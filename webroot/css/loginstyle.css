@@ -1,0 +1,482 @@
+/*html,
+body{
+  margin:0;
+  height: 100%;
+  width: 100%;
+  font-family: Helvetica, sans-serif;
+}
+*/
+
+.wrapper{
+  padding:20px;
+  height:auto;
+}
+
+/*footer{
+  display:table-row;
+  height: 1px;
+
+}*/
+body{
+
+  /*background-size: contain;*/
+  /*background-size: cover;*/
+  /*background-repeat: no-repeat;*/
+}
+.footer {
+  position: fixed;
+    background: #0d9cb7;
+    /*padding: 1px 10px;*/
+  text-align:center;
+  left: 0;
+  right: 0;
+  bottom: 0;
+}
+
+@media (min-device-width : 320px) and (max-device-width : 640px) {
+    .footer {
+      position: relative !important; 
+    }
+}
+
+@media only screen and (max-device-width : 1280px) and (max-height: 800px)  {
+    .footer {
+      position: relative !important; 
+    }
+}
+
+@media only screen and (device-width: 1366px)  {
+    .footer {
+      position: relative !important; 
+    }
+}
+
+
+/*@media  only screen and (min-width: 1680px) {
+ .footer {
+   margin-top: 215px !important;
+  }
+  body{overflow: hidden;}
+  }
+
+  @media only screen and (max-width: 768px){
+ .footer {
+   margin-top: 300px !important;
+  }
+}
+ @media only screen
+
+   and (min-device-width : 800px)
+
+   and (max-device-width : 980px){
+    .footer {
+   margin-top: 550px !important;
+  }
+
+}*/
+ul.social {list-style:none;}
+ul.social li {display:inline; padding: 0; margin:0 5px;}
+ul.social li a {display:inline-block; margi:0 auto; -moz-border-radius:50%; -webkit-border-radius:50%; border-radius:50%; text-align:center; width: 30px; height: 30px; font-size:15px; position:relative;}
+ul.social li a i {color:#FFF; text-align: center; margin:0; line-height:30px; -webkit-transition: all 0.8s; -moz-transition: all 0.8s; -o-transition: all 0.8s; -ms-transition: all 0.8s; transition: all 0.8s;}
+ul.social li a:hover i { -moz-transform: rotate(360deg); -webkit-transform: rotate(360deg); -ms--transform: rotate(360deg); transform: rotate(360deg);
+                         -webkit-transition: all 0.2s; -moz-transition: all 0.2s; -o-transition: all 0.2s; -ms-transition: all 0.2s; transition: all 0.2s;}
+
+.social li a.instagram:hover {background-color: #F56505;}
+.social li a.face:hover {background-color:#3B5998;}
+.social li a.twit:hover {background-color:#33ccff;}
+.social li a.google:hover {background-color:#BD3518;}
+.social li a.linkedin:hover {background-color:#007bb7;}
+
+/*body{
+	
+  background-color:#f2f2f2;
+} */
+
+.cs-signup-row, .cs-header-container,.cs-signup-container {
+    -moz-transition: width 1s ease-in-out, right 1.6s ease-in-out;
+    -webkit-transition: width 1s ease-in-out, right 1.6s ease-in-out;
+    -moz-transition: width 1s ease-in-out, right 1.6s ease-in-out;
+    -o-transition: width 1s ease-in-out, right 1.6s ease-in-out;
+    transition: width 1s ease-in-out, right 1.6s ease-in-out;
+}
+.not-visible {
+  visibility: hidden;
+}
+.cs-inputfield-error {
+    border: 1px solid red !important;
+}
+.hidden { visibility: hidden; }
+ .cs-h1{
+	font-size: 25px;
+	font-family: Helvetica;
+	color: #fff;
+	font-weight: lighter;
+    line-height: 1.4;
+	margin-bottom: 30px;
+	margin-top: 30px;
+  }
+  .cs-h2{
+	font-size: 24px;
+	
+	font-weight: lighter;
+    line-height: 1.4;
+	margin-top: 10px;
+  }
+  .cs-border-radius-none{
+     border-radius: 0;
+  }
+  .cs-signup-margin-bottom{
+     margin-bottom: 51px;
+  }
+  .cs-radio-button{
+	color: #fff;
+	font-size: 16px;
+  }
+  .cs-signup-button{
+	padding: 7px 40px 7px;
+  }
+
+  .cs-signup-row{
+    margin: 45px auto 51px;
+  }
+  .cs-primary-button, .cs-primary-button:active{
+    background-color: #2BBFD9;
+	border-color: #3FD3EF;
+	height: 29px;
+	padding: 0px 10px;
+	border-radius: 0;
+  }
+  .cs-find-button{
+	background-color: #2BBFD9;
+    border-color: #3FD3EF;
+    height: 38px;
+    padding: 5px 10px;
+    border-radius: 0;
+    width: 100%;
+  }
+  .cs-signup-button, .cs-signup-button:active{
+    color: #fff;
+	background-color: #2BBFD9;
+	border-color: #3FD3EF;
+	border-radius: 0;
+  }
+  .cs-usercounts-button, .cs-usercounts-button:hover, .cs-usercounts-button:active, .cs-usercounts-button:visited{
+	color: rgba(0, 0, 0, 0.76);
+	background-color: #9CE6F3;
+	border-color: #9CE6F3;
+	border-radius: 0;
+	width: 106% !important;
+	cursor: auto !important;
+	font-size: 16px;
+	padding: 13px 40px 13px;
+  }
+  .cs-primary-button:focus, .cs-primary-button:hover, .cs-primary-button:visited, 
+  .cs-signup-button:hover, .cs-signup-button:focus, .cs-signup-button:visited,
+  .cs-find-button:focus , .cs-find-button:hover{
+    background-color: #0d9cb7 !important;
+    border-color: #0d9cb7 !important;
+    outline:0 !important;
+  }
+
+  .cs-navbar-password-field{
+	padding-right: 5px;
+	padding-left: 5px;
+  }
+  .cs-header-navbar{
+    min-height: 70px;
+	padding-top: 10px;
+    margin: 0;
+	border-radius: 0;
+  }
+  .cs-textbox{
+	border: 1px solid #848484;
+	height: 29px;
+  border-radius:0;
+  }
+  .cs-error, .cs-empty{
+    color: red;
+    font-size: 12px;
+    margin: 0;
+  }
+  .cs-signup-container{
+	height: 630px;
+	min-height:630px;
+	/*background-color: #3FD3EF;*/
+  /*background-image: url(/styles/images/background.jpg); */
+  } 
+  .cs-signup-wrapper{
+   border:2px solid black;
+  background:#e2e2e2;
+  border:1px solid #aaaaaa;
+  border-radius:5px;
+  z-index: 2;
+  }
+  
+  .cs-signup-field{
+    height: 38px;
+	border:1px solid #fff;
+  font-size: 11px !important;
+  color: #333 !important;
+  }
+  .cs-find-field, .cs-find-button{
+	  height: 38px;
+	  width: 115%;
+  }
+  .cs-find-field{
+	  border: 1px solid #3FD3EF;
+  }
+  .cs-npl{
+	padding-left: 0;
+  }
+  .cs-mb20{
+  	margin-bottom: 20px;
+  },
+  .cs-mt10{
+  	margin-top: 10px;
+  }
+  
+  /*  panel Changes */
+  .cs-npl{
+	padding-left: 0;
+  }
+  .cs-panel{
+  	border:1px solid #b0b0b3;
+  	padding :9px;
+  	width:102%;
+  	margin-bottom: 9px;
+  	border-radius: 1px;
+  }
+   .cs-info-container {
+    padding-top: 15px;
+    padding-left: 5px;
+  }
+  .cs-info-container div{
+  	height: 22px;
+    background-color: #eee;
+    color: #5e5e5e;
+    font-size: 13px;
+    padding: 2px 6px;
+    margin-bottom:10px;
+  }
+  .cs-info-container div p{
+    overflow: hidden;
+    white-space: nowrap;
+    text-overflow: ellipsis;
+  }
+ 
+  .cs-list-container{
+  	background-color: #f2f2f2;
+    padding-right: 15px;
+    padding-left: 15px;
+    margin-right: auto;
+    margin-left: auto;
+    width:80%;
+  }
+  .cs-profile-container p{
+  	margin-bottom: 2px;
+    overflow: hidden;
+    white-space: nowrap;
+    text-overflow: ellipsis;
+  }
+  .cs-panel img{
+  	    width: 118px;
+    	height: 115px;
+  }
+  .cs-name{
+  	color: #2BBFD9;
+    font-size: 18px;
+    padding-top: 5px;
+    
+  }
+  .cs-spec{
+  	color: #5e5e5e;
+  }
+  .profile{
+  	padding-left: 0px;
+  }
+  .cs-list-parent{
+  	    margin-right: -22px;
+  	    margin-top:10px;
+  }
+  div.profile:nth-child(4n) {
+    padding-right: 12px;
+ }
+  
+ 
+  
+/* Tablet/ Mobile Portrait */
+@media only screen and (max-width: 767px){
+	.cs-signup-container{
+		height: 820px;
+	}
+	.cs-navbar-password-field{
+		padding-left: 0;
+		padding-bottom: 20px;
+	}
+	.cs-navbar-email-field{
+		padding-bottom: 20px;
+	}
+	.cs-navbar-form{
+	   border:none;
+	}
+	.cs-usercounts-button{
+		    width: 98% !important;
+    	margin-left: 11px;
+	}
+	.mob-navbar-collapse{
+		position: absolute;
+		background-color: rgb(248, 248, 248);
+		z-index: 9999;
+		width: 100%;
+	}
+
+	.cs-find-field, .cs-find-button{
+		margin-left: 25px;
+		width: 92%;
+	}
+
+	 .cs-panel{
+	  		width: 100%;
+	  }
+	  .cs-photo-section{
+	  	text-align: center;
+	  }
+	  .profile{
+	  	margin-left: 0px;
+	  	padding-left: 15px;
+	  }
+	  .cs-list-parent{
+	  	margin-right: -15px !important;
+	  }
+
+	 .cs-info-container div{
+		  	width: 80%;
+		  }
+
+}
+
+@media only screen and (max-width: 546px){
+	.cs-find-field, .cs-find-button{
+		margin-left: 25px;
+		width: 87%;
+	}
+}
+/* Iphone 5 Portrait and Landscape */
+@media only screen 
+  and (min-device-width: 320px) 
+  and (max-device-width: 568px)
+  and (-webkit-min-device-pixel-ratio: 2) {
+	.cs-signup-button {
+		padding: 10px 15px 10px;
+	}
+	.cs-h1{
+		font-size: 26px;
+	}
+  .cs-info-container div{
+    width:90%;
+  }
+}
+@media only screen and (min-width: 768px) and (max-width: 1200px){
+	
+	.cs-usercounts-button{
+		padding: 13px 16px 13px;
+
+	}
+	.cs-user-counts{
+		    width: 95%;
+    padding-left: 0;
+	}
+}
+
+@media only screen and (min-width: 1200px) and (max-width: 1300px){
+
+  .cs-list-container{
+      width: 80% !important;
+  }
+
+}
+
+@media only screen and (min-width: 1200px){
+  .cs-usercounts-button, .cs-usercounts-button:hover, .cs-usercounts-button:active, .cs-usercounts-button:visited{
+      width:100% !important;
+  }
+  .cs-find-field, .cs-find-button {
+    height: 38px;
+    width: 108%;
+}
+}
+
+@media only screen and (min-width: 768px) and (max-width: 991px){
+	.cs-signup-container{
+		height: 690px;
+	}
+}
+@media only screen and (min-width: 320px) and (max-width: 350px){
+	.cs-signup-container{
+		height: 828px;
+	}
+	.cs-usercounts-global{
+		padding: 13px 20px 13px ;
+	}
+	.cs-find-field, .cs-find-button{
+		width: 83%;
+	} 
+}
+
+/* Scroll to top  */
+
+.cd-top {
+  z-index: 999;
+  display: inline-block;
+  height: 40px;
+  width: 40px;
+  position: fixed;
+  bottom: 25px;
+  right: 25px;
+  box-shadow: 0 0 10px rgba(0, 0, 0, 0.05);
+  cursor: pointer;
+  overflow: hidden;
+  text-indent: 100%;
+  white-space: nowrap;
+  background: #474747 url(images/cd-top-arrow.svg) no-repeat center 50%;
+  visibility: hidden;
+  opacity: 0;
+  -webkit-transition: opacity .3s 0s, visibility 0s .3s;
+  -moz-transition: opacity .3s 0s, visibility 0s .3s;
+  transition: opacity .3s 0s, visibility 0s .3s;
+}
+.cd-top.cd-is-visible, .cd-top.cd-fade-out, .no-touch .cd-top:hover {
+  -webkit-transition: opacity .3s 0s, visibility 0s 0s;
+  -moz-transition: opacity .3s 0s, visibility 0s 0s;
+  transition: opacity .3s 0s, visibility 0s 0s;
+}
+.cd-top.cd-is-visible {
+  /* the button becomes visible */
+  visibility: visible;
+  opacity: 1;
+}
+.cd-top.cd-fade-out {
+  /* if the user keeps scrolling down, the button is out of focus and becomes less visible */
+  opacity: .5;
+}
+.no-touch .cd-top:hover {
+  background-color: #e86256;
+  opacity: 1;
+}
+@media only screen and (min-width: 768px) {
+  .cd-top {
+    right: 20px;
+    bottom: 20px;
+  }
+}
+@media only screen and (min-width: 1024px) {
+  .cd-top {
+    right: 75px;
+    bottom: 30px;
+  }
+}
+.copyrights {
+  color:#ffffff; 
+  margin:0px !important;
+  padding: 5px 0 15px !important;
+}

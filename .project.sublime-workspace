@@ -1,0 +1,301 @@
+{
+	"auto_complete":
+	{
+		"selected_items":
+		[
+			[
+				"text",
+				"text1"
+			],
+			[
+				"back",
+				"background-color"
+			],
+			[
+				"te",
+				"text-center"
+			],
+			[
+				"pull",
+				"pull-left"
+			],
+			[
+				"col-",
+				"col-sm-3"
+			],
+			[
+				"margi",
+				"margin-right"
+			],
+			[
+				"col-md-",
+				"col-md-3"
+			],
+			[
+				"l",
+				"li\tTag"
+			],
+			[
+				"marg",
+				"margin-left"
+			],
+			[
+				"h",
+				"height"
+			]
+		]
+	},
+	"buffers":
+	[
+	],
+	"build_system": "",
+	"build_system_choices":
+	[
+	],
+	"build_varint": "",
+	"command_palette":
+	{
+		"height": 0.0,
+		"last_filter": "",
+		"selected_items":
+		[
+		],
+		"width": 0.0
+	},
+	"console":
+	{
+		"height": 0.0,
+		"history":
+		[
+		]
+	},
+	"distraction_free":
+	{
+		"menu_visible": true,
+		"show_minimap": false,
+		"show_open_files": false,
+		"show_tabs": false,
+		"side_bar_visible": false,
+		"status_bar_visible": false
+	},
+	"file_history":
+	[
+		"/E/vasanth-files/chennaismile/form-basic.css",
+		"/E/vasanth-files/chennaismile/Form_Events.html",
+		"/E/vasanth-files/chennaismile/index.html",
+		"/E/vasanth-files/chennaismile/new_profile.html",
+		"/E/vasanth-files/chennaismile/old.html",
+		"/E/vasanth-files/chennaismile/profile.html",
+		"/E/vasanth-files/chennaismile/style.css",
+		"/E/vasanth-files/chennaismile/css/style.css",
+		"/E/vasanth-files/chennaismile/sign_up.html",
+		"/E/vasanth-files/chennaismile/event.html",
+		"/E/vasanth-files/chennaismile/forgotpass.html",
+		"/E/vasanth-files/chennaismile/eventdetails.html",
+		"/E/vasanth-files/chennaismile/404(1).html",
+		"/E/vasanth-files/chennaismile/404.html",
+		"/E/vasanth-files/chennaismile/js/custom.js",
+		"/E/vasanth-files/chennaismile/js/ripple.js",
+		"/E/vasanth-files/chennaismile/css/bootstrap.min.css",
+		"/E/vasanth-files/chennaismile/css/custom.css",
+		"/E/vasanth-files/chennaismile/bgindex.jpg",
+		"/E/vasanth-files/chennaismile/404.jpg",
+		"/E/vasanth-files/chennaismile/css/checkbox.css",
+		"/E/vasanth-files/chennaismile/CS-PHP-Files/index.php",
+		"/E/vasanth-files/event.html",
+		"/E/vasanth-files/404.jpg",
+		"/E/vasanth-files/eventdetails.html",
+		"/E/vasanth-files/Form_Events.html",
+		"/E/vasanth-files/index.html",
+		"/E/vasanth-files/new_profile.html",
+		"/E/vasanth-files/old.html",
+		"/E/vasanth-files/profile.html",
+		"/E/vasanth-files/sign_up.html",
+		"/E/vasanth-files/form-basic.css",
+		"/E/vasanth-files/404(1).html",
+		"/E/vasanth-files/404.html",
+		"/E/vasanth-files/style.css",
+		"/C/Users/Orbiten/Desktop/Chennai-Smile/Chennai_Smile_Code/CSfiles/cs/404.html",
+		"/C/Users/Orbiten/Desktop/Chennai-Smile/Chennai_Smile_Code/CSfiles/cs/event.html",
+		"/C/Users/Orbiten/Desktop/Chennai-Smile/Chennai_Smile_Code/CSfiles/cs/eventdetails.html",
+		"/C/Users/Orbiten/Desktop/Chennai-Smile/Chennai_Smile_Code/CSfiles/cs/Form_Events.html",
+		"/C/Users/Orbiten/Desktop/Chennai-Smile/Chennai_Smile_Code/CSfiles/cs/404.jpg",
+		"/C/Users/Orbiten/Desktop/Chennai-Smile/Chennai_Smile_Code/CSfiles/cs/index.html",
+		"/C/Users/Orbiten/Desktop/Chennai-Smile/Chennai_Smile_Code/CSfiles/cs/new_profile.html",
+		"/C/Users/Orbiten/Desktop/Chennai-Smile/Chennai_Smile_Code/CSfiles/cs/old.html",
+		"/C/Users/Orbiten/Desktop/Chennai-Smile/Chennai_Smile_Code/CSfiles/cs/profile.html",
+		"/C/Users/Orbiten/Desktop/Chennai-Smile/Chennai_Smile_Code/CSfiles/cs/sign_up.html",
+		"/C/Users/Orbiten/Desktop/Chennai-Smile/Chennai_Smile_Code/CSfiles/cs/form-basic.css",
+		"/C/Users/Orbiten/Desktop/Chennai-Smile/Chennai_Smile_Code/CSfiles/cs/style.css"
+	],
+	"find":
+	{
+		"height": 26.0
+	},
+	"find_in_files":
+	{
+		"height": 0.0,
+		"where_history":
+		[
+		]
+	},
+	"find_state":
+	{
+		"case_sensitive": false,
+		"find_history":
+		[
+			"onc",
+			"name2",
+			"Name2",
+			"name2",
+			"chennai",
+			"sub11",
+			"checked",
+			"sub11",
+			".navbar-nav",
+			"icoVimeo",
+			"icoLinkedin",
+			"sub11",
+			"name",
+			"sub-",
+			".navbar-nav",
+			"btn",
+			"https://maxcdn.bootstrapcdn.com/bootstrap/4.0.0-alpha.4/css/bootstrap.min.css",
+			".col-sm-1",
+			"panel",
+			"12",
+			"row",
+			".col-sm-1",
+			".col-1",
+			"@",
+			"width: 300px",
+			"width: 300px;",
+			"}}",
+			"bs-example",
+			".bs-example",
+			"@",
+			".navbar-nav",
+			"navbar",
+			".navbar",
+			".navbar-nav",
+			"sub_category9",
+			"sub_category2",
+			"category",
+			"chenna",
+			"category",
+			"sub",
+			"panel",
+			"panel bs-example side_panel",
+			"btn",
+			"btn-hover",
+			"button",
+			"hover",
+			"btn-primary:hover",
+			".btn-primary:hover",
+			"hover",
+			"animdiv"
+		],
+		"highlight": true,
+		"in_selection": false,
+		"preserve_case": false,
+		"regex": false,
+		"replace_history":
+		[
+		],
+		"reverse": false,
+		"show_context": true,
+		"use_buffer2": true,
+		"whole_word": false,
+		"wrap": true
+	},
+	"groups":
+	[
+		{
+			"sheets":
+			[
+			]
+		}
+	],
+	"incremental_find":
+	{
+		"height": 26.0
+	},
+	"input":
+	{
+		"height": 0.0
+	},
+	"layout":
+	{
+		"cells":
+		[
+			[
+				0,
+				0,
+				1,
+				1
+			]
+		],
+		"cols":
+		[
+			0.0,
+			1.0
+		],
+		"rows":
+		[
+			0.0,
+			1.0
+		]
+	},
+	"menu_visible": true,
+	"output.find_results":
+	{
+		"height": 0.0
+	},
+	"pinned_build_system": "",
+	"project": ".project.sublime-project",
+	"replace":
+	{
+		"height": 48.0
+	},
+	"save_all_on_build": true,
+	"select_file":
+	{
+		"height": 0.0,
+		"last_filter": "",
+		"selected_items":
+		[
+		],
+		"width": 0.0
+	},
+	"select_project":
+	{
+		"height": 0.0,
+		"last_filter": "",
+		"selected_items":
+		[
+		],
+		"width": 0.0
+	},
+	"select_symbol":
+	{
+		"height": 0.0,
+		"last_filter": "",
+		"selected_items":
+		[
+		],
+		"width": 0.0
+	},
+	"selected_group": 0,
+	"settings":
+	{
+	},
+	"show_minimap": true,
+	"show_open_files": false,
+	"show_tabs": true,
+	"side_bar_visible": true,
+	"side_bar_width": 150.0,
+	"status_bar_visible": true,
+	"template_settings":
+	{
+	}
+}

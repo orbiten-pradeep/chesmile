@@ -1,0 +1,126 @@
+.checkbox label:after, 
+.radio label:after {
+    content: '';
+    display: table;
+    clear: both;
+}
+
+.checkbox .cr,
+.radio .cr {
+    position: relative;
+    display: inline-block;
+    border: 1px solid #ffffff;
+    width: 1.2em;
+    height: 1.2em;
+    float: left;
+    margin-right: .5em;
+}
+
+.radio .cr {
+    border-radius: 50%;
+}
+
+.checkbox .cr .cr-icon,
+.radio .cr .cr-icon {
+    position: absolute;
+    font-size: .65em;
+    line-height: 0;
+    top: 50%;
+    left: 20%;
+}
+
+.radio .cr .cr-icon {
+    margin-left: 0.04em;
+}
+
+.checkbox label input[type="checkbox"],
+.radio label input[type="radio"] {
+    display: none;
+}
+
+.checkbox label input[type="checkbox"] + .cr > .cr-icon,
+.radio label input[type="radio"] + .cr > .cr-icon {
+    transform: scale(3) rotateZ(-20deg);
+    opacity: 0;
+    transition: all .3s ease-in;
+}
+
+.checkbox label input[type="checkbox"]:checked + .cr > .cr-icon,
+.radio label input[type="radio"]:checked + .cr > .cr-icon {
+    transform: scale(1) rotateZ(0deg);
+    opacity: 1;
+}
+
+.checkbox label input[type="checkbox"]:disabled + .cr,
+.radio label input[type="radio"]:disabled + .cr {
+    opacity: .5;
+}
+
+/**/
+.mini-submenu{
+  background-color: rgba(0, 0, 0, 0);   
+  /*position: relative;*/
+  margin-left:5px;
+  display:inline-block;
+  margin-top: 0px;
+}
+
+.mini-submenu:hover{
+  cursor: pointer;
+}
+
+.mini-submenu .icon-bar {
+  border-radius: 1px;
+  display: block;
+  height: 2px;
+  width: 22px;
+  margin-top: 3px;
+}
+
+.mini-submenu .icon-bar {
+  background-color: #ffffff;
+}
+
+#slide-submenu{
+  background: rgba(0, 0, 0, 0.45);
+  display: inline-block;
+  padding: 0 8px;
+  border-radius: 4px;
+  cursor: pointer;
+}
+/*.navbar-collapse .list-group{
+    display: none;
+    top: 0px;
+    background-color:#42c2f4;
+    color:#ffffff;
+    padding:0px 10px
+}*/
+.category_dropdown.list-group {
+    display: none;
+    position: absolute;
+    top: 58px;
+    background-color: #4abac5;
+    color: #ffffff;
+    padding: 0px 10px;
+    z-index: 99;
+    float: none;
+    width: 735px;
+    clear: both;
+}
+.list-group .checkbox{
+    position: relative;
+    display: inline-block;
+    margin: 10px 10px 10px 0px;
+}
+
+.list-group .checkbox label {
+    min-height: 20px;
+    padding-left: 0px;
+    margin-bottom: 0;
+    font-weight: 400;
+    cursor: pointer;
+}
+.list-group .checkbox label {
+  text-transform:uppercase;
+  font-size:13px
+}
