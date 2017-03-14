@@ -1945,10 +1945,7 @@ body{
 
 
     
-  <?php  echo $this->Html->script(['jquery', 'general', 'custom', 'moment.min', 'daterangepicker']);?> 
-
-
-    <script type="text/javascript">
+      <script type="text/javascript">
   function copyTextValue(subcat) {
       var text1 = document.getElementById("sub11");
                 if(subcat.checked)
@@ -2014,6 +2011,8 @@ window.onclick = function(event) {
 <script src="https://code.jquery.com/ui/1.12.1/jquery-ui.js"></script>
 <link rel="stylesheet" href="//cdnjs.cloudflare.com/ajax/libs/timepicker/1.3.5/jquery.timepicker.min.css">
 <script src="//cdnjs.cloudflare.com/ajax/libs/timepicker/1.3.5/jquery.timepicker.min.js"></script>
+
+<?php  echo $this->Html->script(['general','moment.min', 'daterangepicker', 'custom']);?> 
 
 </body>
 

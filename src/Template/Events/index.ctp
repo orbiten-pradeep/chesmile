@@ -46,7 +46,7 @@ use Cake\Routing\Router;
 
        
        $(document).ready(function(){
-    $('#time').timepicker({ timeFormat: 'H:mm' });
+    /*$('#time').timepicker({ timeFormat: 'H:mm' });
     var e = document.getElementById("categories-id");
     var strUser = e.options[e.selectedIndex].value;
     $select = $('#eventsubcategories-sub-categories');
@@ -69,7 +69,7 @@ use Cake\Routing\Router;
         error: function (tab) {
             $select.html('<option id="-1">none available</option>');
         }
-    });
+    });*/
 
      $('#Autocomplete').autocomplete({
             source:'<?php echo Router::url(array("controller" => "events", "action" => "search")); ?>',
@@ -141,7 +141,7 @@ use Cake\Routing\Router;
                               <p class="text-primary">Specific Date Events</p>
                               
 
-           <div id="reportrange" class="pull-right"><i class="glyphicon glyphicon-calendar fa fa-calendar"></i> <span></span> <b class="caret"></b></div>
+           <div id="reportrange"><i class="glyphicon glyphicon-calendar fa fa-calendar"></i> <span></span> <b class="caret"></b></div>
 
 
                              
