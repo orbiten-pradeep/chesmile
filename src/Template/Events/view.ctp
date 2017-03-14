@@ -40,7 +40,7 @@
 
         <div class="row">
             <div class="col-sm-8 lft_container">
-                <h2><img src="img/profile.png" class="img-thumbnail profile-img"><?= h($event->OrganizersName) ?></h2>
+                <h2><img src="/chesmile/img/profile.png" class="img-thumbnail profile-img"><?= h($event->OrganizersName) ?></h2>
                 <p><?= $this->Text->autoParagraph(h($event->descriptioin));?></p>
                 <p class="margin25"><span class="glyphicon glyphicon-calendar calender_txt" aria-hidden="true"></span><?= h($event->date) ?></p>
                 <p>
@@ -53,10 +53,11 @@
                 </address>
                 <address>
                 <div class="text-center"><span class="glyphicon glyphicon-pushpin" aria-hidden="true"></span></div>
-                   <strong>Kishore</strong>
+                   <!-- <strong>Kishore</strong>
                     <br>3481 Melrose Place
                     <br>Beverly Hills, CA 90210
-                    <br>
+                    <br> -->
+                    <?= $this->Text->autoParagraph(h($event->Venue)); ?>
                 </address>
             </div>
         </div>
