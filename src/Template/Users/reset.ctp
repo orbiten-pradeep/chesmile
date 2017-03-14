@@ -18,7 +18,7 @@ if(isset($errors)){
 		<div id="contents1">	
 			 <div class="form-group">
 			    
-				<?= $this->Form->input('password',array('id' => 'password', 'class' => 'form-control','label' => false,'placeholder' => 'password')) ?>
+				<?= $this->Form->input('password',array('id' => 'password', 'class' => 'form-control','label' => false,'placeholder' => 'Enter a new password')) ?>
 			  </div><br>
 			  <br>
 			  <?= $this->Form->submit(__('Save'), array('id' => 'Login', 'class' => 'btn btn-primary')) ?>

@@ -223,10 +223,11 @@ body{
     color:  #444545;
     box-sizing: border-box;
     width: 240px;
-    font-size:16px;
+    font-size:14px;
     font-weight:400;
     padding: 12px;
     border: 1px solid #d2d2d2;
+    height: auto !important;
 }
 .form-basic input:focus{
     border:1px solid #1b8fca;
@@ -491,7 +492,7 @@ body{
         <?= $this->Form->hidden('user_id', ['options' => $users,'default'=> $users_id]);?>
             <div class="form-group">
                 <label>
-                   <?= $this->Form->input('title',array('class' => 'form-control','label' => false));?>
+                   <?= $this->Form->input('title',array('class' => 'form-control'));?>
               </label>  
             </div>
             <div class="form-group">

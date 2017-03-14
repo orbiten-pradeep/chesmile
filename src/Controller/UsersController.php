@@ -200,6 +200,70 @@ class UsersController extends AppController
         $groups = $this->Users->Groups->find('list', ['limit' => 200,'conditions' => array('role' => 'Users')]);
         $this->set(compact('user', 'groups'));
         $this->set('_serialize', ['user']);
+
+		if(!empty($this->request->data))
+		{
+			
+			if(empty($this->request->data['email']))
+			{
+				$this->Flash->error(__('Please Provide Your Email Adress that You used to Register with Us'));
+			}
+			else
+			{
+				$email_inp=$this->request->data['email'];
+				$fu=$this->Users->find('all',array('conditions'=>array('email'=>$email_inp)));
+				$fu = $fu->first();
+				if(!empty($fu))
+				{
+					if($fu['Active'] == true)
+					{
+						$key = Text::uuid();
+						$url = Router::url(['controller' => 'users', 'action' => 'reset/' . $key, '_full' => true ]);
+						$ms=$url;
+						$ms=wordwrap($ms,1000);
+						$fu['activation_key']= Text::uuid();
+						$user_id = $fu['id'];
+						$status = $this->Users->updateAll(['activation_key' => $key], ['id' => $user_id]);
+						if($status){
+							//============Email================//
+							$email = new Email();
+			        		$email->transport('gmail');
+			        		$email->template('default');
+			        		$subject = "Reset Your http://chennaismile.com/ Password";
+			            	$name = $fu['fullname'];
+						    $to = trim($this->request->data['email']);
+						    $email->emailFormat('html');
+						    $email->from('admin@chennaismile.com');
+						    $email->to($to);
+						    $email->cc('admin@chennaismile.com');
+						    $email->subject($subject);
+							
+						    // Always try to write clean code, so that you can read it :) :
+						    $message = "Dear <span style='color:#666666'>" . $name . "</span>,<br/><br/>";
+						    $message .= "<p>Click on the link below to Reset Your Password </p><br/>";
+						    $message .= "<a href='$ms'>$ms</a><br/><br/>";
+						    $message .= "<br/>Thanks, <br/>Support Team";
+						    $email->send($message);
+			            	
+			                $this->Flash->success(__('Check Your Email To Reset your password.'));
+			                return $this->redirect(['action' => 'login']);
+							//============EndEmail=============//
+						}
+						else{
+							$this->Flash->success(__("Error Generating Reset link"));
+						}
+					}
+					else
+					{
+						$this->Flash->success(__('This Account is not Active yet.Check Your mail to activate it'));
+					}
+				}
+				else
+				{
+					$this->Flash->success(__('Email does Not Exist'));
+				}
+			}
+		}
 	}
 	
 	
@@ -318,7 +382,6 @@ class UsersController extends AppController
 				}
 			}
 		}
-		
 	}
 	
 	function reset($token=null)
