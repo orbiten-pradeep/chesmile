@@ -69,123 +69,95 @@
 
 </div>
 
-<div class="event-detail">
-    <div class="container-fluid">
-        <div class="row">
-            <div class="col-sm-8 lft_container">
-                    <h3 class="heading margin25">Sponsors<span></span></h3>
-                        <!-- Client 1 -->
-                        <div class="col-sm-6 col-xs-4 col-md-3" style="visibility: visible; ">
-                            <a href="#"><img src="img/logos/3.png" class="img-responsive clients-img" alt="Client 3"></a>
-                        </div>
-
-                        <!-- Client 2 -->
-                        <div class="col-sm-6 col-xs-4 col-md-3" style="visibility: visible; ">
-                            <a href="#"><img src="img/logos/4.png" class="img-responsive clients-img" alt="Client 4"></a>
-                        </div>
-
-                        <!-- Client 3 -->
-                        <div class="col-sm-6 col-xs-4 col-md-3" style="visibility: visible; ">
-                            <a href="#"><img src="img/logos/5.png" class="img-responsive clients-img" alt="Client 5"></a>
-                        </div>
-
-                        <!-- Client 4 -->
-                        <div class="col-sm-6 col-xs-4 col-md-3" style="visibility: visible; ">
-                            <a href="#"><img src="img/logos/6.png" class="img-responsive clients-img" alt="Client 6"></a>
-                        </div>
-
-                        <div class="clearfix"></div>
-
-                        <h3 class="heading margin25">Media Partners<span></span></h3>
-                        <!-- Client 1 -->
-                        <div class="col-sm-6 col-xs-4 col-md-3" style="visibility: visible; ">
-                            <a href="#"><img src="img/logos/1.png" class="img-responsive clients-img" alt="Client 3"></a>
-                        </div>
-
-                        <!-- Client 2 -->
-                        <div class="col-sm-6 col-xs-4 col-md-3" style="visibility: visible; ">
-                            <a href="#"><img src="img/logos/2.png" class="img-responsive clients-img" alt="Client 4"></a>
-                        </div>
-
-                        <!-- Client 3 -->
-                        <div class="col-sm-6 col-xs-4 col-md-3" style="visibility: visible; ">
-                            <a href="#"><img src="img/logos/3.png" class="img-responsive clients-img" alt="Client 5"></a>
-                        </div>
-
-                        <!-- Client 4 -->
-                        <div class="col-sm-6 col-xs-4 col-md-3" style="visibility: visible; ">
-                            <a href="#"><img src="img/logos/4.png" class="img-responsive clients-img" alt="Client 6"></a>
-                        </div>
-
-                        <div class="clearfix"></div>
-
-                        <h3 class="heading margin25">Gallery (Photos after the Events)<span></span></h3>
-
-                            <div class='col-md-12'>
-                              <div class="carousel slide media-carousel" id="media">
-                              <div class="container">
-                              <div class="row">
-    <div class="col-xs-6 col-sm-2 col-md-2">
-        <a href="#" class="thumbnail" data-toggle="modal" data-target="#lightbox"> 
-            <img src="https://s3.amazonaws.com/ooomf-com-files/lqCNpAk3SCm0bdyd5aA0_IMG_4060_1%20copy.jpg" alt="...">
-        </a>
-    </div>
-    <div class="col-xs-6 col-sm-2 col-md-2">
-        <a href="#" class="thumbnail" data-toggle="modal" data-target="#lightbox"> 
-            <img src="https://s3.amazonaws.com/ooomf-com-files/deYU3EyQP9cN23moYfLw_Dandelion.jpg" alt="...">
-        </a>
-    </div>
-    <div class="col-xs-6 col-sm-2 col-md-2">
-        <a href="#" class="thumbnail" data-toggle="modal" data-target="#lightbox"> 
-            <img src="https://s3.amazonaws.com/ooomf-com-files/8H0UdTsvRFqe03hZkNJr_New%20York%20-%20On%20the%20rock%20-%20Empire%20State%20Building.jpg" alt="...">
-        </a>
-    </div>
-    <div class="col-xs-6 col-sm-2 col-md-2">
-        <a href="#" class="thumbnail" data-toggle="modal" data-target="#lightbox"> 
-            <img src="https://s3.amazonaws.com/ooomf-com-files/Z3LXxzFMRe65FC3Dmhnp_woody_unsplash_DSC0129.jpg" alt="...">
-        </a>
-    </div>
-    </div>
-</div>
-
-<div id="lightbox" class="modal fade" tabindex="-1" role="dialog" aria-labelledby="myLargeModalLabel" aria-hidden="true">
-    <div class="modal-dialog" style="top:250px;">
-        <button type="button" class="close hidden" data-dismiss="modal" aria-hidden="true">×</button>
-        <div class="modal-content">
-            <div class="modal-body">
-                <img src="" alt="" />
-            </div>
-        </div>
-    </div>
-</div>
-                                <!-- <div class="carousel-inner">
-                                  <div class="item  active">
+                            <div class="event-detail">
+                                <div class="container-fluid">
                                     <div class="row">
-                                      <div class="col-md-4">
-                                        <a class="thumbnail" href="#"><img alt="" src="img/events/1.jpg"></a>
-                                      </div>          
-                                      <div class="col-md-4">
-                                        <a class="thumbnail" href="#"><img alt="" src="img/events/2.jpg"></a>
-                                      </div>
-                                      <div class="col-md-4">
-                                        <a class="thumbnail" href="#"><img alt="" src="img/events/3.jpg"></a>
-                                      </div> 
+                                        <div class="col-sm-8 lft_container">
+                                                <h3 class="heading margin25">Sponsors<span></span></h3>
+                                                    <!-- Client 1 -->
+                                                    <div class="col-sm-6 col-xs-4 col-md-3" style="visibility: visible; ">
+                                                        <a href="#"><img src="img/logos/3.png" class="img-responsive clients-img" alt="Client 3"></a>
+                                                    </div>
+
+                                                    <!-- Client 2 -->
+                                                    <div class="col-sm-6 col-xs-4 col-md-3" style="visibility: visible; ">
+                                                        <a href="#"><img src="img/logos/4.png" class="img-responsive clients-img" alt="Client 4"></a>
+                                                    </div>
+
+                                                    <!-- Client 3 -->
+                                                    <div class="col-sm-6 col-xs-4 col-md-3" style="visibility: visible; ">
+                                                        <a href="#"><img src="img/logos/5.png" class="img-responsive clients-img" alt="Client 5"></a>
+                                                    </div>
+
+                                                    <!-- Client 4 -->
+                                                    <div class="col-sm-6 col-xs-4 col-md-3" style="visibility: visible; ">
+                                                        <a href="#"><img src="img/logos/6.png" class="img-responsive clients-img" alt="Client 6"></a>
+                                                    </div>
+
+                                                    <div class="clearfix"></div>
+
+                                                    <h3 class="heading margin25">Media Partners<span></span></h3>
+                                                    <!-- Client 1 -->
+                                                    <div class="col-sm-6 col-xs-4 col-md-3" style="visibility: visible; ">
+                                                        <a href="#"><img src="img/logos/1.png" class="img-responsive clients-img" alt="Client 3"></a>
+                                                    </div>
+
+                                                    <!-- Client 2 -->
+                                                    <div class="col-sm-6 col-xs-4 col-md-3" style="visibility: visible; ">
+                                                        <a href="#"><img src="img/logos/2.png" class="img-responsive clients-img" alt="Client 4"></a>
+                                                    </div>
+
+                                                    <!-- Client 3 -->
+                                                    <div class="col-sm-6 col-xs-4 col-md-3" style="visibility: visible; ">
+                                                        <a href="#"><img src="img/logos/3.png" class="img-responsive clients-img" alt="Client 5"></a>
+                                                    </div>
+
+                                                    <!-- Client 4 -->
+                                                    <div class="col-sm-6 col-xs-4 col-md-3" style="visibility: visible; ">
+                                                        <a href="#"><img src="img/logos/4.png" class="img-responsive clients-img" alt="Client 6"></a>
+                                                    </div>
+
+                                                    <div class="clearfix"></div>
+
+                                                    <h3 class="heading margin25">Gallery (Photos after the Events)<span></span></h3>
+
+                                                        <div class='col-md-12'>
+                                                          <div class="carousel slide media-carousel" id="media">
+                                                          <div class="container">
+                                                          <div class="row">
+                                <div class="col-xs-6 col-sm-2 col-md-2">
+                                    <a href="#" class="thumbnail" data-toggle="modal" data-target="#lightbox"> 
+                                        <img src="https://s3.amazonaws.com/ooomf-com-files/lqCNpAk3SCm0bdyd5aA0_IMG_4060_1%20copy.jpg" alt="...">
+                                    </a>
+                                </div>
+                                <div class="col-xs-6 col-sm-2 col-md-2">
+                                    <a href="#" class="thumbnail" data-toggle="modal" data-target="#lightbox"> 
+                                        <img src="https://s3.amazonaws.com/ooomf-com-files/deYU3EyQP9cN23moYfLw_Dandelion.jpg" alt="...">
+                                    </a>
+                                </div>
+                                <div class="col-xs-6 col-sm-2 col-md-2">
+                                    <a href="#" class="thumbnail" data-toggle="modal" data-target="#lightbox"> 
+                                        <img src="https://s3.amazonaws.com/ooomf-com-files/8H0UdTsvRFqe03hZkNJr_New%20York%20-%20On%20the%20rock%20-%20Empire%20State%20Building.jpg" alt="...">
+                                    </a>
+                                </div>
+                                <div class="col-xs-6 col-sm-2 col-md-2">
+                                    <a href="#" class="thumbnail" data-toggle="modal" data-target="#lightbox"> 
+                                        <img src="https://s3.amazonaws.com/ooomf-com-files/Z3LXxzFMRe65FC3Dmhnp_woody_unsplash_DSC0129.jpg" alt="...">
+                                    </a>
+                                </div>
+                                </div>
+                            </div>
+
+                            <div id="lightbox" class="modal fade" tabindex="-1" role="dialog" aria-labelledby="myLargeModalLabel" aria-hidden="true">
+                                <div class="modal-dialog" style="top:250px;">
+                                    <button type="button" class="close hidden" data-dismiss="modal" aria-hidden="true">×</button>
+                                    <div class="modal-content">
+                                        <div class="modal-body">
+                                            <img src="" alt="" />
+                                        </div>
                                     </div>
-                                  </div>
-                                  <div class="item">
-                                    <div class="row">
-                                      <div class="col-md-4">
-                                        <a class="thumbnail" href="#"><img alt="" src="img/events/1.jpg"></a>
-                                      </div>          
-                                      <div class="col-md-4">
-                                        <a class="thumbnail" href="#"><img alt="" src="img/events/3.jpg"></a>
-                                      </div>
-                                      <div class="col-md-4">
-                                        <a class="thumbnail" href="#"><img alt="" src="img/events/2.jpg"></a>
-                                      </div>        
-                                    </div>
-                                  </div>
-                                </div> -->
+                                </div>
+                            </div>
                                 <a data-slide="prev" href="#media" class="left carousel-control">‹</a>
                                 <a data-slide="next" href="#media" class="right carousel-control">›</a>
                               </div>                          
