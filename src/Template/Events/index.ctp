@@ -6,7 +6,10 @@ use Cake\Routing\Router;
    a:hover {
  cursor:pointer;
 }
-
+.sizebox{
+  padding-right: 110px;
+  color: black;
+}
 /*#footer{
    bottom:0;
    width:100%;
@@ -112,7 +115,7 @@ use Cake\Routing\Router;
                             <form id="searchbyarea" class="sx_location"> 
                              <div class="ui-widget">
                               <label for="Autocomplete"></label>
-                                 <?php echo $this->Form->input('areaname', array('id' => 'Autocomplete', 'required')); ?>
+                                 <?php echo $this->Form->input('areaname', array('id' => 'Autocomplete', 'required','class' => 'list-group-item sizebox','label' => false,'placeholder' => 'searchbyarea')); ?>
                             </div>
              <!-- <div class="form-group"> 
 
