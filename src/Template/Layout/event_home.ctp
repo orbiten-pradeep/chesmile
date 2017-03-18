@@ -190,7 +190,7 @@ body{
         </li>
         <li class="mobhide">
           <div class="dropdown">
-          <img onclick="smalldrop()" class="dropbtn" src="/chesmile/img/profile_thumbnail.jpg">
+          <img onclick="smalldrop()" class="dropbtn" src="img/profile_thumbnail.jpg">
                 <div id="myDropdown" class="dropdown-content">
                <a href="profile.html"><i class="fa fa-user fa-fw"></i>My Account</a>
                <a href="order-history.php"><i class="fa fa-calendar-o fa-fw"></i>My Events</a>
@@ -201,7 +201,7 @@ body{
       </ul>
       <ul class="nav navbar-nav navbar-right">
         <div class="dropdown" style="margin-right: 60px;">
-         <img onclick="largedrop()" class="dropbtn" src="/chesmile/img/profile_thumbnail.jpg">
+         <img onclick="largedrop()" class="dropbtn" src="img/profile_thumbnail.jpg">
                 <div id="mylargeDropdown" class="dropdown-content">
                <a href="profile.html"><i class="fa fa-user fa-fw"></i>My Account</a>
                <a href="order-history.php"><i class="fa fa-calendar-o fa-fw"></i>My Events</a>
