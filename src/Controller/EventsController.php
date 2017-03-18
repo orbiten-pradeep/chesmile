@@ -84,6 +84,111 @@ class EventsController extends AppController
         $this->set('_serialize', ['events', 'likes']);
     }
 
+
+    public function myevents()
+    {
+    	$this->paginate = [
+            'contain' => ['Users', 'Categories']
+        ];
+    	if(!empty($this->Auth->user('id')))
+		{
+			$users_id = $this->Auth->user('id');
+			$fullname = $this->Auth->user('fullname');
+			$email = $this->Auth->user('email');
+			$this->paginate['conditions'] = array("Events.user_id" => $users_id);
+		}
+        
+        $filter = false;
+        $this->paginate['order'] = array('Events.created' => 'desc');
+        //debug($this->paginate);
+        //exit(0);
+		//$this->paginate['conditions'] = array('Events.active' => '1');
+        $events = $this->paginate($this->Events);
+        //$events->orderAsc();
+
+		$this->viewBuilder()->layout('event_home');
+		$this->loadModel('Likes');
+        $likes = '';
+        foreach ($events as $key => $value) {
+        	$query_count = $this->Likes->find('all', [
+			    'conditions' => ['events_id' => $value['id'], 'likes' => 1]
+			]);
+			$number_cnt = $query_count->count();
+			$likes[$key]['events'] = $value['id'];
+			$likes[$key]['likes'] = $number_cnt;
+        }
+        $this->loadModel('Categories');
+        $categories_new = $this->Categories->find()->select(['Categories.name'])
+        	->where(['active' => 1]);
+
+        $this->loadModel('SubCategories');
+        $subCategories_new = $this->SubCategories->find('all', ['fields' => 'name',
+			    'conditions' => ['active' => 1]
+			]);
+
+        $this->set('categories', $categories_new);
+        $this->set(compact('subCategories_new'));
+        $this->set(compact('events'));
+        $this->set(compact('likes'));
+        $this->set('_serialize', ['events', 'likes']);
+    }
+
+
+	public function likedevents()
+    {
+    	$this->paginate = [
+            'contain' => ['Users', 'Categories']
+        ];
+        $this->loadModel('Likes');
+        
+    	if(!empty($this->Auth->user('id')))
+		{
+			$users_id = $this->Auth->user('id');
+			$fullname = $this->Auth->user('fullname');
+			$email = $this->Auth->user('email');
+			$likes = $this->Likes->find('all', ['conditions' => ['user_id' => $users_id]])->select(['events_id']);
+		}
+		if(!empty($likes))
+		{
+			foreach ($likes as $key => $value) {
+
+				$eventids[$key] = $value['events_id'];
+			}
+			$this->paginate['conditions'] = array('Events.id IN' => $eventids);
+		}
+        
+        $this->paginate['order'] = array('Events.created' => 'desc');
+        $events = $this->paginate($this->Events);
+
+        //$events->orderAsc();
+
+		$this->viewBuilder()->layout('event_home');
+		$this->loadModel('Likes');
+        $likes = '';
+        foreach ($events as $key => $value) {
+        	$query_count = $this->Likes->find('all', [
+			    'conditions' => ['events_id' => $value['id'], 'likes' => 1]
+			]);
+			$number_cnt = $query_count->count();
+			$likes[$key]['events'] = $value['id'];
+			$likes[$key]['likes'] = $number_cnt;
+        }
+        $this->loadModel('Categories');
+        $categories_new = $this->Categories->find()->select(['Categories.name'])
+        	->where(['active' => 1]);
+
+        $this->loadModel('SubCategories');
+        $subCategories_new = $this->SubCategories->find('all', ['fields' => 'name',
+			    'conditions' => ['active' => 1]
+			]);
+
+        $this->set('categories', $categories_new);
+        $this->set(compact('subCategories_new'));
+        $this->set(compact('events'));
+        $this->set(compact('likes'));
+        $this->set('_serialize', ['events', 'likes']);
+    }
+
     /**
      * View method
      *
@@ -93,7 +198,7 @@ class EventsController extends AppController
      */
     public function view($id = null)
     {
-$this->viewBuilder()->layout('event_home');
+		$this->viewBuilder()->layout('event_home');
         $event = $this->Events->get($id, [
             'contain' => ['Users', 'Categories']
         ]);
@@ -673,7 +778,7 @@ $this->viewBuilder()->layout('event_home');
 		}
 	}
 
-		public function likes($id = null)
+	public function likes($id = null)
 	{
 		if ($this->request->is('ajax')) 
         {
