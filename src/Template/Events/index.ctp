@@ -6,10 +6,10 @@ use Cake\Routing\Router;
    a:hover {
  cursor:pointer;
 }
-.sizebox{
+/*.sizebox{
   padding-right: 110px;
   color: black;
-}
+}*/
 /*#footer{
    bottom:0;
    width:100%;
@@ -113,18 +113,19 @@ use Cake\Routing\Router;
                         <div class="panel-body"> 
                            <div class="list-group">
                             <form id="searchbyarea" class="sx_location"> 
-                             <div class="ui-widget">
+                            <!--  <div class="ui-widget">
                               <label for="Autocomplete"></label>
-                                 <?php echo $this->Form->input('areaname', array('id' => 'Autocomplete', 'required','class' => 'list-group-item sizebox','label' => false,'placeholder' => 'searchbyarea')); ?>
-                            </div>
-             <!-- <div class="form-group"> 
+                                 <?php echo $this->Form->input('areaname', array('id' => 'Autocomplete', 'required','class' => 'list-group-item','label' => false,'placeholder' => 'searchbyarea')); ?>
+                            </div> -->
+             <div class="form-group"> 
 
               <span class="twitter-typeahead" style="position: relative; display: inline-block;">
               <input class="tt-hint dropdown_hint" type="text" autocomplete="off" spellcheck="off" disabled style="">
-              <input type="text" class="form-control tt-query dropdown_input" name="query" id="query" placeholder="Search by location/Area" autocomplete="off" spellcheck="false" dir="auto" style="">
+               <?php echo $this->Form->input('areaname', array('id' => 'Autocomplete', 'required','class' => 'form-control tt-query dropdown_input','label' => false,'placeholder' => 'Search by location/Area')); ?>
+              <!-- <input type="text" class="form-control tt-query dropdown_input" name="query" id="query" placeholder="Search by location/Area" autocomplete="off" spellcheck="false" dir="auto" style=""> -->
               <span style="" class="dropdown_txt1"></span>
               <span class="tt-dropdown-menu" style="position: absolute; top: 100%; left: 0px; z-index: 100; display: none;"></span></span> 
-             </div>  -->
+             </div> 
            </form> 
                               <!-- <a href="#" class="list-group-item">Select Category</a> -->
                                   <?= $this->Html->link(__("Today's Events"), ['action' => 'index', '?' => ['query' => 'Today']], array('class' => 'list-group-item')) ?>
