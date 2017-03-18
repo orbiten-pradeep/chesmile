@@ -163,7 +163,7 @@ use Cake\Routing\Router;
                               <div class="thumbnail">
                               <p class="pull-left tag"><?= $event->has('category') ? $event->category->name : '' ?></p>
                               <p class="pull-right post"><!--<?= h($event->created) ?>--></p>
-                                  <img src="img/photos/1.jpg" alt="">
+                                  <img src="/chesmile/img/photos/1.jpg" alt="">
                                   <div class="caption dance">
                                       <h4 class="event_txt"><a href="#"><?= $this->Html->link(h($event->title), ['action' => 'view', $event->id]) ?></a></h4>
                                       <p class="venue_txt"><?= h($event->OrganizersName) ?></p>
@@ -184,7 +184,6 @@ use Cake\Routing\Router;
                                         </p>
                                      </div>
                                   </div>
-                                 
                               </div>
                           </div>
                             
