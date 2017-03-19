@@ -157,6 +157,9 @@ use Cake\Routing\Router;
 
                   <div class="col-sm-8 col-lg-10 col-md-8 list_event">
 
+
+
+
                       <div class="row" style="margin-right: 0px;">
                       <?php foreach ($events as $event): ?>
                         

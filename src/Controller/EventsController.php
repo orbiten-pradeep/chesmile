@@ -69,7 +69,7 @@ class EventsController extends AppController
 			$likes[$key]['likes'] = $number_cnt;
         }
         $this->loadModel('Categories');
-        $categories_new = $this->Categories->find()->select(['Categories.name'])
+        $categories_new = $this->Categories->find()->select(['Categories.name', 'Categories.id'])
         	->where(['active' => 1]);
 
         $this->loadModel('SubCategories');
