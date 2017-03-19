@@ -207,7 +207,7 @@ class EventsController extends AppController
         $this->set('_serialize', ['event']);
 
         $this->loadModel('Categories');
-        $categories_new = $this->Categories->find()->select(['Categories.name'])
+        $categories_new = $this->Categories->find()->select(['Categories.name', 'Categories.id'])
         	->where(['active' => 1]);
 
         $this->loadModel('SubCategories');

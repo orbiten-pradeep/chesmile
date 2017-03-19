@@ -44,13 +44,14 @@ $(".category_dropdown .checkbox").click(function(event){
 	var parentElem = $(this);
  	var catID = $(this).attr('data-id'); 
  	var catName = $(this).attr('data-text');
+ 	var apiUrl = $("#sub_category_api_url").val();
     $.ajax({
         type:"POST",
         data:catID,
         data:{ "id":catID },
         ContentType : 'application/json',
         dataType: 'json',
-        url:"events/viewresult",
+        url: apiUrl,
         async:true,
         success: function(data) {
         	if(data != '') {

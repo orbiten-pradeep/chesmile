@@ -156,6 +156,7 @@ body{
 </head>
 <body>
 <nav class="navbar navbar-default">
+  <input type="hidden" id="sub_category_api_url" name="sub_category_api_url" value="<?php echo $this->Url->build(['action' =>'viewresult']);?>">
     <!-- Brand and toggle get grouped for better mobile display -->
      <div class="navbar-header">
       <button type="button" class="navbar-toggle collapsed" data-toggle="collapse" data-target="#bs-example-navbar-collapse-1" aria-expanded="false">
