@@ -3,7 +3,7 @@
 -- http://www.phpmyadmin.net
 --
 -- Host: 127.0.0.1
--- Generation Time: Mar 18, 2017 at 08:04 AM
+-- Generation Time: Mar 20, 2017 at 10:45 AM
 -- Server version: 5.6.17
 -- PHP Version: 5.5.12
 
@@ -37,14 +37,14 @@ CREATE TABLE IF NOT EXISTS `acos` (
   PRIMARY KEY (`id`),
   KEY `lft` (`lft`,`rght`),
   KEY `alias` (`alias`)
-) ENGINE=MyISAM  DEFAULT CHARSET=utf8 AUTO_INCREMENT=162 ;
+) ENGINE=MyISAM  DEFAULT CHARSET=utf8 AUTO_INCREMENT=167 ;
 
 --
 -- Dumping data for table `acos`
 --
 
 INSERT INTO `acos` (`id`, `parent_id`, `model`, `foreign_key`, `alias`, `lft`, `rght`) VALUES
-(1, NULL, NULL, NULL, 'controllers', 1, 270),
+(1, NULL, NULL, NULL, 'controllers', 1, 280),
 (2, 1, NULL, NULL, 'Groups', 2, 13),
 (3, 2, NULL, NULL, 'index', 3, 4),
 (4, 2, NULL, NULL, 'view', 5, 6),
@@ -134,51 +134,56 @@ INSERT INTO `acos` (`id`, `parent_id`, `model`, `foreign_key`, `alias`, `lft`, `
 (108, 105, NULL, NULL, 'add', 179, 180),
 (109, 105, NULL, NULL, 'edit', 181, 182),
 (110, 105, NULL, NULL, 'delete', 183, 184),
-(111, 1, NULL, NULL, 'Events', 186, 209),
+(111, 1, NULL, NULL, 'Events', 186, 219),
 (112, 111, NULL, NULL, 'index', 187, 188),
 (113, 111, NULL, NULL, 'view', 189, 190),
 (114, 111, NULL, NULL, 'add', 191, 192),
 (115, 111, NULL, NULL, 'edit', 193, 194),
 (116, 111, NULL, NULL, 'delete', 195, 196),
-(137, 136, NULL, NULL, 'index', 235, 236),
+(137, 136, NULL, NULL, 'index', 245, 246),
 (118, 16, NULL, NULL, 'forgetpassword', 49, 50),
 (119, 16, NULL, NULL, 'reset', 51, 52),
 (120, 99, NULL, NULL, 'getByCategory', 171, 172),
-(121, 1, NULL, NULL, 'Mediapartners', 210, 221),
-(122, 121, NULL, NULL, 'index', 211, 212),
-(123, 121, NULL, NULL, 'view', 213, 214),
-(124, 121, NULL, NULL, 'add', 215, 216),
-(125, 121, NULL, NULL, 'edit', 217, 218),
-(126, 121, NULL, NULL, 'delete', 219, 220),
-(136, 1, NULL, NULL, 'Galaries', 234, 245),
-(128, 1, NULL, NULL, 'EventsSubCategories', 222, 233),
-(129, 128, NULL, NULL, 'index', 223, 224),
-(130, 128, NULL, NULL, 'view', 225, 226),
-(131, 128, NULL, NULL, 'add', 227, 228),
-(132, 128, NULL, NULL, 'edit', 229, 230),
-(133, 128, NULL, NULL, 'delete', 231, 232),
-(138, 136, NULL, NULL, 'view', 237, 238),
-(139, 136, NULL, NULL, 'add', 239, 240),
-(140, 136, NULL, NULL, 'edit', 241, 242),
-(141, 136, NULL, NULL, 'delete', 243, 244),
+(121, 1, NULL, NULL, 'Mediapartners', 220, 231),
+(122, 121, NULL, NULL, 'index', 221, 222),
+(123, 121, NULL, NULL, 'view', 223, 224),
+(124, 121, NULL, NULL, 'add', 225, 226),
+(125, 121, NULL, NULL, 'edit', 227, 228),
+(126, 121, NULL, NULL, 'delete', 229, 230),
+(136, 1, NULL, NULL, 'Galaries', 244, 255),
+(128, 1, NULL, NULL, 'EventsSubCategories', 232, 243),
+(129, 128, NULL, NULL, 'index', 233, 234),
+(130, 128, NULL, NULL, 'view', 235, 236),
+(131, 128, NULL, NULL, 'add', 237, 238),
+(132, 128, NULL, NULL, 'edit', 239, 240),
+(133, 128, NULL, NULL, 'delete', 241, 242),
+(138, 136, NULL, NULL, 'view', 247, 248),
+(139, 136, NULL, NULL, 'add', 249, 250),
+(140, 136, NULL, NULL, 'edit', 251, 252),
+(141, 136, NULL, NULL, 'delete', 253, 254),
 (142, 111, NULL, NULL, 'viewresult', 197, 198),
 (143, 111, NULL, NULL, 'activate', 199, 200),
-(144, 1, NULL, NULL, 'Eventsubcategories', 246, 257),
-(145, 144, NULL, NULL, 'index', 247, 248),
-(146, 144, NULL, NULL, 'view', 249, 250),
-(147, 144, NULL, NULL, 'add', 251, 252),
-(148, 144, NULL, NULL, 'edit', 253, 254),
-(149, 144, NULL, NULL, 'delete', 255, 256),
-(150, 1, NULL, NULL, 'Address', 258, 269),
-(151, 150, NULL, NULL, 'index', 259, 260),
-(152, 150, NULL, NULL, 'view', 261, 262),
-(153, 150, NULL, NULL, 'add', 263, 264),
-(154, 150, NULL, NULL, 'edit', 265, 266),
-(155, 150, NULL, NULL, 'delete', 267, 268),
+(144, 1, NULL, NULL, 'Eventsubcategories', 256, 267),
+(145, 144, NULL, NULL, 'index', 257, 258),
+(146, 144, NULL, NULL, 'view', 259, 260),
+(147, 144, NULL, NULL, 'add', 261, 262),
+(148, 144, NULL, NULL, 'edit', 263, 264),
+(149, 144, NULL, NULL, 'delete', 265, 266),
+(150, 1, NULL, NULL, 'Address', 268, 279),
+(151, 150, NULL, NULL, 'index', 269, 270),
+(152, 150, NULL, NULL, 'view', 271, 272),
+(153, 150, NULL, NULL, 'add', 273, 274),
+(154, 150, NULL, NULL, 'edit', 275, 276),
+(155, 150, NULL, NULL, 'delete', 277, 278),
 (156, 111, NULL, NULL, 'search', 201, 202),
 (157, 111, NULL, NULL, 'likes', 203, 204),
 (160, 111, NULL, NULL, 'myevents', 205, 206),
-(161, 111, NULL, NULL, 'likedevents', 207, 208);
+(161, 111, NULL, NULL, 'likedevents', 207, 208),
+(162, 111, NULL, NULL, 'about', 209, 210),
+(163, 111, NULL, NULL, 'terms', 211, 212),
+(164, 111, NULL, NULL, 'privacy', 213, 214),
+(165, 111, NULL, NULL, 'partnerwith', 215, 216),
+(166, 111, NULL, NULL, 'career', 217, 218);
 
 /*!40101 SET CHARACTER_SET_CLIENT=@OLD_CHARACTER_SET_CLIENT */;
 /*!40101 SET CHARACTER_SET_RESULTS=@OLD_CHARACTER_SET_RESULTS */;
