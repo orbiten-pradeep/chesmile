@@ -20,6 +20,28 @@ class EventsController extends AppController
      *
      * @return \Cake\Network\Response|null
      */
+    public function about(){
+    	$this->viewBuilder()->layout('event_home');
+
+    }
+
+    public function terms(){
+    	$this->viewBuilder()->layout('event_home');
+    }
+    
+    public function privacy(){
+    	$this->viewBuilder()->layout('event_home');
+    }
+
+    public function partnerwith(){
+    	$this->viewBuilder()->layout('event_home');
+    }
+
+    public function career(){
+    	$this->viewBuilder()->layout('event_home');
+    }
+
+
     public function index($query=null)
     {
         $this->paginate = [
