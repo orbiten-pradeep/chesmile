@@ -36,6 +36,7 @@ class UserProfileController extends AppController
      */
     public function view($id = null)
     {
+         $this->viewBuilder()->layout('event_home');
         $userProfile = $this->UserProfile->get($id, [
             'contain' => ['Users']
         ]);
