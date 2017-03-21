@@ -31,7 +31,6 @@ class UsersController extends AppController
             'contain' => ['Groups']
         ];
         $users = $this->paginate($this->Users);
-
         $this->set(compact('users'));
         $this->set('_serialize', ['users']);
     }
@@ -151,6 +150,7 @@ class UsersController extends AppController
     }
     
 	public function login() {
+
 		$this->viewBuilder()->layout('signin');
 	    if ($this->request->is('post')) {
 	        $user = $this->Auth->identify();
@@ -272,11 +272,10 @@ class UsersController extends AppController
 		$this->viewBuilder()->layout('signin');
 	    if ($this->request->is('post')) {
 	        $user = $this->Auth->identify();
-			
-	        if ($user) {
+			if ($user && $user['group_id'] == 4) {
 	            $this->Auth->setUser($user);
 	            return $this->redirect(array('controller' => 'AdminDashBoard',
-		        'action' => 'index',));
+		        'action' => 'index'));
 	        }
 	        $this->Flash->error(__('Your username or password was incorrect.'));
 	    }
