@@ -79,7 +79,7 @@ ul.social-network li {
 
 ul.social {list-style:none;}
 ul.social li {display:inline; padding: 0; margin:0 5px;}
-ul.social li a {display:inline-block; margi:0 auto; -moz-border-radius:50%; -webkit-border-radius:50%; border-radius:50%; text-align:center; width: 30px; height: 30px; font-size:15px; position:relative;}
+ul.social li a {display:inline-block; margin:0 auto; -moz-border-radius:50%; -webkit-border-radius:50%; border-radius:50%; text-align:center; width: 30px; height: 30px; font-size:15px; position:relative;}
 ul.social li a i {color:#FFF; text-align: center; margin:0; line-height:30px; -webkit-transition: all 0.8s; -moz-transition: all 0.8s; -o-transition: all 0.8s; -ms-transition: all 0.8s; transition: all 0.8s;}
 ul.social li a:hover i { -moz-transform: rotate(360deg); -webkit-transform: rotate(360deg); -ms--transform: rotate(360deg); transform: rotate(360deg);
                          -webkit-transition: all 0.2s; -moz-transition: all 0.2s; -o-transition: all 0.2s; -ms-transition: all 0.2s; transition: all 0.2s;}
@@ -133,6 +133,20 @@ body{
     
 }
 
+/*.nav .category_btn:hover{
+  background-color: #4A94C5;
+}
+.nav .category_btn:hover:active{
+  background-color: #4A94C5;
+}
+.category_dropdown.list-group:hover{
+background-color: #4fa8b1;
+}*/
+.foot{
+  display: inline !important;
+  color: white !important;
+  font-size: 11px !important;
+}
 </style>
  <meta charset="utf-8">
     <meta http-equiv="X-UA-Compatible" content="IE=edge">
@@ -276,12 +290,12 @@ body{
 
   </div>
     <div>
-      <ul class="social" style="color:#ffffff;">
-                <li>About Us</li>
-                <li>Terms of Services</li>
-                <li>Privacy Policy</li>                
-                <li>Partner With Us</li>                
-                <li>Career</li>                
+      <ul class="social" style="color:#ffffff !important;">
+                <li><?= $this->Html->link(__('About us'), ['controller' => 'events', 'action' => 'about'], array('class' => 'foot')); ?></li>
+                <li><?= $this->Html->link(__('Terms of service'), ['controller' => 'events', 'action' => 'terms'], array('class' => 'foot')); ?></li>
+                <li><?= $this->Html->link(__('Privacy Policy'), ['controller' => 'events', 'action' => 'privacy'], array('class' => 'foot')); ?></li>                
+                <li><?= $this->Html->link(__('Partner with us'), ['controller' => 'events', 'action' => 'partnerwith'], array('class' => 'foot')); ?></li>                
+                <li><?= $this->Html->link(__('Career'), ['controller' => 'events', 'action' => 'career'], array('class' => 'foot')); ?></li>                
             </ul> 
     </div>
     <p style="" class="copyrights">Copyright © 2017 ChennaiSmile</p><!--End container-->

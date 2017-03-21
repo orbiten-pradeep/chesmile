@@ -64,7 +64,7 @@ class UserProfileController extends AppController
      */
     public function add()
     {
-        $this->viewBuilder()->layout('header_footer');
+        $this->viewBuilder()->layout('event_home');
         $userProfile = $this->UserProfile->newEntity();
     	$users_id = "";
         $usersInfo = "";
@@ -144,7 +144,7 @@ class UserProfileController extends AppController
      */
     public function edit($id = null)
     {
-        $this->viewBuilder()->layout('header_footer');
+        $this->viewBuilder()->layout('event_home');
         $userProfile = $this->UserProfile->get($id, [
             'contain' => []
         ]);
