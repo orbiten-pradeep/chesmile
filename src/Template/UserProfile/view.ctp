@@ -22,7 +22,9 @@
     max-width: 350px;
     padding: 40px 40px;
 }
-
+.borderless td, .borderless th {
+    border: none;
+}
 </style>
 <div class="container-fluid">
     <div class="row">
@@ -36,9 +38,9 @@
           This is an <strong>.alert</strong>. Use this to show important messages to the user.
         </div>-->
         <!-- <form class="form-horizontal" role="form"> -->
-        <?= $this->Form->create($userProfile,array('enctype' => 'multipart/form-data','class' => 'form-horizontal')); ?>
+      <!--   <?= $this->Form->create($userProfile,array('enctype' => 'multipart/form-data','class' => 'form-horizontal')); ?>
 
-        <?= $this->Form->hidden('user_id', ['options' => $users,'default'=> $users_id]); ?>
+        <?= $this->Form->hidden('user_id', ['options' => $users,'default'=> $users_id]); ?> -->
 
          <div class="text-center">
             <?php echo $this->Html->image('profile.png',array('alt' => '','class' => 'avatar img-circle')); ?>
@@ -47,6 +49,89 @@
         </div>
     </div>
     <div class="col-sm-3 col-sm-offset-2 col-lg-3 col-md-3 col-lg-offset-1 content">
+    <h3><?= h($userProfile->fullname) ?></h3>
+    <table class="table borderless">
+         <tr>
+            <th scope="row"><?= __('Email') ?></th>
+            <td><?= h($user->email) ?></td>
+        </tr>
+         <tr>
+            <th scope="row"><?= __('Fullname') ?></th>
+            <td><?= h($user->fullname) ?></td>
+        </tr>
+        <tr>
+            <th scope="row"><?= __('Name') ?></th>
+            <td><?= h($group->name) ?></td>
+        </tr>
+        <tr>
+            <th scope="row"><?= __('Mobile') ?></th>
+            <td><?= h($userProfile->Mobile) ?></td>
+        </tr>
+        <tr>
+            <th scope="row"><?= __('Address 1') ?></th>
+            <td><?= h($userProfile->Address_1) ?></td>
+        </tr>
+        <tr>
+            <th scope="row"><?= __('Address 2') ?></th>
+            <td><?= h($userProfile->Address_2) ?></td>
+        </tr>
+        <tr>
+            <th scope="row"><?= __('City') ?></th>
+            <td><?= h($userProfile->City) ?></td>
+        </tr>
+        <tr>
+            <th scope="row"><?= __('State') ?></th>
+            <td><?= h($userProfile->State) ?></td>
+        </tr>
+        <tr>
+            <th scope="row"><?= __('Country') ?></th>
+            <td><?= h($userProfile->Country) ?></td>
+        </tr>
+        <tr>
+            <th scope="row"><?= __('Photo') ?></th>
+            <td><?php if($userProfile->Photo) 
+            {
+                echo $this->Html->image('profile/'.$userProfile->Photo, array('width' => '200px','alt'=>'aswq'));
+            }  ?></td>
+        </tr>
+        <tr>
+            <th scope="row"><?= __('Zipcode') ?></th>
+            <td><?= $this->Number->format($userProfile->Zipcode) ?></td>
+        </tr>
+    </table>
+
+    <div class="pull-right">
+    <?= $this->Html->link($this->Html->tag('i', '', array('class' => 'fa fa-pencil-square-o')).'Edit', array('action' => 'edit', $userProfile->id), array('class' => 'btn btn-primary','escape' => false)) ?>
+    <!-- <button type="submit" class="btn btn-primary">
+  <i class="fa fa-pencil-square-o"></i> Edit
+</button> -->
+       <!--  <?= $this->Html->link(__('Edit'), ['action' => 'edit', $userProfile->id], array('class' => 'btn btn-primary')) ?> -->
+    </div>
+
+</div>
+
+<script type="text/javascript">
+ // function to set the height on fly
+ function autoHeight() {
+   $('.content').css('min-height', 0);
+   $('.content').css('min-height', (
+     $(document).height() 
+     - $('#header').height() 
+     - $('.footer').height()
+   ));
+ }
+
+ // onDocumentReady function bind
+ $(document).ready(function() {
+   autoHeight();
+ });
+
+ // onResize bind of the function
+ $(window).resize(function() {
+   autoHeight();
+ });
+ </script>
+    <!-- <div class="col-sm-3 col-sm-offset-2 col-lg-3 col-md-3 col-lg-offset-1 content">
 
         <div class="form-group">
             <?=  $this->Form->input('fullname',array('default'=> $fullname,'class' => 'form-control','type' => 'text')); ?>
@@ -87,11 +172,7 @@
         <div class="form-group">
            <?= $this->Form->input('Zipcode',array('class' => 'form-control'));?>
         </div>
-        <div class="pull-right">
 
-
-            
-        </div>
             <?= $this->Form->end() ?>
 
 
@@ -102,9 +183,11 @@
         <div class="form-group">
            <?= $this->Form->input('Zipcode',array('class' => 'form-control'));?>
         </div>
+        <div class="pull-right">
         <?= $this->Form->button(__('Submit'),array('class' => 'btn btn-primary')); ?>
+        </div>
             <?= $this->Form->end() ?>
-         </div>
+         </div> -->
     </div>
 </div>
 

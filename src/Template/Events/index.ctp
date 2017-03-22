@@ -136,15 +136,16 @@ use Cake\Routing\Router;
                                   <a href="#" class="list-group-item">This Month Events</a>
                                    -->
                                   
-                                  <?= $this->Html->link(__("Tomorrow's Events"), ['action' => 'index', '?' => ['query' => 'Tomorrow']], array('class' => 'list-group-item')) ?>
+                              <?= $this->Html->link(__("Tomorrow's Events"), ['action' => 'index', '?' => ['query' => 'Tomorrow']], array('class' => 'list-group-item')) ?>
 
-                                  <?= $this->Html->link(__("This Weekend Events"), ['action' => 'index', '?' => ['query' => 'Weekend']], array('class' => 'list-group-item')) ?>
+                              <?= $this->Html->link(__("This Weekend Events"), ['action' => 'index', '?' => ['query' => 'Weekend']], array('class' => 'list-group-item')) ?>
 
-                                   <?= $this->Html->link(__("This Month Events"), ['action' => 'index', '?' => ['query' => 'Month']], array('class' => 'list-group-item')) ?>
+                              <?= $this->Html->link(__("This Month Events"), ['action' => 'index', '?' => ['query' => 'Month']], array('class' => 'list-group-item')) ?>
+
+                              <?= $this->Html->link(__("All Events"), ['action' => 'index'], array('class' => 'list-group-item')) ?>
                              
                               <p class="text-primary">Specific Date Events</p>
                               
-
            <div id="reportrange"><i class="glyphicon glyphicon-calendar fa fa-calendar"></i> <span></span> <b class="caret"></b></div>
 
 

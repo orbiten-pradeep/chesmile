@@ -147,6 +147,10 @@ background-color: #4fa8b1;
   color: white !important;
   font-size: 11px !important;
 }
+
+.list-group .checkbox label:hover{
+  color: #337AB7 !important;
+}
 </style>
  <meta charset="utf-8">
     <meta http-equiv="X-UA-Compatible" content="IE=edge">
