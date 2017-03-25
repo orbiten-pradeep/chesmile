@@ -6,6 +6,18 @@ use Cake\Routing\Router;
    a:hover {
  cursor:pointer;
 }
+
+/*.back{
+
+  display: block;
+  /*position: relative;*/
+  background: linear-gradient(to bottom, transparent 0%, #080607 100%);
+  margin-top: -120px;
+  height: 150px;
+  width: 100%;
+  content: '';
+
+}*/
 /*.sizebox{
   padding-right: 110px;
   color: black;
@@ -166,9 +178,11 @@ use Cake\Routing\Router;
                         
                           <div class="col-sm-6 col-lg-2 col-md-4">
                               <div class="thumbnail">
-                              <p class="pull-left tag"><?= $event->has('category') ? $event->category->name : '' ?></p>
-                              <p class="pull-right post"><!--<?= h($event->created) ?>--></p>
-                                  <img src="img/photos/1.jpg" alt="">
+                              <div class="back">
+                                <p class="pull-left tag"><?= $event->has('category') ? $event->category->name : '' ?></p>
+                                <p class="pull-right post"><!--<?= h($event->created) ?>--></p>
+                              </div>
+                                  <img src="/chesmile/img/photos/1.jpg" alt="">
                                   <div class="caption dance">
                                       <h4 class="event_txt"><a href="#"><?= $this->Html->link(h($event->title), ['action' => 'view', $event->id]) ?></a></h4>
                                       <p class="venue_txt"><?= h($event->OrganizersName) ?></p>

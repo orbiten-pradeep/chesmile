@@ -1,4 +1,4 @@
-<!-- <?php echo $this->Html->css(['form-basic']); ?> -->
+<?php echo $this->Html->css(['form-basic']); ?>
 <?php 
 use Cake\Routing\Router;
 ?>
@@ -97,7 +97,7 @@ $(document).ready(function() {
 </script>
 <style type="text/css">
     /******************************************************PROFILE CSS ************************************/
-.card-block{
+/*/*.card-block{
     padding-left:3%;
     padding-top:3%;
 }
@@ -145,7 +145,7 @@ hr {
 /****************************************************** EVENT CREATION FORM CSS ************************************/
 
 
-body{
+/*body{
     background-color: #f2f2f2;
     font-family: 'Raleway', sans-serif;
 }
@@ -184,7 +184,7 @@ body{
 }
 
 /* The form title */
-.form-basic h1{
+/*.form-basic h1{
     display: inline-block;
     box-sizing: border-box;
     color:  #4c565e;
@@ -336,9 +336,8 @@ body{
     }
     .form-basic button{
         margin: 0;
-    }
-}
-
+    }*/
+/*}*/
 </style>
 <!-- 
 <link rel="stylesheet" href="//code.jquery.com/ui/1.11.4/themes/smoothness/jquery-ui.css">
@@ -476,24 +475,24 @@ body{
             </div>
             <div class="form-group">
             <?= $this->Form->button(__('Submit')) ?>
-               <!--  <button id="subbutton" type="submit">Submit Form</button> -->
+              <button id="subbutton" type="submit">Submit Form</button> -->
   <!--           </div>
         </form>
     </div>
  --> 
-<div class="container">
-    <div class="row">
+<!-- <div class="container">
+    <div class="row"> -->
       <!-- left column -->
       
       <!-- edit form column -->
-    <div class="main-content">
-    <?= $this->Form->create($event,array('type' => 'file','class' => 'form-basic text-center')) ?>
+    <!-- <div class="main-content">
+    <?= $this->Form->create($event,array('type' => 'file','class' => 'form-basic text-center')) ?> -->
        <!--  <form class="form-basic" method="post" action="#"> -->
-        <?= $this->Form->hidden('user_id', ['options' => $users,'default'=> $users_id]);?>
+<!--         <?= $this->Form->hidden('user_id', ['options' => $users,'default'=> $users_id]);?>
             <div class="form-group">
-                <label>
-                   <?= $this->Form->input('title',array('class' => 'form-control'));?>
-              </label>  
+                <label> 
+                   <?= $this->Form->input('title',array('class' => 'form-control','label' => false));?>
+                </label>
             </div>
             <div class="form-group">
                 <label>
@@ -601,15 +600,15 @@ body{
          <?= $this->Form->end() ?>
     </div>
     </div>
-</div>
+</div> -->
 
- <nav class="large-3 medium-4 columns" id="actions-sidebar">
+<!--  <nav class="large-3 medium-4 columns" id="actions-sidebar">
     <ul class="side-nav">
         <li class="heading"><?= __('Actions') ?></li>
         <li><?= $this->Html->link(__('Events'), ['action' => 'index']) ?></li>
 
     </ul>
-</nav>
+</nav> -->
 <!-- <div class="events form large-9 medium-8 columns content">
     <?= $this->Form->create($event, ['type' => 'file']) ?>
     <fieldset>
@@ -648,4 +647,368 @@ body{
     <?= $this->Form->button(__('Submit')) ?>
     <?= $this->Form->end() ?>
 </div>
+-->
+<style type="text/css">
+    .float-label-control { position: relative; margin-bottom: 1.5em; }
+    /*.float-label-control ::-webkit-input-placeholder { color: transparent; }
+    .float-label-control :-moz-placeholder { color: transparent; }
+    .float-label-control ::-moz-placeholder { color: transparent; }
+    .float-label-control :-ms-input-placeholder { color: transparent; }*/
+    .float-label-control input:-webkit-autofill,
+    .float-label-control textarea:-webkit-autofill { background-color: transparent !important; -webkit-box-shadow: 0 0 0 1000px white inset !important; -moz-box-shadow: 0 0 0 1000px white inset !important; box-shadow: 0 0 0 1000px white inset !important; }
+    .float-label-control input, .float-label-control textarea, .float-label-control label { font-size: 1.3em; box-shadow: none; -webkit-box-shadow: none; }
+        .float-label-control input:focus,
+        .float-label-control textarea:focus { box-shadow: none; -webkit-box-shadow: none; border-bottom-width: 2px; padding-bottom: 0; background: none; }
+        .float-label-control textarea:focus { padding-bottom: 4px; }
+    .float-label-control input, .float-label-control textarea { display: block; width: 100%; padding: 0.1em 0em 1px 0em; border: none; border-radius: 0px; border-bottom: 1px solid #aaa; outline: none; margin: 0px; background: none; }
+    .float-label-control textarea { padding: 0.1em 0em 5px 0em; }
+    .float-label-control label { position: absolute; font-weight: normal; top: -1.0em; left: 0.08em; color: #aaaaaa; z-index: -1; font-size: 0.85em; -moz-animation: float-labels 300ms none ease-out; -webkit-animation: float-labels 300ms none ease-out; -o-animation: float-labels 300ms none ease-out; -ms-animation: float-labels 300ms none ease-out; -khtml-animation: float-labels 300ms none ease-out; animation: float-labels 300ms none ease-out; /* There is a bug sometimes pausing the animation. This avoids that.*/ animation-play-state: running !important; -webkit-animation-play-state: running !important; }
+    .float-label-control input.empty + label,
+    .float-label-control textarea.empty + label { top: 0.1em; font-size: 1.5em; animation: none; -webkit-animation: none; }
+    .float-label-control input:not(.empty) + label,
+    .float-label-control textarea:not(.empty) + label { z-index: 1; }
+    .float-label-control input:not(.empty):focus + label,
+    .float-label-control textarea:not(.empty):focus + label { color: #aaaaaa; }
+    .float-label-control.label-bottom label { -moz-animation: float-labels-bottom 300ms none ease-out; -webkit-animation: float-labels-bottom 300ms none ease-out; -o-animation: float-labels-bottom 300ms none ease-out; -ms-animation: float-labels-bottom 300ms none ease-out; -khtml-animation: float-labels-bottom 300ms none ease-out; animation: float-labels-bottom 300ms none ease-out; }
+    .float-label-control.label-bottom input:not(.empty) + label,
+    .float-label-control.label-bottom textarea:not(.empty) + label { top: 3em; }
+
+
+@keyframes float-labels {
+    0% { opacity: 1; color: #aaa; top: 0.1em; font-size: 1.5em; }
+    20% { font-size: 1.5em; opacity: 0; }
+    30% { top: 0.1em; }
+    50% { opacity: 0; font-size: 0.85em; }
+    100% { top: -1em; opacity: 1; }
+}
+
+@-webkit-keyframes float-labels {
+    0% { opacity: 1; color: #aaa; top: 0.1em; font-size: 1.5em; }
+    20% { font-size: 1.5em; opacity: 0; }
+    30% { top: 0.1em; }
+    50% { opacity: 0; font-size: 0.85em; }
+    100% { top: -1em; opacity: 1; }
+}
+
+@keyframes float-labels-bottom {
+    0% { opacity: 1; color: #aaa; top: 0.1em; font-size: 1.5em; }
+    20% { font-size: 1.5em; opacity: 0; }
+    30% { top: 0.1em; }
+    50% { opacity: 0; font-size: 0.85em; }
+    100% { top: 3em; opacity: 1; }
+}
+
+@-webkit-keyframes float-labels-bottom {
+    0% { opacity: 1; color: #aaa; top: 0.1em; font-size: 1.5em; }
+    20% { font-size: 1.5em; opacity: 0; }
+    30% { top: 0.1em; }
+    50% { opacity: 0; font-size: 0.85em; }
+    100% { top: 3em; opacity: 1; }
+}
+.wrapp{
+    max-width: 640px;
+    /*margin: 0 auto;*/
+    padding: 55px;
+    box-sizing: border-box;
+    background-color:  #ffffff;
+    box-shadow: 0 1px 3px 0 rgba(0, 0, 0, 0.1);
+    margin-bottom: 35px;
+   /* font: bold 14px sans-serif;
+    text-align: center;*/
+}
+.heigh{
+    height: 35px !important;
+}
+
+label {
+    font-weight: inherit !important;
+}
+</style>
+<div class="container wrapp">
+        <div class="row">
+            <div class="col-sm-8">
+                 <?= $this->Form->create($event,array('type' => 'file')) ?>
+                  <?= $this->Form->hidden('user_id', ['options' => $users,'default'=> $users_id]);?>
+                <!-- <form role="form"> -->  <!-- <input type="text" class="form-control" placeholder="Event Title"> -->
+                    <div class="form-group float-label-control">
+                        <label for="">Event Title</label>
+         <?php echo $this->Form->input('title',array('div' => false, 'label' => false, 'class' => 'form-control form-element', 'placeholder' => 'Event Title')); ?>
+                      
+                    </div>
+
+                    <div class="form-group float-label-control">
+                        <label for="">Organizers Name</label>
+                         <?=  $this->Form->input('OrganizersName',array('div' => false, 'label' => false, 'class' => 'form-control form-element','placeholder' => 'Organizer Name'));?>
+                        <!-- <input type="text" class="form-control" placeholder="Organizers Name"> -->
+                    </div>
+
+            <?= $this->Form->hidden('active');?>
+
+                    <div class="form-group">
+                <label>
+<?= $this->Form->input('categories_id',array('class' => 'form-control heigh','options' => $categories, 'onChange' => 'checkForOther(this);', 'empty' => '(Select Categories)','label' => false));?>
+            </label>
+            </div>
+
+            <div class="form-group">
+                <label>
+            <?=$this->Form->input('Eventsubcategories.sub_categories',array('class' => 'form-control','options' => $subCategories, 'multiple' => 'true', 'empty' => '(choose one)','label' => false,'empty' => false));?>
+            </label>
+            </div>
+
+            <div class="form-group float-label-control">
+                   <label for="">Description</label>
+                  <?= $this->Form->input('descriptioin',array('div' => false, 'label' => false,'class' => 'form-control form-element','placeholder' => 'Description about your event','rows' => '1' ));?>
+                  <!--  <textarea class="form-control" placeholder="Some Words about your event" rows="1"></textarea> -->
+            </div>
+
+             <div class="form-group">
+                <label>
+           <?= $this->Form->input('date', array('type' => 'text','class' => 'form-control','placeholder' => 'Date','label' => false));?>
+           </label>
+           </div>
+
+             <!-- <div class="form-group float-label-control">
+                  <label for="datepicker">date</label>
+                 <input type="text" class="form-control" placeholder="Event Date">
+             </div> -->
+
+           <div class="form-group">
+            <label>
+           <?=$this->Form->input('time', array('type' => 'text','class' => 'form-control timepicker','label' => false,'placeholder' => 'Time'));?>
+           </label>
+           </div>
+                     <div class="form-group float-label-control">
+                        <label for="">Venue</label>
+                        <?=  $this->Form->input('venue',array('div' => false, 'label' => false, 'class' => 'form-control form-element','placeholder' => 'Enter Venue'));?>
+                        <!-- <input type="text" class="form-control" placeholder="Organizers Name"> -->
+                    </div>
+
+                    <div class="form-group">
+                <label>
+                    <?=$this->Form->input('banner',['type' => 'file']);?>
+                </label>
+            </div>
+
+             <div class="form-group">
+                <label>
+            <?=$this->Form->input('display',['type' => 'file']);?>
+            </label>
+            </div>
+
+             <div class="form-group">
+                <label>
+            <?=$this->Form->input('OrganizersLogo',['type' => 'file']);?>
+            </label>
+            </div> 
+
+             <div class="form-group">
+                <label>
+           <?= $this->Form->input('Mediapartners[]',['type' => 'file', 'multiple' => 'true','label' => 'Mediapartners']);?>
+            </label>
+            </div>
+
+             <div class="form-group">
+                <label>
+            <?=$this->Form->input('Sponsors[]',['type' => 'file', 'multiple' => 'true', 'label' => 'Sponsors']);?>
+            </label>
+            </div>
+
+            <div class="form-group float-label-control">
+                <label for="">Address 1</label>
+            <?= $this->Form->input('address_1',array('div' => false,'label' => false,'class' => 'form-control form-element', 'placeholder' => 'Enter address 1'));?>
+                      <!--   <input type="text" class="form-control" placeholder="Enter Address 1"> -->
+            </div>
+
+            <div class="form-group float-label-control">
+                        <label for="">Address 2</label>
+            <?= $this->Form->input('address_2',array('div' => false,'label' => false,'class' => 'form-control form-element', 'placeholder' => 'Enter address 2'));?>
+                        <!-- <input type="text" class="form-control" placeholder="Enter Address 2"> -->
+            </div>
+
+            <div class="form-group float-label-control">
+                        <label for="">Landmark</label>
+               <?= $this->Form->input('landmark',array('div' => false,'label' => false,'class' => 'form-control form-element', 'placeholder' => 'Any Specific Landmark?'));?>
+                       <!--  <input type="text" class="form-control" placeholder="Any Specific Landmarks?"> -->
+            </div>
+
+            <div class="form-group float-label-control">
+                <div class="ui-widget">
+                  <label for="Autocomplete"> Area Name</label>
+                <?php echo $this->Form->input('areaname', array('id' => 'Autocomplete', 'required','class' => 'form-control form-element','label' => false,'placeholder' => 'Areaname'));?>
+                </div>
+            </div>
+
+            <!-- <div class="form-group float-label-control">
+                    <div class="ui-widget">
+                        <label for="">Areaname</label>
+                        <input for="Autocomplete" type="text" class="form-control">
+                    </div>
+            </div> -->
+
+           <!--   <div class="form-group">
+                <label>
+            <div class="ui-widget">
+            <label for="Autocomplete"></label>
+            <?php echo $this->Form->input('areaname', array('id' => 'Autocomplete', 'required','class' => 'form-control'));?>
+            </div>
+            </label>
+            </div> -->
+
+                <div class="form-group">
+                <label>
+            <?=$this->Form->input('city', array('default' => 'CHENNAI', 'readonly','class' => 'form-control'));?>
+            </label>
+            </div>
+
+             <div class="form-group">
+                <label>
+            <?=$this->Form->input('state', array('default' => 'TAMILNADU', 'readonly','class' => 'form-control'));?>
+            </label>
+            </div>
+
+            <div class="form-group">
+                <label>
+            <?= $this->Form->input('country', array('default' => 'INDIA', 'readonly','class' => 'form-control'));?>
+            </label>
+            </div>
+
+            <div class="form-group">
+            <?= $this->Form->button('Submit',array('id' => 'subbutton')) ?>
+            </div>
+
+
+</form>
+            <!-- <div class="form-group">
+                <label>
+            <?=$this->Form->input('address_1',array('class' => 'form-control'));?>
+            </label>
+            </div> -->
+
+             <!-- <div class="form-group">
+                <label>
+            <?=$this->Form->input('address_2',array('class' => 'form-control'));?>
+            </label>
+            </div>
  -->
+             <!-- <div class="form-group">
+                <label>
+            <?=$this->Form->input('landmark',array('class' => 'form-control'));?>
+            </label>
+            </div> -->
+                    <!-- <div class="form-group float-label-control">
+                        <label for="">Textarea</label>
+                        <textarea class="form-control" placeholder="Textarea" rows="1"></textarea>
+                    </div> -->
+                
+
+
+                <!-- <h4 class="page-header">Bottom Labels</h4>
+                <form role="form">
+                    <div class="form-group float-label-control label-bottom">
+                        <label for="">Username</label>
+                        <input type="email" class="form-control" placeholder="Username">
+                    </div>
+                </form> -->
+
+
+               <!--  <h4 class="page-header">Placeholder Overrides</h4>
+                <form role="form">
+                    <div class="form-group float-label-control">
+                        <label for="">Email Address</label>
+                        <input type="email" class="form-control" placeholder="What's your email address?">
+                    </div>
+                </form> -->
+            </div>
+        </div>
+    </div>
+<script src="https://ajax.googleapis.com/ajax/libs/jquery/1.12.4/jquery.min.js"></script>
+
+<script type="text/javascript">
+    /* Float Label Pattern Plugin for Bootstrap 3.1.0 by Travis Wilson
+**************************************************/
+
+(function ($) {
+    $.fn.floatLabels = function (options) {
+
+        // Settings
+        var self = this;
+        var settings = $.extend({}, options);
+
+
+        // Event Handlers
+        function registerEventHandlers() {
+            self.on('input keyup change', 'input, textarea', function () {
+                actions.swapLabels(this);
+            });
+        }
+
+
+        // Actions
+        var actions = {
+            initialize: function() {
+                self.each(function () {
+                    var $this = $(this);
+                    var $label = $this.children('label');
+                    var $field = $this.find('input,textarea').first();
+
+                    if ($this.children().first().is('label')) {
+                        $this.children().first().remove();
+                        $this.append($label);
+                    }
+
+                    var placeholderText = ($field.attr('placeholder') && $field.attr('placeholder') != $label.text()) ? $field.attr('placeholder') : $label.text();
+
+                    $label.data('placeholder-text', placeholderText);
+                    $label.data('original-text', $label.text());
+
+                    if ($field.val() == '') {
+                        $field.addClass('empty')
+                    }
+                });
+            },
+            swapLabels: function (field) {
+                var $field = $(field);
+                var $label = $(field).siblings('label').first();
+                var isEmpty = Boolean($field.val());
+
+                if (isEmpty) {
+                    $field.removeClass('empty');
+                    $label.text($label.data('original-text'));
+                }
+                else {
+                    $field.addClass('empty');
+                    $label.text($label.data('placeholder-text'));
+                }
+            }
+        }
+
+
+        // Initialization
+        function init() {
+            registerEventHandlers();
+
+            actions.initialize();
+            self.each(function () {
+                actions.swapLabels($(this).find('input,textarea').first());
+            });
+        }
+        init();
+
+
+        return this;
+    };
+
+    $(function () {
+        jQuery('.form-element').each(function(){
+          if($(this).parent().hasClass('required')){
+             jQuery('.form-element').unwrap();
+          }
+        });
+
+        setTimeout(function(){
+            $('.float-label-control').floatLabels();
+        },1000);
+    });
+})(jQuery);
+</script>

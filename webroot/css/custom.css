@@ -33,7 +33,9 @@ body {
       position: relative !important; 
     }
 }*/
-
+.tag {
+    font-weight: unset !important;
+}
 .navbar-brand {
     float: none;
     height: auto;
@@ -172,7 +174,7 @@ footer {
     color: #ffffff;
 }
 .event_txt a {
-    text-transform: uppercase;
+    text-transform: none;
     color: #ffffff;
 }
 .venue_txt {} .date_txt {} .clearfix:after {
@@ -474,11 +476,12 @@ h3.heading > span,
     position: absolute;
     color: #ffffff;
     top: 5px;
-    padding: 0px 5px;
+    padding: 5px 5px;
     border: 1px solid #ffffff;
     left: 5px;
     font-size: 12px;
     text-shadow: 0px 1px 2px rgba(0, 0, 0, 1);
+    font-weight: 0px !important;
 }
 .thumbnail .pull-right.post {
     position: absolute;
