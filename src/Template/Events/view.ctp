@@ -57,7 +57,7 @@
                     <br>3481 Melrose Place
                     <br>Beverly Hills, CA 90210
                     <br> -->
-                    <?= $this->Text->autoParagraph(h($event->Venue)); ?>
+                   <!--  <?= $this->Text->autoParagraph(h($event->Venue)); ?> -->
                 </address>
             </div>
         </div>

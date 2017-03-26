@@ -109,7 +109,8 @@
     </div>
 
 </div>
-
+</div>
+</div>
 <script type="text/javascript">
  // function to set the height on fly
  function autoHeight() {

@@ -168,7 +168,7 @@ use Cake\Routing\Router;
                     
                   </div>
 
-                  <div class="col-sm-8 col-lg-10 col-md-8 list_event">
+                  <div class="col-sm-8 col-lg-10 col-md-8 list_event content">
 
 
 
@@ -212,12 +212,32 @@ use Cake\Routing\Router;
                       </div>
 
                   </div>
-
-
               </div>
               <div class="row">
               &nbsp;
                   </div>
+<script type="text/javascript">
+ // function to set the height on fly
+ function autoHeight() {
+   $('.content').css('min-height', 0);
+   $('.content').css('min-height', (
+     $(document).height() 
+     - $('#header').height() 
+     - $('.footer').height()
+   ));
+ }
+
+ // onDocumentReady function bind
+ $(document).ready(function() {
+   autoHeight();
+ });
+
+ // onResize bind of the function
+ $(window).resize(function() {
+   autoHeight();
+ });
+ </script>
+
  <!--              </div> -->
 <!-- <nav class="large-3 medium-4 columns" id="actions-sidebar">
           <ul class="side-nav">

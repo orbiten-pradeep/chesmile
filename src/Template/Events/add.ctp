@@ -778,11 +778,10 @@ label {
            <?=$this->Form->input('time', array('type' => 'text','class' => 'form-control timepicker','label' => false,'placeholder' => 'Time'));?>
            </label>
            </div>
-                     <div class="form-group float-label-control">
+                     <!-- <div class="form-group float-label-control">
                         <label for="">Venue</label>
                         <?=  $this->Form->input('venue',array('div' => false, 'label' => false, 'class' => 'form-control form-element','placeholder' => 'Enter Venue'));?>
-                        <!-- <input type="text" class="form-control" placeholder="Organizers Name"> -->
-                    </div>
+                    </div> -->
 
                     <div class="form-group">
                 <label>
