@@ -6,6 +6,7 @@ use Cake\I18n\Time;
 use Cake\Utility\Text;
 use Cake\Mailer\Email;
 use Cake\Routing\Router;
+use Cake\Datasource\ConnectionManager;
 
 /**
  * Events Controller
@@ -44,52 +45,8 @@ class EventsController extends AppController
 
     public function index($query=null)
     {
-        $this->paginate = [
-            'contain' => ['Users', 'Categories']
-        ];
-        $filter = false;
-        $this->paginate['order'] = array('Events.created' => 'desc');
-		//$this->paginate['conditions'] = array('Events.active' => '1');
-
-        if (!empty($this->request->query)) 
-        {
-        	if($this->request->query['query'] == "Today")
-        	{
-        		$filter = true;
-        		$this->paginate['conditions'] = array("Events.date = CURDATE()");
-        	} elseif($this->request->query['query'] == "Tomorrow")
-        	{
-        		$filter = true;
-        		//$this->paginate['conditions'] = "";
-        		$this->paginate['conditions'] = array("Events.date = DATE_ADD(CURDATE(),INTERVAL 1 DAY)");
-        	} elseif ($this->request->query['query'] == "Weekend")
-        	{
-        		$filter = true;
-        		//$this->paginate['conditions'] = "";
-        		$this->paginate['conditions'] = array("Events.date between DATE_ADD(CURDATE(), interval(7 - DAYOFWEEK(CURDATE()) ) DAY) AND DATE_ADD(CURDATE(), interval(7-DAYOFWEEK(CURDATE())+1) DAY)");
-        	}elseif ($this->request->query['query'] == "Month")
-        	{
-        		$filter = true;
-        		//$this->paginate['conditions'] = "";
-        		$this->paginate['conditions'] = array("Events.date between DATE_FORMAT(NOW() ,'%Y-%m-01') AND LAST_DAY(CURDATE())");
-        	}
-        }
-        if(!$filter)
-	        $this->paginate['conditions'] = array("Events.date > DATE_ADD(CURDATE(),INTERVAL -1 DAY)");
-        $events = $this->paginate($this->Events);
-        //$events->orderAsc();
-
 		$this->viewBuilder()->layout('event_home');
-		$this->loadModel('Likes');
-        $likes = '';
-        foreach ($events as $key => $value) {
-        	$query_count = $this->Likes->find('all', [
-			    'conditions' => ['events_id' => $value['id'], 'likes' => 1]
-			]);
-			$number_cnt = $query_count->count();
-			$likes[$key]['events'] = $value['id'];
-			$likes[$key]['likes'] = $number_cnt;
-        }
+		
         $this->loadModel('Categories');
         $categories_new = $this->Categories->find()->select(['Categories.name', 'Categories.id'])
         	->where(['active' => 1]);
@@ -101,11 +58,7 @@ class EventsController extends AppController
 
         $this->set('categories', $categories_new);
         $this->set(compact('subCategories_new'));
-        $this->set(compact('events'));
-        $this->set(compact('likes'));
-        $this->set('_serialize', ['events', 'likes']);
     }
-
 
     public function myevents()
     {
@@ -782,22 +735,81 @@ class EventsController extends AppController
 
     //Search AreaName
 	public function search() 
-	       {
-	        if ($this->request->is('ajax')) {
-	            $this->loadModel('Area');
-	            $this->autoRender = false;            
-	            $name = $this->request->query('term');            
-	            $results = $this->Area->find('all', array(
-	                                           'conditions' => array('area_name LIKE ' =>  $name . '%')
-	                                         
-	                                           ));
-	            
-	            $resultArr = array();
-	            foreach($results as $result) {
-	               $resultArr[] = array('label' =>$result['area_name'] , 'value' => $result['area_name'] );
-	            }
-	            echo json_encode($resultArr);              
+	{
+        if ($this->request->is('ajax')) {
+            $this->loadModel('Area');
+            $this->autoRender = false;            
+            $name = $this->request->query('term');            
+            $results = $this->Area->find('all', array(
+                                           'conditions' => array('area_name LIKE ' =>  $name . '%')
+                                         
+                                           ));
+            
+            $resultArr = array();
+            foreach($results as $result) {
+               $resultArr[] = array('label' =>$result['area_name'] , 'value' => $result['area_name'] );
+            }
+            echo json_encode($resultArr);              
 		}
+	}
+
+	public function eventlist() 
+	{    
+		if ($this->request->is('ajax')) {
+
+			$filter = false;
+	        $cond = '';
+
+	        if (!empty($this->request->data)){
+	        	//echo "<pre>";print_r($this->request->query);echo "</pre>";
+
+	        	if(isset($this->request->data['category']) && $this->request->data['category'] !='') {
+	        		$category = $this->request->data['category'];
+	        		$cond .= " AND e.categories_id IN ($category)";
+	        	}
+	        	if(isset($this->request->data['date']) && !empty($this->request->data['date'])){
+		        	if($this->request->data['date'] == "today") {
+		        		$filter = true;
+		        		$cond .= " AND e.date = CURDATE()";
+		        	}
+		        	elseif($this->request->data['date'] == "tomorrow") {
+		        		$filter = true;
+		        		$cond .= " AND e.date = DATE_ADD(CURDATE(),INTERVAL 1 DAY)";
+		        	}
+		        	elseif ($this->request->data['date'] == "weekend") {
+		        		$filter = true;
+		        		$cond .= " AND e.date between DATE_ADD(CURDATE(), interval(7 - DAYOFWEEK(CURDATE()) ) DAY) AND DATE_ADD(CURDATE(), interval(7-DAYOFWEEK(CURDATE())+1) DAY)";
+		        	}
+		        	elseif ($this->request->data['date'] == "month") {
+		        		$filter = true;
+		        		$cond .= " AND e.date between DATE_FORMAT(NOW() ,'%Y-%m-01') AND LAST_DAY(CURDATE())";
+		        	}
+	        	}
+	        }
+	        if(!$filter)
+		        $cond .= " AND e.date > DATE_ADD(CURDATE(),INTERVAL -1 DAY)";
+
+            /*$results = $this->Events
+            ->find('all', [
+    			'limit' => 200, 
+    			'conditions' => array(array($catCond), $dateCond),
+		        'order' => "Events.created DESC"
+    		])
+    		->select(['categories.name', 'likes_count' => $sub_query])
+    		->select($this->Events)
+    		->leftJoin('categories', 'categories.id = Events.categories_id');*/
+            //echo "<pre>";print_r($results);echo "</pre>";
+
+            $conn = ConnectionManager::get('default');
+            $query = "SELECT e.*, c.name as category_name, (SELECT count(l.events_id) FROM likes l WHERE l.events_id = e.id GROUP BY l.events_id) as likes_count FROM events e LEFT JOIN categories c ON c.id = e.categories_id WHERE 1 $cond";
+            $stmt = $conn->execute($query);
+            $results = $stmt ->fetchAll('assoc');
+            //sleep(100);
+
+        	echo json_encode($results);    
+		}
+		$this->autoRender = false;
+		exit;
 	}
 
 	public function likes($id = null)

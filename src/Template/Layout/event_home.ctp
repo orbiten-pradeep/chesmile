@@ -164,8 +164,6 @@ background-color: #4fa8b1;
 <title>Chennai Smile</title>
 
 <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/4.0.0-alpha.4/css/bootstrap.min.css">
-<script src="https://maxcdn.bootstrapcdn.com/bootstrap/4.0.0-alpha.4/js/bootstrap.min.js" "></script>
-
 <link href="https://fonts.googleapis.com/css?family=Raleway:100,200,300,400,500,600,700,800,900" rel="stylesheet"> 
 <link href="http://maxcdn.bootstrapcdn.com/font-awesome/4.2.0/css/font-awesome.min.css" rel="stylesheet">
 
@@ -175,6 +173,9 @@ background-color: #4fa8b1;
 <body>
 <nav class="navbar navbar-default">
   <input type="hidden" id="sub_category_api_url" name="sub_category_api_url" value="<?php echo $this->Url->build(['action' =>'viewresult']);?>">
+  <input type="hidden" id="event_list_url" name="event_list_url" value="<?php echo $this->Url->build(['action' =>'eventlist']);?>">
+  <input type="hidden" id="event_view_url" name="event_view_url" value="<?php echo $this->Url->build(['action' =>'view']);?>">
+  <input type="hidden" id="filterDateVal" name="filterDateVal" value="">
     <!-- Brand and toggle get grouped for better mobile display -->
      <div class="navbar-header">
       <button type="button" class="navbar-toggle collapsed" data-toggle="collapse" data-target="#bs-example-navbar-collapse-1" aria-expanded="false">
@@ -198,11 +199,13 @@ background-color: #4fa8b1;
          </div>
         </li>
         <li class="search-box-li">
-         <form class="navbar-form navbar-left">
+         <form class="navbar-form navbar-left" action="<?php echo $this->Url->build(['action' =>'index']);?>" method="post">
           <div class="form-group">
-            <input id="eventCategorySearch" type="text" class="form-control" placeholder="Search for events, parties, concerts and more">           
+            <input id="eventCategorySearch" type="text" class="form-control" placeholder="Search for events, parties, concerts and more">   
+            <input type="hidden" name="parent_category_id" id="parent_category_id">
+            <input type="hidden" name="sub_categories_id" id="sub_categories_id">        
           </div>
-          <button type="submit" class="btn btn-primary btn-go">GO</button>
+          <button type="button" class="btn btn-primary btn-go" onclick="getEventListByFilter();">GO</button>
         </form>
         </li>
         <li class="mobhide">
@@ -373,6 +376,9 @@ window.onclick = function(event) {
 <script src="https://code.jquery.com/ui/1.12.1/jquery-ui.js"></script>
 <link rel="stylesheet" href="//cdnjs.cloudflare.com/ajax/libs/timepicker/1.3.5/jquery.timepicker.min.css">
 <script src="//cdnjs.cloudflare.com/ajax/libs/timepicker/1.3.5/jquery.timepicker.min.js"></script>
+
+<script src="https://npmcdn.com/tether@1.2.4/dist/js/tether.min.js"></script>
+<script src="https://maxcdn.bootstrapcdn.com/bootstrap/4.0.0-alpha.4/js/bootstrap.min.js" "></script>
 
 <?php  echo $this->Html->script(['general','moment.min', 'daterangepicker', 'bootstrap-tagsinput', 'custom']);?> 
 

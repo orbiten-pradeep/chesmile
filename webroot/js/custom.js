@@ -77,6 +77,7 @@ $(".category_dropdown .checkbox").click(function(event){
 	            $("#subCategoriesResp").html(html);
 	            $(".category_dropdown").hide();
 	            $(".sub_category_dropdown").show();
+	            $("#parent_category_id").val(catID);
 	            $('.bootstrap-tagsinput input').attr('placeholder', $('#eventCategorySearch').attr('placeholder'));
 	            $(".category_btn").html('<div id="subMenu" data-id="'+catID+'"><label>'+catName +'</label><div class="mini-submenu"><span class="glyphicon glyphicon-remove"></span></div></div>');
 	            elt.tagsinput('removeAll');
@@ -133,6 +134,51 @@ $("#subCategoriesResp").on('click','label > input', function(event){
 	}
 	console.log(elt.tagsinput('items'));
 });
+
+$(".filterDate").click(function(){
+	//alert($(this).attr('data'));
+	$("#filterDateVal").val($(this).attr('data'));
+	getEventListByFilter();
+});
+
+function getEventListByFilter() {
+	var params = {};
+	//console.log(elt.tagsinput('items'));
+	var subCategories = elt.tagsinput('items');
+	var dateVal = $("#filterDateVal").val();
+	//console.log(dateVal);
+	if(subCategories!='') {
+		var scIds = [];
+		for(obj in subCategories){ 	
+			scIds.push(subCategories[obj].id);
+		}
+		$("#sub_categories_id").val(scIds);
+		var subCategories = $("#sub_categories_id").val();
+		if(subCategories!='') {
+			params.category = subCategories;
+		}
+	}
+	if(dateVal!='') {
+		params.date = dateVal;
+	}
+	//console.log(params);
+
+	getEventList(params);
+	return false;
+}
+
+function formatDate(date) {
+    var d = new Date(date),
+        month = '' + (d.getMonth() + 1),
+        day = '' + d.getDate(),
+        year = d.getFullYear();
+
+    if (month.length < 2) month = '0' + month;
+    if (day.length < 2) day = '0' + day;
+
+    return [year, month, day].join('-');
+}
+
 //elt.tagsinput('add', { "value": 1 , "text": "Amsterdam"   , "continent": "Europe"    });
 /*Date js*/
 
@@ -153,3 +199,60 @@ $("#subCategoriesResp").on('click','label > input', function(event){
     cb(start, end);
     
 });
+
+function getEventList(params) {
+	var dataParams = (params!='') ? params : '';
+	//console.log(dataParams);
+	$("#eventResponse").html('').hide();
+	$(".loadingDiv").show();
+	$.ajax({
+	    type: "POST", 
+	    ContentType: 'application/json',
+	    data: dataParams,
+	    dataType: 'json',
+	    url: $("#event_list_url").val(),
+	    success: function(response) {
+	        //console.log(response);
+	        if(response!=''){	        
+		        var html = '';
+		        var eventDetailsUrl = $("#event_view_url").val();
+
+		        for(k in response){
+		        	var likes_count = (response[k].likes_count == null) ? 0 : response[k].likes_count;
+		        	var eventUrl = eventDetailsUrl + '/' + response[k].id;
+		        	html += '<div class="col-sm-6 col-lg-2 col-md-4">\
+							        <div class="thumbnail">\
+							        	<div class="back">\
+								            <p class="pull-left tag">'+response[k].category_name+'</p>\
+								            <p class="pull-right post"></p>\
+							            </div>\
+							            <img src="img/photos/1.jpg" alt="">\
+							            <div class="caption dance style="background-color:">\
+							                <h4 class="event_txt"><a href="'+eventUrl+'" class="event-title">'+response[k].title+'</a></h4>\
+							                <p class="venue_txt">'+response[k].OrganizersName+'</p>\
+							                <p class="date_txt">'+formatDate(response[k].date)+'</p>\
+							                <div class="ratings clearfix">\
+							                    <p class="pull-right"> <a onClick="hide('+response[k].id+', '+response[k].user_id+');"><span class="glyphicon glyphicon-thumbs-up"></span> </a><span class="count_txt" id="'+response[k].id+'">'+likes_count+'</span>\
+							                    </p>\
+							                </div>\
+							            </div>\
+							        </div>\
+							    </div>';
+		        }
+		        //console.log(html);
+		        $("#eventResponse").html(html);
+		        $(".loadingDiv").hide();
+		        $("#eventResponse").fadeIn('slow');
+		    } else {
+		    	$(".loadingDiv").hide();
+		    	$("#eventResponse").html("<h2 class='no_events'>No events found!!!</h2>");
+		    	$("#eventResponse").fadeIn('slow');
+		    }
+	    },
+	    error: function() {
+	    	console.log("Error while getting event list!!!");
+	        //$select.html('<option id="-1">none available</option>');
+	    }
+	});
+}
+getEventList();

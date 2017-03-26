@@ -673,3 +673,30 @@ h3.heading > span,
         top: 112px !important;
     }
 }
+#loading {
+    background: #fff url("../img/ajax-loader.gif") no-repeat scroll center center;
+    height: 190px;
+    margin: 10% auto;
+    position: relative;
+    top: 50%;
+    width: 50px;
+    z-index: 1000;
+}
+.loadingDiv {
+    width: 100%; 
+    display: none;
+}
+#eventResponse {
+    display: none;
+}
+.no_events {
+    text-align: center;
+}
+.event-title {
+    float: left;
+    margin-bottom: 8px;
+    overflow: hidden;
+    text-overflow: ellipsis;
+    white-space: nowrap;
+    width: 100%;
+}
