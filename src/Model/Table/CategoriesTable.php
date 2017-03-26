@@ -56,6 +56,12 @@ class CategoriesTable extends Table
             ->notEmpty('name');
 
         $validator
+            ->allowEmpty('color');
+
+        $validator
+            ->allowEmpty('card');
+
+        $validator
             ->boolean('active')
             ->requirePresence('active', 'create')
             ->notEmpty('active');

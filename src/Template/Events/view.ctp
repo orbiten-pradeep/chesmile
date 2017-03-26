@@ -28,7 +28,7 @@
         <div class="container heading_txt">
             <div class="row">
                 <div class="col-lg-12">
-                    <button class="btn btn-tag"><?= $event->has('category') ? $this->Html->link($event->category->name, ['controller' => 'Categories', 'action' => 'view', $event->category->id]) : '' ?></button> <?php echo $this->Html->image('party-and-nightlife.png',array('alt' => 'Logo Chennai Smile','class' => 'icon')); ?>
+                    <button class="btn btn-tag"><?= $event->has('category') ? $this->Html->link($event->category->name, ['controller' => 'Categories', 'action' => 'view', $event->category->id]) : '' ?></button> <?php echo $this->Html->image('card/'.$event->category->card, array('width' => '100px', 'height' => '100px','alt'=>'Card')); ?>
                     <h1 class="tagline"><?= h($event->title) ?></h1>
                 </div>
             </div>

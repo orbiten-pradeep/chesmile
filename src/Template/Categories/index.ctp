@@ -2,9 +2,6 @@
     <ul class="side-nav">
         <li class="heading"><?= __('Actions') ?></li>
         <li><?= $this->Html->link(__('New Category'), ['action' => 'add']) ?></li>
-        <li><?= $this->Html->link(__('List Sub Categories'), ['controller' => 'SubCategories','action' => 'index']) ?></li>
-        <li><?= $this->Html->link(__('New Sub Category'), ['controller' => 'SubCategories','action' => 'add']) ?></li>
-        
     </ul>
 </nav>
 <div class="categories index large-9 medium-8 columns content">
@@ -14,6 +11,8 @@
             <tr>
                 <th scope="col"><?= $this->Paginator->sort('id') ?></th>
                 <th scope="col"><?= $this->Paginator->sort('name') ?></th>
+                <th scope="col"><?= $this->Paginator->sort('color') ?></th>
+                <th scope="col"><?= $this->Paginator->sort('card') ?></th>
                 <th scope="col"><?= $this->Paginator->sort('active') ?></th>
                 <th scope="col"><?= $this->Paginator->sort('created') ?></th>
                 <th scope="col"><?= $this->Paginator->sort('modified') ?></th>
@@ -25,6 +24,8 @@
             <tr>
                 <td><?= $this->Number->format($category->id) ?></td>
                 <td><?= h($category->name) ?></td>
+                <td style="background-color: <?php echo "#".$category->color; ?>"><?= h($category->color) ?></td>
+                <td><?php echo $this->Html->image('card/'.$category->card, array('width' => '20px', 'height' => '20px','alt'=>'Card')); ?></td>
                 <td><?= h($category->active) ?></td>
                 <td><?= h($category->created) ?></td>
                 <td><?= h($category->modified) ?></td>

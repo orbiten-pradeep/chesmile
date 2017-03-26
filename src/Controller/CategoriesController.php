@@ -50,7 +50,40 @@ class CategoriesController extends AppController
     {
         $category = $this->Categories->newEntity();
         if ($this->request->is('post')) {
+
+            if(!empty($this->request->data['card']))
+            {
+                $banner = $this->request->data['card'];
+                $ext = substr(strtolower(strrchr($banner['name'], '.')), 1); //get the extension
+                $arr_ext = array('jpg', 'jpeg', 'png'); //set allowed extensions
+                
+                if($banner['size']/1024 > '2048')
+                {
+                    $this->Flash->error(__('"imageLogs", __METHOD__." The uploaded file exceeds the MAX_FILE_SIZE(2MB) '));
+                    $errCheck = true;
+                }
+                else if(in_array($ext, $arr_ext))
+                {
+                    //do the actual uploading of the file. First arg is the tmp name, second arg is
+                    //where we are putting it
+                    $uploadFolder = WWW_ROOT . 'img/card';
+                    if( !file_exists($uploadFolder) ){
+                        mkdir($uploadFolder);
+                    }
+                    $filename = str_replace(" ", "-", rand(1, 3000) . $banner['name']);
+                    move_uploaded_file($banner['tmp_name'], WWW_ROOT . 'img/card' . DS . $filename);
+                     //prepare the filename for database entry
+                    $this->request->data['card']['name'] = $filename;
+                    $banner = $filename;
+                }
+            }
+
+            if(!is_null($banner))
+            {
+                $this->request->data['card'] = $banner;
+            }
             $category = $this->Categories->patchEntity($category, $this->request->data);
+
             if ($this->Categories->save($category)) {
                 $this->Flash->success(__('The category has been saved.'));
 
@@ -76,6 +109,43 @@ class CategoriesController extends AppController
             'contain' => []
         ]);
         if ($this->request->is(['patch', 'post', 'put'])) {
+            
+            if(!empty($this->request->data['card']))
+            {
+                $banner = $this->request->data['card'];
+
+                if(isset($banner['size']))
+                {
+                    $ext = substr(strtolower(strrchr($banner['name'], '.')), 1); //get the extension
+                    $arr_ext = array('jpg', 'jpeg', 'png'); //set allowed extensions
+                    
+                    if($banner['size']/1024 > '2048')
+                    {
+                        $this->Flash->error(__('"imageLogs", __METHOD__." The uploaded file exceeds the MAX_FILE_SIZE(2MB) '));
+                        $errCheck = true;
+                    }
+                    else if(in_array($ext, $arr_ext))
+                    {
+                        //do the actual uploading of the file. First arg is the tmp name, second arg is
+                        //where we are putting it
+                        $uploadFolder = WWW_ROOT . 'img/card';
+                        if( !file_exists($uploadFolder) ){
+                            mkdir($uploadFolder);
+                        }
+                        $filename = str_replace(" ", "-", rand(1, 3000) . $banner['name']);
+                        move_uploaded_file($banner['tmp_name'], WWW_ROOT . 'img/card' . DS . $filename);
+                         //prepare the filename for database entry
+                        $this->request->data['card']['name'] = $filename;
+                        $banner = $filename;
+                    }
+                }
+            }
+
+            if(!is_null($banner))
+            {
+                $this->request->data['card'] = $banner;
+            }           
+
             $category = $this->Categories->patchEntity($category, $this->request->data);
             if ($this->Categories->save($category)) {
                 $this->Flash->success(__('The category has been saved.'));

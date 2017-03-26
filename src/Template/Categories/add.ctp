@@ -5,11 +5,13 @@
     </ul>
 </nav>
 <div class="categories form large-9 medium-8 columns content">
-    <?= $this->Form->create($category) ?>
+    <?= $this->Form->create($category, array('type' => 'file')) ?>
     <fieldset>
         <legend><?= __('Add Category') ?></legend>
         <?php
             echo $this->Form->input('name');
+            echo $this->Form->input('color', array('class' => 'jscolor'));
+            echo $this->Form->input('card',['type' => 'file', 'accept' => 'image/*']);
             echo $this->Form->input('active');
         ?>
     </fieldset>

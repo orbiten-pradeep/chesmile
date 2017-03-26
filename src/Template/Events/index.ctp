@@ -183,7 +183,7 @@ use Cake\Routing\Router;
                                 <p class="pull-right post"><!--<?= h($event->created) ?>--></p>
                               </div>
                                   <img src="/chesmile/img/photos/1.jpg" alt="">
-                                  <div class="caption dance">
+                                  <div class="caption dance" style="background-color: <?php echo "#".$event->category->color; ?>">
                                       <h4 class="event_txt"><a href="#"><?= $this->Html->link(h($event->title), ['action' => 'view', $event->id]) ?></a></h4>
                                       <p class="venue_txt"><?= h($event->OrganizersName) ?></p>
                                       <p class="date_txt"><?= h($event->date) ?>
