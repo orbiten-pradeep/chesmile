@@ -154,7 +154,7 @@ use Cake\Routing\Router;
                     
                   </div>
 
-                  <div class="col-sm-8 col-lg-10 col-md-8 list_event">
+                  <div class="col-sm-8 col-lg-10 col-md-8 list_event content">
 
                       <div class="row" style="margin-right: 0px;">
                       <?php foreach ($events as $event): ?>
@@ -164,7 +164,7 @@ use Cake\Routing\Router;
                               <p class="pull-left tag"><?= $event->has('category') ? $event->category->name : '' ?></p>
                               <p class="pull-right post"><!--<?= h($event->created) ?>--></p>
                                   <img src="/chesmile/img/photos/1.jpg" alt="">
-                                  <div class="caption dance">
+                                  <div class="caption dance" style="background-color:<?php echo "#".$event->category->color; ?>">
                                       <h4 class="event_txt"><a href="#"><?= $this->Html->link(h($event->title), ['action' => 'view', $event->id]) ?></a></h4>
                                       <p class="venue_txt"><?= h($event->OrganizersName) ?></p>
                                       <p class="date_txt"><?= h($event->date) ?>
@@ -192,12 +192,25 @@ use Cake\Routing\Router;
                       </div>
 
                   </div>
-
-
               </div>
               <div class="row">
               &nbsp;
                   </div>
+<script type="text/javascript">
+
+    function autoHeight() {
+            $('.content').css('min-height', 0);
+            $('.content').css('min-height', ($(document).height() - $('#header').height() - $('.footer').height()));
+        }
+        // onDocumentReady function bind
+    $(document).ready(function() {
+        autoHeight();
+    });
+    // onResize bind of the function
+    $(window).resize(function() {
+        autoHeight();
+    });
+    </script>
  <!--              </div> -->
 <!-- <nav class="large-3 medium-4 columns" id="actions-sidebar">
           <ul class="side-nav">

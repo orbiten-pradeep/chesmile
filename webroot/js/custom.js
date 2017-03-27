@@ -227,7 +227,7 @@ function getEventList(params) {
 								            <p class="pull-right post"></p>\
 							            </div>\
 							            <img src="img/photos/1.jpg" alt="">\
-							            <div class="caption dance style="background-color:">\
+							           <div class="caption dance" style="background-color:#'+response[k].category_color+'">\
 							                <h4 class="event_txt"><a href="'+eventUrl+'" class="event-title">'+response[k].title+'</a></h4>\
 							                <p class="venue_txt">'+response[k].OrganizersName+'</p>\
 							                <p class="date_txt">'+formatDate(response[k].date)+'</p>\
