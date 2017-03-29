@@ -141,12 +141,42 @@ $(".filterDate").click(function(){
 	getEventListByFilter();
 });
 
+$(".my-events").click(function(){
+	$("#filterUserId").val($("#userId").val());
+
+	elt.tagsinput('removeAll');
+	$("#filterDateVal").val('');
+	$("#sub_categories_id").val('');
+	$("#subMenu .glyphicon-remove").trigger('click');
+
+	getEventListByFilter();
+	$("#filterUserId").val('');
+});
+
+$(".my-likes").click(function(){
+	$("#filterUserId").val($("#userId").val());
+	$("#likeId").val(true);
+
+	elt.tagsinput('removeAll');
+	$("#filterDateVal").val('');
+	$("#sub_categories_id").val('');
+	$("#subMenu .glyphicon-remove").trigger('click');
+
+	getEventListByFilter();
+	$("#filterUserId").val('');
+	$("#likeId").val('');
+});
+
+
+
 function getEventListByFilter() {
 	var params = {};
 	//console.log(elt.tagsinput('items'));
 	var subCategories = elt.tagsinput('items');
 	var dateVal = $("#filterDateVal").val();
-	//console.log(dateVal);
+	var userId = $("#filterUserId").val();
+	var liked = $("#likeId").val();
+	//console.log(subCategories);
 	if(subCategories!='') {
 		var scIds = [];
 		for(obj in subCategories){ 	
@@ -160,6 +190,13 @@ function getEventListByFilter() {
 	}
 	if(dateVal!='') {
 		params.date = dateVal;
+	}
+	if(userId!='') {
+		params.userId = userId;
+	}
+
+	if(liked){
+		params.liked = true;
 	}
 	//console.log(params);
 
@@ -221,7 +258,7 @@ function getEventList(params) {
 		        	var likes_count = (response[k].likes_count == null) ? 0 : response[k].likes_count;
 		        	var eventUrl = eventDetailsUrl + '/' + response[k].id;
 		        	html += '<div class="col-sm-6 col-lg-2 col-md-4">\
-							        <div class="thumbnail">\
+		        					<div class="thumbnail">\
 							        	<div class="back">\
 								            <p class="pull-left tag">'+response[k].category_name+'</p>\
 								            <p class="pull-right post"></p>\

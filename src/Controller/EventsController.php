@@ -56,7 +56,10 @@ class EventsController extends AppController
 			    'conditions' => ['active' => 1]
 			]);
 
+        $users_id = $this->Auth->user('id');
+
         $this->set('categories', $categories_new);
+        $this->set('usersId', $users_id);
         $this->set(compact('subCategories_new'));
     }
 
@@ -759,13 +762,21 @@ class EventsController extends AppController
 
 			$filter = false;
 	        $cond = '';
+	        $joins = '';
 
 	        if (!empty($this->request->data)){
 	        	//echo "<pre>";print_r($this->request->query);echo "</pre>";
-
 	        	if(isset($this->request->data['category']) && $this->request->data['category'] !='') {
 	        		$category = $this->request->data['category'];
 	        		$cond .= " AND e.categories_id IN ($category)";
+	        	}
+	        	if(isset($this->request->data['userId']) && $this->request->data['userId'] !='') {
+	        		$userId = $this->request->data['userId'];
+	        		$cond .= " AND e.user_id = ".$userId;
+	        	}
+	        	if(isset($this->request->data['likes']) && $this->request->data['likes'] !='') {
+	        		//$userId = $this->request->data['userId'];
+	        		$joins .= " LEFT JOIN likes l ON l.eventid = e.id";
 	        	}
 	        	if(isset($this->request->data['date']) && !empty($this->request->data['date'])){
 		        	if($this->request->data['date'] == "today") {
@@ -786,7 +797,7 @@ class EventsController extends AppController
 		        	}
 	        	}
 	        }
-	        if(!$filter)
+	        if(!$filter && (!isset($this->request->data['userId'])))
 		        $cond .= " AND e.date > DATE_ADD(CURDATE(),INTERVAL -1 DAY)";
 
             /*$results = $this->Events
@@ -801,9 +812,9 @@ class EventsController extends AppController
             //echo "<pre>";print_r($results);echo "</pre>";
 
             $conn = ConnectionManager::get('default');
-            $query = "SELECT e.*, c.name as category_name, c.color as category_color, (SELECT count(l.events_id) FROM likes l WHERE l.events_id = e.id GROUP BY l.events_id) as likes_count FROM events e LEFT JOIN categories c ON c.id = e.categories_id WHERE 1 $cond";
+            $query = "SELECT e.*, c.name as category_name, c.color as category_color, (SELECT count(l.events_id) FROM likes l WHERE l.events_id = e.id GROUP BY l.events_id) as likes_count FROM events e LEFT JOIN categories c ON c.id = e.categories_id $joins WHERE 1 $cond";
             $stmt = $conn->execute($query);
-            $results = $stmt ->fetchAll('assoc');
+            $results = $stmt->fetchAll('assoc');
             //sleep(100);
 
         	echo json_encode($results);    

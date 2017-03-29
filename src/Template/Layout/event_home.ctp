@@ -176,6 +176,8 @@ background-color: #4fa8b1;
   <input type="hidden" id="event_list_url" name="event_list_url" value="<?php echo $this->Url->build(['action' =>'eventlist']);?>">
   <input type="hidden" id="event_view_url" name="event_view_url" value="<?php echo $this->Url->build(['action' =>'view']);?>">
   <input type="hidden" id="filterDateVal" name="filterDateVal" value="">
+  <input type="hidden" id="filterUserId" name="filterUserId" value="">
+  <input type="hidden" id="userId" name="userId" value="<?php echo $usersId; ?>">
     <!-- Brand and toggle get grouped for better mobile display -->
      <div class="navbar-header">
       <button type="button" class="navbar-toggle collapsed" data-toggle="collapse" data-target="#bs-example-navbar-collapse-1" aria-expanded="false">
@@ -214,7 +216,7 @@ background-color: #4fa8b1;
                 <div id="myDropdown" class="dropdown-content">
                <?= $this->Html->link($this->Html->tag('i', '', array('class' => 'fa fa-user fa-fw')).'My Account', array('controller' => 'UserProfile', 'action' => 'add'), array('escape' => false)) ?>
 
-                <?= $this->Html->link($this->Html->tag('i', '', array('class' => 'fa fa-calendar-o fa-fw')).'My Events', array('controller' => 'Events', 'action' => 'myevents'), array('escape' => false)) ?>
+                <a href="javascript:;" class="my-events"><i class="fa fa-calendar-o fa-fw"></i>My Events</a>
 
                 <?= $this->Html->link($this->Html->tag('i', '', array('class' => 'fa fa-thumbs-up fa-fw')).'Liked Events', array('controller' => 'Events', 'action' => 'likedevents'), array('escape' => false)) ?>
                 </div>
@@ -227,7 +229,7 @@ background-color: #4fa8b1;
                 <div id="mylargeDropdown" class="dropdown-content">
                 <?= $this->Html->link($this->Html->tag('i', '', array('class' => 'fa fa-user fa-fw')).'My Account', array('controller' => 'UserProfile', 'action' => 'add'), array('escape' => false)) ?>
 
-                <?= $this->Html->link($this->Html->tag('i', '', array('class' => 'fa fa-calendar-o fa-fw')).'My Events', array('controller' => 'Events', 'action' => 'myevents'), array('escape' => false)) ?>
+                <a href="javascript:;" class="my-events"><i class="fa fa-calendar-o fa-fw"></i>My Events</a>
 
                 <?= $this->Html->link($this->Html->tag('i', '', array('class' => 'fa fa-thumbs-up fa-fw')).'Liked Events', array('controller' => 'Events', 'action' => 'likedevents'), array('escape' => false)) ?>
               <!--  <a href="profile.html"><i class="fa fa-user fa-fw"></i>My Account</a> -->
