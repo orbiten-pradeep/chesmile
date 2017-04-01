@@ -158,9 +158,6 @@ background-color: #4fa8b1;
     <meta name="description" content="">
     <meta name="author" content="">
 
-<script src="https://ajax.googleapis.com/ajax/libs/jquery/1.12.4/jquery.min.js"></script>
-
-
 <title>Chennai Smile</title>
 
 <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/4.0.0-alpha.4/css/bootstrap.min.css">
@@ -174,10 +171,11 @@ background-color: #4fa8b1;
 <nav class="navbar navbar-default">
   <input type="hidden" id="sub_category_api_url" name="sub_category_api_url" value="<?php echo $this->Url->build(['action' =>'viewresult']);?>">
   <input type="hidden" id="event_list_url" name="event_list_url" value="<?php echo $this->Url->build(['action' =>'eventlist']);?>">
+  <input type="hidden" id="eventIndexUrl" name="event_index_url" value="<?php echo $this->Url->build(['action' =>'index']);?>">
   <input type="hidden" id="event_view_url" name="event_view_url" value="<?php echo $this->Url->build(['action' =>'view']);?>">
   <input type="hidden" id="filterDateVal" name="filterDateVal" value="">
-  <input type="hidden" id="filterUserId" name="filterUserId" value="">
-  <input type="hidden" id="userId" name="userId" value="<?php echo $usersId; ?>">
+  <input type="hidden" id="apiAction" name="apiAction" value="">
+  <input type="hidden" id="eventPage" name="eventPage" value="<?php echo $this->request->params['action']; ?>">
     <!-- Brand and toggle get grouped for better mobile display -->
      <div class="navbar-header">
       <button type="button" class="navbar-toggle collapsed" data-toggle="collapse" data-target="#bs-example-navbar-collapse-1" aria-expanded="false">
@@ -216,9 +214,8 @@ background-color: #4fa8b1;
                 <div id="myDropdown" class="dropdown-content">
                <?= $this->Html->link($this->Html->tag('i', '', array('class' => 'fa fa-user fa-fw')).'My Account', array('controller' => 'UserProfile', 'action' => 'add'), array('escape' => false)) ?>
 
-                <a href="javascript:;" class="my-events"><i class="fa fa-calendar-o fa-fw"></i>My Events</a>
-
-                <?= $this->Html->link($this->Html->tag('i', '', array('class' => 'fa fa-thumbs-up fa-fw')).'Liked Events', array('controller' => 'Events', 'action' => 'likedevents'), array('escape' => false)) ?>
+                <a href="#my-events" class="my-events"><i class="fa fa-calendar-o fa-fw"></i>My Events</a>
+                <a href="#liked-events" class="liked-events"><i class="fa fa-thumbs-up fa-fw"></i>Liked Events</a>
                 </div>
             </div>
         </li>
@@ -229,9 +226,8 @@ background-color: #4fa8b1;
                 <div id="mylargeDropdown" class="dropdown-content">
                 <?= $this->Html->link($this->Html->tag('i', '', array('class' => 'fa fa-user fa-fw')).'My Account', array('controller' => 'UserProfile', 'action' => 'add'), array('escape' => false)) ?>
 
-                <a href="javascript:;" class="my-events"><i class="fa fa-calendar-o fa-fw"></i>My Events</a>
-
-                <?= $this->Html->link($this->Html->tag('i', '', array('class' => 'fa fa-thumbs-up fa-fw')).'Liked Events', array('controller' => 'Events', 'action' => 'likedevents'), array('escape' => false)) ?>
+                <a href="#my-events" class="my-events"><i class="fa fa-calendar-o fa-fw"></i>My Events</a>
+                <a href="#liked-events" class="liked-events"><i class="fa fa-thumbs-up fa-fw"></i>Liked Events</a>
               <!--  <a href="profile.html"><i class="fa fa-user fa-fw"></i>My Account</a> -->
               <!--  <?= $this->Html->link(__('My Events'), ['controller' => 'Events', 'action' => 'myevents']) ?> -->
                <!-- <a href="order-history.php"><i class="fa fa-calendar-o fa-fw"></i>My Events</a> -->
@@ -240,9 +236,9 @@ background-color: #4fa8b1;
                 </div>
             </div>
   
-<li> <?= $this->Html->link(__("View past events"), ['controller' => 'events','action' => 'index', '?' => ['query' => 'Past']], array('class' => 'btn btn-primary'))?> </li>
+    <li><a href="#past-events" class="btn btn-primary past-events">View past events</a></li>
     <li><?= $this->Html->link(__('Create events'), ['controller' => 'events', 'action' => 'add'], array('class' => 'btn btn-primary')); ?></li>
-      </ul>
+    </ul>
 
  
     <div class="category_dropdown list-group">
@@ -279,8 +275,8 @@ background-color: #4fa8b1;
 </nav>  
      <div class="container-fluid">
         <div class="row btn-hide">
-    <?= $this->Html->link(__("View past events"), ['controller' => 'events','action' => 'index', '?' => ['query' => 'Past']], array('class' => 'btn btn-primary'))?> 
-    <?= $this->Html->link(__('Create events'), ['controller' => 'events', 'action' => 'add'], array('class' => 'btn btn-primary pull-right')); ?>
+          <a href="#past-events" class="btn btn-primary past-events">View past events</a>
+          <?= $this->Html->link(__('Create events'), ['controller' => 'events', 'action' => 'add'], array('class' => 'btn btn-primary pull-right')); ?>
         </div>
       </div>
         
@@ -380,12 +376,53 @@ window.onclick = function(event) {
 <script src="//cdnjs.cloudflare.com/ajax/libs/timepicker/1.3.5/jquery.timepicker.min.js"></script>
 
 <script src="https://npmcdn.com/tether@1.2.4/dist/js/tether.min.js"></script>
-<script src="https://maxcdn.bootstrapcdn.com/bootstrap/4.0.0-alpha.4/js/bootstrap.min.js" "></script>
+<script src="https://maxcdn.bootstrapcdn.com/bootstrap/4.0.0-alpha.4/js/bootstrap.min.js"></script>
 
 <?php  echo $this->Html->script(['general','moment.min', 'daterangepicker', 'bootstrap-tagsinput', 'custom']);?> 
 
-</body>
+<script type="text/javascript">
+  function hide(eventid, userid) {
+        $.ajax({
+            type: "POST",
+            data: {
+                "eventid": eventid,
+                "userid": userid
+            },
+            ContentType: 'application/json',
+            dataType: 'json',
+            url: "<?php echo $this->Url->build(['action' =>'likes']); ?>",
+            async: true,
+            success: function(data) {
+                document.getElementById(eventid).textContent = data; 
+            },
+            error: function(tab) {
+                //$select.html('<option id="-1">none available</option>');
+            }
+        });
+        return false;
+    }
+    $(document).ready(function() {
+        $('#Autocomplete').autocomplete({
+            source: "<?php echo $this->Url->build(['action' =>'search']); ?>",
+            minLength: 1
+        });
+    });
 
+    function autoHeight() {
+            $('.content').css('min-height', 0);
+            $('.content').css('min-height', ($(document).height() - $('#header').height() - $('.footer').height()));
+        }
+        // onDocumentReady function bind
+    $(document).ready(function() {
+        autoHeight();
+    });
+    // onResize bind of the function
+    $(window).resize(function() {
+        autoHeight();
+    });
+
+</script>
+</body>
 </html>
         
 

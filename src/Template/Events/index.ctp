@@ -5,45 +5,7 @@
     } 
 </style>
 <script type="text/javascript">
-    function hide(eventid, userid) {
-        $.ajax({
-            type: "POST",
-            data: {
-                "eventid": eventid,
-                "userid": userid
-            },
-            ContentType: 'application/json',
-            dataType: 'json',
-            url: "<?php echo $this->Url->build(['action' =>'likes']); ?>",
-            async: true,
-            success: function(data) {
-                document.getElementById(eventid).textContent = data; 
-            },
-            error: function(tab) {
-                //$select.html('<option id="-1">none available</option>');
-            }
-        });
-        return false;
-    }
-    $(document).ready(function() {
-        $('#Autocomplete').autocomplete({
-            source: '<?php echo Router::url(array("controller" => "events", "action" => "search")); ?>',
-            minLength: 1
-        });
-    });
-
-    function autoHeight() {
-            $('.content').css('min-height', 0);
-            $('.content').css('min-height', ($(document).height() - $('#header').height() - $('.footer').height()));
-        }
-        // onDocumentReady function bind
-    $(document).ready(function() {
-        autoHeight();
-    });
-    // onResize bind of the function
-    $(window).resize(function() {
-        autoHeight();
-    });
+    
 </script>
 <!--  <div class="content"> -->
 <!-- <div class="container-fluid content"> -->

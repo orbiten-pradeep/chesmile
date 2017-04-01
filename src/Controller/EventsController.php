@@ -759,7 +759,7 @@ class EventsController extends AppController
 	public function eventlist() 
 	{    
 		if ($this->request->is('ajax')) {
-
+			$userId = $this->Auth->user('id');
 			$filter = false;
 	        $cond = '';
 	        $joins = '';
@@ -770,13 +770,22 @@ class EventsController extends AppController
 	        		$category = $this->request->data['category'];
 	        		$cond .= " AND e.categories_id IN ($category)";
 	        	}
-	        	if(isset($this->request->data['userId']) && $this->request->data['userId'] !='') {
-	        		$userId = $this->request->data['userId'];
-	        		$cond .= " AND e.user_id = ".$userId;
-	        	}
-	        	if(isset($this->request->data['likes']) && $this->request->data['likes'] !='') {
-	        		//$userId = $this->request->data['userId'];
-	        		$joins .= " LEFT JOIN likes l ON l.eventid = e.id";
+	        	
+	        	if(isset($this->request->data['action']) && $this->request->data['action'] !='') {
+	        		$action = $this->request->data['action'];
+	        		if($action == "pastevents"){
+	        			$filter = true;
+		        		$cond .= " AND e.date < CURDATE()";
+	        		}
+	        		if($action == "likedevents"){
+	        			$joins .= " LEFT JOIN likes l ON l.events_id = e.id";
+		        		$cond .= " AND l.user_id = ".$userId;
+		        		$filter = true;
+	        		}
+	        		if($action == "myevents"){
+	        			$cond .= " AND e.user_id = ".$userId;
+	        			$filter = true;
+	        		}
 	        	}
 	        	if(isset($this->request->data['date']) && !empty($this->request->data['date'])){
 		        	if($this->request->data['date'] == "today") {
@@ -797,9 +806,9 @@ class EventsController extends AppController
 		        	}
 	        	}
 	        }
-	        if(!$filter && (!isset($this->request->data['userId'])))
+	        if(!$filter) {
 		        $cond .= " AND e.date > DATE_ADD(CURDATE(),INTERVAL -1 DAY)";
-
+	        }
             /*$results = $this->Events
             ->find('all', [
     			'limit' => 200, 
@@ -813,6 +822,7 @@ class EventsController extends AppController
 
             $conn = ConnectionManager::get('default');
             $query = "SELECT e.*, c.name as category_name, c.color as category_color, (SELECT count(l.events_id) FROM likes l WHERE l.events_id = e.id GROUP BY l.events_id) as likes_count FROM events e LEFT JOIN categories c ON c.id = e.categories_id $joins WHERE 1 $cond";
+            //echo $query;
             $stmt = $conn->execute($query);
             $results = $stmt->fetchAll('assoc');
             //sleep(100);
