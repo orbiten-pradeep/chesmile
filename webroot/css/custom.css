@@ -700,3 +700,14 @@ h3.heading > span,
     white-space: nowrap;
     width: 100%;
 }
+.launch-map {
+    margin-top: 10px;
+}
+#mapPanel {
+    margin-bottom: 15px;
+}
+#mapPanel .text {
+    width: 80%;
+    float: left;
+    margin-right: 20px;
+}

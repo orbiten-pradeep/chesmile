@@ -336,3 +336,280 @@ function getEventList(params) {
 if(ePage == 'index') {
 	getEventListByFilter();
 }
+else if(ePage == 'add') {
+
+	var geocoder;
+	var map;
+	var marker;
+
+	codeAddress = function () {
+	  geocoder = new google.maps.Geocoder();
+	  
+	  var address = document.getElementById('city_country').value;
+	  geocoder.geocode( { 'address': address}, function(results, status) {
+	    if (status == google.maps.GeocoderStatus.OK) {
+	      map = new google.maps.Map(document.getElementById('mapCanvas'), {
+	    zoom: 16,
+	            streetViewControl: false,
+	          mapTypeControlOptions: {
+	        style: google.maps.MapTypeControlStyle.HORIZONTAL_BAR,
+	              mapTypeIds:[google.maps.MapTypeId.HYBRID, google.maps.MapTypeId.ROADMAP] 
+	    },
+	    center: results[0].geometry.location,
+	    mapTypeId: google.maps.MapTypeId.ROADMAP
+	  });
+	      map.setCenter(results[0].geometry.location);
+	      marker = new google.maps.Marker({
+	          map: map,
+	          position: results[0].geometry.location,
+	          draggable: true,
+	          title: 'My Title'
+	      });
+	      updateMarkerPosition(results[0].geometry.location);
+	      geocodePosition(results[0].geometry.location);
+	        
+	      // Add dragging event listeners.
+	  google.maps.event.addListener(marker, 'dragstart', function() {
+	    updateMarkerAddress('Dragging...');
+	  });
+	      
+	  google.maps.event.addListener(marker, 'drag', function() {
+	    updateMarkerStatus('Dragging...');
+	    updateMarkerPosition(marker.getPosition());
+	  });
+	  
+	  google.maps.event.addListener(marker, 'dragend', function() {
+	    updateMarkerStatus('Drag ended');
+	    geocodePosition(marker.getPosition());
+	      map.panTo(marker.getPosition()); 
+	  });
+	  
+	  google.maps.event.addListener(map, 'click', function(e) {
+	    updateMarkerPosition(e.latLng);
+	    geocodePosition(marker.getPosition());
+	    marker.setPosition(e.latLng);
+	  map.panTo(marker.getPosition()); 
+	  }); 
+	  
+	    } else {
+	      alert('Geocode was not successful for the following reason: ' + status);
+	    }
+	  });
+	}
+
+	function geocodePosition(pos) {
+	  geocoder.geocode({
+	    latLng: pos
+	  }, function(responses) {
+	    if (responses && responses.length > 0) {
+	      updateMarkerAddress(responses[0].formatted_address);
+	    } else {
+	      updateMarkerAddress('Cannot determine address at this location.');
+	    }
+	  });
+	}
+
+	function updateMarkerStatus(str) {
+	  /*document.getElementById('markerStatus').innerHTML = str;*/
+	}
+
+	function updateMarkerPosition(latLng) {
+	  document.getElementById('googleMapID').value = [
+	    latLng.lat(),
+	    latLng.lng()
+	  ].join(', ');
+	}
+
+	function updateMarkerAddress(str) {
+	  document.getElementById('address').innerHTML = str;
+	}
+
+
+	
+
+	$('.launch-map').on('click', function () {
+	    $('#myModal').modal({
+	        backdrop: 'static',
+	        keyboard: false
+	    }).on('shown.bs.modal', function () {
+	        codeAddress();
+	    });
+	});
+
+	/* Float Label Pattern Plugin for Bootstrap 3.1.0 by Travis Wilson
+	**************************************************/
+
+	(function ($) {
+	    $.fn.floatLabels = function (options) {
+
+	        // Settings
+	        var self = this;
+	        var settings = $.extend({}, options);
+
+
+	        // Event Handlers
+	        function registerEventHandlers() {
+	            self.on('input keyup change', 'input, textarea', function () {
+	                actions.swapLabels(this);
+	            });
+	        }
+
+
+	        // Actions
+	        var actions = {
+	            initialize: function() {
+	                self.each(function () {
+	                    var $this = $(this);
+	                    var $label = $this.children('label');
+	                    var $field = $this.find('input,textarea').first();
+
+	                    if ($this.children().first().is('label')) {
+	                        $this.children().first().remove();
+	                        $this.append($label);
+	                    }
+
+	                    var placeholderText = ($field.attr('placeholder') && $field.attr('placeholder') != $label.text()) ? $field.attr('placeholder') : $label.text();
+
+	                    $label.data('placeholder-text', placeholderText);
+	                    $label.data('original-text', $label.text());
+
+	                    if ($field.val() == '') {
+	                        $field.addClass('empty')
+	                    }
+	                });
+	            },
+	            swapLabels: function (field) {
+	                var $field = $(field);
+	                var $label = $(field).siblings('label').first();
+	                var isEmpty = Boolean($field.val());
+
+	                if (isEmpty) {
+	                    $field.removeClass('empty');
+	                    $label.text($label.data('original-text'));
+	                }
+	                else {
+	                    $field.addClass('empty');
+	                    $label.text($label.data('placeholder-text'));
+	                }
+	            }
+	        }
+
+
+	        // Initialization
+	        function init() {
+	            registerEventHandlers();
+
+	            actions.initialize();
+	            self.each(function () {
+	                actions.swapLabels($(this).find('input,textarea').first());
+	            });
+	        }
+	        init();
+
+
+	        return this;
+	    };
+
+	    $(function () {
+	        jQuery('.form-element').each(function(){
+	          if($(this).parent().hasClass('required')){
+	             jQuery('.form-element').unwrap();
+	          }
+	        });
+
+	        setTimeout(function(){
+	            $('.float-label-control').floatLabels();
+	        },1000);
+	    });
+	})(jQuery);
+
+
+	function checkForOther(id)
+	{
+	    var e = document.getElementById("categories-id");
+	    var strUser = e.options[e.selectedIndex].value;
+	    $select = $('#eventsubcategories-sub-categories');
+	    $.ajax({
+	        type:"POST",
+	        data:strUser,
+	        data:{"id":strUser},
+	        ContentType : 'application/json',
+	        dataType: 'json',
+	        url:"<?php echo $this->Url->build(['action' =>'viewresult']);?>",
+	        async:true,
+	        success: function(data) {
+	            $select.html('');
+	            //iterate over the data and append a select option
+	            $.each(data, function(key, val){
+	                //alert(val);
+	                $select.append('<option value="' + key + '">' + val + '</option>');
+	            })
+	        },
+	        error: function (tab) {
+	            $select.html('<option id="-1">none available</option>');
+	        }
+	    }); 
+	}
+
+	$( function() {
+	    $('#date').datepicker({
+	        changeMonth: true,
+	        changeYear: true,
+	        minDate: new Date()
+	        });
+	  } );
+	$(document).ready(function(){
+	    $('#time').timepicker({ timeFormat: 'H:mm' });
+	    var e = document.getElementById("categories-id");
+	    var strUser = e.options[e.selectedIndex].value;
+	    $select = $('#eventsubcategories-sub-categories');
+	    $.ajax({
+	        type:"POST",
+	        data:strUser,
+	        data:{"id":strUser},
+	        ContentType : 'application/json',
+	        dataType: 'json',
+	        url:"<?php echo $this->Url->build(['action' =>'viewresult']);?>",
+	        async:true,
+	        success: function(data) {
+	            $select.html('');
+	            //iterate over the data and append a select option
+	            $.each(data, function(key, val){
+	                //alert(val);
+	                $select.append('<option value="' + key + '">' + val + '</option>');
+	            })
+	        },
+	        error: function (tab) {
+	            $select.html('<option id="-1">none available</option>');
+	        }
+	    });
+
+	     $('#Autocomplete').autocomplete({
+	            source:'<?php echo Router::url(array("controller" => "events", "action" => "search")); ?>',
+	            minLength: 1
+	     });  
+	        
+	});
+
+
+	$(document).ready(function() {
+
+	//To add new input file field dynamically, on click of "Add More Files" button below function will be executed
+	    $('#add_more').click(function() {
+	        $(this).before($("<div/>", {id: 'filediv'}).fadeIn('slow').append(
+	                $("<input/>", {name: 'Mediapartners_1[]', type: 'file', id: 'Mediapartners'}),        
+	                $("<br/><br/>")
+	                ));
+	    });
+	})
+	$(document).ready(function() {
+
+	//To add new input file field dynamically, on click of "Add More Files" button below function will be executed
+	    $('#add_more2').click(function() {
+	        $(this).before($("<div/>", {id: 'filediv'}).fadeIn('slow').append(
+	                $("<input/>", {name: 'Sponsors_1[]', type: 'file', id: 'Sponsors'}),        
+	                $("<br/><br/>")
+	                ));
+	    });
+	})
+}

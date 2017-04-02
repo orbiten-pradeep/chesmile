@@ -377,6 +377,7 @@ window.onclick = function(event) {
 
 <script src="https://npmcdn.com/tether@1.2.4/dist/js/tether.min.js"></script>
 <script src="https://maxcdn.bootstrapcdn.com/bootstrap/4.0.0-alpha.4/js/bootstrap.min.js"></script>
+<script src="http://maps.googleapis.com/maps/api/js?libraries=places&key=AIzaSyBN3LHzhmsORmwlmvR3fIdjTI-VJK5w-TA"></script>
 
 <?php  echo $this->Html->script(['general','moment.min', 'daterangepicker', 'bootstrap-tagsinput', 'custom']);?> 
 

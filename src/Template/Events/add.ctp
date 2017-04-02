@@ -3,98 +3,6 @@
 use Cake\Routing\Router;
 ?>
 
-<script type="text/javascript">
-function checkForOther(id)
-{
-    var e = document.getElementById("categories-id");
-    var strUser = e.options[e.selectedIndex].value;
-    $select = $('#eventsubcategories-sub-categories');
-    $.ajax({
-        type:"POST",
-        data:strUser,
-        data:{"id":strUser},
-        ContentType : 'application/json',
-        dataType: 'json',
-        url:"<?php echo $this->Url->build(['action' =>'viewresult']);?>",
-        async:true,
-        success: function(data) {
-            $select.html('');
-            //iterate over the data and append a select option
-            $.each(data, function(key, val){
-                //alert(val);
-                $select.append('<option value="' + key + '">' + val + '</option>');
-            })
-        },
-        error: function (tab) {
-            $select.html('<option id="-1">none available</option>');
-        }
-    }); 
-}
-
-$( function() {
-    $('#date').datepicker({
-        changeMonth: true,
-        changeYear: true,
-        minDate: new Date()
-        });
-  } );
-$(document).ready(function(){
-    $('#time').timepicker({ timeFormat: 'H:mm' });
-    var e = document.getElementById("categories-id");
-    var strUser = e.options[e.selectedIndex].value;
-    $select = $('#eventsubcategories-sub-categories');
-    $.ajax({
-        type:"POST",
-        data:strUser,
-        data:{"id":strUser},
-        ContentType : 'application/json',
-        dataType: 'json',
-        url:"<?php echo $this->Url->build(['action' =>'viewresult']);?>",
-        async:true,
-        success: function(data) {
-            $select.html('');
-            //iterate over the data and append a select option
-            $.each(data, function(key, val){
-                //alert(val);
-                $select.append('<option value="' + key + '">' + val + '</option>');
-            })
-        },
-        error: function (tab) {
-            $select.html('<option id="-1">none available</option>');
-        }
-    });
-
-     $('#Autocomplete').autocomplete({
-            source:'<?php echo Router::url(array("controller" => "events", "action" => "search")); ?>',
-            minLength: 1
-     });  
-        
-});
-
-
-$(document).ready(function() {
-
-//To add new input file field dynamically, on click of "Add More Files" button below function will be executed
-    $('#add_more').click(function() {
-        $(this).before($("<div/>", {id: 'filediv'}).fadeIn('slow').append(
-                $("<input/>", {name: 'Mediapartners_1[]', type: 'file', id: 'Mediapartners'}),        
-                $("<br/><br/>")
-                ));
-    });
-})
-$(document).ready(function() {
-
-//To add new input file field dynamically, on click of "Add More Files" button below function will be executed
-    $('#add_more2').click(function() {
-        $(this).before($("<div/>", {id: 'filediv'}).fadeIn('slow').append(
-                $("<input/>", {name: 'Sponsors_1[]', type: 'file', id: 'Sponsors'}),        
-                $("<br/><br/>")
-                ));
-    });
-})
-
-
-</script>
 <style type="text/css">
     /******************************************************PROFILE CSS ************************************/
 /*/*.card-block{
@@ -338,6 +246,18 @@ hr {
         margin: 0;
     }*/
 /*}*/
+
+body, .modal-open .page-container, .modal-open .page-container .navbar-fixed-top, .modal-open .modal-container {
+    overflow-y: scroll;
+}
+@media (max-width: 979px) {
+    .modal-open .page-container .navbar-fixed-top {
+        overflow-y: visible;
+    }
+}
+#map-canvas {
+    height: 400px;
+}
 </style>
 <!-- 
 <link rel="stylesheet" href="//code.jquery.com/ui/1.11.4/themes/smoothness/jquery-ui.css">
@@ -838,6 +758,12 @@ label {
                 </div>
             </div>
 
+            <div class="form-group">
+                <label for="">Add Map Location</label>                
+                <input type="text" class="form-control" id="googleMapID" name="google_map" placeholder="" readonly="">
+                <input type="button" class="btn launch-map" value="Launch Map" />
+            </div>
+
             <!-- <div class="form-group float-label-control">
                     <div class="ui-widget">
                         <label for="">Areaname</label>
@@ -921,93 +847,35 @@ label {
             </div>
         </div>
     </div>
-<script src="https://ajax.googleapis.com/ajax/libs/jquery/1.12.4/jquery.min.js"></script>
 
-<script type="text/javascript">
-    /* Float Label Pattern Plugin for Bootstrap 3.1.0 by Travis Wilson
-**************************************************/
-
-(function ($) {
-    $.fn.floatLabels = function (options) {
-
-        // Settings
-        var self = this;
-        var settings = $.extend({}, options);
-
-
-        // Event Handlers
-        function registerEventHandlers() {
-            self.on('input keyup change', 'input, textarea', function () {
-                actions.swapLabels(this);
-            });
-        }
-
-
-        // Actions
-        var actions = {
-            initialize: function() {
-                self.each(function () {
-                    var $this = $(this);
-                    var $label = $this.children('label');
-                    var $field = $this.find('input,textarea').first();
-
-                    if ($this.children().first().is('label')) {
-                        $this.children().first().remove();
-                        $this.append($label);
-                    }
-
-                    var placeholderText = ($field.attr('placeholder') && $field.attr('placeholder') != $label.text()) ? $field.attr('placeholder') : $label.text();
-
-                    $label.data('placeholder-text', placeholderText);
-                    $label.data('original-text', $label.text());
-
-                    if ($field.val() == '') {
-                        $field.addClass('empty')
-                    }
-                });
-            },
-            swapLabels: function (field) {
-                var $field = $(field);
-                var $label = $(field).siblings('label').first();
-                var isEmpty = Boolean($field.val());
-
-                if (isEmpty) {
-                    $field.removeClass('empty');
-                    $label.text($label.data('original-text'));
-                }
-                else {
-                    $field.addClass('empty');
-                    $label.text($label.data('placeholder-text'));
-                }
-            }
-        }
-
-
-        // Initialization
-        function init() {
-            registerEventHandlers();
-
-            actions.initialize();
-            self.each(function () {
-                actions.swapLabels($(this).find('input,textarea').first());
-            });
-        }
-        init();
-
-
-        return this;
-    };
-
-    $(function () {
-        jQuery('.form-element').each(function(){
-          if($(this).parent().hasClass('required')){
-             jQuery('.form-element').unwrap();
-          }
-        });
-
-        setTimeout(function(){
-            $('.float-label-control').floatLabels();
-        },1000);
-    });
-})(jQuery);
-</script>
+<div class="modal fade" id="myModal">
+  <div class="modal-dialog" role="document">
+    <div class="modal-content">
+      <div class="modal-header">
+        <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+          <span aria-hidden="true">&times;</span>
+        </button>
+        <h5 class="modal-title" id="exampleModalLabel">Map</h5>        
+      </div>
+      <div class="modal-body">
+        <div id="mapPanel">            
+            <input class="form-control text" id="city_country" type="textbox" value="Mylapore, Chennai">
+            <input class="btn btn-md btn-primary botton" type="button" value="Geocode" onclick="codeAddress()">            
+        </div>  
+        <div id="mapCanvas" style="width: 100%; height: 350px;"></div>
+        <div id="infoPanel">
+            <!--<b>Marker status:</b>
+            <div id="markerStatus"><i>Click and drag the marker.</i></div>
+            <b>Current position:</b>
+            <div id="info"></div>-->
+            <b>Closest matching address:</b>
+            <div id="address"></div>
+        </div>
+      </div>
+      <div class="modal-footer">
+        <button type="button" class="btn btn-secondary" data-dismiss="modal">Close</button>
+        <button type="button" class="btn btn-primary" data-dismiss="modal">Save changes</button>
+      </div>
+    </div>
+  </div>
+</div>
