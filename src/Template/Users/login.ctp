@@ -122,7 +122,7 @@ input.invalid{
   <img class="img-responsive sizelog" src="/chesmile/img/logo.png" >
     </div>
    <!--  <div class="collapse navbar-collapse mob-navbar-collapse"> -->
-   <?= $this->Form->create('', array('id' => 'animdiv','class' => 'navbar-form navbar-right cs-navbar-form desktop-signIn')) ?>
+   <?= $this->Form->create('',array('id' => 'animdiv','class' => 'navbar-form navbar-right cs-navbar-form desktop-signIn')) ?>
        <!--  <form name="signin" class="navbar-form navbar-right cs-navbar-form" role="form"> -->
     <div class="input-group cs-navbar-email-field">
      <!--  <input id="username" type="text" pattern="[a-zA-Z0-9_-]{6,12}" autofocus required title="must be alphanumeric in 6-12 chars">    -->
@@ -166,7 +166,7 @@ input.invalid{
           <h4 class="modal-title">Forgot Password</h4>
         </div>
         <div class="modal-body">
-         <?= $this->Form->create('', array('id' => 'animdiv')) ?>
+         <?= $this->Form->create('', array('id' => 'animdiv'), ['url' => ['action' => 'forgetpassword']]) ?>
       
         <div class="col-xs-9 col-sm-9 col-md-9 col-lg-10">
             <div class="form-group">
@@ -213,7 +213,7 @@ input.invalid{
         <div class="card card-container">
            
 
-            <?= $this->Form->create($user, array('id' => 'animdiv','class' => 'form-signin formheigh mobile-signIn')) ?>
+            <?= $this->Form->create('', array('id' => 'animdiv','class' => 'form-signin formheigh mobile-signIn', 'url' => ['action' => 'add'])) ?>
             <!-- <form class="form-signin"> -->
             <h3 style="color:#333333">Sign In & Enjoy</h3>
              
@@ -234,11 +234,11 @@ input.invalid{
               <div style=" color: #000;">Not a member? <a class="viewSignupForim">Join Now</a></div>
            </div>
             <?= $this->Form->end() ?>
-            
+              
 
 
            <!--  <p id="profile-name" class="profile-name-card"></p> -->
-           <?= $this->Form->create($user, array('id' => 'animdiv','class' => 'form-signup formheigh ')) ?>
+           <?= $this->Form->create('', array('id' => 'animdiv','class' => 'form-signup formheigh ', 'url' => ['action' => 'add'])) ?>
             <!-- <form class="form-signin"> -->
             <h3 style="color:#333333">Sign up & Enjoy</h3>
               <div class="form-group" style="margin-top: 20px;">

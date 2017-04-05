@@ -69,28 +69,23 @@ class UsersController extends AppController
         	$user = $this->Users->patchEntity($user, $this->request->data);
             
             if ($this->Users->save($user)) {
-            	
-            	$email = new Email();
-        		$email->transport('gmail');
-        		$email->template('default');
-        		$subject = "Account Activation link send on your email";
-            	$name = $this->request->data['fullname'];
-			    $to = trim($this->request->data['email']);
-			    $email->emailFormat('html');
-			    $email->from('admin@chennaismile.com');
-			    $email->to($to);
-			    $email->cc('admin@chennaismile.com');
-			    $email->subject($subject);
-			    
-				$activationUrl = Router::url(['controller' => 'users', 'action' => 'activate/' . $activation_key, '_full' => true ]);
-			    // Always try to write clean code, so that you can read it :) :
-			    $message = "Dear <span style='color:#666666'>" . $name . "</span>,<br/><br/>";
-			    $message .= "Your account has been created successfully by Administrator.<br/>";
-            	$message .= "<b>Activate your account by clicking on the below url:</b> <br/>";
-			    $message .= "<a href='$activationUrl'>$activationUrl</a><br/><br/>";
-			    $message .= "<br/>Thanks, <br/>Support Team";
-			    $email->send($message);
-            	
+				$email = new Email();
+                $email->transport('gmail');
+				//$email->setHelpers(['Html','Text']);
+                $subject = "Account Activation link send on your email";
+                $name = $this->request->data['fullname'];
+                $to = trim($this->request->data['email']);
+                $activationUrl = Router::url(['controller' => 'users', 'action' => 'activate/' . $activation_key, '_full' => true ]);
+                // Always try to write clean code, so that you can read it :) :
+    			$email->template('cssignupemail','cs-email');
+                $email->emailFormat('html');
+    			$email->to($to);
+    			$email->cc('admin@chennaismile.com');
+    			$email->subject($subject);
+    			$email->from('admin@chennaismile.com');
+    			$email->viewVars(['name' => $name, 'activationUrl' => $activationUrl]);
+    			$email->send();
+
                 $this->Flash->success(__('The user has been saved.'));
                 return $this->redirect(['action' => 'login']);
             } else {
@@ -160,7 +155,7 @@ class UsersController extends AppController
 	        }
 	        $this->Flash->error(__('Your username or password was incorrect.'));
 	    }
-	    $activation_key = Text::uuid();
+/*	    $activation_key = Text::uuid();
 	    $user = $this->Users->newEntity();
         if ($this->request->is('post')) {
         	//$this->request->data['activation_key'] = $activation_key = String::uuid();
@@ -172,7 +167,6 @@ class UsersController extends AppController
             	
             	$email = new Email();
         		$email->transport('gmail');
-        		$email->template('default');
         		$subject = "Account Activation link send on your email";
             	$name = $this->request->data['fullname'];
 			    $to = trim($this->request->data['email']);
@@ -181,15 +175,20 @@ class UsersController extends AppController
 			    $email->to($to);
 			    $email->cc('admin@chennaismile.com');
 			    $email->subject($subject);
+                $email ->setTemplate('cs-signup-email')
+                        ->setLayout('cs-email')
+                        ->setEmailFormat('html')
+                         ->send();
 			    
 				$activationUrl = Router::url(['controller' => 'users', 'action' => 'activate/' . $activation_key, '_full' => true ]);
 			    // Always try to write clean code, so that you can read it :) :
-			    $message = "Dear <span style='color:#666666'>" . $name . "</span>,<br/><br/>";
-			    $message .= "Your account has been created successfully by Administrator.<br/>";
-            	$message .= "<b>Activate your account by clicking on the below url:</b> <br/>";
-			    $message .= "<a href='$activationUrl'>$activationUrl</a><br/><br/>";
-			    $message .= "<br/>Thanks, <br/>Support Team";
-			    $email->send($message);
+			    // $message ="";
+			    // $message = "Dear <span style='color:#666666'>" . $name . "</span>,<br/><br/>";
+			    // $message .= "Your account has been created successfully by Administrator.<br/>";
+               	//$message .= "<b>Activate your account by clicking on the below url:</b> <br/>";
+			    // $message .= "<a href='$activationUrl'>$activationUrl</a><br/><br/>";
+			    // $message .= "<br/>Thanks, <br/>Support Team";
+			    $email->send();
             	
                 $this->Flash->success(__('The user has been saved.'));
                 return $this->redirect(['action' => 'login']);
@@ -199,9 +198,9 @@ class UsersController extends AppController
         }
         $groups = $this->Users->Groups->find('list', ['limit' => 200,'conditions' => array('role' => 'Users')]);
         $this->set(compact('user', 'groups'));
-        $this->set('_serialize', ['user']);
+        $this->set('_serialize', ['user']);*/
 
-		if(!empty($this->request->data))
+		/*if(!empty($this->request->data))
 		{
 			
 			if(empty($this->request->data['email']))
@@ -263,7 +262,11 @@ class UsersController extends AppController
 					$this->Flash->success(__('Email does Not Exist'));
 				}
 			}
-		}
+		}*/
+
+		$groups = $this->Users->Groups->find('list', ['limit' => 200,'conditions' => array('role' => 'Users')]);
+        $this->set(compact('groups'));
+        
 	}
 	
 	
