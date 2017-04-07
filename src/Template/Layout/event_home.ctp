@@ -169,10 +169,10 @@ background-color: #4fa8b1;
 </head>
 <body>
 <nav class="navbar navbar-default">
-  <input type="hidden" id="sub_category_api_url" name="sub_category_api_url" value="<?php echo $this->Url->build(['action' =>'viewresult']);?>">
-  <input type="hidden" id="event_list_url" name="event_list_url" value="<?php echo $this->Url->build(['action' =>'eventlist']);?>">
-  <input type="hidden" id="eventIndexUrl" name="event_index_url" value="<?php echo $this->Url->build(['action' =>'index']);?>">
-  <input type="hidden" id="event_view_url" name="event_view_url" value="<?php echo $this->Url->build(['action' =>'view']);?>">
+  <input type="hidden" id="sub_category_api_url" name="sub_category_api_url" value="<?php echo $this->Url->build(array('controller' => 'events', 'action' => 'viewresult'));?>">
+  <input type="hidden" id="event_list_url" name="event_list_url" value="<?php echo $this->Url->build(array('controller' => 'events', 'action' => 'eventlist'));?>">
+  <input type="hidden" id="eventIndexUrl" name="event_index_url" value="<?php echo $this->Url->build(array('controller' => 'events', 'action' => 'index'));?>">
+  <input type="hidden" id="event_view_url" name="event_view_url" value="<?php echo $this->Url->build(array('controller' => 'events', 'action' => 'view'));?>">
   <input type="hidden" id="filterDateVal" name="filterDateVal" value="">
   <input type="hidden" id="apiAction" name="apiAction" value="">
   <input type="hidden" id="eventPage" name="eventPage" value="<?php echo $this->request->params['action']; ?>">
