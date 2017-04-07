@@ -535,7 +535,7 @@ else if(ePage == 'add') {
 	        data:{"id":strUser},
 	        ContentType : 'application/json',
 	        dataType: 'json',
-	        url:"<?php echo $this->Url->build(['action' =>'viewresult']);?>",
+	        url:$("#sub_category_api_url").val(),
 	        async:true,
 	        success: function(data) {
 	            $select.html('');
@@ -569,7 +569,7 @@ else if(ePage == 'add') {
 	        data:{"id":strUser},
 	        ContentType : 'application/json',
 	        dataType: 'json',
-	        url:"<?php echo $this->Url->build(['action' =>'viewresult']);?>",
+	        url: $("#sub_category_api_url").val(),
 	        async:true,
 	        success: function(data) {
 	            $select.html('');
