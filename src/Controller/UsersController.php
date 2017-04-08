@@ -343,21 +343,20 @@ class UsersController extends AppController
 						$ms=wordwrap($ms,1000);
 						$fu['activation_key']= Text::uuid();
 						$user_id = $fu['id'];
-						$status = $this->Users->updateAll(['activation_key' => $key], ['id' => $user_id]);
+						$status = $this->Users->updateAll(['activation_key' => $key,'Active' => '0'], ['id' => $user_id]);
 						if($status){
 							//============Email================//
 							$email = new Email();
 			        		$email->transport('gmail');
 			        		$email->template('csforgotpassword','cs-email');
 			        		$subject = "Reset Your http://chennaismile.com/ Password";
-			            	$name = $this->request->data['fullname'];
 						    $to = trim($this->request->data['email']);
 						    $email->emailFormat('html');
 						    $email->from('admin@chennaismile.com');
 						    $email->to($to);
 						    $email->cc('admin@chennaismile.com');
 						    $email->subject($subject);
-							$email->viewVars(['name' => $name,'url' => $url]);
+							$email->viewVars(['url' => $url]);
 						    // Always try to write clean code, so that you can read it :) :
 						    // $message = "Dear <span style='color:#666666'>" . $name . "</span>,<br/><br/>";
 						    // $message .= "<p>Click on the link below to Reset Your Password </p><br/>";
@@ -400,6 +399,7 @@ class UsersController extends AppController
 					$activation_key = Text::uuid();
 					$u['activation_key'] = $activation_key;
 					$u['password'] = $this->request->data['password'];
+					$u['Active'] = '1';
 					$user = $u;
 					$user = $this->Users->patchEntity($user, $this->request->data);
 					if($this->Users->save($user))

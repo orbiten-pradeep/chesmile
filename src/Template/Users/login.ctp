@@ -166,7 +166,7 @@ input.invalid{
           <h4 class="modal-title">Forgot Password</h4>
         </div>
         <div class="modal-body">
-         <?= $this->Form->create('', array('id' => 'animdiv'), ['url' => ['action' => 'forgetpassword']]) ?>
+         <?= $this->Form->create('', array('id' => 'animdiv', 'url' => ['action' => 'forgetpassword'])) ?>
       
         <div class="col-xs-9 col-sm-9 col-md-9 col-lg-10">
             <div class="form-group">
