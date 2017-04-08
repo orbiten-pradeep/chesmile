@@ -30,6 +30,18 @@ $('#media').carousel({
 	interval: false,
 });
 
+$(document).ready(function() {
+    $('#homeAutocomplete').autocomplete({
+        source: $("#search_area_url").val(),
+        minLength: 1,
+		select: function (event, ui) {
+		    var value = ui.item.value;
+		    $("#areaSearch").val(value);
+			getEventListByFilter();
+		}
+    });
+});
+
 var elt = $('#eventCategorySearch');
 elt.tagsinput({
 	allowDuplicates: false,
@@ -201,7 +213,10 @@ function getEventListByFilter() {
 	//console.log(elt.tagsinput('items'));
 	var subCategories = elt.tagsinput('items');
 	var dateVal = $("#filterDateVal").val();
+	var customDate = $("#customDate").val();
 	var liked = $("#likeId").val();
+	var area = $("#areaSearch").val();
+	//alert(area);return;
 	var apiAction = '';
 	apiAction = $("#apiAction").val();
 
@@ -238,6 +253,12 @@ function getEventListByFilter() {
 	if(apiAction!=''){
 		params.action = apiAction;
 	}
+	if(area!=''){
+		params.area = area;
+	}
+	if(customDate!=''){
+		params.customDate = customDate;
+	}
 	//console.log(params);
 
 	getEventList(params);
@@ -265,7 +286,7 @@ $(function() {
     var end = moment();
 
     function cb(start, end) {
-        $('#reportrange span').html(start.format('MMMM D, YY') + ' - ' + end.format('MMMM D, YY'));
+        $('#reportrange span').html(start.format('MMMM D, YY') + ' - ' + end.format('MMMM D, YY'));        
     }
 
     $('#reportrange').daterangepicker({
@@ -274,6 +295,15 @@ $(function() {
     }, cb);
 
     cb(start, end);
+
+    $('#reportrange').on('apply.daterangepicker', function (ev, picker) {
+	    var startDate = picker.startDate;
+	    var endDate = picker.endDate;  
+	    var joinDate = startDate.format('YYYY-MM-DD') + '|' + endDate.format('YYYY-MM-DD');
+        //alert(joinDate);
+        $("#customDate").val(joinDate);
+        getEventListByFilter();
+	});
     
 });
 

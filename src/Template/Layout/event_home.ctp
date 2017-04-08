@@ -173,9 +173,12 @@ background-color: #4fa8b1;
   <input type="hidden" id="event_list_url" name="event_list_url" value="<?php echo $this->Url->build(array('controller' => 'events', 'action' => 'eventlist'));?>">
   <input type="hidden" id="eventIndexUrl" name="event_index_url" value="<?php echo $this->Url->build(array('controller' => 'events', 'action' => 'index'));?>">
   <input type="hidden" id="event_view_url" name="event_view_url" value="<?php echo $this->Url->build(array('controller' => 'events', 'action' => 'view'));?>">
+  <input type="hidden" id="search_area_url" name="search_area_url" value="<?php echo $this->Url->build(array('controller' => 'events', 'action' => 'search'));?>">
   <input type="hidden" id="filterDateVal" name="filterDateVal" value="">
   <input type="hidden" id="apiAction" name="apiAction" value="">
   <input type="hidden" id="eventPage" name="eventPage" value="<?php echo $this->request->params['action']; ?>">
+  <input type="hidden" id="areaSearch" name="areaSearch" value="">
+  <input type="hidden" id="customDate" name="customDate" value="">
     <!-- Brand and toggle get grouped for better mobile display -->
      <div class="navbar-header">
       <button type="button" class="navbar-toggle collapsed" data-toggle="collapse" data-target="#bs-example-navbar-collapse-1" aria-expanded="false">
@@ -402,12 +405,6 @@ window.onclick = function(event) {
         });
         return false;
     }
-    $(document).ready(function() {
-        $('#Autocomplete').autocomplete({
-            source: "<?php echo $this->Url->build(['action' =>'search']); ?>",
-            minLength: 1
-        });
-    });
 
     function autoHeight() {
             $('.content').css('min-height', 0);

@@ -19,11 +19,11 @@
                     <form id="searchbyarea" class="sx_location">
                         <!--  <div class="ui-widget">
                               <label for="Autocomplete"></label>
-                                 <?php echo $this->Form->input('areaname', array('id' => 'Autocomplete', 'required','class' => 'list-group-item','label' => false,'placeholder' => 'searchbyarea')); ?>
+                                 <?php echo $this->Form->input('areaname', array('id' => 'homeAutocomplete', 'required','class' => 'list-group-item','label' => false,'placeholder' => 'searchbyarea')); ?>
                             </div> -->
                         <div class="form-group"> <span class="twitter-typeahead" style="position: relative; display: inline-block;">
               <input class="tt-hint dropdown_hint" type="text" autocomplete="off" spellcheck="off" disabled style="">
-               <?php echo $this->Form->input('areaname', array('id' => 'Autocomplete', 'required','class' => 'form-control tt-query dropdown_input','label' => false,'placeholder' => 'Search by location/Area')); ?>
+               <?php echo $this->Form->input('areaname', array('id' => 'homeAutocomplete', 'required','class' => 'form-control tt-query dropdown_input','label' => false,'placeholder' => 'Search by location/Area')); ?>
               <!-- <input type="text" class="form-control tt-query dropdown_input" name="query" id="query" placeholder="Search by location/Area" autocomplete="off" spellcheck="false" dir="auto" style=""> -->
               <span style="" class="dropdown_txt1"></span> <span class="tt-dropdown-menu" style="position: absolute; top: 100%; left: 0px; z-index: 100; display: none;"></span></span>
                         </div>
