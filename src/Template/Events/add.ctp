@@ -682,6 +682,19 @@ label {
                   <!--  <textarea class="form-control" placeholder="Some Words about your event" rows="1"></textarea> -->
             </div>
 
+
+            <div class="form-group float-label-control">
+                   <label for="">Contact Number</label>
+                  <?= $this->Form->input('contact_number',array('div' => false, 'label' => false,'class' => 'form-control form-element','placeholder' => 'Enter Contact Number'));?>
+                  <!--  <textarea class="form-control" placeholder="Some Words about your event" rows="1"></textarea> -->
+            </div>
+
+            <div class="form-group float-label-control">
+                   <label for="">Mobile Number</label>
+                  <?= $this->Form->input('mobile_number',array('div' => false, 'label' => false,'class' => 'form-control form-element','placeholder' => 'Enter Mobile Number',));?>
+                  <!--  <textarea class="form-control" placeholder="Some Words about your event" rows="1"></textarea> -->
+            </div>
+
              <div class="form-group">
                 <label>
            <?= $this->Form->input('date', array('type' => 'text','class' => 'form-control','placeholder' => 'Date','label' => false));?>
