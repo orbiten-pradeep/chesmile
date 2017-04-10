@@ -75,47 +75,41 @@
                                         <div class="col-sm-8 lft_container">
                                                 <h3 class="heading margin25">Sponsors<span></span></h3>
                                                     <!-- Client 1 -->
+
+                                                    <?php foreach ($sponsors as $sponsor): ?>
                                                     <div class="col-sm-6 col-xs-4 col-md-3" style="visibility: visible; ">
-                                                        <a href="#"><img src="img/logos/3.png" class="img-responsive clients-img" alt="Client 3"></a>
+                                                        <a href="#">
+                                                        <?php echo $this->Html->image('Sponsors/'.$sponsor->Sponsors, array('alt'=>'Sponsors')); ?>
+                                                    </a>
                                                     </div>
 
                                                     <!-- Client 2 -->
-                                                    <div class="col-sm-6 col-xs-4 col-md-3" style="visibility: visible; ">
+                                                    <!-- <div class="col-sm-6 col-xs-4 col-md-3" style="visibility: visible; ">
                                                         <a href="#"><img src="img/logos/4.png" class="img-responsive clients-img" alt="Client 4"></a>
                                                     </div>
 
                                                     <!-- Client 3 -->
-                                                    <div class="col-sm-6 col-xs-4 col-md-3" style="visibility: visible; ">
+                                                    <!-- <div class="col-sm-6 col-xs-4 col-md-3" style="visibility: visible; ">
                                                         <a href="#"><img src="img/logos/5.png" class="img-responsive clients-img" alt="Client 5"></a>
                                                     </div>
 
                                                     <!-- Client 4 -->
-                                                    <div class="col-sm-6 col-xs-4 col-md-3" style="visibility: visible; ">
+                                                    <!-- <div class="col-sm-6 col-xs-4 col-md-3" style="visibility: visible; ">
                                                         <a href="#"><img src="img/logos/6.png" class="img-responsive clients-img" alt="Client 6"></a>
-                                                    </div>
-
+                                                    </div> -->
+                                                    <?php endforeach; ?>
                                                     <div class="clearfix"></div>
 
                                                     <h3 class="heading margin25">Media Partners<span></span></h3>
                                                     <!-- Client 1 -->
+                                                    <?php foreach ($mediapartners as $mediapartner): ?>
                                                     <div class="col-sm-6 col-xs-4 col-md-3" style="visibility: visible; ">
-                                                        <a href="#"><img src="img/logos/1.png" class="img-responsive clients-img" alt="Client 3"></a>
+                                                        <a href="#">
+                                                        <?php echo $this->Html->image('Mediapartners/'.$mediapartner->MediaPartners, array('alt'=>'Mediapartners')); ?>
+                                                        </a>
                                                     </div>
-
+                                                    <?php endforeach; ?>
                                                     <!-- Client 2 -->
-                                                    <div class="col-sm-6 col-xs-4 col-md-3" style="visibility: visible; ">
-                                                        <a href="#"><img src="img/logos/2.png" class="img-responsive clients-img" alt="Client 4"></a>
-                                                    </div>
-
-                                                    <!-- Client 3 -->
-                                                    <div class="col-sm-6 col-xs-4 col-md-3" style="visibility: visible; ">
-                                                        <a href="#"><img src="img/logos/3.png" class="img-responsive clients-img" alt="Client 5"></a>
-                                                    </div>
-
-                                                    <!-- Client 4 -->
-                                                    <div class="col-sm-6 col-xs-4 col-md-3" style="visibility: visible; ">
-                                                        <a href="#"><img src="img/logos/4.png" class="img-responsive clients-img" alt="Client 6"></a>
-                                                    </div>
 
                                                     <div class="clearfix"></div>
 
@@ -187,7 +181,7 @@
                     <div class="clearfix"></div>
 
                     <p class="text-primary"><b>Interested in this Event</b></p>
-                    <small><span class="glyphicon glyphicon-thumbs-up"></span> 1k People are interested</small>
+                    <small><span class="glyphicon glyphicon-thumbs-up"></span> <?= h($number) ?> People are interested</small>
                     
                     <div class="panel bs-example side_panel margin25"> 
                         <div class="panel-heading"> 
@@ -210,17 +204,19 @@
 
 <nav class="large-3 medium-4 columns" id="actions-sidebar">
     <ul class="side-nav">
-        <li class="heading"><?= __('Actions') ?></li>
-        <li><?= $this->Html->link(__('Edit Event'), ['action' => 'edit', $event->id]) ?> </li>
+        <!-- <li class="heading"><?= __('Actions') ?></li>
+        <li><?= $this->Html->link(__('Edit Event'), ['action' => 'edit', $event->id]) ?> </li> -->
+        <?php if($u_id == $event->user_id){ ?>
         <li><?= $this->Form->postLink(__('Delete Event'), ['action' => 'delete', $event->id], ['confirm' => __('Are you sure you want to delete # {0}?', $event->id)]) ?> </li>
-        <li><?= $this->Html->link(__('List Events'), ['action' => 'index']) ?> </li>
+        <?php } ?>
+        <!-- <li><?= $this->Html->link(__('List Events'), ['action' => 'index']) ?> </li>
         <li><?= $this->Html->link(__('New Event'), ['action' => 'add']) ?> </li>
         <li><?= $this->Html->link(__('List Users'), ['controller' => 'Users', 'action' => 'index']) ?> </li>
         <li><?= $this->Html->link(__('New User'), ['controller' => 'Users', 'action' => 'add']) ?> </li>
         <li><?= $this->Html->link(__('List Categories'), ['controller' => 'Categories', 'action' => 'index']) ?> </li>
         <li><?= $this->Html->link(__('New Category'), ['controller' => 'Categories', 'action' => 'add']) ?> </li>
         <li><?= $this->Html->link(__('List Sub Categories'), ['controller' => 'SubCategories', 'action' => 'index']) ?> </li>
-        <li><?= $this->Html->link(__('New Sub Category'), ['controller' => 'SubCategories', 'action' => 'add']) ?> </li>
+        <li><?= $this->Html->link(__('New Sub Category'), ['controller' => 'SubCategories', 'action' => 'add']) ?> </li> -->
     </ul>
 </nav>
 <script type="text/javascript">
