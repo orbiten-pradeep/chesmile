@@ -163,7 +163,7 @@ body{
         <span class="icon-bar"></span>
         <span class="icon-bar"></span>
       </button>
-      <?php echo $this->Html->image('logo.png',array('alt' => 'Logo Chennai Smile','class' => 'img-responsive logores')); ?>
+      <?php echo $this->Html->image('logo.png',array('alt' => 'Logo Chennai Smile','class' => 'img-responsive logores','url' => array('controller' => 'events', 'action' => 'index') )); ?>
     </div>
 
     <!-- Collect the nav links, forms, and other content for toggling -->
