@@ -180,6 +180,25 @@ class EventsController extends AppController
         $event = $this->Events->get($id, [
             'contain' => ['Users', 'Categories']
         ]);
+        $u_id = "";
+        if(!empty($this->Auth->user('id')))
+		{
+			$u_id = $this->Auth->user('id');
+			$fullname = $this->Auth->user('fullname');
+			$email = $this->Auth->user('email');
+		}
+
+        $this->loadModel('Address');
+        $address = $this->Address->find('all', ['conditions' => ['events_id' => $id]]);
+        $this->loadModel('Mediapartners');
+        $mediapartners = $this->Mediapartners->find('all', ['conditions' => ['events_id' => $id]]);
+        $this->loadModel('Sponsors');
+        $sponsors = $this->Sponsors->find('all', ['conditions' => ['events_id' => $id]]);
+        $this->loadModel('Likes');
+        $likes = $this->Likes->find('all', ['conditions' => ['events_id' => $id]]);
+        $query = $this->Likes->find('all', ['select' => 'id',
+		    	'conditions' => ['events_id' => $id]]);
+		$number = $query->count();
 
         $this->set('event', $event);
         $this->set('_serialize', ['event']);
@@ -195,6 +214,7 @@ class EventsController extends AppController
 
         $this->set('categories', $categories_new);
         $this->set(compact('subCategories_new'));
+        $this->set(compact('address', 'mediapartners', 'sponsors', 'number', 'likes', 'u_id'));
     }
 
 		
@@ -770,12 +790,6 @@ class EventsController extends AppController
 	        		$category = $this->request->data['category'];
 	        		$cond .= " AND e.categories_id IN ($category)";
 	        	}
-
-	        	if(isset($this->request->data['area']) && $this->request->data['area'] !='') {
-	        		$area = $this->request->data['area'];
-	        		$joins .= " LEFT JOIN address ad ON ad.events_id = e.id";
-		        	$cond .= " AND ad.areaname = '".$area."'";
-	        	}
 	        	
 	        	if(isset($this->request->data['action']) && $this->request->data['action'] !='') {
 	        		$action = $this->request->data['action'];
@@ -811,12 +825,6 @@ class EventsController extends AppController
 		        		$cond .= " AND e.date between DATE_FORMAT(NOW() ,'%Y-%m-01') AND LAST_DAY(CURDATE())";
 		        	}
 	        	}
-	        	if(isset($this->request->data['customDate']) && !empty($this->request->data['customDate'])){
-	        		$customDate = $this->request->data['customDate'];
-	        		$exp = explode('|', $customDate);
-	        		$filter = true;
-	        		$cond .= " AND e.date between '".$exp[0]."' AND '".$exp[1]."'";
-		        }
 	        }
 	        if(!$filter) {
 		        $cond .= " AND e.date > DATE_ADD(CURDATE(),INTERVAL -1 DAY)";
