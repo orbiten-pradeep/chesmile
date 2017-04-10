@@ -67,8 +67,16 @@ class UsersController extends AppController
         	$this->request->data['group_id'] = 1;
         	$this->request->data['activation_key'] = $activation_key;
         	$user = $this->Users->patchEntity($user, $this->request->data);
-            
+
+        	$this->loadModel('UserProfile');
+            $userProfile = $this->UserProfile->newEntity();
+
             if ($this->Users->save($user)) {
+            	$userProfile = $this->UserProfile->patchEntity($userProfile, $this->request->data);
+            	$userProfile['fullname'] = $this->request->data['fullname'];
+            	$userProfile['user_id'] = $user->id;
+            	$this->UserProfile->save($userProfile);
+
 				$email = new Email();
                 $email->transport('gmail');
 				//$email->setHelpers(['Html','Text']);
