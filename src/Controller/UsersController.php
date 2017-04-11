@@ -427,6 +427,31 @@ class UsersController extends AppController
 			$this->redirect('/');
 		}
 	}
+
+	function changepassword($token=null)
+	{
+		if ($this->request->is('post')) 
+		{
+
+			$user = $this->Users->get($this->request->data['user_id']);	
+			if(!empty($this->request->data['password'])){
+				$user = $this->Users->patchEntity($user, $this->request->data);
+				if($this->Users->save($user))
+				{
+					$this->Flash->success(__('Password Has been Updated'));
+					$this->redirect(array('controller'=>'users','action'=>'login'));
+				}
+			}
+			else
+			{
+				$this->Flash->success(__('Token Corrupted,,Please Retry.the reset link work only for once.'));
+			}
+		}
+ 		else
+		{
+			$this->redirect('/');
+		}
+	}
 	
 	
 	
