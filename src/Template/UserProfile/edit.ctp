@@ -113,16 +113,21 @@
 
 
               <div class="tab-pane fade" id="profile">
-               <div class="form-group">
-           <?= $this->Form->input('Country',array('class' => 'form-control'));?>
-        </div>
 
-        <div class="form-group">
-           <?= $this->Form->input('Zipcode',array('class' => 'form-control'));?>
-        </div>
-
+           <?= $this->Form->create('', array('id' => 'animdiv','class' => 'form-signup formheigh', 'url' => ['controller' => 'Users', 'action' => 'changepassword'])) ?>
+            
+              <div class="form-group" style="margin-top: 20px;">
+              <?=  $this->Form->input('fullname',array('default'=> $fullname,'class' => 'form-control','type' => 'hidden')); ?>
+              <?= $this->Form->hidden('user_id', ['options' => $users,'default'=> $users_id]); ?>
+           <?= $this->Form->input('password',array('id' => 'password', 'class' => 'form-control cs-textbox','label' => false,'placeholder' => 'Enter a new password','required' => true)) ?>
+          </div>
+          <div class="form-group">
+            <?= $this->Form->input('password',array('id' => 'confirm_password', 'class' => 'form-control cs-textbox','label' => false,'placeholder' => 'Re-type Password','required' => true)) ?>
+          </div>
+           <?= $this->Form->submit(__('Update'), array('id' => 'Login', 'class' => 'btn btn-primary btn-lg cs-signup-button')) ?>
             <?= $this->Form->end() ?>
-         
+            
+        
 
 
               </div>
