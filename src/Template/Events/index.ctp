@@ -3,17 +3,25 @@
     a:hover {
         cursor: pointer;
     } 
+
+    .popover-content {
+    color: black;
+}
 </style>
 <script type="text/javascript">
-    
+
 </script>
+<link href="//netdna.bootstrapcdn.com/font-awesome/3.2.1/css/font-awesome.css" rel="stylesheet">
+<script src="https://ajax.googleapis.com/ajax/libs/jquery/1.11.3/jquery.min.js"></script>
+<script src="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.6/js/bootstrap.min.js"></script>
 <!--  <div class="content"> -->
 <!-- <div class="container-fluid content"> -->
 <div class="row" style="margin-left: 0px;">
     <div class="col-sm-4 col-lg-2 col-md-4">
         <div class="panel bs-example side_panel">
             <div class="panel-heading">
-                <h3 class="panel-title">Sort By</h3> </div>
+                <h3 class="panel-title">Sort By <a href="#" class="pull-right"><i class="icon-trash" data-toggle="popover" data-content="Reset Filter"></i></h3></a></div> <!-- <button type="button" class="btn btn-primary" data-toggle="popover" title="Popover title" data-content="Default popover">Popover</button> -->
+                
             <div class="panel-body">
                 <div class="list-group">
                     <form id="searchbyarea" class="sx_location">
@@ -50,3 +58,12 @@
     </div>
 </div>
 <div class="row"> &nbsp; </div>
+
+<script type="text/javascript">
+$(document).ready(function(){
+    $('[data-toggle="popover"]').popover({
+        placement : 'top',
+        trigger : 'hover'
+    });
+});
+</script>

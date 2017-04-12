@@ -84,7 +84,7 @@
                                                     <?php foreach ($sponsors as $sponsor): ?>
                                                     <div class="col-sm-6 col-xs-4 col-md-3" style="visibility: visible; ">
                                                         <a href="#">
-                                                        <?php echo $this->Html->image('Sponsors/'.$sponsor->Sponsors, array('alt'=>'Sponsors')); ?>
+                                                        <?php echo $this->Html->image('Sponsors/'.$sponsor->Sponsors, array('alt'=>'Sponsors','height' => '125px','width' => '125px')); ?>
                                                     </a>
                                                     </div>
 
@@ -110,13 +110,25 @@
                                                     <?php foreach ($mediapartners as $mediapartner): ?>
                                                     <div class="col-sm-6 col-xs-4 col-md-3" style="visibility: visible; ">
                                                         <a href="#">
-                                                        <?php echo $this->Html->image('Mediapartners/'.$mediapartner->MediaPartners, array('alt'=>'Mediapartners')); ?>
+                                                        <?php echo $this->Html->image('Mediapartners/'.$mediapartner->MediaPartners, array('alt'=>'Mediapartners','height' => '125px', 'width' => '125px')); ?>
                                                         </a>
                                                     </div>
                                                     <?php endforeach; ?>
                                                     <!-- Client 2 -->
 
                                                     <div class="clearfix"></div>
+
+                                                     <button class="btn btn-info btn-lg" data-toggle="modal" data-target="#myModal">Open Modal</button>
+
+
+                                                     <!-- Modal -->
+                                                  <div class="modal fade" tabindex="-1" id="myModal" role="dialog">
+                                                    <div class="modal-dialog">
+                                                    
+                                                      <!-- Modal content-->
+                                                      <div class="modal-content">
+                                                        <div class="modal-body">
+                                                              <div class="clearfix"></div>
 
                                                     <h3 class="heading margin25">Gallery (Photos after the Events)<span></span></h3>
 
@@ -125,12 +137,12 @@
                                                           <div class="container">
                                                           <div class="row">
                                 <div class="col-xs-6 col-sm-2 col-md-2">
-                                    <a href="#" class="thumbnail" data-toggle="modal" data-target="#lightbox"> 
+                                    <a href="#" class="thumbnail" data-target="#lightbox"> 
                                         <img src="https://s3.amazonaws.com/ooomf-com-files/lqCNpAk3SCm0bdyd5aA0_IMG_4060_1%20copy.jpg" alt="...">
                                     </a>
                                 </div>
                                 <div class="col-xs-6 col-sm-2 col-md-2">
-                                    <a href="#" class="thumbnail" data-toggle="modal" data-target="#lightbox"> 
+                                    <a href="#" class="thumbnail" data-target="#lightbox"> 
                                         <img src="https://s3.amazonaws.com/ooomf-com-files/deYU3EyQP9cN23moYfLw_Dandelion.jpg" alt="...">
                                     </a>
                                 </div>
@@ -140,14 +152,14 @@
                                     </a>
                                 </div>
                                 <div class="col-xs-6 col-sm-2 col-md-2">
-                                    <a href="#" class="thumbnail" data-toggle="modal" data-target="#lightbox"> 
+                                    <a href="#" class="thumbnail" data-target="#lightbox"> 
                                         <img src="https://s3.amazonaws.com/ooomf-com-files/Z3LXxzFMRe65FC3Dmhnp_woody_unsplash_DSC0129.jpg" alt="...">
                                     </a>
                                 </div>
                                 </div>
                             </div>
 
-                            <div id="lightbox" class="modal fade" tabindex="-1" role="dialog" aria-labelledby="myLargeModalLabel" aria-hidden="true">
+                           <!--  <div id="lightbox" class="modal fade" tabindex="-1" role="dialog" aria-labelledby="myLargeModalLabel" aria-hidden="true">
                                 <div class="modal-dialog" style="top:250px;">
                                     <button type="button" class="close hidden" data-dismiss="modal" aria-hidden="true">×</button>
                                     <div class="modal-content">
@@ -156,7 +168,7 @@
                                         </div>
                                     </div>
                                 </div>
-                            </div>
+                            </div> -->
                                 <a data-slide="prev" href="#media" class="left carousel-control">‹</a>
                                 <a data-slide="next" href="#media" class="right carousel-control">›</a>
                               </div>                          
@@ -170,7 +182,12 @@
                                 <div class="margin25">
                                   <button type="submit" class="btn btn-primary">Submit</button>
                                 </div>
-                              </div>
+                              </div> 
+        </div>
+      </div>
+      
+    </div>
+  </div>
             </div>  
 
             <div class="col-sm-4 lft_container">
