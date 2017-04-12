@@ -189,7 +189,7 @@ body{
         </li>
         <li class="mobhide">
           <div class="dropdown">
-          <?php echo $this->Html->image('profile_thumbnail.jpg', array('alt' => 'CakePHP', 'border' => '0', 'data-src' => 'holder.js/100%x100')); ?>
+          <?php echo $this->Html->image('profile_thumbnail.jpg',array('alt' => 'Logo Chennai Smile','class' => 'dropbtn','onclick' => 'smalldrop()')); ?>
                 <div id="myDropdown" class="dropdown-content">
                <a href="profile.html"><i class="fa fa-user fa-fw"></i>My Account</a>
                <a href="order-history.php"><i class="fa fa-calendar-o fa-fw"></i>My Events</a>
@@ -200,7 +200,7 @@ body{
       </ul>
       <ul class="nav navbar-nav navbar-right">
         <div class="dropdown" style="margin-right: 60px;">
-         <img onclick="largedrop()" class="dropbtn" src="/chesmile/img/profile_thumbnail.jpg">
+         <?php echo $this->Html->image('profile_thumbnail.jpg',array('alt' => 'Logo Chennai Smile','class' => 'dropbtn','onclick' => 'largedrop()')); ?>
                 <div id="mylargeDropdown" class="dropdown-content">
                <a href="profile.html"><i class="fa fa-user fa-fw"></i>My Account</a>
                <a href="order-history.php"><i class="fa fa-calendar-o fa-fw"></i>My Events</a>

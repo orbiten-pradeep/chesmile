@@ -213,7 +213,8 @@ background-color: #4fa8b1;
         </li>
         <li class="mobhide">
           <div class="dropdown">
-          <img onclick="smalldrop()" class="dropbtn" src="img/profile_thumbnail.jpg">
+          <?php echo $this->Html->image('profile_thumbnail.jpg',array('alt' => 'Logo Chennai Smile','class' => 'dropbtn','onclick' => 'smalldrop()')); ?>
+          <!-- <img onclick="smalldrop()" class="dropbtn" src="img/profile_thumbnail.jpg"> -->
                 <div id="myDropdown" class="dropdown-content">
                <?= $this->Html->link($this->Html->tag('i', '', array('class' => 'fa fa-user fa-fw')).'My Account', array('controller' => 'UserProfile', 'action' => 'add'), array('escape' => false)) ?>
 
@@ -225,17 +226,15 @@ background-color: #4fa8b1;
       </ul>
       <ul class="nav navbar-nav navbar-right">
         <div class="dropdown" style="margin-right: 15px;">
-         <img onclick="largedrop()" class="dropbtn" src="img/profile_thumbnail.jpg">
+        <?php echo $this->Html->image('profile_thumbnail.jpg',array('alt' => 'Logo Chennai Smile','class' => 'dropbtn','onclick' => 'largedrop()')); ?>
+         <!-- <img onclick="largedrop()" class="dropbtn" src="img/profile_thumbnail.jpg"> -->
                 <div id="mylargeDropdown" class="dropdown-content">
                 <?= $this->Html->link($this->Html->tag('i', '', array('class' => 'fa fa-user fa-fw')).'My Account', array('controller' => 'UserProfile', 'action' => 'add'), array('escape' => false)) ?>
 
                 <a href="#my-events" class="my-events"><i class="fa fa-calendar-o fa-fw"></i>My Events</a>
                 <a href="#liked-events" class="liked-events"><i class="fa fa-thumbs-up fa-fw"></i>Liked Events</a>
-              <!--  <a href="profile.html"><i class="fa fa-user fa-fw"></i>My Account</a> -->
-              <!--  <?= $this->Html->link(__('My Events'), ['controller' => 'Events', 'action' => 'myevents']) ?> -->
-               <!-- <a href="order-history.php"><i class="fa fa-calendar-o fa-fw"></i>My Events</a> -->
-               <!-- <?= $this->Html->link(__('Liked Events'), ['controller' => 'Events', 'action' => 'likedevents']) ?> -->
-               <!--  <a href="order-history.php"><i class="fa fa-thumbs-up fa-fw"></i>Liked Events</a> -->
+                <?= $this->Html->link($this->Html->tag('i', '', array('class' => 'fa fa-sign-out')).'Logout', array('controller' => 'Users', 'action' => 'logout'),array('escape' => false))?>
+                <!-- <?= $this->Html->link(__('Logout'), ['controller' => 'Users', 'action' => 'logout']) ?> -->
                 </div>
             </div>
   
