@@ -7,12 +7,12 @@
     </ul>
 </nav>
 <div class="galaries form large-9 medium-8 columns content">
-    <?= $this->Form->create($galary) ?>
+    <?= $this->Form->create($galary, array('enctype' => 'multipart/form-data')) ?>
     <fieldset>
         <legend><?= __('Add Galary') ?></legend>
         <?php
             echo $this->Form->input('events_id', ['options' => $events]);
-            echo $this->Form->input('galary');
+            echo $this->Form->input('galary[]', array('type' => 'file', 'multiple'));
         ?>
     </fieldset>
     <?= $this->Form->button(__('Submit')) ?>
