@@ -445,19 +445,19 @@ class EventsController extends AppController
 
 	            //$mediapartner = $this->Mediapartners->newEntity();
         		//$sponsor = $this->Sponsors->newEntity();
-	            foreach($this->request->data['Mediapartners'] as $key=>$tmp_name)
+	             foreach($this->request->data['Mediapartners'] as $key=>$tmp_name)
 	            {
-	            	$mediapartner = $this->Mediapartners->patchEntity($mediapartner, $this->request->data);
-	            	$mediapartner->events_id = $new_id;
-	            	$mediapartner->MediaPartners = $this->request->data['Mediapartners'][$key]["name"];
+	            	$mediapartner = $this->Mediapartners->newEntity();
+	            	$mediapartner['events_id'] = $new_id;
+	            	$mediapartner['MediaPartners'] = $this->request->data['Mediapartners'][$key]["name"];
 	            	$this->Mediapartners->save($mediapartner);
 	            }
 
 	            foreach($this->request->data['Sponsors'] as $key=>$tmp_name)
 	            {
-	            	$sponsor = $this->Sponsors->patchEntity($sponsor, $this->request->data);
-	            	$sponsor->events_id = $new_id;
-	            	$sponsor->Sponsors = $this->request->data['Sponsors'][$key]["name"];
+	            	$sponsor = $this->Sponsors->newEntity();
+	            	$sponsor['events_id'] = $new_id;
+	            	$sponsor['Sponsors'] = $this->request->data['Sponsors'][$key]["name"];
 	            	$this->Sponsors->save($sponsor);
 	            }
 	            
