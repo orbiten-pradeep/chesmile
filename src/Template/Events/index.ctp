@@ -20,11 +20,16 @@
     <div class="col-sm-4 col-lg-2 col-md-4">
         <div class="panel bs-example side_panel">
             <div class="panel-heading">
-                <h3 class="panel-title">Filters <a href="javascript:;" class="pull-right" id="filterClearAll"><i class="icon-trash" data-toggle="tooltip" title="Clear"></i></h3></a>
+                <h3 class="panel-title">Filters                     
+
+                    <a href="javascript:;" class="pull-right" id="filterDD"><i class="filter-dd-icon icon-chevron-right" data-toggle="tooltip" title="expand"></i></a>
+
+                    <a href="javascript:;" class="pull-right" id="filterClearAll"><i class="icon-trash" data-toggle="tooltip" title="Clear"></i></a>
+                </h3>
 
             </div> <!-- <button type="button" class="btn btn-primary" data-toggle="popover" title="Popover title" data-content="Default popover">Popover</button> -->
                 
-            <div class="panel-body">
+            <div class="panel-body filter-panel-body">
                 <div class="list-group">
                     <div class="f-sections">
                         <div class="f-item filter-date">

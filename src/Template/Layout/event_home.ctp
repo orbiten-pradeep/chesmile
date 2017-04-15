@@ -444,19 +444,17 @@ window.onclick = function(event) {
         // onDocumentReady function bind
     $(document).ready(function() {
         autoHeight();
-
-        $('.bootstrap-tagsinput').slimScroll({
-            axis: 'x',
-            height: '42px',
-            size: '7px',
-            position: 'left',
-            color: '#286090',
-            allowPageScroll: false
-        });
-
-        $('.bootstrap-tagsinput').slimScroll({ scrollToX: '50px' }).bind('slimscrollX', function(e, pos){
-            console.log("Horizontal Scrollbar Reached " + pos + "px");
-        });
+        
+        if ($(window).width() > 767) { 
+          $('.bootstrap-tagsinput').slimScroll({
+              axis: 'x',
+              height: '42px',
+              size: '7px',
+              position: 'left',
+              color: '#286090',
+              allowPageScroll: false
+          });
+        } 
     });
     // onResize bind of the function
     $(window).resize(function() {
