@@ -148,9 +148,38 @@ background-color: #4fa8b1;
   font-size: 11px !important;
 }
 
-.list-group .checkbox label:hover{
-  color: #337AB7 !important;
+.nav .category_btn:hover {
+    color: #fff;
+    background-color: #286090;
+    border-color: #204d74;
 }
+.category_dropdown.list-group{
+  background-color: #337AB7 !important;
+  width: 590px !important;
+}
+
+/*.list-group .checkbox label:hover{
+  color: black !important;
+}*/
+
+.list-group .checkbox{
+  padding: 2px;
+}
+.sub_category1.list-group{
+  width: 620px !important;
+}
+.cs-cat:hover{
+background-color: #286090;
+}
+
+.cs-subcat:hover{
+  background-color: #348890;
+}
+
+.checkbox{
+  margin-bottom: 0px !important;
+}
+
 </style>
  <meta charset="utf-8">
     <meta http-equiv="X-UA-Compatible" content="IE=edge">
@@ -187,7 +216,7 @@ background-color: #4fa8b1;
         <span class="icon-bar"></span>
         <span class="icon-bar"></span>
       </button>
-    <?php echo $this->Html->image('logo.png',array('alt' => 'Logo Chennai Smile','class' => 'img-responsive logores','url' => array('controller' => 'events', 'action' => 'index') )); ?>
+    <?php echo $this->Html->image('chennaismile-logo.png',array('alt' => 'Logo Chennai Smile','class' => 'img-responsive logores','url' => array('controller' => 'events', 'action' => 'index') )); ?>
     </div>
 
     <!-- Collect the nav links, forms, and other content for toggling -->
@@ -248,7 +277,7 @@ background-color: #4fa8b1;
         <?php foreach ($categories as $key => $category): ?>
           <?php //echo "<pre>";print_r($category); echo "</pre>";?>
           <?php $i=0; if(($i%5)==0) {echo '<div class="col-md-4">';} ?>           
-              <div class="checkbox" data-id="<?php echo $category->id; ?>" data-text="<?php echo $category->name; ?>">
+              <div class="checkbox cs-cat" data-id="<?php echo $category->id; ?>" data-text="<?php echo $category->name; ?>">
                <label><?php echo $category->name; ?></label>
               </div>  
               <?php if($i!= 0) { echo "<br>";} $i++; ?>
@@ -369,8 +398,11 @@ window.onclick = function(event) {
 }
 </script>
 
+<script src="https://ajax.googleapis.com/ajax/libs/jquery/3.1.1/jquery.min.js"></script>
+  <script src="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/js/bootstrap.min.js"></script>
 
-<script src="https://ajax.googleapis.com/ajax/libs/jquery/1.12.4/jquery.min.js"></script>
+
+<!-- script src="https://ajax.googleapis.com/ajax/libs/jquery/1.12.4/jquery.min.js"></script> -->
 <link rel="stylesheet" href="//code.jquery.com/ui/1.12.1/themes/base/jquery-ui.css">
 <script src="https://code.jquery.com/jquery-1.12.4.js"></script>
 <script src="https://code.jquery.com/ui/1.12.1/jquery-ui.js"></script>
@@ -378,7 +410,7 @@ window.onclick = function(event) {
 <script src="//cdnjs.cloudflare.com/ajax/libs/timepicker/1.3.5/jquery.timepicker.min.js"></script>
 
 <script src="https://npmcdn.com/tether@1.2.4/dist/js/tether.min.js"></script>
-<script src="https://maxcdn.bootstrapcdn.com/bootstrap/4.0.0-alpha.4/js/bootstrap.min.js"></script>
+<!-- <script src="https://maxcdn.bootstrapcdn.com/bootstrap/4.0.0-alpha.4/js/bootstrap.min.js"></script> -->
 <script src="http://maps.googleapis.com/maps/api/js?libraries=places&key=AIzaSyBN3LHzhmsORmwlmvR3fIdjTI-VJK5w-TA"></script>
 
 <?php  echo $this->Html->script(['general','moment.min', 'daterangepicker', 'bootstrap-tagsinput', 'custom']);?> 
