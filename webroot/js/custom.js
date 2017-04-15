@@ -6,10 +6,12 @@ $('#query').typeahead({
         local: ['Arun','bravo','Charlie','Dog','Elephant','Muthu','Ravi','Van','zulu', 'karthi', 'kishore', 'Happy', 'funny', 'jolly', 'sun', 'Nepal', 'Frost']
 });                                                                                                                                            
 $('.tt-query').css('background-color','#fff');  
+$('[data-toggle="tooltip"]').tooltip();  
 //sub_category_dropdown
 
 $(document).click(function (e) {
     //e.stopPropagation();
+
     var container = $(".category_dropdown");
 
     //check if the clicked area is dropDown or not
@@ -37,8 +39,20 @@ $(document).ready(function() {
 		select: function (event, ui) {
 		    var value = ui.item.value;
 		    $("#areaSearch").val(value);
+
+		    $(".f-sections").css('display','inline-block');
+			$(".filter-area").css('display','inline-block');
+			$(".filter-area > label").html(value);
+
 			getEventListByFilter();
 		}
+    });
+
+    $(".filter-area-clear").click(function(){
+    	$("#areaSearch").val("");
+    	$("#homeAutocomplete").val("");
+    	$(".filter-area").hide();
+    	getEventListByFilter();
     });
 });
 
@@ -148,7 +162,33 @@ $("#subCategoriesResp").on('click','label > input', function(event){
 
 $(".filterDate").click(function(){
 	//alert($(this).attr('data'));
-	$("#filterDateVal").val($(this).attr('data'));
+	var vd = $(this).attr('data');
+	$("#filterDateVal").val(vd);
+
+	$(".f-sections").css('display','inline-block');
+	$(".filter-date").css('display','inline-block');
+	$(".filter-date > label").html(vd);
+
+	$("#customDate").val('');
+	getEventListByFilter();
+});
+
+$(".filter-date-clear").click(function(){
+	$("#filterDateVal").val("");
+	$("#customDate").val("");
+	$(".filter-date").hide();
+	getEventListByFilter();
+});
+
+$("#filterClearAll").click(function(){
+	$("#filterDateVal").val("");
+	$("#customDate").val("");
+	$("#areaSearch").val("");
+	$("#homeAutocomplete").val("");
+
+	$(".filter-area").hide();
+	$(".filter-date").hide();
+	$(".f-sections").hide();
 	getEventListByFilter();
 });
 
@@ -302,6 +342,12 @@ $(function() {
 	    var joinDate = startDate.format('YYYY-MM-DD') + '|' + endDate.format('YYYY-MM-DD');
         //alert(joinDate);
         $("#customDate").val(joinDate);
+
+        $("#filterDateVal").val('');
+		$(".f-sections").css('display','inline-block');
+		$(".filter-date").css('display','inline-block');
+		$(".filter-date > label").html("selected date");
+
         getEventListByFilter();
 	});
     
