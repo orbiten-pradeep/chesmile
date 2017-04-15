@@ -445,8 +445,11 @@ class EventsController extends AppController
 
 	            //$mediapartner = $this->Mediapartners->newEntity();
         		//$sponsor = $this->Sponsors->newEntity();
-	             foreach($this->request->data['Mediapartners'] as $key=>$tmp_name)
+	            foreach($this->request->data['Mediapartners'] as $key=>$tmp_name)
 	            {
+	            	// $mediapartner = $this->Mediapartners->patchEntity($mediapartner, $this->request->data);
+	            	// $mediapartner->events_id = $new_id;
+	            	// $mediapartner->MediaPartners = $this->request->data['Mediapartners'][$key]["name"];
 	            	$mediapartner = $this->Mediapartners->newEntity();
 	            	$mediapartner['events_id'] = $new_id;
 	            	$mediapartner['MediaPartners'] = $this->request->data['Mediapartners'][$key]["name"];
@@ -455,6 +458,9 @@ class EventsController extends AppController
 
 	            foreach($this->request->data['Sponsors'] as $key=>$tmp_name)
 	            {
+	            	// $sponsor = $this->Sponsors->patchEntity($sponsor, $this->request->data);
+	            	// $sponsor->events_id = $new_id;
+	            	// $sponsor->Sponsors = $this->request->data['Sponsors'][$key]["name"];
 	            	$sponsor = $this->Sponsors->newEntity();
 	            	$sponsor['events_id'] = $new_id;
 	            	$sponsor['Sponsors'] = $this->request->data['Sponsors'][$key]["name"];
@@ -465,7 +471,6 @@ class EventsController extends AppController
 	            $addres->events_id = $new_id; 
 	            $this->Address->save($addres);
             	////////////////////////////////////////////////////////////////////
-
 	            
             	//Send email to admin to active
             	$email = new Email();
@@ -484,21 +489,34 @@ class EventsController extends AppController
 			    $message .= "<a href='$activationUrl'>$activationUrl</a><br/><br/>";
 			    $message .= "<br/>Thanks, <br/>Support Team";
 			    $email->send($message);
+
+                $email->transport('gmail');
+                $subject = "Event Activation is waiting for Admin review..";
+                $name = $this->Auth->user('fullname');
+                // Always try to write clean code, so that you can read it :) :
+    			$email->template('awaitingapproval','cs-email');
+                $email->emailFormat('html');
+    			$email->to($this->Auth->user('email'));
+    			$email->cc('admin@chennaismile.com');
+    			$email->subject($subject);
+    			$email->from('admin@chennaismile.com');
+    			$email->viewVars(['name' => $name]);
+    			$email->send();
             	
-            	//Email to customer, who created the events
-            	$email->transport('gmail');
-        		$email->template('default');
-        		$subject = "Event Activation is waiting for Admin review..";
-            	$name = $this->Auth->user('fullname');
-			    $email->emailFormat('html');
-			    $email->from('admin@chennaismile.com');
-			    $email->to($this->Auth->user('email'));
-			    $email->subject($subject);
-			    $message = "Dear <span style='color:#666666'>".$name."</span>,<br/><br/>";
-			    $message .= "Event has been created successfully by " .$this->Auth->user('fullname'). ".<br/>";
-            	$message .= "<b>Event Activation is waiting for Admin review.. Will let you know, once its activated.</b> <br/>";
-			    $message .= "<br/>Thanks, <br/>Support Team";
-			    $email->send($message);
+    //         	//Email to customer, who created the events
+    //         	$email->transport('gmail');
+    //     		$email->template('default');
+    //     		$subject = "Event Activation is waiting for Admin review..";
+    //         	$name = $this->Auth->user('fullname');
+			 //    $email->emailFormat('html');
+			 //    $email->from('admin@chennaismile.com');
+			 //    $email->to($this->Auth->user('email'));
+			 //    $email->subject($subject);
+			 //    $message = "Dear <span style='color:#666666'>".$name."</span>,<br/><br/>";
+			 //    $message .= "Event has been created successfully by " .$this->Auth->user('fullname'). ".<br/>";
+    //         	$message .= "<b>Event Activation is waiting for Admin review.. Will let you know, once its activated.</b> <br/>";
+			 //    $message .= "<br/>Thanks, <br/>Support Team";
+			 //    $email->send($message);
 			    
             	////////////////////////////////////////////////////////////////////
                 $this->Flash->success(__('The event has been saved.'));
@@ -713,7 +731,7 @@ class EventsController extends AppController
             	//Send eamil to user 
             	$email = new Email();
         		$email->transport('gmail');
-        		$email->template('default');
+        		$email->template('event-activated','cs-email');
         		
             	$name = $this->Auth->user('fullname');
 			    $email->emailFormat('html');
@@ -721,14 +739,15 @@ class EventsController extends AppController
 			    $email->to($users_email['email']);
 			    $email->cc('admin@chennaismile.com');
 			    $email->subject($subject);
+			    $email->viewVars(['name' => $name]);
 			    // Always try to write clean code, so that you can read it :) :
 			    if($this->request->data['active'] == '1')
 			    {
 			    	$subject = "Event Activated";
-			        $message = "Dear <span style='color:#666666'>".$name."</span>,<br/><br/>";
-				    $message .= "Event has been activated successfully by Admin.<br/>";
-				    $message .= "<br/>";
-				    $message .= "<br/>Thanks, <br/>Support Team";
+			     //    $message = "Dear <span style='color:#666666'>".$name."</span>,<br/><br/>";
+				    // $message .= "Event has been activated successfully by Admin.<br/>";
+				    // $message .= "<br/>";
+				    // $message .= "<br/>Thanks, <br/>Support Team";
 			    } 
 			    else 
 			    {
@@ -739,7 +758,7 @@ class EventsController extends AppController
 				    $message .= "<br/>Thanks, <br/>Support Team";
 			    }
 			    $email->subject($subject);
-			    $email->send($message);
+			    $email->send();
             	
             	$this->Flash->success(__('The event has been updated.'));
 
