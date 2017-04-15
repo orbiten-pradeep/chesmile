@@ -134,24 +134,24 @@
 
                                                         <div class='col-md-12'>
                                                           <div class="carousel slide media-carousel" id="media">
-                                                          <div class="container">
+                                                          <div class="container-fluid">
                                                           <div class="row">
-                                <div class="col-xs-6 col-sm-2 col-md-2">
+                                <div class="col-xs-6 col-sm-2 col-md-2 col-lg-3">
                                     <a href="#" class="thumbnail" data-target="#lightbox"> 
                                         <img src="https://s3.amazonaws.com/ooomf-com-files/lqCNpAk3SCm0bdyd5aA0_IMG_4060_1%20copy.jpg" alt="...">
                                     </a>
                                 </div>
-                                <div class="col-xs-6 col-sm-2 col-md-2">
+                                <div class="col-xs-6 col-sm-2 col-md-2 col-lg-3">
                                     <a href="#" class="thumbnail" data-target="#lightbox"> 
                                         <img src="https://s3.amazonaws.com/ooomf-com-files/deYU3EyQP9cN23moYfLw_Dandelion.jpg" alt="...">
                                     </a>
                                 </div>
-                                <div class="col-xs-6 col-sm-2 col-md-2">
+                                <div class="col-xs-6 col-sm-2 col-md-2 col-lg-3">
                                     <a href="#" class="thumbnail" data-toggle="modal" data-target="#lightbox"> 
                                         <img src="https://s3.amazonaws.com/ooomf-com-files/8H0UdTsvRFqe03hZkNJr_New%20York%20-%20On%20the%20rock%20-%20Empire%20State%20Building.jpg" alt="...">
                                     </a>
                                 </div>
-                                <div class="col-xs-6 col-sm-2 col-md-2">
+                                <div class="col-xs-6 col-sm-2 col-md-2 col-lg-3">
                                     <a href="#" class="thumbnail" data-target="#lightbox"> 
                                         <img src="https://s3.amazonaws.com/ooomf-com-files/Z3LXxzFMRe65FC3Dmhnp_woody_unsplash_DSC0129.jpg" alt="...">
                                     </a>
@@ -224,24 +224,24 @@
 
 
 
-<nav class="large-3 medium-4 columns" id="actions-sidebar">
+<!-- <nav class="large-3 medium-4 columns" id="actions-sidebar">
     <ul class="side-nav">
-        <!-- <li class="heading"><?= __('Actions') ?></li>
-        <li><?= $this->Html->link(__('Edit Event'), ['action' => 'edit', $event->id]) ?> </li> -->
+         <li class="heading"><?= __('Actions') ?></li>
+        <li><?= $this->Html->link(__('Edit Event'), ['action' => 'edit', $event->id]) ?> </li>
         <?php if($u_id == $event->user_id){ ?>
         <li><?= $this->Form->postLink(__('Delete Event'), ['action' => 'delete', $event->id], ['confirm' => __('Are you sure you want to delete # {0}?', $event->id)]) ?> </li>
         <?php } ?>
-        <!-- <li><?= $this->Html->link(__('List Events'), ['action' => 'index']) ?> </li>
+       <li><?= $this->Html->link(__('List Events'), ['action' => 'index']) ?> </li>
         <li><?= $this->Html->link(__('New Event'), ['action' => 'add']) ?> </li>
         <li><?= $this->Html->link(__('List Users'), ['controller' => 'Users', 'action' => 'index']) ?> </li>
         <li><?= $this->Html->link(__('New User'), ['controller' => 'Users', 'action' => 'add']) ?> </li>
         <li><?= $this->Html->link(__('List Categories'), ['controller' => 'Categories', 'action' => 'index']) ?> </li>
         <li><?= $this->Html->link(__('New Category'), ['controller' => 'Categories', 'action' => 'add']) ?> </li>
         <li><?= $this->Html->link(__('List Sub Categories'), ['controller' => 'SubCategories', 'action' => 'index']) ?> </li>
-        <li><?= $this->Html->link(__('New Sub Category'), ['controller' => 'SubCategories', 'action' => 'add']) ?> </li> -->
-    </ul>
-</nav>
-<script type="text/javascript">
+        <li><?= $this->Html->link(__('New Sub Category'), ['controller' => 'SubCategories', 'action' => 'add']) ?> </li> 
+    </ul
+</nav> -->
+<!-- <script type="text/javascript">
     $(document).ready(function() {
     var $lightbox = $('#lightbox');
     
@@ -267,7 +267,7 @@
         $lightbox.find('.close').removeClass('hidden');
     });
 });
-</script>
+</script> -->
 <!-- <div class="events view large-9 medium-8 columns content">
     <h3><?= h($event->title) ?></h3>
     <table class="vertical-table">
