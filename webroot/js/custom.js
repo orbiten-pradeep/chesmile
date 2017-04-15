@@ -71,7 +71,7 @@ $(".category_dropdown .checkbox").click(function(event){
 	        	var rcnt = 0;
 	            $.each(data, function(key, val){
 	            	rcnt++;
-	            	html += '<div class="col-md-4"><div class="checkbox">\
+	            	html += '<div class="col-md-4"><div class="checkbox cs-subcat">\
 					          <label id="'+key+'" text="'+val+'">\
 					            <input type="checkbox" value="'+key+'" class="category">\
 					            <span class="cr"><i class="cr-icon glyphicon glyphicon-ok"></i></span>\
