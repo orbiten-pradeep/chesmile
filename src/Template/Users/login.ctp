@@ -212,8 +212,7 @@ input.invalid{
    <h1 style="color:#ffffff">Fun begins with ChennaiSmile!</h1>
         <div class="card card-container">
            
-
-            <?= $this->Form->create('', array('id' => 'animdiv','class' => 'form-signin formheigh mobile-signIn', 'url' => ['action' => 'add'])) ?>
+            <?= $this->Form->create('',array('id' => 'animdiv','class' => 'form-signin formheigh mobile-signIn')) ?>
             <!-- <form class="form-signin"> -->
             <h3 style="color:#333333">Sign In & Enjoy</h3>
              
@@ -226,8 +225,9 @@ input.invalid{
             <!-- <input type="text" class="form-control" id="mobile" name="mobile" placeholder="Password" required> -->
           </div>
         
-                
-              <?= $this->Form->button(__('Sign In'), array('id' => 'Login', 'class' => 'btn btn-primary btn-lg cs-signup-button cs-signin-button')) ?>
+               <?= $this->Form->submit(__('Log In'), array('id' => 'Login', 'class' => 'btn btn-primary btn-lg cs-signup-button cs-signin-button')) ?>
+
+
                 <!-- <button class="btn btn-primary btn-lg cs-signup-button" type="submit">Create Account</button> -->
             <!-- </form> --><!-- /form -->
             <div class="forgotpass" style=" margin-top: 10px;">
