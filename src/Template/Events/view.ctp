@@ -23,8 +23,16 @@
 }
 </style>
 
-
-<div class="cover-pic">
+<?php
+$bgImage = $event->banner;
+if(!empty($bgImage)){
+    $bgCoverImg = $this->Url->image('banner/'.$bgImage);
+}
+else {
+    $bgCoverImg = $this->Url->image('cover_pic.jpg');
+}
+?>
+<div class="cover-pic" style="background: rgba(0, 0, 0, 0) url(<?=$bgCoverImg?>) no-repeat scroll center center / cover">
         <div class="container heading_txt">
             <div class="row">
                 <div class="col-lg-12">
@@ -37,10 +45,19 @@
 
 <div class="cover-detail">
     <div class="container-fluid">
+        <?php
+        $organizerLogoImage = $event->OrganizersLogo;
+        if(!empty($organizerLogoImage)){
+            $organizerLogoImageUrl = $this->Url->image('OrganizersLogo/'.$organizerLogoImage);
+        }
+        else {
+            $organizerLogoImageUrl = $this->Url->image('profile.png');
+        }
+        ?>
 
         <div class="row">
             <div class="col-sm-8 lft_container">
-                <h2><img src="/chesmile/img/profile.png" class="img-thumbnail profile-img"><?= h($event->OrganizersName) ?></h2>
+                <h2><img src="<?=$organizerLogoImageUrl?>" class="img-thumbnail profile-img"><?= h($event->OrganizersName) ?></h2>
                 <p><?= $this->Text->autoParagraph(h($event->descriptioin));?></p>
                 <p class="margin25"><span class="glyphicon glyphicon-calendar calender_txt" aria-hidden="true"></span><?= h($event->date) ?></p>
                 <p>

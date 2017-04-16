@@ -391,14 +391,22 @@ function getEventList(params) {
 		        for(k in response){
 		        	var likes_count = (response[k].likes_count == null) ? 0 : response[k].likes_count;
 		        	var eventUrl = eventDetailsUrl + '/' + response[k].id;
+		        	var dispImgHmtl = '';
+		        	var dispImg = response[k].display;
+		        	if(dispImg==''){
+		        		dispImgHmtl = '<img src="img/photos/1.jpg" alt="">';
+		        	}
+		        	else {
+		        		var imgSrc = "img/display/"+dispImg;
+		        		dispImgHmtl = '<img src="'+imgSrc+'" alt="" onerror="this.src=\'img/photos/1.jpg\'">';
+		        	}
 		        	html += '<div class="col-sm-6 col-lg-2 col-md-4">\
 		        					<div class="thumbnail">\
 							        	<div class="back">\
 								            <p class="pull-left tag">'+response[k].category_name+'</p>\
 								            <p class="pull-right post"></p>\
-							            </div>\
-							            <img src="img/photos/1.jpg" alt="">\
-							           <div class="caption dance" style="background-color:#'+response[k].category_color+'">\
+							            </div>'+dispImgHmtl+'\
+							            <div class="caption dance" style="background-color:#'+response[k].category_color+'">\
 							                <h4 class="event_txt"><a href="'+eventUrl+'" class="event-title">'+response[k].title+'</a></h4>\
 							                <p class="venue_txt">'+response[k].OrganizersName+'</p>\
 							                <p class="date_txt">'+formatDate(response[k].date)+'</p>\
