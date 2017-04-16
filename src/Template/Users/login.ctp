@@ -119,7 +119,7 @@ input.invalid{
         <span class="icon-bar"></span>
         <span class="icon-bar"></span>
       </button> -->
-  <img class="img-responsive sizelog" src="/chesmile/img/logo.png" >
+  <img class="img-responsive sizelog" src="<?=$this->Url->image('logo.png')?>" >
     </div>
    <!--  <div class="collapse navbar-collapse mob-navbar-collapse"> -->
    <?= $this->Form->create('',array('id' => 'animdiv','class' => 'navbar-form navbar-right cs-navbar-form desktop-signIn')) ?>

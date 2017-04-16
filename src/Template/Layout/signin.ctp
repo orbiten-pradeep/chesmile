@@ -175,7 +175,7 @@ a.socialIcon:hover, .socialHoverClass {
   <script src="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/js/bootstrap.min.js"></script>
 <?php echo $this->Html->css(['bootstrap.min', 'loginstyle', 'font-awesome']); ?>
 </head>
-<body style="background-image: url('/chesmile-correct/img/cs-homepage-BG.jpg');">
+<body style="background-image: url('<?=$this->Url->image('cs-homepage-BG.jpg')?>');">
 
  <?= $this->fetch('content') ?>
 <!-- <div class="col-xs-12 col-sm-12 col-md-12 col-lg-12">
