@@ -96,7 +96,7 @@ input:required:{
 }
 */
 
-input.invalid{
+/*input.invalid{
       border: 2px solid red;
       border-radius:0;
     }
@@ -104,7 +104,83 @@ input.invalid{
     input.valid{
       border: 2px solid green;
       border-radius:0;
-    }
+    }*/
+</style>
+<style type="text/css">
+    .float-label-control { position: relative; margin-bottom: 1.5em; }
+    /*.float-label-control ::-webkit-input-placeholder { color: transparent; }
+    .float-label-control :-moz-placeholder { color: transparent; }
+    .float-label-control ::-moz-placeholder { color: transparent; }
+    .float-label-control :-ms-input-placeholder { color: transparent; }*/
+    .float-label-control input:-webkit-autofill,
+    .float-label-control textarea:-webkit-autofill { background-color: transparent !important; -webkit-box-shadow: 0 0 0 1000px white inset !important; -moz-box-shadow: 0 0 0 1000px white inset !important; box-shadow: 0 0 0 1000px white inset !important; }
+    .float-label-control input, .float-label-control textarea, .float-label-control label { font-size: 1.3em; box-shadow: none; -webkit-box-shadow: none; }
+        .float-label-control input:focus,
+        .float-label-control textarea:focus { box-shadow: none; -webkit-box-shadow: none; border-bottom-width: 2px; padding-bottom: 0; background: none; }
+        .float-label-control textarea:focus { padding-bottom: 4px; }
+    .float-label-control input, .float-label-control textarea { display: block; width: 100%; padding: 0.1em 0em 1px 0em; border: none; border-radius: 0px; border-bottom: 1px solid #aaa; outline: none; margin: 0px; background: none; }
+    .float-label-control textarea { padding: 0.1em 0em 5px 0em; }
+    .float-label-control label { position: absolute; font-weight: normal; top: -1.0em; left: 0.08em; color: #aaaaaa; z-index: -1; font-size: 0.85em; -moz-animation: float-labels 300ms none ease-out; -webkit-animation: float-labels 300ms none ease-out; -o-animation: float-labels 300ms none ease-out; -ms-animation: float-labels 300ms none ease-out; -khtml-animation: float-labels 300ms none ease-out; animation: float-labels 300ms none ease-out; /* There is a bug sometimes pausing the animation. This avoids that.*/ animation-play-state: running !important; -webkit-animation-play-state: running !important; }
+    .float-label-control input.empty + label,
+    .float-label-control textarea.empty + label { top: 0.1em; font-size: 1.5em; animation: none; -webkit-animation: none; }
+    .float-label-control input:not(.empty) + label,
+    .float-label-control textarea:not(.empty) + label { z-index: 1; }
+    .float-label-control input:not(.empty):focus + label,
+    .float-label-control textarea:not(.empty):focus + label { color: #aaaaaa; }
+    .float-label-control.label-bottom label { -moz-animation: float-labels-bottom 300ms none ease-out; -webkit-animation: float-labels-bottom 300ms none ease-out; -o-animation: float-labels-bottom 300ms none ease-out; -ms-animation: float-labels-bottom 300ms none ease-out; -khtml-animation: float-labels-bottom 300ms none ease-out; animation: float-labels-bottom 300ms none ease-out; }
+    .float-label-control.label-bottom input:not(.empty) + label,
+    .float-label-control.label-bottom textarea:not(.empty) + label { top: 3em; }
+
+
+@keyframes float-labels {
+    0% { opacity: 1; color: #aaa; top: 0.1em; font-size: 1.5em; }
+    20% { font-size: 1.5em; opacity: 0; }
+    30% { top: 0.1em; }
+    50% { opacity: 0; font-size: 0.85em; }
+    100% { top: -1em; opacity: 1; }
+}
+
+@-webkit-keyframes float-labels {
+    0% { opacity: 1; color: #aaa; top: 0.1em; font-size: 1.5em; }
+    20% { font-size: 1.5em; opacity: 0; }
+    30% { top: 0.1em; }
+    50% { opacity: 0; font-size: 0.85em; }
+    100% { top: -1em; opacity: 1; }
+}
+
+@keyframes float-labels-bottom {
+    0% { opacity: 1; color: #aaa; top: 0.1em; font-size: 1.5em; }
+    20% { font-size: 1.5em; opacity: 0; }
+    30% { top: 0.1em; }
+    50% { opacity: 0; font-size: 0.85em; }
+    100% { top: 3em; opacity: 1; }
+}
+
+@-webkit-keyframes float-labels-bottom {
+    0% { opacity: 1; color: #aaa; top: 0.1em; font-size: 1.5em; }
+    20% { font-size: 1.5em; opacity: 0; }
+    30% { top: 0.1em; }
+    50% { opacity: 0; font-size: 0.85em; }
+    100% { top: 3em; opacity: 1; }
+}
+.wrapp{
+    max-width: 640px;
+    /*margin: 0 auto;*/
+    padding: 55px;
+    box-sizing: border-box;
+    background-color:  #ffffff;
+    box-shadow: 0 1px 3px 0 rgba(0, 0, 0, 0.1);
+    margin-bottom: 35px;
+   /* font: bold 14px sans-serif;
+    text-align: center;*/
+}
+.heigh{
+    height: 35px !important;
+}
+
+label {
+    font-weight: inherit !important;
+}
 </style>
 <!-- Login Container -->
 <div class="container cs-header-container col-xs-12 col-sm-12 col-md-12 col-lg-12  ">
@@ -121,24 +197,30 @@ input.invalid{
   <img class="img-responsive sizelog" src="<?=$this->Url->image('logo.png')?>" >
     </div>
    <!--  <div class="collapse navbar-collapse mob-navbar-collapse"> -->
-   <?= $this->Form->create('',array('id' => 'loginForm','class' => 'navbar-form navbar-right cs-navbar-form desktop-signIn')) ?>
+   <?= $this->Form->create('',array('id' => 'loginForm','class' => 'navbar-form navbar-right desktop-signIn')) ?>
        <!--  <form name="signin" class="navbar-form navbar-right cs-navbar-form" role="form"> -->
-    <div class="input-group cs-navbar-email-field">
+    <div class="form-group float-label-control">
+   
      <!--  <input id="username" type="text" pattern="[a-zA-Z0-9_-]{6,12}" autofocus required title="must be alphanumeric in 6-12 chars">    -->
-    <?= $this->Form->input('email', array('id' => 'email','class' => 'form-control cs-textbox','label' => false,'placeholder' => 'Email Address','required' => true)) ?> 
+    <?= $this->Form->input('email', array('div' => false,'id' => 'email','class' => 'form-control form-element','label' => false,'placeholder' => 'Email Address','required' => true)) ?>
+     <label for="">Email Address</label> 
      <!--  <input id="email" type="email" class="form-control cs-textbox" name="userName" value="" placeholder="Email Address" required=""> -->
-        <div class="forgotpass"> &nbsp;</a></div>
+        <div class="forgotpass"> &nbsp;</div>
     </div>
+     
 
-    <div class="input-group cs-navbar-password-field">
-    <?= $this->Form->input('password',array('id' => 'password', 'class' => 'form-control cs-textbox','label' => false,'placeholder' => 'Password','required' => true)) ?>
+    <div class="form-group float-label-control">
+    <?= $this->Form->input('password',array('id' => 'password', 'class' => 'form-control form-element','div' => false,'label' => false,'placeholder' => 'Password','required' => true)) ?>
+    <label for="">password</label>
       <!-- <input id="password" type="password" class="form-control cs-textbox"  name="password" value="" placeholder="Password" required="">  --> 
       <!-- <br> -->
+
       <div class="forgotpass">
        <a data-toggle="modal" href="#myModal">Forgot Password?</a>
       </div>
+      </div>
 
-    </div>
+
 
 
     
@@ -168,9 +250,10 @@ input.invalid{
          <?= $this->Form->create('', array('id' => 'animdiv', 'url' => ['action' => 'forgetpassword'])) ?>
       
         <div class="col-xs-9 col-sm-9 col-md-9 col-lg-10">
-            <div class="form-group">
+            <div class="form-group float-label-control">
              <!-- <?= $this->Form->input('email', array('id' => 'email', 'class' => 'form-control cs-signup-field cs-border-radius-none','label' => false,'placeholder' => 'Email Address')) ?> -->
-             <?= $this->Form->input('email', array('id' => 'email', 'class' => 'form-control','label' => false,'placeholder' => 'Enter email', 'required')) ?>
+             <label for="">Email Address</label>
+             <?= $this->Form->input('email', array('div' => false,'id' => 'email', 'class' => 'form-control form-element','label' => false,'placeholder' => 'Enter email', 'required' => true)) ?>
               <!-- <input type="email" name="email" id="email" tabindex="3" class="form-control cs-signup-field cs-border-radius-none" required="" placeholder="Email Address"> -->
             </div>
         </div>
@@ -215,12 +298,17 @@ input.invalid{
             <!-- <form class="form-signin"> -->
             <h3 style="color:#333333">Sign In & Enjoy</h3>
              
-          <div class="form-group" style="margin-top: 20px;">
-        <?= $this->Form->input('email', array('id' => 'email', 'class' => 'form-control cs-textbox','label' => false,'placeholder' => 'Email Address','required' => true)) ?>
-            <!-- <input type="text" class="form-control" id="email" name="email" placeholder="Email Address" required> -->
-          </div>
-          <div class="form-group">
-        <?= $this->Form->input('password',array('id' => 'password', 'class' => 'form-control cs-textbox','label' => false,'placeholder' => 'Password','required' => true)) ?>
+          <div class="form-group float-label-control">
+   
+     <!--  <input id="username" type="text" pattern="[a-zA-Z0-9_-]{6,12}" autofocus required title="must be alphanumeric in 6-12 chars">    -->
+    <?= $this->Form->input('email', array('div' => false,'id' => 'email','class' => 'form-control form-element','label' => false,'placeholder' => 'Email Address','required' => true)) ?>
+     <label for="">Email Address</label> 
+     <!--  <input id="email" type="email" class="form-control cs-textbox" name="userName" value="" placeholder="Email Address" required=""> -->
+        <div class="forgotpass"> &nbsp;</div>
+    </div>
+          <div class="form-group float-label-control">
+          <label for="">Password</label> 
+        <?= $this->Form->input('password',array('div' => false,'id' => 'password', 'class' => 'form-control form-element','label' => false,'placeholder' => 'Password','required' => true)) ?>
             <!-- <input type="text" class="form-control" id="mobile" name="mobile" placeholder="Password" required> -->
           </div>
         
@@ -240,20 +328,31 @@ input.invalid{
            <?= $this->Form->create('', array('id' => 'signupForm','class' => 'form-signup formheigh ', 'url' => ['action' => 'add'])) ?>
             <!-- <form class="form-signin"> -->
             <h3 style="color:#333333">Sign up & Enjoy</h3>
-              <div class="form-group" style="margin-top: 20px;">
-           <?= $this->Form->input('fullname', array('id' => 'fullname', 'class' => 'form-control cs-textbox full','label' => false,'placeholder' => 'Full Name','required' => true)) ?>
+            <!--  <div class="form-group float-label-control">
+   
+     
+    <?= $this->Form->input('email', array('div' => false,'id' => 'email','class' => 'form-control form-element','label' => false,'placeholder' => 'Email Address','required' => true)) ?>
+     <label for="">Email Address</label> 
+        <div class="forgotpass"> &nbsp;</div>
+    </div> -->
+              <div class="form-group float-label-control" style="margin-top: 20px;">
+              <label for="">Name</label> 
+           <?= $this->Form->input('fullname', array('div' => false,'id' => 'fullname', 'class' => 'form-control form-element','label' => false,'placeholder' => 'Full Name','required' => true)) ?>
             <!-- <input type="text" class="form-control" id="name" name="name" placeholder="Full Name" required> -->
           </div>
-          <div class="form-group">
-        <?= $this->Form->input('email', array('id' => 'email', 'class' => 'form-control cs-textbox','label' => false,'placeholder' => 'Email Address','required' => true)) ?>
+          <div class="form-group float-label-control">
+          <label for="">Email</label> 
+        <?= $this->Form->input('email', array('div' => false,'id' => 'email', 'class' => 'form-control form-element','label' => false,'placeholder' => 'Email Address','required' => true)) ?>
             <!-- <input type="text" class="form-control" id="email" name="email" placeholder="Email Address" required> -->
           </div>
-          <div class="form-group">
-        <?= $this->Form->input('password',array('id' => 'new_password', 'class' => 'form-control cs-textbox','label' => false,'placeholder' => 'Password','required' => true)) ?>
+          <div class="form-group float-label-control">
+          <label for="">Password</label>
+        <?= $this->Form->input('password',array('id' => 'new_password', 'class' => 'form-control form-element','label' => false,'placeholder' => 'Password','required' => true)) ?>
             <!-- <input type="text" class="form-control" id="mobile" name="mobile" placeholder="Password" required> -->
           </div>
-          <div class="form-group">
-<?= $this->Form->input('confirm_password',array('id' => 'confirm_password', 'type' => 'password', 'class' => 'form-control cs-textbox','label' => false,'placeholder' => 'Re-type Password','required' => true)) ?>
+          <div class="form-group float-label-control">
+          <label for="">Confirm Password</label>
+<?= $this->Form->input('confirm_password',array('div' => false,'id' => 'confirm_password', 'type' => 'password', 'class' => 'form-control form-element','label' => false,'placeholder' => 'Re-type Password','required' => true)) ?>
             <!-- <input type="text" class="form-control" id="subject" name="subject" placeholder="Re-type Password" required> -->
           </div>
               <?= $this->Form->hidden('group_id', ['options' => $groups], ['default' => '1']); ?> 
@@ -272,6 +371,97 @@ input.invalid{
     </div>
     </div> 
     </div>
+
+
+
+<script type="text/javascript">
+    /* Float Label Pattern Plugin for Bootstrap 3.1.0 by Travis Wilson
+**************************************************/
+
+(function ($) {
+    $.fn.floatLabels = function (options) {
+
+        // Settings
+        var self = this;
+        var settings = $.extend({}, options);
+
+
+        // Event Handlers
+        function registerEventHandlers() {
+            self.on('input keyup change', 'input, textarea', function () {
+                actions.swapLabels(this);
+            });
+        }
+
+
+        // Actions
+        var actions = {
+            initialize: function() {
+                self.each(function () {
+                    var $this = $(this);
+                    var $label = $this.children('label');
+                    var $field = $this.find('input,textarea').first();
+
+                    if ($this.children().first().is('label')) {
+                        $this.children().first().remove();
+                        $this.append($label);
+                    }
+
+                    var placeholderText = ($field.attr('placeholder') && $field.attr('placeholder') != $label.text()) ? $field.attr('placeholder') : $label.text();
+
+                    $label.data('placeholder-text', placeholderText);
+                    $label.data('original-text', $label.text());
+
+                    if ($field.val() == '') {
+                        $field.addClass('empty')
+                    }
+                });
+            },
+            swapLabels: function (field) {
+                var $field = $(field);
+                var $label = $(field).siblings('label').first();
+                var isEmpty = Boolean($field.val());
+
+                if (isEmpty) {
+                    $field.removeClass('empty');
+                    $label.text($label.data('original-text'));
+                }
+                else {
+                    $field.addClass('empty');
+                    $label.text($label.data('placeholder-text'));
+                }
+            }
+        }
+
+
+        // Initialization
+        function init() {
+            registerEventHandlers();
+
+            actions.initialize();
+            self.each(function () {
+                actions.swapLabels($(this).find('input,textarea').first());
+            });
+        }
+        init();
+
+
+        return this;
+    };
+
+    $(function () {
+        jQuery('.form-element').each(function(){
+          if($(this).parent().hasClass('required')){
+             jQuery('.form-element').unwrap();
+          }
+        });
+
+        setTimeout(function(){
+            $('.float-label-control').floatLabels();
+        },1000);
+    });
+})(jQuery);
+</script>
 <script type="text/javascript">
   
 $('.viewSignupForim').click(function(){
@@ -430,4 +620,3 @@ $(document ).ready( function () {
 </script>
 
 
- 
