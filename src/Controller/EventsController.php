@@ -190,6 +190,7 @@ class EventsController extends AppController
 
         $this->loadModel('Address');
         $address = $this->Address->find('all', ['conditions' => ['events_id' => $id]]);
+        $address = $address->first();
         $this->loadModel('Mediapartners');
         $mediapartners = $this->Mediapartners->find('all', ['conditions' => ['events_id' => $id]]);
         $this->loadModel('Sponsors');
