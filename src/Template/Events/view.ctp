@@ -80,6 +80,12 @@ else {
                     <br>Beverly Hills, CA 90210
                     <br> -->
                    <!--  <?= $this->Text->autoParagraph(h($event->Venue)); ?> -->
+                   <br><?php echo $address->address_1. ", ".$address->address_2.","; ?>
+                    <br><?php echo $address->landmark. ", ".$address->areaname.","; ?>
+                    <br><?php echo $address->city.", ".$address->state.", ".$address->country; ?>
+                    <br><?= h($event->contact_number) ?>
+                    <br><?= h($event->mobile_number) ?>
+                    <br>
                 </address>
             </div>
         </div>
@@ -222,7 +228,7 @@ else {
                     <p class="text-primary"><b>Interested in this Event</b></p>
                     <small><span class="glyphicon glyphicon-thumbs-up"></span> <?= h($number) ?> People are interested</small>
                     
-                    <div class="panel bs-example side_panel margin25"> 
+                    <!-- <div class="panel bs-example side_panel margin25"> 
                         <div class="panel-heading"> 
                             <h3 class="panel-title">Twitter Updates</h3> 
                         </div> 
@@ -231,7 +237,7 @@ else {
                                 <p>Tweet updates coming here</p>
                             </div>                  
                         </div> 
-                    </div>
+                    </div> -->
 
             </div>      
                     </div>
