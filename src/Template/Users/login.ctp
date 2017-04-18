@@ -181,6 +181,9 @@ input:required:{
 label {
     font-weight: inherit !important;
 }
+.help-block{
+    color: red !important;
+}
 </style>
 <!-- Login Container -->
 <div class="container cs-header-container col-xs-12 col-sm-12 col-md-12 col-lg-12  ">
@@ -247,7 +250,7 @@ label {
           <h4 class="modal-title">Forgot Password</h4>
         </div>
         <div class="modal-body">
-         <?= $this->Form->create('', array('id' => 'animdiv', 'url' => ['action' => 'forgetpassword'])) ?>
+         <?= $this->Form->create('', array('id' => 'forgotpassform', 'url' => ['action' => 'forgetpassword'])) ?>
       
         <div class="col-xs-9 col-sm-9 col-md-9 col-lg-10">
             <div class="form-group float-label-control">
@@ -492,6 +495,38 @@ $(document ).ready( function () {
          }
       }
   });*/
+
+
+$("#forgotpassform" ).validate( {
+    rules: {    
+      email: {
+        required: true,
+        email: true
+      },
+    },
+    messages: {
+      email: "Please enter a email address"
+    },
+    errorElement: "em",
+    errorPlacement: function ( error, element ) {
+      // Add the `help-block` class to the error element
+      error.addClass( "help-block" );
+      console.log(element);
+
+      if ( element.prop( "type" ) === "checkbox" ) {
+        error.insertAfter( element.parent( "label" ) );
+      } else {
+        error.insertAfter( element );
+      }
+    },
+    highlight: function ( element, errorClass, validClass ) {
+      $( element ).parents( ".input" ).addClass( "has-error" ).removeClass( "has-success" );
+    },
+    unhighlight: function (element, errorClass, validClass) {
+      $( element ).parents( ".input" ).addClass( "has-success" ).removeClass( "has-error" );
+    }
+  });
+
 
   $("#signupForm" ).validate( {
     rules: {
