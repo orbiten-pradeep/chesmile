@@ -330,13 +330,7 @@ a.socialIcon:hover, .socialHoverClass {
 
   </script>
 
-  <script>
-$(document).ready(function(){
-    $("#myModal").click(function(){
-        $("#myModal").modal();
-    });
-});
-</script>
+
 
 <!-- 
  /*
