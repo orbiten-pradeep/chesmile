@@ -960,7 +960,10 @@ class EventsController extends AppController
 		    $email->viewVars(['title' => $event['title'], 'descriptioin' => $event['descriptioin'], 'URL' => $activationUrl, 'date' => $event['date'], 'time' => $event['time'], 'contact' => $event['contact_number'], 'mobile' => $event['mobile_number'],  'address_1' => $address['address_1'],  'address_2' => $address['address_2'],  'landmark' => $address['landmark'], 
 		    	'city' => $address['city'], 'state' => $address['state'], 'country' => $address['country'], 'google_map' => $event['google_map']]);
 		    $email->send();
-		    echo "Success";
+		    $return = 'Success';
+		    echo json_encode(compact('return'));
+		    //return "Success";
+		    exit(0);
 	    }
     }
 
