@@ -931,5 +931,39 @@ class EventsController extends AppController
     	}
 
 	}
+
+	public function sendemail()
+    {
+		if ($this->request->is('ajax')) 
+        {
+        	$this->autoRender = false;
+        	
+        	$events_id = $this->request->data('eventid');
+        	$email_req = $this->request->data('email');        	
+	        $event = $this->Events->get($events_id, [
+	            'contain' => ['Users', 'Categories']
+	        ]);
+
+	        $this->loadModel('Address');
+	        $address = $this->Address->find('all', ['conditions' => ['events_id' => $events_id]]);
+	        $address = $address->first();
+	        $activationUrl = Router::url(['controller' => 'events', 'action' => 'view/' . $events_id, '_full' => true ]);
+
+	        $email = new Email();
+    		$email->transport('gmail');
+    		$email->viewRender('invite-email');
+    		$subject = "Invitation from chennaismile";
+        	$email->emailFormat('both');
+		    $email->from('admin@chennaismile.com');
+		    $email->to($email_req);
+		    $email->cc('admin@chennaismile.com');
+		    $email->subject($subject);
+		    $email->viewVars(['title' => $event['title'], 'descriptioin' => $event['descriptioin'], 'URL' => $activationUrl, 'date' => $event['date'], 'time' => $event['time'], 'contact' => $event['contact_number'], 'mobile' => $event['mobile_number'],  'address_1' => $address['address_1'],  'address_2' => $address['address_2'],  'landmark' => $address['landmark'], 
+		    	'city' => $address['city'], 'state' => $address['state'], 'country' => $address['country'], 'google_map' => $event['google_map']]);
+		    $email->send();
+		    echo "Success";
+	    }
+    }
+
     
 }
