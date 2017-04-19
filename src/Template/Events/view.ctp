@@ -1,3 +1,7 @@
+<?php 
+use Cake\Routing\Router;
+?>
+
 <style type="text/css">
     .icon{
         height: 120px; 
@@ -22,6 +26,37 @@
     z-index:1032;
 }
 </style>
+
+<script type="text/javascript">
+    function sendemail(eventid, e) {
+        
+        var email = document.getElementById("invite").value;
+        alert(eventid);
+        if(email === "")
+        {
+            alert(email);
+        }
+        $.ajax({
+            type: "POST",
+            data: {
+                "eventid": eventid,
+                "email": email
+            },
+            ContentType: 'application/json',
+            dataType: 'json',
+            url: "<?php echo $this->Url->build(['action' =>'sendemail']); ?>",
+            success: function(data) {
+                return false;
+                //document.getElementById(eventid).textContent = data; 
+            },
+            error: function(tab) {
+                //$select.html('<option id="-1">none available</option>');
+            }
+        });
+        return false;
+    }
+
+</script>
 
 <?php
 $bgImage = $event->banner;
@@ -215,13 +250,13 @@ else {
 
             <div class="col-sm-4 lft_container">
                         <div class="invite_email">
-                            <form>
+                            
                               <div class="form-group">
                                 <input type="email" class="form-control" id="invite" placeholder="Email address">
                               </div>
                               
-                              <button type="submit" class="btn btn-primary form-control">Invite Friends</button>
-                            </form>
+                              <button onclick="sendemail(<?php echo $event->id; ?>);" class="btn btn-primary form-control">Invite Friends</button>
+                            
                         </div>                          
                     <div class="clearfix"></div>
 
