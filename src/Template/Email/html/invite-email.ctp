@@ -33,7 +33,7 @@
                     <table  style=" border-collapse: collapse !important;" cellspacing="0" cellpadding="0" width="100%">
                       <tr>
                         <td>
-                          <h1 style=" padding: 0; margin: 0; color: #ffffff; font-weight: 400;">EVENT TITLE GOES HERE</h1><br>
+                          <h1 style=" padding: 0; margin: 0; color: #ffffff; font-weight: 400;"><?php echo $title; ?></h1><br>
                           <h2 style=" padding: 0; margin: 0; color: #ffffff; font-weight: 400;">Lorem ipsum dolor sit amet, consectetur adipisicing elit. Et molestiae similique eligendi reiciendis sunt distinctio odit?</h2>
                           <br>
                         </td>
