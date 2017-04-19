@@ -3,7 +3,7 @@
 -- http://www.phpmyadmin.net
 --
 -- Host: 127.0.0.1
--- Generation Time: Apr 11, 2017 at 03:05 PM
+-- Generation Time: Apr 19, 2017 at 02:47 PM
 -- Server version: 5.6.17
 -- PHP Version: 5.5.12
 
@@ -37,47 +37,47 @@ CREATE TABLE IF NOT EXISTS `acos` (
   PRIMARY KEY (`id`),
   KEY `lft` (`lft`,`rght`),
   KEY `alias` (`alias`)
-) ENGINE=MyISAM  DEFAULT CHARSET=utf8 AUTO_INCREMENT=169 ;
+) ENGINE=MyISAM  DEFAULT CHARSET=utf8 AUTO_INCREMENT=170 ;
 
 --
 -- Dumping data for table `acos`
 --
 
 INSERT INTO `acos` (`id`, `parent_id`, `model`, `foreign_key`, `alias`, `lft`, `rght`) VALUES
-(148, 144, NULL, NULL, 'edit', 267, 268),
-(147, 144, NULL, NULL, 'add', 265, 266),
-(146, 144, NULL, NULL, 'view', 263, 264),
-(145, 144, NULL, NULL, 'index', 261, 262),
-(144, 1, NULL, NULL, 'Eventsubcategories', 260, 271),
+(148, 144, NULL, NULL, 'edit', 269, 270),
+(147, 144, NULL, NULL, 'add', 267, 268),
+(146, 144, NULL, NULL, 'view', 265, 266),
+(145, 144, NULL, NULL, 'index', 263, 264),
+(144, 1, NULL, NULL, 'Eventsubcategories', 262, 273),
 (143, 111, NULL, NULL, 'activate', 201, 202),
 (142, 111, NULL, NULL, 'viewresult', 199, 200),
-(141, 136, NULL, NULL, 'delete', 257, 258),
-(140, 136, NULL, NULL, 'edit', 255, 256),
-(139, 136, NULL, NULL, 'add', 253, 254),
-(138, 136, NULL, NULL, 'view', 251, 252),
-(133, 128, NULL, NULL, 'delete', 245, 246),
-(132, 128, NULL, NULL, 'edit', 243, 244),
-(131, 128, NULL, NULL, 'add', 241, 242),
-(130, 128, NULL, NULL, 'view', 239, 240),
-(129, 128, NULL, NULL, 'index', 237, 238),
-(128, 1, NULL, NULL, 'EventsSubCategories', 236, 247),
-(136, 1, NULL, NULL, 'Galaries', 248, 259),
-(126, 121, NULL, NULL, 'delete', 233, 234),
-(125, 121, NULL, NULL, 'edit', 231, 232),
-(124, 121, NULL, NULL, 'add', 229, 230),
-(123, 121, NULL, NULL, 'view', 227, 228),
-(122, 121, NULL, NULL, 'index', 225, 226),
-(121, 1, NULL, NULL, 'Mediapartners', 224, 235),
+(141, 136, NULL, NULL, 'delete', 259, 260),
+(140, 136, NULL, NULL, 'edit', 257, 258),
+(139, 136, NULL, NULL, 'add', 255, 256),
+(138, 136, NULL, NULL, 'view', 253, 254),
+(133, 128, NULL, NULL, 'delete', 247, 248),
+(132, 128, NULL, NULL, 'edit', 245, 246),
+(131, 128, NULL, NULL, 'add', 243, 244),
+(130, 128, NULL, NULL, 'view', 241, 242),
+(129, 128, NULL, NULL, 'index', 239, 240),
+(128, 1, NULL, NULL, 'EventsSubCategories', 238, 249),
+(136, 1, NULL, NULL, 'Galaries', 250, 261),
+(126, 121, NULL, NULL, 'delete', 235, 236),
+(125, 121, NULL, NULL, 'edit', 233, 234),
+(124, 121, NULL, NULL, 'add', 231, 232),
+(123, 121, NULL, NULL, 'view', 229, 230),
+(122, 121, NULL, NULL, 'index', 227, 228),
+(121, 1, NULL, NULL, 'Mediapartners', 226, 237),
 (120, 99, NULL, NULL, 'getByCategory', 173, 174),
 (119, 16, NULL, NULL, 'reset', 51, 52),
 (118, 16, NULL, NULL, 'forgetpassword', 49, 50),
-(137, 136, NULL, NULL, 'index', 249, 250),
+(137, 136, NULL, NULL, 'index', 251, 252),
 (116, 111, NULL, NULL, 'delete', 197, 198),
 (115, 111, NULL, NULL, 'edit', 195, 196),
 (114, 111, NULL, NULL, 'add', 193, 194),
 (113, 111, NULL, NULL, 'view', 191, 192),
 (112, 111, NULL, NULL, 'index', 189, 190),
-(111, 1, NULL, NULL, 'Events', 188, 223),
+(111, 1, NULL, NULL, 'Events', 188, 225),
 (110, 105, NULL, NULL, 'delete', 185, 186),
 (109, 105, NULL, NULL, 'edit', 183, 184),
 (108, 105, NULL, NULL, 'add', 181, 182),
@@ -167,14 +167,14 @@ INSERT INTO `acos` (`id`, `parent_id`, `model`, `foreign_key`, `alias`, `lft`, `
 (4, 2, NULL, NULL, 'view', 5, 6),
 (3, 2, NULL, NULL, 'index', 3, 4),
 (2, 1, NULL, NULL, 'Groups', 2, 13),
-(1, NULL, NULL, NULL, 'controllers', 1, 284),
-(149, 144, NULL, NULL, 'delete', 269, 270),
-(150, 1, NULL, NULL, 'Address', 272, 283),
-(151, 150, NULL, NULL, 'index', 273, 274),
-(152, 150, NULL, NULL, 'view', 275, 276),
-(153, 150, NULL, NULL, 'add', 277, 278),
-(154, 150, NULL, NULL, 'edit', 279, 280),
-(155, 150, NULL, NULL, 'delete', 281, 282),
+(1, NULL, NULL, NULL, 'controllers', 1, 286),
+(149, 144, NULL, NULL, 'delete', 271, 272),
+(150, 1, NULL, NULL, 'Address', 274, 285),
+(151, 150, NULL, NULL, 'index', 275, 276),
+(152, 150, NULL, NULL, 'view', 277, 278),
+(153, 150, NULL, NULL, 'add', 279, 280),
+(154, 150, NULL, NULL, 'edit', 281, 282),
+(155, 150, NULL, NULL, 'delete', 283, 284),
 (156, 111, NULL, NULL, 'search', 203, 204),
 (157, 111, NULL, NULL, 'likes', 205, 206),
 (160, 111, NULL, NULL, 'myevents', 207, 208),
@@ -185,7 +185,8 @@ INSERT INTO `acos` (`id`, `parent_id`, `model`, `foreign_key`, `alias`, `lft`, `
 (165, 111, NULL, NULL, 'partnerwith', 217, 218),
 (166, 111, NULL, NULL, 'career', 219, 220),
 (167, 111, NULL, NULL, 'eventlist', 221, 222),
-(168, 16, NULL, NULL, 'changepassword', 53, 54);
+(168, 16, NULL, NULL, 'changepassword', 53, 54),
+(169, 111, NULL, NULL, 'sendemail', 223, 224);
 
 /*!40101 SET CHARACTER_SET_CLIENT=@OLD_CHARACTER_SET_CLIENT */;
 /*!40101 SET CHARACTER_SET_RESULTS=@OLD_CHARACTER_SET_RESULTS */;
