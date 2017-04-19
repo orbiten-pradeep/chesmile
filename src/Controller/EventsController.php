@@ -193,6 +193,9 @@ class EventsController extends AppController
         $address = $address->first();
         $this->loadModel('Mediapartners');
         $mediapartners = $this->Mediapartners->find('all', ['conditions' => ['events_id' => $id]]);
+        $this->loadModel('Galaries');
+        $galaries = $this->Galaries->find('all', ['conditions' => ['events_id' => $id]]);
+
         $this->loadModel('Sponsors');
         $sponsors = $this->Sponsors->find('all', ['conditions' => ['events_id' => $id]]);
         $this->loadModel('Likes');
@@ -215,7 +218,7 @@ class EventsController extends AppController
 
         $this->set('categories', $categories_new);
         $this->set(compact('subCategories_new'));
-        $this->set(compact('address', 'mediapartners', 'sponsors', 'number', 'likes', 'u_id'));
+        $this->set(compact('address', 'mediapartners', 'sponsors', 'number', 'likes', 'u_id', 'galaries'));
     }
 
 		
@@ -861,7 +864,8 @@ class EventsController extends AppController
             //echo "<pre>";print_r($results);echo "</pre>";
 
             $conn = ConnectionManager::get('default');
-            $query = "SELECT e.*, c.name as category_name, c.color as category_color, (SELECT count(l.events_id) FROM likes l WHERE l.events_id = e.id GROUP BY l.events_id) as likes_count FROM events e LEFT JOIN categories c ON c.id = e.categories_id $joins WHERE e.active = 1 $cond";
+            /*$query = "SELECT e.*, c.name as category_name, c.color as category_color, (SELECT count(l.events_id) FROM likes l WHERE l.events_id = e.id GROUP BY l.events_id) as likes_count FROM events e LEFT JOIN categories c ON c.id = e.categories_id $joins WHERE 1 $cond"; */
+             $query = "SELECT e.*, c.name as category_name, c.color as category_color, (SELECT count(l.events_id) FROM likes l WHERE l.events_id = e.id GROUP BY l.events_id) as likes_count FROM events e LEFT JOIN categories c ON c.id = e.categories_id $joins WHERE e.active = 1 $cond";
             //echo $query;
             $stmt = $conn->execute($query);
             $results = $stmt->fetchAll('assoc');
@@ -942,6 +946,16 @@ class EventsController extends AppController
 	        $event = $this->Events->get($events_id, [
 	            'contain' => ['Users', 'Categories']
 	        ]);
+
+	        $this->loadModel('Invitefriends');
+	        $invitefriend = $this->Invitefriends->newEntity();
+	        $invitefriend['events_id'] = $events_id;
+            $invitefriend['email'] = $email_req;
+            if ($this->Invitefriends->save($invitefriend)) {
+                $this->Flash->success(__('The invitefriend has been saved.'));
+            } else {
+                $this->Flash->error(__('The invitefriend could not be saved. Please, try again.'));
+            }
 
 	        $this->loadModel('Address');
 	        $address = $this->Address->find('all', ['conditions' => ['events_id' => $events_id]]);

@@ -53,6 +53,7 @@ class GalariesController extends AppController
     {
         $galary = $this->Galaries->newEntity();
         if ($this->request->is('post')) {
+            
             /////////////////////////////////////////////////////////////////////////
             $galary_file = "";
             if(!empty($this->request->data['galary']))
@@ -104,7 +105,13 @@ class GalariesController extends AppController
                 $galary['galary'] = $value;
                 $this->Galaries->save($galary);
             }
-            return $this->redirect(['action' => 'index']);
+            if(isset($this->request->data['note']))
+            {
+                $this->loadModel('Events');
+                $this->Events->updateAll(['note' => $this->request->data['note']], ['id' => $events_id_new]);
+                return $this->redirect(['controller' => 'events','action' => 'view',$events_id_new]);
+            } else
+                return $this->redirect(['action' => 'index']);
 
         }
         $events = $this->Galaries->Events->find('list', ['limit' => 200]);
