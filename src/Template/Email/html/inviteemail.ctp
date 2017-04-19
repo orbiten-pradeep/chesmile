@@ -22,7 +22,7 @@
                     </td>
                       <td style="width:150px; height:33px; background-color: #3bcdc3;" >
                         <div>
-                          <a href="#" style="background-color:#3bcdc3;border-radius:4px;color:#ffffff;display:inline-block;font-family:sans-serif;font-size:13px;font-weight:bold;line-height:40px;text-align:center;text-decoration:none;width:150px;-webkit-text-size-adjust:none;">View Event</a>
+                          <a href='<?= $URL ?>' style="background-color:#3bcdc3;border-radius:4px;color:#ffffff;display:inline-block;font-family:sans-serif;font-size:13px;font-weight:bold;line-height:40px;text-align:center;text-decoration:none;width:150px;-webkit-text-size-adjust:none;">View Event</a>
                           </div>
                       </td>
                       <td>
