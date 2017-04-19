@@ -172,7 +172,7 @@ else {
 
                                                     <div class="clearfix"></div>
 
-                                                     <button class="btn btn-info btn-lg" data-toggle="modal" data-target="#myModal" style="display: none;">Open Modal</button>
+                                                     <button class="btn btn-info btn-lg" data-toggle="modal" data-target="#myModal" style="">Open Modal</button>
 
 
                                                      <!-- Modal -->
@@ -182,67 +182,26 @@ else {
                                                       <!-- Modal content-->
                                                       <div class="modal-content">
                                                         <div class="modal-body">
-                                                              <div class="clearfix"></div>
-
-                                                    <h3 class="heading margin25">Gallery (Photos after the Events)<span></span></h3>
-
-                                                        <div class='col-md-12'>
-                                                          <div class="carousel slide media-carousel" id="media">
-                                                          <div class="container-fluid">
-                                                          <div class="row">
-                                <div class="col-xs-6 col-sm-2 col-md-2 col-lg-3">
-                                    <a href="#" class="thumbnail" data-target="#lightbox"> 
-                                        <img src="https://s3.amazonaws.com/ooomf-com-files/lqCNpAk3SCm0bdyd5aA0_IMG_4060_1%20copy.jpg" alt="...">
-                                    </a>
-                                </div>
-                                <div class="col-xs-6 col-sm-2 col-md-2 col-lg-3">
-                                    <a href="#" class="thumbnail" data-target="#lightbox"> 
-                                        <img src="https://s3.amazonaws.com/ooomf-com-files/deYU3EyQP9cN23moYfLw_Dandelion.jpg" alt="...">
-                                    </a>
-                                </div>
-                                <div class="col-xs-6 col-sm-2 col-md-2 col-lg-3">
-                                    <a href="#" class="thumbnail" data-toggle="modal" data-target="#lightbox"> 
-                                        <img src="https://s3.amazonaws.com/ooomf-com-files/8H0UdTsvRFqe03hZkNJr_New%20York%20-%20On%20the%20rock%20-%20Empire%20State%20Building.jpg" alt="...">
-                                    </a>
-                                </div>
-                                <div class="col-xs-6 col-sm-2 col-md-2 col-lg-3">
-                                    <a href="#" class="thumbnail" data-target="#lightbox"> 
-                                        <img src="https://s3.amazonaws.com/ooomf-com-files/Z3LXxzFMRe65FC3Dmhnp_woody_unsplash_DSC0129.jpg" alt="...">
-                                    </a>
-                                </div>
-                                </div>
-                            </div>
-
-                           <!--  <div id="lightbox" class="modal fade" tabindex="-1" role="dialog" aria-labelledby="myLargeModalLabel" aria-hidden="true">
-                                <div class="modal-dialog" style="top:250px;">
-                                    <button type="button" class="close hidden" data-dismiss="modal" aria-hidden="true">×</button>
-                                    <div class="modal-content">
-                                        <div class="modal-body">
-                                            <img src="" alt="" />
-                                        </div>
-                                    </div>
-                                </div>
-                            </div> -->
-                                <a data-slide="prev" href="#media" class="left carousel-control">‹</a>
-                                <a data-slide="next" href="#media" class="right carousel-control">›</a>
-                              </div>                          
-                            </div>
-
-                        <div class="clearfix"></div>
-
-                        <h3 class="heading margin25">Thank you note - Post Events<span></span></h3>
-                            <textarea class="form-control" rows="3"></textarea>
-                            <div class="form-group">
-                                <div class="margin25">
-                                  <button type="submit" class="btn btn-primary">Submit</button>
-                                </div>
-                              </div> 
-        </div>
-      </div>
-      
-    </div>
-  </div>
-            </div>  
+                                                              
+                                                              <?= $this->Form->create('', array('enctype' => 'multipart/form-data', 'url' => ['controller' => 'Galaries', 'action' => 'add'])) ?>
+                                                                <?=  $this->Form->hidden('events_id',array('div' => false, 'label' => false, 'class' => 'form-control form-element','default' => $event->id));?>
+                                                              <div class="form-group">
+                                                                <label>
+                                                           <?= $this->Form->input('galary[]',['type' => 'file', 'multiple' => 'true','label' => 'Galary']);?>
+                                                                </label>
+                                                            </div>
+                                                                
+                                                                 <div class="form-group float-label-control">
+                                                                       <label for="">Thank you note :</label>
+                                                                      <?= $this->Form->input('note',array('div' => false, 'label' => false,'class' => 'form-control form-element','placeholder' => 'Thank you note','rows' => '1' ));?>
+                                                                </div>
+                                                            <?= $this->Form->button(__('Submit')) ?>
+                                                            <?= $this->Form->end() ?>
+                                                </div>
+                                              </div>
+                                            </div>
+                                          </div>
+                                        </div>  
 
             <div class="col-sm-4 lft_container">
                         <div class="invite_email">
