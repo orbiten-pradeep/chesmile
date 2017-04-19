@@ -3,6 +3,7 @@
 use Cake\Routing\Router;
 ?>
 
+
 <style type="text/css">
     /******************************************************PROFILE CSS ************************************/
 /*/*.card-block{
@@ -647,12 +648,12 @@ label {
 <div class="container wrapp">
         <div class="row">
             <div class="col-sm-8">
-                 <?= $this->Form->create($event,array('type' => 'file')) ?>
+                 <?= $this->Form->create($event,array('id' => 'createEvent','type' => 'file')) ?>
                   <?= $this->Form->hidden('user_id', ['options' => $users,'default'=> $users_id]);?>
                 <!-- <form role="form"> -->  <!-- <input type="text" class="form-control" placeholder="Event Title"> -->
                     <div class="form-group float-label-control">
                         <label for="">Event Title</label>
-         <?php echo $this->Form->input('title',array('div' => false, 'label' => false, 'class' => 'form-control form-element', 'placeholder' => 'Event Title')); ?>
+         <?php echo $this->Form->input('title',array('div' => false,'id' => 'title', 'label' => false, 'class' => 'form-control form-element', 'placeholder' => 'Event Title','required' => true)); ?>
                       
                     </div>
 
@@ -892,3 +893,139 @@ label {
     </div>
   </div>
 </div>
+
+
+<script src="https://ajax.googleapis.com/ajax/libs/jquery/3.1.1/jquery.min.js"></script>
+  <script src="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/js/bootstrap.min.js"></script>
+
+
+<script type="text/javascript">
+    /* Float Label Pattern Plugin for Bootstrap 3.1.0 by Travis Wilson
+**************************************************/
+
+(function ($) {
+    $.fn.floatLabels = function (options) {
+
+        // Settings
+        var self = this;
+        var settings = $.extend({}, options);
+
+
+        // Event Handlers
+        function registerEventHandlers() {
+            self.on('input keyup change', 'input, textarea', function () {
+                actions.swapLabels(this);
+            });
+        }
+
+
+        // Actions
+        var actions = {
+            initialize: function() {
+                self.each(function () {
+                    var $this = $(this);
+                    var $label = $this.children('label');
+                    var $field = $this.find('input,textarea').first();
+
+                    if ($this.children().first().is('label')) {
+                        $this.children().first().remove();
+                        $this.append($label);
+                    }
+
+                    var placeholderText = ($field.attr('placeholder') && $field.attr('placeholder') != $label.text()) ? $field.attr('placeholder') : $label.text();
+
+                    $label.data('placeholder-text', placeholderText);
+                    $label.data('original-text', $label.text());
+
+                    if ($field.val() == '') {
+                        $field.addClass('empty')
+                    }
+                });
+            },
+            swapLabels: function (field) {
+                var $field = $(field);
+                var $label = $(field).siblings('label').first();
+                var isEmpty = Boolean($field.val());
+
+                if (isEmpty) {
+                    $field.removeClass('empty');
+                    $label.text($label.data('original-text'));
+                }
+                else {
+                    $field.addClass('empty');
+                    $label.text($label.data('placeholder-text'));
+                }
+            }
+        }
+
+
+        // Initialization
+        function init() {
+            registerEventHandlers();
+
+            actions.initialize();
+            self.each(function () {
+                actions.swapLabels($(this).find('input,textarea').first());
+            });
+        }
+        init();
+
+
+        return this;
+    };
+
+    $(function () {
+        jQuery('.form-element').each(function(){
+          if($(this).parent().hasClass('required')){
+             jQuery('.form-element').unwrap();
+          }
+        });
+
+        setTimeout(function(){
+            $('.float-label-control').floatLabels();
+        },1000);
+    });
+})(jQuery);
+</script>
+
+<script type="text/javascript">
+$(document ).ready( function () {
+
+  /*$.validator.setDefaults({
+      submitHandler: function (form) {
+
+         if ($(form).valid()) {
+             form.submit();
+         }
+      }
+  });*/
+
+
+  $("#createEvent" ).validate( {
+    rules: {
+      title: "required"
+    },
+    messages: {
+      title: "Please enter your Event's Title"
+    },
+    errorElement: "em",
+    errorPlacement: function ( error, element ) {
+      // Add the `help-block` class to the error element
+      error.addClass( "help-block" );
+
+      if ( element.prop( "type" ) === "checkbox" ) {
+        error.insertAfter( element.parent( "label" ) );
+      } else {
+        error.insertAfter( element );
+      }
+    },
+    highlight: function ( element, errorClass, validClass ) {
+      $( element ).parents( ".input" ).addClass( "has-error" ).removeClass( "has-success" );
+    },
+    unhighlight: function (element, errorClass, validClass) {
+      $( element ).parents( ".input" ).addClass( "has-success" ).removeClass( "has-error" );
+    }
+  });
+
+});
+</script>

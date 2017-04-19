@@ -2,6 +2,7 @@
 use Cake\Routing\Router;
 ?>
 
+
 <style type="text/css">
     .icon{
         height: 120px; 
@@ -25,38 +26,33 @@ use Cake\Routing\Router;
     right: -55px;
     z-index:1032;
 }
+a {
+    color:white;
+}
+.img-overlay{
+    border: 1px solid #e6e9ed;
+background-color: #fafafa;
+filter: grayscale(1);
+-webkit-filter: grayscale(1);
+-moz-filter: grayscale(1);
+-o-filter: grayscale(1);
+-ms-filter: grayscale(1);
+}
+
+.img-overlay:hover{
+filter: grayscale(0);
+-webkit-filter: grayscale(0);
+-moz-filter: grayscale(0);
+-o-filter: grayscale(0);
+-ms-filter: grayscale(0);
+-webkit-transition: all 0.3s ease-in-out;
+-moz-transition: all 0.3s ease-in-out;
+-o-transition: all 0.3s ease-in-out;
+-ms-transition: all 0.3s ease-in-out;
+transition: all 0.3s ease-in-out;
+opacity: 0.7;
+}
 </style>
-
-<script type="text/javascript">
-    function sendemail(eventid, e) {
-        
-        var email = document.getElementById("invite").value;
-        alert(eventid);
-        if(email === "")
-        {
-            alert(email);
-        }
-        $.ajax({
-            type: "POST",
-            data: {
-                "eventid": eventid,
-                "email": email
-            },
-            ContentType: 'application/json',
-            dataType: 'json',
-            url: "<?php echo $this->Url->build(['action' =>'sendemail']); ?>",
-            success: function(data) {
-                return false;
-                //document.getElementById(eventid).textContent = data; 
-            },
-            error: function(tab) {
-                //$select.html('<option id="-1">none available</option>');
-            }
-        });
-        return false;
-    }
-
-</script>
 
 <?php
 $bgImage = $event->banner;
@@ -68,11 +64,11 @@ else {
 }
 ?>
 <div class="cover-pic" style="background: rgba(0, 0, 0, 0) url(<?=$bgCoverImg?>) no-repeat scroll center center / cover">
-        <div class="container heading_txt">
+        <div class="container-fluid heading_txt" style="background: rgba(49,51,53,.5);position: absolute;bottom: 0;z-index: 1;width: 100%;box-sizing: border-box;">
             <div class="row">
                 <div class="col-lg-12">
                     <button class="btn btn-tag"><?= $event->has('category') ? $this->Html->link($event->category->name, ['controller' => 'Categories', 'action' => 'view', $event->category->id]) : '' ?></button> <?php echo $this->Html->image('card/'.$event->category->card, array('width' => '100px', 'height' => '100px','alt'=>'Card')); ?>
-                    <h1 class="tagline"><?= h($event->title) ?></h1>
+                    <h1 class="tagline" style="color: #FFFFFF"><?= h($event->title) ?></h1>
                 </div>
             </div>
         </div>
@@ -140,9 +136,9 @@ else {
                                                     <!-- Client 1 -->
 
                                                     <?php foreach ($sponsors as $sponsor): ?>
-                                                    <div class="col-sm-6 col-xs-4 col-md-3" style="visibility: visible; ">
+                                                    <div class="col-sm-6 col-xs-12 col-md-3 col-lg-3" style="visibility: visible; ">
                                                         <a href="#">
-                                                        <?php echo $this->Html->image('Sponsors/'.$sponsor->Sponsors, array('alt'=>'Sponsors','height' => '125px','width' => '125px')); ?>
+                                                        <?php echo $this->Html->image('Sponsors/'.$sponsor->Sponsors, array('alt'=>'Sponsors','class' =>'img-overlay','height' => '150px', 'width' => '250px')); ?>
                                                     </a>
                                                     </div>
 
@@ -166,9 +162,9 @@ else {
                                                     <h3 class="heading margin25">Media Partners<span></span></h3>
                                                     <!-- Client 1 -->
                                                     <?php foreach ($mediapartners as $mediapartner): ?>
-                                                    <div class="col-sm-6 col-xs-4 col-md-3" style="visibility: visible; ">
+                                                    <div class="col-sm-6 col-xs-12 col-md-3" style="visibility: visible; ">
                                                         <a href="#">
-                                                        <?php echo $this->Html->image('Mediapartners/'.$mediapartner->MediaPartners, array('alt'=>'Mediapartners','height' => '125px', 'width' => '125px')); ?>
+                                                        <?php echo $this->Html->image('Mediapartners/'.$mediapartner->MediaPartners, array('alt'=>'Mediapartners','class' => 'img-overlay','height' => '150px', 'width' => '250px')); ?>
                                                         </a>
                                                     </div>
                                                     <?php endforeach; ?>
@@ -176,7 +172,7 @@ else {
 
                                                     <div class="clearfix"></div>
 
-                                                     <button class="btn btn-info btn-lg" data-toggle="modal" data-target="#myModal">Open Modal</button>
+                                                     <button class="btn btn-info btn-lg" data-toggle="modal" data-target="#myModal" style="display: none;">Open Modal</button>
 
 
                                                      <!-- Modal -->
@@ -250,13 +246,11 @@ else {
 
             <div class="col-sm-4 lft_container">
                         <div class="invite_email">
-                            
                               <div class="form-group">
                                 <input type="email" class="form-control" id="invite" placeholder="Email address">
                               </div>
                               
-                              <button onclick="sendemail(<?php echo $event->id; ?>);" class="btn btn-primary form-control">Invite Friends</button>
-                            
+                              <button  onclick="sendemail(<?php echo $event->id; ?>);" class="btn btn-primary form-control">Invite Friends</button>
                         </div>                          
                     <div class="clearfix"></div>
 
@@ -278,7 +272,39 @@ else {
                     </div>
 
             </div>
-    </div>      
+    </div>   
+
+
+    <script type="text/javascript">
+    function sendemail(eventid, e) {
+        
+       var email = document.getElementById("invite").value;
+        if(email === "")
+        {
+            alert("Please Enter An Email id");
+            return false;
+        }
+        $.ajax({
+            type: "POST",
+            data: {
+                "eventid": eventid,
+                "email": email
+            },
+            ContentType: 'application/json',
+            dataType: 'json',
+            url: "<?php echo $this->Url->build(['action' =>'sendemail']); ?>",
+            success: function(data) {
+                return false;
+                //document.getElementById(eventid).textContent = data; 
+            },
+            error: function(tab) {
+                //$select.html('<option id="-1">none available</option>');
+            }
+        });
+        return false;
+    }
+
+</script>   
 
 
 
