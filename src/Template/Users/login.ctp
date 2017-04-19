@@ -183,6 +183,8 @@ label {
 }
 .help-block{
     color: red !important;
+    font-size: 11px;
+    font-style: normal;
 }
 </style>
 <!-- Login Container -->
