@@ -294,7 +294,8 @@ else {
             dataType: 'json',
             url: "<?php echo $this->Url->build(['action' =>'sendemail']); ?>",
             success: function(data) {
-                return false;
+                document.getElementById("invite").value = "";
+                alert('Your Friend Invited');
                 //document.getElementById(eventid).textContent = data; 
             },
             error: function(tab) {
