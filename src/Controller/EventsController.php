@@ -931,7 +931,6 @@ class EventsController extends AppController
     	}
 
 	}
-
 	public function sendemail()
     {
 		if ($this->request->is('ajax')) 
@@ -951,9 +950,9 @@ class EventsController extends AppController
 
 	        $email = new Email();
     		$email->transport('gmail');
-    		$email->viewRender('invite-email');
+    		$email->template('inviteemail','csinvite');
     		$subject = "Invitation from chennaismile";
-        	$email->emailFormat('both');
+        	$email->emailFormat('html');
 		    $email->from('admin@chennaismile.com');
 		    $email->to($email_req);
 		    $email->cc('admin@chennaismile.com');
@@ -967,3 +966,4 @@ class EventsController extends AppController
 
     
 }
+
