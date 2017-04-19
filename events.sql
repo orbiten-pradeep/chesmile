@@ -3,7 +3,7 @@
 -- http://www.phpmyadmin.net
 --
 -- Host: 127.0.0.1
--- Generation Time: Apr 10, 2017 at 07:31 AM
+-- Generation Time: Apr 19, 2017 at 07:59 PM
 -- Server version: 5.6.17
 -- PHP Version: 5.5.12
 
@@ -35,7 +35,7 @@ CREATE TABLE IF NOT EXISTS `events` (
   `descriptioin` text,
   `date` date NOT NULL,
   `time` varchar(255) DEFAULT NULL,
-  `Venue` text,
+  `note` text,
   `google_map` varchar(255) DEFAULT NULL,
   `contact_number` varchar(255) DEFAULT NULL,
   `mobile_number` varchar(255) DEFAULT NULL,
@@ -46,7 +46,11 @@ CREATE TABLE IF NOT EXISTS `events` (
   `created` datetime DEFAULT NULL,
   `modified` datetime DEFAULT NULL,
   PRIMARY KEY (`id`)
-) ENGINE=MyISAM  DEFAULT CHARSET=utf8 AUTO_INCREMENT=83 ;
+) ENGINE=MyISAM  DEFAULT CHARSET=utf8 AUTO_INCREMENT=86 ;
+
+--
+-- Dumping data for table `events`
+--
 
 /*!40101 SET CHARACTER_SET_CLIENT=@OLD_CHARACTER_SET_CLIENT */;
 /*!40101 SET CHARACTER_SET_RESULTS=@OLD_CHARACTER_SET_RESULTS */;

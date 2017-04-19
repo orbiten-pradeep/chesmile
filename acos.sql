@@ -3,7 +3,7 @@
 -- http://www.phpmyadmin.net
 --
 -- Host: 127.0.0.1
--- Generation Time: Apr 19, 2017 at 02:47 PM
+-- Generation Time: Apr 19, 2017 at 07:58 PM
 -- Server version: 5.6.17
 -- PHP Version: 5.5.12
 
@@ -37,7 +37,7 @@ CREATE TABLE IF NOT EXISTS `acos` (
   PRIMARY KEY (`id`),
   KEY `lft` (`lft`,`rght`),
   KEY `alias` (`alias`)
-) ENGINE=MyISAM  DEFAULT CHARSET=utf8 AUTO_INCREMENT=170 ;
+) ENGINE=MyISAM  DEFAULT CHARSET=utf8 AUTO_INCREMENT=176 ;
 
 --
 -- Dumping data for table `acos`
@@ -167,7 +167,7 @@ INSERT INTO `acos` (`id`, `parent_id`, `model`, `foreign_key`, `alias`, `lft`, `
 (4, 2, NULL, NULL, 'view', 5, 6),
 (3, 2, NULL, NULL, 'index', 3, 4),
 (2, 1, NULL, NULL, 'Groups', 2, 13),
-(1, NULL, NULL, NULL, 'controllers', 1, 286),
+(1, NULL, NULL, NULL, 'controllers', 1, 298),
 (149, 144, NULL, NULL, 'delete', 271, 272),
 (150, 1, NULL, NULL, 'Address', 274, 285),
 (151, 150, NULL, NULL, 'index', 275, 276),
@@ -186,7 +186,13 @@ INSERT INTO `acos` (`id`, `parent_id`, `model`, `foreign_key`, `alias`, `lft`, `
 (166, 111, NULL, NULL, 'career', 219, 220),
 (167, 111, NULL, NULL, 'eventlist', 221, 222),
 (168, 16, NULL, NULL, 'changepassword', 53, 54),
-(169, 111, NULL, NULL, 'sendemail', 223, 224);
+(169, 111, NULL, NULL, 'sendemail', 223, 224),
+(170, 1, NULL, NULL, 'Invitefriends', 286, 297),
+(171, 170, NULL, NULL, 'index', 287, 288),
+(172, 170, NULL, NULL, 'view', 289, 290),
+(173, 170, NULL, NULL, 'add', 291, 292),
+(174, 170, NULL, NULL, 'edit', 293, 294),
+(175, 170, NULL, NULL, 'delete', 295, 296);
 
 /*!40101 SET CHARACTER_SET_CLIENT=@OLD_CHARACTER_SET_CLIENT */;
 /*!40101 SET CHARACTER_SET_RESULTS=@OLD_CHARACTER_SET_RESULTS */;
