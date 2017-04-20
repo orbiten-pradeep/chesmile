@@ -171,8 +171,24 @@ else {
                                                     <!-- Client 2 -->
 
                                                     <div class="clearfix"></div>
+                                                    <div style="display: '<?php if(empty($galaries)) { echo "none;";  } ?>'>
+                                                     <h3 class="heading margin25">Event Galaries<span></span></h3>
+                                                    <!-- Client 1 -->
+                                                    <?php foreach ($galaries as $galary): ?>
+                                                    <div class="col-sm-6 col-xs-12 col-md-3" style="visibility: visible; ">
+                                                        <a href="#">
+                                                        <?php echo $this->Html->image('Galary/'.$galary->galary, array('alt'=>'Galary','class' => 'img-overlay','height' => '150px', 'width' => '250px')); ?>
+                                                        </a>
+                                                    </div>
+                                                    <?php endforeach; ?>
+                                                    <!-- Client 2 -->
+                                                    <div class="clearfix"></div>
+                                                    <h3 class="heading margin25">Thank You Note:<span></span></h3>
+                                                    <p><?= $this->Text->autoParagraph(h($event->note));?></p>
+                                                    </div>
+                                                    <div class="clearfix"></div>
 
-                                                     <button class="btn btn-info btn-lg" data-toggle="modal" data-target="#myModal" style="">Open Modal</button>
+                                                     <button class="btn btn-info btn-lg" data-toggle="modal" data-target="#myModal" style="display: <?php if(!empty($galaries)) { echo "none;"; } ?>">Open Modal</button>
 
 
                                                      <!-- Modal -->
