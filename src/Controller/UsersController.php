@@ -285,8 +285,14 @@ class UsersController extends AppController
 	        $user = $this->Auth->identify();
 			if ($user && $user['group_id'] == 4) {
 	            $this->Auth->setUser($user);
-	            return $this->redirect(array('controller' => 'AdminDashBoard',
-		        'action' => 'index'));
+	            if($this->request->session()->read('Activate') == 1)
+	            {
+	            	return $this->redirect(array('controller' => 'events', 'action' => 'activate',$this->request->session()->read('eventid')));
+	            }
+	            else
+	            {
+	            	return $this->redirect(array('controller' => 'AdminDashBoard', 'action' => 'index'));
+	            }
 	        }
 	        $this->Flash->error(__('Your username or password was incorrect.'));
 	    }

@@ -15,6 +15,16 @@ use Cake\Datasource\ConnectionManager;
  */
 class EventsController extends AppController
 {
+
+	public function initialize()
+	{
+	    parent::initialize();
+	
+	    //$this->Auth->allow(['add','adminlogin']);
+	    $this->Auth->allow('activate');
+	}
+
+
 	public $components = array('RequestHandler');
     /**
      * Index method
@@ -479,21 +489,16 @@ class EventsController extends AppController
             	//Send email to admin to active
             	$email = new Email();
         		$email->transport('gmail');
-        		$email->template('default');
-        		$subject = "Event Activation Link";
-            	$name = $this->Auth->user('fullname');
-			    $email->emailFormat('html');
+        		$email->template('eventactivationadmin','cs-email');
+        		$subject = "New event has arrived!";
+            	$email->emailFormat('html');
 			    $email->from('admin@chennaismile.com');
 			    $email->to('admin@chennaismile.com');
 			    $email->subject($subject);
 				$activationUrl = Router::url(['controller' => 'events', 'action' => 'activate/' . $new_id, '_full' => true ]);
-			    $message = "Dear <span style='color:#666666'> Admin </span>,<br/><br/>";
-			    $message .= "Event has been created successfully by " .$this->Auth->user('email'). ".<br/>";
-            	$message .= "<b>Please Activate the event by clicking on the below url:</b> <br/>";
-			    $message .= "<a href='$activationUrl'>$activationUrl</a><br/><br/>";
-			    $message .= "<br/>Thanks, <br/>Support Team";
-			    $email->send($message);
-
+			    $email->viewVars(['URL' => $activationUrl]);
+			    $email->send();
+			    //Send email to admin to active
                 $email->transport('gmail');
                 $subject = "Event Activation is waiting for Admin review..";
                 $name = $this->Auth->user('fullname');
@@ -723,60 +728,105 @@ class EventsController extends AppController
      */
     public function activate($id = null)
     {
-        $event = $this->Events->get($id, [
-            'contain' => []
+    	$event = $this->Events->get($id, [
+            'contain' => ['Users', 'Categories']
         ]);
-        $users_email = $this->Events->Users->find('all',['conditions'=> array('id' => $event['user_id']), 'fields'=> array('email')]);
-        $users_email = $users_email->first();
-        //$users_email['email']
-        if ($this->request->is(['patch', 'post', 'put'])) {
-            //$event = $this->Events->patchEntity($event, $this->request->data['active']);
-            if ($this->Events->updateAll(['active' => $this->request->data['active']], ['id' => $id])) {
-            	//Send eamil to user 
-            	$email = new Email();
-        		$email->transport('gmail');
-        		$email->template('event-activated','cs-email');
-        		
-            	$name = $this->Auth->user('fullname');
-			    $email->emailFormat('html');
-			    $email->from('admin@chennaismile.com');
-			    $email->to($users_email['email']);
-			    $email->cc('admin@chennaismile.com');
-			    $email->subject($subject);
-			    $email->viewVars(['name' => $name]);
-			    // Always try to write clean code, so that you can read it :) :
-			    if($this->request->data['active'] == '1')
-			    {
-			    	$subject = "Event Activated";
-			     //    $message = "Dear <span style='color:#666666'>".$name."</span>,<br/><br/>";
-				    // $message .= "Event has been activated successfully by Admin.<br/>";
-				    // $message .= "<br/>";
-				    // $message .= "<br/>Thanks, <br/>Support Team";
-			    } 
-			    else 
-			    {
-			    	$subject = "Event De-Activated";
-				    $message = "Dear <span style='color:#666666'>".$name."</span>,<br/><br/>";
-				    $message .= "Event has been de-activated by Admin.<br/>";
-				    $message .= "<br/>";
-				    $message .= "<br/>Thanks, <br/>Support Team";
-			    }
-			    $email->subject($subject);
-			    $email->send();
-            	
-            	$this->Flash->success(__('The event has been updated.'));
+        $this->request->session()->write('Activate', '1');
+        $this->request->session()->write('eventid', $id);
+     	
+       	if($this->Auth->user('group_id') == 4)
+       	{
+	        $users_email = $event['user']['email'];
+	        //$users_email['email']
+	        if ($this->request->is(['patch', 'post', 'put'])) 
+	        {
+	            //$event = $this->Events->patchEntity($event, $this->request->data['active']);
+	            if ($this->Events->updateAll(['active' => $this->request->data['active']], ['id' => $id])) 
+	            {
+	            	//Send eamil to user 
+	            	$email = new Email();
+	        		$email->transport('gmail');
+	        		
+				    // Always try to write clean code, so that you can read it :) :
+				    if($this->request->data['active'] == '1')
+				    {
+					    $email->template('eventactivated','cs-email');
+		            	$name = $event['user']['fullname'];
+					    $email->emailFormat('html');
+					    $email->from('admin@chennaismile.com');
+					    $email->to($users_email);
+					    $email->cc('admin@chennaismile.com');
+					    $activationUrl = Router::url(['controller' => 'events', 'action' => 'view/' . $id, '_full' => true ]);
+					    $email->viewVars(['name' => $name, 'URL' => $activationUrl]);
+				    	$subject = "Event Activated";
+				    	$email->subject($subject);
+				    	$email->send();
+				    } 
+				    else 
+				    {
+				    	$email->template('default');
+		            	$name = $event['user']['fullname'];
+					    $email->emailFormat('html');
+					    $email->from('admin@chennaismile.com');
+					    $email->to($users_email);
+					    $email->cc('admin@chennaismile.com');
+					    $activationUrl = Router::url(['controller' => 'events', 'action' => 'view/' . $id, '_full' => true ]);
+					    //$email->viewVars(['name' => $name, 'URL' => $activationUrl]);
+				    	$subject = "Event De-Activated";
+					    $message = "Dear <span style='color:#666666'>".$name."</span>,<br/><br/>";
+					    $message .= "Event has been de-activated by Admin.<br/>";
+					    $message .= "<br/>";
+					    $message .= "<br/>Thanks, <br/>Support Team";
+					    $email->subject($subject);
+				    	$email->send($message);
+				    }
+	            	$this->Flash->success(__('The event has been updated.'));
+	                return $this->redirect(['action' => 'index']);
+	            } else {
+	                $this->Flash->error(__('The event could not be updated. Please, try again.'));
+	            }
+	        }
+	        $this->viewBuilder()->layout('event_home');
+	        $u_id = "";
+	        if(!empty($this->Auth->user('id')))
+			{
+				$u_id = $this->Auth->user('id');
+				$fullname = $this->Auth->user('fullname');
+				$email = $this->Auth->user('email');
+			}
+	        $this->loadModel('Address');
+	        $address = $this->Address->find('all', ['conditions' => ['events_id' => $id]]);
+	        $address = $address->first();
+	        $this->loadModel('Mediapartners');
+	        $mediapartners = $this->Mediapartners->find('all', ['conditions' => ['events_id' => $id]]);
+	        $this->loadModel('Galaries');
+	        $galaries = $this->Galaries->find('all', ['conditions' => ['events_id' => $id]]);
+	        $this->loadModel('Sponsors');
+	        $sponsors = $this->Sponsors->find('all', ['conditions' => ['events_id' => $id]]);
+	        $this->loadModel('Likes');
+	        $likes = $this->Likes->find('all', ['conditions' => ['events_id' => $id]]);
+	        $query = $this->Likes->find('all', ['select' => 'id',
+			    	'conditions' => ['events_id' => $id]]);
+			$number = $query->count();
+	        $this->loadModel('Categories');
+	        $categories_new = $this->Categories->find()->select(['Categories.name', 'Categories.id'])
+	        	->where(['active' => 1]);
 
-                return $this->redirect(['action' => 'index']);
-            } else {
-                $this->Flash->error(__('The event could not be updated. Please, try again.'));
-            }
-        }
-        $this->loadModel('SubCategories');
-        $users = $this->Events->Users->find('list', ['limit' => 200]);
-        $categories = $this->Events->Categories->find('list', ['limit' => 200]);
-        $subCategories = $this->SubCategories->find('list', ['limit' => 200]);
-        $this->set(compact('event', 'users', 'categories', 'subCategories'));
-        $this->set('_serialize', ['event']);
+	        $this->loadModel('SubCategories');
+	        $subCategories_new = $this->SubCategories->find('all', ['fields' => 'name',
+				    'conditions' => ['active' => 1]
+				    	]);
+	        $this->set('event', $event);
+	        $this->set('_serialize', ['event']);
+	        $this->set('categories', $categories_new);
+	        $this->set(compact('subCategories_new'));
+	        $this->set(compact('address', 'mediapartners', 'sponsors', 'number', 'likes', 'u_id', 'galaries'));
+	    }
+	    else
+	    {
+	    	return $this->redirect(['controller' => 'Users', 'action' => 'adminlogin']);
+	    }
+
     }
 
     //Search AreaName
@@ -867,10 +917,11 @@ class EventsController extends AppController
             /*$query = "SELECT e.*, c.name as category_name, c.color as category_color, (SELECT count(l.events_id) FROM likes l WHERE l.events_id = e.id GROUP BY l.events_id) as likes_count FROM events e LEFT JOIN categories c ON c.id = e.categories_id $joins WHERE 1 $cond"; */
              $query = "SELECT e.*, c.name as category_name, c.color as category_color, (SELECT count(l.events_id) FROM likes l WHERE l.events_id = e.id GROUP BY l.events_id) as likes_count FROM events e LEFT JOIN categories c ON c.id = e.categories_id $joins WHERE e.active = 1 $cond";
             //echo $query;
+
             $stmt = $conn->execute($query);
             $results = $stmt->fetchAll('assoc');
             //sleep(100);
-
+          
         	echo json_encode($results);    
 		}
 		$this->autoRender = false;
