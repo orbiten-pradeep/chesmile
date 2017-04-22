@@ -3,7 +3,7 @@
 -- http://www.phpmyadmin.net
 --
 -- Host: 127.0.0.1
--- Generation Time: Apr 22, 2017 at 01:47 PM
+-- Generation Time: Apr 22, 2017 at 02:05 PM
 -- Server version: 5.6.17
 -- PHP Version: 5.5.12
 
@@ -37,7 +37,7 @@ CREATE TABLE IF NOT EXISTS `acos` (
   PRIMARY KEY (`id`),
   KEY `lft` (`lft`,`rght`),
   KEY `alias` (`alias`)
-) ENGINE=MyISAM  DEFAULT CHARSET=utf8 AUTO_INCREMENT=179 ;
+) ENGINE=MyISAM  DEFAULT CHARSET=utf8 AUTO_INCREMENT=181 ;
 
 --
 -- Dumping data for table `acos`
@@ -194,8 +194,8 @@ INSERT INTO `acos` (`id`, `parent_id`, `model`, `foreign_key`, `alias`, `lft`, `
 (174, 170, NULL, NULL, 'edit', 299, 300),
 (175, 170, NULL, NULL, 'delete', 301, 302),
 (176, 111, NULL, NULL, 'invitation', 227, 228),
-(177, 111, NULL, NULL, 'isEmailExist', 229, 230),
-(178, 16, NULL, NULL, 'isEmailExist', 55, 56);
+(180, 16, NULL, NULL, 'isemailexist', 55, 56),
+(179, 111, NULL, NULL, 'isemailexist', 229, 230);
 
 /*!40101 SET CHARACTER_SET_CLIENT=@OLD_CHARACTER_SET_CLIENT */;
 /*!40101 SET CHARACTER_SET_RESULTS=@OLD_CHARACTER_SET_RESULTS */;
