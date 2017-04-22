@@ -3,7 +3,7 @@
 -- http://www.phpmyadmin.net
 --
 -- Host: 127.0.0.1
--- Generation Time: Apr 19, 2017 at 07:57 PM
+-- Generation Time: Apr 22, 2017 at 01:51 PM
 -- Server version: 5.6.17
 -- PHP Version: 5.5.12
 
@@ -29,17 +29,18 @@ SET time_zone = "+00:00";
 CREATE TABLE IF NOT EXISTS `invitefriends` (
   `ID` int(11) NOT NULL AUTO_INCREMENT,
   `events_id` int(11) NOT NULL,
+  `activation_key` varchar(255) NOT NULL,
   `email` text NOT NULL,
   `created` timestamp NOT NULL DEFAULT CURRENT_TIMESTAMP,
   PRIMARY KEY (`ID`)
-) ENGINE=InnoDB  DEFAULT CHARSET=utf8 AUTO_INCREMENT=2 ;
+) ENGINE=InnoDB  DEFAULT CHARSET=utf8 AUTO_INCREMENT=3 ;
 
 --
 -- Dumping data for table `invitefriends`
 --
 
-INSERT INTO `invitefriends` (`ID`, `events_id`, `email`, `created`) VALUES
-(1, 82, 'jpradeep.anna@gmail.com', '2017-04-19 17:00:45');
+INSERT INTO `invitefriends` (`ID`, `events_id`, `activation_key`, `email`, `created`) VALUES
+(2, 87, '0f7c47a0-a149-4417-b5cb-4cac4ec750f4', 'jpradeep.anna@gmail.com', '2017-04-22 11:01:07');
 
 /*!40101 SET CHARACTER_SET_CLIENT=@OLD_CHARACTER_SET_CLIENT */;
 /*!40101 SET CHARACTER_SET_RESULTS=@OLD_CHARACTER_SET_RESULTS */;
