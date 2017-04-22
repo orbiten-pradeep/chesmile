@@ -687,7 +687,7 @@ else if(ePage == 'add') {
 	    });
 
 	     $('#Autocomplete').autocomplete({
-	            source:'<?php echo Router::url(array("controller" => "events", "action" => "search")); ?>',
+	            source:$("#search_area_url").val(),
 	            minLength: 1
 	     });  
 	        
