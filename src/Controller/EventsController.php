@@ -1069,7 +1069,7 @@ class EventsController extends AppController
     public function invitation($activation_key = null)
     {
     	$this->loadModel('Invitefriends');
-    	$invitefriends = $this->Invitefriends->find('all', ['condition' => ['activation_key' => $activation_key]]);
+    	$invitefriends = $this->Invitefriends->find('all',array('conditions'=>array('activation_key'=>$activation_key)));
     	$invitefriends = $invitefriends->first();
 
     	if(isset($invitefriends['events_id']))
@@ -1118,7 +1118,7 @@ class EventsController extends AppController
         $this->set(compact('address', 'mediapartners', 'sponsors', 'number', 'likes', 'galaries'));
     }
 
-    public function isEmailExist($email = null)
+    public function isemailexist($email = null)
     {
 
     }
