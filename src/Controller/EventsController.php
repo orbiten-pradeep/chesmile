@@ -536,12 +536,25 @@ class EventsController extends AppController
                 $this->Flash->error(__('The event could not be saved. Please, try again.'));
             }
         }
+
+        $this->loadModel('Categories');
+        $categories_new = $this->Categories->find()->select(['Categories.name', 'Categories.id'])
+        	->where(['active' => 1]);
+
+        $this->loadModel('SubCategories');
+        $subCategories_new = $this->SubCategories->find('all', ['fields' => 'name',
+			    'conditions' => ['active' => 1]
+			]); 
+
+        $this->set('categories', $categories_new); 
+        $this->set(compact('subCategories_new'));
+
+
         $this->loadModel('SubCategories');
         $this->set(compact('userProfile', 'users_id'));
         $users = $this->Events->Users->find('list', ['limit' => 200]);
-        $categories = $this->Events->Categories->find('list', ['limit' => 200]);
-        $subCategories = $this->SubCategories->find('list', ['limit' => 200]);
-        $this->set(compact('event', 'users', 'categories', 'subCategories'));
+
+        $this->set(compact('event', 'users'));
         $this->set('_serialize', ['event']);
     }
 
