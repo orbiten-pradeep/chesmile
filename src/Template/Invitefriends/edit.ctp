@@ -18,6 +18,7 @@
         <legend><?= __('Edit Invitefriend') ?></legend>
         <?php
             echo $this->Form->input('events_id', ['options' => $events]);
+            echo $this->Form->input('activation_key');
             echo $this->Form->input('email');
         ?>
     </fieldset>

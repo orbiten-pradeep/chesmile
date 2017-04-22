@@ -17,6 +17,10 @@
             <td><?= $invitefriend->has('event') ? $this->Html->link($invitefriend->event->title, ['controller' => 'Events', 'action' => 'view', $invitefriend->event->id]) : '' ?></td>
         </tr>
         <tr>
+            <th scope="row"><?= __('Activation Key') ?></th>
+            <td><?= h($invitefriend->activation_key) ?></td>
+        </tr>
+        <tr>
             <th scope="row"><?= __('ID') ?></th>
             <td><?= $this->Number->format($invitefriend->ID) ?></td>
         </tr>

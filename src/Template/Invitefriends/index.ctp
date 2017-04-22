@@ -13,6 +13,7 @@
             <tr>
                 <th scope="col"><?= $this->Paginator->sort('ID') ?></th>
                 <th scope="col"><?= $this->Paginator->sort('events_id') ?></th>
+                <th scope="col"><?= $this->Paginator->sort('activation_key') ?></th>
                 <th scope="col"><?= $this->Paginator->sort('created') ?></th>
                 <th scope="col" class="actions"><?= __('Actions') ?></th>
             </tr>
@@ -22,6 +23,7 @@
             <tr>
                 <td><?= $this->Number->format($invitefriend->ID) ?></td>
                 <td><?= $invitefriend->has('event') ? $this->Html->link($invitefriend->event->title, ['controller' => 'Events', 'action' => 'view', $invitefriend->event->id]) : '' ?></td>
+                <td><?= h($invitefriend->activation_key) ?></td>
                 <td><?= h($invitefriend->created) ?></td>
                 <td class="actions">
                     <?= $this->Html->link(__('View'), ['action' => 'view', $invitefriend->ID]) ?>
