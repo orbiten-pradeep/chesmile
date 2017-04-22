@@ -12,6 +12,10 @@ body {
     
     font-family: OpenSans;
 }
+.navbar-default .navbar-nav > li > a:hover, .navbar-default .navbar-nav > li > a:focus{
+color: white;
+background-color: #286090;
+}
 .navbar-brand>img {
     display: block;
 }
@@ -170,7 +174,9 @@ footer {
     margin-top: 50px
 }
 /*Custom style*/
-
+.date_txt{
+    font-size: 13px;
+}
 .event_txt,
 .venue_txt,
 .date_txt {
@@ -183,6 +189,7 @@ footer {
 .event_txt a {
     text-transform: none;
     color: #ffffff;
+    font-size:17px;
 }
 .venue_txt {} .date_txt {} .clearfix:after {
     clear: both;
@@ -259,7 +266,7 @@ footer {
 .bs-example {
     position: relative;
     padding: 0px;
-    /*margin: 0 -15px 15px;*/
+    margin: 0 -15px 15px;
     
     border-color: #e5e5e5 #eee #eee;
     border-style: solid;

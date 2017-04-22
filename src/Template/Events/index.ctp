@@ -7,6 +7,36 @@
     .popover-content {
     color: black;
 }
+@media (min-width: 320px)
+and (max-width: 460px){
+.card-size {
+    max-width: none !important;
+    max-height: none !important;
+}
+}
+@media (max-width: 1920px){
+.card-size{
+    max-width: 311px;
+    max-height: 334px;
+}
+}
+@media (max-width: 1366px)
+{
+  .card-size {
+    max-width: 277px;
+    max-height: 310px;
+}
+}
+
+@media (max-width: 1280px)
+{
+ .card-size {
+max-width: 259px;
+max-height: 300px;
+}
+}
+
+
 </style>
 <script type="text/javascript">
 
@@ -16,8 +46,9 @@
 <script src="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.6/js/bootstrap.min.js"></script>
 <!--  <div class="content"> -->
 <!-- <div class="container-fluid content"> -->
+<div class="container-fluid">
 <div class="row" style="margin-left: 0px;">
-    <div class="col-sm-4 col-lg-2 col-md-4">
+    <div class="col-md-2">
         <div class="panel bs-example side_panel">
             <div class="panel-heading">
                 <h3 class="panel-title">Filters                     
@@ -67,14 +98,14 @@
             </div>
         </div>
     </div>
-    <div class="col-sm-8 col-lg-10 col-md-8 list_event content">
+    <div class="col-md-10 list_event content">
         <div class="row" style="margin-right: 0px;" id="eventResponse">
-            
         </div>
         <div class="loadingDiv"><div id="loading"></div></div>
     </div>
 </div>
-<div class="row"> &nbsp; </div>
+</div>
+<!-- <div class="row"> &nbsp; </div> -->
 
 <script type="text/javascript">
 $(document).ready(function(){

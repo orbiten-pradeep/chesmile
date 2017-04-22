@@ -80,6 +80,23 @@
     display: block;
   }
 }
+.form-signup{
+ font-family: Helvetica,Arial,sans-serif !important;
+  font-size: 13px !important;
+  font-weight: normal !important;
+}
+
+ .desktop-signIn{
+  font-family: Helvetica,Arial,sans-serif !important;
+  font-size: 13px !important;
+  font-weight: normal !important;
+}
+.mobile-signIn{
+  font-family: Helvetica,Arial,sans-serif !important;
+  font-size: 13px !important;
+  font-weight: normal !important;
+}
+
 /*  input:required:invalid {
     border: 1px solid red;
   border-radius:0;
@@ -114,7 +131,7 @@ input:required:{
     .float-label-control :-ms-input-placeholder { color: transparent; }*/
     .float-label-control input:-webkit-autofill,
     .float-label-control textarea:-webkit-autofill { background-color: transparent !important; -webkit-box-shadow: 0 0 0 1000px white inset !important; -moz-box-shadow: 0 0 0 1000px white inset !important; box-shadow: 0 0 0 1000px white inset !important; }
-    .float-label-control input, .float-label-control textarea, .float-label-control label { font-size: 1.3em; box-shadow: none; -webkit-box-shadow: none; }
+    .float-label-control input, .float-label-control textarea, .float-label-control label { font-size: 1.2em; box-shadow: none; -webkit-box-shadow: none; }
         .float-label-control input:focus,
         .float-label-control textarea:focus { box-shadow: none; -webkit-box-shadow: none; border-bottom-width: 2px; padding-bottom: 0; background: none; }
         .float-label-control textarea:focus { padding-bottom: 4px; }
@@ -199,7 +216,7 @@ label {
         <span class="icon-bar"></span>
         <span class="icon-bar"></span>
       </button> -->
-  <img class="img-responsive sizelog" src="<?=$this->Url->image('logo.png')?>" >
+  <img class="img-responsive sizelog" src="<?=$this->Url->image('chennai-smile-logo.png')?>" >
     </div>
    <!--  <div class="collapse navbar-collapse mob-navbar-collapse"> -->
    <?= $this->Form->create('',array('id' => 'loginForm','class' => 'navbar-form navbar-right desktop-signIn')) ?>
@@ -221,7 +238,7 @@ label {
       <!-- <br> -->
 
       <div class="forgotpass">
-       <a data-toggle="modal" href="#myModal">Forgot Password?</a>
+       <a style="font-size: 12px;" data-toggle="modal" href="#myModal">Forgot Password?</a>
       </div>
       </div>
 

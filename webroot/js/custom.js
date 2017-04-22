@@ -400,7 +400,7 @@ function getEventList(params) {
 		        		var imgSrc = "img/display/"+dispImg;
 		        		dispImgHmtl = '<img src="'+imgSrc+'" alt="" onerror="this.src=\'img/photos/1.jpg\'">';
 		        	}
-		        	html += '<div class="col-sm-6 col-lg-2 col-md-4">\
+		        	html += '<div class="col-sm-4 col-lg-4 col-md-4 card-size">\
 		        					<div class="thumbnail">\
 							        	<div class="back">\
 								            <p class="pull-left tag">'+response[k].category_name+'</p>\
@@ -687,7 +687,7 @@ else if(ePage == 'add') {
 	    });
 
 	     $('#Autocomplete').autocomplete({
-	            source: $("#search_area_url").val(),
+	            source:'<?php echo Router::url(array("controller" => "events", "action" => "search")); ?>',
 	            minLength: 1
 	     });  
 	        

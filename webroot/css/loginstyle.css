@@ -141,7 +141,7 @@ ul.social li a:hover i { -moz-transform: rotate(360deg); -webkit-transform: rota
   }
   .cs-primary-button, .cs-primary-button:active{
     background-color: #2BBFD9;
-	border-color: #3FD3EF;
+	border-color: #0D9CB7;
 	height: 29px;
 	padding: 0px 10px;
 	border-radius: 0;
@@ -157,7 +157,7 @@ ul.social li a:hover i { -moz-transform: rotate(360deg); -webkit-transform: rota
   .cs-signup-button, .cs-signup-button:active{
     color: #fff;
 	background-color: #2BBFD9;
-	border-color: #3FD3EF;
+	border-color: #0D9CB7;
 	border-radius: 0;
   }
   .cs-usercounts-button, .cs-usercounts-button:hover, .cs-usercounts-button:active, .cs-usercounts-button:visited{
