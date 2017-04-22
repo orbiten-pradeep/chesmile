@@ -667,7 +667,7 @@ label {
 
                     <div class="form-group">
                 <label>
-<?= $this->Form->input('categories_id',array('class' => 'form-control heigh','options' => $categories, 'onChange' => 'checkForOther(this);', 'empty' => '(Select Categories)','label' => false));?>
+<?= $this->Form->input('categories_id',array('class' => 'form-control heigh','options' => $categories_list, 'onChange' => 'checkForOther(this);', 'empty' => '(Select Categories)','label' => false));?>
             </label>
             </div>
 

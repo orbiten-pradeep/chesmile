@@ -56,6 +56,18 @@ class UserProfileController extends AppController
         $this->set('group', $groups);
         $this->set('userProfile', $userProfile);
         $this->set('_serialize', ['userProfile']);
+
+        $this->loadModel('Categories');
+        $categories_new = $this->Categories->find()->select(['Categories.name', 'Categories.id'])
+            ->where(['active' => 1]);
+
+        $this->loadModel('SubCategories');
+        $subCategories_new = $this->SubCategories->find('all', ['fields' => 'name',
+                'conditions' => ['active' => 1]
+            ]); 
+
+        $this->set('categories', $categories_new);  
+        $this->set(compact('subCategories_new'));
     }
 
     /**
@@ -134,6 +146,18 @@ class UserProfileController extends AppController
         $this->set(compact('userProfile', 'email'));
         $this->set(compact('userProfile', 'usersInfo'));
         $this->set('_serialize', ['userProfile']);
+
+        $this->loadModel('Categories');
+        $categories_new = $this->Categories->find()->select(['Categories.name', 'Categories.id'])
+            ->where(['active' => 1]);
+
+        $this->loadModel('SubCategories');
+        $subCategories_new = $this->SubCategories->find('all', ['fields' => 'name',
+                'conditions' => ['active' => 1]
+            ]); 
+
+        $this->set('categories', $categories_new);  
+        $this->set(compact('subCategories_new'));
     }
 
     /**
@@ -216,6 +240,18 @@ class UserProfileController extends AppController
         $this->set(compact('userProfile', 'email'));
         $this->set(compact('userProfile', 'users'));
         $this->set('_serialize', ['userProfile']);
+
+        $this->loadModel('Categories');
+        $categories_new = $this->Categories->find()->select(['Categories.name', 'Categories.id'])
+            ->where(['active' => 1]);
+
+        $this->loadModel('SubCategories');
+        $subCategories_new = $this->SubCategories->find('all', ['fields' => 'name',
+                'conditions' => ['active' => 1]
+            ]); 
+
+        $this->set('categories', $categories_new);  
+        $this->set(compact('subCategories_new'));
     }
 
     /**

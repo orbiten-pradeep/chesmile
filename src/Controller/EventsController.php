@@ -543,7 +543,8 @@ class EventsController extends AppController
 			    'conditions' => ['active' => 1]
 			]); 
 
-        $this->set('categories', $categories_new); 
+        $this->set('categories', $categories_new);
+        $this->set('subCategories', $subCategories_new); 
         $this->set(compact('subCategories_new'));
 
 
@@ -551,7 +552,8 @@ class EventsController extends AppController
         $this->set(compact('userProfile', 'users_id'));
         $users = $this->Events->Users->find('list', ['limit' => 200]);
 
-        $this->set(compact('event', 'users'));
+        $categories_list = $this->Events->Categories->find('list', ['limit' => 200]);
+        $this->set(compact('event', 'users', 'categories_list', 'subCategories')); 
         $this->set('_serialize', ['event']);
     }
 
