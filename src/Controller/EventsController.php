@@ -876,6 +876,12 @@ class EventsController extends AppController
 	        		$category = $this->request->data['category'];
 	        		$cond .= " AND e.categories_id IN ($category)";
 	        	}
+
+	        	if(isset($this->request->data['area']) && $this->request->data['area'] !='') {
+	        		$area = $this->request->data['area'];
+	        		$joins .= " LEFT JOIN address ad ON ad.events_id = e.id";
+		        	$cond .= " AND ad.areaname = '".$area."'";
+	        	}
 	        	
 	        	if(isset($this->request->data['action']) && $this->request->data['action'] !='') {
 	        		$action = $this->request->data['action'];
@@ -911,6 +917,13 @@ class EventsController extends AppController
 		        		$cond .= " AND e.date between DATE_FORMAT(NOW() ,'%Y-%m-01') AND LAST_DAY(CURDATE())";
 		        	}
 	        	}
+
+	        	if(isset($this->request->data['customDate']) && !empty($this->request->data['customDate'])){
+	        		$customDate = $this->request->data['customDate'];
+	        		$exp = explode('|', $customDate);
+	        		$filter = true;
+	        		$cond .= " AND e.date between '".$exp[0]."' AND '".$exp[1]."'";
+		        }
 	        }
 	        if(!$filter) {
 		        $cond .= " AND e.date > DATE_ADD(CURDATE(),INTERVAL -1 DAY)";
