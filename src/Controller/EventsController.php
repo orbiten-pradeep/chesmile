@@ -7,7 +7,8 @@ use Cake\Utility\Text;
 use Cake\Mailer\Email;
 use Cake\Routing\Router;
 use Cake\Datasource\ConnectionManager;
-
+use Cake\Utility\Security;
+use Cake\Event\Event;
 /**
  * Events Controller
  *
@@ -15,15 +16,11 @@ use Cake\Datasource\ConnectionManager;
  */
 class EventsController extends AppController
 {
-
-	public function initialize()
+	public function beforeFilter(Event $event) 
 	{
-	    parent::initialize();
-	
-	    //$this->Auth->allow(['add','adminlogin']);
-	    $this->Auth->allow('activate');
+		parent::beforeFilter($event);
+    	$this->Auth->allow('Invitation');
 	}
-
 
 	public $components = array('RequestHandler');
     /**
@@ -432,7 +429,7 @@ class EventsController extends AppController
         	}
         	if(!is_null($display))
         	{
-        		$this->request->data['display'] = $banner;
+        		$this->request->data['display'] = $display;
         	}
         	if(!is_null($display))
         	{
@@ -1024,10 +1021,12 @@ class EventsController extends AppController
 	            'contain' => ['Users', 'Categories']
 	        ]);
 
+	        $activation_key = Text::uuid();
 	        $this->loadModel('Invitefriends');
 	        $invitefriend = $this->Invitefriends->newEntity();
 	        $invitefriend['events_id'] = $events_id;
             $invitefriend['email'] = $email_req;
+            $invitefriend['activation_key'] = $activation_key;
             if ($this->Invitefriends->save($invitefriend)) {
                 $this->Flash->success(__('The invitefriend has been saved.'));
             } else {
@@ -1037,7 +1036,7 @@ class EventsController extends AppController
 	        $this->loadModel('Address');
 	        $address = $this->Address->find('all', ['conditions' => ['events_id' => $events_id]]);
 	        $address = $address->first();
-	        $activationUrl = Router::url(['controller' => 'events', 'action' => 'view/' . $events_id, '_full' => true ]);
+	        $activationUrl = Router::url(['controller' => 'events', 'action' => 'invitation/' . $activation_key, '_full' => true ]);
 
 	        $email = new Email();
     		$email->transport('gmail');
@@ -1058,6 +1057,69 @@ class EventsController extends AppController
 	    }
     }
 
+     /**
+     * View method
+     *
+     * @param string|null $id Event id.
+     * @return \Cake\Network\Response|null
+     * @throws \Cake\Datasource\Exception\RecordNotFoundException When record not found.
+     */
+    public function invitation($activation_key = null)
+    {
+    	$this->loadModel('Invitefriends');
+    	$invitefriends = $this->Invitefriends->find('all', ['condition' => ['activation_key' => $activation_key]]);
+    	$invitefriends = $invitefriends->first();
+
+    	if(isset($invitefriends['events_id']))
+    	{
+    		$id = $invitefriends['events_id'];
+    	} else
+    	{
+    		return $this->redirect(['controller' => 'Users', 'action' => 'login']);
+    	}
     
+		$this->viewBuilder()->layout('event_home');
+        $event = $this->Events->get($id, [
+            'contain' => ['Users', 'Categories']
+        ]);
+        
+        $this->loadModel('Address');
+        $address = $this->Address->find('all', ['conditions' => ['events_id' => $id]]);
+        $address = $address->first();
+        $this->loadModel('Mediapartners');
+        $mediapartners = $this->Mediapartners->find('all', ['conditions' => ['events_id' => $id]]);
+        $this->loadModel('Galaries');
+        $galaries = $this->Galaries->find('all', ['conditions' => ['events_id' => $id]]);
+
+        $this->loadModel('Sponsors');
+        $sponsors = $this->Sponsors->find('all', ['conditions' => ['events_id' => $id]]);
+        $this->loadModel('Likes');
+        $likes = $this->Likes->find('all', ['conditions' => ['events_id' => $id]]);
+        $query = $this->Likes->find('all', ['select' => 'id',
+		    	'conditions' => ['events_id' => $id]]);
+		$number = $query->count();
+
+        $this->set('event', $event);
+        $this->set('_serialize', ['event']);
+
+        $this->loadModel('Categories');
+        $categories_new = $this->Categories->find()->select(['Categories.name', 'Categories.id'])
+        	->where(['active' => 1]);
+
+        $this->loadModel('SubCategories');
+        $subCategories_new = $this->SubCategories->find('all', ['fields' => 'name',
+			    'conditions' => ['active' => 1]
+			    	]);
+
+        $this->set('categories', $categories_new);
+        $this->set(compact('subCategories_new'));
+        $this->set(compact('address', 'mediapartners', 'sponsors', 'number', 'likes', 'galaries'));
+    }
+
+    public function isEmailExist($email = null)
+    {
+
+    }
+
 }
 
