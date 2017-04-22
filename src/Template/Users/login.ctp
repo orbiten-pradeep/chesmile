@@ -216,7 +216,7 @@ label {
         <span class="icon-bar"></span>
         <span class="icon-bar"></span>
       </button> -->
-  <img class="img-responsive sizelog" src="<?=$this->Url->image('chennai-smile-logo.png')?>" >
+  <img class="img-responsive sizelog" src="<?=$this->Url->image('chennaismile-logo.png')?>" >
     </div>
    <!--  <div class="collapse navbar-collapse mob-navbar-collapse"> -->
    <?= $this->Form->create('',array('id' => 'loginForm','class' => 'navbar-form navbar-right desktop-signIn')) ?>
