@@ -350,6 +350,7 @@ label {
            <?= $this->Form->create('', array('id' => 'signupForm','class' => 'form-signup formheigh ', 'url' => ['action' => 'add'])) ?>
             <!-- <form class="form-signin"> -->
             <h3 style="color:#333333">Sign up & Enjoy</h3>
+            <input type="hidden" id="checkUrl" name="checkUrl" value="<?php echo $this->Url->build(array('controller' => 'users', 'action' => 'isemailexist'));?>">
             <!--  <div class="form-group float-label-control">
    
      
@@ -545,14 +546,31 @@ $("#forgotpassform" ).validate( {
       $( element ).parents( ".input" ).addClass( "has-success" ).removeClass( "has-error" );
     }
   });
-
-
+  
   $("#signupForm" ).validate( {
     rules: {
       fullname: "required",      
       email: {
         required: true,
-        email: true
+        email: true,
+        remote: {
+          url: $("#checkUrl").val(),
+          type: "POST",
+          cache: false,
+          dataType: "json",
+          data: {
+              email: function() { return $("#signupForm #email").val(); }
+          },
+          dataFilter: function(response) {
+            if(response != "") {
+              var resp = JSON.parse(response); 
+              return (resp.code == true) ? true : false;
+            } 
+            else { 
+              return false;
+            }
+          }
+        }
       },
       password: {
         required: true,
@@ -566,10 +584,13 @@ $("#forgotpassform" ).validate( {
     },
     messages: {
       fullname: "Please enter your Fullname",      
-      email: "Please enter a valid email address",
+      email: { 
+        required: "Please enter a valid email address",
+        remote: "Email ID already exist" 
+      },
       password: {
         required: "Please provide a password",
-        minlength: "Your password must be at least 5 characters long"
+        minlength: "Your password must be at least 6 characters long"
       },
       confirm_password: {
         required: "Please provide a confirm password",

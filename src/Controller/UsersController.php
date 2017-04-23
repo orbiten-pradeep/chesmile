@@ -2,6 +2,7 @@
 namespace App\Controller;
 use Cake\Mailer\Email;
 use App\Controller\AppController;
+use Cake\Datasource\ConnectionManager;
 use Cake\Utility\Text;
 use Cake\Routing\Router;
 /**
@@ -459,9 +460,25 @@ class UsersController extends AppController
 		}
 	}
 	
-	public function isemailexist($email = null)
+	public function isemailexist()
     {
+    	$conn = ConnectionManager::get('default');
+    	$request = $this->request->data;
+    	$email = $request['email'];
+    	$response = "";
 
+    	$query = "SELECT id From users WHERE 1 AND email = '".$email."'";
+        $stmt = $conn->execute($query);
+        $results = $stmt->fetchAll();
+    	
+    	if(empty($results)){
+    		$response['code'] = true;
+    	} 
+    	else {
+    		$response['code'] = false;
+    	}
+		echo json_encode($response);
+    	exit;
     }
 	
 }
