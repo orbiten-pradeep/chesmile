@@ -20,6 +20,7 @@ class EventsController extends AppController
 	{
 		parent::beforeFilter($event);
     	$this->Auth->allow('Invitation');
+    	$this->set('Photo',$this->Auth->user('Photo'));
 	}
 
 	public $components = array('RequestHandler');
@@ -689,6 +690,8 @@ class EventsController extends AppController
         	$cnt++;
         }
         
+
+
         $this->loadModel('SubCategories');
         $this->set(compact('selected', 'selected'));
         $this->set(compact('userProfile', 'users_id'));
@@ -710,7 +713,7 @@ class EventsController extends AppController
     {
         $this->request->allowMethod(['post', 'delete']);
         $event = $this->Events->get($id);
-        if ($this->Events->delete($event)) {
+        if ($this->Events->updateAll(['active' => '2'], ['id' => $id])) {
             $this->Flash->success(__('The event has been deleted.'));
         } else {
             $this->Flash->error(__('The event could not be deleted. Please, try again.'));
@@ -1023,8 +1026,17 @@ class EventsController extends AppController
 	            'contain' => ['Users', 'Categories']
 	        ]);
 
-	        $activation_key = Text::uuid();
 	        $this->loadModel('Invitefriends');
+	        $invitefriends = $this->Invitefriends->find('all',array('conditions'=>array('email'=>$email_req)));
+    		$invitefriends = $invitefriends->first();
+
+    		if(isset($invitefriends))
+    		{
+    			$invitefriend = $this->Invitefriends->get($invitefriends['ID']);
+    			$this->Invitefriends->delete($invitefriend);
+    		}
+	        
+	        $activation_key = Text::uuid();
 	        $invitefriend = $this->Invitefriends->newEntity();
 	        $invitefriend['events_id'] = $events_id;
             $invitefriend['email'] = $email_req;

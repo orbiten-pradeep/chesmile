@@ -47,6 +47,20 @@ class UserProfileController extends AppController
        		$fullname = $this->Auth->user('fullname');
         	$email = $this->Auth->user('email');
     	}
+
+       $this->loadModel('Categories');
+        $categories_new = $this->Categories->find()->select(['Categories.name', 'Categories.id'])
+            ->where(['active' => 1]);
+
+        $this->loadModel('SubCategories');
+        $subCategories_new = $this->SubCategories->find('all', ['fields' => 'name',
+                'conditions' => ['active' => 1]
+                    ]);
+
+        $this->set('categories', $categories_new);
+        $this->set(compact('subCategories_new'));
+
+
     	//$groups = $this->UserProfile->Groups->find('list', array('conditions' => array('role' => 'Users')), ['limit' => 200]);
         $this->loadModel('Users');
         $this->loadModel('Groups');
@@ -56,18 +70,6 @@ class UserProfileController extends AppController
         $this->set('group', $groups);
         $this->set('userProfile', $userProfile);
         $this->set('_serialize', ['userProfile']);
-
-        $this->loadModel('Categories');
-        $categories_new = $this->Categories->find()->select(['Categories.name', 'Categories.id'])
-            ->where(['active' => 1]);
-
-        $this->loadModel('SubCategories');
-        $subCategories_new = $this->SubCategories->find('all', ['fields' => 'name',
-                'conditions' => ['active' => 1]
-            ]); 
-
-        $this->set('categories', $categories_new);  
-        $this->set(compact('subCategories_new'));
     }
 
     /**
@@ -146,18 +148,6 @@ class UserProfileController extends AppController
         $this->set(compact('userProfile', 'email'));
         $this->set(compact('userProfile', 'usersInfo'));
         $this->set('_serialize', ['userProfile']);
-
-        $this->loadModel('Categories');
-        $categories_new = $this->Categories->find()->select(['Categories.name', 'Categories.id'])
-            ->where(['active' => 1]);
-
-        $this->loadModel('SubCategories');
-        $subCategories_new = $this->SubCategories->find('all', ['fields' => 'name',
-                'conditions' => ['active' => 1]
-            ]); 
-
-        $this->set('categories', $categories_new);  
-        $this->set(compact('subCategories_new'));
     }
 
     /**
@@ -186,7 +176,7 @@ class UserProfileController extends AppController
         	$errCheck = false;
         	if($this->request->data['Photo']['name'] != '')
         	{
-        		debug($this->request->data['Photo']); //exit(0);
+        		 //exit(0);
         		$file = $this->request->data['Photo'];
 	        	$ext = substr(strtolower(strrchr($file['name'], '.')), 1); //get the extension
 		        $arr_ext = array('jpg', 'jpeg', 'png'); //set allowed extensions
@@ -209,7 +199,7 @@ class UserProfileController extends AppController
 	                $this->request->data['Photo'] = $filename;
 		        }
         	}
-        	if($this->request->data['Photo']['name'] == '')
+        	if(empty($this->request->data['Photo']))
         	{
         		$this->request->data['Photo'] = $userProfile['Photo']; 
         	}
@@ -218,10 +208,10 @@ class UserProfileController extends AppController
   			{
 	            $userProfile = $this->UserProfile->patchEntity($userProfile, $this->request->data);
 	            $this->loadModel('Users');
-	            $status = $this->Users->updateAll(['fullname' => $this->request->data['fullname'], 'group_id' => $this->request->data['group_id']], ['id' => $this->request->data['user_id']]);
+	            $status = $this->Users->updateAll(['fullname' => $this->request->data['fullname'], 'group_id' => $this->request->data['group_id'],  'Photo' => $this->request->data['Photo']], ['id' => $this->request->data['user_id']]);
 	        	if ($this->UserProfile->save($userProfile)) {
 	                $this->Flash->success(__('The user profile has been saved.'));
-	                return $this->redirect(['action' => 'index']);
+	                return $this->redirect(['action' => 'view/', $id]);
 	            } else {
 	                $this->Flash->error(__('The user profile could not be saved. Please, try again.'));
 	            }
@@ -233,14 +223,7 @@ class UserProfileController extends AppController
         $email = $userinfo['email'];
         $fullname = $userinfo['fullname'];
         $groups = $this->UserProfile->Groups->find('list', array('conditions' => array('role' => 'Users')), ['limit' => 200]);
-		//debug($userinfo['email']); exit(0);		
-        $this->set(compact('userProfile', 'groups'));        
-        $this->set(compact('userProfile', 'users_id'));
-        $this->set(compact('userProfile', 'fullname'));
-        $this->set(compact('userProfile', 'email'));
-        $this->set(compact('userProfile', 'users'));
-        $this->set('_serialize', ['userProfile']);
-
+		
         $this->loadModel('Categories');
         $categories_new = $this->Categories->find()->select(['Categories.name', 'Categories.id'])
             ->where(['active' => 1]);
@@ -248,10 +231,17 @@ class UserProfileController extends AppController
         $this->loadModel('SubCategories');
         $subCategories_new = $this->SubCategories->find('all', ['fields' => 'name',
                 'conditions' => ['active' => 1]
-            ]); 
+                    ]);
 
-        $this->set('categories', $categories_new);  
+        $this->set('categories', $categories_new);
         $this->set(compact('subCategories_new'));
+
+        $this->set(compact('userProfile', 'groups'));        
+        $this->set(compact('userProfile', 'users_id'));
+        $this->set(compact('userProfile', 'fullname'));
+        $this->set(compact('userProfile', 'email'));
+        $this->set(compact('userProfile', 'users'));
+        $this->set('_serialize', ['userProfile']);
     }
 
     /**
