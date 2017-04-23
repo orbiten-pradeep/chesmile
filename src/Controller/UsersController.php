@@ -459,7 +459,7 @@ class UsersController extends AppController
 		}
 	}
 	
-	public function isEmailExist($email = null)
+	public function isemailexist($email = null)
     {
 
     }
