@@ -242,7 +242,15 @@ background-color: #286090;
         </li>
         <li class="mobhide">
           <div class="dropdown">
-          <?php echo $this->Html->image('profile_thumbnail.jpg',array('alt' => 'Logo Chennai Smile','class' => 'dropbtn','onclick' => 'smalldrop()')); ?>
+          <?php 
+           $user = $this->request->session()->read('Auth.User');
+            if(!empty($user['Photo'])) {
+              echo $this->Html->image('profile/'.$user['Photo'],array('alt' => 'Logo Chennai Smile','width' => '41px', 'height' => '41px','class' => 'dropbtn','onclick' => 'smalldrop()')); 
+            }else {
+              echo $this->Html->image('profile_thumbnail.jpg',array('alt' => 'Logo Chennai Smile','class' => 'dropbtn','onclick' => 'smalldrop()')); 
+            }
+          
+          ?>
           <!-- <img onclick="smalldrop()" class="dropbtn" src="img/profile_thumbnail.jpg"> -->
                 <div id="myDropdown" class="dropdown-content">
                <?= $this->Html->link($this->Html->tag('i', '', array('class' => 'fa fa-user fa-fw')).'My Account', array('controller' => 'UserProfile', 'action' => 'add'), array('escape' => false)) ?>
@@ -255,7 +263,17 @@ background-color: #286090;
       </ul>
       <ul class="nav navbar-nav navbar-right">
         <div class="dropdown" style="margin-right: 15px;">
-        <?php echo $this->Html->image('profile_thumbnail.jpg',array('alt' => 'Logo Chennai Smile','class' => 'dropbtn','onclick' => 'largedrop()')); ?>
+          <?php
+          $user = $this->request->session()->read('Auth.User');
+          if(!empty($user['Photo'])) {
+            echo $this->Html->image('profile/'.$user['Photo'],array('alt' => 'Logo Chennai Smile','class' => 'dropbtn','width' => '41px', 'height' => '41px','onclick' => 'largedrop()'));
+          } else
+          {
+            echo $this->Html->image('profile_thumbnail.jpg',array('alt' => 'Logo Chennai Smile','class' => 'dropbtn','onclick' => 'largedrop()'));
+          }
+        ?>
+
+<!--         <?php echo $this->Html->image('profile_thumbnail.jpg',array('alt' => 'Logo Chennai Smile','class' => 'dropbtn','onclick' => 'largedrop()')); ?> -->
          <!-- <img onclick="largedrop()" class="dropbtn" src="img/profile_thumbnail.jpg"> -->
                 <div id="mylargeDropdown" class="dropdown-content">
                 <?= $this->Html->link($this->Html->tag('i', '', array('class' => 'fa fa-user fa-fw')).'My Account', array('controller' => 'UserProfile', 'action' => 'add'), array('escape' => false)) ?>

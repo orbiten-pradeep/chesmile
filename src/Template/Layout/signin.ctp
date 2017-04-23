@@ -304,7 +304,8 @@ a.socialIcon:hover, .socialHoverClass {
         </div>
     
   </footer> -->
-	
+	<?php echo $this->Flash->render(); ?>
+  
 	<script src="https://cdnjs.cloudflare.com/ajax/libs/d3/3.4.11/d3.min.js"></script>
 	<script>
 		$( "#carnival" ).mouseover(function() {

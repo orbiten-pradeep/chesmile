@@ -1944,7 +1944,7 @@ body{
     
   <?php  echo $this->Html->script(['jquery', 'general', 'custom', 'moment.min', 'daterangepicker']);?> 
 
-
+<?php echo $this->Flash->render(); ?>
     <script type="text/javascript">
   function copyTextValue(subcat) {
       var text1 = document.getElementById("sub11");
