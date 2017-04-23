@@ -43,11 +43,17 @@
         <?= $this->Form->hidden('user_id', ['options' => $users,'default'=> $users_id]); ?> -->
 
          <div class="text-center">
-            <?php echo $this->Html->image('profile.png',array('alt' => '','class' => 'avatar img-circle')); ?>
-            <h6>Upload a different photo...</h6>
-           <?= $this->Form->input('Photo', ['type' => 'file']);?>
+         <?php if($userProfile->Photo) {
+                echo $this->Html->image('profile/'.$userProfile->Photo, array('width' => '200px','alt'=>'aswq'));
+            }  else {
+                echo $this->Html->image('profile.png',array('alt' => '','class' => 'avatar img-circle')); 
+            }
+            ?>
+            <!-- <h6>Upload a different photo...</h6>
+           <?= $this->Form->input('Photo', ['type' => 'file']);?> -->
         </div>
     </div>
+    <?php $this->assign('Photo', $Photo); ?>
     <div class="col-sm-3 col-sm-offset-2 col-lg-3 col-md-3 col-lg-offset-1 content">
     <h3><?= h($userProfile->fullname) ?></h3>
     <table class="table borderless">
@@ -86,13 +92,6 @@
         <tr>
             <th scope="row"><?= __('Country') ?></th>
             <td><?= h($userProfile->Country) ?></td>
-        </tr>
-        <tr>
-            <th scope="row"><?= __('Photo') ?></th>
-            <td><?php if($userProfile->Photo) 
-            {
-                echo $this->Html->image('profile/'.$userProfile->Photo, array('width' => '200px','alt'=>'aswq'));
-            }  ?></td>
         </tr>
         <tr>
             <th scope="row"><?= __('Zipcode') ?></th>
