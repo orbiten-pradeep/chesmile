@@ -1027,7 +1027,7 @@ class EventsController extends AppController
 	        ]);
 
 	        $this->loadModel('Invitefriends');
-	        $invitefriends = $this->Invitefriends->find('all',array('conditions'=>array('email'=>$email_req)));
+	        $invitefriends = $this->Invitefriends->find('all',array('conditions'=>array('email'=>$email_req, 'events_id' => $events_id)));
     		$invitefriends = $invitefriends->first();
 
     		if(isset($invitefriends))
