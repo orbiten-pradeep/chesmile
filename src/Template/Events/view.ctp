@@ -2,7 +2,7 @@
 use Cake\Routing\Router;
 ?>
 
-
+<script type='text/javascript' src='//platform-api.sharethis.com/js/sharethis.js#property=58fdbf6acaaba30012e7e564&product=sticky-share-buttons' async='async'></script>
 <style type="text/css">
     .icon{
         height: 120px; 
