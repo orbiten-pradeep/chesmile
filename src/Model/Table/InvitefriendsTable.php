@@ -59,6 +59,10 @@ class InvitefriendsTable extends Table
             ->allowEmpty('ID', 'create');
 
         $validator
+            ->requirePresence('activation_key', 'create')
+            ->notEmpty('activation_key');
+
+        $validator
             ->email('email')
             ->requirePresence('email', 'create')
             ->notEmpty('email');
@@ -75,7 +79,7 @@ class InvitefriendsTable extends Table
      */
     public function buildRules(RulesChecker $rules)
     {
-        $rules->add($rules->isUnique(['email']));
+        //$rules->add($rules->isUnique(['email']));
         $rules->add($rules->existsIn(['events_id'], 'Events'));
 
         return $rules;
