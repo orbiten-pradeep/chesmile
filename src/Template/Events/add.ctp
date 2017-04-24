@@ -581,22 +581,22 @@ body, .modal-open .page-container, .modal-open .page-container .navbar-fixed-top
         .float-label-control input:focus,
         .float-label-control textarea:focus { box-shadow: none; -webkit-box-shadow: none; border-bottom-width: 2px; padding-bottom: 0; background: none; }
         .float-label-control textarea:focus { padding-bottom: 4px; }
-    .float-label-control input, .float-label-control textarea { display: block; width: 100%; padding: 0.1em 0em 1px 0em; border: none; border-radius: 0px; border-bottom: 1px solid #aaa; outline: none; margin: 0px; background: none; }
+    .float-label-control input, .float-label-control textarea { display: block; width: 100%; padding: 0.1em 0em 1px 0em; border: none; border-radius: 0px; border-bottom: 1px solid black; outline: none; margin: 0px; background: none; }
     .float-label-control textarea { padding: 0.1em 0em 5px 0em; }
-    .float-label-control label { position: absolute; font-weight: normal; top: -1.0em; left: 0.08em; color: #aaaaaa; z-index: -1; font-size: 0.85em; -moz-animation: float-labels 300ms none ease-out; -webkit-animation: float-labels 300ms none ease-out; -o-animation: float-labels 300ms none ease-out; -ms-animation: float-labels 300ms none ease-out; -khtml-animation: float-labels 300ms none ease-out; animation: float-labels 300ms none ease-out; /* There is a bug sometimes pausing the animation. This avoids that.*/ animation-play-state: running !important; -webkit-animation-play-state: running !important; }
+    .float-label-control label { position: absolute; font-weight: normal; top: -1.0em; left: 0.08em; color: white; z-index: -1; font-size: 0.85em; -moz-animation: float-labels 300ms none ease-out; -webkit-animation: float-labels 300ms none ease-out; -o-animation: float-labels 300ms none ease-out; -ms-animation: float-labels 300ms none ease-out; -khtml-animation: float-labels 300ms none ease-out; animation: float-labels 300ms none ease-out; /* There is a bug sometimes pausing the animation. This avoids that.*/ animation-play-state: running !important; -webkit-animation-play-state: running !important; }
     .float-label-control input.empty + label,
     .float-label-control textarea.empty + label { top: 0.1em; font-size: 1.5em; animation: none; -webkit-animation: none; }
     .float-label-control input:not(.empty) + label,
     .float-label-control textarea:not(.empty) + label { z-index: 1; }
     .float-label-control input:not(.empty):focus + label,
-    .float-label-control textarea:not(.empty):focus + label { color: #aaaaaa; }
+    .float-label-control textarea:not(.empty):focus + label { color: white; }
     .float-label-control.label-bottom label { -moz-animation: float-labels-bottom 300ms none ease-out; -webkit-animation: float-labels-bottom 300ms none ease-out; -o-animation: float-labels-bottom 300ms none ease-out; -ms-animation: float-labels-bottom 300ms none ease-out; -khtml-animation: float-labels-bottom 300ms none ease-out; animation: float-labels-bottom 300ms none ease-out; }
     .float-label-control.label-bottom input:not(.empty) + label,
     .float-label-control.label-bottom textarea:not(.empty) + label { top: 3em; }
 
 
 @keyframes float-labels {
-    0% { opacity: 1; color: #aaa; top: 0.1em; font-size: 1.5em; }
+    0% { opacity: 1; color: white; top: 0.1em; font-size: 1.5em; }
     20% { font-size: 1.5em; opacity: 0; }
     30% { top: 0.1em; }
     50% { opacity: 0; font-size: 0.85em; }
@@ -604,7 +604,7 @@ body, .modal-open .page-container, .modal-open .page-container .navbar-fixed-top
 }
 
 @-webkit-keyframes float-labels {
-    0% { opacity: 1; color: #aaa; top: 0.1em; font-size: 1.5em; }
+    0% { opacity: 1; color: white; top: 0.1em; font-size: 1.5em; }
     20% { font-size: 1.5em; opacity: 0; }
     30% { top: 0.1em; }
     50% { opacity: 0; font-size: 0.85em; }
@@ -612,7 +612,7 @@ body, .modal-open .page-container, .modal-open .page-container .navbar-fixed-top
 }
 
 @keyframes float-labels-bottom {
-    0% { opacity: 1; color: #aaa; top: 0.1em; font-size: 1.5em; }
+    0% { opacity: 1; color: white; top: 0.1em; font-size: 1.5em; }
     20% { font-size: 1.5em; opacity: 0; }
     30% { top: 0.1em; }
     50% { opacity: 0; font-size: 0.85em; }
@@ -620,7 +620,7 @@ body, .modal-open .page-container, .modal-open .page-container .navbar-fixed-top
 }
 
 @-webkit-keyframes float-labels-bottom {
-    0% { opacity: 1; color: #aaa; top: 0.1em; font-size: 1.5em; }
+    0% { opacity: 1; color: white; top: 0.1em; font-size: 1.5em; }
     20% { font-size: 1.5em; opacity: 0; }
     30% { top: 0.1em; }
     50% { opacity: 0; font-size: 0.85em; }
@@ -644,13 +644,163 @@ body, .modal-open .page-container, .modal-open .page-container .navbar-fixed-top
 label {
     font-weight: inherit !important;
 }
+.height{
+    background-color: #474747;
+    height:100px;
+}
+.card-container.card {
+    max-width: 800px;
+    padding: 40px 40px;
+}
+
+.formheigh{
+  margin-top: -35px;
+}
+
+.card {
+    background-color: #4ABAC6;
+    color: white;
+    /* just in case there no content*/
+    padding: 20px 25px 30px;
+    /*margin: 30px auto 25px;*/
+   /* margin: 30px 190px 25px;*/
+    margin-top: 0px;
+    /* shadows and rounded borders */
+    -moz-border-radius: 2px;
+    -webkit-border-radius: 2px;
+    border-radius: 2px;
+    /*-moz-box-shadow: 10px 10px 10px rgba(0, 0, 0, 0.3);
+    -webkit-box-shadow: 10px 10px 10px rgba(0, 0, 0, 0.3);
+    box-shadow: 0px 0px 7px 7px rgba(0, 0, 0, 0.1);*/
+}
+::-webkit-input-placeholder { /* Chrome/Opera/Safari */
+  color: white !important;
+}
+::-moz-placeholder { /* Firefox 19+ */
+  color: white !important;
+}
+:-ms-input-placeholder { /* IE 10+ */
+  color: white !important;
+}
+:-moz-placeholder { /* Firefox 18- */
+  color: white !important;
+}
+
+
+input{
+    color:white !important;
+}
+
+.form-control:focus{
+    border-color: white !important;
+}
+
+.error-message{
+    color: red !important;
+    font-size: 11px;
+    font-style: normal;
+}
+.help-block{
+    color: red !important;
+    font-size: 11px;
+    font-style: normal;
+}
+.error{
+    color: red !important;
+    font-size: 11px;
+    font-style: normal;
+
+}
+  .card-prof {
+    background-color: #4ABAC6;
+    /* just in case there no content*/
+    padding: 20px 25px 30px;
+    /*margin: 30px auto 25px;*/
+    margin-top: 60px;
+    -moz-border-radius: 2px;
+    -webkit-border-radius: 2px;
+    border-radius: 2px;
+    -moz-box-shadow: 10px 10px 10px rgba(0, 0, 0, 0.3);
+    -webkit-box-shadow: 10px 10px 10px rgba(0, 0, 0, 0.3);
+    box-shadow: 0px 0px 7px 7px rgba(0, 0, 0, 0.1);
+}
+
+.card-container-prof.card-prof {
+    max-width: 90px;
+    padding: 40px 40px;
+
+}
+.date{
+    background-color: #4ABAC6;
+}
+.date:focus{
+    background-color: #4ABAC6;
+}
+.time-bg{
+    background-color: #4ABAC6;
+}
+.time-bg:focus{
+    background-color: #4ABAC6;
+}
+.map{
+    background-color: #4ABAC6 !important;
+}
+.map:focus{
+    background-color: #4ABAC6;
+}
+.city{
+     background-color: #4ABAC6 !important;
+}
+.city:focus{
+     background-color: #4ABAC6;
+}
+.state{
+     background-color: #4ABAC6 !important;
+}
+.state:focus{
+     background-color: #4ABAC6;
+}
+.country{
+     background-color: #4ABAC6 !important;
+}
+.country:focus{
+     background-color: #4ABAC6;
+}
 </style>
-<div class="container wrapp">
-        <div class="row">
-            <div class="col-sm-8">
+<div class="container-fluid height">
+    <div class="col-md-offset-2">
+        <div class="card-prof card-container-prof">
+
+        </div>
+    </div>
+</div>
+
+<div class="container content">
+    <div class="row">
+ <ul class="nav nav-tabs col-md-offset-2" style="margin-top:50px;" id="myTab">
+                    <div class="liner"></div>
+                     <li class="active">
+                     <a href="#home" data-toggle="tab" title="welcome">
+                   Event Information
+                  </a></li>
+
+                  <li><a href="#profile" data-toggle="tab" title="profile">
+                     <span class="round-tabs two">
+                       Additional Details
+                     </span> 
+                    </a>
+                 </li>
+                     
+                     </ul>
+
+    <div class="card card-container col-md-offset-2">
+    <!-- <div class="col-sm-8"> -->
+    <div class="tab-content">
+    <div class="tab-pane fade in active" id="home">
                  <?= $this->Form->create($event,array('id' => 'createEvent','type' => 'file')) ?>
                   <?= $this->Form->hidden('user_id', ['options' => $users,'default'=> $users_id]);?>
                 <!-- <form role="form"> -->  <!-- <input type="text" class="form-control" placeholder="Event Title"> -->
+                 
                     <div class="form-group float-label-control">
                         <label for="">Event Title</label>
          <?php echo $this->Form->input('title',array('div' => false,'id' => 'title', 'label' => false, 'class' => 'form-control form-element', 'placeholder' => 'Event Title','required' => true)); ?>
@@ -686,19 +836,19 @@ label {
 
             <div class="form-group float-label-control">
                    <label for="">Contact Number</label>
-                  <?= $this->Form->input('contact_number',array('div' => false, 'label' => false,'class' => 'form-control form-element','placeholder' => 'Enter Contact Number'));?>
+                  <?= $this->Form->input('contact_number',array('div' => false, 'label' => false,'class' => 'form-control form-element','placeholder' => 'Enter Contact Number','required' => true));?>
                   <!--  <textarea class="form-control" placeholder="Some Words about your event" rows="1"></textarea> -->
             </div>
 
             <div class="form-group float-label-control">
                    <label for="">Mobile Number</label>
-                  <?= $this->Form->input('mobile_number',array('div' => false, 'label' => false,'class' => 'form-control form-element','placeholder' => 'Enter Mobile Number',));?>
+                  <?= $this->Form->input('mobile_number',array('div' => false,'label' => false,'class' => 'form-control form-element','placeholder' => 'Enter Mobile Number', 'required' => true));?>
                   <!--  <textarea class="form-control" placeholder="Some Words about your event" rows="1"></textarea> -->
             </div>
 
              <div class="form-group">
                 <label>
-           <?= $this->Form->input('date', array('type' => 'text','class' => 'form-control','placeholder' => 'Date','label' => false));?>
+           <?= $this->Form->input('date', array('type' => 'text','class' => 'form-control date','placeholder' => 'Date','label' => false));?>
            </label>
            </div>
 
@@ -709,43 +859,13 @@ label {
 
            <div class="form-group">
             <label>
-           <?=$this->Form->input('time', array('type' => 'text','class' => 'form-control timepicker','label' => false,'placeholder' => 'Time'));?>
+           <?=$this->Form->input('time', array('type' => 'text','class' => 'form-control timepicker time-bg','label' => false,'placeholder' => 'Time'));?>
            </label>
            </div>
                      <!-- <div class="form-group float-label-control">
                         <label for="">Venue</label>
                         <?=  $this->Form->input('venue',array('div' => false, 'label' => false, 'class' => 'form-control form-element','placeholder' => 'Enter Venue'));?>
                     </div> -->
-
-                    <div class="form-group">
-                <label>
-                    <?=$this->Form->input('banner',['type' => 'file']);?>
-                </label>
-            </div>
-
-             <div class="form-group">
-                <label>
-            <?=$this->Form->input('display',['type' => 'file']);?>
-            </label>
-            </div>
-
-             <div class="form-group">
-                <label>
-            <?=$this->Form->input('OrganizersLogo',['type' => 'file']);?>
-            </label>
-            </div> 
-
-             <div class="form-group">
-                <label>
-           <?= $this->Form->input('Mediapartners[]',['type' => 'file', 'multiple' => 'true','label' => 'Mediapartners']);?>
-            </label>
-            </div>
-
-             <div class="form-group">
-                <label>
-            <?=$this->Form->input('Sponsors[]',['type' => 'file', 'multiple' => 'true', 'label' => 'Sponsors']);?>
-            </label>
-            </div>
 
             <div class="form-group float-label-control">
                 <label for="">Address 1</label>
@@ -774,7 +894,7 @@ label {
 
             <div class="form-group">
                 <label for="">Add Map Location</label>                
-                <input type="text" class="form-control" id="googleMapID" name="google_map" placeholder="" readonly="">
+                <input type="text" class="form-control map" id="googleMapID" name="google_map" placeholder="" readonly="">
                 <input type="button" class="btn launch-map" value="Launch Map" />
             </div>
 
@@ -796,71 +916,79 @@ label {
 
                 <div class="form-group">
                 <label>
-            <?=$this->Form->input('city', array('default' => 'CHENNAI', 'readonly','class' => 'form-control'));?>
+            <?=$this->Form->input('city', array('default' => 'CHENNAI', 'readonly','class' => 'form-control city'));?>
             </label>
             </div>
 
              <div class="form-group">
                 <label>
-            <?=$this->Form->input('state', array('default' => 'TAMILNADU', 'readonly','class' => 'form-control'));?>
+            <?=$this->Form->input('state', array('default' => 'TAMILNADU', 'readonly','class' => 'form-control state'));?>
             </label>
             </div>
 
             <div class="form-group">
                 <label>
-            <?= $this->Form->input('country', array('default' => 'INDIA', 'readonly','class' => 'form-control'));?>
+            <?= $this->Form->input('country', array('default' => 'INDIA', 'readonly','class' => 'form-control country'));?>
             </label>
             </div>
+            
+            </div>
+            <?= $this->Form->end() ?>
+
+            <div class="tab-pane fade" id="profile">
+             <?= $this->Form->create($event,array('id' => 'createEvent','type' => 'file', 'class' => 'imagevalid')) ?>
+            <div class="form-group">
+           <!--  <label>[Size: 1311 * 985px]</label> -->
+                <label>
+                    <?=$this->Form->input('banner',['type' => 'file','accept' => 'image/*']);?>
+                    [Size: 1311 * 985px]
+                </label>
+            </div>
+
+             <div class="form-group">
+                <label>
+            <?=$this->Form->input('display',['type' => 'file','accept' => 'image/*']);?>
+            [Size: 1311 * 985px]
+            </label>
+            </div>
+
+             <div class="form-group">
+                <label>
+            <?=$this->Form->input('OrganizersLogo',['type' => 'file','accept' => 'image/*']);?>
+            [Size: 1311 * 985px]
+            </label>
+            </div> 
+
+             <div class="form-group">
+                <label>
+           <?= $this->Form->input('Mediapartners[]',['type' => 'file', 'multiple' => 'true','label' => 'Mediapartners','accept' => 'image/*']);?>
+           [Size: 1311 * 985px]
+            </label>
+            </div>
+
+             <div class="form-group">
+                <label>
+            <?=$this->Form->input('Sponsors[]',['type' => 'file', 'multiple' => 'true', 'label' => 'Sponsors','accept' => 'image/*']);?>
+            [Size: 1311 * 985px]
+            </label>
+            </div>
+
 
             <div class="form-group">
             <?= $this->Form->button('Submit',array('id' => 'subbutton')) ?>
             </div>
-
-
-</form>
-            <!-- <div class="form-group">
-                <label>
-            <?=$this->Form->input('address_1',array('class' => 'form-control'));?>
-            </label>
-            </div> -->
-
-             <!-- <div class="form-group">
-                <label>
-            <?=$this->Form->input('address_2',array('class' => 'form-control'));?>
-            </label>
+             <?= $this->Form->end() ?>
             </div>
- -->
-             <!-- <div class="form-group">
-                <label>
-            <?=$this->Form->input('landmark',array('class' => 'form-control'));?>
-            </label>
-            </div> -->
-                    <!-- <div class="form-group float-label-control">
-                        <label for="">Textarea</label>
-                        <textarea class="form-control" placeholder="Textarea" rows="1"></textarea>
-                    </div> -->
-                
 
 
-                <!-- <h4 class="page-header">Bottom Labels</h4>
-                <form role="form">
-                    <div class="form-group float-label-control label-bottom">
-                        <label for="">Username</label>
-                        <input type="email" class="form-control" placeholder="Username">
-                    </div>
-                </form> -->
+
+            <!-- </div> -->
 
 
-               <!--  <h4 class="page-header">Placeholder Overrides</h4>
-                <form role="form">
-                    <div class="form-group float-label-control">
-                        <label for="">Email Address</label>
-                        <input type="email" class="form-control" placeholder="What's your email address?">
-                    </div>
-                </form> -->
-            </div>
-        </div>
+</div>
+</div>
     </div>
+</div>
 
 <div class="modal fade" id="myModal">
   <div class="modal-dialog" role="document">
@@ -893,6 +1021,15 @@ label {
     </div>
   </div>
 </div>
+
+
+
+<script type="text/javascript">
+function autoHeight() {
+            $('.content').css('min-height', 0);
+            $('.content').css('min-height', ($(document).height() - $('#header').height() - $('.footer').height()));
+        }
+        </script>
 
 
 <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.1.1/jquery.min.js"></script>
@@ -1003,10 +1140,23 @@ $(document ).ready( function () {
 
   $("#createEvent" ).validate( {
     rules: {
-      title: "required"
-    },
+      title: "required",
+      contact_number: {
+                    required: true,
+                    minlength: 7,
+                    maxlength: 10,
+                    number: true
+                },
+    mobile_number:  {
+                    required: true,
+                    minlength: 10,
+                    number: true
+            }
+            },
     messages: {
-      title: "Please enter your Event's Title"
+      title: "Please enter your Event's Title",
+     contact_number:"Please enter a number with at least 7 and max 10 characters!",
+      mobile_number:"Please enter a number with at least 10 characters!"
     },
     errorElement: "em",
     errorPlacement: function ( error, element ) {
@@ -1028,4 +1178,11 @@ $(document ).ready( function () {
   });
 
 });
+</script>
+<script type="text/javascript">
+
+$(document).ready(function() {
+        $(".imagevalid").validate();
+    });
+
 </script>
