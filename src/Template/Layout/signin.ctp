@@ -179,6 +179,7 @@ a.socialIcon:hover, .socialHoverClass {
 <body style="background-image: url('<?=$this->Url->image('cs-homepage-BG.jpg')?>');">
 
  <?= $this->fetch('content') ?>
+ <?php echo $this->Flash->render(); ?>
 <!-- <div class="col-xs-12 col-sm-12 col-md-12 col-lg-12">
   &nbsp;<br>
   </div>
@@ -304,7 +305,7 @@ a.socialIcon:hover, .socialHoverClass {
         </div>
     
   </footer> -->
-	<?php echo $this->Flash->render(); ?>
+	
   
 	<script src="https://cdnjs.cloudflare.com/ajax/libs/d3/3.4.11/d3.min.js"></script>
 	<script>

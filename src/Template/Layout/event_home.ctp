@@ -223,7 +223,7 @@ background-color: #286090;
   <div  class="collapse navbar-collapse col-md-offset-3" id="bs-example-navbar-collapse-1">
      <ul class="nav navbar-nav search-nav">
         <li class="dropdown category_btn">
-            <label>Category</label>
+            <label style="font-weight: normal;">Category</label>
             <div class="mini-submenu">
             <span class="icon-bar"></span>
             <span class="icon-bar"></span>
@@ -431,7 +431,7 @@ window.onclick = function(event) {
 <!-- <script src="https://maxcdn.bootstrapcdn.com/bootstrap/4.0.0-alpha.4/js/bootstrap.min.js"></script> -->
 <script src="http://maps.googleapis.com/maps/api/js?libraries=places&key=AIzaSyBN3LHzhmsORmwlmvR3fIdjTI-VJK5w-TA"></script>
 
-<?php  echo $this->Html->script(['general','moment.min', 'daterangepicker', 'bootstrap-tagsinput', 'custom', 'jquery.slimscroll.min','jquery.validate.min']);?> 
+<?php  echo $this->Html->script(['general','moment.min', 'daterangepicker', 'bootstrap-tagsinput', 'custom', 'jquery.slimscroll.min','jquery.validate.min', 'additional-methods']);?> 
 
 
 <script type="text/javascript">
