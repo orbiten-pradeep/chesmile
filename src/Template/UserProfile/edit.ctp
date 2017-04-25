@@ -174,12 +174,12 @@ input{
                     <div class="liner"></div>
                      <li class="active">
                      <a href="#home" data-toggle="tab" title="welcome">
-                   Event Information
+                  Basic Info
                   </a></li>
 
                   <li><a href="#profile" data-toggle="tab" title="profile">
                      <span class="round-tabs two">
-                       Additional Details
+                       Change Password
                      </span> 
                     </a>
                  </li>
