@@ -218,7 +218,7 @@ input{
             </div>
 
             <div class="form-group float-label-control">
-                   <label for="">Address-2</label>
+                   <label for="">Address-2 (Optional)</label>
                    <?php echo $this->Form->input('Address_2',array('class' => 'form-control','div' => false, 'label' => false,'class' => 'form-control form-element','placeholder' => 'Enter your address-2'));?>
             </div>
 
@@ -246,7 +246,7 @@ input{
             <?= $this->Form->end() ?>
 
             <div class="tab-pane fade" id="profile">
-             <?= $this->Form->create('', array('id' => 'animdiv','class' => 'form-signup formheigh', 'url' => ['controller' => 'Users', 'action' => 'changepassword'])) ?>
+             <?= $this->Form->create('', array('id' => 'animdiv','class' => 'form-signup formheigh changepass', 'url' => ['controller' => 'Users', 'action' => 'changepassword'])) ?>
              <?=  $this->Form->input('fullname',array('default'=> $fullname,'class' => 'form-control','type' => 'hidden')); ?>
 
               <?= $this->Form->hidden('user_id', ['options' => $users,'default'=> $users_id]); ?>
@@ -387,6 +387,117 @@ input{
         },1000);
     });
 })(jQuery);
+</script>
+
+<script type="text/javascript">
+$(document ).ready( function () {
+
+  /*$.validator.setDefaults({
+      submitHandler: function (form) {
+
+         if ($(form).valid()) {
+             form.submit();
+         }
+      }
+  });*/
+
+
+  $(".form-horizontal" ).validate( {
+    rules: {
+      Address_1: "required",
+      City: "required",
+      State: "required",
+      Country: "required",
+    Mobile:  {
+                    required: true,
+                    minlength: 10,
+                    number: true
+            }
+            },
+    messages: {
+      Address_1: "Please enter your Address",
+      City: "Please enter your city",
+      State: "Please enter your state",
+      Country: "Please enter your Country",
+     contact_number:"Please enter a number with at least 7 and max 10 characters!",
+      Mobile:"Please enter a number with at least 10 characters!"
+    },
+    errorElement: "em",
+    errorPlacement: function ( error, element ) {
+      // Add the `help-block` class to the error element
+      error.addClass( "help-block" );
+
+      if ( element.prop( "type" ) === "checkbox" ) {
+        error.insertAfter( element.parent( "label" ) );
+      } else {
+        error.insertAfter( element );
+      }
+    },
+    highlight: function ( element, errorClass, validClass ) {
+      $( element ).parents( ".input" ).addClass( "has-error" ).removeClass( "has-success" );
+    },
+    unhighlight: function (element, errorClass, validClass) {
+      $( element ).parents( ".input" ).addClass( "has-success" ).removeClass( "has-error" );
+    }
+  });
+
+
+   $(".changepass" ).validate( {
+    rules: {    
+      password: {
+        required: true,
+        minlength: 6
+      },
+      confirm_password: {
+        required: true,
+        minlength: 6,
+        equalTo: "password"
+      }
+    },
+    messages: {
+      password: {
+        required: "Please provide a password",
+        minlength: "Your password must be at least 6 characters long"
+      },
+      confirm_password: {
+        required: "Please provide a confirm password",
+        minlength: "Your password must be at least 6 characters long",
+        equalTo: "Please enter the same password as above"
+      }
+     
+    },
+    errorElement: "em",
+    errorPlacement: function ( error, element ) {
+      // Add the `help-block` class to the error element
+      error.addClass( "help-block" );
+      console.log(element);
+
+      if ( element.prop( "type" ) === "checkbox" ) {
+        error.insertAfter( element.parent( "label" ) );
+      } else {
+        error.insertAfter( element );
+      }
+    },
+    highlight: function ( element, errorClass, validClass ) {
+      $( element ).parents( ".input" ).addClass( "has-error" ).removeClass( "has-success" );
+    },
+    unhighlight: function (element, errorClass, validClass) {
+      $( element ).parents( ".input" ).addClass( "has-success" ).removeClass( "has-error" );
+    }
+  });
+
+});
+
+
+
+
+</script>
+<script type="text/javascript">
+
+$(document).ready(function() {
+        $(".imagevalid").validate();
+    });
+
 </script>
 <!-- <nav class="large-3 medium-4 columns" id="actions-sidebar">
     <ul class="side-nav">

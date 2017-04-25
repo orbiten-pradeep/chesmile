@@ -933,10 +933,10 @@ input{
             </div>
             
             </div>
-            <?= $this->Form->end() ?>
+            <!-- <?= $this->Form->end() ?> -->
 
-            <div class="tab-pane fade" id="profile">
-             <?= $this->Form->create($event,array('id' => 'createEvent','type' => 'file', 'class' => 'imagevalid')) ?>
+            <div class="tab-pane fade imagevalid" id="profile">
+            <!--  <?= $this->Form->create($event,array('id' => 'createEvent','type' => 'file', 'class' => 'imagevalid')) ?> -->
             <div class="form-group">
            <!--  <label>[Size: 1311 * 985px]</label> -->
                 <label>
