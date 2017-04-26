@@ -36,6 +36,20 @@ max-height: 300px;
 }
 }
 
+.back{
+    position: absolute;
+    /*opacity: 0;*/
+    transition: opacity .3s ease;
+    -ms-transition: opacity .3s ease;
+    -webkit-transition: opacity .3s ease;
+    -o-transition: opacity .3s ease;
+    z-index: 9999;
+    background-color: rgba(0,0,0,.6);
+    /*top: 0;*/
+    width: 100%;
+    height: 10%;
+    /*bottom: 0;*/
+}
 
 </style>
 <script type="text/javascript">

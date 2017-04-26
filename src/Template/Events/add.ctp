@@ -948,7 +948,7 @@ input{
              <div class="form-group">
                 <label>
             <?=$this->Form->input('display',['type' => 'file','accept' => 'image/*']);?>
-            [Size: 1311 * 985px]
+            [Size: 280px * 185px]
             </label>
             </div>
 
