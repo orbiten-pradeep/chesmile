@@ -4,17 +4,18 @@ namespace App\Model\Entity;
 use Cake\ORM\Entity;
 
 /**
- * Invitefriend Entity
+ * Like Entity
  *
  * @property int $ID
  * @property int $events_id
- * @property string $activation_key
- * @property string $email
+ * @property int $user_id
+ * @property int $likes
  * @property \Cake\I18n\Time $created
  *
  * @property \App\Model\Entity\Event $event
+ * @property \App\Model\Entity\User $user
  */
-class Invitefriend extends Entity
+class Like extends Entity
 {
 
     /**
