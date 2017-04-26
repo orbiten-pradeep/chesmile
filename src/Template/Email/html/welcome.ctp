@@ -24,7 +24,7 @@
           <!--img-->
           <tr>
             <td align="center" style="line-height:0px;border-collapse: collapse;">
-              <img style="display:block; line-height:0px; font-size:0px; border:0px;" class="img1" src="welcome-banner.png" width="100%" height="auto" alt="header-img">
+              <img style="display:block; line-height:0px; font-size:0px; border:0px;" class="img1" src="http://chennaismile.com/img/welcome-banner.png" width="100%" height="auto" alt="header-img">
             </td>
           </tr>
           <!--End img-->
@@ -59,7 +59,7 @@
             <td style="border-collapse: collapse;" height="20">&nbsp;</td>
           </tr>
           <tr>
-<td align="center" style="font-family: 'century Gothic', arial, sans-serif; font-size:22px; color:#4a4a4a; font-weight:bold;border-collapse: collapse;"><strong>Thank you for joining us, Kishore.</strong></td>
+<td align="center" style="font-family: 'century Gothic', arial, sans-serif; font-size:22px; color:#4a4a4a; font-weight:bold;border-collapse: collapse;"><strong>Thank you for joining us, <?= $name ?> .</strong></td>
                 </tr>
                 <tr>
                   <td height="15"></td>
