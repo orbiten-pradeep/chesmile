@@ -80,15 +80,7 @@ class InvitefriendsTable extends Table
      */
     public function buildRules(RulesChecker $rules)
     {
-<<<<<<< .mine
-        // $rules->add($rules->isUnique(['email']));
-||||||| .r121
-        $rules->add($rules->isUnique(['email']));
-=======
-        //$rules->add($rules->isUnique(['email']));
->>>>>>> .r127
         $rules->add($rules->existsIn(['events_id'], 'Events'));
-
         return $rules;
     }
 }
