@@ -23,7 +23,7 @@ and (max-width: 460px){
 @media (max-width: 1366px)
 {
   .card-size {
-    max-width: 277px;
+    max-width: 274px;
     max-height: 310px;
 }
 }
