@@ -394,7 +394,7 @@ function getEventList(params) {
 		        	var dispImgHmtl = '';
 		        	var dispImg = response[k].display;
 		        	if(dispImg==''){
-		        		dispImgHmtl = '<img src="img/photos/1.jpg" alt="">';
+		        		dispImgHmtl = '<img src="img/photos/1.jpg" alt="" style="width:280px;height:185px;">';
 		        	}
 		        	else {
 		        		var imgSrc = "img/display/"+dispImg;
