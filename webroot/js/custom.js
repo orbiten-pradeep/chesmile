@@ -398,7 +398,7 @@ function getEventList(params) {
 		        	}
 		        	else {
 		        		var imgSrc = "img/display/"+dispImg;
-		        		dispImgHmtl = '<img src="'+imgSrc+'" alt="" onerror="this.src=\'img/photos/1.jpg\'">';
+		        		dispImgHmtl = '<img src="'+imgSrc+'" alt="" onerror="this.src=\'img/photos/1.jpg\'" style="width:280px;height:185px;">';
 		        	}
 		        	html += '<div class="col-sm-4 col-lg-4 col-md-4 card-size">\
 		        					<div class="thumbnail">\
