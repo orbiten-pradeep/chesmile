@@ -1,5 +1,6 @@
 <?php 
 use Cake\Routing\Router;
+use Cake\I18n\Time;
 ?>
 
 <script type='text/javascript' src='//platform-api.sharethis.com/js/sharethis.js#property=58fdbf6acaaba30012e7e564&product=sticky-share-buttons' async='async'></script>
@@ -171,7 +172,15 @@ else {
                                                     <!-- Client 2 -->
 
                                                     <div class="clearfix"></div>
+                                                    <?php 
+                                                    $today = Time::now();  
+                                                    //echo $today->format('m/d/y');
+                                                    $date = new Time('now');
+                                                    //echo $date->format('m/d/y');
 
+                                                    if($today >= $date) {
+                                                    ?>
+                                                    <div class="clearfix"></div>
                                                      <div style="display: '<?php if(empty($galaries)) { echo "none;";  } ?>'>
                                                      <h3 class="heading margin25">Event Galaries<span></span></h3>
                                                     <!-- Client 1 -->
@@ -189,9 +198,9 @@ else {
                                                     </div>
                                                     <div class="clearfix"></div>
 
-                                                     <button class="btn btn-info btn-lg" data-toggle="modal" data-target="#myModal" <?php if(!empty($galaries)) { echo "none;"; } ?>">Open Modal</button>
+                                                     <button class="btn btn-info btn-lg" data-toggle="modal" data-target="#myModal" style="display: <?php if(isset($galaries)) { echo 'none;'; } ?>">Open Modal</button>
 
-
+                                                     <?php } ?>
                                                      <!-- Modal -->
                                                   <div class="modal fade" tabindex="-1" id="myModal" role="dialog">
                                                     <div class="modal-dialog">
@@ -250,8 +259,8 @@ else {
             </div>
     </div>   
 
-
     <script type="text/javascript">
+
     function sendemail(eventid, e) {
         
        var email = document.getElementById("invite").value;
