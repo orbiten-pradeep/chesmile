@@ -318,10 +318,23 @@ class UsersController extends AppController
 			if ($userData['active'] == false)
             {
                 $activeStatus = 1;
+                
             }
 			$status = $this->Users->updateAll(['active' => $activeStatus], ['id' => $userData['id']]);
 			if ($status)
 			{
+				$email = new Email();
+        		$email->transport('gmail');
+        		$email->template('welcome','cs-email');
+        		$subject = "Welcome to chennaismile";
+            	$email->emailFormat('html');
+			    $email->from('admin@chennaismile.com');
+			    $to = $userData['email'];
+			    $email->to($to);
+			    $email->subject($subject);
+				// $activationUrl = Router::url(['controller' => 'events', 'action' => 'activate/' . $new_id, '_full' => true ]);
+			    $email->viewVars(['name' => $userData['fullname']]);
+			    $email->send();
 				$this->Flash->success(__('Status updated successfully'));
 			}
 			else
