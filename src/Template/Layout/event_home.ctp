@@ -328,7 +328,7 @@ background-color: #286090;
           <?= $this->Html->link(__('Create events'), ['controller' => 'events', 'action' => 'add'], array('class' => 'btn btn-primary pull-right')); ?>
         </div>
       </div>
-        
+         <?php echo $this->Flash->render(); ?>
          <?= $this->fetch('content') ?>
            
 
