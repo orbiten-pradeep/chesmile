@@ -963,7 +963,7 @@ class EventsController extends AppController
 			$this->loadModel('Likes');
 	        $this->autoRender = false;
 	        $events_id = $this->request->data('eventid'); 
-	        $user_id = $this->request->data('userid'); 
+	        $user_id = $this->Auth->user('id'); 
 	        $likes = $this->Likes->newEntity();
 	        $likes = $this->Likes->patchEntity($likes, $this->request->data);
 	        $likes->events_id = $events_id;
