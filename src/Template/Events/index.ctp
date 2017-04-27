@@ -43,7 +43,7 @@ max-height: 300px;
     -ms-transition: opacity .3s ease;
     -webkit-transition: opacity .3s ease;
     -o-transition: opacity .3s ease;
-    z-index: 9999;
+   /* z-index: 9999;*/
     background-color: rgba(0,0,0,.6);
     /*top: 0;*/
     width: 100%;
