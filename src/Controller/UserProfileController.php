@@ -169,36 +169,39 @@ class UserProfileController extends AppController
        		$users_id = $this->Auth->user('id');
        		$fullname = $this->Auth->user('fullname');
         	$email = $this->Auth->user('email');
-    	}
+      	}
         
         if ($this->request->is(['patch', 'post', 'put'])) 
         {
-        	$errCheck = false;
-        	if($this->request->data['Photo']['name'] != '')
-        	{
-        		 //exit(0);
-        		$file = $this->request->data['Photo'];
-	        	$ext = substr(strtolower(strrchr($file['name'], '.')), 1); //get the extension
-		        $arr_ext = array('jpg', 'jpeg', 'png'); //set allowed extensions
-		        if($file['size']/1024 > '2048')
-		        {
-		        	$this->Flash->error(__('"imageLogs", __METHOD__." The uploaded file exceeds the MAX_FILE_SIZE(2MB) '));
-		        	$errCheck = true;
-		        }
-		        else if(in_array($ext, $arr_ext))
-		        {
-		            //do the actual uploading of the file. First arg is the tmp name, second arg is
-		            //where we are putting it
-		            $uploadFolder = WWW_ROOT . 'img/profile';
-		        	if( !file_exists($uploadFolder) ){
-				        mkdir($uploadFolder);
-				    }
-		            $filename = str_replace(" ", "-", rand(1, 3000) . $file['name']);
-		            move_uploaded_file($file['tmp_name'], WWW_ROOT . 'img/profile' . DS . $filename);
-		             //prepare the filename for database entry
-	                $this->request->data['Photo'] = $filename;
-		        }
-        	}
+          	$errCheck = false;
+			if(isset($this->request->data['Photo']))
+			{
+				if($this->request->data['Photo']['name'] != '')
+				{
+					 //exit(0);
+					$file = $this->request->data['Photo'];
+					$ext = substr(strtolower(strrchr($file['name'], '.')), 1); //get the extension
+					$arr_ext = array('jpg', 'jpeg', 'png'); //set allowed extensions
+					if($file['size']/1024 > '2048')
+					{
+						$this->Flash->error(__('"imageLogs", __METHOD__." The uploaded file exceeds the MAX_FILE_SIZE(2MB) '));
+						$errCheck = true;
+					}
+					else if(in_array($ext, $arr_ext))
+					{
+						//do the actual uploading of the file. First arg is the tmp name, second arg is
+						//where we are putting it
+						$uploadFolder = WWW_ROOT . 'img/profile';
+						if( !file_exists($uploadFolder) ){
+							mkdir($uploadFolder);
+						}
+						$filename = str_replace(" ", "-", rand(1, 3000) . $file['name']);
+						move_uploaded_file($file['tmp_name'], WWW_ROOT . 'img/profile' . DS . $filename);
+						 //prepare the filename for database entry
+						$this->request->data['Photo'] = $filename;
+					}
+				}
+			}
         	if(empty($this->request->data['Photo']))
         	{
         		$this->request->data['Photo'] = $userProfile['Photo']; 
