@@ -175,7 +175,7 @@ else {
                                                     <?php 
                                                     $today = Time::now();  
                                                     //echo $today->format('m/d/y');
-                                                    $date = new Time('now');
+                                                    $date = new Time($event->date);
                                                     //echo $date->format('m/d/y');
 
                                                     if($today >= $date) {
