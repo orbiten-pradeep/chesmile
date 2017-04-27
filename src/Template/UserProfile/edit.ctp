@@ -211,6 +211,11 @@ input{
                     <?php echo $this->Form->input('Mobile',array('class' => 'form-control form-element','div' => false, 'label' => false, 'placeholder' => 'Enter your mobile number')); ?>
             </div>
 
+             <div class="form-group float-label-control">
+              <label for="">Mobile Number</label>
+            <?=  $this->Form->input('group_id', array('options' => $groups,'class' => 'form-control size')); ?>
+            </div>
+
 
             <div class="form-group float-label-control">
                    <label for="">Address-1</label>
