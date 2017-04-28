@@ -1,5 +1,6 @@
 <?php 
 use Cake\Routing\Router;
+use Cake\I18n\Time;
 ?>
 
 
@@ -51,6 +52,12 @@ filter: grayscale(0);
 -ms-transition: all 0.3s ease-in-out;
 transition: all 0.3s ease-in-out;
 opacity: 0.7;
+}
+
+
+.invite_email{
+    display: none;
+
 }
 </style>
 
@@ -172,7 +179,16 @@ else {
 
                                                     <div class="clearfix"></div>
 
-                                                     <div style="display: '<?php if(empty($galaries)) { echo "none;";  } ?>'>
+                                                     <?php 
+                                                    $today = Time::now();  
+                                                    //echo $today->format('m/d/y');
+                                                    $date = new Time($event->date);
+                                                    //echo $date->format('m/d/y');
+
+                                                    if($today >= $date) {
+                                                    ?>
+                                                    <div class="clearfix"></div>
+                                                     <div style="display: '<?php if(empty($galaries)) { echo "none;";  } ?>'">
                                                      <h3 class="heading margin25">Event Galaries<span></span></h3>
                                                     <!-- Client 1 -->
                                                     <?php foreach ($galaries as $galary): ?>
@@ -188,8 +204,9 @@ else {
                                                     <p><?= $this->Text->autoParagraph(h($event->note));?></p>
                                                     </div>
                                                     <div class="clearfix"></div>
+                                                   <?php } ?>
 
-                                                     <button class="btn btn-info btn-lg" data-toggle="modal" data-target="#myModal" <?php if(!empty($galaries)) { echo "none;"; } ?>">Open Modal</button>
+                                                     <!-- <button class="btn btn-info btn-lg" data-toggle="modal" data-target="#myModal" <?php if(!empty($galaries)) { echo "none;"; } ?>">Open Modal</button> -->
 
 
                                                      <!-- Modal -->

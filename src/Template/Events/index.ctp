@@ -43,7 +43,7 @@ max-height: 300px;
     -ms-transition: opacity .3s ease;
     -webkit-transition: opacity .3s ease;
     -o-transition: opacity .3s ease;
-   /* z-index: 9999;*/
+    z-index: 2;
     background-color: rgba(0,0,0,.6);
     /*top: 0;*/
     width: 100%;
@@ -96,7 +96,17 @@ max-height: 300px;
                            <?php echo $this->Form->input('areaname', array('id' => 'homeAutocomplete', 'required','class' => 'form-control tt-query dropdown_input','label' => false,'placeholder' => 'Search by location/Area')); ?>
                           <!-- <input type="text" class="form-control tt-query dropdown_input" name="query" id="query" placeholder="Search by location/Area" autocomplete="off" spellcheck="false" dir="auto" style=""> -->
                           <span style="" class="dropdown_txt1"></span> <span class="tt-dropdown-menu" style="position: absolute; top: 100%; left: 0px; z-index: 100; display: none;"></span></span>
-                                    </div>
+                        </div>
+                    </form>
+
+                    <form>
+                        <div class="form-group"> <span class="twitter-typeahead" style="position: relative; display: inline-block;">
+                          <input class="tt-hint dropdown_hint" type="text" autocomplete="off" spellcheck="off" disabled style="">
+                           <?php echo $this->Form->input('areaname', array('id' => 'homeAutocomplete', 'required','class' => 'form-control tt-query dropdown_input','label' => false,'placeholder' => 'Search by event title')); ?>
+                          <span style="" class="dropdown_txt1"></span> 
+                          <span class="tt-dropdown-menu" style="position: absolute; top: 100%; left: 0px; z-index: 100; display: none;"></span>
+                          </span>
+                        </div>
                     </form>
 
                     <a href="javascript:;" class="filterDate list-group-item" data="today">Today's Events</a>

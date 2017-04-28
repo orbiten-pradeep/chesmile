@@ -181,7 +181,7 @@ else {
                                                     if($today >= $date) {
                                                     ?>
                                                     <div class="clearfix"></div>
-                                                     <div style="display: '<?php if(empty($galaries)) { echo "none;";  } ?>'>
+                                                     <div style="display: '<?php if(empty($galaries)) { echo "none;";  } ?>'">
                                                      <h3 class="heading margin25">Event Galaries<span></span></h3>
                                                     <!-- Client 1 -->
                                                     <?php foreach ($galaries as $galary): ?>

@@ -17,7 +17,7 @@
                     <table style="table-layout: auto;" border="0" align="left" cellpadding="0" cellspacing="0">
                       <tbody><tr>
                         <td align="center" style="line-height:0px;table-layout: auto; border-collapse: collapse;">
-                          <img  style="display:block; line-height:0px; font-size:0px; border:0px;" src="http://chennaismile.com/img/logo.png" alt="logo">
+                          <img  style="display:block; line-height:0px; font-size:0px; border:0px;" src="http://chennaismile.com/img/chennaismile-logo.png" alt="logo">
                         </td>
                       </tr>
                     </tbody></table>

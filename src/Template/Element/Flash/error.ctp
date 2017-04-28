@@ -43,6 +43,10 @@ if (!isset($params['escape']) || $params['escape'] !== false) {
 
     $(window).on('load',function(){
         $('#logout').modal('show');
+
+        setTimeout(function(){
+            $('#logout').modal('hide');
+        },3000);
     });
 
 </script>
