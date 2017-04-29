@@ -421,7 +421,7 @@ footer {
 }
 .lft_container {
     padding: 10px 35px;
-    border-right: 1px solid #ffffff;
+    border-right: 0px solid #ffffff;
 }
 h3.heading,
 .h3.heading {
@@ -772,4 +772,12 @@ h3.heading > span,
 }
 .bs-example .panel-heading {
     border-radius: 0 !important;
+}
+#eventDescription + [data-readmore-toggle]{
+    font-weight: bold;
+    color: #0f1820;
+}
+.event-details  .organizer-logo {
+    width: 75px;
+    height: auto;
 }

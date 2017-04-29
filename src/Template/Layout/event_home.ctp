@@ -432,9 +432,9 @@ window.onclick = function(event) {
 
 <script src="https://npmcdn.com/tether@1.2.4/dist/js/tether.min.js"></script>
 <!-- <script src="https://maxcdn.bootstrapcdn.com/bootstrap/4.0.0-alpha.4/js/bootstrap.min.js"></script> -->
-<script src="http://maps.googleapis.com/maps/api/js?libraries=places&key=AIzaSyBN3LHzhmsORmwlmvR3fIdjTI-VJK5w-TA"></script>
+<script src="http://maps.googleapis.com/maps/api/js?libraries=places&key=AIzaSyCx2hb4R1uhaMbmlUAu1_lFasvl3gVHtnw"></script>
 
-<?php  echo $this->Html->script(['general','moment.min', 'daterangepicker', 'bootstrap-tagsinput', 'custom', 'jquery.slimscroll.min','jquery.validate.min', 'additional-methods']);?> 
+<?php  echo $this->Html->script(['general','moment.min', 'daterangepicker', 'bootstrap-tagsinput', 'readmore.min', 'jquery.slimscroll.min','jquery.validate.min', 'additional-methods', 'custom']);?> 
 
 
 <script type="text/javascript">
@@ -486,28 +486,3 @@ window.onclick = function(event) {
 </script>
 </body>
 </html>
-        
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-

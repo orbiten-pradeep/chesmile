@@ -155,11 +155,11 @@ $(".category_dropdown .checkbox").click(function(event){
         	else {
         		elt.tagsinput('removeAll');
 				var obj = { "id": catID, "text": catName };
-				console.log(obj);
+				//console.log(obj);
 				elt.tagsinput('add', obj);
 				$(".category_btn").html('<div id="mainMenu">Category <div class="mini-submenu"><span class="icon-bar"></span><span class="icon-bar"></span><span class="icon-bar"></span></div></div>');
 				$(".category_dropdown").hide();
-				console.log(elt.tagsinput('items'));
+				//console.log(elt.tagsinput('items'));
         	}
         },
         error: function (tab) {
@@ -752,6 +752,18 @@ else if(ePage == 'add') {
 	})
 }
 else if(ePage == 'view') {
+	/*$('#eventDescription').readmore({
+	  speed: 75,
+	  lessLink: '<a href="#">Read less</a>',
+	  moreLink: '<a href="#">Read more</a>',
+	  collapsedHeight: 100
+	});*/
+
+	$('#eventDescription').slimScroll({ 
+		height: '150px', 
+		allowPageScroll: true
+  	});
+
 	function validateEmail(email) {
 	    var re = /^(([^<>()\[\]\\.,;:\s@"]+(\.[^<>()\[\]\\.,;:\s@"]+)*)|(".+"))@((\[[0-9]{1,3}\.[0-9]{1,3}\.[0-9]{1,3}\.[0-9]{1,3}])|(([a-zA-Z\-0-9]+\.)+[a-zA-Z]{2,}))$/;
 	    return re.test(email);

@@ -32,27 +32,38 @@ a {
 }
 .img-overlay{
     border: 1px solid #e6e9ed;
-background-color: #fafafa;
-filter: grayscale(1);
--webkit-filter: grayscale(1);
--moz-filter: grayscale(1);
--o-filter: grayscale(1);
--ms-filter: grayscale(1);
+    background-color: #fafafa;
+    filter: grayscale(1);
+    -webkit-filter: grayscale(1);
+    -moz-filter: grayscale(1);
+    -o-filter: grayscale(1);
+    -ms-filter: grayscale(1);
 }
 
 .img-overlay:hover{
-filter: grayscale(0);
--webkit-filter: grayscale(0);
--moz-filter: grayscale(0);
--o-filter: grayscale(0);
--ms-filter: grayscale(0);
--webkit-transition: all 0.3s ease-in-out;
--moz-transition: all 0.3s ease-in-out;
--o-transition: all 0.3s ease-in-out;
--ms-transition: all 0.3s ease-in-out;
-transition: all 0.3s ease-in-out;
-opacity: 0.7;
+    filter: grayscale(0);
+    -webkit-filter: grayscale(0);
+    -moz-filter: grayscale(0);
+    -o-filter: grayscale(0);
+    -ms-filter: grayscale(0);
+    -webkit-transition: all 0.3s ease-in-out;
+    -moz-transition: all 0.3s ease-in-out;
+    -o-transition: all 0.3s ease-in-out;
+    -ms-transition: all 0.3s ease-in-out;
+    transition: all 0.3s ease-in-out;
+    opacity: 0.7;
 }
+.address-info p {
+    font-size: 13px;
+    margin-bottom: 5px;
+}
+.address-info {
+    margin: 10px 10px 15px 10px !important;
+}
+address {
+    margin-bottom: 0 !important;
+}
+
 </style>
 
 <?php
@@ -88,9 +99,9 @@ else {
         ?>
 
         <div class="row">
-            <div class="col-sm-8 lft_container">
-                <h2><img src="<?=$organizerLogoImageUrl?>" class="img-thumbnail profile-img"><?= h($event->OrganizersName) ?></h2>
-                <p><?= $this->Text->autoParagraph(h($event->descriptioin));?></p>
+            <div class="col-sm-8 lft_container event-details">
+                <h2><img src="<?=$organizerLogoImageUrl?>" class="img-thumbnail profile-img organizer-logo"><?= h($event->OrganizersName) ?></h2>
+                <div id="eventDescription"><?= $this->Text->autoParagraph(h($event->descriptioin));?></div>
                 <p class="margin25"><span class="glyphicon glyphicon-calendar calender_txt" aria-hidden="true"></span><?= h($event->date) ?></p>
                 <p>
                     <span class="glyphicon glyphicon-time time_txt" aria-hidden="true"></span><?= h($event->time) ?>
@@ -103,21 +114,18 @@ else {
             ?>
             <div class="col-sm-4 text-center rgt_container">
                 <address>
-                    <script src='https://maps.googleapis.com/maps/api/js?v=3.exp'></script><div style='overflow:hidden;height:440px;width:630px;'><div id='gmap_canvas' style='height:440px;width:700px;'></div><div><small><a href="http://embedgooglemaps.com">embed google maps</a></small></div><div><small><a href="https:/disclaimergenerator.net">disclaimer example</a></small></div><style>#gmap_canvas img{max-width:none!important;background:none!important}</style></div><script type='text/javascript'>function init_map(){var myOptions = {zoom:10,center:new google.maps.LatLng(<?=$geoCode;?>),mapTypeId: google.maps.MapTypeId.ROADMAP};map = new google.maps.Map(document.getElementById('gmap_canvas'), myOptions);marker = new google.maps.Marker({map: map,position: new google.maps.LatLng(<?=$geoCode;?>)});infowindow = new google.maps.InfoWindow({content:''});google.maps.event.addListener(marker, 'click', function(){infowindow.open(map,marker);});infowindow.open(map,marker);}google.maps.event.addDomListener(window, 'load', init_map);</script>
+                    <script src='https://maps.googleapis.com/maps/api/js?v=3.exp'></script><div style='overflow:hidden;height:330px;width:630px;'><div id='gmap_canvas' style='height:330px;width:700px;'></div><div><small><a href="http://embedgooglemaps.com">embed google maps</a></small></div><div><small><a href="https:/disclaimergenerator.net">disclaimer example</a></small></div><style>#gmap_canvas img{max-width:none!important;background:none!important}</style></div><script type='text/javascript'>function init_map(){var myOptions = {zoom:10,center:new google.maps.LatLng(<?=$geoCode;?>),mapTypeId: google.maps.MapTypeId.ROADMAP};map = new google.maps.Map(document.getElementById('gmap_canvas'), myOptions);marker = new google.maps.Marker({map: map,position: new google.maps.LatLng(<?=$geoCode;?>)});infowindow = new google.maps.InfoWindow({content:''});google.maps.event.addListener(marker, 'click', function(){infowindow.open(map,marker);});infowindow.open(map,marker);}google.maps.event.addDomListener(window, 'load', init_map);</script>
                 </address>
-                <address>
-                <div class="text-center"><span class="glyphicon glyphicon-pushpin" aria-hidden="true"></span></div>
-                   <!-- <strong>Kishore</strong>
-                    <br>3481 Melrose Place
-                    <br>Beverly Hills, CA 90210
-                    <br> -->
-                   <!--  <?= $this->Text->autoParagraph(h($event->Venue)); ?> -->
-                   <br><?php echo $address->address_1. ", ".$address->address_2.","; ?>
-                    <br><?php echo $address->landmark. ", ".$address->areaname.","; ?>
-                    <br><?php echo $address->city.", ".$address->state.", ".$address->country; ?>
-                    <br><?= h($event->contact_number) ?>
-                    <br><?= h($event->mobile_number) ?>
-                    <br>
+                <address class="address-info">
+                    <p class="text-center"><span class="glyphicon glyphicon-pushpin" aria-hidden="true"></span></p>
+                    <p>
+                        <?php echo empty(!$address->address_1) ? $address->address_1. ", " : ''; ?>
+                        <?php echo empty(!$address->address_2) ? $address->address_2. ", " : ''; ?>
+                        <?php echo empty(!$address->landmark) ? $address->landmark. ", " : ''; ?>
+                        <?php echo empty(!$address->areaname) ? $address->areaname : ''; ?>
+                    </p>
+                    <p><?php echo $address->city; ?></p>
+                    <p><?php echo h($event->contact_number).", ".h($event->mobile_number) ?></p> 
                 </address>
             </div>
         </div>
