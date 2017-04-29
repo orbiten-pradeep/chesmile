@@ -144,7 +144,7 @@ class UsersController extends AppController
     {
         $this->request->allowMethod(['post', 'delete']);
         $user = $this->Users->get($id);
-        if ($this->Users->delete($user)) {
+        if ($this->Users->updateAll(['active' => '2'], ['id' => $id])) {
             $this->Flash->success(__('The user has been deleted.'));
         } else {
             $this->Flash->error(__('The user could not be deleted. Please, try again.'));
@@ -313,7 +313,7 @@ class UsersController extends AppController
 			)
 		));
 		$userData = $query->first();
-		if( !empty($userData))
+		if(isset($userData))
 		{
 			if ($userData['active'] == false)
             {
