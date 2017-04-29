@@ -761,7 +761,9 @@ else if(ePage == 'view') {
 
 	$('#eventDescription').slimScroll({ 
 		height: '150px', 
-		allowPageScroll: true
+		allowPageScroll: true,
+		touchScrollStep: 10,
+		wheelStep : 50,
   	});
 
 	function validateEmail(email) {

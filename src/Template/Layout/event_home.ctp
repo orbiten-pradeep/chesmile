@@ -203,7 +203,7 @@ background-color: #286090;
   <input type="hidden" id="eventIndexUrl" name="event_index_url" value="<?php echo $this->Url->build(array('controller' => 'events', 'action' => 'index'));?>">
   <input type="hidden" id="event_view_url" name="event_view_url" value="<?php echo $this->Url->build(array('controller' => 'events', 'action' => 'view'));?>">
   <input type="hidden" id="search_area_url" name="search_area_url" value="<?php echo $this->Url->build(array('controller' => 'events', 'action' => 'search'));?>">
-  <input type="hidden" id="search_etitle_url" name="search_etitle_url" value="<?php echo $this->Url->build(array('controller' => 'events', 'action' => 'search'));?>">
+  <input type="hidden" id="search_etitle_url" name="search_etitle_url" value="<?php echo $this->Url->build(array('controller' => 'events', 'action' => 'searchbyeventtitle'));?>">
   <input type="hidden" id="invite_sendmail_url" name="invite_sendmail_url" value="<?php echo $this->Url->build(array('controller' => 'events', 'action' => 'sendemail'));?>">
   <input type="hidden" id="filterDateVal" name="filterDateVal" value="">
   <input type="hidden" id="apiAction" name="apiAction" value="">
