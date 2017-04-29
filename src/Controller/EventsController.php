@@ -864,6 +864,21 @@ class EventsController extends AppController
 		}
 	}
 
+	public function searchbyeventtitle() 
+	{
+        if ($this->request->is('ajax')) {
+            $this->autoRender = false;            
+            $title = $this->request->query('term');            
+            $results = $this->Events->find('all', array('conditions' => array('title LIKE ' => '%'.$title.'%')));
+            
+            $resultArr = array();
+            foreach($results as $result) {
+               $resultArr[] = array('label' =>$result['title'] , 'value' => $result['title'] );
+            }
+            echo json_encode($resultArr);              
+		}
+	}
+
 	public function eventlist() 
 	{    
 		if ($this->request->is('ajax')) {
@@ -877,12 +892,20 @@ class EventsController extends AppController
 	        	if(isset($this->request->data['category']) && $this->request->data['category'] !='') {
 	        		$category = $this->request->data['category'];
 	        		$cond .= " AND e.categories_id IN ($category)";
+	        		$filter = true;
 	        	}
 
 	        	if(isset($this->request->data['area']) && $this->request->data['area'] !='') {
 	        		$area = $this->request->data['area'];
 	        		$joins .= " LEFT JOIN address ad ON ad.events_id = e.id";
 		        	$cond .= " AND ad.areaname = '".$area."'";
+		        	$filter = true;
+	        	}
+
+	        	if(isset($this->request->data['eTitle']) && $this->request->data['eTitle'] !='') {
+	        		$eTitle = $this->request->data['eTitle'];
+		        	$cond .= " AND e.title like '%".$eTitle."%'";
+		        	$filter = true;
 	        	}
 	        	
 	        	if(isset($this->request->data['action']) && $this->request->data['action'] !='') {
@@ -929,22 +952,10 @@ class EventsController extends AppController
 	        }
 	        if(!$filter) {
 		        $cond .= " AND e.date > DATE_ADD(CURDATE(),INTERVAL -1 DAY)";
-	        }
-            /*$results = $this->Events
-            ->find('all', [
-    			'limit' => 200, 
-    			'conditions' => array(array($catCond), $dateCond),
-		        'order' => "Events.created DESC"
-    		])
-    		->select(['categories.name', 'likes_count' => $sub_query])
-    		->select($this->Events)
-    		->leftJoin('categories', 'categories.id = Events.categories_id');*/
-            //echo "<pre>";print_r($results);echo "</pre>";
+	        } 
 
-            $conn = ConnectionManager::get('default');
-            /*$query = "SELECT e.*, c.name as category_name, c.color as category_color, (SELECT count(l.events_id) FROM likes l WHERE l.events_id = e.id GROUP BY l.events_id) as likes_count FROM events e LEFT JOIN categories c ON c.id = e.categories_id $joins WHERE 1 $cond"; */
-             $query = "SELECT e.*, c.name as category_name, c.color as category_color, (SELECT count(l.events_id) FROM likes l WHERE l.events_id = e.id GROUP BY l.events_id) as likes_count FROM events e LEFT JOIN categories c ON c.id = e.categories_id $joins WHERE e.active = 1 $cond";
-            //echo $query;
+            $conn = ConnectionManager::get('default'); 
+            $query = "SELECT e.*, c.name as category_name, c.color as category_color, (SELECT count(l.events_id) FROM likes l WHERE l.events_id = e.id GROUP BY l.events_id) as likes_count FROM events e LEFT JOIN categories c ON c.id = e.categories_id $joins WHERE e.active = 1 $cond";
 
             $stmt = $conn->execute($query);
             $results = $stmt->fetchAll('assoc');

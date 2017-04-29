@@ -84,7 +84,11 @@ max-height: 300px;
                         <div class="f-item filter-area">
                             <label></label>
                             <span class="glyphicon glyphicon-remove filter-area-clear"></span>
-                        </div>                        
+                        </div>
+                        <div class="f-item filter-etitle">
+                            <label></label>
+                            <span class="glyphicon glyphicon-remove filter-etitle-clear"></span>
+                        </div>                   
                     </div>
                     <form id="searchbyarea" class="sx_location">
                         <!--  <div class="ui-widget">
@@ -99,10 +103,10 @@ max-height: 300px;
                         </div>
                     </form>
 
-                    <form>
+                    <form id="searchbytitle" >
                         <div class="form-group"> <span class="twitter-typeahead" style="position: relative; display: inline-block;">
                           <input class="tt-hint dropdown_hint" type="text" autocomplete="off" spellcheck="off" disabled style="">
-                           <?php echo $this->Form->input('areaname', array('id' => 'homeAutocomplete', 'required','class' => 'form-control tt-query dropdown_input','label' => false,'placeholder' => 'Search by event title')); ?>
+                           <?php echo $this->Form->input('eventTitle', array('id' => 'eTitleAutocomplete', 'required','class' => 'form-control tt-query dropdown_input','label' => false,'placeholder' => 'Search by event title')); ?>
                           <span style="" class="dropdown_txt1"></span> 
                           <span class="tt-dropdown-menu" style="position: absolute; top: 100%; left: 0px; z-index: 100; display: none;"></span>
                           </span>
