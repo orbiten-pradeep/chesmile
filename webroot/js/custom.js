@@ -748,3 +748,51 @@ else if(ePage == 'add') {
 	    });
 	})
 }
+else if(ePage == 'view') {
+	function validateEmail(email) {
+	    var re = /^(([^<>()\[\]\\.,;:\s@"]+(\.[^<>()\[\]\\.,;:\s@"]+)*)|(".+"))@((\[[0-9]{1,3}\.[0-9]{1,3}\.[0-9]{1,3}\.[0-9]{1,3}])|(([a-zA-Z\-0-9]+\.)+[a-zA-Z]{2,}))$/;
+	    return re.test(email);
+	}	
+	function sendemail(eventid, e) {
+       $("#statusMsg").html("");
+       var email = document.getElementById("invite").value;
+        if(email === "") {
+        	$("#statusMsg").html('<div class="alert alert-danger">Please Enter An Email ID.</div>');
+        	$("#invite").focus();
+            return false;
+        }
+        else {
+        	if (!validateEmail(email)) { 
+        		$("#statusMsg").html('<div class="alert alert-danger">Please Enter An Valid Email ID.</div>');
+	        	$("#invite").focus();
+	            return false;
+        	}
+        	else {
+	        	$.ajax({
+		            type: "POST",
+		            data: {
+		                "eventid": eventid,
+		                "email": email
+		            },
+		            ContentType: 'application/json',
+		            dataType: 'json',
+		            beforeSend: function() {
+		            	$("#invite").attr("readonly","readonly");
+		            	$("#statusMsg").html('<div class="alert alert-info">Please wait.. Inviting message sending!!!</div>');
+		            },
+		            url: $("#invite_sendmail_url").val(),
+		            success: function(data) {
+		               $("#statusMsg").html('<div class="alert alert-success">Invited messages sent to friends succesfully!!!</div>');
+		               $("#invite").attr("readonly","");
+		            },
+		            error: function(tab) {
+		                $("#statusMsg").html('<div class="alert alert-danger">Something went wrong. Please try again!!!</div>');
+			        	$("#invite").focus();
+			        	$("#invite").removeAttr("readonly");
+			            return false;
+		            }
+		        });
+        	}
+        }        
+    }
+}

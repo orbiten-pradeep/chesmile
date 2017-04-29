@@ -234,7 +234,7 @@ else {
                               <div class="form-group">
                                 <input type="email" class="form-control" id="invite" placeholder="Email address">
                               </div>
-                              
+                              <div id="statusMsg"></div>
                               <button  onclick="sendemail(<?php echo $event->id; ?>);" class="btn btn-primary form-control">Invite Friends</button>
                         </div>                          
                     <div class="clearfix"></div>
@@ -258,39 +258,7 @@ else {
 
             </div>
     </div>   
-
-    <script type="text/javascript">
-
-    function sendemail(eventid, e) {
-        
-       var email = document.getElementById("invite").value;
-        if(email === "")
-        {
-            alert("Please Enter An Email id");
-            return false;
-        }
-        $.ajax({
-            type: "POST",
-            data: {
-                "eventid": eventid,
-                "email": email
-            },
-            ContentType: 'application/json',
-            dataType: 'json',
-            url: "<?php echo $this->Url->build(['action' =>'sendemail']); ?>",
-            success: function(data) {
-                document.getElementById("invite").value = "";
-                alert('Your Friend Invited');
-                //document.getElementById(eventid).textContent = data; 
-            },
-            error: function(tab) {
-                //$select.html('<option id="-1">none available</option>');
-            }
-        });
-        return false;
-    }
-
-</script>   
+ 
 <nav class="large-3 medium-4 columns" id="actions-sidebar">
 <ul class="side-nav">
 <?php if($u_id == $event->user_id){ ?>

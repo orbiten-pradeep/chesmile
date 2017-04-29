@@ -464,6 +464,14 @@ h3.heading > span,
 .invite_email {
     margin: 20px 0px;
 }
+.invite_email input {
+    border-radius: 0;
+}
+.invite_email .alert {
+    border-radius: 0;
+    padding: 5px;
+    font-size: 12px;    
+}
 .sub_category1 {
     display: none;
 }
