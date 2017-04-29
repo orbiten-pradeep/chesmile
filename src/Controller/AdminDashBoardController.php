@@ -18,7 +18,7 @@ class AdminDashBoardController extends AppController
      */
     public function index()
     {
-    	$this->viewBuilder()->layout('admin');
+    	//$this->viewBuilder()->layout('admin');
         //$adminDashBoard = $this->paginate($this->AdminDashBoard);
 
         //$this->set(compact('adminDashBoard'));

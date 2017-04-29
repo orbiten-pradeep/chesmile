@@ -361,7 +361,7 @@ class UsersController extends AppController
 				$email_inp=$this->request->data['email'];
 				$fu=$this->Users->find('all',array('conditions'=>array('email'=>$email_inp)));
 				$fu = $fu->first();
-				if(!empty($fu))
+				if(isset($fu))
 				{
 					if($fu['Active'] == true)
 					{
@@ -385,11 +385,6 @@ class UsersController extends AppController
 						    $email->cc('admin@chennaismile.com');
 						    $email->subject($subject);
 							$email->viewVars(['url' => $url]);
-						    // Always try to write clean code, so that you can read it :) :
-						    // $message = "Dear <span style='color:#666666'>" . $name . "</span>,<br/><br/>";
-						    // $message .= "<p>Click on the link below to Reset Your Password </p><br/>";
-						    // $message .= "<a href='$ms'>$ms</a><br/><br/>";
-						    // $message .= "<br/>Thanks, <br/>Support Team";
 						    $email->send();
 			            	
 			                $this->Flash->success(__('Check Your Email To Reset your password.'));
@@ -493,5 +488,33 @@ class UsersController extends AppController
 		echo json_encode($response);
     	exit;
     }
+
+    public function adminadd()
+    {
+    	$activation_key = Text::uuid();
+		$this->viewBuilder()->layout('signin');
+        $user = $this->Users->newEntity();
+        if ($this->request->is('post')) {
+        	//$this->request->data['activation_key'] = $activation_key = String::uuid();
+        	//$this->request->data['group_id'] = 4;
+        	$this->request->data['activation_key'] = $activation_key;
+        	$this->request->data['Active'] = '1';
+        	$user = $this->Users->patchEntity($user, $this->request->data);
+
+        	$this->loadModel('UserProfile');
+            $userProfile = $this->UserProfile->newEntity();
+
+            if ($this->Users->save($user)) {
+                $this->Flash->success(__('The user has been saved.'));
+                return $this->redirect(['action' => 'adminlogin']);
+            } else {
+                $this->Flash->error(__('The user could not be saved. Please, try again.'));
+            }
+        }
+        $groups = $this->Users->Groups->find('list', ['limit' => 200,'conditions' => array('role' => 'Admin')]);
+        $this->set(compact('user', 'groups'));
+        $this->set('_serialize', ['user']);
+    }
+
 	
 }
