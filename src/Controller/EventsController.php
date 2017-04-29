@@ -1141,10 +1141,37 @@ class EventsController extends AppController
         $this->set(compact('address', 'mediapartners', 'sponsors', 'number', 'likes', 'galaries'));
     }
 
-    public function isemailexist($email = null)
+    public function adminindex()
     {
+		//$this->viewBuilder()->layout('event_home');
+		$this->paginate = [
+            'contain' => ['Users', 'Categories',]
+        ];
+        $events = $this->paginate($this->Events);
+        $this->loadModel('Categories');
+        $categories_new = $this->Categories->find()->select(['Categories.name', 'Categories.id'])
+        	->where(['active' => 1]);
 
+        $this->loadModel('SubCategories');
+        $subCategories_new = $this->SubCategories->find('all', ['fields' => 'name',
+			    'conditions' => ['active' => 1]
+			]);
+        $this->loadModel('Address');
+        $eventss = array();
+        $i = 0;
+        foreach ($events as $event) {
+        	 $address= $this->Address->find('all', array('conditions' => array('events_id'=> $event['id'])));
+        	 $event['Address'] = $address->first();
+        	 $eventss[$i] =$event;
+        	 $i++;
+        }
+        
+        $users_id = $this->Auth->user('id');
+        $this->set(compact('eventss'));
+        $this->set(compact('address'));
+        $this->set('categories', $categories_new);
+        $this->set('usersId', $users_id);
+        $this->set(compact('subCategories_new'));
     }
-
 }
 
