@@ -426,6 +426,9 @@ function getEventList(params) {
 		        	var eventUrl = eventDetailsUrl + '/' + response[k].id;
 		        	var dispImgHmtl = '';
 		        	var dispImg = response[k].display;
+		        	var dtimeHtml = '';
+		        	dtimeHtml = moment(response[k].date).fromNow();
+
 		        	if(dispImg==''){
 		        		dispImgHmtl = '<img src="img/photos/1.jpg" alt="" style="width:280px;height:185px;">';
 		        	}
@@ -437,7 +440,7 @@ function getEventList(params) {
 		        					<div class="thumbnail">\
 							        	<div class="back">\
 								            <p class="pull-left tag">'+response[k].category_name+'</p>\
-								            <p class="pull-right post"></p>\
+								            <p class="pull-right post">'+dtimeHtml+'</p>\
 							            </div>'+dispImgHmtl+'\
 							            <div class="caption dance" style="background-color:#'+response[k].category_color+'">\
 							                <h4 class="event_txt"><a href="'+eventUrl+'" class="event-title">'+response[k].title+'</a></h4>\
