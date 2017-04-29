@@ -27,7 +27,7 @@ $cakeDescription = 'CakePHP: the rapid development php framework';
 
     <?= $this->Html->css('base.css') ?>
     <?= $this->Html->css('cake.css') ?>
-    <?= $this->Html->css('style.css') ?>
+    <?= $this->Html->css('style_old.css') ?>
 
     <?= $this->fetch('meta') ?>
     <?= $this->fetch('css') ?>
@@ -46,17 +46,16 @@ $cakeDescription = 'CakePHP: the rapid development php framework';
         <ul class="title-area large-3 medium-4 columns">
             <li class="name">
                 <h1><a href=""><?= $this->fetch('title') ?></a></h1>
+                <li><?= $this->Html->link(__('Events List'), ['controller' => 'events', 'action' => 'adminindex']) ?></li>
             </li>
         </ul>
         <div class="top-bar-section">
 	        <ul class="right">
-				<li><?php
-					$user = $this->request->session()->read('Auth.User');
-					if(!empty($user)) {
-						echo strtoupper($user['fullname']);
-					}
-				?></li>
-            	<li><?= $this->Html->link(__('My Profile'), ['controller' => 'UserProfile', 'action' => 'add']) ?></li>
+            	<li><?= $this->Html->link(__('Events List'), ['controller' => 'events', 'action' => 'adminindex']) ?></li>
+                <li><?= $this->Html->link(__('Users List'), ['controller' => 'Users', 'action' => 'index']) ?></li>
+                <li><?= $this->Html->link(__('List Groups'), ['controller' => 'Groups', 'action' => 'index']) ?></li>
+                <li><?= $this->Html->link(__('List Sub Categories'), ['controller' => 'SubCategories','action' => 'index']) ?></li>
+                <li><?= $this->Html->link(__('List Categories'), ['controller' => 'Categories', 'action' => 'index']) ?></li>
             	<li><?= $this->Html->link(__('Logout'), ['controller' => 'Users', 'action' => 'logout']) ?></li>
             </ul>
         </div>

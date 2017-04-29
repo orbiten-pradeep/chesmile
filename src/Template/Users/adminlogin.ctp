@@ -13,7 +13,7 @@
 			  <br>
 			  <?= $this->Form->submit(__('Login'), array('id' => 'Login', 'class' => 'btn btn-primary')) ?>
 			  <p class="tag" >not yet a user ? 
-			  <?= $this->Html->link(__('Sign Up'), ['controller' => 'Users', 'action' => 'add'], array('class' => 'uplink')) ?> it's easy</p>
+			  <?= $this->Html->link(__('Sign Up'), ['controller' => 'Users', 'action' => 'adminadd'], array('class' => 'uplink')) ?> it's easy</p>
 			 </div>
 			<!-- 
 			<div id="contents2">

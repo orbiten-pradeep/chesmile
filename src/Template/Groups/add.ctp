@@ -11,8 +11,9 @@
     <fieldset>
         <legend><?= __('Add Group') ?></legend>
         <?php
+            $role = ['Users' => 'Users', 'Admin' => 'Admin'];
             echo $this->Form->input('name');
-            echo $this->Form->input('role');
+            echo $this->Form->select('role', $role);
         ?>
     </fieldset>
     <?= $this->Form->button(__('Submit')) ?>
