@@ -81,7 +81,7 @@ class UsersController extends AppController
 				$email = new Email();
                 $email->transport('gmail');
 				//$email->setHelpers(['Html','Text']);
-                $subject = "Account Activation link send on your email";
+                $subject = "Your Activation link";
                 $name = $this->request->data['fullname'];
                 $to = trim($this->request->data['email']);
                 $activationUrl = Router::url(['controller' => 'users', 'action' => 'activate/' . $activation_key, '_full' => true ]);
@@ -95,7 +95,7 @@ class UsersController extends AppController
     			$email->viewVars(['name' => $name, 'activationUrl' => $activationUrl]);
     			$email->send();
 
-                $this->Flash->success(__('The user has been saved.'));
+                $this->Flash->success(__('Your account is activated successfully. Login Now'));
                 return $this->redirect(['action' => 'login']);
             } else {
                 $this->Flash->error(__('The user could not be saved. Please, try again.'));
@@ -162,7 +162,7 @@ class UsersController extends AppController
 	            $this->Auth->setUser($user);
 	            return $this->redirect($this->Auth->redirectUrl());
 	        }
-	        $this->Flash->error(__('Your username or password was incorrect.'));
+	        $this->Flash->error(__('Username or Password is wrong! Please try again'));
 	    }
 /*	    $activation_key = Text::uuid();
 	    $user = $this->Users->newEntity();
@@ -387,7 +387,7 @@ class UsersController extends AppController
 							$email->viewVars(['url' => $url]);
 						    $email->send();
 			            	
-			                $this->Flash->success(__('Check Your Email To Reset your password.'));
+			                $this->Flash->success(__('Email has been sent to reset your password'));
 			                return $this->redirect(['action' => 'login']);
 							//============EndEmail=============//
 						}
@@ -427,7 +427,7 @@ class UsersController extends AppController
 					$user = $this->Users->patchEntity($user, $this->request->data);
 					if($this->Users->save($user))
 					{
-						$this->Flash->success(__('Password Has been Updated'));
+						$this->Flash->success(__('Password changed successfully'));
 						$this->redirect(array('controller'=>'users','action'=>'login'));
 					}
 				}
