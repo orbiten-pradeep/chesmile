@@ -430,11 +430,11 @@ function getEventList(params) {
 		        	dtimeHtml = moment(response[k].date).fromNow();
 
 		        	if(dispImg==''){
-		        		dispImgHmtl = '<img src="img/photos/1.jpg" alt="" style="width:280px;height:185px;">';
+		        		dispImgHmtl = '<img src="img/photos/1.jpg" alt="" style="height:185px;">';
 		        	}
 		        	else {
 		        		var imgSrc = "img/display/"+dispImg;
-		        		dispImgHmtl = '<img src="'+imgSrc+'" alt="" onerror="this.src=\'img/photos/1.jpg\'" style="width:280px;height:185px;">';
+		        		dispImgHmtl = '<img src="'+imgSrc+'" alt="" onerror="this.src=\'img/photos/1.jpg\'" style="height:185px;">';
 		        	}
 		        	html += '<div class="col-sm-4 col-lg-4 col-md-4 card-size">\
 		        					<div class="thumbnail">\
