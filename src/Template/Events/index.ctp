@@ -11,20 +11,20 @@
 and (max-width: 460px){
 .card-size {
     max-width: none !important;
-    max-height: none !important;
+    /*max-height: none !important;*/
 }
 }
 @media (max-width: 1920px){
 .card-size{
     max-width: 311px;
-    max-height: 334px;
+    /*max-height: 334px;*/
 }
 }
 @media (max-width: 1366px)
 {
   .card-size {
     max-width: 274px;
-    max-height: 310px;
+    /*max-height: 310px;*/
 }
 }
 
@@ -32,7 +32,7 @@ and (max-width: 460px){
 {
  .card-size {
 max-width: 259px;
-max-height: 300px;
+/*max-height: 300px;*/
 }
 }
 
