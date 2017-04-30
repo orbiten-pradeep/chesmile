@@ -203,6 +203,30 @@ label {
     font-size: 11px;
     font-style: normal;
 }
+
+
+  .modal-content{
+    border-radius: 0px !important;
+    border: 1px solid #999 !important;
+    box-shadow: 0 0px 0px rgba(0,0,0,.5) !important;
+  }
+
+  .close{
+    text-shadow: none !important;
+    opacity: 3 !important;
+  }
+
+  .closebtn{
+    color: white !important;
+    background-color: #4abac5 !important;
+    border: none !important;
+    border-radius: 0px !important;
+    margin-top: -30px;
+  }
+
+.text{
+  color:white;
+}
 </style>
 <!-- Login Container -->
 <div class="container cs-header-container col-xs-12 col-sm-12 col-md-12 col-lg-12  ">
@@ -259,10 +283,55 @@ label {
     <?= $this->Form->end() ?>
         <!-- </form> -->
           <!-- Modal -->
+
+
+          <div class="container">
+  <!-- Trigger the modal with a button -->
+ <!--  <button type="button" class="btn btn-info btn-lg" id="alertbox">Click here</button> -->
+
+  <!-- Modal -->
   <div class="modal fade" id="myModal" role="dialog">
     <div class="modal-dialog">
     
       <!-- Modal content-->
+      <div class="modal-content" style="background-color: #474747; color: #f2f2f2; width: 500px; left: 50px; ">
+        <div class="modal-header" style="border-bottom: none;">
+          <button type="button" class="close" data-dismiss="modal" style="color: #4abac5 !important;">&times;</button>
+          <h4 class="modal-title">Forgot Password?</h4>
+        </div>
+        <div class="modal-body">
+          <?= $this->Form->create('', array('id' => 'forgotpassform', 'url' => ['action' => 'forgetpassword'])) ?>
+
+           <div class="col-xs-9 col-sm-9 col-md-9 col-lg-10">
+            <div class="form-group float-label-control">
+             
+             <label for="">Email Address</label>
+             <?= $this->Form->input('email', array('div' => false,'id' => 'email', 'class' => 'form-control form-element text','label' => false,'placeholder' => 'Enter your email address', 'required' => true)) ?>
+            </div>
+        </div>
+
+        <div class="col-xs-9 col-sm-9 col-md-9 col-lg-10">
+          <div class="form-group text-center">
+          <?= $this->Form->submit(__('Recover'), array('id' => 'Login', 'class' => 'btn btn-primary btn-lg cs-signup-button')) ?>
+
+          </div>
+        </div>
+  
+    <?= $this->Form->end() ?>
+
+        </div>
+        <div class="modal-footer" style="border-top: none;">
+         <!--  <button type="button" class="btn btn-default closebtn" data-dismiss="modal">Close</button> -->
+        </div>
+      </div>
+      
+    </div>
+  </div>
+  
+</div>
+<!--   <div class="modal fade" id="myModal" role="dialog">
+    <div class="modal-dialog">
+    
       <div class="modal-content"  style="background-color: #E2E2E2;">
         <div class="modal-header">
           <button type="button" class="close" data-dismiss="modal">&times;</button>
@@ -273,10 +342,9 @@ label {
       
         <div class="col-xs-9 col-sm-9 col-md-9 col-lg-10">
             <div class="form-group float-label-control">
-             <!-- <?= $this->Form->input('email', array('id' => 'email', 'class' => 'form-control cs-signup-field cs-border-radius-none','label' => false,'placeholder' => 'Email Address')) ?> -->
+             
              <label for="">Email Address</label>
-             <?= $this->Form->input('email', array('div' => false,'id' => 'email', 'class' => 'form-control form-element','label' => false,'placeholder' => 'Enter email', 'required' => true)) ?>
-              <!-- <input type="email" name="email" id="email" tabindex="3" class="form-control cs-signup-field cs-border-radius-none" required="" placeholder="Email Address"> -->
+             <?= $this->Form->input('email', array('div' => false,'id' => 'email', 'class' => 'form-control form-element','label' => false,'placeholder' => 'Enter your email address', 'required' => true)) ?>
             </div>
         </div>
 
@@ -284,9 +352,6 @@ label {
         <div class="col-xs-9 col-sm-9 col-md-9 col-lg-10">
           <div class="form-group text-center">
           <?= $this->Form->submit(__('Recover'), array('id' => 'Login', 'class' => 'btn btn-primary btn-lg cs-signup-button')) ?>
-          <!-- <?= $this->Form->button(__('Create Account'), array('id' => 'Login', 'class' => 'btn btn-primary btn-lg cs-signup-button')) ?> -->
-        
-              <!-- <button type="button" class="btn btn-primary btn-lg cs-signup-button" tabindex="8">Create a new account</button> --> 
 
           </div>
         </div>
@@ -294,12 +359,11 @@ label {
     <?= $this->Form->end() ?>
         </div>
         <div class="modal-footer">
-         <!--  <button type="button" class="btn btn-default" data-dismiss="modal">Close</button> -->
         </div>
       </div>
       
     </div>
-  </div>
+  </div> -->
 
 
 <!--     </div> -->
@@ -340,7 +404,7 @@ label {
                 <!-- <button class="btn btn-primary btn-lg cs-signup-button" type="submit">Create Account</button> -->
             <!-- </form> --><!-- /form -->
             <div class="forgotpass" style=" margin-top: 10px;">
-              <div style=" color: #000;">Not a member? <a class="viewSignupForim">Join Now</a></div>
+              <div style=" color: #000; margin-top: 10px;">Not a member? <a class="viewSignupForim">Join Now</a></div>
            </div>
             <?= $this->Form->end() ?>
               
@@ -385,7 +449,7 @@ label {
                 <!-- <button class="btn btn-primary btn-lg cs-signup-button" type="submit">Create Account</button> -->
 
                  <div class="forgotpass" style=" margin-top: 10px;">
-                    <div style=" color: #000;"><a class="viewSignInForim">Back to SignIn</a></div>
+                    <div style="color: #000; margin-top: 10px;"><a class="viewSignInForim">Back to SignIn</a></div>
                  </div>
             <!-- </form> --><!-- /form -->
             <?= $this->Form->end() ?>
