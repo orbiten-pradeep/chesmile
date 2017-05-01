@@ -1,8 +1,13 @@
- <style type="text/css">
+<style type="text/css">
   .modal-content{
     border-radius: 0px !important;
     border: 1px solid #999 !important;
     box-shadow: 0 0px 0px rgba(0,0,0,.5) !important;
+    background-color: #474747;
+    color: #f2f2f2;
+     height: 150px;
+      width: 500px;
+     left: 50px;
   }
 
   .close{
@@ -16,6 +21,24 @@
     border: none !important;
     border-radius: 0px !important;
     margin-top: -30px;
+  }
+
+  @media only screen and (min-width: 320px)
+  and (max-width: 460px){
+    .modal-content{
+       height: auto;
+      width: auto;
+     left: auto;
+     font-size: 13px;
+    }
+
+  }
+  @media only screen and (max-width: 320px)
+  {
+    .modal-content{
+     font-size: 11px;
+    }
+
   }
 
 </style>
@@ -35,7 +58,7 @@
     <div class="modal-dialog">
     
       <!-- Modal content-->
-      <div class="modal-content" style="background-color: #474747; color: #f2f2f2; height: 150px; width: 500px; left: 50px; ">
+      <div class="modal-content">
         <div class="modal-header" style="border-bottom: none;">
           <button type="button" class="close" data-dismiss="modal" style="color: #4abac5 !important;">&times;</button>
           <h4 class="modal-title"></h4>
