@@ -197,7 +197,6 @@ background-color: #286090;
 <?php echo $this->Html->css(['style', 'custom', 'checkbox', 'daterangepicker', 'bootstrap-tagsinput']); ?>
 </head>
 <body>
-<nav class="navbar navbar-default">
   <input type="hidden" id="sub_category_api_url" name="sub_category_api_url" value="<?php echo $this->Url->build(array('controller' => 'events', 'action' => 'viewresult'));?>">
   <input type="hidden" id="event_list_url" name="event_list_url" value="<?php echo $this->Url->build(array('controller' => 'events', 'action' => 'eventlist'));?>">
   <input type="hidden" id="eventIndexUrl" name="event_index_url" value="<?php echo $this->Url->build(array('controller' => 'events', 'action' => 'index'));?>">
@@ -211,27 +210,54 @@ background-color: #286090;
   <input type="hidden" id="areaSearch" name="areaSearch" value="">
   <input type="hidden" id="eventTitle" name="eventTitle" value="">
   <input type="hidden" id="customDate" name="customDate" value="">
-    <!-- Brand and toggle get grouped for better mobile display -->
-     <div class="navbar-header">
-      <button type="button" class="navbar-toggle collapsed" data-toggle="collapse" data-target="#bs-example-navbar-collapse-1" aria-expanded="false">
-        <span class="sr-only">Toggle navigation</span>
-        <span class="icon-bar"></span>
-        <span class="icon-bar"></span>
-        <span class="icon-bar"></span>
+  <input type="hidden" id="mobFilter" name="mobFilter" value="false">
+
+<nav class="navbar mobile-navbar one-edge-shadow navbar-default visible-xs">
+  <div class="navbar-header">
+    <div class="mobile-menu pull-right" id="mobileMenuBtn" data-direction='right'>
+      <button type="button" class="btn btn-default btn-sm">
+        <span class="glyphicon glyphicon-menu-hamburger"></span>
       </button>
-    <?php echo $this->Html->image('chennaismile-logo.png',array('alt' => 'Logo Chennai Smile','class' => 'img-responsive logores','url' => array('controller' => 'events', 'action' => 'index') )); ?>
+    </div>
+  
+
+  <div class="mobile-logo"><?php echo $this->Html->image('chennaismile-logo.png',array('alt' => 'Logo Chennai Smile','class' => 'img-responsive mobile-logo-img','url' => array('controller' => 'events', 'action' => 'index') )); ?></div>
+  </div>  
+</nav>
+
+<nav class="navbar navbar-default hidden-xs"> 
+    <div class="dropdown mobhide ipad-profile">
+      <?php 
+      $user = $this->request->session()->read('Auth.User');
+      if(!empty($user['Photo'])) {
+        echo $this->Html->image('profile/'.$user['Photo'],array('alt' => 'Logo Chennai Smile','width' => '41px', 'height' => '41px','class' => 'dropbtn','onclick' => 'smalldrop()')); 
+      } else {
+        echo $this->Html->image('profile_thumbnail.jpg',array('alt' => 'Logo Chennai Smile','class' => 'dropbtn','onclick' => 'smalldrop()')); 
+      }
+
+      ?> 
+      <div id="myDropdown" class="dropdown-content">
+        <?= $this->Html->link($this->Html->tag('i', '', array('class' => 'fa fa-user fa-fw')).'My Account', array('controller' => 'UserProfile', 'action' => 'add'), array('escape' => false)) ?>
+
+        <a href="#my-events" class="my-events"><i class="fa fa-calendar-o fa-fw"></i>My Events</a>
+        <a href="#liked-events" class="liked-events"><i class="fa fa-thumbs-up fa-fw"></i>Liked Events</a>
+      </div>
+    </div>
+
+    <div class="navbar-header">
+      <?php echo $this->Html->image('chennaismile-logo.png',array('alt' => 'Logo Chennai Smile','class' => 'img-responsive logores','url' => array('controller' => 'events', 'action' => 'index') )); ?>
     </div>
 
     <!-- Collect the nav links, forms, and other content for toggling -->
-  <div  class="collapse navbar-collapse col-md-offset-3" id="bs-example-navbar-collapse-1">
+  <div  class="col-md-offset-3" id="bs-example-navbar-collapse-1">
      <ul class="nav navbar-nav search-nav">
         <li class="dropdown category_btn">
             <label style="font-weight: normal;">Category</label>
             <div class="mini-submenu">
-            <span class="icon-bar"></span>
-            <span class="icon-bar"></span>
-            <span class="icon-bar"></span>
-         </div>
+              <span class="icon-bar"></span>
+              <span class="icon-bar"></span>
+              <span class="icon-bar"></span>
+            </div>
         </li>
         <li class="search-box-li">
          <form class="navbar-form navbar-left" action="<?php echo $this->Url->build(['action' =>'index']);?>" method="post">
@@ -244,24 +270,7 @@ background-color: #286090;
         </form>
         </li>
         <li class="mobhide">
-          <div class="dropdown">
-          <?php 
-           $user = $this->request->session()->read('Auth.User');
-            if(!empty($user['Photo'])) {
-              echo $this->Html->image('profile/'.$user['Photo'],array('alt' => 'Logo Chennai Smile','width' => '41px', 'height' => '41px','class' => 'dropbtn','onclick' => 'smalldrop()')); 
-            }else {
-              echo $this->Html->image('profile_thumbnail.jpg',array('alt' => 'Logo Chennai Smile','class' => 'dropbtn','onclick' => 'smalldrop()')); 
-            }
-          
-          ?>
-          <!-- <img onclick="smalldrop()" class="dropbtn" src="img/profile_thumbnail.jpg"> -->
-                <div id="myDropdown" class="dropdown-content">
-               <?= $this->Html->link($this->Html->tag('i', '', array('class' => 'fa fa-user fa-fw')).'My Account', array('controller' => 'UserProfile', 'action' => 'add'), array('escape' => false)) ?>
-
-                <a href="#my-events" class="my-events"><i class="fa fa-calendar-o fa-fw"></i>My Events</a>
-                <a href="#liked-events" class="liked-events"><i class="fa fa-thumbs-up fa-fw"></i>Liked Events</a>
-                </div>
-            </div>
+         
         </li>
       </ul>
       <ul class="nav navbar-nav navbar-right">
@@ -317,48 +326,168 @@ background-color: #286090;
 
 
     </div><!-- /.navbar-collapse -->
-
-
-
-
   <!-- </div> --><!--.container-fluid-->
-
-
 </nav>  
-     <div class="container-fluid">
-        <div class="row btn-hide">
-          <a href="#past-events" class="btn btn-primary past-events">View past events</a>
-          <?= $this->Html->link(__('Create events'), ['controller' => 'events', 'action' => 'add'], array('class' => 'btn btn-primary pull-right')); ?>
-        </div>
-      </div>
-         <?php echo $this->Flash->render(); ?>
-         <?= $this->fetch('content') ?>
+<div class="container-fluid">
+  <div class="row btn-hide">
+  <a href="#past-events" class="btn btn-primary past-events">View past events</a>
+  <?= $this->Html->link(__('Create events'), ['controller' => 'events', 'action' => 'add'], array('class' => 'btn btn-primary pull-right')); ?>
+  </div>
+</div>
+<div class="container-content">
+  <?php echo $this->Flash->render(); ?>
+  <?= $this->fetch('content') ?>
+</div>
            
 
-           <div align="center" class="footer" style="font-size: 11px;">
-   
-        <div style="margin-bottom:3px; vertical-align:middle;" class="col-md-12">
-            <ul class="social-network social-circle social">
-                <li><a href="#" class="face" title="Facebook"><i class="fa fa-facebook"></i></a></li>
-                <li><a href="#" class="twit" title="Twitter"><i class="fa fa-twitter"></i></a></li>
-                <li><a href="#" class="google" title="Google +"><i class="fa fa-google-plus"></i></a></li>
-                <li><a href="#" class="instagram" title="Instagram"><i class="fa fa-instagram"></i></a></li>
-            </ul> 
+<div align="center" class="footer main-footer" style="font-size: 11px;">
+
+  <div style="margin-bottom:3px; vertical-align:middle;" class="col-md-12">
+    <ul class="social-network social-circle social">
+    <li><a href="#" class="face" title="Facebook"><i class="fa fa-facebook"></i></a></li>
+    <li><a href="#" class="twit" title="Twitter"><i class="fa fa-twitter"></i></a></li>
+    <li><a href="#" class="google" title="Google +"><i class="fa fa-google-plus"></i></a></li>
+    <li><a href="#" class="instagram" title="Instagram"><i class="fa fa-instagram"></i></a></li>
+    </ul> 
 
   </div>
-    <div>
-      <ul class="social" style="color:#ffffff !important;">
-                <li><?= $this->Html->link(__('About us'), ['controller' => 'events', 'action' => 'about'], array('class' => 'foot')); ?></li>
-                <li><?= $this->Html->link(__('Terms of service'), ['controller' => 'events', 'action' => 'terms'], array('class' => 'foot')); ?></li>
-                <li><?= $this->Html->link(__('Privacy Policy'), ['controller' => 'events', 'action' => 'privacy'], array('class' => 'foot')); ?></li>                
-                <li><?= $this->Html->link(__('Partner with us'), ['controller' => 'events', 'action' => 'partnerwith'], array('class' => 'foot')); ?></li>                
-                <li><?= $this->Html->link(__('Career'), ['controller' => 'events', 'action' => 'career'], array('class' => 'foot')); ?></li>                
-            </ul> 
-    </div>
-    <p style="" class="copyrights">Copyright © 2017 ChennaiSmile</p><!--End container-->
+  <div>
+    <ul class="social" style="color:#ffffff !important;">
+      <li><?= $this->Html->link(__('About us'), ['controller' => 'events', 'action' => 'about'], array('class' => 'foot')); ?></li>
+      <li><?= $this->Html->link(__('Terms of service'), ['controller' => 'events', 'action' => 'terms'], array('class' => 'foot')); ?></li>
+      <li><?= $this->Html->link(__('Privacy Policy'), ['controller' => 'events', 'action' => 'privacy'], array('class' => 'foot')); ?></li>                
+      <li><?= $this->Html->link(__('Partner with us'), ['controller' => 'events', 'action' => 'partnerwith'], array('class' => 'foot')); ?></li>                
+      <li><?= $this->Html->link(__('Career'), ['controller' => 'events', 'action' => 'career'], array('class' => 'foot')); ?></li>                
+    </ul> 
+  </div>
+  <p style="" class="copyrights">Copyright © 2017 ChennaiSmile</p><!--End container-->
 </div>
+<div class="mobile-footer visible-xs" id="mobFooter">
+  <div class="container">
+    <div class="left"><a href="javascript:;" id="mobileFilterCategoryBtn" ><span class="glyphicon glyphicon-menu-hamburger"></span> Menu</a></div>
+    <div class="right"><a href="javascript:;" id="mobileFilterBtn" data-direction='bottom'><span class="glyphicon glyphicon-filter"></span> Filter</a></div>
+  </div>
+</div>
+<div class="modal modal-mob-filter-cat fade">
+  <div class="modal-dialog">
+    <div class="modal-content">
+      <div class="modal-header">
+        <!--<button type="button" class="close" data-dismiss="modal"><span aria-hidden="true">&times;</span><span class="sr-only">Close</span></button>--> 
 
+        <div class="btn-group pull-right btn-group-sm" role="group">
+          <button type="button" class="btn btn-default" data-dismiss="modal">Close</button>
+          <button type="button" class="btn btn-default mob-cat-clear">Clear</button>
+          <button type="button" class="btn btn-primary mob-cat-apply">Apply</button>
+        </div>
 
+        <h4 class="modal-title">Category</h4>
+      </div>
+      <div class="modal-body">
+        <div class="mob-category-list">
+          <div class="form-group">
+            <input id="mobEventCategorySearch" type="text" class="form-control" placeholder="Search for events, parties, concerts and more">         
+          </div>
+          <ul class="list-group inner-mob-category-list"> 
+          <?php foreach ($categories as $key => $category): ?>          
+              <li class="list-group-item mob-cs-cat" data-id="<?php echo $category->id; ?>" data-text="<?php echo $category->name; ?>"><?php echo $category->name; ?></li>            
+          <?php endforeach; ?>
+          </ul>
+          <div class="mob-sub-category-list">
+
+          </div>
+        </div>
+      </div>
+      <div class="modal-footer">
+        <div class="btn-group pull-right btn-group-sm" role="group">
+          <button type="button" class="btn btn-default" data-dismiss="modal">Close</button>
+          <button type="button" class="btn btn-default">Clear</button>
+          <button type="button" class="btn btn-primary">Apply</button>
+        </div>
+      </div>
+    </div><!-- /.modal-content -->
+  </div><!-- /.modal-dialog -->
+</div><!-- /.modal -->
+<div class="modal modal-mob-filter fade">
+  <div class="modal-dialog">
+    <div class="modal-content">
+      <div class="modal-header">
+        <!--<button type="button" class="close" data-dismiss="modal"><span aria-hidden="true">&times;</span><span class="sr-only">Close</span></button>--> 
+
+        <div class="btn-group pull-right btn-group-sm" role="group">
+          <button type="button" class="btn btn-default" data-dismiss="modal">Close</button>
+          <button type="button" class="btn btn-default mob-clear-filter">Clear</button>
+          <button type="button" class="btn btn-primary mob-apply-filter">Apply</button>
+        </div>
+
+        <h4 class="modal-title">Filters</h4>
+      </div>
+      <div class="modal-body">
+        <div class="f-sections">
+            <div class="f-item filter-date">
+                <label></label>
+                <span class="glyphicon glyphicon-remove filter-date-clear"></span>
+            </div>
+            <div class="f-item filter-area">
+                <label></label>
+                <span class="glyphicon glyphicon-remove filter-area-clear"></span>
+            </div>
+            <div class="f-item filter-etitle">
+                <label></label>
+                <span class="glyphicon glyphicon-remove filter-etitle-clear"></span>
+            </div>                   
+        </div>
+        <form id="searchbyarea2" class="sx_location"> 
+            <div class="form-group"> <span class="twitter-typeahead" style="position: relative; display: inline-block;">
+              <input class="tt-hint dropdown_hint" type="text" autocomplete="off" spellcheck="off" disabled style="">
+               <?php echo $this->Form->input('areaname2', array('id' => 'homeAutocomplete2', 'required','class' => 'form-control tt-query dropdown_input','label' => false,'placeholder' => 'Search by location/Area')); ?>
+              <span style="" class="dropdown_txt1"></span> <span class="tt-dropdown-menu" style="position: absolute; top: 100%; left: 0px; z-index: 100; display: none;"></span></span>
+            </div>
+        </form>
+
+        <form id="searchbytitle2" >
+            <div class="form-group"> <span class="twitter-typeahead" style="position: relative; display: inline-block;">
+              <input class="tt-hint dropdown_hint" type="text" autocomplete="off" spellcheck="off" disabled style="">
+               <?php echo $this->Form->input('eventTitle2', array('id' => 'eTitleAutocomplete2', 'required','class' => 'form-control tt-query dropdown_input','label' => false,'placeholder' => 'Search by event title')); ?>
+              <span style="" class="dropdown_txt1"></span> 
+              <span class="tt-dropdown-menu" style="position: absolute; top: 100%; left: 0px; z-index: 100; display: none;"></span>
+              </span>
+            </div>
+        </form>
+
+        <a href="javascript:;" class="filterDate list-group-item" data="today">Today's Events</a>
+        <a href="javascript:;" class="filterDate list-group-item" data="tomorrow">Tomorrow's Events</a>
+        <a href="javascript:;" class="filterDate list-group-item" data="weekend">This Weekend Events</a>
+        <a href="javascript:;" class="filterDate list-group-item" data="month">This Month Events</a>
+        <br/>
+        <p class="text-primary">Specific Date Events</p>
+        <div id="mobreportrange"><i class="glyphicon glyphicon-calendar fa fa-calendar"></i> <span></span>
+        <b class="caret"></b>
+        </div>
+      </div>
+      <div class="modal-footer">
+        <div class="btn-group pull-right btn-group-sm" role="group">
+          <button type="button" class="btn btn-default" data-dismiss="modal">Close</button>
+          <button type="button" class="btn btn-default mob-clear-filter">Clear</button>
+          <button type="button" class="btn btn-primary mob-apply-filter">Apply</button>
+        </div>
+      </div>
+    </div><!-- /.modal-content -->
+  </div><!-- /.modal-dialog -->
+</div><!-- /.modal -->
+
+<div class="modal modal-mob-menus fade">
+  <div class="modal-dialog">
+    <div class="modal-content">
+      <div class="modal-body"> 
+          <ul class="list-group">
+            <li class="list-group-item"><a href="<?php echo $this->Url->build(array('controller' => 'events', 'action' => 'add'));?>" >Create Event</a></li>
+            <li class="list-group-item"><a href="<?php echo $this->Url->build(array('controller' => 'events'));?>#past-events" >Past Event</a></li>
+            <li class="list-group-item"><a href="<?php echo $this->Url->build(array('controller' => 'UserProfile', 'action' => 'add'));?>" >My Profile</a></li>
+          </ul>
+      </div> 
+    </div><!-- /.modal-content -->
+  </div><!-- /.modal-dialog -->
+</div><!-- /.modal -->
     
       <script type="text/javascript">
   function copyTextValue(subcat) {
@@ -378,7 +507,7 @@ background-color: #286090;
 <script>
 /* When the user clicks on the button, 
 toggle between hiding and showing the dropdown content */
-function smalldrop() {
+function smalldrop() { 
     document.getElementById("myDropdown").classList.toggle("show");
 }
 
@@ -434,7 +563,7 @@ window.onclick = function(event) {
 <!-- <script src="https://maxcdn.bootstrapcdn.com/bootstrap/4.0.0-alpha.4/js/bootstrap.min.js"></script> -->
 <script src="http://maps.googleapis.com/maps/api/js?libraries=places&key=AIzaSyCx2hb4R1uhaMbmlUAu1_lFasvl3gVHtnw"></script>
 
-<?php  echo $this->Html->script(['general','moment.min', 'daterangepicker', 'bootstrap-tagsinput', 'readmore.min', 'jquery.slimscroll.min','jquery.validate.min', 'additional-methods', 'custom']);?> 
+<?php  echo $this->Html->script(['general','moment.min', 'daterangepicker', 'bootstrap-tagsinput', 'readmore.min', 'jquery.slimscroll.min','jquery.validate.min', 'additional-methods', 'mobile-filters', 'custom']);?> 
 
 
 <script type="text/javascript">
@@ -468,7 +597,7 @@ window.onclick = function(event) {
         autoHeight();
         
         if ($(window).width() > 767) { 
-          $('.bootstrap-tagsinput').slimScroll({
+          $('.search-nav .bootstrap-tagsinput').slimScroll({
               axis: 'x',
               height: '42px',
               size: '7px',

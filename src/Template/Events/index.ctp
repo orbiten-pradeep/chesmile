@@ -62,16 +62,13 @@ max-width: 259px;
 <!-- <div class="container-fluid content"> -->
 <div class="container-fluid">
 <div class="row" style="margin-left: 0px;">
-    <div class="col-md-2">
-        <div class="panel bs-example side_panel">
+    <div class="col-sm-3 col-md-2"> 
+        <div class="panel bs-example side_panel hidden-xs">
             <div class="panel-heading">
-                <h3 class="panel-title">Filters                     
-
+                <h3 class="panel-title">Filters 
                     <a href="javascript:;" class="pull-right" id="filterDD"><i class="filter-dd-icon icon-chevron-right" data-toggle="tooltip" title="expand"></i></a>
-
                     <a href="javascript:;" class="pull-right" id="filterClearAll"><i class="icon-trash" data-toggle="tooltip" title="Clear"></i></a>
                 </h3>
-
             </div> <!-- <button type="button" class="btn btn-primary" data-toggle="popover" title="Popover title" data-content="Default popover">Popover</button> -->
                 
             <div class="panel-body filter-panel-body">
@@ -126,7 +123,7 @@ max-width: 259px;
             </div>
         </div>
     </div>
-    <div class="col-md-10 list_event content">
+    <div class="col-sm-9 col-md-10 list_event content">
         <div class="row" style="margin-right: 0px;" id="eventResponse">
         </div>
         <div class="loadingDiv"><div id="loading"></div></div>

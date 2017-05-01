@@ -66,6 +66,24 @@ $(document).ready(function() {
 		}
     });
 
+    $('#homeAutocomplete2').autocomplete({
+        source: $("#search_area_url").val(),
+        minLength: 1,
+		select: function (event, ui) {
+		    var value = ui.item.value;
+		    $("#areaSearch").val(value);
+
+		    $(".f-sections").css('display','inline-block');
+			$(".filter-area").css('display','inline-block');
+			$(".filter-area > label").html(value);
+
+			alert($("#mobFilter").val());
+	        if(!$("#mobFilter").val()){
+				getEventListByFilter();
+			}
+		}
+    });
+
     $('#eTitleAutocomplete').autocomplete({
         source: $("#search_etitle_url").val(),
         minLength: 1,
@@ -78,6 +96,24 @@ $(document).ready(function() {
 			$(".filter-etitle > label").html(value);
 
 			getEventListByFilter();
+		}
+    });
+
+    $('#eTitleAutocomplete2').autocomplete({
+        source: $("#search_etitle_url").val(),
+        minLength: 1,
+		select: function (event, ui) {
+		    var value = ui.item.value;
+		    $("#eventTitle").val(value);
+
+		    $(".f-sections").css('display','inline-block');
+			$(".filter-etitle").css('display','inline-block');
+			$(".filter-etitle > label").html(value);
+
+			alert($("#mobFilter").val());
+	        if(!$("#mobFilter").val()){
+				getEventListByFilter();
+			}
 		}
     });
 
@@ -202,7 +238,7 @@ $("#subCategoriesResp").on('click','label > input', function(event){
 	} else {
 		elt.tagsinput('remove', obj);
 	}
-	console.log(elt.tagsinput('items'));
+	//console.log(elt.tagsinput('items'));
 });
 
 $(".filterDate").click(function(){
@@ -215,22 +251,19 @@ $(".filterDate").click(function(){
 	$(".filter-date > label").html(vd);
 
 	$("#customDate").val('');
-	getEventListByFilter();
-});
 
-$(".filter-date-clear").click(function(){
-	$("#filterDateVal").val("");
-	$("#customDate").val("");
-	$(".filter-date").hide();
-	getEventListByFilter();
+	if(!$("#mobFilter").val()){
+		getEventListByFilter();
+	}
 });
-
+ 
 $("#filterClearAll").click(function(){
 	$("#filterDateVal").val("");
 	$("#customDate").val("");
 	$("#areaSearch").val("");
 	$("#eventTitle").val("");
 	$("#homeAutocomplete").val("");
+	$("#eTitleAutocomplete").val("");
 
 	$(".filter-area").hide();
 	$(".filter-date").hide();
@@ -298,7 +331,12 @@ $(".past-events").click(function(){
 function getEventListByFilter() {
 	var params = {};
 	//console.log(elt.tagsinput('items'));
-	var subCategories = elt.tagsinput('items');
+	if(!$("#mobFilter").val()){
+		var subCategories = elt.tagsinput('items');
+	} else {
+		var subCategories = mobElt.tagsinput('items');	
+	}
+	
 	var dateVal = $("#filterDateVal").val();
 	var customDate = $("#customDate").val();
 	var liked = $("#likeId").val();
@@ -399,7 +437,9 @@ $(function() {
 		$(".filter-date").css('display','inline-block');
 		$(".filter-date > label").html("selected date");
 
-        getEventListByFilter();
+		if(!$("#mobFilter").val()){
+			getEventListByFilter();
+		}       
 	});
     
 });
@@ -436,7 +476,7 @@ function getEventList(params) {
 		        		var imgSrc = "img/display/"+dispImg;
 		        		dispImgHmtl = '<img src="'+imgSrc+'" alt="" onerror="this.src=\'img/photos/1.jpg\'" style="height:185px;">';
 		        	}
-		        	html += '<div class="col-sm-4 col-lg-4 col-md-4 card-size">\
+		        	html += '<div class="col-sm-6 col-lg-4 col-md-4 card-size">\
 		        					<div class="thumbnail">\
 							        	<div class="back">\
 								            <p class="pull-left tag">'+response[k].category_name+'</p>\
