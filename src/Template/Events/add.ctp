@@ -894,8 +894,8 @@ input{
 
             <div class="form-group">
                 <label for="">Add Map Location</label>                
-                <input type="text" class="form-control map" id="googleMapID" name="google_map" placeholder="" readonly="">
-                <input type="button" class="btn launch-map" value="Launch Map" />
+                <input type="text" class="form-control map" id="googleMapID" name="google_map" placeholder="" readonly="" style="color: black !important;">
+                <input type="button" class="btn launch-map" value="Launch Map" style="background-color: #337AB7"; />
             </div>
 
             <!-- <div class="form-group float-label-control">
@@ -1001,7 +1001,7 @@ input{
       </div>
       <div class="modal-body">
         <div id="mapPanel">            
-            <input class="form-control text" id="city_country" type="textbox" value="Mylapore, Chennai">
+            <input class="form-control text" id="city_country" type="textbox" value="Mylapore, Chennai" style="color: black !important;">
             <input class="btn btn-md btn-primary botton" type="button" value="Geocode" onclick="codeAddress()">            
         </div>  
         <div id="mapCanvas" style="width: 100%; height: 350px;"></div>

@@ -3,7 +3,7 @@ use Cake\Routing\Router;
 use Cake\I18n\Time;
 ?>
 
-<script type='text/javascript' src='//platform-api.sharethis.com/js/sharethis.js#property=58fdbf6acaaba30012e7e564&product=sticky-share-buttons' async='async'></script>
+<!-- <script type='text/javascript' src='//platform-api.sharethis.com/js/sharethis.js#property=58fdbf6acaaba30012e7e564&product=sticky-share-buttons' async='async'></script> -->
 <style type="text/css">
     .icon{
         height: 120px; 

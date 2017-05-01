@@ -44,10 +44,10 @@ max-width: 259px;
     -webkit-transition: opacity .3s ease;
     -o-transition: opacity .3s ease;
     z-index: 2;
-    background-color: rgba(0,0,0,.6);
+    background: linear-gradient(to top, rgba(0, 0, 0, 0) 0%, rgba(0,0,0,.6) 50%);
     /*top: 0;*/
     width: 100%;
-    height: 10%;
+    height: 12%;
     /*bottom: 0;*/
 }
 
