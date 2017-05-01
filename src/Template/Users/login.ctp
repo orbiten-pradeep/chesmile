@@ -404,7 +404,7 @@ label {
                 <!-- <button class="btn btn-primary btn-lg cs-signup-button" type="submit">Create Account</button> -->
             <!-- </form> --><!-- /form -->
             <div class="forgotpass" style=" margin-top: 10px;">
-              <div style=" color: #000; margin-top: 10px;">Not a member? <a class="viewSignupForim">Join Now</a></div>
+              <div style=" color: #000; margin-top: 25px;">Not a member? <a class="viewSignupForim">Join Now</a></div>
            </div>
             <?= $this->Form->end() ?>
               
@@ -449,7 +449,7 @@ label {
                 <!-- <button class="btn btn-primary btn-lg cs-signup-button" type="submit">Create Account</button> -->
 
                  <div class="forgotpass" style=" margin-top: 10px;">
-                    <div style="color: #000; margin-top: 10px;"><a class="viewSignInForim">Back to SignIn</a></div>
+                    <div style="color: #000; margin-top: 25px;"><a class="viewSignInForim">Back to SignIn</a></div>
                  </div>
             <!-- </form> --><!-- /form -->
             <?= $this->Form->end() ?>
