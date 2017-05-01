@@ -331,9 +331,9 @@ $(".past-events").click(function(){
 function getEventListByFilter() {
 	var params = {};
 	//console.log(elt.tagsinput('items'));
-	if(!$("#mobFilter").val()){
+	if($("#mobFilter").val() == "false"){ 
 		var subCategories = elt.tagsinput('items');
-	} else {
+	} else { 
 		var subCategories = mobElt.tagsinput('items');	
 	}
 	

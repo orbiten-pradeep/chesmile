@@ -918,8 +918,16 @@ h3.heading > span,
 @media only screen 
 and (min-device-width : 768px) 
 and (max-device-width : 1024px) {
-    .navbar-nav.search-nav {
-        margin-left: 12% !important;
-        margin-top: 10px;
+    .nav.navbar-nav.navbar-right {
+        margin-right: 10px;
     }
+    .nav.navbar-nav.search-nav {
+        margin-left: 10%;
+    }
+    .category_dropdown.list-group, .sub_category1.list-group {
+        margin-left: 9.79999%;  
+    }
+}
+.dropdown-content {
+    z-index: 1514 !important;
 }

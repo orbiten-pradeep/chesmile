@@ -31,9 +31,6 @@ ul.social-network li {
   .btn-hide{
   display: inline;
 }
-.navbar-right{
-  display: none;
-}
 .mobhide{
   display: inline !important;
 }
@@ -225,24 +222,7 @@ background-color: #286090;
   </div>  
 </nav>
 
-<nav class="navbar navbar-default hidden-xs"> 
-    <div class="dropdown mobhide ipad-profile">
-      <?php 
-      $user = $this->request->session()->read('Auth.User');
-      if(!empty($user['Photo'])) {
-        echo $this->Html->image('profile/'.$user['Photo'],array('alt' => 'Logo Chennai Smile','width' => '41px', 'height' => '41px','class' => 'dropbtn','onclick' => 'smalldrop()')); 
-      } else {
-        echo $this->Html->image('profile_thumbnail.jpg',array('alt' => 'Logo Chennai Smile','class' => 'dropbtn','onclick' => 'smalldrop()')); 
-      }
-
-      ?> 
-      <div id="myDropdown" class="dropdown-content">
-        <?= $this->Html->link($this->Html->tag('i', '', array('class' => 'fa fa-user fa-fw')).'My Account', array('controller' => 'UserProfile', 'action' => 'add'), array('escape' => false)) ?>
-
-        <a href="#my-events" class="my-events"><i class="fa fa-calendar-o fa-fw"></i>My Events</a>
-        <a href="#liked-events" class="liked-events"><i class="fa fa-thumbs-up fa-fw"></i>Liked Events</a>
-      </div>
-    </div>
+<nav class="navbar navbar-default hidden-xs">  
 
     <div class="navbar-header">
       <?php echo $this->Html->image('chennaismile-logo.png',array('alt' => 'Logo Chennai Smile','class' => 'img-responsive logores','url' => array('controller' => 'events', 'action' => 'index') )); ?>
@@ -250,58 +230,53 @@ background-color: #286090;
 
     <!-- Collect the nav links, forms, and other content for toggling -->
   <div  class="col-md-offset-3" id="bs-example-navbar-collapse-1">
-     <ul class="nav navbar-nav search-nav">
-        <li class="dropdown category_btn">
-            <label style="font-weight: normal;">Category</label>
-            <div class="mini-submenu">
-              <span class="icon-bar"></span>
-              <span class="icon-bar"></span>
-              <span class="icon-bar"></span>
-            </div>
-        </li>
-        <li class="search-box-li">
-         <form class="navbar-form navbar-left" action="<?php echo $this->Url->build(['action' =>'index']);?>" method="post">
-          <div class="form-group">
-            <input id="eventCategorySearch" type="text" class="form-control" placeholder="Search for events, parties, concerts and more">   
-            <input type="hidden" name="parent_category_id" id="parent_category_id">
-            <input type="hidden" name="sub_categories_id" id="sub_categories_id">        
-          </div>
-          <button type="button" class="btn btn-primary btn-go" onclick="getEventListByFilter();">GO</button>
-        </form>
-        </li>
-        <li class="mobhide">
-         
-        </li>
-      </ul>
-      <ul class="nav navbar-nav navbar-right">
-        <div class="dropdown" style="margin-right: 15px;">
-          <?php
-          $user = $this->request->session()->read('Auth.User');
-          if(!empty($user['Photo'])) {
-            echo $this->Html->image('profile/'.$user['Photo'],array('alt' => 'Logo Chennai Smile','class' => 'dropbtn','width' => '41px', 'height' => '41px','onclick' => 'largedrop()'));
-          } else
-          {
-            echo $this->Html->image('profile_thumbnail.jpg',array('alt' => 'Logo Chennai Smile','class' => 'dropbtn','onclick' => 'largedrop()'));
-          }
-        ?>
+    <ul class="nav navbar-nav navbar-right">
+      <div class="dropdown" style="margin-right: 15px;">
+        <?php
+        $user = $this->request->session()->read('Auth.User');
+        if(!empty($user['Photo'])) {
+        echo $this->Html->image('profile/'.$user['Photo'],array('alt' => 'Logo Chennai Smile','class' => 'dropbtn','width' => '41px', 'height' => '41px','onclick' => 'largedrop()'));
+        } else
+        {
+        echo $this->Html->image('profile_thumbnail.jpg',array('alt' => 'Logo Chennai Smile','class' => 'dropbtn','onclick' => 'largedrop()'));
+        }
+        ?> 
+        <div id="mylargeDropdown" class="dropdown-content">
+          <?= $this->Html->link($this->Html->tag('i', '', array('class' => 'fa fa-user fa-fw')).'My Account', array('controller' => 'UserProfile', 'action' => 'add'), array('escape' => false)) ?>
 
-<!--         <?php echo $this->Html->image('profile_thumbnail.jpg',array('alt' => 'Logo Chennai Smile','class' => 'dropbtn','onclick' => 'largedrop()')); ?> -->
-         <!-- <img onclick="largedrop()" class="dropbtn" src="img/profile_thumbnail.jpg"> -->
-                <div id="mylargeDropdown" class="dropdown-content">
-                <?= $this->Html->link($this->Html->tag('i', '', array('class' => 'fa fa-user fa-fw')).'My Account', array('controller' => 'UserProfile', 'action' => 'add'), array('escape' => false)) ?>
+          <a href="#my-events" class="my-events"><i class="fa fa-calendar-o fa-fw"></i>My Events</a>
+          <a href="#liked-events" class="liked-events"><i class="fa fa-thumbs-up fa-fw"></i>Liked Events</a>
+          <?= $this->Html->link($this->Html->tag('i', '', array('class' => 'fa fa-sign-out')).'Logout', array('controller' => 'Users', 'action' => 'logout'),array('escape' => false))?>
+          <!-- <?= $this->Html->link(__('Logout'), ['controller' => 'Users', 'action' => 'logout']) ?> -->
+        </div>
+      </div>
 
-                <a href="#my-events" class="my-events"><i class="fa fa-calendar-o fa-fw"></i>My Events</a>
-                <a href="#liked-events" class="liked-events"><i class="fa fa-thumbs-up fa-fw"></i>Liked Events</a>
-                <?= $this->Html->link($this->Html->tag('i', '', array('class' => 'fa fa-sign-out')).'Logout', array('controller' => 'Users', 'action' => 'logout'),array('escape' => false))?>
-                <!-- <?= $this->Html->link(__('Logout'), ['controller' => 'Users', 'action' => 'logout']) ?> -->
-                </div>
-            </div>
-  
-    <li><a href="#past-events" class="btn btn-primary past-events">View past events</a></li>
-    <li><?= $this->Html->link(__('Create events'), ['controller' => 'events', 'action' => 'add'], array('class' => 'btn btn-primary')); ?></li>
+      <li><a href="#past-events" class="btn btn-primary past-events">View past events</a></li>
+      <li><?= $this->Html->link(__('Create events'), ['controller' => 'events', 'action' => 'add'], array('class' => 'btn btn-primary')); ?></li>
     </ul>
-
- 
+    <ul class="nav navbar-nav search-nav">
+      <li class="dropdown category_btn">
+          <label style="font-weight: normal;">Category</label>
+          <div class="mini-submenu">
+            <span class="icon-bar"></span>
+            <span class="icon-bar"></span>
+            <span class="icon-bar"></span>
+          </div>
+      </li>
+      <li class="search-box-li">
+       <form class="navbar-form navbar-left" action="<?php echo $this->Url->build(['action' =>'index']);?>" method="post">
+        <div class="form-group">
+          <input id="eventCategorySearch" type="text" class="form-control" placeholder="Search for events, parties, concerts and more">   
+          <input type="hidden" name="parent_category_id" id="parent_category_id">
+          <input type="hidden" name="sub_categories_id" id="sub_categories_id">        
+        </div>
+        <button type="button" class="btn btn-primary btn-go" onclick="getEventListByFilter();">GO</button>
+      </form>
+      </li>
+      <li class="mobhide">
+       
+      </li>
+    </ul>
     <div class="category_dropdown list-group">
       <div class="row">
         <?php foreach ($categories as $key => $category): ?>
@@ -327,13 +302,7 @@ background-color: #286090;
 
     </div><!-- /.navbar-collapse -->
   <!-- </div> --><!--.container-fluid-->
-</nav>  
-<div class="container-fluid">
-  <div class="row btn-hide">
-  <a href="#past-events" class="btn btn-primary past-events">View past events</a>
-  <?= $this->Html->link(__('Create events'), ['controller' => 'events', 'action' => 'add'], array('class' => 'btn btn-primary pull-right')); ?>
-  </div>
-</div>
+</nav>   
 <div class="container-content">
   <?php echo $this->Flash->render(); ?>
   <?= $this->fetch('content') ?>
@@ -400,8 +369,8 @@ background-color: #286090;
       <div class="modal-footer">
         <div class="btn-group pull-right btn-group-sm" role="group">
           <button type="button" class="btn btn-default" data-dismiss="modal">Close</button>
-          <button type="button" class="btn btn-default">Clear</button>
-          <button type="button" class="btn btn-primary">Apply</button>
+          <button type="button" class="btn btn-default mob-cat-clear">Clear</button>
+          <button type="button" class="btn btn-primary mob-cat-apply">Apply</button>
         </div>
       </div>
     </div><!-- /.modal-content -->
