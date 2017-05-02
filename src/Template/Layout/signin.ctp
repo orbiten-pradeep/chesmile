@@ -307,7 +307,7 @@ a.socialIcon:hover, .socialHoverClass {
   </footer> -->
 	
   
-	<script src="https://cdnjs.cloudflare.com/ajax/libs/d3/3.4.11/d3.min.js"></script>
+	<!-- <script src="https://cdnjs.cloudflare.com/ajax/libs/d3/3.4.11/d3.min.js"></script>
 	<script>
 		$( "#carnival" ).mouseover(function() {
 			var myPolygon = d3.select(document.getElementById('my-polygon'))
@@ -330,7 +330,7 @@ a.socialIcon:hover, .socialHoverClass {
 	
   });
 
-  </script>
+  </script> -->
 
 
 
