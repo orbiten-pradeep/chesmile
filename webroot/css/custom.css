@@ -866,6 +866,9 @@ h3.heading > span,
 
 .ui-menu.ui-widget.ui-widget-content {
     z-index: 1551;
+    height:100px;
+    overflow-y: scroll;
+    overflow-x: hidden;
 }
 .mob-category-list .mob-cs-cat:hover {
     cursor: pointer;
