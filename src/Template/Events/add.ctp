@@ -942,6 +942,7 @@ input{
                 <label>
                     <?=$this->Form->input('banner',['type' => 'file','accept' => 'image/*']);?>
                     [Size: 1311 * 985px]
+                    <span style="display: none;">Please upload an image with below 1mb </span>
                 </label>
             </div>
 
@@ -1035,6 +1036,24 @@ function autoHeight() {
 <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.1.1/jquery.min.js"></script>
   <script src="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/js/bootstrap.min.js"></script>
 
+<!--   <script type="text/javascript">
+$("#banner").change(function () {
+       if ($(this).val() !== "") {
+        var file = $('#banner')[0].files[0];
+        console.log(file.size);
+        //console.log(file.width);
+        var reader = new FileReader();
+        var img = new Image();
+        
+        reader.readAsDataURL(file);
+        reader.onload = function(_file) {
+            img.src= _file.target.result;
+            console.log(img.width,img.height);
+        } 
+       }
+});
+  </script>
+ -->
 
 <script type="text/javascript">
     /* Float Label Pattern Plugin for Bootstrap 3.1.0 by Travis Wilson
