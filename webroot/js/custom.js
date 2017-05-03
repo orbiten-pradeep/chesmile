@@ -606,6 +606,8 @@ else if(ePage == 'add') {
 	
 
 	$('.launch-map').on('click', function () {
+		var loc = $("#landmark").val()+","+$("#Autocomplete").val();
+		$("#city_country").val(loc);
 	    $('#myModal').modal({
 	        backdrop: 'static',
 	        keyboard: false
