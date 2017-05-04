@@ -144,6 +144,13 @@ input{
   background-color: #4ABAC6 !important;
 }
 
+.category_btn{
+    display: none !important;
+}
+.search-box-li{
+    display: none !important;
+}
+
 
 </style>
 <div class="container-fluid height">
@@ -151,7 +158,7 @@ input{
         <div class="card-prof card-container-prof">
         <div class="text-center">
          <?php if($userProfile->Photo) {
-                echo $this->Html->image('profile/'.$userProfile->Photo, array('width' => '200px','alt'=>'aswq'));
+                echo $this->Html->image('profile/'.$userProfile->Photo, array('height' => '100px','width' => '100px','alt'=>'aswq'));
             }  else {
                 echo $this->Html->image('profile.png',array('alt' => '','class' => 'avatar img-circle')); 
             }

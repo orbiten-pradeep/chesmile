@@ -157,6 +157,14 @@ input{
   background-color: #4ABAC6 !important;
 }
 
+.category_btn{
+    display: none !important;
+}
+.search-box-li{
+    display: none !important;
+}
+
+
 </style>
 
 <div class="container-fluid height">
