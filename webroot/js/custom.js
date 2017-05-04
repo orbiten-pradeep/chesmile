@@ -706,6 +706,7 @@ else if(ePage == 'add') {
 
 	function checkForOther(id)
 	{
+		$('#subdiv').css('display','inline-block');
 	    var e = document.getElementById("categories-id");
 	    var strUser = e.options[e.selectedIndex].value;
 	    $select = $('#eventsubcategories-sub-categories');
