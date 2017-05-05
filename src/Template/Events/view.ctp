@@ -63,6 +63,20 @@ a {
 address {
     margin-bottom: 0 !important;
 }
+.glyphicon-calendar{
+    font-size: 25px !important;
+}
+
+.glyphicon-time{
+    font-size: 25px !important;
+}
+
+.date-txt{
+   /* font-size:25px;*/
+}
+.time-txt{
+   /* font-size:25px;*/
+}
 
 </style>
 
@@ -76,7 +90,7 @@ else {
 }
 ?>
 <div class="cover-pic" style="background: rgba(0, 0, 0, 0) url(<?=$bgCoverImg?>) no-repeat scroll center center / cover">
-        <div class="container-fluid heading_txt" style="background: rgba(49,51,53,.5);position: absolute;bottom: 0;z-index: 1;width: 100%;box-sizing: border-box;">
+        <div class="container-fluid heading_txt" style="background: linear-gradient(to bottom, rgba(0, 0, 0, 0) 0%, rgba(0,0,0,.6) 50%);position: absolute;bottom: 0;z-index: 1;width: 100%;box-sizing: border-box;">
             <div class="row">
                 <div class="col-lg-12">
                     <button class="btn btn-tag"><?= $event->has('category') ? $this->Html->link($event->category->name, ['controller' => 'Categories', 'action' => 'view', $event->category->id]) : '' ?></button> <?php echo $this->Html->image('card/'.$event->category->card, array('width' => '100px', 'height' => '100px','alt'=>'Card')); ?>
@@ -145,7 +159,7 @@ else {
                                                     <!-- Client 1 -->
 
                                                     <?php foreach ($sponsors as $sponsor): ?>
-                                                    <div class="col-sm-6 col-xs-12 col-md-3 col-lg-3" style="visibility: visible; ">
+                                                    <div class="col-sm-6 col-xs-12 col-md-3 col-lg-3" style="visibility: visible;width: 270px; margin-bottom: 10px;">
                                                         <a href="#">
                                                         <?php echo $this->Html->image('Sponsors/'.$sponsor->Sponsors, array('alt'=>'Sponsors','class' =>'img-overlay','height' => '150px', 'width' => '250px')); ?>
                                                     </a>
@@ -171,7 +185,7 @@ else {
                                                     <h3 class="heading margin25">Media Partners<span></span></h3>
                                                     <!-- Client 1 -->
                                                     <?php foreach ($mediapartners as $mediapartner): ?>
-                                                    <div class="col-sm-6 col-xs-12 col-md-3" style="visibility: visible; ">
+                                                    <div class="col-sm-6 col-xs-12 col-md-3" style="visibility: visible;width: 270px;margin-bottom: 10px;">
                                                         <a href="#">
                                                         <?php echo $this->Html->image('Mediapartners/'.$mediapartner->MediaPartners, array('alt'=>'Mediapartners','class' => 'img-overlay','height' => '150px', 'width' => '250px')); ?>
                                                         </a>
