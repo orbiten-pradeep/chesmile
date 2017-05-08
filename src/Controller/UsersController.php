@@ -161,8 +161,11 @@ class UsersController extends AppController
 			if ($user && $user['Active'] != False) {
 	            $this->Auth->setUser($user);
 	            return $this->redirect($this->Auth->redirectUrl());
+	        }else{
+	        	$this->Flash->error(__('Username or Password is wrong! Please try again'));
+	        	return $this->redirect(['action' => 'login']);
 	        }
-	        $this->Flash->error(__('Username or Password is wrong! Please try again'));
+	        // $this->Flash->error(__('Username or Password is wrong! Please try again'));
 	    }
 /*	    $activation_key = Text::uuid();
 	    $user = $this->Users->newEntity();
