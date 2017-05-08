@@ -115,7 +115,7 @@ else {
         <div class="row">
             <div class="col-sm-8 lft_container event-details">
                 <h2><img src="<?=$organizerLogoImageUrl?>" class="img-thumbnail profile-img organizer-logo"><?= h($event->OrganizersName) ?></h2>
-                <div id="eventDescription"><?= $this->Text->autoParagraph(h($event->descriptioin));?></div>
+                <div id="eventDescription"><?=  $this->Text->autoParagraph(h($event->descriptioin));?></div>
                 <p class="margin25"><span class="glyphicon glyphicon-calendar calender_txt" aria-hidden="true"></span><?= h($event->date) ?></p>
                 <p>
                     <span class="glyphicon glyphicon-time time_txt" aria-hidden="true"></span><?= h($event->time) ?>
@@ -128,7 +128,7 @@ else {
             ?>
             <div class="col-sm-4 text-center rgt_container">
                 <address>
-                    <script src='https://maps.googleapis.com/maps/api/js?v=3.exp'></script><div style='overflow:hidden;height:330px;width:630px;'><div id='gmap_canvas' style='height:330px;width:700px;'></div><div><small><a href="http://embedgooglemaps.com">embed google maps</a></small></div><div><small><a href="https:/disclaimergenerator.net">disclaimer example</a></small></div><style>#gmap_canvas img{max-width:none!important;background:none!important}</style></div><script type='text/javascript'>function init_map(){var myOptions = {zoom:10,center:new google.maps.LatLng(<?=$geoCode;?>),mapTypeId: google.maps.MapTypeId.ROADMAP};map = new google.maps.Map(document.getElementById('gmap_canvas'), myOptions);marker = new google.maps.Marker({map: map,position: new google.maps.LatLng(<?=$geoCode;?>)});infowindow = new google.maps.InfoWindow({content:''});google.maps.event.addListener(marker, 'click', function(){infowindow.open(map,marker);});infowindow.open(map,marker);}google.maps.event.addDomListener(window, 'load', init_map);</script>
+                    <script src='https://maps.googleapis.com/maps/api/js?v=3.exp'></script><div style='overflow:hidden;height:330px;width:630px;'><div id='gmap_canvas' style='height:330px;width:700px;'></div><div><small><a href="http://embedgooglemaps.com">embed google maps</a></small></div><div><small><a href="https:/disclaimergenerator.net">disclaimer example</a></small></div><style>#gmap_canvas img{max-width:none!important;background:none!important}</style></div><script type='text/javascript'>function init_map(){var myOptions = {zoom:10,center:new google.maps.LatLng(<?=$geoCode;?>),mapTypeId: google.maps.MapTypeId.ROADMAP};map = new google.maps.Map(document.getElementById('gmap_canvas'), myOptions);marker = new google.maps.Marker({map: map,position: new google.maps.LatLng(<?=$geoCode;?>)});google.maps.event.addListener(marker, 'click', function(){infowindow.open(map,marker);});infowindow.open(map,marker);}google.maps.event.addDomListener(window, 'load', init_map);</script>
                 </address>
                 <address class="address-info">
                     <p class="text-center"><span class="glyphicon glyphicon-pushpin" aria-hidden="true"></span></p>
@@ -155,52 +155,93 @@ else {
                                 <div class="container-fluid">
                                     <div class="row">
                                         <div class="col-sm-8 lft_container">
-                                                <h3 class="heading margin25">Sponsors<span></span></h3>
+                                                
                                                     <!-- Client 1 -->
+                                                    <?php
+                                                    // code for show the sponsers 
+                                                    $ival = 0;
+                                                    foreach ($sponsors as $sponsor) {
+                                                        $ival++;
+                                                    }
+                                                    if($ival==1){
+                                                        foreach ($sponsors as $sponsor) {
+                                                            if(strpos($sponsor->Sponsors,'jpg') !== false || strpos($sponsor->Sponsors,'png') !== false){
+                                                                $ival=1;
+                                                                // image available
+                                                            }else{
+                                                                $ival=0;
+                                                                //image not available
+                                                            }
+                                                        }
+                                                    }
+                                                    $count_sponser = $ival;
+                                                    if($count_sponser > 0){
+                                                       echo '<h3 class="heading margin25">Sponsors<span></span></h3>';
+                                                        foreach ($sponsors as $sponsor) {
+                                                            echo '<div class="col-sm-6 col-xs-12 col-md-3 col-lg-3" style="visibility: visible;width: 270px; margin-bottom: 10px;"><a href="#">';
+                                                            echo $this->Html->image("Sponsors/".$sponsor->Sponsors, array("alt"=>"Sponsors","class" =>"img-overlay","height" => "150px", "width" => "250px"));
+                                                            echo '</a></div>';
+                                                        }
+                                                    }
+                                                    ?>
 
-                                                    <?php foreach ($sponsors as $sponsor): ?>
+                                                     <!-- <?php //foreach ($sponsors as $sponsor): ?>
                                                     <div class="col-sm-6 col-xs-12 col-md-3 col-lg-3" style="visibility: visible;width: 270px; margin-bottom: 10px;">
                                                         <a href="#">
-                                                        <?php echo $this->Html->image('Sponsors/'.$sponsor->Sponsors, array('alt'=>'Sponsors','class' =>'img-overlay','height' => '150px', 'width' => '250px')); ?>
+                                                        <?php //echo $this->Html->image('Sponsors/'.$sponsor->Sponsors, array('alt'=>'Sponsors','class' =>'img-overlay','height' => '150px', 'width' => '250px')); ?>
                                                     </a>
-                                                    </div>
-
-                                                    <!-- Client 2 -->
-                                                    <!-- <div class="col-sm-6 col-xs-4 col-md-3" style="visibility: visible; ">
-                                                        <a href="#"><img src="img/logos/4.png" class="img-responsive clients-img" alt="Client 4"></a>
-                                                    </div>
-
-                                                    <!-- Client 3 -->
-                                                    <!-- <div class="col-sm-6 col-xs-4 col-md-3" style="visibility: visible; ">
-                                                        <a href="#"><img src="img/logos/5.png" class="img-responsive clients-img" alt="Client 5"></a>
-                                                    </div>
-
-                                                    <!-- Client 4 -->
-                                                    <!-- <div class="col-sm-6 col-xs-4 col-md-3" style="visibility: visible; ">
-                                                        <a href="#"><img src="img/logos/6.png" class="img-responsive clients-img" alt="Client 6"></a>
                                                     </div> -->
-                                                    <?php endforeach; ?>
+                                                    <?php //endforeach; ?> 
                                                     <div class="clearfix"></div>
+                                                    <?php
+                                                    $jval = 0;
+                                                    foreach ($mediapartners as $mediapartner) {
+                                                        $jval++;
+                                                    }
+                                                    if($jval==1){
+                                                        foreach ($mediapartners as $mediapartner) {
+                                                            if(strpos($mediapartner->MediaPartners,'jpg') !== false || strpos($mediapartner->MediaPartners,'png') !== false){
+                                                                $jval=1;
+                                                                // image available
+                                                            }else{
+                                                                $jval=0;
+                                                                //image not available
+                                                            }
+                                                        }
+                                                    }
+                                                    $count_mepar = $jval;
+                                                    if($count_mepar > 0){
 
-                                                    <h3 class="heading margin25">Media Partners<span></span></h3>
+                                                        echo '<h3 class="heading margin25">Media Partners<span></span></h3>';
+                                                        foreach ($mediapartners as $mediapartner) {
+                                                            echo '<div class="col-sm-6 col-xs-12 col-md-3" style="visibility: visible;width: 270px;margin-bottom: 10px;"><a href="#">'.$this->Html->image("Mediapartners/".$mediapartner->MediaPartners, array("alt"=>"Mediapartners","class" => "img-overlay","height" => "150px", "width" => "250px"));
+                                                            echo '</a></div>';
+                                                        }
+                                                    }
+                                                    ?>
+                                                    
                                                     <!-- Client 1 -->
-                                                    <?php foreach ($mediapartners as $mediapartner): ?>
+                                                    <!-- <?php //foreach ($mediapartners as $mediapartner): ?>
                                                     <div class="col-sm-6 col-xs-12 col-md-3" style="visibility: visible;width: 270px;margin-bottom: 10px;">
                                                         <a href="#">
-                                                        <?php echo $this->Html->image('Mediapartners/'.$mediapartner->MediaPartners, array('alt'=>'Mediapartners','class' => 'img-overlay','height' => '150px', 'width' => '250px')); ?>
+                                                        <?php //echo $this->Html->image('Mediapartners/'.$mediapartner->MediaPartners, array('alt'=>'Mediapartners','class' => 'img-overlay','height' => '150px', 'width' => '250px')); ?>
                                                         </a>
                                                     </div>
-                                                    <?php endforeach; ?>
+                                                    <?php// endforeach; ?> -->
                                                     <!-- Client 2 -->
 
                                                     <div class="clearfix"></div>
                                                     <?php 
-                                                    $today = Time::now();  
+                                                    $today = date('n/j/y');
+                                                    echo "today".$today;
                                                     //echo $today->format('m/d/y');
                                                     $date = new Time($event->date);
+                                                    $e_date = substr($date,0, strpos($date,','));
+                                                    echo "date".substr($date,0, strpos($date,','));
+                                                    //ijothi change
                                                     //echo $date->format('m/d/y');
 
-                                                    if($today >= $date) {
+                                                    if($today >= $e_date) {
                                                     ?>
                                                     <div class="clearfix"></div>
                                                      <div style="display: '<?php if(empty($galaries)) { echo "none;";  } ?>'">
@@ -220,7 +261,7 @@ else {
                                                     </div>
                                                     <div class="clearfix"></div>
 
-                                                     <button class="btn btn-info btn-lg" data-toggle="modal" data-target="#myModal" style="display: <?php if(isset($galaries)) { echo 'none;'; } ?>">Open Modal</button>
+                                                     <button class="btn btn-info btn-lg" data-toggle="modal" data-target="#myModal" style="display: <?php if(isset($galaries)) { echo 'none;'; }else{echo 'inline-block;';} ?>">Open Modal</button>
 
                                                      <?php } ?>
                                                      <!-- Modal -->
