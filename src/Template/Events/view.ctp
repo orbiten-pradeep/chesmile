@@ -78,6 +78,78 @@ address {
    /* font-size:25px;*/
 }
 
+    .float-label-control { position: relative; margin-bottom: 1.5em; }
+    /*.float-label-control ::-webkit-input-placeholder { color: transparent; }
+    .float-label-control :-moz-placeholder { color: transparent; }
+    .float-label-control ::-moz-placeholder { color: transparent; }
+    .float-label-control :-ms-input-placeholder { color: transparent; }*/
+    .float-label-control input:-webkit-autofill,
+    .float-label-control textarea:-webkit-autofill { background-color: transparent !important; -webkit-box-shadow: 0 0 0 1000px white inset !important; -moz-box-shadow: 0 0 0 1000px white inset !important; box-shadow: 0 0 0 1000px white inset !important; }
+    .float-label-control input, .float-label-control textarea, .float-label-control label { font-size: 1.2em; box-shadow: none; -webkit-box-shadow: none; }
+        .float-label-control input:focus,
+        .float-label-control textarea:focus { box-shadow: none; -webkit-box-shadow: none; border-bottom-width: 2px; padding-bottom: 0; background: none; }
+        .float-label-control textarea:focus { padding-bottom: 4px; }
+    .float-label-control input, .float-label-control textarea { display: block; width: 100%; padding: 0.1em 0em 1px 0em; border: none; border-radius: 0px; border-bottom: 1px solid #aaa; outline: none; margin: 0px; background: none; }
+    .float-label-control textarea { padding: 0.1em 0em 5px 0em; }
+    .float-label-control label { position: absolute; font-weight: normal; top: -1.0em; left: 0.08em; color: #aaaaaa; z-index: -1; font-size: 0.85em; -moz-animation: float-labels 300ms none ease-out; -webkit-animation: float-labels 300ms none ease-out; -o-animation: float-labels 300ms none ease-out; -ms-animation: float-labels 300ms none ease-out; -khtml-animation: float-labels 300ms none ease-out; animation: float-labels 300ms none ease-out; /* There is a bug sometimes pausing the animation. This avoids that.*/ animation-play-state: running !important; -webkit-animation-play-state: running !important; }
+    .float-label-control input.empty + label,
+    .float-label-control textarea.empty + label { top: 0.1em; font-size: 1.5em; animation: none; -webkit-animation: none; }
+    .float-label-control input:not(.empty) + label,
+    .float-label-control textarea:not(.empty) + label { z-index: 1; }
+    .float-label-control input:not(.empty):focus + label,
+    .float-label-control textarea:not(.empty):focus + label { color: #aaaaaa; }
+    .float-label-control.label-bottom label { -moz-animation: float-labels-bottom 300ms none ease-out; -webkit-animation: float-labels-bottom 300ms none ease-out; -o-animation: float-labels-bottom 300ms none ease-out; -ms-animation: float-labels-bottom 300ms none ease-out; -khtml-animation: float-labels-bottom 300ms none ease-out; animation: float-labels-bottom 300ms none ease-out; }
+    .float-label-control.label-bottom input:not(.empty) + label,
+    .float-label-control.label-bottom textarea:not(.empty) + label { top: 3em; }
+
+
+@keyframes float-labels {
+    0% { opacity: 1; color: #aaa; top: 0.1em; font-size: 1.5em; }
+    20% { font-size: 1.5em; opacity: 0; }
+    30% { top: 0.1em; }
+    50% { opacity: 0; font-size: 0.85em; }
+    100% { top: -1em; opacity: 1; }
+}
+
+@-webkit-keyframes float-labels {
+    0% { opacity: 1; color: #aaa; top: 0.1em; font-size: 1.5em; }
+    20% { font-size: 1.5em; opacity: 0; }
+    30% { top: 0.1em; }
+    50% { opacity: 0; font-size: 0.85em; }
+    100% { top: -1em; opacity: 1; }
+}
+
+@keyframes float-labels-bottom {
+    0% { opacity: 1; color: #aaa; top: 0.1em; font-size: 1.5em; }
+    20% { font-size: 1.5em; opacity: 0; }
+    30% { top: 0.1em; }
+    50% { opacity: 0; font-size: 0.85em; }
+    100% { top: 3em; opacity: 1; }
+}
+
+@-webkit-keyframes float-labels-bottom {
+    0% { opacity: 1; color: #aaa; top: 0.1em; font-size: 1.5em; }
+    20% { font-size: 1.5em; opacity: 0; }
+    30% { top: 0.1em; }
+    50% { opacity: 0; font-size: 0.85em; }
+    100% { top: 3em; opacity: 1; }
+}
+
+.card {
+    background-color: #F7F7F7;
+    /* just in case there no content*/
+    padding: 20px 25px 30px;
+    margin: 30px auto 25px;
+    margin-top: 30px;
+    /* shadows and rounded borders */
+    -moz-border-radius: 2px;
+    -webkit-border-radius: 2px;
+    border-radius: 2px;
+    -moz-box-shadow: 10px 10px 10px rgba(0, 0, 0, 0.3);
+    -webkit-box-shadow: 10px 10px 10px rgba(0, 0, 0, 0.3);
+    box-shadow: 0px 0px 7px 7px rgba(0, 0, 0, 0.1);
+}
+
 </style>
 
 <?php
@@ -120,6 +192,7 @@ else {
                 <p>
                     <span class="glyphicon glyphicon-time time_txt" aria-hidden="true"></span><?= h($event->time) ?>
                 </p>
+                <a style="font-size: 12px;" data-toggle="modal" href="#Register-modal">Register Online</a>
             </div>
             <?php
             //echo $event->google_map; exit;
@@ -128,7 +201,7 @@ else {
             ?>
             <div class="col-sm-4 text-center rgt_container">
                 <address>
-                    <script src='https://maps.googleapis.com/maps/api/js?v=3.exp'></script><div style='overflow:hidden;height:330px;width:630px;'><div id='gmap_canvas' style='height:330px;width:700px;'></div><div><small><a href="http://embedgooglemaps.com">embed google maps</a></small></div><div><small><a href="https:/disclaimergenerator.net">disclaimer example</a></small></div><style>#gmap_canvas img{max-width:none!important;background:none!important}</style></div><script type='text/javascript'>function init_map(){var myOptions = {zoom:10,center:new google.maps.LatLng(<?=$geoCode;?>),mapTypeId: google.maps.MapTypeId.ROADMAP};map = new google.maps.Map(document.getElementById('gmap_canvas'), myOptions);marker = new google.maps.Marker({map: map,position: new google.maps.LatLng(<?=$geoCode;?>)});google.maps.event.addListener(marker, 'click', function(){infowindow.open(map,marker);});infowindow.open(map,marker);}google.maps.event.addDomListener(window, 'load', init_map);</script>
+                    <script src='https://maps.googleapis.com/maps/api/js?v=3.exp'></script><div style='overflow:hidden;height:330px;width:630px;'><div id='gmap_canvas' style='height:330px;width:700px;'></div><div><small><a href="http://embedgooglemaps.com">embed google maps</a></small></div><div><small><a href="https:/disclaimergenerator.net">disclaimer example</a></small></div><style>#gmap_canvas img{max-width:none!important;background:none!important}</style></div><script type='text/javascript'>function init_map(){var myOptions = {zoom:10,center:new google.maps.LatLng(<?=$geoCode;?>),mapTypeId: google.maps.MapTypeId.ROADMAP};map = new google.maps.Map(document.getElementById('gmap_canvas'), myOptions);marker = new google.maps.Marker({map: map,position: new google.maps.LatLng(<?=$geoCode;?>)});}google.maps.event.addDomListener(window, 'load', init_map);</script>
                 </address>
                 <address class="address-info">
                     <p class="text-center"><span class="glyphicon glyphicon-pushpin" aria-hidden="true"></span></p>
@@ -234,20 +307,22 @@ else {
                                                     <?php 
                                                     $today = date('n/j/y');
                                                     echo "today".$today;
-                                                    //echo $today->format('m/d/y');
-                                                    $date = new Time($event->date);
-                                                    $e_date = substr($date,0, strpos($date,','));
-                                                    echo "date".substr($date,0, strpos($date,','));
-                                                    //ijothi change
-                                                    //echo $date->format('m/d/y');
+                                                    $eventdate = $event->date;
+                                                    echo "D-".$eventdate;
 
-                                                    if($today >= $e_date) {
+                                                    if($today >= $eventdate) {
+                                                        $status = "available";
                                                     ?>
                                                     <div class="clearfix"></div>
                                                      <div style="display: '<?php if(empty($galaries)) { echo "none;";  } ?>'">
                                                      <h3 class="heading margin25">Event Galaries<span></span></h3>
                                                     <!-- Client 1 -->
-                                                    <?php foreach ($galaries as $galary): ?>
+                                                    <?php 
+                                                    $i = 0;
+                                                    foreach ($galaries as $galary):
+
+                                                    $i++;
+                                                    echo "ival"+$i; ?>
                                                     <div class="col-sm-6 col-xs-12 col-md-3" style="visibility: visible; ">
                                                         <a href="#">
                                                         <?php echo $this->Html->image('Galary/'.$galary->galary, array('alt'=>'Galary','class' => 'img-overlay','height' => '150px', 'width' => '250px')); ?>
@@ -261,7 +336,7 @@ else {
                                                     </div>
                                                     <div class="clearfix"></div>
 
-                                                     <button class="btn btn-info btn-lg" data-toggle="modal" data-target="#myModal" style="display: <?php if(isset($galaries)) { echo 'none;'; }else{echo 'inline-block;';} ?>">Open Modal</button>
+                                                     <button class="btn btn-info btn-lg" data-toggle="modal" data-target="#myModal" style="display: <?php if(!isset($galaries) && $status!="" ) { echo 'none;'; }else{echo 'inline-block;';} ?>">Open Modal</button>
 
                                                      <?php } ?>
                                                      <!-- Modal -->
@@ -330,6 +405,236 @@ else {
         </ul>
 </nav> 
 
+          <div class="container">
+  <!-- Trigger the modal with a button -->
+ <!--  <button type="button" class="btn btn-info btn-lg" id="alertbox">Click here</button> -->
+
+  <!-- Modal -->
+  <div class="modal fade" id="Register-modal" role="dialog">
+    <div class="modal-dialog">
+    
+      <!-- Modal content-->
+      <div class="modal-content card">
+        <div class="modal-header" style="border-bottom: none;">
+          <button type="button" class="close" data-dismiss="modal">&times;</button>
+          <h4 class="modal-title">Forgot Password?</h4>
+        </div>
+        <div class="modal-body">
+          <?= $this->Form->create('', array('id' => 'forgotpassform', 'url' => ['action' => 'forgetpassword'])) ?>
+
+           <div class="col-xs-9 col-sm-9 col-md-9 col-lg-10">
+            <div class="form-group float-label-control">
+             
+             <label for="">Firstname</label>
+             <?= $this->Form->input('Firstname', array('div' => false,'id' => 'email', 'class' => 'form-control form-element text','label' => false,'placeholder' => 'Enter your firstname', 'required' => true)) ?>
+            </div>
+        </div>
+
+        <div class="col-xs-9 col-sm-9 col-md-9 col-lg-10">
+            <div class="form-group float-label-control">
+             
+             <label for="">Lastname</label>
+             <?= $this->Form->input('Lastname', array('div' => false,'id' => 'email', 'class' => 'form-control form-element text','label' => false,'placeholder' => 'Enter your lastname', 'required' => true)) ?>
+            </div>
+        </div>
+
+        <div class="form-group">
+                <label>
+           <?= $this->Form->input('date', array('type' => 'text','class' => 'form-control date','placeholder' => 'Date','label' => false));?>
+           </label>
+           <span id="person_type" style="color: #00FF00;"></span>
+           </div>
+
+        <div class="col-xs-9 col-sm-9 col-md-9 col-lg-10">  
+             <label>Sex</label>
+             <ul>
+              <li  style="list-style:none;">
+                <input type="radio" name="custom_type" value="public" />
+                Male
+                <input type="radio" name="custom_type" 
+                value="private" id="custom_venuetype_private" />
+                Female
+              </li>
+            </ul>
+        </div>
+
+        <div class="col-xs-9 col-sm-9 col-md-9 col-lg-10">
+            <div class="form-group float-label-control">
+             
+             <label for="">Email</label>
+             <?= $this->Form->input('Email', array('div' => false,'id' => 'email', 'class' => 'form-control form-element text','label' => false,'placeholder' => 'Enter your email address', 'required' => true)) ?>
+            </div>
+        </div>
+
+        <div class="col-xs-9 col-sm-9 col-md-9 col-lg-10">
+            <div class="form-group float-label-control">
+             <label for="">Mobile number</label>
+             <?= $this->Form->input('Mobilenumber', array('div' => false,'id' => 'email', 'class' => 'form-control form-element text','label' => false,'placeholder' => 'Enter your mobile number', 'required' => true)) ?>
+            </div>
+        </div>
+
+         <div class="col-xs-9 col-sm-9 col-md-9 col-lg-10"> 
+             <label>KMs</label>
+             <ul>
+              <li  style="list-style:none;">
+                <input type="radio" name="custom_type" value="public" />
+                1 KM
+                <input type="radio" name="custom_type" 
+                value="private" id="custom_venuetype_private" checked="checked"/>
+                5 KM
+                 <input type="radio" name="custom_type" 
+                value="private" id="custom_venuetype_private" />
+                10 KM
+              </li>
+            </ul>
+            </div>
+      
+        <div class="col-xs-9 col-sm-9 col-md-9 col-lg-10">
+        <label>Tshirt size</label>
+            <div class="form-group float-label-control">
+            
+            <select>
+              <option value="volvo">Small</option>
+              <option value="saab">medium</option>
+              <option value="opel">Large</option>
+              <option value="audi">Extra Large</option>
+            </select>
+            </div>
+        </div>
+
+
+        <div class="col-xs-9 col-sm-9 col-md-9 col-lg-10">
+          <div class="form-group text-center">
+          <?= $this->Form->submit(__('Register'), array('id' => 'Login', 'class' => 'btn btn-primary btn-lg cs-signup-button')) ?>
+
+          </div>
+        </div>
+  
+    <?= $this->Form->end() ?>
+
+        </div>
+        <div class="modal-footer" style="border-top: none;">
+         <!--  <button type="button" class="btn btn-default closebtn" data-dismiss="modal">Close</button> -->
+        </div>
+      </div>
+      
+    </div>
+  </div>
+  
+</div>
+        <script src="//code.jquery.com/jquery-1.9.1.js"></script>
+
+<!-- <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.1.1/jquery.min.js"></script> -->
+  <script src="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/js/bootstrap.min.js"></script>
+
+<script type="text/javascript">
+$( function() {
+        $('#date').datepicker({
+            changeMonth: true,
+            changeYear: true,
+            yearRange: '1950:2017',
+            maxDate: '+60Y',
+            minDate: new Date(1950, 10 - 1, 25),
+            onSelect: function (dateText, inst) {
+                var dob_year = dateText.split('/');
+                var curyear = 2017;
+                var year = curyear-dob_year[2];
+                if(year<=14){
+                    $("#person_type").text("Kids");
+                }else{
+                    $("#person_type").text("Adults");
+                }
+                
+            }
+
+            });
+      } );
+    /* Float Label Pattern Plugin for Bootstrap 3.1.0 by Travis Wilson
+**************************************************/
+(function ($) {
+    $.fn.floatLabels = function (options) {
+
+        // Settings
+        var self = this;
+        var settings = $.extend({}, options);
+
+
+        // Event Handlers
+        function registerEventHandlers() {
+            self.on('input keyup change', 'input, textarea', function () {
+                actions.swapLabels(this);
+            });
+        }
+
+
+        // Actions
+        var actions = {
+            initialize: function() {
+                self.each(function () {
+                    var $this = $(this);
+                    var $label = $this.children('label');
+                    var $field = $this.find('input,textarea').first();
+
+                    if ($this.children().first().is('label')) {
+                        $this.children().first().remove();
+                        $this.append($label);
+                    }
+
+                    var placeholderText = ($field.attr('placeholder') && $field.attr('placeholder') != $label.text()) ? $field.attr('placeholder') : $label.text();
+
+                    $label.data('placeholder-text', placeholderText);
+                    $label.data('original-text', $label.text());
+
+                    if ($field.val() == '') {
+                        $field.addClass('empty')
+                    }
+                });
+            },
+            swapLabels: function (field) {
+                var $field = $(field);
+                var $label = $(field).siblings('label').first();
+                var isEmpty = Boolean($field.val());
+
+                if (isEmpty) {
+                    $field.removeClass('empty');
+                    $label.text($label.data('original-text'));
+                }
+                else {
+                    $field.addClass('empty');
+                    $label.text($label.data('placeholder-text'));
+                }
+            }
+        }
+
+
+        // Initialization
+        function init() {
+            registerEventHandlers();
+
+            actions.initialize();
+            self.each(function () {
+                actions.swapLabels($(this).find('input,textarea').first());
+            });
+        }
+        init();
+
+
+        return this;
+    };
+
+    $(function () {
+        jQuery('.form-element').each(function(){
+          if($(this).parent().hasClass('required')){
+             jQuery('.form-element').unwrap();
+          }
+        });
+
+        setTimeout(function(){
+            $('.float-label-control').floatLabels();
+        },1000);
+    });
+})(jQuery);
+</script>
 <!-- <nav class="large-3 medium-4 columns" id="actions-sidebar">
     <ul class="side-nav">
          <li class="heading"><?= __('Actions') ?></li>

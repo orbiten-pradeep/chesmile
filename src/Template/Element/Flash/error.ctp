@@ -50,10 +50,10 @@ if (!isset($params['escape']) || $params['escape'] !== false) {
 </style>
 
 <meta name="viewport" content="width=device-width, initial-scale=1">
-  <script src="https://ajax.googleapis.com/ajax/libs/jquery/1.12.0/jquery.min.js"></script>
+  <!-- <script src="https://ajax.googleapis.com/ajax/libs/jquery/1.12.0/jquery.min.js"></script> -->
   <script src="http://maxcdn.bootstrapcdn.com/bootstrap/3.3.6/js/bootstrap.min.js"></script>
 
-
+<?php echo $this->Html->script(['jquery']); ?>
 
 
 
@@ -91,7 +91,7 @@ if (!isset($params['escape']) || $params['escape'] !== false) {
 
 <script type="text/javascript">
 
-    // $(window).on('load',function(){
-    //     $('#logout').modal('show');
-    // });
+    $(window).on('load',function(){
+        $('#logout').modal('show');
+    });
     </script>
