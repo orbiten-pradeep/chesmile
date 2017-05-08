@@ -19,6 +19,9 @@ body, .modal-open .page-container, .modal-open .page-container .navbar-fixed-top
 </style>
 
 <style type="text/css">
+    textarea {
+       resize: none;
+    }
     .float-label-control { position: relative; margin-bottom: 1.5em; }
     /*.float-label-control ::-webkit-input-placeholder { color: transparent; }
     .float-label-control :-moz-placeholder { color: transparent; }
@@ -233,7 +236,7 @@ input{
       }
 
       #banner-preview{
-        width: 280px;
+        width: 285px;
         height: 185px;
 
       }
@@ -280,13 +283,14 @@ input{
     <!-- <div class="col-sm-8"> -->
     <div class="tab-content">
     <div class="tab-pane fade in active" id="home">
-                 <?= $this->Form->create($event,array('id' => 'createEvent','type' => 'file')) ?>
+                 <?= $this->Form->create($event,array('id' => 'createEvent','type' => 'file','novalidate' => true)) ?>
                   <?= $this->Form->hidden('user_id', ['options' => $users,'default'=> $users_id]);?>
                 <!-- <form role="form"> -->  <!-- <input type="text" class="form-control" placeholder="Event Title"> -->
                  
                     <div class="form-group float-label-control">
                         <label for="">Event Title</label>
-         <?php echo $this->Form->input('title',array('div' => false,'id' => 'title', 'label' => false, 'class' => 'form-control form-element', 'placeholder' => 'Event Title','required' => true)); ?>
+         <?php echo $this->Form->input('title',array('div' => false,'id' => 'title', 'label' => false, 'class' => 'form-control form-element', 'placeholder' => 'Event Title')); ?>
+            <span id="title_error" style="color: #FF0000;"></span>
                       
                     </div>
 
@@ -302,30 +306,42 @@ input{
                 <label>
 <?= $this->Form->input('categories_id',array('class' => 'form-control heigh','options' => $categories_list, 'onChange' => 'checkForOther(this);', 'empty' => '(Select Categories)','label' => false));?>
             </label>
+            <span id="cate_error" style="color: #FF0000;"></span>
             </div>
 
             <div id="subdiv" class="form-group" style="display: none;">
                 <label>
             <?=$this->Form->input('Eventsubcategories.sub_categories',array( 'subcategory_id'=>'', 'class' => 'form-control subclass','options' => $subCategories, 'multiple' => 'true', 'empty' => '(choose one)','label' => false,'empty' => false));?>
             </label>
+            <span id="subcate_error" style="color: #FF0000;"></span>
             </div>
 
-            <div class="form-group float-label-control">
+            <div class="form-group">
                    <label for="">Description</label>
-                  <?= $this->Form->input('descriptioin',array('div' => false, 'label' => false,'class' => 'form-control form-element','placeholder' => 'Description about your event','rows' => '1' ));?>
+                  <?= $this->Form->input('descriptioin',array('div' => false, 'label' => false,'class' => 'form-control form-element','placeholder' => 'Description about your event','rows' => '4', 'cols' => '50', 'resize'=> 'none' ));?>
+                  <span id="description_error" style="color: #FF0000;"></span>
+                  <br/>
                   <!--  <textarea class="form-control" placeholder="Some Words about your event" rows="1"></textarea> -->
+                  <input type="button" id="id_typemore" name="id_typemore" class="btn" style="float: right;background-color: #337AB7;" value="Type More Here..." />
+            </div>
+
+            <div class="form-group" style="display: none;" id="id_moredes">
+                   <label for="">Description More..</label>
+                  <?= $this->Form->input('descriptioin_more',array('div' => false, 'label' => false,'class' => 'form-control form-element','placeholder' => 'Type more description.','style' => 'color:black !important;', 'type' => 'textarea' ));?>
             </div>
 
 
             <div class="form-group float-label-control">
-                   <label for="">Contact Number</label>
-                  <?= $this->Form->input('contact_number',array('div' => false, 'label' => false,'class' => 'form-control form-element','placeholder' => 'Enter Contact Number','required' => true));?>
+                    <label for="">Contact Number</label>
+                  <?= $this->Form->input('contact_number',array('div' => false,'id' =>'contact_number', 'label' => false,'class' => 'form-control form-element','placeholder' => 'Enter Contact Number'));?>
+                  <span id="contact_error" style="color: #FF0000;"></span>
                   <!--  <textarea class="form-control" placeholder="Some Words about your event" rows="1"></textarea> -->
             </div>
 
             <div class="form-group float-label-control">
                    <label for="">Mobile Number</label>
-                  <?= $this->Form->input('mobile_number',array('div' => false,'label' => false,'class' => 'form-control form-element','placeholder' => 'Enter Mobile Number', 'required' => true));?>
+                  <?= $this->Form->input('mobile_number',array('id' => 'mobile_number', 'div' => false,'label' => false,'class' => 'form-control form-element','placeholder' => 'Enter Mobile Number'));?>
+                  <span id="mobile_error" style="color: #FF0000;"></span>
                   <!--  <textarea class="form-control" placeholder="Some Words about your event" rows="1"></textarea> -->
             </div>
 
@@ -333,6 +349,7 @@ input{
                 <label>
            <?= $this->Form->input('date', array('type' => 'text','class' => 'form-control date','placeholder' => 'Date','label' => false));?>
            </label>
+           <span id="date_error" style="color: #FF0000;"></span>
            </div>
 
              <!-- <div class="form-group float-label-control">
@@ -344,6 +361,7 @@ input{
             <label>
            <?=$this->Form->input('time', array('type' => 'text','class' => 'form-control timepicker time-bg','label' => false,'placeholder' => 'Time'));?>
            </label>
+           <span id="time_error" style="color: #FF0000;"></span>
            </div>
                      <!-- <div class="form-group float-label-control">
                         <label for="">Venue</label>
@@ -365,6 +383,7 @@ input{
             <div class="form-group float-label-control">
                         <label for="">Landmark</label>
                <?= $this->Form->input('landmark',array('div' => false,'label' => false,'class' => 'form-control form-element', 'placeholder' => 'Any Specific Landmark?'));?>
+               <span id="landmark_error" style="color: #FF0000;"></span>
                        <!--  <input type="text" class="form-control" placeholder="Any Specific Landmarks?"> -->
             </div>
 
@@ -372,6 +391,7 @@ input{
                 <div class="ui-widget">
                   <label for="Autocomplete"> Area Name</label>
                 <?php echo $this->Form->input('areaname', array('id' => 'Autocomplete', 'required','class' => 'form-control form-element','label' => false,'placeholder' => 'Areaname'));?>
+                  <span id="area_error" style="color: #FF0000;"></span>
                 </div>
             </div>
 
@@ -422,54 +442,51 @@ input{
             
             <div class="form-group">
                 <div class="image-editor">
-                <label>
-                    <?=$this->Form->input('banner',['type' => 'file','accept' => 'image/*', 'class' => 'cropit-image-input']);?>
-                    [Size: 1311 * 985px]
-                </label>
+                    <label>
+                        <?=$this->Form->input('banner',['type' => 'file','accept' => 'image/*', 'class' => 'cropit-image-input']);?>
+                        [Size: 1311 * 985px]
+                    </label>
+                    <div id="container-size" style="width:200px; height:200px; display: none;">
+                    <div class="cropit-preview" id="banner-preview" style="display: none;"></div></div>
+                      <div class="image-size-label">
+                      </div>
+                   
+                      <input id="banner-zoom" type="range" class="cropit-image-zoom-input" style="display: none;">
 
-                <div class="cropit-preview" id="banner-preview" style="display: none;"></div>
-                  <div class="image-size-label">
-                  </div>
-               
-                  <input id="banner-zoom" type="range" class="cropit-image-zoom-input" style="display: none;">
                 </div>
-            </div>
-
-             <div class="form-group">
-            <div class="image-editor">
-               <label>
-            <?=$this->Form->input('display',['type' => 'file','accept' => 'image/*','class' => 'cropit-image-input']);?>
-            [Size: 280px * 185px]
-            </label>
-      <!-- <input type="file" id="imgsel" class="cropit-image-input" accept="images/*"> -->
-      <div class="cropit-preview" id="display-preview" style="display: none;"></div>
-      <div class="image-size-label">
-      </div>
-   
-      <input id="display-zoom" type="range" class="cropit-image-zoom-input" style="display: none;">
-      
-    </div>
             </div>
 
              <div class="form-group">
                 <div class="image-editor">
-                <label>
-            <?=$this->Form->input('OrganizersLogo',['type' => 'file','id' => 'org','accept' => 'image/*','class' => 'cropit-image-input']);?>
-            [Size: 1311 * 985px]
-            </label>
-            <div class="cropit-preview" id="organizer-preview" style="display: none;"></div>
-              <div class="image-size-label">
-              </div>
-           
-              <input id="organizers-zoom" type="range" class="cropit-image-zoom-input" style="display: none;">
+                   <label>
+                <?=$this->Form->input('display',['type' => 'file','accept' => 'image/*','class' => 'cropit-image-input']);?>
+                [Size: 280px * 185px]
+                      <!-- <input type="file" id="imgsel" class="cropit-image-input" accept="images/*"> -->
+                      <div class="cropit-preview" id="display-preview" style="display: none;"></div>
+                      <div class="image-size-label">
+                      </div>
+                      <input id="display-zoom" type="range" class="cropit-image-zoom-input" style="display: none;">
+          
                 </div>
-            </div> 
+            </div>
 
              <div class="form-group">
-                <label>
-           <?= $this->Form->input('Mediapartners[]',['type' => 'file', 'multiple' => 'true','label' => 'Mediapartners','accept' => 'image/*']);?>
-           [Size: 1311 * 985px]
-            </label>
+                <div class="image-editor">
+                    <label>
+                            <?=$this->Form->input('OrganizersLogo',['type' => 'file','id' => 'org','accept' => 'image/*','class' => 'cropit-image-input']);?>
+                            Size: 1311 * 985px]
+                    </label>
+                    <div class="cropit-preview" id="organizer-preview" style="display: none;"></div>
+                    <div class="image-size-label"></div>
+                    <input id="organizers-zoom" type="range" class="cropit-image-zoom-input" style="display: none;">
+                </div>
+            </div>
+
+             <div class="form-group">
+                    <label>
+                        <?= $this->Form->input('Mediapartners[]',['type' => 'file', 'multiple' => 'true','label' => 'Mediapartners','accept' => 'image/*']);?>
+                        [Size: 1311 * 985px]
+                    </label>
             </div>
 
              <div class="form-group">
@@ -508,7 +525,7 @@ input{
       <div class="modal-body">
         <div id="mapPanel">            
             <input class="form-control text" id="city_country" type="textbox" value="Mylapore, Chennai" style="color: black !important;">
-            <input class="btn btn-md btn-primary botton" type="button" value="Geocode" onclick="codeAddress()">            
+            <input class="btn btn-md btn-primary botton" type="button" value="save" onclick="codeAddress()">            
         </div>  
         <div id="mapCanvas" style="width: 100%; height: 350px;"></div>
         <div id="infoPanel">
@@ -516,18 +533,25 @@ input{
             <div id="markerStatus"><i>Click and drag the marker.</i></div>
             <b>Current position:</b>
             <div id="info"></div>-->
-            <b>Closest matching address:</b>
-            <div id="address"></div>
+            <!-- <b>Closest matching address:</b>
+            <div id="address"></div> -->
         </div>
       </div>
       <div class="modal-footer">
         <button type="button" class="btn btn-secondary" data-dismiss="modal">Close</button>
-        <button type="button" class="btn btn-primary" data-dismiss="modal">Save changes</button>
+       <!--  <button type="button" class="btn btn-primary" data-dismiss="modal">Save changes</button> -->
       </div>
     </div>
   </div>
 </div>
 
+
+
+        <script src="//code.jquery.com/jquery-1.9.1.js"></script>
+
+ <script src="//ajax.aspnetcdn.com/ajax/jquery.validate/1.9/jquery.validate.min.js"></script>
+<!-- <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.1.1/jquery.min.js"></script> -->
+  <script src="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/js/bootstrap.min.js"></script>
 
 
 <script type="text/javascript">
@@ -536,10 +560,6 @@ function autoHeight() {
             $('.content').css('min-height', ($(document).height() - $('#header').height() - $('.footer').height()));
         }
         </script>
-
-
-<script src="https://ajax.googleapis.com/ajax/libs/jquery/3.1.1/jquery.min.js"></script>
-  <script src="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/js/bootstrap.min.js"></script>
 
 <!--   <script type="text/javascript">
 $("#banner").change(function () {
@@ -559,6 +579,8 @@ $("#banner").change(function () {
 });
   </script>
  -->
+
+
 
 <script type="text/javascript">
     /* Float Label Pattern Plugin for Bootstrap 3.1.0 by Travis Wilson
@@ -662,52 +684,52 @@ $(document ).ready( function () {
   });*/
 
 
-  $("#createEvent" ).validate( {
-    rules: {
-      title: "required",
-      contact_number: {
-                    required: true,
-                    minlength: 7,
-                    maxlength: 10,
-                    number: true
-                },
-    mobile_number:  {
-                    required: true,
-                    minlength: 10,
-                    number: true
-            }
-            },
-    messages: {
-      title: "Please enter your Event's Title",
-     contact_number:"Please enter a number with at least 7 and max 10 characters!",
-      mobile_number:"Please enter a number with at least 10 characters!"
-    },
-    errorElement: "em",
-    errorPlacement: function ( error, element ) {
-      // Add the `help-block` class to the error element
-      error.addClass( "help-block" );
+  // $("#createEvent" ).validate( {
+  //   rules: {
+  //     title: "required",
+  //     contact_number: {
+  //                   required: true,
+  //                   minlength: 7,
+  //                   maxlength: 10,
+  //                   number: true
+  //               },
+  //   mobile_number:  {
+  //                   required: true,
+  //                   minlength: 10,
+  //                   number: true
+  //           }
+  //           },
+  //   messages: {
+  //     title: "Please enter your Event's Title",
+  //    contact_number:"Please enter a number with at least 7 and max 10 characters!",
+  //     mobile_number:"Please enter a number with at least 10 characters!"
+  //   },
+  //   errorElement: "em",
+  //   errorPlacement: function ( error, element ) {
+  //     // Add the `help-block` class to the error element
+  //     error.addClass( "help-block" );
 
-      if ( element.prop( "type" ) === "checkbox" ) {
-        error.insertAfter( element.parent( "label" ) );
-      } else {
-        error.insertAfter( element );
-      }
-    },
-    highlight: function ( element, errorClass, validClass ) {
-      $( element ).parents( ".input" ).addClass( "has-error" ).removeClass( "has-success" );
-    },
-    unhighlight: function (element, errorClass, validClass) {
-      $( element ).parents( ".input" ).addClass( "has-success" ).removeClass( "has-error" );
-    }
-  });
+  //     if ( element.prop( "type" ) === "checkbox" ) {
+  //       error.insertAfter( element.parent( "label" ) );
+  //     } else {
+  //       error.insertAfter( element );
+  //     }
+  //   },
+  //   highlight: function ( element, errorClass, validClass ) {
+  //     $( element ).parents( ".input" ).addClass( "has-error" ).removeClass( "has-success" );
+  //   },
+  //   unhighlight: function (element, errorClass, validClass) {
+  //     $( element ).parents( ".input" ).addClass( "has-success" ).removeClass( "has-error" );
+  //   }
+  // });
 
 });
 </script>
 <script type="text/javascript">
 
-$(document).ready(function() {
-        $(".imagevalid").validate();
-    });
+// $(document).ready(function() {
+//         $(".imagevalid").validate();
+//     });
 
 
 $("#display").click(function(){
@@ -716,6 +738,7 @@ $("#display").click(function(){
     });
 
 $("#banner").click(function(){
+      $("#container-size").css('display','block');
       $("#banner-preview").css('display','block');
       $("#banner-zoom").css('display', 'block');
     });
@@ -732,4 +755,80 @@ $("#org").click(function(){
 
       });
 
+      // $("#id_typemore").click(function(){
+      //   alert("asfd");
+      //   console.log("asdfasdf");
+      //   $("#id_moredes").show();
+      // });
+
+$('#id_typemore').on('click', function () {
+        $("#id_moredes").show();
+    });
+
+
+      // function typemore(){
+      //   alert("asfd");
+      //   $("#id_moredes").show();
+      // }
+
+    $("#createEvent").submit(function(event){
+        var status =true ;
+        if ($('#title').val() == '') {
+            status = false;
+           $("#title_error").text("please enter your title");
+        }else{
+            $("#title_error").text("");
+        }
+
+        if ($('#contact_number').val() == '') {
+            status = false;
+           $("#contact_error").text("please enter your Contact Number");
+        }else{
+            $("#contact_error").text("");
+        } 
+
+        if($("#descriptioin").val().length<=250){
+            status = false;
+            $("#description_error").text("please enter descriptioin minimun height is 120");
+        }else{
+            $("#description_error").text("");
+        }
+
+        if($("#landmark").val() == ''){
+            status = false;
+            $("#landmark_error").text("please type landmark");
+        }else{
+            $("#landmark_error").text("");
+        }
+
+        if($("#date").val() == ''){
+            status = false;
+            $("#date_error").text("please Select event date");
+        }else{
+            $("#date_error").text("");
+        }
+
+        if($("#time").val() == ''){
+            status = false;
+            $("#time_error").text("please Select event time");
+        }else{
+            $("#time_error").text("");
+        }
+
+        if($("#categories_id option:selected").val() == ''){
+            status = false;
+            $("#cate_error").text("please Select event category");
+        }else{
+            $("#cate_error").text("");
+        }
+
+        if($("#Autocomplete").val() == ''){
+            status = false;
+            $("#area_error").text("please Select event Areaname");
+        }else{
+            $("#area_error").text("");
+        }
+        
+        return status;
+    });
 </script>

@@ -304,7 +304,7 @@ background-color: #286090;
   <!-- </div> --><!--.container-fluid-->
 </nav>   
 <div class="container-content">
-  <?php echo $this->Flash->render(); ?>
+  <!-- <?php //echo $this->Flash->render(); ?> -->
   <?= $this->fetch('content') ?>
 </div>
            
@@ -532,7 +532,7 @@ window.onclick = function(event) {
 <!-- <script src="https://maxcdn.bootstrapcdn.com/bootstrap/4.0.0-alpha.4/js/bootstrap.min.js"></script> -->
 <script src="http://maps.googleapis.com/maps/api/js?libraries=places&key=AIzaSyCx2hb4R1uhaMbmlUAu1_lFasvl3gVHtnw"></script>
 
-<?php  echo $this->Html->script(['general','moment.min', 'daterangepicker', 'bootstrap-tagsinput', 'readmore.min', 'jquery.slimscroll.min','jquery.validate.min', 'additional-methods', 'mobile-filters', 'custom','jquery.cropit']);?> 
+<?php  echo $this->Html->script(['general','moment.min', 'daterangepicker', 'bootstrap-tagsinput', 'readmore.min', 'jquery.slimscroll.min', 'mobile-filters', 'custom','jquery.cropit','jquery.validate.min']);?> 
 
 
 <script type="text/javascript">
