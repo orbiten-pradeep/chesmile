@@ -295,7 +295,6 @@ return /******/ (function(modules) { // webpackBootstrap
 	  }, {
 	    key: 'unbindListeners',
 	    value: function unbindListeners() {
-	    	console.log("change images");
 	      this.$fileInput.off('change.cropit');
 	      this.$imageContainer.off(_constants.EVENTS.PREVIEW);
 	      this.$imageContainer.off('dragover.cropit dragleave.cropit drop.cropit');
@@ -319,20 +318,17 @@ return /******/ (function(modules) { // webpackBootstrap
 	        fileReader.onload = this.onFileReaderLoaded.bind(this);
 	        fileReader.onerror = this.onFileReaderError.bind(this);
 	      } else if (file) {
-	      	console.log("Please1 select other image");
 	        this.onFileReaderError();
 	      }
 	    }
 	  }, {
 	    key: 'onFileReaderLoaded',
 	    value: function onFileReaderLoaded(e) {
-	    	console.log("Please2 select other image");
 	      this.loadImage(e.target.result);
 	    }
 	  }, {
 	    key: 'onFileReaderError',
 	    value: function onFileReaderError() {
-	    	console.log("Please3 select other image");
 	      this.options.onFileReaderError();
 	    }
 	  }, {
