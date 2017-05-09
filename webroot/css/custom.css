@@ -355,11 +355,15 @@ footer {
 .tt-suggestion p {
     margin: 0;
 }
+.cover-picdiv{
+        height: 70%;
+}
+
 .cover-pic {
-    height: 400px;
+    height: 100%;
     background: url('../img/cover_pic.jpg') center center no-repeat scroll;
     -webkit-background-size: cover;
-    -moz-background-size: cover;
+    -moz-background-size: 100% 100%;
     background-size: cover;
     -o-background-size: cover;
     position: relative;
@@ -627,6 +631,7 @@ h3.heading > span,
     .lft_container {
         padding: 10px 10px;
         border-right: 1px solid #ffffff;
+        margin-bottom: 40px;
     }
     .navbar-nav {
         margin: 5px 0px;

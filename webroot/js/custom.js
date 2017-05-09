@@ -241,8 +241,8 @@ $("#subCategoriesResp").on('click','label > input', function(event){
 	//console.log(elt.tagsinput('items'));
 });
 
-$(".filterDate").click(function(){
-	//alert($(this).attr('data'));
+$(".filterDate").on('click', function(){
+	// alert($(this).attr('data'));
 	var vd = $(this).attr('data');
 	$("#filterDateVal").val(vd);
 
@@ -255,6 +255,7 @@ $(".filterDate").click(function(){
 	if(!$("#mobFilter").val()){
 		getEventListByFilter();
 	}
+	getEventListByFilter();
 });
  
 $("#filterClearAll").click(function(){
