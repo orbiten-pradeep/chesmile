@@ -265,11 +265,22 @@ background-color: #286090;
       </li>
       <li class="search-box-li">
        <form class="navbar-form navbar-left" action="<?php echo $this->Url->build(['action' =>'index']);?>" method="post">
-        <div class="form-group">
-          <input id="eventCategorySearch" type="text" class="form-control" placeholder="Search for events, parties, concerts and more">   
-          <input type="hidden" name="parent_category_id" id="parent_category_id">
-          <input type="hidden" name="sub_categories_id" id="sub_categories_id">        
-        </div>
+          <div class="form-group">
+            <input id="eventCategorySearch" type="text" class="form-control" placeholder="Search for events, parties, concerts and more">   
+            <!-- TEST -->
+            <!-- <div class="category_btn" style="background: none;">
+              <div class="mini-submenu">
+                <span class="icon-bar"></span>
+                <span class="icon-bar"></span>
+                <span class="icon-bar"></span>
+                <span class="icon-bar"></span>
+                <span class="icon-bar"></span>
+              </div>
+            </div> -->
+            <!-- TEST END -->
+            <input type="hidden" name="parent_category_id" id="parent_category_id">
+            <input type="hidden" name="sub_categories_id" id="sub_categories_id">   
+            </div>  
         <button type="button" class="btn btn-primary btn-go" onclick="getEventListByFilter();">GO</button>
       </form>
       </li>

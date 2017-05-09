@@ -64,11 +64,11 @@ address {
     margin-bottom: 0 !important;
 }
 .glyphicon-calendar{
-    font-size: 25px !important;
+    font-size: 21px !important;
 }
 
 .glyphicon-time{
-    font-size: 25px !important;
+    font-size: 21px !important;
 }
 
 .date-txt{
@@ -150,6 +150,19 @@ address {
     box-shadow: 0px 0px 7px 7px rgba(0, 0, 0, 0.1);
 }
 
+@media only screen and (max-width:1280px){
+    .cover-pic {
+    /*height: 38% !important;*/
+    background: url('../img/cover_pic.jpg') center center no-repeat scroll;
+    -webkit-background-size: cover;
+    -moz-background-size: cover;
+    background-size: cover;
+    -o-background-size: cover;
+    position: relative;
+}
+
+}
+
 </style>
 
 <?php
@@ -161,7 +174,8 @@ else {
     $bgCoverImg = $this->Url->image('cover_pic.jpg');
 }
 ?>
-<div class="cover-pic" style="background: rgba(0, 0, 0, 0) url(<?=$bgCoverImg?>) no-repeat scroll center center / cover">
+<div class="cover-picdiv">
+<div class="cover-pic img-responsive" style="background: rgba(0, 0, 0, 0) url(<?=$bgCoverImg?>) no-repeat scroll center center / cover;background-size:100% 100% !important;">
         <div class="container-fluid heading_txt" style="background: linear-gradient(to bottom, rgba(0, 0, 0, 0) 0%, rgba(0,0,0,.6) 50%);position: absolute;bottom: 0;z-index: 1;width: 100%;box-sizing: border-box;">
             <div class="row">
                 <div class="col-lg-12">
@@ -170,6 +184,8 @@ else {
                 </div>
             </div>
         </div>
+
+</div>
 </div>
 
 <div class="cover-detail">
@@ -185,23 +201,26 @@ else {
         ?>
 
         <div class="row">
-            <div class="col-sm-8 lft_container event-details">
+            <div class="col-md-8 col-sm-8 lft_container event-details">
                 <h2><img src="<?=$organizerLogoImageUrl?>" class="img-thumbnail profile-img organizer-logo"><?= h($event->OrganizersName) ?></h2>
                 <div id="eventDescription"><?=  $this->Text->autoParagraph(h($event->descriptioin));?></div>
-                <p class="margin25"><span class="glyphicon glyphicon-calendar calender_txt" aria-hidden="true"></span><?= h($event->date) ?></p>
-                <p>
-                    <span class="glyphicon glyphicon-time time_txt" aria-hidden="true"></span><?= h($event->time) ?>
+                <p class="margin25" style="font-size: 20px;"><span class="glyphicon glyphicon-calendar calender_txt" aria-hidden="true"></span><span style="margin-left: 5px;"><?= date_format($event->date, "j,M Y") ?></span></p>
+                <p style="font-size: 20px;">
+                    <span class="glyphicon glyphicon-time" aria-hidden="true"></span><span style="margin-left: 5px;"><?= h($event->time)." AM"; ?></span>
                 </p>
-                <a style="font-size: 12px;" data-toggle="modal" href="#Register-modal">Register Online</a>
+                <div style="float: right;">
+            <button class="btn btn-primary" style="font-size: 12px; float: right; background-color: #4ABAC5;border:none;" data-toggle="modal" href="#view-more">View more</button>
+             <button class="btn btn-primary" style="font-size: 12px; float: right;margin-right: 10px; background-color: #4ABAC5;border:none;" data-toggle="modal" href="#Register-modal">Register Online</button>
+             </div>
             </div>
             <?php
             //echo $event->google_map; exit;
             $geoCode = (!empty($event->google_map)) ? $event->google_map : '13.0595365,80.24247919999993';
 
             ?>
-            <div class="col-sm-4 text-center rgt_container">
+            <div class="col-md-4 col-sm-4 text-center rgt_container">
                 <address>
-                    <script src='https://maps.googleapis.com/maps/api/js?v=3.exp'></script><div style='overflow:hidden;height:330px;width:630px;'><div id='gmap_canvas' style='height:330px;width:700px;'></div><div><small><a href="http://embedgooglemaps.com">embed google maps</a></small></div><div><small><a href="https:/disclaimergenerator.net">disclaimer example</a></small></div><style>#gmap_canvas img{max-width:none!important;background:none!important}</style></div><script type='text/javascript'>function init_map(){var myOptions = {zoom:10,center:new google.maps.LatLng(<?=$geoCode;?>),mapTypeId: google.maps.MapTypeId.ROADMAP};map = new google.maps.Map(document.getElementById('gmap_canvas'), myOptions);marker = new google.maps.Marker({map: map,position: new google.maps.LatLng(<?=$geoCode;?>)});}google.maps.event.addDomListener(window, 'load', init_map);</script>
+                    <script src='https://maps.googleapis.com/maps/api/js?v=3.exp'></script><div style='overflow:hidden;height:330px;width:100%;'><div id='gmap_canvas' style='height:330px;width:700px;'></div><div><small><a href="http://embedgooglemaps.com">embed google maps</a></small></div><div><small><a href="https:/disclaimergenerator.net">disclaimer example</a></small></div><style>#gmap_canvas img{max-width:none!important;background:none!important}</style></div><script type='text/javascript'>function init_map(){var myOptions = {zoom:10,center:new google.maps.LatLng(<?=$geoCode;?>),mapTypeId: google.maps.MapTypeId.ROADMAP};map = new google.maps.Map(document.getElementById('gmap_canvas'), myOptions);marker = new google.maps.Marker({map: map,position: new google.maps.LatLng(<?=$geoCode;?>)});}google.maps.event.addDomListener(window, 'load', init_map);</script>
                 </address>
                 <address class="address-info">
                     <p class="text-center"><span class="glyphicon glyphicon-pushpin" aria-hidden="true"></span></p>
@@ -306,9 +325,9 @@ else {
                                                     <div class="clearfix"></div>
                                                     <?php 
                                                     $today = date('n/j/y');
-                                                    echo "today".$today;
+                                                    // echo "today".$today;
                                                     $eventdate = $event->date;
-                                                    echo "D-".$eventdate;
+                                                    // echo "D-".$eventdate;
 
                                                     if($today >= $eventdate) {
                                                         $status = "available";
@@ -335,8 +354,7 @@ else {
                                                     <p><?= $this->Text->autoParagraph(h($event->note));?></p>
                                                     </div>
                                                     <div class="clearfix"></div>
-
-                                                     <button class="btn btn-info btn-lg" data-toggle="modal" data-target="#myModal" style="display: <?php if(!isset($galaries) && $status!="" ) { echo 'none;'; }else{echo 'inline-block;';} ?>">Open Modal</button>
+                                                     <button class="btn btn-info btn-lg" data-toggle="modal" data-target="#myModal" style="display: <?php if($event->note=="" && $status!="" && $u_id == $event->user_id ) { echo 'inline-block;'; }else{echo 'none;';} ?>">Open Modal</button>
 
                                                      <?php } ?>
                                                      <!-- Modal -->
@@ -406,6 +424,7 @@ else {
 </nav> 
 
           <div class="container">
+            
   <!-- Trigger the modal with a button -->
  <!--  <button type="button" class="btn btn-info btn-lg" id="alertbox">Click here</button> -->
 
@@ -415,6 +434,14 @@ else {
     
       <!-- Modal content-->
       <div class="modal-content card">
+        <div class="row">
+                <div class="col-md-6">
+                   efgegerg 
+                </div>
+                <div class="col-md-6">
+                    erergergergerg
+                </div>
+            </div>
         <div class="modal-header" style="border-bottom: none;">
           <button type="button" class="close" data-dismiss="modal">&times;</button>
           <h4 class="modal-title">Forgot Password?</h4>
@@ -511,6 +538,34 @@ else {
         </div>
   
     <?= $this->Form->end() ?>
+
+        </div>
+        <div class="modal-footer" style="border-top: none;">
+         <!--  <button type="button" class="btn btn-default closebtn" data-dismiss="modal">Close</button> -->
+        </div> 
+      </div>
+      
+    </div>
+  </div>
+  
+</div>
+
+       <div class="container">
+  <!-- Trigger the modal with a button -->
+ <!--  <button type="button" class="btn btn-info btn-lg" id="alertbox">Click here</button> -->
+
+  <!-- Modal -->
+  <div class="modal fade" id="view-more" role="dialog">
+    <div class="modal-dialog">
+    
+      <!-- Modal content-->
+      <div class="modal-content">
+        <div class="modal-header" style="border-bottom: none;">
+          <button type="button" class="close" data-dismiss="modal">&times;</button>
+          <h4 class="modal-title">Event Description</h4>
+        </div>
+        <div class="modal-body">
+          dfsfsdf
 
         </div>
         <div class="modal-footer" style="border-top: none;">

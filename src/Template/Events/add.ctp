@@ -242,8 +242,8 @@ input{
       }
 
       #organizer-preview{
-        width: 280px;
-        height: 185px;
+        width: 75px;
+        height: 75px;
       }
 
       .cropit-preview-image-container {
@@ -474,7 +474,7 @@ input{
                 <div class="image-editor">
                     <label>
                             <?=$this->Form->input('OrganizersLogo',['type' => 'file','id' => 'org','accept' => 'image/*','class' => 'cropit-image-input']);?>
-                            Size: 1311 * 985px]
+                            Size: 75 * 75px]
                     </label>
                     <div class="cropit-preview" id="organizer-preview" style="display: none;"></div>
                     <div class="image-size-label"></div>

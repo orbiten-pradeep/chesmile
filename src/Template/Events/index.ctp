@@ -132,11 +132,11 @@ max-width: 259px;
 </div>
 <!-- <div class="row"> &nbsp; </div> -->
 
-<script type="text/javascript">
+<!-- <script type="text/javascript">
 $(document).ready(function(){
     $('[data-toggle="popover"]').popover({
         placement : 'top',
         trigger : 'hover'
     });
 });
-</script>
+</script> -->
