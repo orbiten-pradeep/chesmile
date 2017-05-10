@@ -206,7 +206,13 @@ address {
     float: left !important;
 }
 }
+
+.btn-reg{
+    margin-top: 35px;
+    
+}
 </style>
+
 
 
 <div class="cover-picdiv">
@@ -243,10 +249,10 @@ address {
                 <p style="font-size: 20px;">
                     <span class="glyphicon glyphicon-time" aria-hidden="true"></span><span style="margin-left: 5px;"><?= h($event->time)." AM"; ?></span>
                 </p>
-
+                <div class="btn-reg">
                 <button class="btn btn-primary" style="float: right; background-color: #4ABAC5;border-color: #e2e2e2;" data-toggle="modal" href="#Register-modal">Register Online</button>
             <button class="btn btn-primary view-btn" style="float: right;margin-right: 10px;background-color: #4ABAC5;border-color: #e2e2e2;" data-toggle="modal" href="#view-more">View more</button>
-             
+             </div>
           
             </div>
             <?php
