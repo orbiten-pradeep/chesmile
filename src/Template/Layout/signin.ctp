@@ -164,6 +164,18 @@ a.socialIcon:hover, .socialHoverClass {
     line-height: 20px;
 }
 
+.login-bg{
+  background-image: url('<?=$this->Url->image('cs-homepage-BG.jpg')?>');
+  background-size: cover;
+}
+
+@media screen and (max-width: 700px){
+  .login-bg{
+  background-image: url('<?=$this->Url->image('mobile-bg.png')?>');
+  background-size: cover;
+}
+
+}
 
 </style>
 
@@ -177,7 +189,7 @@ a.socialIcon:hover, .socialHoverClass {
 <?php echo $this->Html->css(['bootstrap.min', 'loginstyle', 'font-awesome']); ?>
 <?php echo $this->Html->script(['jquery.validate.min']); ?>
 </head>
-<body style="background-image: url('<?=$this->Url->image('cs-homepage-BG.jpg')?>');">
+<body class="login-bg">
 
  <?= $this->fetch('content') ?>
  <?php echo $this->Flash->render(); ?>

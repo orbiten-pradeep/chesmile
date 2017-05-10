@@ -3,6 +3,17 @@ use Cake\Routing\Router;
 use Cake\I18n\Time;
 ?>
 
+
+<?php
+$bgImage = $event->banner;
+if(!empty($bgImage)){
+    $bgCoverImg = $this->Url->image('banner/'.$bgImage);
+}
+else {
+    $bgCoverImg = $this->Url->image('cover_pic.jpg');
+}
+?>
+
 <!-- <script type='text/javascript' src='//platform-api.sharethis.com/js/sharethis.js#property=58fdbf6acaaba30012e7e564&product=sticky-share-buttons' async='async'></script> -->
 <style type="text/css">
     .icon{
@@ -14,7 +25,19 @@ use Cake\I18n\Time;
     display: inline-block;
     text-align: center;   
 }
-
+/*.modal-open body{
+    padding-right: 0 !important;
+}
+*/
+.modal{
+    overflow-y: auto;
+}
+.modal-open{
+    overflow: auto;
+}
+body{
+    width: 100% !important;
+}
 #lightbox .close {
     opacity: 1;
     color: rgb(255, 255, 255);
@@ -74,6 +97,9 @@ address {
 .date-txt{
    /* font-size:25px;*/
 }
+.date{
+    font-weight: normal;
+}
 .time-txt{
    /* font-size:25px;*/
 }
@@ -89,7 +115,7 @@ address {
         .float-label-control input:focus,
         .float-label-control textarea:focus { box-shadow: none; -webkit-box-shadow: none; border-bottom-width: 2px; padding-bottom: 0; background: none; }
         .float-label-control textarea:focus { padding-bottom: 4px; }
-    .float-label-control input, .float-label-control textarea { display: block; width: 100%; padding: 0.1em 0em 1px 0em; border: none; border-radius: 0px; border-bottom: 1px solid #aaa; outline: none; margin: 0px; background: none; }
+    .float-label-control input, .float-label-control textarea { display: block; width: 100%; padding: 0.1em 0em 1px 0em; border: none; border-radius: 0px; border-bottom: 1px solid #aaa; outline: none; margin: 0px; background: none;font-size: 14px; }
     .float-label-control textarea { padding: 0.1em 0em 5px 0em; }
     .float-label-control label { position: absolute; font-weight: normal; top: -1.0em; left: 0.08em; color: #aaaaaa; z-index: -1; font-size: 0.85em; -moz-animation: float-labels 300ms none ease-out; -webkit-animation: float-labels 300ms none ease-out; -o-animation: float-labels 300ms none ease-out; -ms-animation: float-labels 300ms none ease-out; -khtml-animation: float-labels 300ms none ease-out; animation: float-labels 300ms none ease-out; /* There is a bug sometimes pausing the animation. This avoids that.*/ animation-play-state: running !important; -webkit-animation-play-state: running !important; }
     .float-label-control input.empty + label,
@@ -140,7 +166,7 @@ address {
     /* just in case there no content*/
     padding: 20px 25px 30px;
     margin: 30px auto 25px;
-    margin-top: 30px;
+    margin-top: 0px;
     /* shadows and rounded borders */
     -moz-border-radius: 2px;
     -webkit-border-radius: 2px;
@@ -148,6 +174,7 @@ address {
     -moz-box-shadow: 10px 10px 10px rgba(0, 0, 0, 0.3);
     -webkit-box-shadow: 10px 10px 10px rgba(0, 0, 0, 0.3);
     box-shadow: 0px 0px 7px 7px rgba(0, 0, 0, 0.1);
+    height: auto;
 }
 
 @media only screen and (max-width:1280px){
@@ -162,24 +189,32 @@ address {
 }
 
 }
+.btn-tag{
+    background: linear-gradient(to top, rgba(0, 0, 0, 0.55) 50%, rgba(0, 0, 0, 0.63) 50%) !important;
+    border-color: #e2e2e2 !important;
+}
 
+.marg-card{
+    margin-top: -20px !important;
+}
+.user-pic{
+    background: rgba(0, 0, 0, 0) url(<?=$bgCoverImg?>) no-repeat scroll center center / cover;
+}
+
+@media screen and (max-width: 400px){
+.view-btn{
+    float: left !important;
+}
+}
 </style>
 
-<?php
-$bgImage = $event->banner;
-if(!empty($bgImage)){
-    $bgCoverImg = $this->Url->image('banner/'.$bgImage);
-}
-else {
-    $bgCoverImg = $this->Url->image('cover_pic.jpg');
-}
-?>
+
 <div class="cover-picdiv">
-<div class="cover-pic img-responsive" style="background: rgba(0, 0, 0, 0) url(<?=$bgCoverImg?>) no-repeat scroll center center / cover;background-size:100% 100% !important;">
-        <div class="container-fluid heading_txt" style="background: linear-gradient(to bottom, rgba(0, 0, 0, 0) 0%, rgba(0,0,0,.6) 50%);position: absolute;bottom: 0;z-index: 1;width: 100%;box-sizing: border-box;">
+<div class="cover-pic img-responsive user-pic">
+        <div class="container-fluid heading_txt" style="background: linear-gradient(to bottom, rgba(0, 0, 0, 0) 0%, rgba(0, 0, 0, 0.63) 50%);position: absolute;bottom: 0;z-index: 1;width: 100%;box-sizing: border-box;">
             <div class="row">
                 <div class="col-lg-12">
-                    <button class="btn btn-tag"><?= $event->has('category') ? $this->Html->link($event->category->name, ['controller' => 'Categories', 'action' => 'view', $event->category->id]) : '' ?></button> <?php echo $this->Html->image('card/'.$event->category->card, array('width' => '100px', 'height' => '100px','alt'=>'Card')); ?>
+                    <button class="btn btn-tag"><?= $event->has('category') ? $this->Html->link($event->category->name, ['controller' => 'Categories', 'action' => 'view', $event->category->id]) : '' ?></button> <?php echo $this->Html->image('card/'.$event->category->card, array('width' => '65px', 'height' => '65px', 'class' => 'marg-card' ,'alt'=>'Card')); ?>
                     <h1 class="tagline" style="color: #FFFFFF"><?= h($event->title) ?></h1>
                 </div>
             </div>
@@ -203,15 +238,16 @@ else {
         <div class="row">
             <div class="col-md-8 col-sm-8 lft_container event-details">
                 <h2><img src="<?=$organizerLogoImageUrl?>" class="img-thumbnail profile-img organizer-logo"><?= h($event->OrganizersName) ?></h2>
-                <div id="eventDescription"><?=  $this->Text->autoParagraph(h($event->descriptioin));?></div>
-                <p class="margin25" style="font-size: 20px;"><span class="glyphicon glyphicon-calendar calender_txt" aria-hidden="true"></span><span style="margin-left: 5px;"><?= date_format($event->date, "j,M Y") ?></span></p>
+                <div id="eventDescription" style="height:100px; overflow: hidden;"><?=  $this->Text->autoParagraph(h($event->descriptioin));?></div>
+                <p class="margin25" style="font-size: 20px;"><span class="glyphicon glyphicon-calendar calender_txt" aria-hidden="true"></span><span style="margin-left: 7px;"><?= date_format($event->date, "j-M-Y") ?></span></p>
                 <p style="font-size: 20px;">
                     <span class="glyphicon glyphicon-time" aria-hidden="true"></span><span style="margin-left: 5px;"><?= h($event->time)." AM"; ?></span>
                 </p>
-                <div style="float: right;">
-            <button class="btn btn-primary" style="font-size: 12px; float: right; background-color: #4ABAC5;border:none;" data-toggle="modal" href="#view-more">View more</button>
-             <button class="btn btn-primary" style="font-size: 12px; float: right;margin-right: 10px; background-color: #4ABAC5;border:none;" data-toggle="modal" href="#Register-modal">Register Online</button>
-             </div>
+
+                <button class="btn btn-primary" style="float: right; background-color: #4ABAC5;border-color: #e2e2e2;" data-toggle="modal" href="#Register-modal">Register Online</button>
+            <button class="btn btn-primary view-btn" style="float: right;margin-right: 10px;background-color: #4ABAC5;border-color: #e2e2e2;" data-toggle="modal" href="#view-more">View more</button>
+             
+          
             </div>
             <?php
             //echo $event->google_map; exit;
@@ -424,27 +460,143 @@ else {
 </nav> 
 
           <div class="container">
-            
-  <!-- Trigger the modal with a button -->
- <!--  <button type="button" class="btn btn-info btn-lg" id="alertbox">Click here</button> -->
 
-  <!-- Modal -->
-  <div class="modal fade" id="Register-modal" role="dialog">
+          <!-- <link href="//maxcdn.bootstrapcdn.com/font-awesome/4.1.0/css/font-awesome.min.css" rel="stylesheet"> -->
+    <div class="modal fade" id="Register-modal" role="dialog">
+    <div class="modal-dialog">
+      <div class="modal-content">
+          <div class="modal-header">
+              <button type="button" class="close" data-dismiss="modal"><span aria-hidden="true">×</span><span class="sr-only">Close</span></button>
+              <h4 class="modal-title" id="myModalLabel">Login to site.com</h4>
+          </div>
+          <div class="modal-body">
+              <div class="row">
+                  <div class="col-xs-9 col-lg-6">
+                      <div class="card">
+                          <?= $this->Form->create('', array('id' => 'forgotpassform', 'url' => ['action' => 'forgetpassword'])) ?>
+
+           <div class="">
+            <div class="form-group float-label-control">
+             
+             <label for="">Firstname</label>
+             <?= $this->Form->input('Firstname', array('div' => false,'id' => 'email', 'class' => 'form-control form-element text','label' => false,'placeholder' => 'Firstname', 'required' => true)) ?>
+            </div>
+        </div>
+
+        <div class="">
+            <div class="form-group float-label-control">
+             
+             <label for="">Lastname</label>
+             <?= $this->Form->input('Lastname', array('div' => false,'id' => 'email', 'class' => 'form-control form-element text','label' => false,'placeholder' => 'Lastname', 'required' => true)) ?>
+            </div>
+        </div>
+
+        <div class="form-group">
+                <label>
+           <?= $this->Form->input('date', array('type' => 'text','class' => 'form-control date','placeholder' => 'Date','label' => false));?>
+           </label>
+           <span id="person_type" style="color: #00FF00;"></span>
+           </div>
+
+        <div class="">  
+             <label>Sex</label>
+             <ul>
+              <li  style="list-style:none;">
+                <input type="radio" name="custom_type" value="public" />
+                Male</li>
+                <li style="list-style:none;">
+                <input type="radio" name="custom_type" 
+                value="private" id="custom_venuetype_private" />
+                Female
+              </li>
+            </ul>
+        </div>
+
+        <div class="">
+            <div class="form-group float-label-control">
+             
+             <label for="">Email</label>
+             <?= $this->Form->input('Email', array('div' => false,'id' => 'email', 'class' => 'form-control form-element text','label' => false,'placeholder' => 'Email address', 'required' => true)) ?>
+            </div>
+        </div>
+
+        <div class="">
+            <div class="form-group float-label-control">
+             <label for="">Mobile number</label>
+             <?= $this->Form->input('Mobilenumber', array('div' => false,'id' => 'email', 'class' => 'form-control form-element text','label' => false,'placeholder' => 'Mobile number', 'required' => true)) ?>
+            </div>
+        </div>
+
+         <div class=""> 
+             <label>KMs</label>
+             <ul>
+              <li  style="list-style:none;">
+                <input type="radio" name="custom_type" 
+                value="private" id="custom_venuetype_private" checked="checked"/>
+                2 KM</li>
+                <li style="list-style: none;">
+                 <input type="radio" name="custom_type" 
+                value="private" id="custom_venuetype_private" />
+                5 KM
+              </li>
+            </ul>
+            </div>
+      
+        <div class="">
+        <label>Tshirt size</label>
+            <div class="form-group float-label-control">
+            
+            <select class="form-control" style="height:35px;">
+              <option value="volvo">S</option>
+              <option value="saab">M</option>
+              <option value="opel">L</option>
+              <option value="audi">XL</option>
+              <option value="audi">XXL</option>
+              <option value="audi">XXXL</option>
+            </select>
+            </div>
+        </div>
+
+
+        <div class="">
+          <div class="form-group text-center">
+          <?= $this->Form->submit(__('Register'), array('id' => 'Login', 'class' => 'btn btn-primary btn-lg cs-signup-button')) ?>
+
+          </div>
+        </div>
+  
+    <?= $this->Form->end() ?>
+                      </div>
+                  </div>
+                  <div class="col-xs-9 col-lg-6">
+                      <p class="lead">Register now for <span class="text-success">FREE</span></p>
+                      <ul class="list-unstyled" style="line-height: 2">
+                          <li><span class="fa fa-check text-success"></span> See all your orders</li>
+                          <li><span class="fa fa-check text-success"></span> Fast re-order</li>
+                          <li><span class="fa fa-check text-success"></span> Save your favorites</li>
+                          <li><span class="fa fa-check text-success"></span> Fast checkout</li>
+                          <li><span class="fa fa-check text-success"></span> Get a gift <small>(only new customers)</small></li>
+                          <li><a href="/read-more/"><u>Read more</u></a></li>
+                      </ul>
+                      <p><a href="/new-customer/" class="btn btn-info btn-block">Yes please, register now!</a></p>
+                  </div>
+              </div>
+          </div>
+      </div>
+  </div>
+            
+
+  <!-- <div class="modal fade" id="Register-modal" role="dialog">
     <div class="modal-dialog">
     
-      <!-- Modal content-->
+      
       <div class="modal-content card">
         <div class="row">
-                <div class="col-md-6">
-                   efgegerg 
-                </div>
-                <div class="col-md-6">
-                    erergergergerg
-                </div>
+              
             </div>
         <div class="modal-header" style="border-bottom: none;">
           <button type="button" class="close" data-dismiss="modal">&times;</button>
-          <h4 class="modal-title">Forgot Password?</h4>
+          <h4 class="modal-title">Register your Details.</h4>
         </div>
         <div class="modal-body">
           <?= $this->Form->create('', array('id' => 'forgotpassform', 'url' => ['action' => 'forgetpassword'])) ?>
@@ -504,14 +656,12 @@ else {
              <label>KMs</label>
              <ul>
               <li  style="list-style:none;">
-                <input type="radio" name="custom_type" value="public" />
-                1 KM
                 <input type="radio" name="custom_type" 
                 value="private" id="custom_venuetype_private" checked="checked"/>
-                5 KM
+                2 KM
                  <input type="radio" name="custom_type" 
                 value="private" id="custom_venuetype_private" />
-                10 KM
+                5 KM
               </li>
             </ul>
             </div>
@@ -521,10 +671,12 @@ else {
             <div class="form-group float-label-control">
             
             <select>
-              <option value="volvo">Small</option>
-              <option value="saab">medium</option>
-              <option value="opel">Large</option>
-              <option value="audi">Extra Large</option>
+              <option value="volvo">S</option>
+              <option value="saab">M</option>
+              <option value="opel">L</option>
+              <option value="audi">XL</option>
+              <option value="audi">XXL</option>
+              <option value="audi">XXXL</option>
             </select>
             </div>
         </div>
@@ -541,12 +693,12 @@ else {
 
         </div>
         <div class="modal-footer" style="border-top: none;">
-         <!--  <button type="button" class="btn btn-default closebtn" data-dismiss="modal">Close</button> -->
+         
         </div> 
       </div>
       
     </div>
-  </div>
+  </div> -->
   
 </div>
 
@@ -565,7 +717,7 @@ else {
           <h4 class="modal-title">Event Description</h4>
         </div>
         <div class="modal-body">
-          dfsfsdf
+          <?=  $this->Text->autoParagraph(h($event->descriptioin));?>
 
         </div>
         <div class="modal-footer" style="border-top: none;">
@@ -583,6 +735,33 @@ else {
   <script src="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/js/bootstrap.min.js"></script>
 
 <script type="text/javascript">
+
+
+$(document).ready(function(){
+    var event_id = '<?=$event->id;?>';
+    if(event_id==123){
+        if($(document).width() < 400){
+            console.log("mobile");
+            $(".cover-picdiv").css('height', '200px');
+            // rgba(0, 0, 0, 0) url(/chesmile/img/banner/banner_mob_mar.png) no-repeat scroll center center / cover
+            $(".user-pic").css('background', 'rgba(0, 0, 0, 0) url("../../../chesmile/img/banner/banner_mob_mar.png") no-repeat scroll center center / cover');
+        }else if($(document).width()< 800){
+            console.log("tab");
+            $(".cover-picdiv").css('height', '300px');
+            $(".user-pic").css('background', 'rgba(0, 0, 0, 0) url("../../../chesmile/img/banner/banner_tab_mar.png") no-repeat scroll center center / cover');
+        }else{
+            console.log("default");
+            $(".cover-picdiv").css('height', '400px');
+            $(".user-pic").css('background', 'rgba(0, 0, 0, 0) url("../../../chesmile/img/banner/banner_def_mar.png") no-repeat scroll center center / cover');        
+        }
+    }
+
+});
+
+// function autoHeight() {
+//             $('.content').css('min-height', 0);
+//             $('.content').css('min-height', ($(document).height() - $('#header').height() - $('.footer').height()));
+//         }
 $( function() {
         $('#date').datepicker({
             changeMonth: true,
@@ -595,7 +774,7 @@ $( function() {
                 var curyear = 2017;
                 var year = curyear-dob_year[2];
                 if(year<=14){
-                    $("#person_type").text("Kids");
+                    $("#person_type").text("Kids"+", Rs. 200");
                 }else{
                     $("#person_type").text("Adults");
                 }

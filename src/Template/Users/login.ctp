@@ -229,7 +229,7 @@ label {
 }
 </style>
 <!-- Login Container -->
-<div class="container cs-header-container col-xs-12 col-sm-12 col-md-12 col-lg-12  ">
+<div class="container cs-header-container col-xs-12 col-sm-12 col-md-12 col-lg-12">
 <div class="row">
 <nav class="navbar navbar-default cs-header-navbar">
   <div class="container-fluid"> 
