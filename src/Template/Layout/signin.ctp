@@ -177,6 +177,14 @@ a.socialIcon:hover, .socialHoverClass {
 
 }
 
+@media screen and (max-width: 1000px){
+  .login-bg{
+  background-image: url('<?=$this->Url->image('tab-bg.png')?>');
+  background-size: cover;
+}
+
+}
+
 </style>
 
 
