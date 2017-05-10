@@ -6,8 +6,11 @@
     src: url('webfont.eot?#iefix') format('embedded-opentype'), url('webfont.woff2') format('woff2'), url('webfont.woff') format('woff'), url('../fonts/OpenSans-Regular.ttf') format('truetype'), url('webfont.svg#svgFontName') format('svg');
     /* Legacy iOS */
 }
+
 body {
     padding-top: 0px;
+    padding-right: 0 !important;
+
     /* Required padding for .navbar-fixed-top. Remove if using .navbar-static-top. Change if height of navigation changes. */
     
     font-family: OpenSans;
@@ -356,7 +359,7 @@ footer {
     margin: 0;
 }
 .cover-picdiv{
-        height: 70%;
+        height: 400px;
 }
 
 .cover-pic {
