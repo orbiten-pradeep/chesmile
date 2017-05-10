@@ -3,7 +3,7 @@
 -- http://www.phpmyadmin.net
 --
 -- Host: 127.0.0.1
--- Generation Time: Apr 29, 2017 at 03:54 PM
+-- Generation Time: May 10, 2017 at 08:01 PM
 -- Server version: 5.6.17
 -- PHP Version: 5.5.12
 
@@ -37,7 +37,7 @@ CREATE TABLE IF NOT EXISTS `acos` (
   PRIMARY KEY (`id`),
   KEY `lft` (`lft`,`rght`),
   KEY `alias` (`alias`)
-) ENGINE=MyISAM  DEFAULT CHARSET=utf8 AUTO_INCREMENT=184 ;
+) ENGINE=MyISAM  DEFAULT CHARSET=utf8 AUTO_INCREMENT=190 ;
 
 --
 -- Dumping data for table `acos`
@@ -167,7 +167,7 @@ INSERT INTO `acos` (`id`, `parent_id`, `model`, `foreign_key`, `alias`, `lft`, `
 (4, 2, NULL, NULL, 'view', 5, 6),
 (3, 2, NULL, NULL, 'index', 3, 4),
 (2, 1, NULL, NULL, 'Groups', 2, 13),
-(1, NULL, NULL, NULL, 'controllers', 1, 308),
+(1, NULL, NULL, NULL, 'controllers', 1, 320),
 (149, 144, NULL, NULL, 'delete', 281, 282),
 (150, 1, NULL, NULL, 'Address', 284, 295),
 (151, 150, NULL, NULL, 'index', 285, 286),
@@ -196,8 +196,14 @@ INSERT INTO `acos` (`id`, `parent_id`, `model`, `foreign_key`, `alias`, `lft`, `
 (176, 111, NULL, NULL, 'invitation', 229, 230),
 (180, 16, NULL, NULL, 'isemailexist', 55, 56),
 (181, 16, NULL, NULL, 'adminadd', 57, 58),
+(184, 1, NULL, NULL, 'Marathon', 308, 319),
 (182, 111, NULL, NULL, 'adminindex', 231, 232),
-(183, 111, NULL, NULL, 'searchbyeventtitle', 233, 234);
+(183, 111, NULL, NULL, 'searchbyeventtitle', 233, 234),
+(185, 184, NULL, NULL, 'index', 309, 310),
+(186, 184, NULL, NULL, 'view', 311, 312),
+(187, 184, NULL, NULL, 'add', 313, 314),
+(188, 184, NULL, NULL, 'edit', 315, 316),
+(189, 184, NULL, NULL, 'delete', 317, 318);
 
 /*!40101 SET CHARACTER_SET_CLIENT=@OLD_CHARACTER_SET_CLIENT */;
 /*!40101 SET CHARACTER_SET_RESULTS=@OLD_CHARACTER_SET_RESULTS */;
