@@ -61,6 +61,7 @@ a {
     -moz-filter: grayscale(1);
     -o-filter: grayscale(1);
     -ms-filter: grayscale(1);
+    padding:30px;
 }
 
 .img-overlay:hover{
@@ -75,6 +76,7 @@ a {
     -ms-transition: all 0.3s ease-in-out;
     transition: all 0.3s ease-in-out;
     opacity: 0.7;
+    padding:30px;
 }
 .address-info p {
     font-size: 13px;
@@ -171,9 +173,9 @@ address {
     -moz-border-radius: 2px;
     -webkit-border-radius: 2px;
     border-radius: 2px;
-    -moz-box-shadow: 10px 10px 10px rgba(0, 0, 0, 0.3);
+    /*-moz-box-shadow: 10px 10px 10px rgba(0, 0, 0, 0.3);
     -webkit-box-shadow: 10px 10px 10px rgba(0, 0, 0, 0.3);
-    box-shadow: 0px 0px 7px 7px rgba(0, 0, 0, 0.1);
+    box-shadow: 0px 0px 7px 7px rgba(0, 0, 0, 0.1);*/
     height: auto;
 }
 
@@ -211,6 +213,9 @@ address {
     margin-top: 35px;
     
 }
+.heigh{
+    height: 35px !important;
+}
 </style>
 
 
@@ -245,9 +250,10 @@ address {
             <div class="col-md-8 col-sm-8 lft_container event-details">
                 <h2><img src="<?=$organizerLogoImageUrl?>" class="img-thumbnail profile-img organizer-logo"><?= h($event->OrganizersName) ?></h2>
                 <div id="eventDescription" style="height:100px; overflow: hidden;"><?=  $this->Text->autoParagraph(h($event->descriptioin));?></div>
-                <p class="margin25" style="font-size: 20px;"><span class="glyphicon glyphicon-calendar calender_txt" aria-hidden="true"></span><span style="margin-left: 7px;"><?= date_format($event->date, "j-M-Y") ?></span></p>
+                <p class="margin25" style="font-size: 20px;"><!-- <span class="glyphicon glyphicon-calendar calender_txt" aria-hidden="true"></span> -->
+                <?php echo $this->Html->image('cal.png')?><span style="margin-left: 7px;"><?= date_format($event->date, "j-M-Y") ?></span></p>
                 <p style="font-size: 20px;">
-                    <span class="glyphicon glyphicon-time" aria-hidden="true"></span><span style="margin-left: 5px;"><?= h($event->time)." AM"; ?></span>
+                    <!-- <span class="glyphicon glyphicon-time" aria-hidden="true"></span> --><?php echo $this->Html->image('final.png')?><span style="margin-left: 5px;"><?= h($event->time)." AM"; ?></span>
                 </p>
                 <div class="btn-reg">
                 <button class="btn btn-primary" style="float: right; background-color: #4ABAC5;border-color: #e2e2e2;" data-toggle="modal" href="#Register-modal">Register Online</button>
@@ -313,7 +319,7 @@ address {
                                                        echo '<h3 class="heading margin25">Sponsors<span></span></h3>';
                                                         foreach ($sponsors as $sponsor) {
                                                             echo '<div class="col-sm-6 col-xs-12 col-md-3 col-lg-3" style="visibility: visible;width: 270px; margin-bottom: 10px;"><a href="#">';
-                                                            echo $this->Html->image("Sponsors/".$sponsor->Sponsors, array("alt"=>"Sponsors","class" =>"img-overlay","height" => "150px", "width" => "250px"));
+                                                            echo $this->Html->image("Sponsors/".$sponsor->Sponsors, array("alt"=>"Sponsors","class" =>"img-overlay","height" => "152px", "width" => "250px"));
                                                             echo '</a></div>';
                                                         }
                                                     }
@@ -348,7 +354,7 @@ address {
 
                                                         echo '<h3 class="heading margin25">Media Partners<span></span></h3>';
                                                         foreach ($mediapartners as $mediapartner) {
-                                                            echo '<div class="col-sm-6 col-xs-12 col-md-3" style="visibility: visible;width: 270px;margin-bottom: 10px;"><a href="#">'.$this->Html->image("Mediapartners/".$mediapartner->MediaPartners, array("alt"=>"Mediapartners","class" => "img-overlay","height" => "150px", "width" => "250px"));
+                                                            echo '<div class="col-sm-6 col-xs-12 col-md-3" style="visibility: visible;width: 270px;margin-bottom: 10px;"><a href="#">'.$this->Html->image("Mediapartners/".$mediapartner->MediaPartners, array("alt"=>"Mediapartners","class" => "img-overlay","height" => "152px", "width" => "250px"));
                                                             echo '</a></div>';
                                                         }
                                                     }
@@ -473,108 +479,77 @@ address {
       <div class="modal-content">
           <div class="modal-header">
               <button type="button" class="close" data-dismiss="modal"><span aria-hidden="true">×</span><span class="sr-only">Close</span></button>
-              <h4 class="modal-title" id="myModalLabel">Login to site.com</h4>
+              <h4 class="modal-title" id="myModalLabel">Register online</h4>
           </div>
           <div class="modal-body">
               <div class="row">
-                  <div class="col-xs-9 col-lg-6">
+                  <div class="col-xs-12 col-lg-7">
                       <div class="card">
-                          <?= $this->Form->create('', array('id' => 'forgotpassform', 'url' => ['action' => 'forgetpassword'])) ?>
-
-           <div class="">
+                      
+                          <?= $this->Form->create('$marathon', array('url' => ['controller' => 'Marathon','action' => 'add'])) ?>
+        
+         
             <div class="form-group float-label-control">
              
              <label for="">Firstname</label>
-             <?= $this->Form->input('Firstname', array('div' => false,'id' => 'email', 'class' => 'form-control form-element text','label' => false,'placeholder' => 'Firstname', 'required' => true)) ?>
+             <?= $this->Form->input('firstname', array('div' => false, 'class' => 'form-control form-element text','label' => false,'placeholder' => 'Firstname', 'required' => true)) ?>
             </div>
-        </div>
-
-        <div class="">
+       
             <div class="form-group float-label-control">
              
              <label for="">Lastname</label>
-             <?= $this->Form->input('Lastname', array('div' => false,'id' => 'email', 'class' => 'form-control form-element text','label' => false,'placeholder' => 'Lastname', 'required' => true)) ?>
+             <?= $this->Form->input('lastname', array('div' => false,'class' => 'form-control form-element text','label' => false,'placeholder' => 'Lastname', 'required' => true)) ?>
             </div>
-        </div>
+    
 
         <div class="form-group">
                 <label>
-           <?= $this->Form->input('date', array('type' => 'text','class' => 'form-control date','placeholder' => 'Date','label' => false));?>
+           <?= $this->Form->input('date', array('type' => 'text','class' => 'form-control date','placeholder' => 'Date of birth','label' => false));?>
            </label>
            <span id="person_type" style="color: #00FF00;"></span>
            </div>
 
-        <div class="">  
-             <label>Sex</label>
-             <ul>
-              <li  style="list-style:none;">
-                <input type="radio" name="custom_type" value="public" />
-                Male</li>
-                <li style="list-style:none;">
-                <input type="radio" name="custom_type" 
-                value="private" id="custom_venuetype_private" />
-                Female
-              </li>
-            </ul>
+       <div class="form-group">
+            <?php $sex = ['Male' => 'Male', 'Female' => 'Female'];
+             echo $this->Form->select('sex', $sex, array('empty' => '(Select Gender)', 'class' => 'form-control heigh'));?>
         </div>
-
-        <div class="">
+            
             <div class="form-group float-label-control">
              
              <label for="">Email</label>
-             <?= $this->Form->input('Email', array('div' => false,'id' => 'email', 'class' => 'form-control form-element text','label' => false,'placeholder' => 'Email address', 'required' => true)) ?>
+             <?= $this->Form->input('email', array('div' => false,'class' => 'form-control form-element text','label' => false,'placeholder' => 'Email address', 'required' => true)) ?>
             </div>
-        </div>
+     
 
-        <div class="">
+      
             <div class="form-group float-label-control">
              <label for="">Mobile number</label>
-             <?= $this->Form->input('Mobilenumber', array('div' => false,'id' => 'email', 'class' => 'form-control form-element text','label' => false,'placeholder' => 'Mobile number', 'required' => true)) ?>
+             <?= $this->Form->input('mobile_number', array('div' => false,'class' => 'form-control form-element text','label' => false,'placeholder' => 'Mobile number', 'required' => true)) ?>
             </div>
-        </div>
+     
+            <div class="form-group">
+            <label> Distance </label>
+         <?php $km = ['2 KM' => '2 KM', '5 KM' => '5 KM'];
+           echo $this->Form->select('KM', $km, array('default' => '2 KM','class' => 'form-control heigh'));?>
+           </div>
 
-         <div class=""> 
-             <label>KMs</label>
-             <ul>
-              <li  style="list-style:none;">
-                <input type="radio" name="custom_type" 
-                value="private" id="custom_venuetype_private" checked="checked"/>
-                2 KM</li>
-                <li style="list-style: none;">
-                 <input type="radio" name="custom_type" 
-                value="private" id="custom_venuetype_private" />
-                5 KM
-              </li>
-            </ul>
-            </div>
-      
-        <div class="">
-        <label>Tshirt size</label>
-            <div class="form-group float-label-control">
-            
-            <select class="form-control" style="height:35px;">
-              <option value="volvo">S</option>
-              <option value="saab">M</option>
-              <option value="opel">L</option>
-              <option value="audi">XL</option>
-              <option value="audi">XXL</option>
-              <option value="audi">XXXL</option>
-            </select>
-            </div>
-        </div>
-
+           <div class="form-group">
+           <label> Select your tshirt size </label>
+           <?php $tshirt = ['S' => 'S', 'M' => 'M', 'L' => 'L', 'XL' => 'XL', 'XXL' => 'XXL', 'XXXL' => 'XXXL'];
+           echo $this->Form->select('TSHIRT', $tshirt, array('default' => 'S', 'class' => 'form-control heigh'));?>
+           </div>
 
         <div class="">
           <div class="form-group text-center">
-          <?= $this->Form->submit(__('Register'), array('id' => 'Login', 'class' => 'btn btn-primary btn-lg cs-signup-button')) ?>
-
+           <?= $this->Form->button(__('Submit'),array('class' => "btn btn-info btn-block")) ?>
+    <?= $this->Form->end() ?>
           </div>
         </div>
   
     <?= $this->Form->end() ?>
                       </div>
                   </div>
-                  <div class="col-xs-9 col-lg-6">
+                  <div class="col-xs-9 col-lg-5">
                       <p class="lead">Register now for <span class="text-success">FREE</span></p>
                       <ul class="list-unstyled" style="line-height: 2">
                           <li><span class="fa fa-check text-success"></span> See all your orders</li>
@@ -782,7 +757,7 @@ $( function() {
                 if(year<=14){
                     $("#person_type").text("Kids"+", Rs. 200");
                 }else{
-                    $("#person_type").text("Adults");
+                    $("#person_type").text("Adults"+", Rs.300");
                 }
                 
             }
