@@ -486,7 +486,7 @@ address {
                   <div class="col-xs-12 col-lg-7">
                       <div class="card">
                       
-                          <?= $this->Form->create('$marathon', array('url' => ['controller' => 'Marathon','action' => 'add'])) ?>
+                          <?= $this->Form->create('$marathon', array('url' => ['controller' => 'Marathon','action' => 'add', $event->id])) ?>
         
          
             <div class="form-group float-label-control">
