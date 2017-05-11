@@ -2,7 +2,13 @@
 namespace App\Controller;
 
 use App\Controller\AppController;
-
+use Cake\I18n\Time;
+use Cake\Utility\Text;
+use Cake\Mailer\Email;
+use Cake\Routing\Router;
+use Cake\Datasource\ConnectionManager;
+use Cake\Utility\Security;
+use Cake\Event\Event;
 /**
  * Marathon Controller
  *
@@ -49,15 +55,24 @@ class MarathonController extends AppController
      *
      * @return \Cake\Network\Response|void Redirects on successful add, renders view otherwise.
      */
-    public function add()
+    public function add($id = null)
     {
         $marathon = $this->Marathon->newEntity();
         if ($this->request->is('post')) {
+            if(!empty($this->request->data['date']))
+            {
+                $this->request->data['date'] = new Time($this->request->data['date']);
+            }
+
+            if(isset($id))
+            {
+                $this->request->data['events_id'] = $id;
+            }
             $marathon = $this->Marathon->patchEntity($marathon, $this->request->data);
             if ($this->Marathon->save($marathon)) {
-                $this->Flash->success(__('The marathon has been saved.'));
-
-                return $this->redirect(['action' => 'index']);
+                $this->Flash->success(__('Your request has been registered.'));
+                return $this->redirect($this->referer());
+                //return $this->redirect(['action' => 'index']);
             } else {
                 $this->Flash->error(__('The marathon could not be saved. Please, try again.'));
             }
