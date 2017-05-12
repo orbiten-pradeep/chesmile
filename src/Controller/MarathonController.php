@@ -1,6 +1,5 @@
 <?php
 namespace App\Controller;
-
 use App\Controller\AppController;
 use Cake\I18n\Time;
 use Cake\Utility\Text;
@@ -16,7 +15,6 @@ use Cake\Event\Event;
  */
 class MarathonController extends AppController
 {
-
     /**
      * Index method
      *
@@ -28,11 +26,9 @@ class MarathonController extends AppController
             'contain' => ['Events']
         ];
         $marathon = $this->paginate($this->Marathon);
-
         $this->set(compact('marathon'));
         $this->set('_serialize', ['marathon']);
     }
-
     /**
      * View method
      *
@@ -45,11 +41,9 @@ class MarathonController extends AppController
         $marathon = $this->Marathon->get($id, [
             'contain' => ['Events']
         ]);
-
         $this->set('marathon', $marathon);
         $this->set('_serialize', ['marathon']);
     }
-
     /**
      * Add method
      *
@@ -63,7 +57,6 @@ class MarathonController extends AppController
             {
                 $this->request->data['date'] = new Time($this->request->data['date']);
             }
-
             if(isset($id))
             {
                 $this->request->data['events_id'] = $id;
@@ -81,7 +74,6 @@ class MarathonController extends AppController
         $this->set(compact('marathon', 'events'));
         $this->set('_serialize', ['marathon']);
     }
-
     /**
      * Edit method
      *
@@ -98,7 +90,6 @@ class MarathonController extends AppController
             $marathon = $this->Marathon->patchEntity($marathon, $this->request->data);
             if ($this->Marathon->save($marathon)) {
                 $this->Flash->success(__('The marathon has been saved.'));
-
                 return $this->redirect(['action' => 'index']);
             } else {
                 $this->Flash->error(__('The marathon could not be saved. Please, try again.'));
@@ -108,7 +99,6 @@ class MarathonController extends AppController
         $this->set(compact('marathon', 'events'));
         $this->set('_serialize', ['marathon']);
     }
-
     /**
      * Delete method
      *
@@ -125,7 +115,6 @@ class MarathonController extends AppController
         } else {
             $this->Flash->error(__('The marathon could not be deleted. Please, try again.'));
         }
-
         return $this->redirect(['action' => 'index']);
     }
 }
