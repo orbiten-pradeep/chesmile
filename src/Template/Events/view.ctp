@@ -319,7 +319,7 @@ address {
                                                        echo '<h3 class="heading margin25">Sponsors<span></span></h3>';
                                                         foreach ($sponsors as $sponsor) {
                                                             echo '<div class="col-sm-6 col-xs-12 col-md-3 col-lg-3" style="visibility: visible;width: 270px; margin-bottom: 10px;"><a href="#">';
-                                                            echo $this->Html->image("Sponsors/".$sponsor->Sponsors, array("alt"=>"Sponsors","class" =>"img-overlay","height" => "152px", "width" => "250px"));
+                                                            echo $this->Html->image("Sponsors/".$sponsor->Sponsors, array("alt"=>"Sponsors","class" =>"img-overlay", "width" => "250px"));
                                                             echo '</a></div>';
                                                         }
                                                     }
@@ -354,7 +354,7 @@ address {
 
                                                         echo '<h3 class="heading margin25">Media Partners<span></span></h3>';
                                                         foreach ($mediapartners as $mediapartner) {
-                                                            echo '<div class="col-sm-6 col-xs-12 col-md-3" style="visibility: visible;width: 270px;margin-bottom: 10px;"><a href="#">'.$this->Html->image("Mediapartners/".$mediapartner->MediaPartners, array("alt"=>"Mediapartners","class" => "img-overlay","height" => "152px", "width" => "250px"));
+                                                            echo '<div class="col-sm-6 col-xs-12 col-md-3" style="visibility: visible;width: 270px;margin-bottom: 10px;"><a href="#">'.$this->Html->image("Mediapartners/".$mediapartner->MediaPartners, array("alt"=>"Mediapartners","class" => "img-overlay","width" => "250px"));
                                                             echo '</a></div>';
                                                         }
                                                     }
@@ -486,7 +486,7 @@ address {
                   <div class="col-xs-12 col-lg-7">
                       <div class="card">
                       
-                          <?= $this->Form->create('$marathon', array('url' => ['controller' => 'Marathon','action' => 'add', $event->id])) ?>
+                          <?= $this->Form->create('$marathon', array('url' => ['controller' => 'Marathon','action' => 'add'])) ?>
         
          
             <div class="form-group float-label-control">
