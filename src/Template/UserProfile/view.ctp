@@ -122,17 +122,17 @@ input{
 
 }
   .card-prof {
-    background-color: #4ABAC6;
+    /*background-color:white;*/
     /* just in case there no content*/
     padding: 20px 25px 30px;
     /*margin: 30px auto 25px;*/
     margin-top: 15px;
-    -moz-border-radius: 2px;
+    /*-moz-border-radius: 2px;
     -webkit-border-radius: 2px;
     border-radius: 2px;
     -moz-box-shadow: 10px 10px 10px rgba(0, 0, 0, 0.3);
     -webkit-box-shadow: 10px 10px 10px rgba(0, 0, 0, 0.3);
-    box-shadow: 0px 0px 7px 7px rgba(0, 0, 0, 0.1);
+    box-shadow: 0px 0px 7px 7px rgba(0, 0, 0, 0.1);*/
 }
 
 .card-container-prof.card-prof {
@@ -150,6 +150,12 @@ input{
 .search-box-li{
     display: none !important;
 }
+.img-style{
+    background-color: white;
+    padding: 5px;
+    margin-top: 15px;
+    border: 1px solid #a7a7a7;
+}
 
 
 </style>
@@ -158,9 +164,9 @@ input{
         <div class="card-prof card-container-prof">
         <div class="text-center">
          <?php if($userProfile->Photo) {
-                echo $this->Html->image('profile/'.$userProfile->Photo, array('height' => '100px','width' => '100px','alt'=>'aswq'));
+                echo $this->Html->image('profile/'.$userProfile->Photo, array('height' => '100px','width' => '100px','alt'=>'aswq','class' => 'img-style'));
             }  else {
-                echo $this->Html->image('profile.png',array('alt' => '','class' => 'avatar img-circle')); 
+                echo $this->Html->image('profile.png',array('alt' => '','class' => 'avatar img-style')); 
             }
             ?>
             <!-- <h6>Upload a different photo...</h6>
@@ -174,8 +180,13 @@ input{
     <div class="row">
 
     <div class="card card-container col-md-offset-2">
+    
+    <div>
+    <h2 style="margin-top: 0;" class="pull-left">My Profile</h2>
+    <?= $this->Html->link($this->Html->tag('i', '', array('class' => 'fa fa-pencil-square-o')).'Edit', array('action' => 'edit', $userProfile->id), array('class' => 'btn btn-primary pull-right','escape' => false)) ?>
+            </div>
 
-                    <h3><?= h($userProfile->fullname) ?></h3>
+                   <!--  <h3><?= h($userProfile->fullname) ?></h3> -->
     <table class="table borderless">
          <tr>
             <th scope="row"><?= __('Email') ?></th>
@@ -219,9 +230,7 @@ input{
         </tr>
     </table>
 
-    <div class="pull-right">
-    <?= $this->Html->link($this->Html->tag('i', '', array('class' => 'fa fa-pencil-square-o')).'Edit', array('action' => 'edit', $userProfile->id), array('class' => 'btn btn-primary','escape' => false)) ?>
-            </div>
+    
 
 
 

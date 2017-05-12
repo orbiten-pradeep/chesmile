@@ -441,45 +441,47 @@ input{
             <div class="tab-pane fade imagevalid" id="profile">
             
             <div class="form-group">
-                <div class="image-editor">
+                <!-- <div class="image-editor"> -->
                     <label>
                         <?=$this->Form->input('banner',['type' => 'file','accept' => 'image/*', 'class' => 'cropit-image-input']);?>
                         [Size: 1311 * 985px]
                     </label>
-                    <div id="container-size" style="width:200px; height:200px; display: none;">
+                    <!-- <div id="container-size" style="width:200px; height:200px; display: none;">
                     <div class="cropit-preview" id="banner-preview" style="display: none;"></div></div>
                       <div class="image-size-label">
                       </div>
                    
-                      <input id="banner-zoom" type="range" class="cropit-image-zoom-input" style="display: none;">
+                      <input id="banner-zoom" type="range" class="cropit-image-zoom-input" style="display: none;"> -->
 
-                </div>
+                <!-- </div> -->
             </div>
 
              <div class="form-group">
-                <div class="image-editor">
+                <!-- <div class="image-editor"> -->
                    <label>
                 <?=$this->Form->input('display',['type' => 'file','accept' => 'image/*','class' => 'cropit-image-input']);?>
                 [Size: 280px * 185px]
+                </label>
+
                       <!-- <input type="file" id="imgsel" class="cropit-image-input" accept="images/*"> -->
-                      <div class="cropit-preview" id="display-preview" style="display: none;"></div>
+                      <!-- <div class="cropit-preview" id="display-preview" style="display: none;"></div>
                       <div class="image-size-label">
                       </div>
-                      <input id="display-zoom" type="range" class="cropit-image-zoom-input" style="display: none;">
+                      <input id="display-zoom" type="range" class="cropit-image-zoom-input" style="display: none;"> -->
           
-                </div>
+                <!-- </div> -->
             </div>
 
              <div class="form-group">
-                <div class="image-editor">
+                <!-- <div class="image-editor"> -->
                     <label>
                             <?=$this->Form->input('OrganizersLogo',['type' => 'file','id' => 'org','accept' => 'image/*','class' => 'cropit-image-input']);?>
                             Size: 75 * 75px]
                     </label>
-                    <div class="cropit-preview" id="organizer-preview" style="display: none;"></div>
+                    <!-- <div class="cropit-preview" id="organizer-preview" style="display: none;"></div>
                     <div class="image-size-label"></div>
-                    <input id="organizers-zoom" type="range" class="cropit-image-zoom-input" style="display: none;">
-                </div>
+                    <input id="organizers-zoom" type="range" class="cropit-image-zoom-input" style="display: none;"> -->
+                <!-- </div> -->
             </div>
 
              <div class="form-group">
@@ -789,7 +791,7 @@ $('#id_typemore').on('click', function () {
 
         if($("#descriptioin").val().length<=250){
             status = false;
-            $("#description_error").text("please enter descriptioin minimun height is 120");
+            $("#description_error").text("please enter a description with minimum 120 characters");
         }else{
             $("#description_error").text("");
         }
