@@ -216,6 +216,11 @@ address {
 .heigh{
     height: 35px !important;
 }
+@media screen and (min-width: 768px){
+.btn-reg {
+    margin-top: -45px;
+}
+}
 </style>
 
 
@@ -249,11 +254,11 @@ address {
         <div class="row">
             <div class="col-md-8 col-sm-8 lft_container event-details">
                 <h2><img src="<?=$organizerLogoImageUrl?>" class="img-thumbnail profile-img organizer-logo"><?= h($event->OrganizersName) ?></h2>
-                <div id="eventDescription" style="height:100px; overflow: hidden;"><?=  $this->Text->autoParagraph(h($event->descriptioin));?></div>
-                <p class="margin25" style="font-size: 20px;"><!-- <span class="glyphicon glyphicon-calendar calender_txt" aria-hidden="true"></span> -->
-                <?php echo $this->Html->image('cal.png')?><span style="margin-left: 7px;"><?= date_format($event->date, "j-M-Y") ?></span></p>
-                <p style="font-size: 20px;">
-                    <!-- <span class="glyphicon glyphicon-time" aria-hidden="true"></span> --><?php echo $this->Html->image('final.png')?><span style="margin-left: 5px;"><?= h($event->time)." AM"; ?></span>
+                <h3 style="font-size: 14px;"><div id="eventDescription" style="height:100px; overflow: hidden; margin-top: 0px;text-align: justify;line-height: 20px;"><?=  $this->Text->autoParagraph(h($event->descriptioin));?></div></h3>
+                <p class="margin25" style="font-size: 17px;"><!-- <span class="glyphicon glyphicon-calendar calender_txt" aria-hidden="true"></span> -->
+                <?php echo $this->Html->image('cal.png')?><span style="margin-left: 10px;"><?= date_format($event->date, "j M Y") ?></span></p>
+                <p style="font-size: 17px;">
+                    <!-- <span class="glyphicon glyphicon-time" aria-hidden="true"></span> --><?php echo $this->Html->image('clock-chennaismile.png')?><span style="margin-left: 10px;"><?= h($event->time)." AM"; ?></span>
                 </p>
                 <div class="btn-reg">
                 <button class="btn btn-primary" style="float: right; background-color: #4ABAC5;border-color: #e2e2e2;" data-toggle="modal" href="#Register-modal">Register Online</button>
@@ -438,8 +443,8 @@ address {
                               <div class="form-group">
                                 <input type="email" class="form-control" id="invite" placeholder="Email address">
                               </div>
-                              <div id="statusMsg"></div>
-                              <button  onclick="sendemail(<?php echo $event->id; ?>);" class="btn btn-primary form-control">Invite Friends</button>
+                               <div id="statusMsg"></div>
+                              <button style="padding-top: 5px; padding-bottom: 5px;" onclick="sendemail(<?php echo $event->id; ?>);" class="btn btn-primary form-control">Invite Friends</button>
                         </div>                          
                     <div class="clearfix"></div>
 
@@ -485,10 +490,8 @@ address {
               <div class="row">
                   <div class="col-xs-12 col-lg-7">
                       <div class="card">
-                      
-                          <?= $this->Form->create('$marathon', array('url' => ['controller' => 'Marathon','action' => 'add'])) ?>
         
-         
+         <?= $this->Form->create('$marathon', array('url' => ['controller' => 'Marathon','action' => 'add', $event->id])) ?>
             <div class="form-group float-label-control">
              
              <label for="">Firstname</label>
