@@ -343,9 +343,9 @@ background-color: #286090;
   <p style="" class="copyrights">Copyright © 2017 ChennaiSmile</p><!--End container-->
 </div>
 <div class="mobile-footer visible-xs" id="mobFooter">
-  <div class="container">
-    <div class="left"><a href="javascript:;" id="mobileFilterCategoryBtn" ><span class="glyphicon glyphicon-menu-hamburger"></span> Menu</a></div>
-    <div class="right"><a href="javascript:;" id="mobileFilterBtn" data-direction='bottom'><span class="glyphicon glyphicon-filter"></span> Filter</a></div>
+  <div class="container" style="background-color:#337ab7; color: white !important;">
+    <div class="left"><a href="javascript:;" id="mobileFilterCategoryBtn" >Search Events</a></div>
+    <div class="right"><a href="javascript:;" id="mobileFilterBtn" data-direction='bottom'>Filter</a></div>
   </div>
 </div>
 <div class="modal modal-mob-filter-cat fade">
