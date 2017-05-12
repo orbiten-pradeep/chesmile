@@ -227,6 +227,14 @@ label {
 .text{
   color:white;
 }
+
+@media screen and (min-width: 320px)
+and (max-width: 414px){
+.mob-modal{
+  width: 300px !important;
+left: 0px !important;
+}
+}
 </style>
 <!-- Login Container -->
 <div class="container cs-header-container col-xs-12 col-sm-12 col-md-12 col-lg-12">
@@ -294,7 +302,7 @@ label {
     <div class="modal-dialog">
     
       <!-- Modal content-->
-      <div class="modal-content" style="background-color: #474747; color: #f2f2f2; width: 500px; left: 50px; ">
+      <div class="modal-content mob-modal" style="background-color: #474747; color: #f2f2f2; width: 500px; left: 50px; ">
         <div class="modal-header" style="border-bottom: none;">
           <button type="button" class="close" data-dismiss="modal" style="color: #4abac5 !important;">&times;</button>
           <h4 class="modal-title">Forgot Password?</h4>
@@ -377,7 +385,7 @@ label {
 <!-- Page Content -->
     <div class="intro-header_CHENNAI">
   <div class="container"><br>
-   <h1 style="color:#ffffff">Fun begins with ChennaiSmile!</h1>
+   <h1 style="color:#ffffff">Let's roll like a frisky ball!</h1>
         <div class="card card-container">
            
             <?= $this->Form->create('',array('id' => 'loginForm2','class' => 'form-signin formheigh mobile-signIn')) ?>
@@ -404,7 +412,11 @@ label {
                 <!-- <button class="btn btn-primary btn-lg cs-signup-button" type="submit">Create Account</button> -->
             <!-- </form> --><!-- /form -->
             <div class="forgotpass" style=" margin-top: 10px;">
-              <div style=" color: #000; margin-top: 25px;">Not a member? <a class="viewSignupForim">Join Now</a></div>
+            
+              <div style=" color: #000; margin-top: 25px;">
+              <a style="font-size: 12px;" data-toggle="modal" href="#myModal">Forgot Password?</a><br><br>
+              Not a member? <a class="viewSignupForim">Join Now</a></div>
+
            </div>
             <?= $this->Form->end() ?>
               
@@ -413,7 +425,7 @@ label {
            <!--  <p id="profile-name" class="profile-name-card"></p> -->
            <?= $this->Form->create('', array('id' => 'signupForm','class' => 'form-signup formheigh ', 'url' => ['action' => 'add'])) ?>
             <!-- <form class="form-signin"> -->
-            <h3 style="color:#333333">Sign up & Enjoy</h3>
+            <h3 style="color:#333333">Sign up & Treasure in</h3>
             <input type="hidden" id="checkUrl" name="checkUrl" value="<?php echo $this->Url->build(array('controller' => 'users', 'action' => 'isemailexist'));?>">
             <!--  <div class="form-group float-label-control">
    
