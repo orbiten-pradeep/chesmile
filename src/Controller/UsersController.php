@@ -95,7 +95,7 @@ class UsersController extends AppController
     			$email->viewVars(['name' => $name, 'activationUrl' => $activationUrl]);
     			$email->send();
 
-                $this->Flash->success(__('Your account is activated successfully. Login Now'));
+                $this->Flash->success(__('Account activation link has been sent to you. Please check your mail'));
                 return $this->redirect(['action' => 'login']);
             } else {
                 $this->Flash->error(__('The user could not be saved. Please, try again.'));
