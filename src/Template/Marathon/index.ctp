@@ -2,6 +2,8 @@
     <ul class="side-nav">
         <li class="heading"><?= __('Actions') ?></li>
         <li><?= $this->Html->link(__('New Marathon'), ['action' => 'add']) ?></li>
+        <li><?= $this->Html->link(__('List Events'), ['controller' => 'Events', 'action' => 'index']) ?></li>
+        <li><?= $this->Html->link(__('New Event'), ['controller' => 'Events', 'action' => 'add']) ?></li>
     </ul>
 </nav>
 <div class="marathon index large-9 medium-8 columns content">
@@ -19,6 +21,9 @@
                 <th scope="col"><?= $this->Paginator->sort('mobile_number') ?></th>
                 <th scope="col"><?= $this->Paginator->sort('KM') ?></th>
                 <th scope="col"><?= $this->Paginator->sort('TSHIRT') ?></th>
+                <th scope="col"><?= $this->Paginator->sort('activation_key') ?></th>
+                <th scope="col"><?= $this->Paginator->sort('Active') ?></th>
+                <th scope="col"><?= $this->Paginator->sort('Created') ?></th>
                 <th scope="col" class="actions"><?= __('Actions') ?></th>
             </tr>
         </thead>
@@ -35,8 +40,12 @@
                 <td><?= h($marathon->mobile_number) ?></td>
                 <td><?= h($marathon->KM) ?></td>
                 <td><?= h($marathon->TSHIRT) ?></td>
+                <td><?= h($marathon->activation_key) ?></td>
+                <td><?= $this->Number->format($marathon->Active) ?></td>
+                <td><?= h($marathon->Created) ?></td>
                 <td class="actions">
                     <?= $this->Html->link(__('View'), ['action' => 'view', $marathon->ID]) ?>
+                    <?= $this->Html->link(__('Edit'), ['action' => 'edit', $marathon->ID]) ?>
                     <?= $this->Form->postLink(__('Delete'), ['action' => 'delete', $marathon->ID], ['confirm' => __('Are you sure you want to delete # {0}?', $marathon->ID)]) ?>
                 </td>
             </tr>

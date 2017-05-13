@@ -45,8 +45,16 @@
             <td><?= h($marathon->TSHIRT) ?></td>
         </tr>
         <tr>
+            <th scope="row"><?= __('Activation Key') ?></th>
+            <td><?= h($marathon->activation_key) ?></td>
+        </tr>
+        <tr>
             <th scope="row"><?= __('ID') ?></th>
             <td><?= $this->Number->format($marathon->ID) ?></td>
+        </tr>
+        <tr>
+            <th scope="row"><?= __('Active') ?></th>
+            <td><?= $this->Number->format($marathon->Active) ?></td>
         </tr>
         <tr>
             <th scope="row"><?= __('Date') ?></th>

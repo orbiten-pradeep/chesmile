@@ -26,6 +26,8 @@
             echo $this->Form->input('mobile_number');
             echo $this->Form->input('KM');
             echo $this->Form->input('TSHIRT');
+            echo $this->Form->input('activation_key');
+            echo $this->Form->input('Active');
             echo $this->Form->input('Created');
         ?>
     </fieldset>
