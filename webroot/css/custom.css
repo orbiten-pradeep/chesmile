@@ -748,7 +748,7 @@ h3.heading > span,
 #mapPanel .text {
     width: 80%;
     float: left;
-    margin-right: 20px;
+    /*margin-right: 20px;*/
 }
 .f-item {
   background-color: #5bc0de;
