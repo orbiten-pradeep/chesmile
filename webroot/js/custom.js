@@ -404,8 +404,7 @@ function formatDate(date) {
     if (month.length < 2) month = '0' + month;
     if (day.length < 2) day = '0' + day;
 
-    //return [year, month, day].join('-');
-    return [day, month, year].join('-');
+   return [day, month, year].join('-');
 }
 
 //elt.tagsinput('add', { "value": 1 , "text": "Amsterdam"   , "continent": "Europe"    });
@@ -486,7 +485,7 @@ function getEventList(params) {
 							            </div>'+dispImgHmtl+'\
 							            <div class="caption dance" style="background-color:#'+response[k].category_color+'">\
 							                <h4 class="event_txt"><a href="'+eventUrl+'" class="event-title">'+response[k].title+'</a></h4>\
-							                <p class="venue_txt">'+response[k].areaname+'</p>\
+							                 <p class="venue_txt">'+response[k].areaname+'</p>\
 							                <p class="date_txt">'+formatDate(response[k].date)+'</p>\
 							                <div class="ratings clearfix">\
 							                    <p class="pull-right"> <a onClick="hide('+response[k].id+', '+response[k].user_id+');"><span class="glyphicon glyphicon-thumbs-up"></span> </a><span class="count_txt" id="'+response[k].id+'">'+likes_count+'</span>\
@@ -608,7 +607,7 @@ else if(ePage == 'add') {
 	
 
 	$('.launch-map').on('click', function () {
-		var loc = $("#landmark").val()+","+$("#Autocomplete").val();
+		var loc = $("#landmark").val() + $("#Autocomplete").val();
 		$("#city_country").val(loc);
 	    $('#myModal').modal({
 	        backdrop: 'static',
