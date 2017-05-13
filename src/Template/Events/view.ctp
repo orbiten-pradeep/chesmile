@@ -261,7 +261,9 @@ address {
                     <!-- <span class="glyphicon glyphicon-time" aria-hidden="true"></span> --><?php echo $this->Html->image('clock-chennaismile.png')?><span style="margin-left: 10px;"><?= h($event->time)." AM"; ?></span>
                 </p>
                 <div class="btn-reg">
+                <?php if($event->register_online == 1) { ?>
                 <button class="btn btn-primary" style="float: right; background-color: #4ABAC5;border-color: #e2e2e2;" data-toggle="modal" href="#Register-modal">Register Online</button>
+                <?php } ?>
             <button class="btn btn-primary view-btn" style="float: right;margin-right: 10px;background-color: #4ABAC5;border-color: #e2e2e2;" data-toggle="modal" href="#view-more">View more</button>
              </div>
           
