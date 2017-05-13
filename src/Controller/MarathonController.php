@@ -1,5 +1,6 @@
 <?php
 namespace App\Controller;
+
 use App\Controller\AppController;
 use Cake\I18n\Time;
 use Cake\Utility\Text;
@@ -8,6 +9,7 @@ use Cake\Routing\Router;
 use Cake\Datasource\ConnectionManager;
 use Cake\Utility\Security;
 use Cake\Event\Event;
+
 /**
  * Marathon Controller
  *
@@ -15,6 +17,7 @@ use Cake\Event\Event;
  */
 class MarathonController extends AppController
 {
+
     /**
      * Index method
      *
@@ -26,9 +29,11 @@ class MarathonController extends AppController
             'contain' => ['Events']
         ];
         $marathon = $this->paginate($this->Marathon);
+
         $this->set(compact('marathon'));
         $this->set('_serialize', ['marathon']);
     }
+
     /**
      * View method
      *
@@ -41,9 +46,11 @@ class MarathonController extends AppController
         $marathon = $this->Marathon->get($id, [
             'contain' => ['Events']
         ]);
+
         $this->set('marathon', $marathon);
         $this->set('_serialize', ['marathon']);
     }
+
     /**
      * Add method
      *
@@ -52,19 +59,49 @@ class MarathonController extends AppController
     public function add($id = null)
     {
         $marathon = $this->Marathon->newEntity();
+        $activation_key = Text::uuid();
         if ($this->request->is('post')) {
+
             if(!empty($this->request->data['date']))
             {
                 $this->request->data['date'] = new Time($this->request->data['date']);
             }
+            $event = "";
+            $this->loadModel('Events');
+            $this->request->data['activation_key'] = $activation_key;
             if(isset($id))
             {
                 $this->request->data['events_id'] = $id;
+                $event = $this->Events->get($id, [
+                    'contain' => ['Users', 'Categories']
+                ]);
             }
+            //debug($event); exit(0);
             $marathon = $this->Marathon->patchEntity($marathon, $this->request->data);
             if ($this->Marathon->save($marathon)) {
-                $this->Flash->success(__('Your request has been registered.'));
-                return $this->redirect($this->referer());
+
+                $email = new Email();
+                $email->transport('gmail');
+                $name = $event['user']['fullname'];
+                $to = trim($event['user']['email']); 
+                $email->emailFormat('html');
+                $email->template('default');
+                $email->from('admin@chennaismile.com');
+                $email->to($to);
+                $email->cc('admin@chennaismile.com');
+                $subject = "New User registered for your event";
+                $email->subject($subject);
+                $activationUrl = Router::url(['controller' => 'Marathon', 'action' => 'details/' . $activation_key, '_full' => true ]);
+                // Always try to write clean code, so that you can read it :) :
+                $message = "Dear <span style='color:#666666'>" . $name . "</span>,<br/><br/>";
+                $message .= "<br/>New User has been registered successfully for your event. Please find the attached user information as below: <br/>";
+                $message .= "<br/><b>View the registered user information by clicking on the below url:</b> <br/>";
+                $message .= "<a href='$activationUrl'>$activationUrl</a><br/><br/>";
+                $message .= "<br/>Thanks, <br/>Support Team";
+                $email->send($message);
+
+                $this->Flash->success(__('The marathon has been saved.'));
+                return $this->redirect(['controller' => 'Events', 'action' => 'view', $id]);
                 //return $this->redirect(['action' => 'index']);
             } else {
                 $this->Flash->error(__('The marathon could not be saved. Please, try again.'));
@@ -74,6 +111,7 @@ class MarathonController extends AppController
         $this->set(compact('marathon', 'events'));
         $this->set('_serialize', ['marathon']);
     }
+
     /**
      * Edit method
      *
@@ -90,6 +128,7 @@ class MarathonController extends AppController
             $marathon = $this->Marathon->patchEntity($marathon, $this->request->data);
             if ($this->Marathon->save($marathon)) {
                 $this->Flash->success(__('The marathon has been saved.'));
+
                 return $this->redirect(['action' => 'index']);
             } else {
                 $this->Flash->error(__('The marathon could not be saved. Please, try again.'));
@@ -99,6 +138,7 @@ class MarathonController extends AppController
         $this->set(compact('marathon', 'events'));
         $this->set('_serialize', ['marathon']);
     }
+
     /**
      * Delete method
      *
@@ -115,6 +155,37 @@ class MarathonController extends AppController
         } else {
             $this->Flash->error(__('The marathon could not be deleted. Please, try again.'));
         }
+
         return $this->redirect(['action' => 'index']);
+    }
+
+    public function details($key = null)
+    {
+        $marathon = $this->Marathon->find('all',array('conditions'=>array('activation_key'=>$key)));
+        $marathon = $marathon->first();
+        //debug($marathon); exit(0);
+        if(isset($marathon))
+        {
+            $id = $marathon['ID'];
+            $marathon = $this->Marathon->get($id, [
+                'contain' => ['Events']
+            ]);
+            $this->set('marathon', $marathon);
+            $this->set('_serialize', ['marathon']);
+        } else
+        {
+            return $this->redirect(['controller' => 'Events', 'action' => 'index']);
+        }
+    }
+
+    public function usersinformation($id = null)
+    {
+        $this->paginate = [
+            'contain' => ['Events']
+        ];
+        $marathon = $this->paginate($this->Marathon);
+        $this->paginate['conditions'] = array("Marathon.events_id" => $id);
+        $this->set(compact('marathon'));
+        $this->set('_serialize', ['marathon']);
     }
 }
