@@ -209,9 +209,13 @@ class UserProfileController extends AppController
         	
   			if (!$errCheck)
   			{
+          
+            if(!isset($this->request->data['fullname'])){
+              $this->request->data['fullname'] = $this->Auth->user('fullname');
+            }
+             $this->loadModel('Users');
+              $status = $this->Users->updateAll(['fullname' => $this->request->data['fullname'], 'group_id' => $this->request->data['group_id'],  'Photo' => $this->request->data['Photo']], ['id' => $this->request->data['user_id']]);
 	            $userProfile = $this->UserProfile->patchEntity($userProfile, $this->request->data);
-	            $this->loadModel('Users');
-	            $status = $this->Users->updateAll(['fullname' => $this->request->data['fullname'], 'group_id' => $this->request->data['group_id'],  'Photo' => $this->request->data['Photo']], ['id' => $this->request->data['user_id']]);
 	        	if ($this->UserProfile->save($userProfile)) {
 	                $this->Flash->success(__('The user profile has been saved.'));
 	                return $this->redirect(['action' => 'view/', $id]);

@@ -73,7 +73,7 @@ label {
     height:100px;
 }
 .card-container.card {
-    max-width: 800px;
+    max-width: 650px;
     padding: 40px 40px;
 }
 
@@ -88,7 +88,7 @@ label {
     padding: 20px 25px 30px;
     /*margin: 30px auto 25px;*/
    /* margin: 30px 190px 25px;*/
-    margin-top: 90px;
+    margin-top: 70px;
     /* shadows and rounded borders */
     -moz-border-radius: 2px;
     -webkit-border-radius: 2px;
@@ -157,24 +157,48 @@ input{
     border: 1px solid #a7a7a7;
 }
 
-
+.table{
+    width:70% !important;
+}
+@media screen and (min-width: 1280px)
+and (max-width: 1366px){
+    .name-space{
+    margin-left: 20px;
+}
+}
+@media screen and (min-width: 768px)
+and (max-width: 980px){
+.name-space{
+margin-left: 70px;
+}
+}
 </style>
 <div class="container-fluid height">
-    <div class="col-md-offset-2">
+    <div class="col-md-1 col-md-offset-2">
         <div class="card-prof card-container-prof">
         <div class="text-center">
          <?php if($userProfile->Photo) {
                 echo $this->Html->image('profile/'.$userProfile->Photo, array('height' => '100px','width' => '100px','alt'=>'aswq','class' => 'img-style'));
             }  else {
-                echo $this->Html->image('profile.png',array('alt' => '','class' => 'avatar img-style')); 
+                echo $this->Html->image('profile.png',array('alt' => '','class' => 'avatar img-style','height' => '100px', 'width' => '100px')); 
             }
             ?>
+            
+           <!--  <h3><?= h($userProfile->fullname) ?></h3> -->
             <!-- <h6>Upload a different photo...</h6>
            <?= $this->Form->input('Photo', ['type' => 'file']);?> -->
         </div>
         </div>
     </div>
+    <div class="col-md-9 col-lg-4 name-space" style="margin-top:35px;">
+                <h3 style="color: white;"><?= h($userProfile->fullname) ?></h3>
+            </div>
 </div>
+<!-- <div class="container">
+    <div class="col-md-offset-2" style="margin-top: 50px;">
+            <h1 style="margin-left: -10px;">My Profile</h1>
+        </div>
+</div> -->
 
 <div class="container content">
     <div class="row">
@@ -182,51 +206,51 @@ input{
     <div class="card card-container col-md-offset-2">
     
     <div>
-    <h2 style="margin-top: 0;" class="pull-left">My Profile</h2>
+    
     <?= $this->Html->link($this->Html->tag('i', '', array('class' => 'fa fa-pencil-square-o')).'Edit', array('action' => 'edit', $userProfile->id), array('class' => 'btn btn-primary pull-right','escape' => false)) ?>
             </div>
 
                    <!--  <h3><?= h($userProfile->fullname) ?></h3> -->
-    <table class="table borderless">
-         <tr>
+    <table class="table borderless" cellspacing="0" cellpadding="0" border="0">
+         <tr style="border-top-style: hidden;">
             <th scope="row"><?= __('Email') ?></th>
             <td><?= h($user->email) ?></td>
         </tr>
          <tr>
-            <th scope="row"><?= __('Fullname') ?></th>
-            <td><?= h($user->fullname) ?></td>
+            <th style="padding-top: 30px;" scope="row"><?= __('Fullname') ?></th>
+            <td style="padding-top: 30px;"><?= h($user->fullname) ?></td>
         </tr>
         <tr>
-            <th scope="row"><?= __('Name') ?></th>
-            <td><?= h($group->name) ?></td>
+            <th style="padding-top: 30px;" scope="row"><?= __('Name') ?></th>
+            <td style="padding-top: 30px;"><?= h($group->name) ?></td>
         </tr>
         <tr>
-            <th scope="row"><?= __('Mobile') ?></th>
-            <td><?= h($userProfile->Mobile) ?></td>
+            <th style="padding-top: 30px;" scope="row"><?= __('Mobile') ?></th>
+            <td style="padding-top: 30px;"><?= h($userProfile->Mobile) ?></td>
         </tr>
         <tr>
-            <th scope="row"><?= __('Address 1') ?></th>
-            <td><?= h($userProfile->Address_1) ?></td>
+            <th style="padding-top: 30px;" scope="row"><?= __('Address 1') ?></th>
+            <td style="padding-top: 30px;"><?= h($userProfile->Address_1) ?></td>
         </tr>
         <tr>
-            <th scope="row"><?= __('Address 2') ?></th>
-            <td><?= h($userProfile->Address_2) ?></td>
+            <th style="padding-top: 30px;" scope="row"><?= __('Address 2') ?></th>
+            <td style="padding-top: 30px;"><?= h($userProfile->Address_2) ?></td>
         </tr>
         <tr>
-            <th scope="row"><?= __('City') ?></th>
-            <td><?= h($userProfile->City) ?></td>
+            <th style="padding-top: 30px;" scope="row"><?= __('City') ?></th>
+            <td style="padding-top: 30px;"><?= h($userProfile->City) ?></td>
         </tr>
         <tr>
-            <th scope="row"><?= __('State') ?></th>
-            <td><?= h($userProfile->State) ?></td>
+            <th style="padding-top: 30px;" scope="row"><?= __('State') ?></th>
+            <td style="padding-top: 30px;"><?= h($userProfile->State) ?></td>
         </tr>
         <tr>
-            <th scope="row"><?= __('Country') ?></th>
-            <td><?= h($userProfile->Country) ?></td>
+            <th style="padding-top: 30px;" scope="row"><?= __('Country') ?></th>
+            <td style="padding-top: 30px;"><?= h($userProfile->Country) ?></td>
         </tr>
         <tr>
-            <th scope="row"><?= __('Zipcode') ?></th>
-            <td><?= $this->Number->format($userProfile->Zipcode) ?></td>
+            <th style="padding-top: 30px;" scope="row"><?= __('Zipcode') ?></th>
+            <td style="padding-top: 30px;"><?= $this->Number->format($userProfile->Zipcode) ?></td>
         </tr>
     </table>
 

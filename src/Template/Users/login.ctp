@@ -425,7 +425,7 @@ left: 0px !important;
            <!--  <p id="profile-name" class="profile-name-card"></p> -->
            <?= $this->Form->create('', array('id' => 'signupForm','class' => 'form-signup formheigh ', 'url' => ['action' => 'add'])) ?>
             <!-- <form class="form-signin"> -->
-            <h3 style="color:#333333">Sign up & Treasure in</h3>
+            <h3 style="color:#333333">Sign up & Flip over</h3>
             <input type="hidden" id="checkUrl" name="checkUrl" value="<?php echo $this->Url->build(array('controller' => 'users', 'action' => 'isemailexist'));?>">
             <!--  <div class="form-group float-label-control">
    

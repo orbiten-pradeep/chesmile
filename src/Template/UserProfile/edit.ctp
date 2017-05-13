@@ -4,7 +4,7 @@
     height: 3.5rem;
   }
 
-    .float-label-control { position: relative; margin-bottom: 1.5em; }
+    .float-label-control { position: relative; margin-bottom: 1.5em; padding-top: 15px; }
     /*.float-label-control ::-webkit-input-placeholder { color: transparent; }
     .float-label-control :-moz-placeholder { color: transparent; }
     .float-label-control ::-moz-placeholder { color: transparent; }
@@ -21,7 +21,7 @@
     .float-label-control input.empty + label,
     .float-label-control textarea.empty + label { top: 0.1em; font-size: 1.5em; animation: none; -webkit-animation: none; }
     .float-label-control input:not(.empty) + label,
-    .float-label-control textarea:not(.empty) + label { z-index: 1; }
+    .float-label-control textarea:not(.empty) + label { z-index: 1; padding-top: 15px; }
     .float-label-control input:not(.empty):focus + label,
     .float-label-control textarea:not(.empty):focus + label { color: white; }
     .float-label-control.label-bottom label { -moz-animation: float-labels-bottom 300ms none ease-out; -webkit-animation: float-labels-bottom 300ms none ease-out; -o-animation: float-labels-bottom 300ms none ease-out; -ms-animation: float-labels-bottom 300ms none ease-out; -khtml-animation: float-labels-bottom 300ms none ease-out; animation: float-labels-bottom 300ms none ease-out; }
@@ -72,7 +72,7 @@ label {
     height:100px;
 }
 .card-container.card {
-    max-width: 800px;
+    max-width: 650px;
     padding: 40px 40px;
 }
 
@@ -164,13 +164,32 @@ input{
     display: none !important;
 }
 
+.nav-tabs > li.active > a{
+  background-color: #337ab7 !important;
+  color: white !important;
+}
+.nav-tabs {
+    border-bottom: 0px !important;
+}
 
+input[type=number]::-webkit-inner-spin-button, 
+input[type=number]::-webkit-outer-spin-button { 
+    -webkit-appearance: none !important;
+    -moz-appearance: none !important;
+    appearance: none !important;
+    margin: 0 !important; 
+}
+
+input[type=number] {
+    -moz-appearance:textfield;
+}
 </style>
 
 <div class="container-fluid height">
     <div class="col-md-offset-2">
         <div class="card-prof card-container-prof">
         <?php echo $this->Html->image('profile.png',array('alt' => '','class' => 'avatar img-circle','height' => '100px')); ?>
+        <?= $this->Form->create($userProfile,array('enctype' => 'multipart/form-data','class' => 'form-horizontal')); ?>
           <?= $this->Form->input('Photo', ['type' => 'file','label' => false]);?>
         </div>
     </div>
@@ -197,7 +216,6 @@ input{
     <div class="card card-container col-md-offset-2">
     <div class="tab-content">
     <div class="tab-pane fade in active" id="home">
-                 <?= $this->Form->create($userProfile,array('enctype' => 'multipart/form-data','class' => 'form-horizontal')); ?>
 
         <?= $this->Form->hidden('user_id', ['options' => $users,'default'=> $users_id]); ?>
                     <div class="form-group float-label-control">

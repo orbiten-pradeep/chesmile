@@ -955,7 +955,7 @@ class EventsController extends AppController
 	        } 
 
             $conn = ConnectionManager::get('default'); 
-            $query = "SELECT e.*, c.name as category_name, c.color as category_color, (SELECT count(l.events_id) FROM likes l WHERE l.events_id = e.id GROUP BY l.events_id) as likes_count, (SELECT l.areaname FROM address l WHERE l.events_id = e.id GROUP BY l.events_id) as areaname FROM events e LEFT JOIN categories c ON c.id = e.categories_id $joins WHERE e.active = 1 $cond order by e.date asc";
+            $query = "SELECT e.*, c.name as category_name, c.color as category_color, (SELECT count(l.events_id) FROM likes l WHERE l.events_id = e.id GROUP BY l.events_id) as likes_count, (SELECT a.areaname FROM address a WHERE a.events_id = e.id) as areaname FROM events e LEFT JOIN categories c ON c.id = e.categories_id $joins WHERE e.active = 1 $cond order by e.date asc";
 
             $stmt = $conn->execute($query);
             $results = $stmt->fetchAll('assoc');

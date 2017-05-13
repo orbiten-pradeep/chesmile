@@ -101,7 +101,7 @@ label {
     height:100px;
 }
 .card-container.card {
-    max-width: 800px;
+    max-width: 650px;
     padding: 40px 40px;
 }
 
@@ -252,6 +252,13 @@ input{
 #display{
     display: none;
 }
+.nav-tabs > li.active > a{
+  background-color: #337ab7 !important;
+  color: white !important;
+}
+.nav-tabs{
+    border-bottom: 0px;
+}
 </style>
 <div class="container-fluid height">
     <div class="col-md-offset-2">
@@ -396,9 +403,9 @@ input{
             </div>
 
             <div class="form-group">
-                <label for="">Add Map Location</label>                
-                <input type="text" class="form-control map" id="googleMapID" name="google_map" placeholder="" readonly="" style="color: black !important;">
-                <input type="button" class="btn launch-map" value="Launch Map" style="background-color: #337AB7"; />
+                <label for="">Add Map Location</label><br>              
+            <input type="text" class="form-control map" id="googleMapID" name="google_map" placeholder="" readonly="" style="color: black !important; display: none;">
+                <input type="button" class="btn launch-map" value="Launch Map" style="background-color: #337AB7;"/>
             </div>
 
             <!-- <div class="form-group float-label-control">
@@ -433,6 +440,13 @@ input{
                 <label>
             <?= $this->Form->input('country', array('default' => 'INDIA', 'readonly','class' => 'form-control country'));?>
             </label>
+            </div>
+
+            <div class="pull-right">
+                <!-- <i class="fa fa-long-arrow-right" aria-hidden="true"></i> -->
+                 <!-- <?= $this->Html->link($this->Html->tag('i', '', array('class' => 'fa fa-long-arrow-right','escape' => false))) ?> -->
+                 <a href="#profile" data-toggle="tab" title="profile" style="color:white !important;"><i class="fa fa-long-arrow-right" aria-hidden="true"></i></a>
+
             </div>
             
             </div>
@@ -527,7 +541,7 @@ input{
       <div class="modal-body">
         <div id="mapPanel">            
             <input class="form-control text" id="city_country" type="textbox" value="Mylapore, Chennai" style="color: black !important;">
-            <input class="btn btn-md btn-primary botton" type="button" value="save" onclick="codeAddress()">            
+            <input class="btn btn-md btn-primary botton" type="button" value="search" onclick="codeAddress()">            
         </div>  
         <div id="mapCanvas" style="width: 100%; height: 350px;"></div>
         <div id="infoPanel">
