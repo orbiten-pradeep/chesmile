@@ -100,11 +100,12 @@ class MarathonController extends AppController
                 $message .= "<br/>Thanks, <br/>Support Team";
                 $email->send($message);
 
-                $this->Flash->success(__('The marathon has been saved.'));
+                $this->Flash->success(__('The online registration has been completed successfully.'));
                 return $this->redirect(['controller' => 'Events', 'action' => 'view', $id]);
                 //return $this->redirect(['action' => 'index']);
             } else {
-                $this->Flash->error(__('The marathon could not be saved. Please, try again.'));
+                $this->Flash->error(__('The online registration could not be completed. Please, try again.'));
+                return $this->redirect(['controller' => 'Events', 'action' => 'view', $id]);
             }
         }
         $events = $this->Marathon->Events->find('list', ['limit' => 200]);
