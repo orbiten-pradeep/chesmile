@@ -83,7 +83,7 @@ a {
     margin-bottom: 5px;
 }
 .address-info {
-    margin: 10px 10px 15px 10px !important;
+    margin: 10px 10px -5px 10px !important;
 }
 address {
     margin-bottom: 0 !important;
@@ -220,6 +220,22 @@ address {
 .btn-reg {
     margin-top: -45px;
 }
+}
+
+.help-block {
+    display: block;
+    margin-top: 5px;
+    margin-bottom: 10px;
+    color: red;
+    font-style: normal;
+    font-size: 11px;
+    }
+.error.help-block{
+    color: red !important;
+    font-weight: initial;
+}
+.has-error .form-control{
+    border-color: red;
 }
 </style>
 
@@ -493,7 +509,7 @@ address {
                   <div class="col-xs-12 col-lg-7">
                       <div class="card">
         
-         <?= $this->Form->create('$marathon', array('url' => ['controller' => 'Marathon','action' => 'add', $event->id])) ?>
+         <?= $this->Form->create('$marathon', array('class' => 'marathon'),array('url' => ['controller' => 'Marathon','action' => 'add', $event->id])) ?>
             <div class="form-group float-label-control">
              
              <label for="">Firstname</label>
@@ -509,14 +525,14 @@ address {
 
         <div class="form-group">
                 <label>
-           <?= $this->Form->input('date', array('type' => 'text','class' => 'form-control date','placeholder' => 'Date of birth','label' => false));?>
-           </label>
-           <span id="person_type" style="color: #00FF00;"></span>
+           <?= $this->Form->input('date', array('type' => 'text','class' => 'form-control date','placeholder' => 'Date of birth','label' => false,'required' => true));?>
+           </label><br>
+           <span id="person_type" style="color: #4abac5;"></span>
            </div>
 
        <div class="form-group">
             <?php $sex = ['Male' => 'Male', 'Female' => 'Female'];
-             echo $this->Form->select('sex', $sex, array('empty' => '(Select Gender)', 'class' => 'form-control heigh'));?>
+             echo $this->Form->select('sex', $sex, array('empty' => '(Select Gender)', 'class' => 'form-control heigh', 'required' => true));?>
         </div>
             
             <div class="form-group float-label-control">
@@ -535,13 +551,13 @@ address {
             <div class="form-group">
             <label> Distance </label>
          <?php $km = ['2 KM' => '2 KM', '5 KM' => '5 KM'];
-           echo $this->Form->select('KM', $km, array('default' => '2 KM','class' => 'form-control heigh'));?>
+           echo $this->Form->select('KM', $km, array('default' => '2 KM','class' => 'form-control heigh', 'required' => true));?>
            </div>
 
            <div class="form-group">
            <label> Select your tshirt size </label>
            <?php $tshirt = ['S' => 'S', 'M' => 'M', 'L' => 'L', 'XL' => 'XL', 'XXL' => 'XXL', 'XXXL' => 'XXXL'];
-           echo $this->Form->select('TSHIRT', $tshirt, array('default' => 'S', 'class' => 'form-control heigh'));?>
+           echo $this->Form->select('TSHIRT', $tshirt, array('default' => 'S', 'class' => 'form-control heigh', 'required' => true));?>
            </div>
 
         <div class="">
@@ -555,16 +571,16 @@ address {
                       </div>
                   </div>
                   <div class="col-xs-9 col-lg-5">
-                      <p class="lead">Register now for <span class="text-success">FREE</span></p>
-                      <ul class="list-unstyled" style="line-height: 2">
-                          <li><span class="fa fa-check text-success"></span> See all your orders</li>
-                          <li><span class="fa fa-check text-success"></span> Fast re-order</li>
-                          <li><span class="fa fa-check text-success"></span> Save your favorites</li>
-                          <li><span class="fa fa-check text-success"></span> Fast checkout</li>
-                          <li><span class="fa fa-check text-success"></span> Get a gift <small>(only new customers)</small></li>
-                          <li><a href="/read-more/"><u>Read more</u></a></li>
+                      <p class="lead">Note</p>
+                      <ul class="list-unstyled" style="line-height: 2; font-size: 13px;">
+                          <li style="list-style-type: disc;"> Fill the form to register online</li>
+                          <li style="list-style-type: disc;"> A mail consisting the payment link will be sent</li>
+                          <li style="list-style-type: disc;"> Click on the link to make the payment </li>
+                          <li style="list-style-type: disc;"> Confirmation mail will be sent </li>
+                          <li style="list-style-type: disc;"> Please carry a proof of the confirmation mail on the marathon day</li>
+                          <!-- <li><a href="/read-more/"><u>Read more</u></a></li> -->
                       </ul>
-                      <p><a href="/new-customer/" class="btn btn-info btn-block">Yes please, register now!</a></p>
+                      <!-- <p><a href="/new-customer/" class="btn btn-info btn-block">Yes please, register now!</a></p> -->
                   </div>
               </div>
           </div>
@@ -720,6 +736,9 @@ address {
 <!-- <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.1.1/jquery.min.js"></script> -->
   <script src="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/js/bootstrap.min.js"></script>
 
+   <?php echo $this->Html->script(['jquery']); ?>
+<?php echo $this->Html->script(['jquery.validate.min']); ?>
+
 <script type="text/javascript">
 
 
@@ -854,6 +873,67 @@ $( function() {
         },1000);
     });
 })(jQuery);
+
+$(".marathon" ).validate( {
+    rules: {
+      firstname: "required",
+      lastname: "required",      
+      email: {
+        required: true,
+        email: true
+      },
+      mobile_number: {
+        required: true,
+        minlength: 10
+      },
+      password: {
+        required: true,
+        minlength: 6
+      },
+      confirm_password: {
+        required: true,
+        minlength: 6,
+        equalTo: "#new_password"
+      }
+    },
+    messages: {
+      firstname: "Please enter your Firstname",
+      lastname: "Please enter your Lastname",     
+      email: { 
+        required: "Please enter a valid email address"
+      },
+       mobile_number: {
+        required: "Please enter your mobile number",
+        minlength: "Please enter atleast 10 digits"
+      },
+      password: {
+        required: "Please provide a password",
+        minlength: "Your password must be at least 6 characters long"
+      },
+      confirm_password: {
+        required: "Please provide a confirm password",
+        minlength: "Your password must be at least 6 characters long",
+        equalTo: "Please enter the same password as above"
+      }
+    },
+    errorElement: "em",
+    errorPlacement: function ( error, element ) {
+      // Add the `help-block` class to the error element
+      error.addClass( "help-block" );
+
+      if ( element.prop( "type" ) === "checkbox" ) {
+        error.insertAfter( element.parent( "label" ) );
+      } else {
+        error.insertAfter( element );
+      }
+    },
+    highlight: function ( element, errorClass, validClass ) {
+      $( element ).parents( ".input" ).addClass( "has-error" ).removeClass( "has-success" );
+    },
+    unhighlight: function (element, errorClass, validClass) {
+      $( element ).parents( ".input" ).addClass( "has-success" ).removeClass( "has-error" );
+    }
+  });
 </script>
 <!-- <nav class="large-3 medium-4 columns" id="actions-sidebar">
     <ul class="side-nav">

@@ -259,6 +259,10 @@ input{
 .nav-tabs{
     border-bottom: 0px;
 }
+
+.search-nav{
+    display: none;
+}
 </style>
 <div class="container-fluid height">
     <div class="col-md-offset-2">
@@ -297,7 +301,7 @@ input{
                     <div class="form-group float-label-control">
                         <label for="">Event Title</label>
          <?php echo $this->Form->input('title',array('div' => false,'id' => 'title', 'label' => false, 'class' => 'form-control form-element', 'placeholder' => 'Event Title')); ?>
-            <span id="title_error" style="color: #FF0000;"></span>
+            <span id="title_error" style="color: #FF0000;font-size: 11px;"></span>
                       
                     </div>
 
@@ -313,20 +317,20 @@ input{
                 <label>
 <?= $this->Form->input('categories_id',array('class' => 'form-control heigh','options' => $categories_list, 'onChange' => 'checkForOther(this);', 'empty' => '(Select Categories)','label' => false));?>
             </label>
-            <span id="cate_error" style="color: #FF0000;"></span>
+            <span id="cate_error" style="color: #FF0000; font-size: 11px;"></span>
             </div>
 
             <div id="subdiv" class="form-group" style="display: none;">
                 <label>
             <?=$this->Form->input('Eventsubcategories.sub_categories',array( 'subcategory_id'=>'', 'class' => 'form-control subclass','options' => $subCategories, 'multiple' => 'true', 'empty' => '(choose one)','label' => false,'empty' => false));?>
             </label>
-            <span id="subcate_error" style="color: #FF0000;"></span>
+            <span id="subcate_error" style="color: #FF0000; font-size: 11px;"></span>
             </div>
 
             <div class="form-group">
                    <label for="">Description</label>
                   <?= $this->Form->input('descriptioin',array('div' => false, 'label' => false,'class' => 'form-control form-element','placeholder' => 'Description about your event','rows' => '4', 'cols' => '50', 'resize'=> 'none' ));?>
-                  <span id="description_error" style="color: #FF0000;"></span>
+                  <span id="description_error" style="color: #FF0000; font-size: 11px;"></span>
                   <br/>
                   <!--  <textarea class="form-control" placeholder="Some Words about your event" rows="1"></textarea> -->
                   <input type="button" id="id_typemore" name="id_typemore" class="btn" style="float: right;background-color: #337AB7;" value="Type More Here..." />
@@ -341,14 +345,14 @@ input{
             <div class="form-group float-label-control">
                     <label for="">Contact Number</label>
                   <?= $this->Form->input('contact_number',array('div' => false,'id' =>'contact_number', 'label' => false,'class' => 'form-control form-element','placeholder' => 'Enter Contact Number'));?>
-                  <span id="contact_error" style="color: #FF0000;"></span>
+                  <span id="contact_error" style="color: #FF0000; font-size: 11px;"></span>
                   <!--  <textarea class="form-control" placeholder="Some Words about your event" rows="1"></textarea> -->
             </div>
 
             <div class="form-group float-label-control">
                    <label for="">Mobile Number</label>
                   <?= $this->Form->input('mobile_number',array('id' => 'mobile_number', 'div' => false,'label' => false,'class' => 'form-control form-element','placeholder' => 'Enter Mobile Number'));?>
-                  <span id="mobile_error" style="color: #FF0000;"></span>
+                  <span id="mobile_error" style="color: #FF0000; font-size: 11px;"></span>
                   <!--  <textarea class="form-control" placeholder="Some Words about your event" rows="1"></textarea> -->
             </div>
 
@@ -356,7 +360,7 @@ input{
                 <label>
            <?= $this->Form->input('date', array('type' => 'text','class' => 'form-control date','placeholder' => 'Date','label' => false));?>
            </label>
-           <span id="date_error" style="color: #FF0000;"></span>
+           <span id="date_error" style="color: #FF0000; font-size: 11px;"></span>
            </div>
 
              <!-- <div class="form-group float-label-control">
@@ -368,7 +372,7 @@ input{
             <label>
            <?=$this->Form->input('time', array('type' => 'text','class' => 'form-control timepicker time-bg','label' => false,'placeholder' => 'Time'));?>
            </label>
-           <span id="time_error" style="color: #FF0000;"></span>
+           <span id="time_error" style="color: #FF0000; font-size: 11px;"></span>
            </div>
                      <!-- <div class="form-group float-label-control">
                         <label for="">Venue</label>
@@ -390,7 +394,7 @@ input{
             <div class="form-group float-label-control">
                         <label for="">Landmark</label>
                <?= $this->Form->input('landmark',array('div' => false,'label' => false,'class' => 'form-control form-element', 'placeholder' => 'Any Specific Landmark?'));?>
-               <span id="landmark_error" style="color: #FF0000;"></span>
+               <span id="landmark_error" style="color: #FF0000; font-size: 11px;"></span>
                        <!--  <input type="text" class="form-control" placeholder="Any Specific Landmarks?"> -->
             </div>
 
@@ -398,7 +402,7 @@ input{
                 <div class="ui-widget">
                   <label for="Autocomplete"> Area Name</label>
                 <?php echo $this->Form->input('areaname', array('id' => 'Autocomplete', 'required','class' => 'form-control form-element','label' => false,'placeholder' => 'Areaname'));?>
-                  <span id="area_error" style="color: #FF0000;"></span>
+                  <span id="area_error" style="color: #FF0000; font-size: 11px;"></span>
                 </div>
             </div>
 
