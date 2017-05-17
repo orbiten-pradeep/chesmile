@@ -315,8 +315,8 @@ background-color: #286090;
   <!-- </div> --><!--.container-fluid-->
 </nav>   
 <div class="container-content">
-  <!-- <?php //echo $this->Flash->render(); ?> -->
   <?= $this->fetch('content') ?>
+   <?php echo $this->Flash->render(); ?>
 </div>
            
 

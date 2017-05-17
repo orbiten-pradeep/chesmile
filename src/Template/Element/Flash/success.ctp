@@ -1,5 +1,5 @@
 <style type="text/css">
-  .modal-content{
+  .con{
     border-radius: 0px !important;
     border: 1px solid #999 !important;
     box-shadow: 0 0px 0px rgba(0,0,0,.5) !important;
@@ -10,7 +10,7 @@
      left: 50px;
   }
 
-  .close{
+  .hide{
     text-shadow: none !important;
     opacity: 3 !important;
   }
@@ -25,7 +25,7 @@
 
   @media only screen and (min-width: 320px)
   and (max-width: 460px){
-    .modal-content{
+    .con{
        height: auto;
       width: auto;
      left: auto;
@@ -35,7 +35,7 @@
   }
   @media only screen and (max-width: 320px)
   {
-    .modal-content{
+    .con{
      font-size: 11px;
     }
 
@@ -59,9 +59,9 @@
     <div class="modal-dialog">
     
       <!-- Modal content-->
-      <div class="modal-content">
+      <div class="modal-content con">
         <div class="modal-header" style="border-bottom: none;">
-          <button type="button" class="close" data-dismiss="modal" style="color: #4abac5 !important;">&times;</button>
+          <button type="button" class="close hide" data-dismiss="modal" style="color: #4abac5 !important;">&times;</button>
           <h4 class="modal-title"></h4>
         </div>
         <div class="modal-body" style="text-align: center;">

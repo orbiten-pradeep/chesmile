@@ -1,11 +1,5 @@
-<!-- <?php
-if (!isset($params['escape']) || $params['escape'] !== false) {
-    $message = h($message);
-}
-?>
-<div class="message error" onclick="this.classList.add('hidden');"><?= $message ?></div> -->
 <style type="text/css">
-  .modal-content{
+  .con{
     border-radius: 0px !important;
     border: 1px solid #999 !important;
     box-shadow: 0 0px 0px rgba(0,0,0,.5) !important;
@@ -16,7 +10,7 @@ if (!isset($params['escape']) || $params['escape'] !== false) {
      left: 50px;
   }
 
-  .close{
+  .hide{
     text-shadow: none !important;
     opacity: 3 !important;
   }
@@ -31,7 +25,7 @@ if (!isset($params['escape']) || $params['escape'] !== false) {
 
   @media only screen and (min-width: 320px)
   and (max-width: 460px){
-    .modal-content{
+    .con{
        height: auto;
       width: auto;
      left: auto;
@@ -41,7 +35,7 @@ if (!isset($params['escape']) || $params['escape'] !== false) {
   }
   @media only screen and (max-width: 320px)
   {
-    .modal-content{
+    .con{
      font-size: 11px;
     }
 
@@ -53,11 +47,8 @@ if (!isset($params['escape']) || $params['escape'] !== false) {
   <!-- <script src="https://ajax.googleapis.com/ajax/libs/jquery/1.12.0/jquery.min.js"></script> -->
   <script src="http://maxcdn.bootstrapcdn.com/bootstrap/3.3.6/js/bootstrap.min.js"></script>
 
+
 <?php echo $this->Html->script(['jquery']); ?>
-
-
-
-
 
   <div class="container">
   <!-- Trigger the modal with a button -->
@@ -68,9 +59,9 @@ if (!isset($params['escape']) || $params['escape'] !== false) {
     <div class="modal-dialog">
     
       <!-- Modal content-->
-      <div class="modal-content">
+      <div class="modal-content con">
         <div class="modal-header" style="border-bottom: none;">
-          <button type="button" class="close" data-dismiss="modal" style="color: #4abac5 !important;">&times;</button>
+          <button type="button" class="close hide" data-dismiss="modal" style="color: #4abac5 !important;">&times;</button>
           <h4 class="modal-title"></h4>
         </div>
         <div class="modal-body" style="text-align: center;">
@@ -86,12 +77,10 @@ if (!isset($params['escape']) || $params['escape'] !== false) {
   
 </div>
 
-
-<!-- <?php //echo $this->Html->script(['jquery.validate.min']); ?> -->
-
 <script type="text/javascript">
 
     $(window).on('load',function(){
         $('#logout').modal('show');
     });
-    </script>
+</script>
+

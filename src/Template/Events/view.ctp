@@ -302,7 +302,7 @@ address {
                         <?php echo empty(!$address->areaname) ? $address->areaname : ''; ?>
                     </p>
                     <p><?php echo $address->city; ?></p>
-                    <p><?php echo h($event->contact_number).", ".h($event->mobile_number) ?></p> 
+                    <p>contact: <?php echo h($event->contact_number).", ".h($event->mobile_number) ?></p> 
                 </address>
             </div>
         </div>
@@ -509,7 +509,7 @@ address {
                   <div class="col-xs-12 col-lg-7">
                       <div class="card">
         
-         <?= $this->Form->create('$marathon', array('class' => 'marathon'),array('url' => ['controller' => 'Marathon','action' => 'add', $event->id])) ?>
+         <?= $this->Form->create('$marathon',array('url' => ['controller' => 'Marathon','action' => 'add', $event->id])) ?>
             <div class="form-group float-label-control">
              
              <label for="">Firstname</label>
@@ -719,7 +719,8 @@ address {
           <h4 class="modal-title">Event Description</h4>
         </div>
         <div class="modal-body">
-          <?=  $this->Text->autoParagraph(h($event->descriptioin));?>
+        <?=  $this->Text->autoParagraph(h($event->descriptioin));?>
+          <?=  $this->Text->autoParagraph(h($event->descriptioin_more));?>
 
         </div>
         <div class="modal-footer" style="border-top: none;">
@@ -744,7 +745,7 @@ address {
 
 $(document).ready(function(){
     var event_id = '<?=$event->id;?>';
-    if(event_id==123){
+    if(event_id==125){
         if($(document).width() < 400){
             console.log("mobile");
             $(".cover-picdiv").css('height', '200px');
