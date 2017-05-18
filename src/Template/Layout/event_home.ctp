@@ -231,7 +231,7 @@ background-color: #286090;
     <!-- Collect the nav links, forms, and other content for toggling -->
   <div  class="col-md-offset-3" id="bs-example-navbar-collapse-1">
     <ul class="nav navbar-nav navbar-right">
-      <div class="dropdown" style="margin-right: 15px;">
+      <div class="dropdown" style="margin-right: 15px; cursor: pointer !important;">
         <?php
         $user = $this->request->session()->read('Auth.User');
         if(!empty($user['Photo'])) {
@@ -460,9 +460,9 @@ background-color: #286090;
     <div class="modal-content">
       <div class="modal-body"> 
           <ul class="list-group">
-            <li class="list-group-item"><a href="<?php echo $this->Url->build(array('controller' => 'events', 'action' => 'add'));?>" >Create Event</a></li>
-            <li class="list-group-item"><a href="<?php echo $this->Url->build(array('controller' => 'events'));?>#past-events" >Past Event</a></li>
-            <li class="list-group-item"><a href="<?php echo $this->Url->build(array('controller' => 'UserProfile', 'action' => 'add'));?>" >My Profile</a></li>
+            <li class="list-group-item"><a style="color: #337ab7 !important;" href="<?php echo $this->Url->build(array('controller' => 'events', 'action' => 'add'));?>" >Create Event</a></li>
+            <li class="list-group-item"><a style="color: #337ab7 !important;" href="<?php echo $this->Url->build(array('controller' => 'events'));?>#past-events" >Past Event</a></li>
+            <li class="list-group-item"><a style="color: #337ab7 !important;" href="<?php echo $this->Url->build(array('controller' => 'UserProfile', 'action' => 'add'));?>" >My Profile</a></li>
           </ul>
       </div> 
     </div><!-- /.modal-content -->

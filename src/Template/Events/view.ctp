@@ -570,13 +570,13 @@ address {
     <?= $this->Form->end() ?>
                       </div>
                   </div>
-                  <div class="col-xs-9 col-lg-5">
+                  <div class="col-xs-12 col-lg-5">
                       <p class="lead">Note</p>
                       <ul class="list-unstyled" style="line-height: 2; font-size: 13px;">
-                          <li style="list-style-type: disc;"> Fill the form to register online</li>
-                          <li style="list-style-type: disc;"> A mail consisting the payment link will be sent</li>
+                          <li style="list-style-type: disc;"> All the fields are mandatory to register online</li>
+                          <li style="list-style-type: disc;"> After registration is done, you will be receiving payment link via PayZapp HDFC</li>
                           <li style="list-style-type: disc;"> Click on the link to make the payment </li>
-                          <li style="list-style-type: disc;"> Confirmation mail will be sent </li>
+                          <li style="list-style-type: disc;"> Once payment is done, you will receive an acknowledgement mail </li>
                           <li style="list-style-type: disc;"> Please carry a proof of the confirmation mail on the marathon day</li>
                           <!-- <li><a href="/read-more/"><u>Read more</u></a></li> -->
                       </ul>
@@ -935,6 +935,69 @@ $(".marathon" ).validate( {
       $( element ).parents( ".input" ).addClass( "has-success" ).removeClass( "has-error" );
     }
   });
+</script>
+
+<script type="text/javascript">
+    $("#createEvent").submit(function(event){
+        var status =true ;
+        if ($('#firstname').val() == '') {
+            status = false;
+           $("#firstname_error").text("please enter your title");
+        }else{
+            $("#firstname_error").text("");
+        }
+
+        if ($('#lastname').val() == '') {
+            status = false;
+           $("#lastname_error").text("please enter your Contact Number");
+        }else{
+            $("#lastname_error").text("");
+        } 
+
+        if($("#date").val() ==''){
+            status = false;
+            $("#date_error").text("please enter a description with minimum 120 characters");
+        }else{
+            $("#date_error").text("");
+        }
+
+        if($("sex").val() == ''){
+            status = false;
+            $("sex_error").text("please type landmark");
+        }else{
+            $("sex_error").text("");
+        }
+
+        if($("#email").val() == ''){
+            status = false;
+            $("#email_error").text("please Select event date");
+        }else{
+            $("#email_error").text("");
+        }
+
+        if($("#mobile-number").val() == ''){
+            status = false;
+            $("#mobile-number_error").text("please Select event time");
+        }else{
+            $("#mobile-number_error").text("");
+        }
+
+        if($("#categories_id option:selected").val() == ''){
+            status = false;
+            $("#cate_error").text("please Select event category");
+        }else{
+            $("#cate_error").text("");
+        }
+
+        if($("#Autocomplete").val() == ''){
+            status = false;
+            $("#area_error").text("please Select event Areaname");
+        }else{
+            $("#area_error").text("");
+        }
+        
+        return status;
+    });
 </script>
 <!-- <nav class="large-3 medium-4 columns" id="actions-sidebar">
     <ul class="side-nav">

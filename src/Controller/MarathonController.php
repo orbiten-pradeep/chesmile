@@ -79,7 +79,7 @@ class MarathonController extends AppController
             //debug($event); exit(0);
             $marathon = $this->Marathon->patchEntity($marathon, $this->request->data);
             if ($this->Marathon->save($marathon)) {
-                $this->Flash->success(__('online registration is completed, please check the mail from payzaap for further details .'));
+                $this->Flash->success(__('online registration is completed, please check the mail received from payzaap HDFC for further details .'));
                 $email = new Email();
                 $email->transport('gmail');
                 $name = $event['user']['fullname'];

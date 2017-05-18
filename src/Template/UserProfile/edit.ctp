@@ -186,14 +186,36 @@ input[type=number] {
 </style>
 
 <div class="container-fluid height">
+    <div class="col-md-1 col-md-offset-2">
+        <div class="card-prof card-container-prof">
+        <div class="text-center">
+         <?php if($userProfile->Photo) {
+                echo $this->Html->image('profile/'.$userProfile->Photo, array('height' => '100px','width' => '100px','alt'=>'aswq','class' => 'img-style'));
+            }  else {
+                echo $this->Html->image('profile.png',array('alt' => '','class' => 'avatar img-style','height' => '100px', 'width' => '100px')); 
+            }
+            ?>
+            
+           <!--  <h3><?= h($userProfile->fullname) ?></h3> -->
+            <!-- <h6>Upload a different photo...</h6>
+           <?= $this->Form->input('Photo', ['type' => 'file']);?> -->
+        </div>
+        </div>
+    </div>
+    <div class="col-md-9 col-lg-4 name-space" style="margin-top:35px;">
+                <h3 style="color: white;"><?= h($userProfile->fullname) ?></h3>
+            </div>
+</div>
+
+<!-- <div class="container-fluid height">
     <div class="col-md-offset-2">
         <div class="card-prof card-container-prof">
         <?php echo $this->Html->image('profile.png',array('alt' => '','class' => 'avatar img-circle','height' => '100px')); ?>
         <?= $this->Form->create($userProfile,array('enctype' => 'multipart/form-data','class' => 'form-horizontal')); ?>
-          <?= $this->Form->input('Photo', ['type' => 'file','label' => false]);?>
+          <?= $this->Form->input('Photo', ['type' => 'file','label' => false,'div' => false]);?>
         </div>
     </div>
-</div>
+</div> -->
 
 <div class="container content">
     <div class="row">
@@ -216,8 +238,11 @@ input[type=number] {
     <div class="card card-container col-md-offset-2">
     <div class="tab-content">
     <div class="tab-pane fade in active" id="home">
-
+       <?php echo $this->Html->image('profile.png',array('alt' => '','class' => 'avatar img-circle','height' => '100px')); ?>
+        <?= $this->Form->create($userProfile,array('enctype' => 'multipart/form-data','class' => 'form-horizontal')); ?>
+          <?= $this->Form->input('Photo', ['type' => 'file','label' => false,'div' => false]);?>
         <?= $this->Form->hidden('user_id', ['options' => $users,'default'=> $users_id]); ?>
+
                     <div class="form-group float-label-control">
                         <label for="">Fullname</label>
                        <?php echo  $this->Form->input('fullname',array('default'=> $fullname, 'label' => false, 'div' => false ,'class' => 'form-control form-element','type' => 'text', 'placeholder' => 'Fullname','required' => true)); ?>
@@ -443,7 +468,8 @@ $(document ).ready( function () {
                     required: true,
                     minlength: 10,
                     number: true
-            }
+            },
+    Zipcode:"required"
             },
     messages: {
       Address_1: "Please enter your Address",
@@ -451,7 +477,8 @@ $(document ).ready( function () {
       State: "Please enter your state",
       Country: "Please enter your Country",
      contact_number:"Please enter a number with at least 7 and max 10 characters!",
-      Mobile:"Please enter a number with at least 10 characters!"
+      Mobile:"Please enter a number with at least 10 characters!",
+      Zipcode:"Please enter your zipcode"
     },
     errorElement: "em",
     errorPlacement: function ( error, element ) {
