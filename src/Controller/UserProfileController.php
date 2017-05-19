@@ -174,55 +174,59 @@ class UserProfileController extends AppController
         if ($this->request->is(['patch', 'post', 'put'])) 
         {
           	$errCheck = false;
-			if(isset($this->request->data['Photo']))
-			{
-				if($this->request->data['Photo']['name'] != '')
-				{
-					 //exit(0);
-					$file = $this->request->data['Photo'];
-					$ext = substr(strtolower(strrchr($file['name'], '.')), 1); //get the extension
-					$arr_ext = array('jpg', 'jpeg', 'png'); //set allowed extensions
-					if($file['size']/1024 > '2048')
-					{
-						$this->Flash->error(__('"imageLogs", __METHOD__." The uploaded file exceeds the MAX_FILE_SIZE(2MB) '));
-						$errCheck = true;
-					}
-					else if(in_array($ext, $arr_ext))
-					{
-						//do the actual uploading of the file. First arg is the tmp name, second arg is
-						//where we are putting it
-						$uploadFolder = WWW_ROOT . 'img/profile';
-						if( !file_exists($uploadFolder) ){
-							mkdir($uploadFolder);
-						}
-						$filename = str_replace(" ", "-", rand(1, 3000) . $file['name']);
-						move_uploaded_file($file['tmp_name'], WWW_ROOT . 'img/profile' . DS . $filename);
-						 //prepare the filename for database entry
-						$this->request->data['Photo'] = $filename;
-					}
-				}
-			}
+    			if(isset($this->request->data['Photo']))
+    			{
+    				if($this->request->data['Photo']['name'] != '')
+    				{
+    					$file = $this->request->data['Photo'];
+    					$ext = substr(strtolower(strrchr($file['name'], '.')), 1); //get the extension
+    					$arr_ext = array('jpg', 'jpeg', 'png'); //set allowed extensions
+    					if($file['size']/1024 > '2048')
+    					{
+    						$this->Flash->error(__('"imageLogs", __METHOD__." The uploaded file exceeds the MAX_FILE_SIZE(2MB) '));
+    						$errCheck = true;
+    					}
+    					else if(in_array($ext, $arr_ext))
+    					{
+    						//do the actual uploading of the file. First arg is the tmp name, second arg is
+    						//where we are putting it
+    						$uploadFolder = WWW_ROOT . 'img/profile';
+    						if( !file_exists($uploadFolder) ){
+    							mkdir($uploadFolder);
+    						}
+    						$filename = str_replace(" ", "-", rand(1, 3000) . $file['name']);
+    						move_uploaded_file($file['tmp_name'], WWW_ROOT . 'img/profile' . DS . $filename);
+    						 //prepare the filename for database entry
+    						$this->request->data['Photo'] = $filename;
+    					}
+    				}
+    			}
         	if(empty($this->request->data['Photo']))
         	{
         		$this->request->data['Photo'] = $userProfile['Photo']; 
         	}
         	
-  			if (!$errCheck)
-  			{
-          
-            if(!isset($this->request->data['fullname'])){
-              $this->request->data['fullname'] = $this->Auth->user('fullname');
-            }
-             $this->loadModel('Users');
-              $status = $this->Users->updateAll(['fullname' => $this->request->data['fullname'], 'group_id' => $this->request->data['group_id'],  'Photo' => $this->request->data['Photo']], ['id' => $this->request->data['user_id']]);
-	            $userProfile = $this->UserProfile->patchEntity($userProfile, $this->request->data);
-	        	if ($this->UserProfile->save($userProfile)) {
-	                $this->Flash->success(__('The user profile has been saved.'));
-	                return $this->redirect(['action' => 'view/', $id]);
-	            } else {
-	                $this->Flash->error(__('The user profile could not be saved. Please, try again.'));
-	            }
-  			}
+    			if (!$errCheck)
+    			{
+            
+              if(!isset($this->request->data['fullname'])){
+                $this->request->data['fullname'] = $this->Auth->user('fullname');
+              }
+              $this->loadModel('Users');
+              $user = $this->Users->find('all')->where(['id' => $this->request->data['user_id']])->first();
+              $user->fullname = $this->request->data['fullname'];
+              $user->group_id = $this->request->data['group_id'];
+              $user->Photo = $this->request->data['Photo'];
+              $user = $this->Users->patchEntity($user, $this->request->data);
+              $status = $this->Users->save($user);
+  	          $userProfile = $this->UserProfile->patchEntity($userProfile, $this->request->data);
+  	        	if ($this->UserProfile->save($userProfile)) {
+  	                $this->Flash->success(__('The user profile has been saved.'));
+  	                return $this->redirect(['action' => 'view/', $id]);
+  	            } else {
+  	                $this->Flash->error(__('The user profile could not be saved. Please, try again.'));
+  	            }
+    			}
         }
         $users = $this->UserProfile->Users->find('list', ['limit' => 200]);
         //Customize
