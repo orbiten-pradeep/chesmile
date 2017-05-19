@@ -19,7 +19,7 @@ class EventsController extends AppController
 	public function beforeFilter(Event $event) 
 	{
 		parent::beforeFilter($event);
-    	$this->Auth->allow('Invitation');
+    	$this->Auth->allow(['Invitation','about','terms','privacy','partnerwith']);
     	$this->set('Photo',$this->Auth->user('Photo'));
 	}
 
@@ -46,7 +46,7 @@ class EventsController extends AppController
     	$this->viewBuilder()->layout('event_home');
     }
 
-    public function career(){
+    public function contact(){
     	$this->viewBuilder()->layout('event_home');
     }
 
