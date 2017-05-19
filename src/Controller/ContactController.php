@@ -18,6 +18,12 @@ use Cake\Event\Event;
 class ContactController extends AppController
 {
 
+    public function beforeFilter(Event $event) 
+    {
+        parent::beforeFilter($event);
+        $this->Auth->allow(['add']);
+    }
+
     /**
      * Index method
      *

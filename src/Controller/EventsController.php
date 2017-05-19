@@ -19,7 +19,7 @@ class EventsController extends AppController
 	public function beforeFilter(Event $event) 
 	{
 		parent::beforeFilter($event);
-    	$this->Auth->allow(['Invitation','about','terms','privacy','partnerwith']);
+    	$this->Auth->allow(['Invitation','about','terms','privacy','partnerwith','contact']);
     	$this->set('Photo',$this->Auth->user('Photo'));
 	}
 
