@@ -324,10 +324,10 @@ background-color: #286090;
 
   <div style="margin-bottom:3px; vertical-align:middle;" class="col-md-12">
     <ul class="social-network social-circle social">
-    <li><a href="#" class="face" title="Facebook"><i class="fa fa-facebook"></i></a></li>
-    <li><a href="#" class="twit" title="Twitter"><i class="fa fa-twitter"></i></a></li>
-    <li><a href="#" class="google" title="Google +"><i class="fa fa-google-plus"></i></a></li>
-    <li><a href="#" class="instagram" title="Instagram"><i class="fa fa-instagram"></i></a></li>
+    <li><a href="https://www.facebook.com/ChennaiSmile-1991922421035914/?ref=bookmarks" class="face" title="Facebook"><i class="fa fa-facebook"></i></a></li>
+    <li><a href="https://twitter.com/chennaismile" class="twit" title="Twitter"><i class="fa fa-twitter"></i></a></li>
+    <li><a href="https://www.instagram.com/chennaismile.digital/" class="google" title="Google +"><i class="fa fa-google-plus"></i></a></li>
+    <li><a href="https://plus.google.com/u/0/117145967013827849541" class="instagram" title="Instagram"><i class="fa fa-instagram"></i></a></li>
     </ul> 
 
   </div>
@@ -336,8 +336,8 @@ background-color: #286090;
       <li><?= $this->Html->link(__('About us'), ['controller' => 'events', 'action' => 'about'], array('class' => 'foot')); ?></li>
       <li><?= $this->Html->link(__('Terms of service'), ['controller' => 'events', 'action' => 'terms'], array('class' => 'foot')); ?></li>
       <li><?= $this->Html->link(__('Privacy Policy'), ['controller' => 'events', 'action' => 'privacy'], array('class' => 'foot')); ?></li>                
-      <li><?= $this->Html->link(__('Partner with us'), ['controller' => 'events', 'action' => 'partnerwith'], array('class' => 'foot')); ?></li>                
-      <li><?= $this->Html->link(__('Career'), ['controller' => 'events', 'action' => 'career'], array('class' => 'foot')); ?></li>                
+      <li><?= $this->Html->link(__('Disclaimer'), ['controller' => 'events', 'action' => 'partnerwith'], array('class' => 'foot')); ?></li>                
+      <li><?= $this->Html->link(__('Contact us'), ['controller' => 'events', 'action' => 'career'], array('class' => 'foot')); ?></li>                
     </ul> 
   </div>
   <p style="" class="copyrights">Copyright © 2017 ChennaiSmile</p><!--End container-->
@@ -460,9 +460,9 @@ background-color: #286090;
     <div class="modal-content">
       <div class="modal-body"> 
           <ul class="list-group">
-            <li class="list-group-item"><a style="color: #337ab7 !important;" href="<?php echo $this->Url->build(array('controller' => 'events', 'action' => 'add'));?>" >Create Event</a></li>
-            <li class="list-group-item"><a style="color: #337ab7 !important;" href="<?php echo $this->Url->build(array('controller' => 'events'));?>#past-events" >Past Event</a></li>
-            <li class="list-group-item"><a style="color: #337ab7 !important;" href="<?php echo $this->Url->build(array('controller' => 'UserProfile', 'action' => 'add'));?>" >My Profile</a></li>
+            <li class="list-group-item"><a href="<?php echo $this->Url->build(array('controller' => 'events', 'action' => 'add'));?>" >Create Event</a></li>
+            <li class="list-group-item"><a href="<?php echo $this->Url->build(array('controller' => 'events'));?>#past-events" >Past Event</a></li>
+            <li class="list-group-item"><a href="<?php echo $this->Url->build(array('controller' => 'UserProfile', 'action' => 'add'));?>" >My Profile</a></li>
           </ul>
       </div> 
     </div><!-- /.modal-content -->

@@ -185,6 +185,12 @@ a.socialIcon:hover, .socialHoverClass {
 
 }
 
+.foot{
+  display: inline !important;
+  color: white !important;
+  font-size: 11px !important;
+}
+
 </style>
 
 
@@ -271,20 +277,27 @@ a.socialIcon:hover, .socialHoverClass {
    
         <div style="margin-bottom:3px; vertical-align:middle;" class="col-md-12">
             <ul class="social-network social-circle social">
-                <li><a href="#" class="face" title="Facebook"><i class="fa fa-facebook"></i></a></li>
-                <li><a href="#" class="twit" title="Twitter"><i class="fa fa-twitter"></i></a></li>
-                <li><a href="#" class="google" title="Google +"><i class="fa fa-google-plus"></i></a></li>
-                <li><a href="#" class="instagram" title="Instagram"><i class="fa fa-instagram"></i></a></li>
+                <li><a href="https://www.facebook.com/ChennaiSmile-1991922421035914/?ref=bookmarks" class="face" title="Facebook"><i class="fa fa-facebook"></i></a></li>
+    <li><a href="https://twitter.com/chennaismile" class="twit" title="Twitter"><i class="fa fa-twitter"></i></a></li>
+    <li><a href="https://www.instagram.com/chennaismile.digital/" class="google" title="Google +"><i class="fa fa-google-plus"></i></a></li>
+    <li><a href="https://plus.google.com/u/0/117145967013827849541" class="instagram" title="Instagram"><i class="fa fa-instagram"></i></a></li>
             </ul> 
+
+        <!--      <li><?= $this->Html->link(__('About us'), ['controller' => 'events', 'action' => 'about'], array('class' => 'foot')); ?></li>
+      <li><?= $this->Html->link(__('Terms of service'), ['controller' => 'events', 'action' => 'terms'], array('class' => 'foot')); ?></li>
+      <li><?= $this->Html->link(__('Privacy Policy'), ['controller' => 'events', 'action' => 'privacy'], array('class' => 'foot')); ?></li>                
+      <li><?= $this->Html->link(__('FAQ'), ['controller' => 'events', 'action' => 'partnerwith'], array('class' => 'foot')); ?></li>                
+      <li><?= $this->Html->link(__('Contact us'), ['controller' => 'events', 'action' => 'career'], array('class' => 'foot')); ?></li>        
+    </ul>  -->
 
   </div>
     <div>
       <ul class="social" style="color:#ffffff;">
-                <li>About Us</li>
-                <li>Terms of Services</li>
-                <li>Privacy Policy</li>                
-                <li>Partner With Us</li>                
-                <li>Career</li>                
+           <li><?= $this->Html->link(__('About us'), ['controller' => 'events', 'action' => 'about'], array('class' => 'foot')); ?></li>
+      <li><?= $this->Html->link(__('Terms of service'), ['controller' => 'events', 'action' => 'terms'], array('class' => 'foot')); ?></li>
+      <li><?= $this->Html->link(__('Privacy Policy'), ['controller' => 'events', 'action' => 'privacy'], array('class' => 'foot')); ?></li>                
+      <li><?= $this->Html->link(__('Disclaimer'), ['controller' => 'events', 'action' => 'partnerwith'], array('class' => 'foot')); ?></li>                
+      <li><?= $this->Html->link(__('Contact us'), ['controller' => 'events', 'action' => 'career'], array('class' => 'foot')); ?></li>      
             </ul> 
     </div>
     <p style="" class="copyrights">Copyright © 2017 ChennaiSmile</p><!--End container-->
