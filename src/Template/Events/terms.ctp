@@ -42,7 +42,7 @@ body{
        <div class="about">
       <!-- <div class="jumbotron text-center"> -->
       <h2> Terms Of Service</h2>
-      <p style="line-height: 40px;">
+      <p style="line-height: 40px;text-align: justify;">
 Please read the following terms and conditions very carefully as your use of services is subject to your acceptance of and compliance with the following terms and conditions
 By subscribing to or using any of our services you agree that you have read, understood and are bound by the Terms. In these terms “You” “Client” “user” means the end user who is using the website. “We” “Us” “ our” shall refer to the ChennaiSmile and it’s team.
 It is in the discretion of ChennaiSmile to alter, modify and update the terms and conditions. The users are advised to check the terms and conditions regularly to be abreast of the latest changes. 

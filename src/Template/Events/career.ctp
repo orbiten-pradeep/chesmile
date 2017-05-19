@@ -10,7 +10,7 @@
     background-color:  #ffffff;
     box-shadow: 0 1px 3px 0 rgba(0, 0, 0, 0.1);
     border: 1px solid #ccc;
-    padding-bottom: 190px;
+    padding-bottom: 230px;
     /*font: bold 14px sans-serif;*/
    /* text-align: center;*/
 }
@@ -73,6 +73,7 @@ body{
                             <label for="comments">Comments</label>
                             <textarea class="form-control"></textarea>
                           </div>
+                        `<button class="btn btn-primary pull-right">Send</button>
                         </form>
                     </div>
  
