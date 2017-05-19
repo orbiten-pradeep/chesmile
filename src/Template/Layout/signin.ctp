@@ -297,7 +297,7 @@ a.socialIcon:hover, .socialHoverClass {
       <li><?= $this->Html->link(__('Terms of service'), ['controller' => 'events', 'action' => 'terms'], array('class' => 'foot')); ?></li>
       <li><?= $this->Html->link(__('Privacy Policy'), ['controller' => 'events', 'action' => 'privacy'], array('class' => 'foot')); ?></li>                
       <li><?= $this->Html->link(__('Disclaimer'), ['controller' => 'events', 'action' => 'partnerwith'], array('class' => 'foot')); ?></li>                
-      <li><?= $this->Html->link(__('Contact us'), ['controller' => 'events', 'action' => 'career'], array('class' => 'foot')); ?></li>      
+      <li><?= $this->Html->link(__('Contact us'), ['controller' => 'events', 'action' => 'contact'], array('class' => 'foot')); ?></li>      
             </ul> 
     </div>
     <p style="" class="copyrights">Copyright © 2017 ChennaiSmile</p><!--End container-->

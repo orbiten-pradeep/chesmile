@@ -1934,7 +1934,7 @@ body{
                 <li>Terms of Services</li>
                 <li>Privacy Policy</li>                
                 <li>Partner With Us</li>                
-                <li>Career</li>                
+                <li>Contact</li>                
             </ul> 
     </div>
     <p style="" class="copyrights">Copyright © 2017 ChennaiSmile</p><!--End container-->

@@ -60,10 +60,10 @@ body{
                  
                     </div>
                     <div class="col-sm-8" style="text-align: left;">
-                        <?= $this->Form->create('',,array('url' => ['controller' => 'Contact','action' => 'add'])) ?>
+                        <?= $this->Form->create('',array('url' => ['controller' => 'Contact','action' => 'add'])) ?>
                           <div class="col-sm-6 form-group">
                             <label for="name">Name</label>
-                            <input type="text" class="form-control" id="name" placeholder="Enter name" name="email">
+                            <input type="text" class="form-control" id="Name" placeholder="Enter name" name="Name">
                           </div>
                           <div class="col-sm-6 form-group">
                             <label for="email">Email:</label>
@@ -71,7 +71,7 @@ body{
                           </div>
                           <div class="form-group">
                             <label for="comments">Comments</label>
-                            <textarea class="form-control"></textarea>
+                            <textarea class="form-control" name ="comments"></textarea>
                           </div>
                         `<button class="btn btn-primary pull-right">Send</button>
                         <?= $this->Form->end() ?>
