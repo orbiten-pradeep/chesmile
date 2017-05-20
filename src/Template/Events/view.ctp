@@ -237,6 +237,12 @@ address {
 .has-error .form-control{
     border-color: red;
 }
+a {
+    color: #337ab7;
+}
+.font-col{
+    color:white !important;
+}
 </style>
 
 
@@ -490,6 +496,9 @@ address {
 <ul class="side-nav">
 <?php if($u_id == $event->user_id){ ?>
         <li><?= $this->Form->postLink(__('Delete Event'), ['action' => 'delete', $event->id], ['confirm' => __('Are you sure you want to delete # {0}?', $event->id)]) ?> </li>
+        <?php } ?>
+        <?php if($u_id == $event->user_id){ ?>
+        <li><?= $this->Form->postLink(__('Edit Event'), ['action' => 'edit', $event->id], ['confirm' => __('Are you sure you want to edit # {0}?', $event->id)]) ?> </li>
         <?php } ?>
         </ul>
 </nav> 

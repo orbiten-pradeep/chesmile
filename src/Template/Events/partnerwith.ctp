@@ -26,6 +26,10 @@ body{
 .cover-pic {
     height: 200px !important;
     }
+
+.navbar{
+  margin-bottom: 0px !important;
+}
 </style>
 
       <div class="container-fluid">
@@ -42,7 +46,7 @@ body{
        <div class="about">
       <!-- <div class="jumbotron text-center"> -->
       <h2> Disclaimer</h2>
-      <p style="line-height: 40px;text-align: justify;"> The information contained in this website is for general information purposes only.
+      <p style="line-height: 40px;"> The information contained in this website is for general information purposes only.
 The information is provided by Orbiten Technologies and while we endeavor to keep the information up to date and correct, we make no representations or warranties of any kind, express or implied, about the completeness, accuracy, reliability, suitability or availability with respect to the website or the information, products, services, or related graphics contained in the website for any purpose. 
 Any reliance you place on such information is therefore strictly at your own risk.
 We will not be liable for any loss or damage occurring due to cancellation of the event or loss of data or profits arise out of, or in connection with, the use of this website.

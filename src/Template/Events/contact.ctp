@@ -27,6 +27,9 @@ body{
 .cover-pic {
     height: 200px !important;
     }
+.navbar{
+  margin-bottom: 0px !important;
+}
 </style>
 
       <div class="container-fluid">
@@ -69,7 +72,7 @@ body{
                             <label for="email">Email:</label>
                             <input type="email" class="form-control" id="email" placeholder="Enter email" name="email">
                           </div>
-                          <div class="form-group">
+                          <div class="col-sm-12 form-group">
                             <label for="comments">Comments</label>
                             <textarea class="form-control" name ="comments"></textarea>
                           </div>

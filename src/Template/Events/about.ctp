@@ -15,7 +15,7 @@
 }
 
 .wrapper{
-  padding:65px;
+  padding:75px;
   height:auto;
 }
 body{
@@ -26,6 +26,10 @@ body{
 .cover-pic {
     height: 200px !important;
     }
+
+.navbar{
+  margin-bottom: 0px !important;
+}
 </style>
 
       <div class="container-fluid">
@@ -42,7 +46,7 @@ body{
        <div class="about">
       <!-- <div class="jumbotron text-center"> -->
       <h2> About Us</h2>
-      <p style="line-height: 40px;text-align: justify;"> ChennaiSmile is an eventful platform that brings you the most happening and popular upcoming events in Chennai.
+      <p style="line-height: 40px;"> ChennaiSmile is an eventful platform that brings you the most happening and popular upcoming events in Chennai.
 
   Hundreds of events happen in our city, and it’s difficult to find them out. From exhibitions to stand-up acts, conferences to workshops, live performances to music festivals, food trails to night life, and many more happening in Chennai. We will help you to experience the best of the city.
 

@@ -26,6 +26,10 @@ body{
 .cover-pic {
     height: 200px !important;
     }
+
+.navbar{
+  margin-bottom: 0px !important;
+}
 </style>
 
       <div class="container-fluid">
