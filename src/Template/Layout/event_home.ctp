@@ -326,8 +326,8 @@ background-color: #286090;
     <ul class="social-network social-circle social">
     <li><a href="https://www.facebook.com/ChennaiSmile-1991922421035914/?ref=bookmarks" class="face" title="Facebook"><i class="fa fa-facebook"></i></a></li>
     <li><a href="https://twitter.com/chennaismile" class="twit" title="Twitter"><i class="fa fa-twitter"></i></a></li>
-    <li><a href="https://www.instagram.com/chennaismile.digital/" class="google" title="Google +"><i class="fa fa-google-plus"></i></a></li>
-    <li><a href="https://plus.google.com/u/0/117145967013827849541" class="instagram" title="Instagram"><i class="fa fa-instagram"></i></a></li>
+    <li><a href="https://plus.google.com/u/0/117145967013827849541" class="google" title="Google +"><i class="fa fa-google-plus"></i></a></li>
+    <li><a href="https://www.instagram.com/chennaismile.digital/" class="instagram" title="Instagram"><i class="fa fa-instagram"></i></a></li>
     </ul> 
 
   </div>
