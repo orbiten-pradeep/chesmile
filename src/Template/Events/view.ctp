@@ -276,7 +276,7 @@ a {
         <div class="row">
             <div class="col-md-8 col-sm-8 lft_container event-details">
                 <h2><img src="<?=$organizerLogoImageUrl?>" class="img-thumbnail profile-img organizer-logo"><?= h($event->OrganizersName) ?></h2>
-                <h3 style="font-size: 14px;"><div id="eventDescription" style="height:100px; overflow: hidden; margin-top: 0px;text-align: justify;line-height: 20px;"><?=  $this->Text->autoParagraph(h($event->descriptioin));?></div></h3>
+                <h3 style="font-size: 14px;"><div id="eventDescription" style="height:80px; overflow: hidden; margin-top: 0px;text-align: justify;line-height: 20px;"><?=  $this->Text->autoParagraph(h($event->descriptioin));?></div></h3>
                 <p class="margin25" style="font-size: 17px;"><!-- <span class="glyphicon glyphicon-calendar calender_txt" aria-hidden="true"></span> -->
                 <?php echo $this->Html->image('cal.png')?><span style="margin-left: 10px;"><?= date_format($event->date, "j M Y") ?></span></p>
                 <p style="font-size: 17px;">
@@ -559,14 +559,14 @@ a {
      
             <div class="form-group">
             <label> Distance </label>
-         <?php $km = ['2 KM' => '2 KM', '5 KM' => '5 KM'];
+         <?php $km = ['3 KM' => '3 KM', '5 KM' => '5 KM'];
            echo $this->Form->select('KM', $km, array('default' => '2 KM','class' => 'form-control heigh', 'required' => true));?>
            </div>
 
            <div class="form-group">
            <label> Select your tshirt size </label>
-           <?php $tshirt = ['S' => 'S', 'M' => 'M', 'L' => 'L', 'XL' => 'XL', 'XXL' => 'XXL', 'XXXL' => 'XXXL'];
-           echo $this->Form->select('TSHIRT', $tshirt, array('default' => 'S', 'class' => 'form-control heigh', 'required' => true));?>
+           <?php $tshirt = ['XS' => 'XS' ,'S' => 'S', 'M' => 'M', 'L' => 'L', 'XL' => 'XL', 'XXL' => 'XXL', 'XXXL' => 'XXXL'];
+           echo $this->Form->select('TSHIRT', $tshirt, array('default' => 'XS', 'class' => 'form-control heigh', 'required' => true));?>
            </div>
 
         <div class="">
@@ -589,7 +589,10 @@ a {
                           <li style="list-style-type: disc;"> Please carry a proof of the confirmation mail on the marathon day</li>
                           <!-- <li><a href="/read-more/"><u>Read more</u></a></li> -->
                       </ul>
+                      <p class="lead" style="font-size: 20px;">Participant's give-away</p>
+                      <?=$this->html->image('participant-giveaway.png',array('class' => 'img-responsive'))?>
                       <!-- <p><a href="/new-customer/" class="btn btn-info btn-block">Yes please, register now!</a></p> -->
+
                   </div>
               </div>
           </div>
