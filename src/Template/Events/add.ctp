@@ -249,9 +249,7 @@ input{
       .cropit-preview-image-container {
         cursor: move;
       }
-#display{
-    display: none;
-}
+
 .nav-tabs > li.active > a{
   background-color: #337ab7 !important;
   color: white !important;
@@ -480,7 +478,7 @@ input{
                 <?=$this->Form->input('display',['type' => 'file','accept' => 'image/*','class' => 'cropit-image-input']);?>
                 [Size: 280px * 185px]
                 </label>
-
+            </div>
                       <!-- <input type="file" id="imgsel" class="cropit-image-input" accept="images/*"> -->
                       <!-- <div class="cropit-preview" id="display-preview" style="display: none;"></div>
                       <div class="image-size-label">
@@ -488,7 +486,7 @@ input{
                       <input id="display-zoom" type="range" class="cropit-image-zoom-input" style="display: none;"> -->
           
                 <!-- </div> -->
-            </div>
+            
 
              <div class="form-group">
                 <!-- <div class="image-editor"> -->
