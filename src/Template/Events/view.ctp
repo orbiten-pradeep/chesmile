@@ -252,7 +252,7 @@ a {
         <div class="container-fluid heading_txt" style="background: linear-gradient(to bottom, rgba(0, 0, 0, 0) 0%, rgba(0, 0, 0, 0.63) 50%);position: absolute;bottom: 0;z-index: 1;width: 100%;box-sizing: border-box;">
             <div class="row">
                 <div class="col-lg-12">
-                    <button class="btn btn-tag"><?= $event->has('category') ? $this->Html->link($event->category->name, ['controller' => 'Categories', 'action' => 'view', $event->category->id]) : '' ?></button> <?php echo $this->Html->image('card/'.$event->category->card, array('width' => '65px', 'height' => '65px', 'class' => 'marg-card' ,'alt'=>'Card')); ?>
+                    <button class="btn btn-tag"> <?= h($event->category->name) ?></button> <?php echo $this->Html->image('card/'.$event->category->card, array('width' => '65px', 'height' => '65px', 'class' => 'marg-card' ,'alt'=>'Card')); ?>
                     <h1 class="tagline" style="color: #FFFFFF"><?= h($event->title) ?></h1>
                 </div>
             </div>
@@ -276,7 +276,7 @@ a {
         <div class="row">
             <div class="col-md-8 col-sm-8 lft_container event-details">
                 <h2><img src="<?=$organizerLogoImageUrl?>" class="img-thumbnail profile-img organizer-logo"><?= h($event->OrganizersName) ?></h2>
-                <h3 style="font-size: 14px;"><div id="eventDescription" style="height:90px; overflow: hidden; margin-top: 0px;text-align: justify;line-height: 20px;"><?=  $this->Text->autoParagraph(h($event->descriptioin));?></div></h3>
+                <h3 style="font-size: 14px;"><div id="eventDescription" style="height:100px; overflow: hidden; margin-top: 0px;text-align: justify;line-height: 20px;"><?=  $this->Text->autoParagraph(h($event->descriptioin));?></div></h3>
                 <p class="margin25" style="font-size: 17px;"><!-- <span class="glyphicon glyphicon-calendar calender_txt" aria-hidden="true"></span> -->
                 <?php echo $this->Html->image('cal.png')?><span style="margin-left: 10px;"><?= date_format($event->date, "j M Y") ?></span></p>
                 <p style="font-size: 17px;">
@@ -308,7 +308,7 @@ a {
                         <?php echo empty(!$address->areaname) ? $address->areaname : ''; ?>
                     </p>
                     <p><?php echo $address->city; ?></p>
-                    <p>contact: <?php echo h($event->contact_number).", ".h($event->mobile_number) ?></p> 
+                    <p>Contact: <?php echo h($event->contact_number).", ".h($event->mobile_number) ?></p> 
                 </address>
             </div>
         </div>
@@ -511,7 +511,7 @@ a {
       <div class="modal-content">
           <div class="modal-header">
               <button type="button" class="close" data-dismiss="modal"><span aria-hidden="true">×</span><span class="sr-only">Close</span></button>
-              <h4 class="modal-title" id="myModalLabel">Register online</h4>
+              <h4 class="modal-title" id="myModalLabel">Online Registeration</h4>
           </div>
           <div class="modal-body">
               <div class="row">
