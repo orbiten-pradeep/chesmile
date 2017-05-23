@@ -526,7 +526,7 @@ class EventsController extends AppController
 			 //    $email->send($message);
 			    
             	////////////////////////////////////////////////////////////////////
-                $this->Flash->success(__('The event has been saved.'));
+                $this->Flash->success(__('The event has been saved, kindly wait for an approval mail from the admin.'));
 
                 return $this->redirect(['action' => 'index']);
             } else 

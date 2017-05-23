@@ -86,7 +86,7 @@ class ContactController extends AppController
                 $message .= "<br/>Thanks, <br/>Support Team";
                 $email->send($message);
 
-                $this->Flash->success(__('Thank you for contact US. We will catch you soon.'));
+                $this->Flash->success(__('Thank you for contacting us. We will get to you soon.'));
                 return $this->redirect(['controller' => 'Events', 'action' => 'index']);
                 //return $this->redirect(['action' => 'index']);
             } else {
