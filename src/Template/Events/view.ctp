@@ -276,7 +276,7 @@ a {
         <div class="row">
             <div class="col-md-8 col-sm-8 lft_container event-details">
                 <h2><img src="<?=$organizerLogoImageUrl?>" class="img-thumbnail profile-img organizer-logo"><?= h($event->OrganizersName) ?></h2>
-                <h3 style="font-size: 14px;"><div id="eventDescription" style="height:80px; overflow: hidden; margin-top: 0px;text-align: justify;line-height: 20px;"><?=  $this->Text->autoParagraph(h($event->descriptioin));?></div></h3>
+                <h3 style="font-size: 14px;"><div id="eventDescription" style="height:90px; overflow: hidden; margin-top: 0px;text-align: justify;line-height: 20px;"><?=  $this->Text->autoParagraph(h($event->descriptioin));?></div></h3>
                 <p class="margin25" style="font-size: 17px;"><!-- <span class="glyphicon glyphicon-calendar calender_txt" aria-hidden="true"></span> -->
                 <?php echo $this->Html->image('cal.png')?><span style="margin-left: 10px;"><?= date_format($event->date, "j M Y") ?></span></p>
                 <p style="font-size: 17px;">
