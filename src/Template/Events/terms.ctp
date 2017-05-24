@@ -30,6 +30,31 @@ body{
 .navbar{
   margin-bottom: 0px !important;
 }
+
+ .mobile-footer{   
+  display: none !important; 
+} 
+
+@media (max-width: 414px){
+  .wrapper{
+  padding:15px;
+  height:auto;
+}
+.footer {
+    position: absolute !important;
+    background: #4abac5;
+    text-align: center;
+    left: 0;
+    right: 0;
+    bottom: auto !important;
+    }
+}
+@media (max-width: 767px){
+
+.main-footer {
+    margin-bottom: 0px !important;
+}
+}
 </style>
 
       <div class="container-fluid">

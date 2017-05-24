@@ -2,6 +2,8 @@
 use Cake\Routing\Router;
 use Cake\I18n\Time;
 ?>
+
+
 <?php
 $bgImage = $event->banner;
 if(!empty($bgImage)){
@@ -81,7 +83,7 @@ a {
     margin-bottom: 5px;
 }
 .address-info {
-    margin: 10px 10px 15px 10px !important;
+    margin: 10px 10px -5px 10px !important;
 }
 address {
     margin-bottom: 0 !important;
@@ -219,13 +221,38 @@ address {
     margin-top: -45px;
 }
 }
+
+.help-block {
+    display: block;
+    margin-top: 5px;
+    margin-bottom: 10px;
+    color: red;
+    font-style: normal;
+    font-size: 11px;
+    }
+.error.help-block{
+    color: red !important;
+    font-weight: initial;
+}
+.has-error .form-control{
+    border-color: red;
+}
+a {
+    color: #337ab7;
+}
+.font-col{
+    color:white !important;
+}
 </style>
+
+
+
 <div class="cover-picdiv">
 <div class="cover-pic img-responsive user-pic">
         <div class="container-fluid heading_txt" style="background: linear-gradient(to bottom, rgba(0, 0, 0, 0) 0%, rgba(0, 0, 0, 0.63) 50%);position: absolute;bottom: 0;z-index: 1;width: 100%;box-sizing: border-box;">
             <div class="row">
                 <div class="col-lg-12">
-                    <button class="btn btn-tag"><?= $event->has('category') ? $this->Html->link($event->category->name, ['controller' => 'Categories', 'action' => 'view', $event->category->id]) : '' ?></button> <?php echo $this->Html->image('card/'.$event->category->card, array('width' => '65px', 'height' => '65px', 'class' => 'marg-card' ,'alt'=>'Card')); ?>
+                    <button class="btn btn-tag"> <?= h($event->category->name) ?></button> <?php echo $this->Html->image('card/'.$event->category->card, array('width' => '65px', 'height' => '65px', 'class' => 'marg-card' ,'alt'=>'Card')); ?>
                     <h1 class="tagline" style="color: #FFFFFF"><?= h($event->title) ?></h1>
                 </div>
             </div>
@@ -257,9 +284,9 @@ address {
                 </p>
                 <div class="btn-reg">
                 <?php if($event->register_online == 1) { ?>
-                <button class="btn btn-primary" style="float: right; background-color: #4ABAC5;border-color: #e2e2e2;" data-toggle="modal" href="#Register-modal">Register Online</button>
+                <button class="btn btn-primary" style="float: right; background-color: #4ABAC5;border-color: #e2e2e2;" data-toggle="modal" href="#Register-modal">Online Registration</button>
                 <?php } ?>
-            <button class="btn btn-primary view-btn" style="float: right;margin-right: 10px;background-color: #4ABAC5;border-color: #e2e2e2;" data-toggle="modal" href="#view-more">View more</button>
+            <button class="btn btn-primary view-btn" style="float: right;margin-right: 10px;background-color: #4ABAC5;border-color: #e2e2e2;" data-toggle="modal" href="#view-more">Event Details</button>
              </div>
           
             </div>
@@ -281,7 +308,7 @@ address {
                         <?php echo empty(!$address->areaname) ? $address->areaname : ''; ?>
                     </p>
                     <p><?php echo $address->city; ?></p>
-                    <p><?php echo h($event->contact_number).", ".h($event->mobile_number) ?></p> 
+                    <p>Contact: <?php echo h($event->contact_number).", ".h($event->mobile_number) ?></p> 
                 </address>
             </div>
         </div>
@@ -434,7 +461,8 @@ address {
                                             </div>
                                           </div>
                                         </div>  
-                                         <div class="col-sm-4 lft_container">
+
+            <div class="col-sm-4 lft_container">
                         <!-- <div class="invite_email">
                               <div class="form-group">
                                 <input type="email" class="form-control" id="invite" placeholder="Email address">
@@ -458,16 +486,24 @@ address {
                         </div> 
                     </div> -->
 
-            </div>
-
-               
+            </div>      
                     </div>
 
             </div>
-    </div> 
-
-
-    <div class="container">
+    </div>   
+ 
+<!-- <nav class="large-3 medium-4 columns" id="actions-sidebar">
+<ul class="side-nav">
+<?php if($u_id == $event->user_id){ ?>
+        <li><?= $this->Form->postLink(__('Delete Event'), ['action' => 'delete', $event->id], ['confirm' => __('Are you sure you want to delete # {0}?', $event->id)]) ?> </li>
+        <?php } ?>
+        <?php if($u_id == $event->user_id){ ?>
+        <li><?= $this->Form->postLink(__('Edit Event'), ['action' => 'edit', $event->id], ['confirm' => __('Are you sure you want to edit # {0}?', $event->id)]) ?> </li>
+        <?php } ?>
+        </ul>
+</nav> 
+ -->
+          <div class="container">
 
           <!-- <link href="//maxcdn.bootstrapcdn.com/font-awesome/4.1.0/css/font-awesome.min.css" rel="stylesheet"> -->
     <div class="modal fade" id="Register-modal" role="dialog">
@@ -475,14 +511,14 @@ address {
       <div class="modal-content">
           <div class="modal-header">
               <button type="button" class="close" data-dismiss="modal"><span aria-hidden="true">×</span><span class="sr-only">Close</span></button>
-              <h4 class="modal-title" id="myModalLabel">Register online</h4>
+              <h4 class="modal-title" id="myModalLabel">Online Registration</h4>
           </div>
           <div class="modal-body">
               <div class="row">
                   <div class="col-xs-12 col-lg-7">
                       <div class="card">
         
-         <?= $this->Form->create('$marathon', array('url' => ['controller' => 'Marathon','action' => 'add', $event->id])) ?>
+         <?= $this->Form->create('$marathon',array('url' => ['controller' => 'Marathon','action' => 'add', $event->id])) ?>
             <div class="form-group float-label-control">
              
              <label for="">Firstname</label>
@@ -498,14 +534,14 @@ address {
 
         <div class="form-group">
                 <label>
-           <?= $this->Form->input('date', array('type' => 'text','class' => 'form-control date','placeholder' => 'Date of birth','label' => false));?>
-           </label>
-           <span id="person_type" style="color: #00FF00;"></span>
+           <?= $this->Form->input('date', array('type' => 'text','class' => 'form-control date','placeholder' => 'Date of birth','label' => false,'required' => true));?>
+           </label><br>
+           <span id="person_type" style="color: #4abac5;"></span>
            </div>
 
        <div class="form-group">
             <?php $sex = ['Male' => 'Male', 'Female' => 'Female'];
-             echo $this->Form->select('sex', $sex, array('empty' => '(Select Gender)', 'class' => 'form-control heigh'));?>
+             echo $this->Form->select('sex', $sex, array('empty' => '(Select Gender)', 'class' => 'form-control heigh', 'required' => true));?>
         </div>
             
             <div class="form-group float-label-control">
@@ -523,14 +559,14 @@ address {
      
             <div class="form-group">
             <label> Distance </label>
-         <?php $km = ['2 KM' => '2 KM', '5 KM' => '5 KM'];
-           echo $this->Form->select('KM', $km, array('default' => '2 KM','class' => 'form-control heigh'));?>
+         <?php $km = ['3 KM' => '3 KM', '5 KM' => '5 KM'];
+           echo $this->Form->select('KM', $km, array('default' => '2 KM','class' => 'form-control heigh', 'required' => true));?>
            </div>
 
            <div class="form-group">
            <label> Select your tshirt size </label>
-           <?php $tshirt = ['S' => 'S', 'M' => 'M', 'L' => 'L', 'XL' => 'XL', 'XXL' => 'XXL', 'XXXL' => 'XXXL'];
-           echo $this->Form->select('TSHIRT', $tshirt, array('default' => 'S', 'class' => 'form-control heigh'));?>
+           <?php $tshirt = ['XS' => 'XS' ,'S' => 'S', 'M' => 'M', 'L' => 'L', 'XL' => 'XL', 'XXL' => 'XXL', 'XXXL' => 'XXXL'];
+           echo $this->Form->select('TSHIRT', $tshirt, array('default' => 'XS', 'class' => 'form-control heigh', 'required' => true));?>
            </div>
 
         <div class="">
@@ -543,26 +579,144 @@ address {
     <?= $this->Form->end() ?>
                       </div>
                   </div>
-                  <div class="col-xs-9 col-lg-5">
-                      <p class="lead">Register now for <span class="text-success">FREE</span></p>
-                      <ul class="list-unstyled" style="line-height: 2">
-                          <li><span class="fa fa-check text-success"></span> See all your orders</li>
-                          <li><span class="fa fa-check text-success"></span> Fast re-order</li>
-                          <li><span class="fa fa-check text-success"></span> Save your favorites</li>
-                          <li><span class="fa fa-check text-success"></span> Fast checkout</li>
-                          <li><span class="fa fa-check text-success"></span> Get a gift <small>(only new customers)</small></li>
-                          <li><a href="/read-more/"><u>Read more</u></a></li>
+                  <div class="col-xs-12 col-lg-5">
+                      <p class="lead">Note</p>
+                      <ul class="list-unstyled" style="line-height: 2; font-size: 13px;">
+                          <li style="list-style-type: disc;"> All the fields are mandatory to register online</li>
+                         <!--  <li style="list-style-type: disc;"> After registration is done, you will be receiving payment link via PayZapp HDFC</li>
+                          <li style="list-style-type: disc;"> Click on the link to make the payment </li> -->
+                          <li style="list-style-type: disc;"> Once payment is done, you will receive an acknowledgement mail </li>
+                          <li style="list-style-type: disc;"> Please carry a proof of the confirmation mail on the marathon day</li>
+                          <!-- <li><a href="/read-more/"><u>Read more</u></a></li> -->
                       </ul>
-                      <p><a href="/new-customer/" class="btn btn-info btn-block">Yes please, register now!</a></p>
+                      <p class="lead" style="font-size: 20px;">Participant's give-away</p>
+                      <?=$this->html->image('participant-giveaway.png',array('class' => 'img-responsive'))?>
+                      <!-- <p><a href="/new-customer/" class="btn btn-info btn-block">Yes please, register now!</a></p> -->
+
                   </div>
               </div>
           </div>
       </div>
   </div>
-  </div>
+            
+
+  <!-- <div class="modal fade" id="Register-modal" role="dialog">
+    <div class="modal-dialog">
+    
+      
+      <div class="modal-content card">
+        <div class="row">
+              
+            </div>
+        <div class="modal-header" style="border-bottom: none;">
+          <button type="button" class="close" data-dismiss="modal">&times;</button>
+          <h4 class="modal-title">Register your Details.</h4>
+        </div>
+        <div class="modal-body">
+          <?= $this->Form->create('', array('id' => 'forgotpassform', 'url' => ['action' => 'forgetpassword'])) ?>
+
+           <div class="col-xs-9 col-sm-9 col-md-9 col-lg-10">
+            <div class="form-group float-label-control">
+             
+             <label for="">Firstname</label>
+             <?= $this->Form->input('Firstname', array('div' => false,'id' => 'email', 'class' => 'form-control form-element text','label' => false,'placeholder' => 'Enter your firstname', 'required' => true)) ?>
+            </div>
+        </div>
+
+        <div class="col-xs-9 col-sm-9 col-md-9 col-lg-10">
+            <div class="form-group float-label-control">
+             
+             <label for="">Lastname</label>
+             <?= $this->Form->input('Lastname', array('div' => false,'id' => 'email', 'class' => 'form-control form-element text','label' => false,'placeholder' => 'Enter your lastname', 'required' => true)) ?>
+            </div>
+        </div>
+
+        <div class="form-group">
+                <label>
+           <?= $this->Form->input('date', array('type' => 'text','class' => 'form-control date','placeholder' => 'Date','label' => false));?>
+           </label>
+           <span id="person_type" style="color: #00FF00;"></span>
+           </div>
+
+        <div class="col-xs-9 col-sm-9 col-md-9 col-lg-10">  
+             <label>Sex</label>
+             <ul>
+              <li  style="list-style:none;">
+                <input type="radio" name="custom_type" value="public" />
+                Male
+                <input type="radio" name="custom_type" 
+                value="private" id="custom_venuetype_private" />
+                Female
+              </li>
+            </ul>
+        </div>
+
+        <div class="col-xs-9 col-sm-9 col-md-9 col-lg-10">
+            <div class="form-group float-label-control">
+             
+             <label for="">Email</label>
+             <?= $this->Form->input('Email', array('div' => false,'id' => 'email', 'class' => 'form-control form-element text','label' => false,'placeholder' => 'Enter your email address', 'required' => true)) ?>
+            </div>
+        </div>
+
+        <div class="col-xs-9 col-sm-9 col-md-9 col-lg-10">
+            <div class="form-group float-label-control">
+             <label for="">Mobile number</label>
+             <?= $this->Form->input('Mobilenumber', array('div' => false,'id' => 'email', 'class' => 'form-control form-element text','label' => false,'placeholder' => 'Enter your mobile number', 'required' => true)) ?>
+            </div>
+        </div>
+
+         <div class="col-xs-9 col-sm-9 col-md-9 col-lg-10"> 
+             <label>KMs</label>
+             <ul>
+              <li  style="list-style:none;">
+                <input type="radio" name="custom_type" 
+                value="private" id="custom_venuetype_private" checked="checked"/>
+                2 KM
+                 <input type="radio" name="custom_type" 
+                value="private" id="custom_venuetype_private" />
+                5 KM
+              </li>
+            </ul>
+            </div>
+      
+        <div class="col-xs-9 col-sm-9 col-md-9 col-lg-10">
+        <label>Tshirt size</label>
+            <div class="form-group float-label-control">
+            
+            <select>
+              <option value="volvo">S</option>
+              <option value="saab">M</option>
+              <option value="opel">L</option>
+              <option value="audi">XL</option>
+              <option value="audi">XXL</option>
+              <option value="audi">XXXL</option>
+            </select>
+            </div>
+        </div>
 
 
-   <div class="container">
+        <div class="col-xs-9 col-sm-9 col-md-9 col-lg-10">
+          <div class="form-group text-center">
+          <?= $this->Form->submit(__('Register'), array('id' => 'Login', 'class' => 'btn btn-primary btn-lg cs-signup-button')) ?>
+
+          </div>
+        </div>
+  
+    <?= $this->Form->end() ?>
+
+        </div>
+        <div class="modal-footer" style="border-top: none;">
+         
+        </div> 
+      </div>
+      
+    </div>
+  </div> -->
+  
+</div>
+
+       <div class="container">
   <!-- Trigger the modal with a button -->
  <!--  <button type="button" class="btn btn-info btn-lg" id="alertbox">Click here</button> -->
 
@@ -577,7 +731,8 @@ address {
           <h4 class="modal-title">Event Description</h4>
         </div>
         <div class="modal-body">
-          <?=  $this->Text->autoParagraph(h($event->descriptioin));?>
+        <?=  $this->Text->autoParagraph(h($event->descriptioin));?>
+          <?=  $this->Text->autoParagraph(h($event->descriptioin_more));?>
 
         </div>
         <div class="modal-footer" style="border-top: none;">
@@ -589,19 +744,20 @@ address {
   </div>
   
 </div>
-
-
-     <script src="//code.jquery.com/jquery-1.9.1.js"></script>
+        <script src="//code.jquery.com/jquery-1.9.1.js"></script>
 
 <!-- <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.1.1/jquery.min.js"></script> -->
   <script src="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/js/bootstrap.min.js"></script>
+
+   <?php echo $this->Html->script(['jquery']); ?>
+<?php echo $this->Html->script(['jquery.validate.min']); ?>
 
 <script type="text/javascript">
 
 
 $(document).ready(function(){
     var event_id = '<?=$event->id;?>';
-    if(event_id==123){
+    if(event_id==125){
         if($(document).width() < 400){
             console.log("mobile");
             $(".cover-picdiv").css('height', '200px');
@@ -730,10 +886,131 @@ $( function() {
         },1000);
     });
 })(jQuery);
+
+$(".marathon" ).validate( {
+    rules: {
+      firstname: "required",
+      lastname: "required",      
+      email: {
+        required: true,
+        email: true
+      },
+      mobile_number: {
+        required: true,
+        minlength: 10
+      },
+      password: {
+        required: true,
+        minlength: 6
+      },
+      confirm_password: {
+        required: true,
+        minlength: 6,
+        equalTo: "#new_password"
+      }
+    },
+    messages: {
+      firstname: "Please enter your Firstname",
+      lastname: "Please enter your Lastname",     
+      email: { 
+        required: "Please enter a valid email address"
+      },
+       mobile_number: {
+        required: "Please enter your mobile number",
+        minlength: "Please enter atleast 10 digits"
+      },
+      password: {
+        required: "Please provide a password",
+        minlength: "Your password must be at least 6 characters long"
+      },
+      confirm_password: {
+        required: "Please provide a confirm password",
+        minlength: "Your password must be at least 6 characters long",
+        equalTo: "Please enter the same password as above"
+      }
+    },
+    errorElement: "em",
+    errorPlacement: function ( error, element ) {
+      // Add the `help-block` class to the error element
+      error.addClass( "help-block" );
+
+      if ( element.prop( "type" ) === "checkbox" ) {
+        error.insertAfter( element.parent( "label" ) );
+      } else {
+        error.insertAfter( element );
+      }
+    },
+    highlight: function ( element, errorClass, validClass ) {
+      $( element ).parents( ".input" ).addClass( "has-error" ).removeClass( "has-success" );
+    },
+    unhighlight: function (element, errorClass, validClass) {
+      $( element ).parents( ".input" ).addClass( "has-success" ).removeClass( "has-error" );
+    }
+  });
 </script>
 
+<script type="text/javascript">
+    $("#createEvent").submit(function(event){
+        var status =true ;
+        if ($('#firstname').val() == '') {
+            status = false;
+           $("#firstname_error").text("please enter your title");
+        }else{
+            $("#firstname_error").text("");
+        }
 
+        if ($('#lastname').val() == '') {
+            status = false;
+           $("#lastname_error").text("please enter your Contact Number");
+        }else{
+            $("#lastname_error").text("");
+        } 
 
+        if($("#date").val() ==''){
+            status = false;
+            $("#date_error").text("please enter a description with minimum 120 characters");
+        }else{
+            $("#date_error").text("");
+        }
+
+        if($("sex").val() == ''){
+            status = false;
+            $("sex_error").text("please type landmark");
+        }else{
+            $("sex_error").text("");
+        }
+
+        if($("#email").val() == ''){
+            status = false;
+            $("#email_error").text("please Select event date");
+        }else{
+            $("#email_error").text("");
+        }
+
+        if($("#mobile-number").val() == ''){
+            status = false;
+            $("#mobile-number_error").text("please Select event time");
+        }else{
+            $("#mobile-number_error").text("");
+        }
+
+        if($("#categories_id option:selected").val() == ''){
+            status = false;
+            $("#cate_error").text("please Select event category");
+        }else{
+            $("#cate_error").text("");
+        }
+
+        if($("#Autocomplete").val() == ''){
+            status = false;
+            $("#area_error").text("please Select event Areaname");
+        }else{
+            $("#area_error").text("");
+        }
+        
+        return status;
+    });
+</script>
 <!-- <nav class="large-3 medium-4 columns" id="actions-sidebar">
     <ul class="side-nav">
          <li class="heading"><?= __('Actions') ?></li>

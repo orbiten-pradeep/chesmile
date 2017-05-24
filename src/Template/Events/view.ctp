@@ -284,7 +284,7 @@ a {
                 </p>
                 <div class="btn-reg">
                 <?php if($event->register_online == 1) { ?>
-                <button class="btn btn-primary" style="float: right; background-color: #4ABAC5;border-color: #e2e2e2;" data-toggle="modal" href="#Register-modal">Register Online</button>
+                <button class="btn btn-primary" style="float: right; background-color: #4ABAC5;border-color: #e2e2e2;" data-toggle="modal" href="#Register-modal">Online Registration</button>
                 <?php } ?>
             <button class="btn btn-primary view-btn" style="float: right;margin-right: 10px;background-color: #4ABAC5;border-color: #e2e2e2;" data-toggle="modal" href="#view-more">Event Details</button>
              </div>
@@ -511,7 +511,7 @@ a {
       <div class="modal-content">
           <div class="modal-header">
               <button type="button" class="close" data-dismiss="modal"><span aria-hidden="true">×</span><span class="sr-only">Close</span></button>
-              <h4 class="modal-title" id="myModalLabel">Online Registeration</h4>
+              <h4 class="modal-title" id="myModalLabel">Online Registration</h4>
           </div>
           <div class="modal-body">
               <div class="row">
@@ -583,8 +583,8 @@ a {
                       <p class="lead">Note</p>
                       <ul class="list-unstyled" style="line-height: 2; font-size: 13px;">
                           <li style="list-style-type: disc;"> All the fields are mandatory to register online</li>
-                          <li style="list-style-type: disc;"> After registration is done, you will be receiving payment link via PayZapp HDFC</li>
-                          <li style="list-style-type: disc;"> Click on the link to make the payment </li>
+                          <<!-- li style="list-style-type: disc;"> After registration is done, you will be receiving payment link via PayZapp HDFC</li>
+                          <li style="list-style-type: disc;"> Click on the link to make the payment </li> -->
                           <li style="list-style-type: disc;"> Once payment is done, you will receive an acknowledgement mail </li>
                           <li style="list-style-type: disc;"> Please carry a proof of the confirmation mail on the marathon day</li>
                           <!-- <li><a href="/read-more/"><u>Read more</u></a></li> -->

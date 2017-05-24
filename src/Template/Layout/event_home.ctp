@@ -176,6 +176,9 @@ background-color: #286090;
 .checkbox{
   margin-bottom: 0px !important;
 }
+.past-events{
+  display: none !important;
+}
 
 </style>
  <meta charset="utf-8">
