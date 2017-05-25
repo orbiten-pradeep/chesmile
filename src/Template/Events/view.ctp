@@ -519,6 +519,10 @@ a {
                       <div class="card">
         
          <?= $this->Form->create('$marathon',array('url' => ['controller' => 'Marathon','action' => 'add', $event->id])) ?>
+            
+             <input type="hidden" name="amount" value="" id="amount"/>
+             <input type="hidden" name="productinfo" value="Marathon (ChennaiSmile.com)" size="64" />
+             <input type="hidden" name="service_provider" value="payu_paisa" size="64" />
             <div class="form-group float-label-control">
              
              <label for="">Firstname</label>
@@ -793,10 +797,11 @@ $( function() {
                 var year = curyear-dob_year[2];
                 if(year<=14){
                     $("#person_type").text("Kids"+", Rs. 200");
+                    $("#amount").val("200");
                 }else{
                     $("#person_type").text("Adults"+", Rs.300");
+                    $("#amount").val("300");
                 }
-                
             }
 
             });
