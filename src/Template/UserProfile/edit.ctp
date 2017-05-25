@@ -76,6 +76,7 @@ label {
     padding: 40px 40px;
 }
 
+
 .formheigh{
   margin-top: -35px;
 }
@@ -135,23 +136,29 @@ input{
 
 }
   .card-prof {
-    background-color: #4ABAC6;
+   /* background-color: #4ABAC6;*/
     /* just in case there no content*/
     padding: 20px 25px 30px;
     /*margin: 30px auto 25px;*/
     margin-top: 15px;
-    -moz-border-radius: 2px;
+    /*-moz-border-radius: 2px;
     -webkit-border-radius: 2px;
     border-radius: 2px;
     -moz-box-shadow: 10px 10px 10px rgba(0, 0, 0, 0.3);
     -webkit-box-shadow: 10px 10px 10px rgba(0, 0, 0, 0.3);
-    box-shadow: 0px 0px 7px 7px rgba(0, 0, 0, 0.1);
+    box-shadow: 0px 0px 7px 7px rgba(0, 0, 0, 0.1);*/
 }
 
 .card-container-prof.card-prof {
     max-width: 210px;
     padding: 10px 15px;
 
+}
+.img-style{
+    background-color: white;
+    padding: 5px;
+    margin-top: 15px;
+    border: 1px solid #a7a7a7;
 }
 .email-bg{
   background-color: #4ABAC6 !important;

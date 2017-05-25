@@ -576,7 +576,7 @@ a {
 
         <div class="">
           <div class="form-group text-center">
-           <?= $this->Form->button(__('Submit'),array('class' => "btn btn-info btn-block")) ?>
+           <?= $this->Form->button(__('Proceed to payment'),array('class' => "btn btn-info btn-block")) ?>
     <?= $this->Form->end() ?>
           </div>
         </div>

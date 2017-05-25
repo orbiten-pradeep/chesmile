@@ -187,7 +187,7 @@ background-color: #286090;
     <meta name="description" content="">
     <meta name="author" content="">
 
-<title>Chennai Smile</title>
+<title>ChennaiSmile</title>
 
 <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/4.0.0-alpha.4/css/bootstrap.min.css">
 <link href="https://fonts.googleapis.com/css?family=Raleway:100,200,300,400,500,600,700,800,900" rel="stylesheet"> 
@@ -464,8 +464,11 @@ background-color: #286090;
       <div class="modal-body"> 
           <ul class="list-group">
             <li class="list-group-item"><a href="<?php echo $this->Url->build(array('controller' => 'events', 'action' => 'add'));?>" >Create Event</a></li>
-            <li class="list-group-item"><a href="<?php echo $this->Url->build(array('controller' => 'events'));?>#past-events" >Past Event</a></li>
+            <li class="list-group-item"><a href="#my-events" class="my-events">My Events</a></li>
+             <li class="list-group-item"><a href="#liked-events" class="liked-events">Liked Events</a></li>
+            <li class="list-group-item" style="display: none;"><a href="<?php echo $this->Url->build(array('controller' => 'events'));?>#past-events" >Past Event</a></li>
             <li class="list-group-item"><a href="<?php echo $this->Url->build(array('controller' => 'UserProfile', 'action' => 'add'));?>" >My Profile</a></li>
+            <li class="list-group-item"><a href="<?php echo $this->Url->build(array('controller' => 'Users', 'action' => 'logout'));?>" >Logout</a></li>
           </ul>
       </div> 
     </div><!-- /.modal-content -->

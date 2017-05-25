@@ -469,12 +469,13 @@ a {
                               </div>
                                <div id="statusMsg"></div>
                               <button style="padding-top: 5px; padding-bottom: 5px;" onclick="sendemail(<?php echo $event->id; ?>);" class="btn btn-primary form-control">Invite Friends</button>
-                        </div>  -->                         
-                    <div class="clearfix"></div>
+                        </div>                          
+                    <div class="clearfix"></div> -->
 
                     <p class="text-primary"><b>Interested in this Event</b></p>
                     <small><span class="glyphicon glyphicon-thumbs-up"></span> <?= h($number) ?> People are interested</small><br><br>
-                    <div class="sharethis-inline-share-buttons" ></div>
+                    <div class="sharethis-inline-share-buttons"></div>
+                    
                     <!-- <div class="panel bs-example side_panel margin25"> 
                         <div class="panel-heading"> 
                             <h3 class="panel-title">Twitter Updates</h3> 
@@ -501,8 +502,8 @@ a {
         <li><?= $this->Form->postLink(__('Edit Event'), ['action' => 'edit', $event->id], ['confirm' => __('Are you sure you want to edit # {0}?', $event->id)]) ?> </li>
         <?php } ?>
         </ul>
-</nav> 
- -->
+</nav>  -->
+
           <div class="container">
 
           <!-- <link href="//maxcdn.bootstrapcdn.com/font-awesome/4.1.0/css/font-awesome.min.css" rel="stylesheet"> -->
@@ -519,6 +520,10 @@ a {
                       <div class="card">
         
          <?= $this->Form->create('$marathon',array('url' => ['controller' => 'Marathon','action' => 'add', $event->id])) ?>
+            
+             <input type="hidden" name="amount" value="" id="amount"/>
+             <input type="hidden" name="productinfo" value="Marathon (ChennaiSmile.com)" size="64" />
+             <input type="hidden" name="service_provider" value="payu_paisa" size="64" />
             <div class="form-group float-label-control">
              
              <label for="">Firstname</label>
@@ -571,7 +576,7 @@ a {
 
         <div class="">
           <div class="form-group text-center">
-           <?= $this->Form->button(__('Submit'),array('class' => "btn btn-info btn-block")) ?>
+           <?= $this->Form->button(__('Proceed to payment'),array('class' => "btn btn-info btn-block")) ?>
     <?= $this->Form->end() ?>
           </div>
         </div>
@@ -583,7 +588,7 @@ a {
                       <p class="lead">Note</p>
                       <ul class="list-unstyled" style="line-height: 2; font-size: 13px;">
                           <li style="list-style-type: disc;"> All the fields are mandatory to register online</li>
-                         <!--  <li style="list-style-type: disc;"> After registration is done, you will be receiving payment link via PayZapp HDFC</li>
+                          <!-- li style="list-style-type: disc;"> After registration is done, you will be receiving payment link via PayZapp HDFC</li>
                           <li style="list-style-type: disc;"> Click on the link to make the payment </li> -->
                           <li style="list-style-type: disc;"> Once payment is done, you will receive an acknowledgement mail </li>
                           <li style="list-style-type: disc;"> Please carry a proof of the confirmation mail on the marathon day</li>
@@ -598,6 +603,8 @@ a {
           </div>
       </div>
   </div>
+
+<script type="text/javascript" src="https://ajax.googleapis.com/ajax/libs/jqueryui/1.8.11/jquery-ui.min.js"></script>
   <script type='text/javascript' src='//platform-api.sharethis.com/js/sharethis.js#property=58fdbf6acaaba30012e7e564&product=inline-share-buttons' async='async'></script>
             
 
@@ -794,10 +801,11 @@ $( function() {
                 var year = curyear-dob_year[2];
                 if(year<=14){
                     $("#person_type").text("Kids"+", Rs. 200");
+                    $("#amount").val("200");
                 }else{
-                    $("#person_type").text("Adults"+", Rs.300");
+                    $("#person_type").text("Adults"+", Rs. 300");
+                    $("#amount").val("300");
                 }
-                
             }
 
             });
