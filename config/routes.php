@@ -55,12 +55,22 @@ Router::scope('/', function (RouteBuilder $routes) {
      * ...and connect the rest of 'Pages' controller's URLs.
      */
     $routes->connect('/pages/*', ['controller' => 'Pages', 'action' => 'display']);
+
+    $routes->connect('thebigbeachmarathon', ['controller' => 'events', 'action' => 'invitation','48d977a4-dea0-4a49-993a-c9408d0163cb']);
 	//$routes->connect('/', array('controller' => 'posts', 'action' => 'index', 'home'));
     $routes->connect(
 	    '/admin',
 	    array('controller' => 'Users', 'action' => 'adminlogin', 'admin' => true)
 	);
-    
+
+/*    $routes->connect(
+        '/events/activate/:id',
+        array('controller' => 'events', 'action' => 'activate',
+          array(
+              'pass' => array('id')
+          )
+    ));
+    */
     /**
      * Connect catchall routes for all controllers.
      *

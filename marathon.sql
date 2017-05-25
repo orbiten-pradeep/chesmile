@@ -3,7 +3,7 @@
 -- http://www.phpmyadmin.net
 --
 -- Host: 127.0.0.1
--- Generation Time: May 10, 2017 at 08:10 PM
+-- Generation Time: May 25, 2017 at 04:50 PM
 -- Server version: 5.6.17
 -- PHP Version: 5.5.12
 
@@ -31,15 +31,19 @@ CREATE TABLE IF NOT EXISTS `marathon` (
   `events_id` int(11) NOT NULL,
   `firstname` varchar(255) DEFAULT NULL,
   `lastname` varchar(255) DEFAULT NULL,
+  `amount` varchar(255) DEFAULT NULL,
+  `status` varchar(255) DEFAULT NULL,
   `date` date DEFAULT NULL,
   `sex` varchar(255) DEFAULT NULL,
   `email` varchar(255) DEFAULT NULL,
   `mobile_number` varchar(255) DEFAULT NULL,
   `KM` varchar(255) DEFAULT NULL,
   `TSHIRT` varchar(255) DEFAULT NULL,
+  `activation_key` varchar(255) DEFAULT NULL,
+  `Active` int(11) DEFAULT '1',
   `Created` timestamp NULL DEFAULT CURRENT_TIMESTAMP,
   PRIMARY KEY (`ID`)
-) ENGINE=InnoDB DEFAULT CHARSET=utf8 AUTO_INCREMENT=1 ;
+) ENGINE=InnoDB  DEFAULT CHARSET=utf8 AUTO_INCREMENT=9 ;
 
 /*!40101 SET CHARACTER_SET_CLIENT=@OLD_CHARACTER_SET_CLIENT */;
 /*!40101 SET CHARACTER_SET_RESULTS=@OLD_CHARACTER_SET_RESULTS */;
