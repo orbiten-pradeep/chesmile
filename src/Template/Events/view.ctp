@@ -541,7 +541,7 @@ a {
                 <label>
            <?= $this->Form->input('date', array('type' => 'text','class' => 'form-control date','placeholder' => 'Date of birth','label' => false,'required' => true));?>
            </label><br>
-           <span id="person_type" style="color: #4abac5;"></span>
+           <span id="person_type" style="color: black; font-weight: bold;"></span>
            </div>
 
        <div class="form-group">
