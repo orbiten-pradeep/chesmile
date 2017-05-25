@@ -76,10 +76,24 @@ class MarathonController extends AppController
                     'contain' => ['Users', 'Categories']
                 ]);
             }
-            //debug($event); exit(0);
+
+            //$this->merchantKey = 'wBZpGV5E';
+            //$this->salt = 'b8Hg0nhutX';
+            $payu['key'] = 'wBZpGV5E';
+            $payu['salt'] = 'b8Hg0nhutX'; 
+            $payu['txnid'] = $this->randomTxnId();
+            $payu['amount'] = $this->request->data['amount'];
+            $payu['curl'] = '';
+            $payu['productinfo'] = $this->request->data['productinfo'];
+            $payu['service_provider'] = $this->request->data['service_provider'];
+            $payu['firstname'] = $this->request->data['firstname'];
+            $payu['email'] = $this->request->data['email'];
+            $payu['phone'] = $this->request->data['mobile_number'];
+            $payu['surl'] = Router::url(['controller' => 'Marathon', 'action' => 'registrationsuccess/' . $id, '_full' => true ]);
+            $payu['furl'] = Router::url(['controller' => 'Marathon', 'action' => 'registrationfailed/' . $id, '_full' => true ]);
+            
             $marathon = $this->Marathon->patchEntity($marathon, $this->request->data);
-            if ($this->Marathon->save($marathon)) {
-                $this->Flash->success(__('online registration is completed, please check the mail received from payzaap HDFC for further details .'));
+            if ($this->Marathon->save($marathon)) {                
                 $email = new Email();
                 $email->transport('gmail');
                 $name = $event['user']['fullname'];
@@ -100,7 +114,7 @@ class MarathonController extends AppController
                 $message .= "<br/>Thanks, <br/>Support Team";
                 $email->send($message);
 
-                
+                $this->send($payu);
                 return $this->redirect(['controller' => 'Events', 'action' => 'view', $id]);
                 //return $this->redirect(['action' => 'index']);
             } else {
@@ -189,4 +203,138 @@ class MarathonController extends AppController
         $this->set(compact('marathon'));
         $this->set('_serialize', ['marathon']);
     }
+
+    public function getAction() {
+        $this->merchantKey = 'wBZpGV5E';
+        $this->salt = 'b8Hg0nhutX';
+        $this->payuBaseURL = "https://secure.payu.in";
+        return $this->payuBaseURL . '/_payment';
+    }
+
+    public function randomTxnId() {
+        // Generate random transaction id
+        return substr(hash('sha256', mt_rand() . microtime()), 0, 20);
+    }
+
+
+    private function generateHash($posted = []) {
+        // Hash Sequence
+        $hashSequence = "key|txnid|amount|productinfo|firstname|email|udf1|udf2|udf3|udf4|udf5|udf6|udf7|udf8|udf9|udf10";
+        $hashVarsSeq = explode('|', $hashSequence);
+        $hash_string = '';
+        foreach($hashVarsSeq as $hash_var) {
+            $hash_string .= isset($posted[$hash_var]) ? $posted[$hash_var] : '';
+            $hash_string .= '|';
+        }
+        debug($hash_string);
+        $hash_string .= 'b8Hg0nhutX';
+        $this->hash = strtolower(hash('sha512', $hash_string));
+    }
+
+
+    public function send($posted = []) {
+        // Post Request
+        //$posted['key'] = $this->merchantKey;
+        $this->generateHash($posted);
+        $posturl =  'https://secure.payu.in/_payment';
+        $payu_in_args = array(
+            // Merchant details
+            'key'                   => $posted['key'],
+            'surl'                  => $posted['surl'],
+            'furl'                  => $posted['furl'],
+            'curl'                  => $posted['curl'],
+            'service_provider'      => 'payu_paisa',
+            // Customer details
+            'firstname'             => $posted['firstname'],
+            'lastname'              => '',
+            'email'                 => $posted['email'],
+            'address1'              => '',
+            'address2'              => '',
+            'city'                  => '',
+            'state'                 => '',
+            'zipcode'               => '',
+            'country'               => '',
+            'phone'                 => $posted['phone'],
+            // Item details
+            'productinfo'           => $posted['productinfo'],
+            'amount'                => $posted['amount'],
+            // Pre-selection of the payment method tab
+            'pg'                    => ''
+        );
+
+
+
+        $payuform = '';
+        foreach( $payu_in_args as $key => $value ) {
+            if( $value ) {
+                $payuform .= "<input type='hidden' name='" . $key . "' value='" . $value . "' />\n";
+            }
+        }
+        $payuform .= '<input type="hidden" name="txnid" value="' . $posted['txnid'] . '" />' . "\n";
+        $payuform .= '<input type="hidden" name="hash" value="' . $this->hash . '" />' . "\n";
+        // The form
+        echo '
+          <style>
+            body {
+                text-lign:      center;
+                background-color:#fff;
+                cursor: wait;
+                margin: 0 auto;
+                width: 200px;
+            }
+            .box {
+              margin: 50 0px;
+              width: 200px;
+              background-color:#e6e6e6;
+              padding: 50px;
+              border: 3px solid #aaa;
+            }
+          </style>
+          <div class="box">
+            <img src="' . Router::url("/img/front/loader.gif", true) . '" alt="Redirecting..." />Thank you for your order. We are now redirecting you to PayUMoney to make payment.
+          </div>
+          <form action="' . $posturl . '" method="POST" name="payuForm" id="payform">
+                ' . $payuform . '
+                <input type="submit" class="button" id="submit_payu_in_payment_form" value="Pay via PayUMoney" />
+                <a class="button cancel" href="' . $posted['curl'] . '">Cancel order &amp; restore cart</a>
+                <script type="text/javascript">
+                    var payuForm = document.forms.payuForm;
+                    payuForm.submit();
+                </script>
+            </form>';
+        exit;
+    }
+
+    public function registrationfailed($id = null)
+    {
+        $this->autoRender = false;
+        if ($this->request->is(['patch', 'post', 'put'])) {
+            $registor = $this->Marathon->find('all', array('conditions' => array('email' => $this->request->data['email'], 'firstname' => $this->request->data['firstname'], 'mobile_number' => $this->request->data['phone'])));  
+            $registor = $registor->first();
+
+            $marathon = $this->Marathon->get($registor['ID']);
+            $this->Marathon->delete($marathon);
+            $this->Flash->error(__('online registration is failed. Please try again...'));
+            return $this->redirect(['controller' => 'Events', 'action' => 'view', $id]);
+        }
+        return $this->redirect(['controller' => 'Events', 'action' => 'view', $id]);
+        exit(0);
+    }
+
+    public function registrationsuccess($id = null)
+    {
+        $this->autoRender = false;
+        if ($this->request->is(['patch', 'post', 'put'])) {
+
+            $registor = $this->Marathon->find('all', array('conditions' => array('email' => $this->request->data['email'], 'firstname' => $this->request->data['firstname'], 'mobile_number' => $this->request->data['phone'])));  
+            $registo = $registor->first();
+            $status = $this->Marathon->updateAll(['status' => $this->request->data['status'],'amount' => $this->request->data['amount']], ['id' => $registo['ID']]);
+            $this->Flash->success(__('online registration is completed successfully.'));
+            return $this->redirect(['controller' => 'Events', 'action' => 'view', $id]);
+        }
+        return $this->redirect(['controller' => 'Events', 'action' => 'view', $id]);
+        exit(0);
+    }
+
+
 }
