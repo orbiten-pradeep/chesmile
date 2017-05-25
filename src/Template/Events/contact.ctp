@@ -22,7 +22,7 @@
 body{
   overflow-x: hidden !important;
   background-color: #f2f2f2 !important;
-    font-family: 'Raleway', sans-serif, helvetica !important;
+  font-family: 'Raleway', sans-serif, helvetica !important;
 }
 .cover-pic {
     height: 200px !important;
@@ -48,12 +48,33 @@ body{
     right: 0;
     bottom: auto !important;
     }
+.about{
+  padding-bottom: 450px !important;
+  margin: none !important;
 }
-@media (max-width: 767px){
+.pull-left{
+  float: none !important;
+}
+.main-footer{
+  margin-bottom: 0px !important;
+}
+}
+
+@media screen (min-width: 767px)
+and (max-width: 980px){
 
 .main-footer {
     margin-bottom: 0px !important;
 }
+.pull{
+  float: right !important;
+}
+.about{
+  max-width: 500px !important;
+  margin: unset !important;
+  padding-bottom: 300px !important;
+}
+
 }
 </style>
 
@@ -72,7 +93,7 @@ body{
       <!-- <div class="jumbotron text-center"> -->
       <h2> Contact us</h2>
 
-          <div class="col-sm-4">
+          <div class="col-xs-12 col-sm-12 col-lg-4">
                   
                              <p class="pull-left">
                              <i class="fa fa-map-marker" aria-hidden="true"></i>
@@ -82,12 +103,12 @@ body{
             Chennai, 600 004
             </p>
             <br/>
-                             <p class="pull-left">
+                             <p class="pull-left pull">
                              <i class="fa fa-envelope" aria-hidden="true"></i>
                         admin@chennaismile.com</p>
                  
                     </div>
-                    <div class="col-sm-8" style="text-align: left;">
+                    <div class="col-xs-12 col-sm-12 col-lg-8" style="text-align: left;">
                         <?= $this->Form->create('',array('url' => ['controller' => 'Contact','action' => 'add'])) ?>
                           <div class="col-sm-6 form-group">
                             <label for="name">Name</label>

@@ -48,6 +48,17 @@ body{
     right: 0;
     bottom: auto !important;
     }
+
+.about{
+    padding: 18px !important;
+  }
+
+p{
+  line-height: 18px !important;
+text-align: left !important;
+font-size: 12px !important;
+}
+
 }
 @media (max-width: 767px){
 

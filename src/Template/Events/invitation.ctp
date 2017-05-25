@@ -248,11 +248,11 @@ a {
 
 
 <div class="cover-picdiv">
-<div class="cover-pic img-responsive user-pic">
+<div class="cover-pic img-responsive user-pic" alt="The BigBeach Marathon">
         <div class="container-fluid heading_txt" style="background: linear-gradient(to bottom, rgba(0, 0, 0, 0) 0%, rgba(0, 0, 0, 0.63) 50%);position: absolute;bottom: 0;z-index: 1;width: 100%;box-sizing: border-box;">
             <div class="row">
                 <div class="col-lg-12">
-                    <button class="btn btn-tag"> <?= h($event->category->name) ?></button> <?php echo $this->Html->image('card/'.$event->category->card, array('width' => '65px', 'height' => '65px', 'class' => 'marg-card' ,'alt'=>'Card')); ?>
+                    <button class="btn btn-tag"> <?= h($event->category->name) ?></button> <?php echo $this->Html->image('card/'.$event->category->card, array('width' => '65px', 'height' => '65px', 'class' => 'marg-card')); ?>
                     <h1 class="tagline" style="color: #FFFFFF"><?= h($event->title) ?></h1>
                 </div>
             </div>
@@ -473,8 +473,8 @@ a {
                     <div class="clearfix"></div>
 
                     <p class="text-primary"><b>Interested in this Event</b></p>
-                    <small><span class="glyphicon glyphicon-thumbs-up"></span> <?= h($number) ?> People are interested</small>
-                    
+                    <small><span class="glyphicon glyphicon-thumbs-up"></span> <?= h($number) ?> People are interested</small><br><br>
+                    <div class="sharethis-inline-share-buttons" ></div>
                     <!-- <div class="panel bs-example side_panel margin25"> 
                         <div class="panel-heading"> 
                             <h3 class="panel-title">Twitter Updates</h3> 
@@ -598,6 +598,7 @@ a {
           </div>
       </div>
   </div>
+  <script type='text/javascript' src='//platform-api.sharethis.com/js/sharethis.js#property=58fdbf6acaaba30012e7e564&product=inline-share-buttons' async='async'></script>
             
 
   <!-- <div class="modal fade" id="Register-modal" role="dialog">

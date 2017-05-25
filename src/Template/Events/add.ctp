@@ -131,10 +131,10 @@ label {
 ::-moz-placeholder { /* Firefox 19+ */
   color: white !important;
 }
-:-ms-input-placeholder { /* IE 10+ */
+::-ms-input-placeholder { /* IE 10+ */
   color: white !important;
 }
-:-moz-placeholder { /* Firefox 18- */
+::-moz-placeholder { /* Firefox 18- */
   color: white !important;
 }
 
@@ -250,7 +250,7 @@ input{
         cursor: move;
       }
 
-.nav-tabs > li.active > a{
+.nav-tabs li.active a{
   background-color: #337ab7 !important;
   color: white !important;
 }
@@ -260,6 +260,24 @@ input{
 
 .search-nav{
     display: none;
+}
+.plac::-webkit-input-placeholder { /* Chrome/Opera/Safari */
+  color: black !important;
+}
+.plac::-moz-placeholder { /* Firefox 19+ */
+  color: black !important;
+}
+.plac::-ms-input-placeholder { /* IE 10+ */
+  color: black !important;
+}
+.plac::-moz-placeholder { /* Firefox 18- */
+  color: black !important;
+}
+
+.nav > li > a:focus {
+    text-decoration: none;
+    background-color: #337ab7 !important;
+    color: white;
 }
 </style>
 <div class="container-fluid height">
@@ -447,7 +465,8 @@ input{
             <div class="pull-right">
                 <!-- <i class="fa fa-long-arrow-right" aria-hidden="true"></i> -->
                  <!-- <?= $this->Html->link($this->Html->tag('i', '', array('class' => 'fa fa-long-arrow-right','escape' => false))) ?> -->
-                 <a href="#profile" data-toggle="tab" title="profile" style="color:white !important;"><i class="fa fa-long-arrow-right" aria-hidden="true"></i></a>
+                <!--  <a href="#profile" data-toggle="tab" title="profile" style="color:white !important;"><i class="fa fa-long-arrow-right" aria-hidden="true"></i></a> -->
+                <a href="#profile" data-toggle="tab" title="profile"> <button class="btn btn-primary">Next</button> </a>
 
             </div>
             
@@ -542,7 +561,7 @@ input{
       </div>
       <div class="modal-body">
         <div id="mapPanel">            
-            <input class="form-control text" id="city_country" type="textbox" value="Mylapore, Chennai" style="color: black !important;">
+            <input class="form-control text plac" id="city_country" type="textbox" value="Mylapore, Chennai" placeholder="Search your area..." style="color: black !important;">
             <input class="btn btn-md btn-primary botton" type="button" value="search" onclick="codeAddress()">            
         </div>  
         <div id="mapCanvas" style="width: 100%; height: 350px;"></div>
@@ -556,7 +575,7 @@ input{
         </div>
       </div>
       <div class="modal-footer">
-        <button type="button" class="btn btn-secondary" data-dismiss="modal">Close</button>
+        <button type="button" class="btn btn-secondary" data-dismiss="modal" style="background: #337AB7;color: white;">Close</button>
        <!--  <button type="button" class="btn btn-primary" data-dismiss="modal">Save changes</button> -->
       </div>
     </div>
