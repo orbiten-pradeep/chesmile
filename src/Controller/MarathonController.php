@@ -345,5 +345,25 @@ class MarathonController extends AppController
         exit(0);
     }
 
+        public function isemailexist()
+    {
+        $conn = ConnectionManager::get('default');
+        $request = $this->request->data;
+        $email = $request['email'];
+        $response = "";
+
+        $query = "SELECT id From marathon WHERE 1 AND email = '".$email."'";
+        $stmt = $conn->execute($query);
+        $results = $stmt->fetchAll();
+        
+        if(empty($results)){
+            $response['code'] = true;
+        } 
+        else {
+            $response['code'] = false;
+        }
+        echo json_encode($response);
+        exit;
+    }
 
 }
