@@ -18,6 +18,12 @@ use Cake\Event\Event;
 class MarathonController extends AppController
 {
 
+    public function beforeFilter(Event $event) 
+    {
+        parent::beforeFilter($event);
+        $this->Auth->allow(['add','getAction','randomTxnId','generateHash','send','registrationsuccess','registrationfailed']);
+    }
+
     /**
      * Index method
      *
@@ -226,7 +232,7 @@ class MarathonController extends AppController
             $hash_string .= isset($posted[$hash_var]) ? $posted[$hash_var] : '';
             $hash_string .= '|';
         }
-        debug($hash_string);
+        //debug($hash_string);
         $hash_string .= 'b8Hg0nhutX';
         $this->hash = strtolower(hash('sha512', $hash_string));
     }
