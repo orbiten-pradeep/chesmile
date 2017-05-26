@@ -212,13 +212,23 @@ class UserProfileController extends AppController
               if(!isset($this->request->data['fullname'])){
                 $this->request->data['fullname'] = $this->Auth->user('fullname');
               }
+
+              if(empty($this->request->data['Photo'])){
+                $this->request->data['Photo'] = $this->Auth->user('Photo');
+              }
+
+              if(empty($this->request->data['group_id'])){
+                $this->request->data['group_id'] = $this->Auth->user('group_id');
+              }
               $this->loadModel('Users');
               $user = $this->Users->find('all')->where(['id' => $this->request->data['user_id']])->first();
-              $user->fullname = $this->request->data['fullname'];
+/*              $user->fullname = $this->request->data['fullname'];
               $user->group_id = $this->request->data['group_id'];
               $user->Photo = $this->request->data['Photo'];
-              $user = $this->Users->patchEntity($user, $this->request->data);
-              $status = $this->Users->save($user);
+              $user = $this->Users->patchEntity($user, $this->request->data);*/
+              $status = $this->Users->updateAll(['fullname' => $this->request->data['fullname'], 'group_id' => $this->request->data['group_id']], ['id' => $this->request->data['user_id']]);
+
+              //$status = $this->Users->save($user);
   	          $userProfile = $this->UserProfile->patchEntity($userProfile, $this->request->data);
   	        	if ($this->UserProfile->save($userProfile)) {
   	                $this->Flash->success(__('The user profile has been saved.'));
