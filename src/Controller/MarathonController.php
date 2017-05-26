@@ -321,9 +321,10 @@ class MarathonController extends AppController
             $marathon = $this->Marathon->get($registor['ID']);
             $this->Marathon->delete($marathon);
             $this->Flash->error(__('online registration is failed. Please try again...'));
-            return $this->redirect(['controller' => 'Events', 'action' => 'view', $id]);
+            return $this->redirect('thebigbeachmarathon');
         }
-        return $this->redirect(['controller' => 'Events', 'action' => 'view', $id]);
+        //return $this->redirect(['controller' => 'Events', 'action' => 'view', $id]);
+        return $this->redirect('thebigbeachmarathon');
         exit(0);
     }
 
@@ -336,9 +337,11 @@ class MarathonController extends AppController
             $registo = $registor->first();
             $status = $this->Marathon->updateAll(['status' => $this->request->data['status'],'amount' => $this->request->data['amount']], ['id' => $registo['ID']]);
             $this->Flash->success(__('online registration is completed successfully.'));
-            return $this->redirect(['controller' => 'Events', 'action' => 'view', $id]);
+            //return $this->redirect(['controller' => 'Events', 'action' => 'view', $id]);
+            return $this->redirect('thebigbeachmarathon');
         }
-        return $this->redirect(['controller' => 'Events', 'action' => 'view', $id]);
+        return $this->redirect('thebigbeachmarathon');
+        //return $this->redirect(['controller' => 'Events', 'action' => 'view', $id]);
         exit(0);
     }
 
