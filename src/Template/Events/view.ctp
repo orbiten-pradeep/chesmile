@@ -248,7 +248,7 @@ a {
 
 
 <div class="cover-picdiv">
-<div class="cover-pic img-responsive user-pic" alt="The BigBeach Marathon">
+<div class="cover-pic img-responsive user-pic">
         <div class="container-fluid heading_txt" style="background: linear-gradient(to bottom, rgba(0, 0, 0, 0) 0%, rgba(0, 0, 0, 0.63) 50%);position: absolute;bottom: 0;z-index: 1;width: 100%;box-sizing: border-box;">
             <div class="row">
                 <div class="col-lg-12">
@@ -541,7 +541,7 @@ a {
                 <label>
            <?= $this->Form->input('date', array('type' => 'text','class' => 'form-control date','placeholder' => 'Date of birth','label' => false,'required' => true));?>
            </label><br>
-           <span id="person_type" style="color: black; font-weight: bold;"></span>
+           <span id="person_type" style="color: #4abac5;"></span>
            </div>
 
        <div class="form-group">
@@ -576,7 +576,7 @@ a {
 
         <div class="">
           <div class="form-group text-center">
-           <?= $this->Form->button(__('Proceed to payment'),array('class' => "btn btn-info btn-block")) ?>
+           <?= $this->Form->button(__('Submit'),array('class' => "btn btn-info btn-block")) ?>
     <?= $this->Form->end() ?>
           </div>
         </div>
@@ -803,7 +803,7 @@ $( function() {
                     $("#person_type").text("Kids"+", Rs. 200");
                     $("#amount").val("200");
                 }else{
-                    $("#person_type").text("Adults"+", Rs. 300");
+                    $("#person_type").text("Adults"+", Rs.300");
                     $("#amount").val("300");
                 }
             }
