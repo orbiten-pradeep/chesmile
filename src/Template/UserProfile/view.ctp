@@ -221,7 +221,7 @@ margin-left: 70px;
             <td style="padding-top: 30px;"><?= h($user->fullname) ?></td>
         </tr>
         <tr>
-            <th style="padding-top: 30px;" scope="row"><?= __('Name') ?></th>
+            <th style="padding-top: 30px;" scope="row"><?= __('Account Type') ?></th>
             <td style="padding-top: 30px;"><?= h($group->name) ?></td>
         </tr>
         <tr>
