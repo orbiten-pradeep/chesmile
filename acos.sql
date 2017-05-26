@@ -3,7 +3,7 @@
 -- http://www.phpmyadmin.net
 --
 -- Host: 127.0.0.1
--- Generation Time: May 25, 2017 at 04:49 PM
+-- Generation Time: May 26, 2017 at 03:16 PM
 -- Server version: 5.6.17
 -- PHP Version: 5.5.12
 
@@ -37,7 +37,7 @@ CREATE TABLE IF NOT EXISTS `acos` (
   PRIMARY KEY (`id`),
   KEY `lft` (`lft`,`rght`),
   KEY `alias` (`alias`)
-) ENGINE=MyISAM  DEFAULT CHARSET=utf8 AUTO_INCREMENT=206 ;
+) ENGINE=MyISAM  DEFAULT CHARSET=utf8 AUTO_INCREMENT=207 ;
 
 --
 -- Dumping data for table `acos`
@@ -56,7 +56,7 @@ INSERT INTO `acos` (`id`, `parent_id`, `model`, `foreign_key`, `alias`, `lft`, `
 (185, 184, NULL, NULL, 'index', 309, 310),
 (182, 111, NULL, NULL, 'adminindex', 229, 230),
 (183, 111, NULL, NULL, 'searchbyeventtitle', 231, 232),
-(184, 1, NULL, NULL, 'Marathon', 308, 333),
+(184, 1, NULL, NULL, 'Marathon', 308, 335),
 (181, 16, NULL, NULL, 'adminadd', 57, 58),
 (180, 16, NULL, NULL, 'isemailexist', 55, 56),
 (176, 111, NULL, NULL, 'invitation', 227, 228),
@@ -84,7 +84,7 @@ INSERT INTO `acos` (`id`, `parent_id`, `model`, `foreign_key`, `alias`, `lft`, `
 (151, 150, NULL, NULL, 'index', 285, 286),
 (150, 1, NULL, NULL, 'Address', 284, 295),
 (149, 144, NULL, NULL, 'delete', 281, 282),
-(1, NULL, NULL, NULL, 'controllers', 1, 346),
+(1, NULL, NULL, NULL, 'controllers', 1, 348),
 (2, 1, NULL, NULL, 'Groups', 2, 13),
 (3, 2, NULL, NULL, 'index', 3, 4),
 (4, 2, NULL, NULL, 'view', 5, 6),
@@ -205,17 +205,18 @@ INSERT INTO `acos` (`id`, `parent_id`, `model`, `foreign_key`, `alias`, `lft`, `
 (189, 184, NULL, NULL, 'delete', 317, 318),
 (190, 184, NULL, NULL, 'details', 319, 320),
 (191, 184, NULL, NULL, 'usersinformation', 321, 322),
-(192, 1, NULL, NULL, 'Contact', 334, 345),
-(193, 192, NULL, NULL, 'index', 335, 336),
-(194, 192, NULL, NULL, 'view', 337, 338),
-(195, 192, NULL, NULL, 'add', 339, 340),
-(196, 192, NULL, NULL, 'edit', 341, 342),
-(197, 192, NULL, NULL, 'delete', 343, 344),
+(192, 1, NULL, NULL, 'Contact', 336, 347),
+(193, 192, NULL, NULL, 'index', 337, 338),
+(194, 192, NULL, NULL, 'view', 339, 340),
+(195, 192, NULL, NULL, 'add', 341, 342),
+(196, 192, NULL, NULL, 'edit', 343, 344),
+(197, 192, NULL, NULL, 'delete', 345, 346),
 (198, 111, NULL, NULL, 'contact', 233, 234),
 (203, 184, NULL, NULL, 'registrationfailed', 329, 330),
 (200, 184, NULL, NULL, 'getAction', 323, 324),
 (201, 184, NULL, NULL, 'randomTxnId', 325, 326),
 (202, 184, NULL, NULL, 'send', 327, 328),
+(206, 184, NULL, NULL, 'isemailexist', 333, 334),
 (205, 184, NULL, NULL, 'registrationsuccess', 331, 332);
 
 /*!40101 SET CHARACTER_SET_CLIENT=@OLD_CHARACTER_SET_CLIENT */;
