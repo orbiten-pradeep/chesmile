@@ -243,12 +243,21 @@ a {
 .font-col{
     color:white !important;
 }
+
+@media screen and (max-width: 414px){
+
+    .bullet-space{
+    margin-left: 10px;
+}
+
+}
+
 </style>
 
 
 
 <div class="cover-picdiv">
-<div class="cover-pic img-responsive user-pic">
+<div class="cover-pic img-responsive user-pic" alt="The BigBeach Marathon">
         <div class="container-fluid heading_txt" style="background: linear-gradient(to bottom, rgba(0, 0, 0, 0) 0%, rgba(0, 0, 0, 0.63) 50%);position: absolute;bottom: 0;z-index: 1;width: 100%;box-sizing: border-box;">
             <div class="row">
                 <div class="col-lg-12">
@@ -519,8 +528,9 @@ a {
                   <div class="col-xs-12 col-lg-7">
                       <div class="card">
         
-         <?= $this->Form->create('$marathon',array('url' => ['controller' => 'Marathon','action' => 'add', $event->id])) ?>
-            
+         <?= $this->Form->create('$marathon',array('url' => ['controller' => 'Marathon','action' => 'add', $event->id],'id' => 'mar')) ?>
+
+             <input type="hidden" id="checkUrl" name="checkUrl" value="<?php echo $this->Url->build(array('controller' => 'marathon', 'action' => 'isemailexist'));?>">
              <input type="hidden" name="amount" value="" id="amount"/>
              <input type="hidden" name="productinfo" value="Marathon (ChennaiSmile.com)" size="64" />
              <input type="hidden" name="service_provider" value="payu_paisa" size="64" />
@@ -541,7 +551,7 @@ a {
                 <label>
            <?= $this->Form->input('date', array('type' => 'text','class' => 'form-control date','placeholder' => 'Date of birth','label' => false,'required' => true));?>
            </label><br>
-           <span id="person_type" style="color: #4abac5;"></span>
+           <span id="person_type" style="color: black; font-weight: bold;"></span>
            </div>
 
        <div class="form-group">
@@ -576,7 +586,7 @@ a {
 
         <div class="">
           <div class="form-group text-center">
-           <?= $this->Form->button(__('Submit'),array('class' => "btn btn-info btn-block")) ?>
+           <?= $this->Form->button(__('Proceed to payment'),array('class' => "btn btn-info btn-block")) ?>
     <?= $this->Form->end() ?>
           </div>
         </div>
@@ -584,7 +594,7 @@ a {
     <?= $this->Form->end() ?>
                       </div>
                   </div>
-                  <div class="col-xs-12 col-lg-5">
+                  <div class="col-xs-12 col-lg-5 bullet-space">
                       <p class="lead">Note</p>
                       <ul class="list-unstyled" style="line-height: 2; font-size: 13px;">
                           <li style="list-style-type: disc;"> All the fields are mandatory to register online</li>
@@ -604,7 +614,7 @@ a {
       </div>
   </div>
 
-<script type="text/javascript" src="https://ajax.googleapis.com/ajax/libs/jqueryui/1.8.11/jquery-ui.min.js"></script>
+<!-- <script type="text/javascript" src="https://ajax.googleapis.com/ajax/libs/jqueryui/1.8.11/jquery-ui.min.js"></script> -->
   <script type='text/javascript' src='//platform-api.sharethis.com/js/sharethis.js#property=58fdbf6acaaba30012e7e564&product=inline-share-buttons' async='async'></script>
             
 
@@ -765,20 +775,20 @@ a {
 
 $(document).ready(function(){
     var event_id = '<?=$event->id;?>';
-    if(event_id==125){
+    if(event_id==110){
         if($(document).width() < 400){
             console.log("mobile");
             $(".cover-picdiv").css('height', '200px');
             // rgba(0, 0, 0, 0) url(/chesmile/img/banner/banner_mob_mar.png) no-repeat scroll center center / cover
-            $(".user-pic").css('background', 'rgba(0, 0, 0, 0) url("../../../chesmile/img/banner/banner_mob_mar.png") no-repeat scroll center center / cover');
+            $(".user-pic").css('background', 'rgba(0, 0, 0, 0) url("../../../img/banner/banner_mob_mar.png") no-repeat scroll center center / cover');
         }else if($(document).width()< 800){
             console.log("tab");
             $(".cover-picdiv").css('height', '300px');
-            $(".user-pic").css('background', 'rgba(0, 0, 0, 0) url("../../../chesmile/img/banner/banner_tab_mar.png") no-repeat scroll center center / cover');
+            $(".user-pic").css('background', 'rgba(0, 0, 0, 0) url("../../../img/banner/banner_tab_mar.png") no-repeat scroll center center / cover');
         }else{
             console.log("default");
             $(".cover-picdiv").css('height', '400px');
-            $(".user-pic").css('background', 'rgba(0, 0, 0, 0) url("../../../chesmile/img/banner/banner_def_mar.png") no-repeat scroll center center / cover');        
+            $(".user-pic").css('background', 'rgba(0, 0, 0, 0) url("../../../img/banner/banner_def_mar.png") no-repeat scroll center center / cover');        
         }
     }
 
@@ -803,7 +813,7 @@ $( function() {
                     $("#person_type").text("Kids"+", Rs. 200");
                     $("#amount").val("200");
                 }else{
-                    $("#person_type").text("Adults"+", Rs.300");
+                    $("#person_type").text("Adults"+", Rs. 300");
                     $("#amount").val("300");
                 }
             }
@@ -896,46 +906,37 @@ $( function() {
     });
 })(jQuery);
 
-$(".marathon" ).validate( {
+$("#mar" ).validate( {
     rules: {
-      firstname: "required",
-      lastname: "required",      
+      fullname: "required",      
       email: {
         required: true,
-        email: true
-      },
-      mobile_number: {
-        required: true,
-        minlength: 10
-      },
-      password: {
-        required: true,
-        minlength: 6
-      },
-      confirm_password: {
-        required: true,
-        minlength: 6,
-        equalTo: "#new_password"
+        email: true,
+        remote: {
+          url: $("#checkUrl").val(),
+          type: "POST",
+          cache: false,
+          dataType: "json",
+          data: {
+              email: function() { return $("#mar #email").val(); }
+          },
+          dataFilter: function(response) {
+            if(response != "") {
+              var resp = JSON.parse(response); 
+              return (resp.code == true) ? true : false;
+            } 
+            else { 
+              return false;
+            }
+          }
+        }
       }
     },
     messages: {
-      firstname: "Please enter your Firstname",
-      lastname: "Please enter your Lastname",     
+      fullname: "Please enter your Fullname",      
       email: { 
-        required: "Please enter a valid email address"
-      },
-       mobile_number: {
-        required: "Please enter your mobile number",
-        minlength: "Please enter atleast 10 digits"
-      },
-      password: {
-        required: "Please provide a password",
-        minlength: "Your password must be at least 6 characters long"
-      },
-      confirm_password: {
-        required: "Please provide a confirm password",
-        minlength: "Your password must be at least 6 characters long",
-        equalTo: "Please enter the same password as above"
+        required: "Please enter a valid email address",
+        remote: "Email Id already registered" 
       }
     },
     errorElement: "em",
@@ -956,69 +957,6 @@ $(".marathon" ).validate( {
       $( element ).parents( ".input" ).addClass( "has-success" ).removeClass( "has-error" );
     }
   });
-</script>
-
-<script type="text/javascript">
-    $("#createEvent").submit(function(event){
-        var status =true ;
-        if ($('#firstname').val() == '') {
-            status = false;
-           $("#firstname_error").text("please enter your title");
-        }else{
-            $("#firstname_error").text("");
-        }
-
-        if ($('#lastname').val() == '') {
-            status = false;
-           $("#lastname_error").text("please enter your Contact Number");
-        }else{
-            $("#lastname_error").text("");
-        } 
-
-        if($("#date").val() ==''){
-            status = false;
-            $("#date_error").text("please enter a description with minimum 120 characters");
-        }else{
-            $("#date_error").text("");
-        }
-
-        if($("sex").val() == ''){
-            status = false;
-            $("sex_error").text("please type landmark");
-        }else{
-            $("sex_error").text("");
-        }
-
-        if($("#email").val() == ''){
-            status = false;
-            $("#email_error").text("please Select event date");
-        }else{
-            $("#email_error").text("");
-        }
-
-        if($("#mobile-number").val() == ''){
-            status = false;
-            $("#mobile-number_error").text("please Select event time");
-        }else{
-            $("#mobile-number_error").text("");
-        }
-
-        if($("#categories_id option:selected").val() == ''){
-            status = false;
-            $("#cate_error").text("please Select event category");
-        }else{
-            $("#cate_error").text("");
-        }
-
-        if($("#Autocomplete").val() == ''){
-            status = false;
-            $("#area_error").text("please Select event Areaname");
-        }else{
-            $("#area_error").text("");
-        }
-        
-        return status;
-    });
 </script>
 <!-- <nav class="large-3 medium-4 columns" id="actions-sidebar">
     <ul class="side-nav">
