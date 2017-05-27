@@ -878,7 +878,37 @@ h3.heading > span,
     height:100px;
     overflow-y: scroll;
     overflow-x: hidden;
-    width:295px;
+    width:295px !important;
+}
+@media screen and (max-width: 1280px) 
+{
+    .ui-menu.ui-widget.ui-widget-content {
+    z-index: 1551;
+    height:100px;
+    overflow-y: scroll;
+    overflow-x: hidden;
+    width:190px !important;
+}
+}
+@media screen and (max-width: 1366px) 
+{
+    .ui-menu.ui-widget.ui-widget-content {
+    z-index: 1551;
+    height:100px;
+    overflow-y: scroll;
+    overflow-x: hidden;
+    width:205px !important;170px !important
+}
+}
+@media (min-width: 768px) 
+and (max-width: 980px){
+    .ui-menu.ui-widget.ui-widget-content {
+    z-index: 1551;
+    height:100px;
+    overflow-y: scroll;
+    overflow-x: hidden;
+    width:170px !important;
+}
 }
 .ui-menu-item-wrapper:hover{
     background-color: #4ABAC5 !important;
