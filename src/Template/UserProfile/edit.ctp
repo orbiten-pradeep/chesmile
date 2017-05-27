@@ -190,6 +190,19 @@ input[type=number]::-webkit-outer-spin-button {
 input[type=number] {
     -moz-appearance:textfield;
 }
+
+@media screen and (min-width: 1280px)
+and (max-width: 1366px){
+    .name-space{
+    margin-left: 20px;
+}
+}
+@media screen and (min-width: 768px)
+and (max-width: 980px){
+.name-space{
+margin-left: 70px;
+}
+}
 </style>
 
 <div class="container-fluid height">
