@@ -21,7 +21,7 @@ class MarathonController extends AppController
     public function beforeFilter(Event $event) 
     {
         parent::beforeFilter($event);
-        $this->Auth->allow(['add','getAction','randomTxnId','generateHash','send','registrationsuccess','registrationfailed']);
+        $this->Auth->allow(['add','getAction','randomTxnId','generateHash','send','registrationsuccess','registrationfailed','isemailexist']);
     }
 
     /**
@@ -198,6 +198,7 @@ class MarathonController extends AppController
             return $this->redirect(['controller' => 'Events', 'action' => 'index']);
         }
     }
+    
 
     public function usersinformation($id = null)
     {
