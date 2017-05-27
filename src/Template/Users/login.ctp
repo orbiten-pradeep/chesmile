@@ -386,6 +386,7 @@ left: 0px !important;
     <div class="intro-header_CHENNAI">
   <div class="container"><br>
    <h1 style="color:#ffffff">Let's roll like a frisky ball!</h1>
+   <h3 style="font-size: 22px; color:#ffffff;">Journey towards memorable experiences begins from here.</h3>
         <div class="card card-container">
            
             <?= $this->Form->create('',array('id' => 'loginForm2','class' => 'form-signin formheigh mobile-signIn')) ?>
