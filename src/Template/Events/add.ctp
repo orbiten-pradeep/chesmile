@@ -479,7 +479,7 @@ input{
                 <!-- <div class="image-editor"> -->
                     <label>
                         <?=$this->Form->input('banner',['type' => 'file','accept' => 'image/*', 'class' => 'cropit-image-input']);?>
-                        [Size: 1311 * 985px]
+                        [Image Size: 1311px * 985px]
                     </label>
                     <!-- <div id="container-size" style="width:200px; height:200px; display: none;">
                     <div class="cropit-preview" id="banner-preview" style="display: none;"></div></div>
@@ -522,14 +522,14 @@ input{
              <div class="form-group">
                     <label>
                         <?= $this->Form->input('Mediapartners[]',['type' => 'file', 'multiple' => 'true','label' => 'Mediapartners','accept' => 'image/*']);?>
-                        [Size: 1311 * 985px]
+                        [Size: 250px]
                     </label>
             </div>
 
              <div class="form-group">
                 <label>
             <?=$this->Form->input('Sponsors[]',['type' => 'file', 'multiple' => 'true', 'label' => 'Sponsors','accept' => 'image/*']);?>
-            [Size: 1311 * 985px]
+            [Size: 250px]
             </label>
             </div>
 
