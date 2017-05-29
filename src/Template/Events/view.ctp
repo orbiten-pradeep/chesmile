@@ -252,6 +252,9 @@ a {
 
 }
 
+#beverage{
+    display: none;
+}
 </style>
 
 
@@ -397,6 +400,11 @@ a {
                                                         }
                                                     }
                                                     ?>
+
+                                                    <div id="beverage">
+                                                    <h3 class="heading margin25">Beverages Partner<span></span></h3>
+                                                       <a href="http://kalimarkbovonto.com/"> <?=$this->Html->image("static/kalimark.png",array("alt"=>"beverage","class" => "img-overlay","width" => "250px"));?></a>
+                                                    </div>
                                                     
                                                     <!-- Client 1 -->
                                                     <!-- <?php //foreach ($mediapartners as $mediapartner): ?>
@@ -776,6 +784,7 @@ a {
 $(document).ready(function(){
     var event_id = '<?=$event->id;?>';
     if(event_id==110){
+        $("#beverage").css('display', 'block');
         if($(document).width() < 400){
             console.log("mobile");
             $(".cover-picdiv").css('height', '200px');
@@ -908,35 +917,12 @@ $( function() {
 
 $("#mar" ).validate( {
     rules: {
-      fullname: "required",      
-      email: {
-        required: true,
-        email: true,
-        remote: {
-          url: $("#checkUrl").val(),
-          type: "POST",
-          cache: false,
-          dataType: "json",
-          data: {
-              email: function() { return $("#mar #email").val(); }
-          },
-          dataFilter: function(response) {
-            if(response != "") {
-              var resp = JSON.parse(response); 
-              return (resp.code == true) ? true : false;
-            } 
-            else { 
-              return false;
-            }
-          }
-        }
-      }
+      fullname: "required",
     },
     messages: {
       fullname: "Please enter your Fullname",      
       email: { 
-        required: "Please enter a valid email address",
-        remote: "Email Id already registered" 
+        required: "Please enter a valid email address"
       }
     },
     errorElement: "em",
