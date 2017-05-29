@@ -33,7 +33,13 @@ body{
  .mobile-footer{   
   display: none !important; 
 } 
-
+@media (max-width: 414px){
+.copyrights {
+    color: #ffffff;
+    padding: 5px 0 15px !important;
+    margin-left: 75px !important;
+}
+}
 @media (max-width: 414px){
   .wrapper{
   padding:15px;
