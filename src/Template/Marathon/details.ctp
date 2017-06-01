@@ -21,6 +21,18 @@
             <th scope="row"><?= __('Lastname') ?></th>
             <td><?= h($marathon->lastname) ?></td>
         </tr>
+
+        <tr>
+            <th scope="row"><?= __('Amount') ?></th>
+            <td><?= h($marathon->amount) ?></td>
+        </tr>
+
+        <tr>
+            <th scope="row"><?= __('Status') ?></th>
+            <td><?= h($marathon->status) ?></td>
+        </tr>
+
+
         <tr>
             <th scope="row"><?= __('Sex') ?></th>
             <td><?= h($marathon->sex) ?></td>

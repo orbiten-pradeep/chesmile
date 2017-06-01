@@ -9,39 +9,44 @@
     <table cellpadding="0" cellspacing="0">
         <thead>
             <tr>
-                <th scope="col"><?= $this->Paginator->sort('events_id') ?></th>
+                <th scope="col"><?php echo"Sl No"; ?></th>
                 <th scope="col"><?= $this->Paginator->sort('firstname') ?></th>
-                <th scope="col"><?= $this->Paginator->sort('lastname') ?></th>
-                <th scope="col"><?= $this->Paginator->sort('date') ?></th>
-                <th scope="col"><?= $this->Paginator->sort('sex') ?></th>
+                <th scope="col"><?= $this->Paginator->sort('Lastname') ?></th>
+                <th scope="col"><?= $this->Paginator->sort('amount') ?></th>
+                <th scope="col"><?= $this->Paginator->sort('status') ?></th>
                 <th scope="col"><?= $this->Paginator->sort('email') ?></th>
                 <th scope="col"><?= $this->Paginator->sort('mobile_number') ?></th>
-                <th scope="col"><?= $this->Paginator->sort('KM') ?></th>
                 <th scope="col"><?= $this->Paginator->sort('TSHIRT') ?></th>
+                <th scope="col"><?= $this->Paginator->sort('Created') ?></th>
                 <th scope="col" class="actions"><?= __('Actions') ?></th>
             </tr>
         </thead>
         <tbody>
-            <?php foreach ($marathon as $marathon): ?>
+            <?php 
+            $cnt = 1;
+            foreach ($marathon as $marathon): ?>
             <tr>
-                <td><?= $marathon->has('event') ? $this->Html->link($marathon->event->title, ['controller' => 'Events', 'action' => 'view', $marathon->event->id]) : '' ?></td>
+                <td><?php echo $cnt; ?></td>
                 <td><?= h($marathon->firstname) ?></td>
                 <td><?= h($marathon->lastname) ?></td>
-                <td><?= h($marathon->date) ?></td>
-                <td><?= h($marathon->sex) ?></td>
+                <td><?= h($marathon->amount) ?></td>
+                <td><?= h($marathon->status) ?></td>
                 <td><?= h($marathon->email) ?></td>
                 <td><?= h($marathon->mobile_number) ?></td>
-                <td><?= h($marathon->KM) ?></td>
                 <td><?= h($marathon->TSHIRT) ?></td>
+                <td><?= h($marathon->Created) ?></td>
                 <td class="actions">
-                    <?= $this->Html->link(__('View'), ['action' => 'view', $marathon->ID]) ?>
-                    <?= $this->Form->postLink(__('Delete'), ['action' => 'delete', $marathon->ID], ['confirm' => __('Are you sure you want to delete # {0}?', $marathon->ID)]) ?>
+                    <?= $this->Html->link(__('View'), ['action' => 'details', $marathon->activation_key]) ?>
                 </td>
             </tr>
-            <?php endforeach; ?>
+            <?php
+                $cnt++;
+             endforeach; ?>
         </tbody>
     </table>
     <div class="paginator">
+
+        <li><?= $this->Html->link(__('List Events'), ['controller' => 'Events', 'action' => 'index']) ?></li>
         <ul class="pagination">
             <?= $this->Paginator->prev('< ' . __('previous')) ?>
             <?= $this->Paginator->numbers() ?>
