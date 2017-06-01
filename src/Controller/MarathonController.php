@@ -203,10 +203,15 @@ class MarathonController extends AppController
     public function usersinformation($id = null)
     {
         $this->paginate = [
-            'contain' => ['Events']
+            'contain' => ['Events'],
+            'order' => [
+            'Marathon.status' => 'desc'
+        ]
         ];
         $marathon = $this->paginate($this->Marathon);
         $this->paginate['conditions'] = array("Marathon.events_id" => $id);
+        //$this->paginate['order'] = array('Marathon.status' => 'desc');
+        //$this->paginate->sort('Marathon.status');
         $this->set(compact('marathon'));
         $this->set('_serialize', ['marathon']);
     }
@@ -337,6 +342,30 @@ class MarathonController extends AppController
             $registor = $this->Marathon->find('all', array('conditions' => array('email' => $this->request->data['email'], 'firstname' => $this->request->data['firstname'], 'mobile_number' => $this->request->data['phone'])));  
             $registo = $registor->first();
             $status = $this->Marathon->updateAll(['status' => $this->request->data['status'],'amount' => $this->request->data['amount']], ['id' => $registo['ID']]);
+
+
+            //Email to registrant
+            $email = new Email();
+            $email->transport('gmail');
+            $name = $this->request->data['firstname'];
+            $to = trim($this->request->data['email']); 
+            $email->emailFormat('html');
+            $email->template('default');
+            $email->from('admin@chennaismile.com');
+            $email->to($to);
+            $email->cc('admin@chennaismile.com');
+            $subject = "Your registration for The Big Beach Marathon is done";
+            $email->subject($subject);
+            //$activationUrl = Router::url(['controller' => 'Marathon', 'action' => 'details/' . $activation_key, '_full' => true ]);
+            // Always try to write clean code, so that you can read it :) :
+            $message = "Dear <span style='color:#666666'>" . $name . "</span>,<br/><br/>";
+            $message .= "<br/>Thank you for registering for the Big Beach Marathon event. Your registration is successfully completed and you will receive unique BIB number via SMS prior to the event day. <br/>";
+            $message .= "<br/>The event starts at 5.30 am and will be held at Elliot's Beach, Besant Nagar. <br/>";
+            $message .= "If you have any questions please contact ChennaiSmile team @8939775770. <br/>";
+            $message .= "Thank you, awaiting for your presence on the event day! <br/>";
+            $message .= "<br/>Best Regards, <br/>Team ChennaiSmile, <br/>www.chennaismile.com";
+            $email->send($message);
+
             $this->Flash->success(__('online registration is completed successfully.'));
             //return $this->redirect(['controller' => 'Events', 'action' => 'view', $id]);
             return $this->redirect('thebigbeachmarathon');
