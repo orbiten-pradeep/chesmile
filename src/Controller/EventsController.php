@@ -19,7 +19,7 @@ class EventsController extends AppController
 	public function beforeFilter(Event $event) 
 	{
 		parent::beforeFilter($event);
-    	$this->Auth->allow(['Invitation','about','terms','privacy','partnerwith','contact']);
+    	$this->Auth->allow(['Invitation','about','terms','privacy','partnerwith','contact','thebigbeachmarathon']);
     	$this->set('Photo',$this->Auth->user('Photo'));
 	}
 
@@ -1082,7 +1082,7 @@ class EventsController extends AppController
 	    }
     }
 
-     /**
+    /**
      * View method
      *
      * @param string|null $id Event id.
@@ -1173,5 +1173,65 @@ class EventsController extends AppController
         $this->set('usersId', $users_id);
         $this->set(compact('subCategories_new'));
     }
+	
+	/**
+     * View method
+     *
+     * @param string|null $id Event id.
+     * @return \Cake\Network\Response|null
+     * @throws \Cake\Datasource\Exception\RecordNotFoundException When record not found.
+     */
+    public function thebigbeachmarathon($activation_key = null)
+    {
+    	$this->loadModel('Invitefriends');
+    	$invitefriends = $this->Invitefriends->find('all',array('conditions'=>array('activation_key'=>$activation_key)));
+    	$invitefriends = $invitefriends->first();
+
+    	if(isset($invitefriends['events_id']))
+    	{
+    		$id = $invitefriends['events_id'];
+    	} else
+    	{
+    		return $this->redirect(['controller' => 'Users', 'action' => 'login']);
+    	}
+    
+		$this->viewBuilder()->layout('event_home');
+        $event = $this->Events->get($id, [
+            'contain' => ['Users', 'Categories']
+        ]);
+        
+        $this->loadModel('Address');
+        $address = $this->Address->find('all', ['conditions' => ['events_id' => $id]]);
+        $address = $address->first();
+        $this->loadModel('Mediapartners');
+        $mediapartners = $this->Mediapartners->find('all', ['conditions' => ['events_id' => $id]]);
+        $this->loadModel('Galaries');
+        $galaries = $this->Galaries->find('all', ['conditions' => ['events_id' => $id]]);
+
+        $this->loadModel('Sponsors');
+        $sponsors = $this->Sponsors->find('all', ['conditions' => ['events_id' => $id]]);
+        $this->loadModel('Likes');
+        $likes = $this->Likes->find('all', ['conditions' => ['events_id' => $id]]);
+        $query = $this->Likes->find('all', ['select' => 'id',
+		    	'conditions' => ['events_id' => $id]]);
+		$number = $query->count();
+
+        $this->set('event', $event);
+        $this->set('_serialize', ['event']);
+
+        $this->loadModel('Categories');
+        $categories_new = $this->Categories->find()->select(['Categories.name', 'Categories.id'])
+        	->where(['active' => 1]);
+
+        $this->loadModel('SubCategories');
+        $subCategories_new = $this->SubCategories->find('all', ['fields' => 'name',
+			    'conditions' => ['active' => 1]
+			    	]);
+
+        $this->set('categories', $categories_new);
+        $this->set(compact('subCategories_new'));
+        $this->set(compact('address', 'mediapartners', 'sponsors', 'number', 'likes', 'galaries'));
+    }
+	
 }
 
