@@ -61,7 +61,7 @@ a {
     -moz-filter: grayscale(1);
     -o-filter: grayscale(1);
     -ms-filter: grayscale(1);
-    padding:30px;
+    padding:10px;
 }
 
 .img-overlay:hover{
@@ -75,8 +75,22 @@ a {
     -o-transition: all 0.3s ease-in-out;
     -ms-transition: all 0.3s ease-in-out;
     transition: all 0.3s ease-in-out;
-    opacity: 0.7;
-    padding:30px;
+    opacity: 100;
+    padding:10px;
+}
+.img-overlay-other:hover{
+    filter: grayscale(0);
+    -webkit-filter: grayscale(0);
+    -moz-filter: grayscale(0);
+    -o-filter: grayscale(0);
+    -ms-filter: grayscale(0);
+    -webkit-transition: all 0.3s ease-in-out;
+    -moz-transition: all 0.3s ease-in-out;
+    -o-transition: all 0.3s ease-in-out;
+    -ms-transition: all 0.3s ease-in-out;
+    transition: all 0.3s ease-in-out;
+    opacity: 100;
+    padding:25px;
 }
 .address-info p {
     font-size: 13px;
@@ -203,7 +217,7 @@ address {
     background: rgba(0, 0, 0, 0) url(<?=$bgCoverImg?>) no-repeat scroll center center / cover;
 }
 
-@media screen and (max-width: 400px){
+@media screen and (max-width: 414px){
 .view-btn{
     float: left !important;
 }
@@ -255,6 +269,54 @@ a {
 #beverage{
     display: none;
 }
+#beve{
+    display: none;
+}
+@media screen and (min-width: 1280px)
+and (max-width: 1366px){
+    .o2{
+        float: initial;
+    }
+}
+.img-overlay-other{
+    border: 1px solid #e6e9ed;
+    background-color: #fafafa;
+    filter: grayscale(1);
+    -webkit-filter: grayscale(1);
+    -moz-filter: grayscale(1);
+    -o-filter: grayscale(1);
+    -ms-filter: grayscale(1);
+    padding:25px;
+
+}
+@media screen and (max-width: 320px){
+    #beve{
+        margin-left: 30px;
+    }
+    #beverage{
+        margin-left: 30px;
+    }
+}
+
+@media screen and (min-width: 321px)
+and (max-width: 414px){
+     #beve{
+        margin-left: 50px;
+    }
+    #beverage{
+        margin-left: 50px;
+    }
+
+}
+#media-par{
+    display: none;
+}
+.route-map{
+    display: none;
+}
+#fashion{
+	display: none;
+}
 </style>
 
 
@@ -299,6 +361,8 @@ a {
                 <button class="btn btn-primary" style="float: right; background-color: #4ABAC5;border-color: #e2e2e2;" data-toggle="modal" href="#Register-modal">Online Registration</button>
                 <?php } ?>
             <button class="btn btn-primary view-btn" style="float: right;margin-right: 10px;background-color: #4ABAC5;border-color: #e2e2e2;" data-toggle="modal" href="#view-more">Event Details</button>
+
+            <button class="btn btn-primary route-map" style="float: right;margin-right: 10px;background-color: #4ABAC5;border-color: #e2e2e2;" data-toggle="modal" href="#route-map">Route Map</button>
              </div>
           
             </div>
@@ -329,13 +393,13 @@ a {
         <!-- /.row -->
 
     </div>
-
 </div>
 
                             <div class="event-detail">
                                 <div class="container-fluid">
                                     <div class="row">
                                         <div class="col-sm-8 lft_container">
+                                            <div class="row">
                                                 
                                                     <!-- Client 1 -->
                                                     <?php
@@ -400,10 +464,6 @@ a {
                                                         }
                                                     }
                                                     ?>
-
-                                                    <div id="beverage">
-                                                    <h3 class="heading margin25">Beverages Partner<span></span></h3>
-                                                       <a href="http://kalimarkbovonto.com/"> <?=$this->Html->image("static/kalimark.png",array("alt"=>"beverage","class" => "img-overlay","width" => "250px"));?></a>
                                                     </div>
                                                     
                                                     <!-- Client 1 -->
@@ -427,7 +487,8 @@ a {
                                                         $status = "available";
                                                     ?>
                                                     <div class="clearfix"></div>
-                                                     <div style="display: '<?php if(empty($galaries)) { echo "none;";  } ?>'">
+
+                                                     <div style="display: <?php if(empty($galaries)) { echo 'none;'; } ?>">
                                                      <h3 class="heading margin25">Event Galaries<span></span></h3>
                                                     <!-- Client 1 -->
                                                     <?php 
@@ -447,6 +508,7 @@ a {
                                                     <h3 class="heading margin25">Thank You Note:<span></span></h3>
                                                     <p><?= $this->Text->autoParagraph(h($event->note));?></p>
                                                     </div>
+
                                                     <div class="clearfix"></div>
                                                      <button class="btn btn-info btn-lg" data-toggle="modal" data-target="#myModal" style="display: <?php if($event->note=="" && $status!="" && $u_id == $event->user_id ) { echo 'inline-block;'; }else{echo 'none;';} ?>">Open Modal</button>
 
@@ -533,95 +595,55 @@ a {
           </div>
           <div class="modal-body">
               <div class="row">
-                  <div class="col-xs-12 col-lg-7">
-                      <div class="card">
-        
-         <?= $this->Form->create('$marathon',array('url' => ['controller' => 'Marathon','action' => 'add', $event->id],'id' => 'mar')) ?>
+                  <div class="col-xs-12 col-lg-12">
+                      <!-- <div class="card"> --> <!-- </div> -->
+                           <p style="line-height: 3;">Online registration is now closed<br/>
 
-             <input type="hidden" id="checkUrl" name="checkUrl" value="<?php echo $this->Url->build(array('controller' => 'marathon', 'action' => 'isemailexist'));?>">
-             <input type="hidden" name="amount" value="" id="amount"/>
-             <input type="hidden" name="productinfo" value="Marathon (ChennaiSmile.com)" size="64" />
-             <input type="hidden" name="service_provider" value="payu_paisa" size="64" />
-            <div class="form-group float-label-control">
-             
-             <label for="">Firstname</label>
-             <?= $this->Form->input('firstname', array('div' => false, 'class' => 'form-control form-element text','label' => false,'placeholder' => 'Firstname', 'required' => true)) ?>
-            </div>
-       
-            <div class="form-group float-label-control">
-             
-             <label for="">Lastname</label>
-             <?= $this->Form->input('lastname', array('div' => false,'class' => 'form-control form-element text','label' => false,'placeholder' => 'Lastname', 'required' => true)) ?>
-            </div>
-    
+                                  
 
-        <div class="form-group">
-                <label>
-           <?= $this->Form->input('date', array('type' => 'text','class' => 'form-control date','placeholder' => 'Date of birth','label' => false,'required' => true));?>
-           </label><br>
-           <span id="person_type" style="color: black; font-weight: bold;"></span>
-           </div>
+On the spot registration is available <br/>At the venue on june 11th<br/>
 
-       <div class="form-group">
-            <?php $sex = ['Male' => 'Male', 'Female' => 'Female'];
-             echo $this->Form->select('sex', $sex, array('empty' => '(Select Gender)', 'class' => 'form-control heigh', 'required' => true));?>
-        </div>
-            
-            <div class="form-group float-label-control">
-             
-             <label for="">Email</label>
-             <?= $this->Form->input('email', array('div' => false,'class' => 'form-control form-element text','label' => false,'placeholder' => 'Email address', 'required' => true)) ?>
-            </div>
-     
+<b>On spot registration Includes:</b> BIB Number, Medal, Certificate & Refreshments.<br/>
 
-      
-            <div class="form-group float-label-control">
-             <label for="">Mobile number</label>
-             <?= $this->Form->input('mobile_number', array('div' => false,'class' => 'form-control form-element text','label' => false,'placeholder' => 'Mobile number', 'required' => true)) ?>
-            </div>
-     
-            <div class="form-group">
-            <label> Distance </label>
-         <?php $km = ['3 KM' => '3 KM', '5 KM' => '5 KM'];
-           echo $this->Form->select('KM', $km, array('default' => '2 KM','class' => 'form-control heigh', 'required' => true));?>
-           </div>
+<b>Registration Fee:</b> Rs.150<br/>
 
-           <div class="form-group">
-           <label> Select your tshirt size </label>
-           <?php $tshirt = ['XS' => 'XS' ,'S' => 'S', 'M' => 'M', 'L' => 'L', 'XL' => 'XL', 'XXL' => 'XXL', 'XXXL' => 'XXXL'];
-           echo $this->Form->select('TSHIRT', $tshirt, array('default' => 'XS', 'class' => 'form-control heigh', 'required' => true));?>
-           </div>
+<span style="font-size: 11px;">*T-shirt will not be provided for on spot registrants</span>
 
-        <div class="">
-          <div class="form-group text-center">
-           <?= $this->Form->button(__('Proceed to payment'),array('class' => "btn btn-info btn-block")) ?>
-    <?= $this->Form->end() ?>
-          </div>
-        </div>
-  
-    <?= $this->Form->end() ?>
-                      </div>
-                  </div>
-                  <div class="col-xs-12 col-lg-5 bullet-space">
-                      <p class="lead">Note</p>
-                      <ul class="list-unstyled" style="line-height: 2; font-size: 13px;">
-                          <li style="list-style-type: disc;"> All the fields are mandatory to register online</li>
-                          <!-- li style="list-style-type: disc;"> After registration is done, you will be receiving payment link via PayZapp HDFC</li>
-                          <li style="list-style-type: disc;"> Click on the link to make the payment </li> -->
-                          <li style="list-style-type: disc;"> Once payment is done, you will receive an acknowledgement mail </li>
-                          <li style="list-style-type: disc;"> Please carry a proof of the confirmation mail on the marathon day</li>
-                          <!-- <li><a href="/read-more/"><u>Read more</u></a></li> -->
-                      </ul>
-                      <p class="lead" style="font-size: 20px;">Participant's give-away</p>
-                      <?=$this->html->image('participant-giveaway.png',array('class' => 'img-responsive'))?>
-                      <!-- <p><a href="/new-customer/" class="btn btn-info btn-block">Yes please, register now!</a></p> -->
+</p>
 
-                  </div>
-              </div>
           </div>
       </div>
   </div>
+</div>
+</div>
+</div>
+</div>
 
+ <div class="container">
+
+          <!-- <link href="//maxcdn.bootstrapcdn.com/font-awesome/4.1.0/css/font-awesome.min.css" rel="stylesheet"> -->
+    <div class="modal fade" id="route-map" role="dialog">
+    <div class="modal-dialog">
+      <div class="modal-content">
+          <div class="modal-header">
+              <button type="button" class="close" data-dismiss="modal"><span aria-hidden="true">×</span><span class="sr-only">Close</span></button>
+              <h4 class="modal-title" id="myModalLabel">Route Map</h4>
+          </div>
+          <div class="modal-body">
+              <div class="row">
+                  <div class="col-xs-12 col-lg-12">
+                  <?=$this->Html->image("route/3km.PNG",array("alt"=>"route","class" => "img-responsive"));?>
+
+                  <?=$this->Html->image("route/5km.PNG",array("alt"=>"route","class" => "img-responsive"));?>
+     
+
+          </div>
+      </div>
+  </div>
+</div>
+</div>
+</div>
+</div>
 <!-- <script type="text/javascript" src="https://ajax.googleapis.com/ajax/libs/jqueryui/1.8.11/jquery-ui.min.js"></script> -->
   <script type='text/javascript' src='//platform-api.sharethis.com/js/sharethis.js#property=58fdbf6acaaba30012e7e564&product=inline-share-buttons' async='async'></script>
             
@@ -740,7 +762,7 @@ a {
     </div>
   </div> -->
   
-</div>
+
 
        <div class="container">
   <!-- Trigger the modal with a button -->
@@ -780,10 +802,53 @@ a {
 
 <script type="text/javascript">
 
+function referalpgm()
+{
+    var email = document.getElementById("email_registration").value;
+    var amount = $("#amount").val();
+    var person = $("#person_type").val();
+    $.ajax({
+            type: "POST",
+            data: {
+                "email": email
+            },
+            ContentType: 'application/json',
+            dataType: 'json',
+            url: "<?php echo $this->Url->build(array('controller' => 'marathon', 'action' => 'referalpgm')); ?>",
+            success: function(data) {
+                if(data.code)
+                {
+                    var val = $("#amount").val();
+                    if(val =="200")
+                    {
+                        $("#person_type").text("Kids"+", Rs. 200/-. You are existing member of US. So you will get Rs.50 offer. Rs 150/-");
+                        $("#amount").val("150");
+                    }
+                    else if(val=="300")
+                    {
+                        $("#person_type").text("Kids"+", Rs. 300/-. You are existing member of US. So you will get Rs.50 offer. Rs 250/-");
+                        $("#amount").val("250");
+                    }
+                }
+                else
+                {
+                    $("#date").val("");
+                }
+            },
+            error: function(tab) {
+                //$select.html('<option id="-1">none available</option>');
+            }
+        });
+    return false;
+}
 
 $(document).ready(function(){
     var event_id = '<?=$event->id;?>';
     if(event_id==110){
+        $(".marat").css('display','none');
+        $("#beve").css('display','block');
+        $("#media-par").css('display','block');
+        $(".route-map").css('display','block');
         $("#beverage").css('display', 'block');
         if($(document).width() < 400){
             console.log("mobile");
