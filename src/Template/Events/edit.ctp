@@ -381,19 +381,19 @@ input{
 
             <div class="form-group float-label-control">
                 <label for="">Address 1</label>
-            <?= $this->Form->input('address_1',array('div' => false,'label' => false,'class' => 'form-control form-element', 'placeholder' => 'Enter address 1'));?>
+            <?= $this->Form->input('Address.address_1',array('div' => false,'label' => false,'class' => 'form-control form-element', 'placeholder' => 'Enter address 1'), ['value' => $address['address_1']]);?>
                       <!--   <input type="text" class="form-control" placeholder="Enter Address 1"> -->
             </div>
 
             <div class="form-group float-label-control">
                         <label for="">Address 2</label>
-            <?= $this->Form->input('address_2',array('div' => false,'label' => false,'class' => 'form-control form-element', 'placeholder' => 'Enter address 2'));?>
+            <?= $this->Form->input('Address.address_2',array('div' => false,'label' => false,'class' => 'form-control form-element', 'placeholder' => 'Enter address 2'), ['value' => $address['address']]);?>
                         <!-- <input type="text" class="form-control" placeholder="Enter Address 2"> -->
             </div>
 
             <div class="form-group float-label-control">
                         <label for="">Landmark</label>
-               <?= $this->Form->input('landmark',array('div' => false,'label' => false,'class' => 'form-control form-element', 'placeholder' => 'Any Specific Landmark?'));?>
+               <?= $this->Form->input('Address.landmark',array('div' => false,'label' => false,'class' => 'form-control form-element', 'placeholder' => 'Any Specific Landmark?'), ['value' => $address['landmark']]);?>
                <span id="landmark_error" style="color: #FF0000; font-size: 11px;"></span>
                        <!--  <input type="text" class="form-control" placeholder="Any Specific Landmarks?"> -->
             </div>
@@ -401,7 +401,7 @@ input{
             <div class="form-group float-label-control">
                 <div class="ui-widget">
                   <label for="Autocomplete"> Area Name</label>
-                <?php echo $this->Form->input('areaname', array('id' => 'Autocomplete', 'required','class' => 'form-control form-element','label' => false,'placeholder' => 'Areaname'));?>
+                <?php echo $this->Form->input('Address.areaname', array('id' => 'Autocomplete', 'required','class' => 'form-control form-element','label' => false,'placeholder' => 'Areaname'));?>
                   <span id="area_error" style="color: #FF0000; font-size: 11px;"></span>
                 </div>
             </div>
@@ -456,70 +456,10 @@ input{
             </div>
             
 
-            <div class="tab-pane fade imagevalid" id="profile">
             
-            <div class="form-group">
-                <!-- <div class="image-editor"> -->
-                    <label>
-                        <?=$this->Form->input('banner',['type' => 'file','accept' => 'image/*', 'class' => 'cropit-image-input']);?>
-                        [Size: 1311 * 985px]
-                    </label>
-                    <!-- <div id="container-size" style="width:200px; height:200px; display: none;">
-                    <div class="cropit-preview" id="banner-preview" style="display: none;"></div></div>
-                      <div class="image-size-label">
-                      </div>
-                   
-                      <input id="banner-zoom" type="range" class="cropit-image-zoom-input" style="display: none;"> -->
-
-                <!-- </div> -->
-            </div>
-
-             <div class="form-group">
-                <!-- <div class="image-editor"> -->
-                   <label>
-                <?=$this->Form->input('display',['type' => 'file','accept' => 'image/*','class' => 'cropit-image-input']);?>
-                [Size: 280px * 185px]
-                </label>
-
-                      <!-- <input type="file" id="imgsel" class="cropit-image-input" accept="images/*"> -->
-                      <!-- <div class="cropit-preview" id="display-preview" style="display: none;"></div>
-                      <div class="image-size-label">
-                      </div>
-                      <input id="display-zoom" type="range" class="cropit-image-zoom-input" style="display: none;"> -->
-          
-                <!-- </div> -->
-            </div>
-
-             <div class="form-group">
-                <!-- <div class="image-editor"> -->
-                    <label>
-                            <?=$this->Form->input('OrganizersLogo',['type' => 'file','id' => 'org','accept' => 'image/*','class' => 'cropit-image-input']);?>
-                            Size: 75 * 75px]
-                    </label>
-                    <!-- <div class="cropit-preview" id="organizer-preview" style="display: none;"></div>
-                    <div class="image-size-label"></div>
-                    <input id="organizers-zoom" type="range" class="cropit-image-zoom-input" style="display: none;"> -->
-                <!-- </div> -->
-            </div>
-
-             <div class="form-group">
-                    <label>
-                        <?= $this->Form->input('Mediapartners[]',['type' => 'file', 'multiple' => 'true','label' => 'Mediapartners','accept' => 'image/*']);?>
-                        [Size: 1311 * 985px]
-                    </label>
-            </div>
-
-             <div class="form-group">
-                <label>
-            <?=$this->Form->input('Sponsors[]',['type' => 'file', 'multiple' => 'true', 'label' => 'Sponsors','accept' => 'image/*']);?>
-            [Size: 1311 * 985px]
-            </label>
-            </div>
-
 
             <div class="form-group">
             <?= $this->Form->button('Submit',array('id' => 'subbutton')) ?>
-            </div>
              <?= $this->Form->end() ?>
             </div>
 
