@@ -570,111 +570,27 @@ class EventsController extends AppController
         $event = $this->Events->get($id, [
             'contain' => ['Eventsubcategories']
         ]);
+        $this->viewBuilder()->layout('event_home');
+        $this->loadModel('Address');
+        $address = $this->Address->find('all', ['conditions' => ['events_id' => $id]]);
+        $address = $address->first();
     	if(!empty($this->Auth->user('id')))
 		{
 			$users_id = $this->Auth->user('id');
 			$fullname = $this->Auth->user('fullname');
 			$email = $this->Auth->user('email');
 		}
+		//debug($event); exit(0);
         
         if ($this->request->is(['patch', 'post', 'put'])) {
-        	
-        	/////////////////////////////////////////////////////////////////
-        	if(!empty($this->request->data['banner']))
-        	{
-	        	$banner = $this->request->data['banner'];
-		        $ext = substr(strtolower(strrchr($banner['name'], '.')), 1); //get the extension
-		        $arr_ext = array('jpg', 'jpeg', 'png'); //set allowed extensions
-		        
-		        if($banner['size']/1024 > '2048')
-		        {
-		        	$this->Flash->error(__('"imageLogs", __METHOD__." The uploaded file exceeds the MAX_FILE_SIZE(2MB) '));
-		        	$errCheck = true;
-		        }
-		        else if(in_array($ext, $arr_ext))
-		        {
-		            //do the actual uploading of the file. First arg is the tmp name, second arg is
-		            //where we are putting it
-		            $uploadFolder = WWW_ROOT . 'img/banner';
-		        	if( !file_exists($uploadFolder) ){
-				        mkdir($uploadFolder);
-				    }
-		            $filename = str_replace(" ", "-", rand(1, 3000) . $banner['name']);
-		            move_uploaded_file($banner['tmp_name'], WWW_ROOT . 'img/banner' . DS . $filename);
-		             //prepare the filename for database entry
-	                $this->request->data['banner'] = $filename;
-		        }
-        	}
-	        
-        	if(!empty($this->request->data['display']))
-        	{
-	        	$display = $this->request->data['display'];
-		        $ext = substr(strtolower(strrchr($display['name'], '.')), 1); //get the extension
-		        $arr_ext = array('jpg', 'jpeg', 'png'); //set allowed extensions
-		        
-		        if($display['size']/1024 > '2048')
-		        {
-		        	$this->Flash->error(__('"imageLogs", __METHOD__." The uploaded file exceeds the MAX_FILE_SIZE(2MB) '));
-		        	$errCheck = true;
-		        }
-		        else if(in_array($ext, $arr_ext))
-		        {
-		            //do the actual uploading of the file. First arg is the tmp name, second arg is
-		            //where we are putting it
-		            $uploadFolder = WWW_ROOT . 'img/display';
-		        	if( !file_exists($uploadFolder) ){
-				        mkdir($uploadFolder);
-				    }
-		            $filename = str_replace(" ", "-", rand(1, 3000) . $display['name']);
-		            move_uploaded_file($display['tmp_name'], WWW_ROOT . 'img/display' . DS . $filename);
-		             //prepare the filename for database entry
-	                $this->request->data['display'] = $filename;
-		        }
-        	}
-	        
-        	if(!empty($this->request->data['display']))
-        	{
-	        	$OrganizersLogo = $this->request->data['OrganizersLogo'];
-		        $ext = substr(strtolower(strrchr($OrganizersLogo['name'], '.')), 1); //get the extension
-		        $arr_ext = array('jpg', 'jpeg', 'png'); //set allowed extensions
-		        
-		        if($OrganizersLogo['size']/1024 > '2048')
-		        {
-		        	$this->Flash->error(__('"imageLogs", __METHOD__." The uploaded file exceeds the MAX_FILE_SIZE(2MB) '));
-		        	$errCheck = true;
-		        }
-		        else if(in_array($ext, $arr_ext))
-		        {
-		            //do the actual uploading of the file. First arg is the tmp name, second arg is
-		            //where we are putting it
-		            $uploadFolder = WWW_ROOT . 'img/OrganizersLogo';
-		        	if( !file_exists($uploadFolder) ){
-				        mkdir($uploadFolder);
-				    }
-		            $filename = str_replace(" ", "-", rand(1, 3000) . $OrganizersLogo['name']);
-		            move_uploaded_file($OrganizersLogo['tmp_name'], WWW_ROOT . 'img/OrganizersLogo' . DS . $filename);
-		             //prepare the filename for database entry
-	                $this->request->data['OrganizersLogo'] = $filename;
-		        }
-        	}
-  			//debug($this->request->data);
-
+        	$address = $this->Address->patchEntity($address, $this->request->data['Address']);
+	        $address->events_id = $id; 
+	        $this->Address->save($address);
 	        $this->request->data['date'] = new Time($this->request->data['date']);
         	/////////////////////////////////////////////////////////////////
         	
             $event = $this->Events->patchEntity($event, $this->request->data);
             if ($this->Events->save($event)) {
-            	
-            	////////////////////////////////////////////////////////////////////
-            	$new_id = $id;
-            	foreach ($this->request->data['Eventsubcategories']['sub_categories'] as $key => $value)
-	            {
-	            	$subcategories = $this->Events->Eventsubcategories->newEntity();
-	            	$subcategories->events_id = $new_id;
-	            	$subcategories->sub_categories = $value;
-	            	$this->Events->Eventsubcategories->save($subcategories);
-	            }
-            	////////////////////////////////////////////////////////////////////
             	
                 $this->Flash->success(__('The event has been saved.'));
 
@@ -683,14 +599,7 @@ class EventsController extends AppController
                 $this->Flash->error(__('The event could not be saved. Please, try again.'));
             }
         }
-        $cnt = 0;
-        foreach ($event['eventsubcategories'] as $val)
-        {
-        	$selected[$cnt] =  $val['sub_categories'];
-        	$cnt++;
-        }
-        
-
+        $event['Address'] =$address;
 
         $this->loadModel('SubCategories');
         $this->set(compact('selected', 'selected'));
@@ -698,7 +607,8 @@ class EventsController extends AppController
         $users = $this->Events->Users->find('list', ['limit' => 200]);
         $categories = $this->Events->Categories->find('list', ['limit' => 200]);
         $subCategories = $this->SubCategories->find('list', ['limit' => 200]);
-        $this->set(compact('event', 'users', 'categories', 'subCategories'));
+        $categories_list = $this->Events->Categories->find('list', ['limit' => 200]);
+        $this->set(compact('event', 'users', 'categories', 'categories_list', 'subCategories', 'address'));
         $this->set('_serialize', ['event']);
     }
 
