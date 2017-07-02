@@ -49,14 +49,14 @@ Router::scope('/', function (RouteBuilder $routes) {
      * its action called 'display', and we pass a param to select the view file
      * to use (in this case, src/Template/Pages/home.ctp)...
      */
-    $routes->connect('/', ['controller' => 'Users', 'action' => 'login', 'home']);
+    $routes->connect('/', ['controller' => 'events', 'action' => 'index', 'home']);
 
     /**
      * ...and connect the rest of 'Pages' controller's URLs.
      */
     $routes->connect('/pages/*', ['controller' => 'Pages', 'action' => 'display']);
 
-    $routes->connect('thebigbeachmarathon', ['controller' => 'events', 'action' => 'invitation','48d977a4-dea0-4a49-993a-c9408d0163cb']);
+    $routes->connect('thebigbeachmarathon', ['controller' => 'events', 'action' => 'thebigbeachmarathon','48d977a4-dea0-4a49-993a-c9408d0163cb']);
 	//$routes->connect('/', array('controller' => 'posts', 'action' => 'index', 'home'));
     $routes->connect(
 	    '/admin',
