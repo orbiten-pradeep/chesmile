@@ -1196,10 +1196,12 @@ em.error {
     <!-- Collect the nav links, forms, and other content for toggling -->
   <div  class="col-md-offset-3" id="bs-example-navbar-collapse-1">
     <ul class="nav navbar-nav navbar-right">
+    <?php if(!$this->request->session()->read('Auth.User')) { ?>
      <div class="img-responsive login" style="float: left; margin-right: 15px; cursor: pointer;" data-toggle="modal" data-target="#loginSignup">
           <?php echo $this->Html->image('profile_thumbnail.jpg',array('alt' => 'Logo Chennai Smile','onclick' => 'largedrop()'));?>
           <span class="signin-text" style="cursor: pointer;">Sign in</span>
      </div>
+     <?php }  else { ?>
       <div class="dropdown" style="margin-right: 15px; cursor: pointer !important;">
         <?php
         $user = $this->request->session()->read('Auth.User');
@@ -1219,7 +1221,7 @@ em.error {
           <!-- <?= $this->Html->link(__('Logout'), ['controller' => 'Users', 'action' => 'logout']) ?> -->
         </div>
       </div>
-
+      <?php } ?>
       <li><a href="#past-events" class="btn btn-primary past-events">View past events</a></li>
       <li><?= $this->Html->link(__('Create events'), ['controller' => 'events', 'action' => 'add'], array('class' => 'btn btn-primary')); ?></li>
     </ul>
