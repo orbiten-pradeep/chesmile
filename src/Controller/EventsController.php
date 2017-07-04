@@ -19,7 +19,7 @@ class EventsController extends AppController
 	public function beforeFilter(Event $event) 
 	{
 		parent::beforeFilter($event);
-    	$this->Auth->allow(['Invitation','about','terms','privacy','partnerwith','contact','thebigbeachmarathon', 'index']);
+    	$this->Auth->allow(['Invitation','about','terms','privacy','partnerwith','contact','thebigbeachmarathon', 'index', 'eventlist','View','viewresult','searchbyeventtitle','search']);
     	$this->set('Photo',$this->Auth->user('Photo'));
 	}
 
@@ -56,7 +56,11 @@ class EventsController extends AppController
     	$this->loadModel('Groups');
     	$groups = $this->Groups->find('list', ['limit' => 200,'conditions' => array('role' => 'Users')]);
         $this->set(compact('user', 'groups'));
-
+        $logged = false;
+        if($this->Auth->user())
+        	$logged = true;
+        else
+        	$logged = false;
 		$this->viewBuilder()->layout('event_home');
 		
         $this->loadModel('Categories');
