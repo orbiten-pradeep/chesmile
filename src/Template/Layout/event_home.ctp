@@ -1462,7 +1462,7 @@ em.error {
    <h3 style="font-size: 22px; color:#ffffff;">Journey towards memorable experiences begins from here.</h3> -->
         <div class="card-login card-container-login">
           
-           <?= $this->Form->create('', array('id' => 'signupForm','class' => 'form-signup formheigh ','controller' => 'users', 'url' => ['action' => 'add'])) ?>
+           <?= $this->Form->create('', array('id' => 'signupForm','class' => 'form-signup formheigh ', 'url' => ['action' => 'add','controller' => 'users'])) ?>
           
             <input type="hidden" id="checkUrl" name="checkUrl" value="<?php echo $this->Url->build(array('controller' => 'users', 'action' => 'isemailexist'));?>">
             
@@ -1528,7 +1528,7 @@ em.error {
    <h3 style="font-size: 22px; color:#ffffff;">Journey towards memorable experiences begins from here.</h3> -->
         <div class="card-login card-container-login">
            
-            <?= $this->Form->create('',array('id' => 'loginForm2','class' => 'form-signin')) ?>
+            <?= $this->Form->create('',array('id' => 'loginForm2','class' => 'form-signin', 'url' => ['action' => 'login','controller' => 'users'])) ?>
             <!-- <form class="form-signin"> -->
             <!-- <h3 style="color:#333333">Sign In & Enjoy</h3> -->
              
