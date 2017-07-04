@@ -1222,9 +1222,17 @@ em.error {
         </div>
       </div>
       <?php } ?>
+      <?php if($this->request->session()->read('Auth.User')) { ?>
       <li><a href="#past-events" class="btn btn-primary past-events">View past events</a></li>
       <li><?= $this->Html->link(__('Create events'), ['controller' => 'events', 'action' => 'add'], array('class' => 'btn btn-primary')); ?></li>
+        <?php }?>
+
+      <?php if(!$this->request->session()->read('Auth.User')){?>
+      <li><a href="#" class="btn btn-primary" data-toggle="modal" data-target="#loginSignup">Create events</a></li>
+      <?php }?>
     </ul>
+
+    
     <ul class="nav navbar-nav search-nav">
       <li class="dropdown category_btn">
           <label style="font-weight: normal;">Category</label>
