@@ -96,7 +96,8 @@ class UsersController extends AppController
     			$email->send();
 
                 $this->Flash->success(__('Account activation link has been sent to you. Please check your mail'));
-                return $this->redirect(['action' => 'login']);
+                //return $this->redirect(['action' => 'login']);
+                return $this->redirect(['controller' => 'Events','action' => 'index']);
             } else {
                 $this->Flash->error(__('The user could not be saved. Please, try again.'));
             }
@@ -163,7 +164,7 @@ class UsersController extends AppController
 	            return $this->redirect($this->Auth->redirectUrl());
 	        }else{
 	        	$this->Flash->error(__('Username or Password is wrong! Please try again'));
-	        	return $this->redirect(['action' => 'login']);
+	        	return $this->redirect(['controller' => 'Events','action' => 'index']);
 	        }
 	        // $this->Flash->error(__('Username or Password is wrong! Please try again'));
 	    }
