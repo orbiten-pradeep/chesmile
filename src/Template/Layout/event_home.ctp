@@ -504,15 +504,7 @@ input:required:{
       border-radius:0;
     }*/
 
-body.modal-open .background-container{
-    -webkit-filter: blur(4px);
-    -moz-filter: blur(4px);
-    -o-filter: blur(4px);
-    -ms-filter: blur(4px);
-    filter: blur(4px);
-      filter: url("https://gist.githubusercontent.com/amitabhaghosh197/b7865b409e835b5a43b5/raw/1a255b551091924971e7dee8935fd38a7fdf7311/blur".svg#blur);
-    filter:progid:DXImageTransform.Microsoft.Blur(PixelRadius='4');
-  }
+
 </style>
 <style type="text/css">
     .float-label-control { position: relative; margin-bottom: 1.5em; }
@@ -1140,6 +1132,16 @@ em.error {
     background-color: #e2e2e2;
 }
 
+body.modal-open .background-container{
+    -webkit-filter: blur(4px);
+    -moz-filter: blur(4px);
+    -o-filter: blur(4px);
+    -ms-filter: blur(4px);
+    filter: blur(4px);
+      filter: url("https://gist.githubusercontent.com/amitabhaghosh197/b7865b409e835b5a43b5/raw/1a255b551091924971e7dee8935fd38a7fdf7311/blur".svg#blur);
+    filter:progid:DXImageTransform.Microsoft.Blur(PixelRadius='4');
+  }
+
 
 
 </style>
@@ -1290,14 +1292,16 @@ em.error {
 
 
 
-    </div><!-- /.navbar-collapse -->
+   <!--  </div> --><!-- /.navbar-collapse -->
   <!-- </div> --><!--.container-fluid-->
 </nav>   
+</div>
 <div class="container-content">
   <?= $this->fetch('content') ?>
    <?php echo $this->Flash->render(); ?>
 </div>
-           
+
+<div class="background-container">           
 
 <div align="center" class="footer main-footer" style="font-size: 11px;">
 
@@ -1320,6 +1324,7 @@ em.error {
     </ul> 
   </div>
   <p style="" class="copyrights">Copyright © 2017 ChennaiSmile</p><!--End container-->
+</div>
 </div>
 </div>
 <div class="mobile-footer visible-xs" id="mobFooter">
