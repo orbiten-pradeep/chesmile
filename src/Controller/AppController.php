@@ -70,8 +70,8 @@ class AppController extends Controller
 		    ],
 		    'logoutRedirect' => [
 		        'plugin' => false,
-		        'controller' => 'Users',
-		        'action' => 'login'
+		        'controller' => 'Events',
+		        'action' => 'index'
 		    ],
 		    'unauthorizedRedirect' => [
 		        'controller' => 'Users',
