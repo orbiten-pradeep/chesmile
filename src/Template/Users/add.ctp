@@ -1,3 +1,9 @@
+<!-- <script>
+$(window).on('load',function(){
+        window.location="/";
+    });
+</script> -->
+
 <style>
 .btn{
 	margin-top:5%;
@@ -154,6 +160,7 @@ setTimeout( function(){
 
 
 </script>
+
 <?= $this->Form->create($user, array('id' => 'animdiv','class' => 'form-inline signin signupform pure-form')) ?>
 <fieldset>
 		<div id="contents1">	
