@@ -45,11 +45,6 @@
 
 <meta name="viewport" content="width=device-width, initial-scale=1">
   <!-- <script src="https://ajax.googleapis.com/ajax/libs/jquery/1.12.0/jquery.min.js"></script> -->
-  <script src="http://maxcdn.bootstrapcdn.com/bootstrap/3.3.6/js/bootstrap.min.js"></script>
-
-
-<?php echo $this->Html->script(['jquery']); ?>
-
   <div class="container">
   <!-- Trigger the modal with a button -->
  <!--  <button type="button" class="btn btn-info btn-lg" id="alertbox">Click here</button> -->
