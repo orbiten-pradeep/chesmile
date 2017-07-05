@@ -281,12 +281,12 @@ input{
                    Event Information
                   </a></li>
 
-                  <li><a href="#profile" data-toggle="tab" title="profile">
+                 <!--  <li><a href="#profile" data-toggle="tab" title="profile">
                      <span class="round-tabs two">
                        Additional Details
                      </span> 
                     </a>
-                 </li>
+                 </li> -->
                      
                      </ul>
 
@@ -740,12 +740,12 @@ $('#id_typemore').on('click', function () {
             $("#title_error").text("");
         }
 
-        if ($('#contact_number').val() == '') {
-            status = false;
-           $("#contact_error").text("please enter your Contact Number");
-        }else{
-            $("#contact_error").text("");
-        } 
+        // if ($('#contact_number').val() == '') {
+        //     status = false;
+        //    $("#contact_error").text("please enter your Contact Number");
+        // }else{
+        //     $("#contact_error").text("");
+        // } 
 
         if($("#descriptioin").val().length<=250){
             status = false;

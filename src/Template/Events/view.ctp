@@ -317,10 +317,46 @@ and (max-width: 414px){
 #fashion{
 	display: none;
 }
+
+/*body.modal-open .background-container{
+    -webkit-filter: none !important;
+    -moz-filter: none !important;
+    -o-filter: none !important;
+    -ms-filter: none !important;
+    filter: none !important;
+      filter:none !important;
+    filter:none !important;
+  }
+
+  .modal-backdrop {
+    position: relative;
+    top: 0;
+    right: 0;
+    bottom: 0;
+    left: 0;
+    z-index: 1040;
+    background: none !important;
+}
+
+.modal-backdrop.in {
+    filter: none !important;
+    opacity: none !important;
+}
+
+.modal-header{
+  color: none !important;
+  background-color: none !important;
+
+}
+
+.modal-body {
+    background-color: none !important;
+}*/
+
 </style>
 
 
-
+<div class="background-container">
 <div class="cover-picdiv">
 <div class="cover-pic img-responsive user-pic" alt="The BigBeach Marathon">
 		<div class="container-fluid heading_txt" style="background: linear-gradient(to bottom, rgba(0, 0, 0, 0) 0%, rgba(0, 0, 0, 0.63) 50%);position: absolute;bottom: 0;z-index: 1;width: 100%;box-sizing: border-box;">
@@ -354,7 +390,7 @@ and (max-width: 414px){
 				<p class="margin25" style="font-size: 17px;"><!-- <span class="glyphicon glyphicon-calendar calender_txt" aria-hidden="true"></span> -->
 				<?php echo $this->Html->image('cal.png')?><span style="margin-left: 10px;"><?= date_format($event->date, "j M Y") ?></span></p>
 				<p style="font-size: 17px;">
-					<!-- <span class="glyphicon glyphicon-time" aria-hidden="true"></span> --><?php echo $this->Html->image('clock-chennaismile.png')?><span style="margin-left: 10px;"><?= h($event->time)." AM"; ?></span>
+					<!-- <span class="glyphicon glyphicon-time" aria-hidden="true"></span> --><?php echo $this->Html->image('clock-chennaismile.png')?><span style="margin-left: 10px;"><?= h($event->time) ?></span>
 				</p>
 				<div class="btn-reg">
 				<?php if($event->register_online == 1) { ?>
@@ -384,7 +420,7 @@ and (max-width: 414px){
 						<?php echo empty(!$address->areaname) ? $address->areaname : ''; ?>
 					</p>
 					<p><?php echo $address->city; ?></p>
-					<p>Contact: <?php echo h($event->contact_number).", ".h($event->mobile_number) ?></p> 
+					<p style="display: <?php if(empty($event->contact_number | $event->mobile_number)) { echo 'none;'; } ?>">Contact: <?php echo h($event->contact_number).", ".h($event->mobile_number) ?></p> 
 				</address>
 			</div>
 		</div>
@@ -592,6 +628,7 @@ if($u_id == $event->user_id){ ?>
 		</ul>
 </nav> 
 
+</div>
 		  <div class="container">
 
 		  <!-- <link href="//maxcdn.bootstrapcdn.com/font-awesome/4.1.0/css/font-awesome.min.css" rel="stylesheet"> -->
@@ -772,19 +809,75 @@ On the spot registration is available <br/>At the venue on june 11th<br/>
   </div> -->
   
 
+ <div class="modal" tabindex="-1" id="loginModal" role="dialog">
+    <div class="modal-dialog">
+    
+      <!-- Modal content-->
+      <div class="modal-content">
+        <div class="modal-header">
+          <button style="color: #2bbfd9;" type="button" class="close" data-dismiss="modal">&times;</button>
+          <h3 style="color:#e2e2e2;text-align: center;">Sign In & Enjoy</h3>
+        </div>
+        <div class="modal-body">
+        <div class="wrapper">
+<!-- Page Content -->
+    <div class="intro-header_CHENNAI">
+  <div class="container"><br>
+   <!-- <h1 style="color:#ffffff">Let's roll like a frisky ball!</h1>
+   <h3 style="font-size: 22px; color:#ffffff;">Journey towards memorable experiences begins from here.</h3> -->
+        <div class="card-login card-container-login">
+           
+            <?= $this->Form->create('',array('id' => 'loginForm2','class' => 'form-signin', 'url' => ['action' => 'login','controller' => 'users'])) ?>
+            <!-- <form class="form-signin"> -->
+            <!-- <h3 style="color:#333333">Sign In & Enjoy</h3> -->
+             
+          <div class="form-group float-label-control">
+   
+    
+    <?= $this->Form->input('email', array('div' => false,'id' => 'email','class' => 'form-control form-element','label' => false,'placeholder' => 'Email Address','required' => true)) ?>
+     <label for="">Email Address</label> 
+    
+        <div class="forgotpass"> &nbsp;</div>
+    </div>
+          <div class="form-group float-label-control">
+          <label for="">Password</label> 
+        <?= $this->Form->input('password',array('div' => false,'id' => 'password', 'class' => 'form-control form-element','label' => false,'placeholder' => 'Password','required' => true)) ?>
+           
+          </div>
+        
+               <?= $this->Form->submit(__('Log In'), array('id' => 'Login2', 'class' => 'btn btn-primary btn-lg cs-signup-button cs-signin-button')) ?>
 
+
+               
+            <div class="forgotpass" style=" margin-top: 10px;">
+            
+              <div style=" color: #000; margin-top: 25px;">
+              <a style="font-size: 12px;" data-toggle="modal" href="#myModal">Forgot Password?</a><br><br>
+              Not a member? <a href="#" class="viewSignupForim">Join Now</a></div>
+
+           </div>
+            <?= $this->Form->end() ?>
+            </div>
+            </div>
+            </div>
+            </div>
+            </div>
+      </div>
+      
+    </div>
+  </div>
 	   <div class="container">
   <!-- Trigger the modal with a button -->
  <!--  <button type="button" class="btn btn-info btn-lg" id="alertbox">Click here</button> -->
 
   <!-- Modal -->
-  <div class="modal fade" id="view-more" role="dialog">
+  <div class="modal fade" tabindex="-1" id="view-more" role="dialog">
 	<div class="modal-dialog">
 	
 	  <!-- Modal content-->
 	  <div class="modal-content">
-		<div class="modal-header" style="border-bottom: none;">
-		  <button type="button" class="close" data-dismiss="modal">&times;</button>
+		<div class="modal-header">
+		  <button type="button" class="close" data-dismiss="modal" style="color:#4abac5;">&times;</button>
 		  <h4 class="modal-title">Event Description</h4>
 		</div>
 		<div class="modal-body">
@@ -792,9 +885,9 @@ On the spot registration is available <br/>At the venue on june 11th<br/>
 		  <?=  $this->Text->autoParagraph(h($event->descriptioin_more));?>
 
 		</div>
-		<div class="modal-footer" style="border-top: none;">
-		 <!--  <button type="button" class="btn btn-default closebtn" data-dismiss="modal">Close</button> -->
-		</div>
+		<!-- <div class="modal-footer" style="border-top: none;">
+		  <button type="button" class="btn btn-default closebtn" data-dismiss="modal">Close</button>
+		</div> -->
 	  </div>
 	  
 	</div>

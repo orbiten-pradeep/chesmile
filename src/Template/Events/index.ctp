@@ -60,6 +60,7 @@ max-width: 259px;
 <script src="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.6/js/bootstrap.min.js"></script>
 <!--  <div class="content"> -->
 <!-- <div class="container-fluid content"> -->
+<div class="background-container">
 <div class="container-fluid">
 <div class="row" style="margin-left: 0px;">
     <div class="col-sm-3 col-md-2"> 
@@ -128,6 +129,7 @@ max-width: 259px;
         </div>
         <div class="loadingDiv"><div id="loading"></div></div>
     </div>
+</div>
 </div>
 </div>
 <!-- <div class="row"> &nbsp; </div> -->

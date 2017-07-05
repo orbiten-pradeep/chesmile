@@ -279,6 +279,10 @@ input{
     background-color: #337ab7 !important;
     color: white;
 }
+/*.box-st{
+  background: none !important;
+  z-index: 0 !important;
+}*/
 </style>
 <div class="container-fluid height">
     <div class="col-md-offset-2">
@@ -354,7 +358,7 @@ input{
 
             <div class="form-group" style="display: none;" id="id_moredes">
                    <label for="">Description More..</label>
-                  <?= $this->Form->input('descriptioin_more',array('div' => false, 'label' => false,'class' => 'form-control form-element','placeholder' => 'Type more description.','style' => 'color:black !important;', 'type' => 'textarea' ));?>
+                  <?= $this->Form->input('descriptioin_more',array('div' => false, 'label' => false,'class' => 'form-control form-element box-st','placeholder' => 'Type more description.','style' => 'color:black !important;', 'type' => 'textarea' ));?>
             </div>
 
 
@@ -555,7 +559,7 @@ input{
     <div class="modal-content">
       <div class="modal-header">
         <button type="button" class="close" data-dismiss="modal" aria-label="Close">
-          <span aria-hidden="true">&times;</span>
+          <span aria-hidden="true" style="color: #4ABAC6;">&times;</span>
         </button>
         <h5 class="modal-title" id="exampleModalLabel">Map</h5>        
       </div>
@@ -817,12 +821,12 @@ $('#id_typemore').on('click', function () {
             $("#title_error").text("");
         }
 
-        if ($('#contact_number').val() == '') {
-            status = false;
-           $("#contact_error").text("please enter your Contact Number");
-        }else{
-            $("#contact_error").text("");
-        } 
+        // if ($('#contact_number').val() == '') {
+        //     status = false;
+        //    $("#contact_error").text("please enter your Contact Number");
+        // }else{
+        //     $("#contact_error").text("");
+        // } 
 
         if($("#descriptioin").val().length<=250){
             status = false;
