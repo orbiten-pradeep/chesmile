@@ -59,7 +59,7 @@
           <button type="button" class="close hide" data-dismiss="modal" style="color: #4abac5 !important;">&times;</button>
           <h4 class="modal-title"></h4>
         </div>
-        <div class="modal-body" style="text-align: center;">
+        <div class="modal-body" style="text-align: center;background: none;">
           <p ><?= h($message) ?></p>
         </div>
         <div class="modal-footer" style="border-top: none;">

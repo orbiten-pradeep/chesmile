@@ -1142,7 +1142,18 @@ body.modal-open .background-container{
     filter:progid:DXImageTransform.Microsoft.Blur(PixelRadius='4');
   }
 
+.has-error .form-control {
+    border-color: #a94442;
+    -webkit-box-shadow: none !important;
+    box-shadow: none !important;
+}
 
+.has-success .form-control{
+  border-color: #3c763d;
+   -webkit-box-shadow: none !important;
+    box-shadow: none !important;
+
+}
 
 </style>
  <meta charset="utf-8">
@@ -1718,6 +1729,188 @@ window.onclick = function(event) {
         autoHeight();
     });
 
+
+$(document ).ready( function () {
+
+$("#forgotpassform" ).validate( {
+    rules: {    
+      email: {
+        required: true,
+        email: true
+      },
+    },
+    messages: {
+      email: "Please enter a email address"
+    },
+    errorElement: "em",
+    errorPlacement: function ( error, element ) {
+      // Add the `help-block` class to the error element
+      error.addClass( "help-block" );
+      console.log(element);
+
+      if ( element.prop( "type" ) === "checkbox" ) {
+        error.insertAfter( element.parent( "label" ) );
+      } else {
+        error.insertAfter( element );
+      }
+    },
+    highlight: function ( element, errorClass, validClass ) {
+      $( element ).parents( ".input" ).addClass( "has-error" ).removeClass( "has-success" );
+    },
+    unhighlight: function (element, errorClass, validClass) {
+      $( element ).parents( ".input" ).addClass( "has-success" ).removeClass( "has-error" );
+    }
+  });
+  
+  $("#signupForm" ).validate( {
+    rules: {
+      fullname: "required",      
+      email: {
+        required: true,
+        email: true,
+        remote: {
+          url: $("#checkUrl").val(),
+          type: "POST",
+          cache: false,
+          dataType: "json",
+          data: {
+              email: function() { return $("#signupForm #email").val(); }
+          },
+          dataFilter: function(response) {
+            if(response != "") {
+              var resp = JSON.parse(response); 
+              return (resp.code == true) ? true : false;
+            } 
+            else { 
+              return false;
+            }
+          }
+        }
+      },
+      password: {
+        required: true,
+        minlength: 6
+      },
+      confirm_password: {
+        required: true,
+        minlength: 6,
+        equalTo: "#new_password"
+      }
+    },
+    messages: {
+      fullname: "Please enter your Fullname",      
+      email: { 
+        required: "Please enter a valid email address",
+        remote: "Email ID already exist" 
+      },
+      password: {
+        required: "Please provide a password",
+        minlength: "Your password must be at least 6 characters long"
+      },
+      confirm_password: {
+        required: "Please provide a confirm password",
+        minlength: "Your password must be at least 6 characters long",
+        equalTo: "Please enter the same password as above"
+      }
+    },
+    errorElement: "em",
+    errorPlacement: function ( error, element ) {
+      // Add the `help-block` class to the error element
+      error.addClass( "help-block" );
+
+      if ( element.prop( "type" ) === "checkbox" ) {
+        error.insertAfter( element.parent( "label" ) );
+      } else {
+        error.insertAfter( element );
+      }
+    },
+    highlight: function ( element, errorClass, validClass ) {
+      $( element ).parents( ".input" ).addClass( "has-error" ).removeClass( "has-success" );
+    },
+    unhighlight: function (element, errorClass, validClass) {
+      $( element ).parents( ".input" ).addClass( "has-success" ).removeClass( "has-error" );
+    }
+  });
+
+
+  $("#loginForm" ).validate( {
+    rules: {    
+      email: {
+        required: true,
+        email: true
+      },
+      password: {
+        required: true
+      }
+    },
+    messages: {
+      email: "Please enter a email address",
+      password: {
+        required: "Please provide a password"      
+      }
+    },
+    errorElement: "em",
+    errorPlacement: function ( error, element ) {
+      // Add the `help-block` class to the error element
+      error.addClass( "help-block" );
+      console.log(element);
+
+      if ( element.prop( "type" ) === "checkbox" ) {
+        error.insertAfter( element.parent( "label" ) );
+      } else {
+        error.insertAfter( element );
+      }
+    },
+    highlight: function ( element, errorClass, validClass ) {
+      $( element ).parents( ".input" ).addClass( "has-error" ).removeClass( "has-success" );
+    },
+    unhighlight: function (element, errorClass, validClass) {
+      $( element ).parents( ".input" ).addClass( "has-success" ).removeClass( "has-error" );
+    }
+  });
+
+
+  $("#loginForm2" ).validate( {
+    rules: {    
+      email: {
+        required: true,
+        email: true
+      },
+      password: {
+        required: true
+      }
+    },
+    messages: {
+      email: "Please enter a email address",
+      password: {
+        required: "Please provide a password"      
+      }
+    },
+    errorElement: "em",
+    errorPlacement: function ( error, element ) {
+      // Add the `help-block` class to the error element
+      error.addClass( "help-block" );
+      console.log(element);
+
+      if ( element.prop( "type" ) === "checkbox" ) {
+        error.insertAfter( element.parent( "label" ) );
+      } else {
+        error.insertAfter( element );
+      }
+    },
+    highlight: function ( element, errorClass, validClass ) {
+      $( element ).parents( ".input" ).addClass( "has-error" ).removeClass( "has-success" );
+    },
+    unhighlight: function (element, errorClass, validClass) {
+      $( element ).parents( ".input" ).addClass( "has-success" ).removeClass( "has-error" );
+    }
+  });
+
+});
+
+</script>
+<script type="text/javascript">
+  $('#product-options').modal('hide');
 </script>
 </body>
 </html>

@@ -828,12 +828,12 @@ $('#id_typemore').on('click', function () {
         //     $("#contact_error").text("");
         // } 
 
-        if($("#descriptioin").val().length<=250){
-            status = false;
-            $("#description_error").text("please enter a description with minimum 120 characters");
-        }else{
-            $("#description_error").text("");
-        }
+        // if($("#descriptioin").val().length<=250){
+        //     status = false;
+        //     $("#description_error").text("please enter a description with minimum 120 characters");
+        // }else{
+        //     $("#description_error").text("");
+        // }
 
         if($("#landmark").val() == ''){
             status = false;
