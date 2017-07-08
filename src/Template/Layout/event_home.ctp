@@ -176,9 +176,9 @@ background-color: #286090;
 .checkbox{
   margin-bottom: 0px !important;
 }
-.past-events{
+/*.past-events{
   display: none !important;
-}
+}*/
 
 .signin-text{
 top: 45%;
@@ -1215,7 +1215,7 @@ body.modal-open .background-container{
 <nav class="navbar navbar-default hidden-xs">  
 
     <div class="navbar-header">
-      <?php echo $this->Html->image('chennaismile-logo.png',array('alt' => 'Logo Chennai Smile','class' => 'img-responsive logores','url' => array('controller' => 'events', 'action' => 'index') )); ?>
+      <?php echo $this->Html->image('chennaismile-logo.png',array('alt' => 'Logo Chennai Smile','class' => 'img-responsive logores','width' => '80%','url' => array('controller' => 'events', 'action' => 'index') )); ?>
     </div>
 
     <!-- Collect the nav links, forms, and other content for toggling -->
@@ -1247,8 +1247,9 @@ body.modal-open .background-container{
         </div>
       </div>
       <?php } ?>
-      <?php if($this->request->session()->read('Auth.User')) { ?>
       <li><a href="#past-events" class="btn btn-primary past-events">View past events</a></li>
+      <?php if($this->request->session()->read('Auth.User')) { ?>
+      
       <li><?= $this->Html->link(__('Create events'), ['controller' => 'events', 'action' => 'add'], array('class' => 'btn btn-primary')); ?></li>
         <?php }?>
 
@@ -1471,7 +1472,7 @@ body.modal-open .background-container{
             <li class="list-group-item"><a href="<?php echo $this->Url->build(array('controller' => 'events', 'action' => 'add'));?>" >Create Event</a></li>
             <li class="list-group-item"><a href="#my-events" class="my-events">My Events</a></li>
              <li class="list-group-item"><a href="#liked-events" class="liked-events">Liked Events</a></li>
-            <li class="list-group-item" style="display: none;"><a href="<?php echo $this->Url->build(array('controller' => 'events'));?>#past-events" >Past Event</a></li>
+            <li class="list-group-item"><a href="<?php echo $this->Url->build(array('controller' => 'events'));?>#past-events" >Past Event</a></li>
             <li class="list-group-item"><a href="<?php echo $this->Url->build(array('controller' => 'UserProfile', 'action' => 'add'));?>" >My Profile</a></li>
             <li class="list-group-item"><a href="<?php echo $this->Url->build(array('controller' => 'Users', 'action' => 'logout'));?>" >Logout</a></li>
           </ul>
@@ -1479,6 +1480,7 @@ body.modal-open .background-container{
     </div><!-- /.modal-content -->
   </div><!-- /.modal-dialog -->
 </div><!-- /.modal -->
+
 
 <div class="modal" id="loginSignup" role="dialog">
     <div class="modal-dialog">
