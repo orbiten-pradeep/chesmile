@@ -392,7 +392,7 @@ class UsersController extends AppController
 						    $email->send();
 			            	
 			                $this->Flash->success(__('Email has been sent to reset your password'));
-			                return $this->redirect(['action' => 'login']);
+			                return $this->redirect(['controller' => 'events','action' => 'index']);
 							//============EndEmail=============//
 						}
 						else{
@@ -432,7 +432,7 @@ class UsersController extends AppController
 					if($this->Users->save($user))
 					{
 						$this->Flash->success(__('Password changed successfully'));
-						$this->redirect(array('controller'=>'users','action'=>'login'));
+						$this->redirect(array('controller'=>'events','action'=>'index'));
 					}
 				}
 			}

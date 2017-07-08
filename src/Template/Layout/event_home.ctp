@@ -186,7 +186,7 @@ position: absolute;
 
 }
 .login{
-  margin-right: 75px !important;
+  margin-right: 100px !important;
 }
 
 
@@ -1156,6 +1156,18 @@ body.modal-open .background-container{
 }
 
 </style>
+
+<script type="text/javascript">
+
+  (function(i,s,o,g,r,a,m){i['GoogleAnalyticsObject']=r;i[r]=i[r]||function(){
+  (i[r].q=i[r].q||[]).push(arguments)},i[r].l=1*new Date();a=s.createElement(o),
+  m=s.getElementsByTagName(o)[0];a.async=1;a.src=g;m.parentNode.insertBefore(a,m)
+  })(window,document,'script','https://www.google-analytics.com/analytics.js','ga');
+
+  ga('create', 'UA-102062387-1', 'auto');
+  ga('send', 'pageview');
+</script>
+
  <meta charset="utf-8">
     <meta http-equiv="X-UA-Compatible" content="IE=edge">
     <meta name="viewport" content="width=device-width, initial-scale=1">
@@ -1210,9 +1222,9 @@ body.modal-open .background-container{
   <div  class="col-md-offset-3" id="bs-example-navbar-collapse-1">
     <ul class="nav navbar-nav navbar-right">
     <?php if(!$this->request->session()->read('Auth.User')) { ?>
-     <div class="img-responsive login" style="float: left; margin-right: 15px; cursor: pointer;" data-toggle="modal" data-target="#loginSignup">
-          <?php echo $this->Html->image('profile_thumbnail.jpg',array('alt' => 'Logo Chennai Smile','onclick' => 'largedrop()'));?>
-          <span class="signin-text" style="cursor: pointer;">Sign in</span>
+     <div id="log-modal" class="img-responsive login" style="float: left; margin-right: 15px; cursor: pointer;" data-toggle="modal" data-target="#loginSignup">
+           <?php echo $this->Html->image('profile_thumbnail.jpg',array('alt' => 'Logo Chennai Smile','onclick' => 'largedrop()'));?>
+          <span class="signin-text" style="cursor: pointer;">Login/Signup</span>
      </div>
      <?php }  else { ?>
       <div class="dropdown" style="margin-right: 15px; cursor: pointer !important;">
@@ -1534,13 +1546,13 @@ body.modal-open .background-container{
 
 
 
-    <div class="modal" tabindex="-1" id="loginModal" role="dialog">
+    <div class="modal" id="loginModal" role="dialog">
     <div class="modal-dialog">
     
       <!-- Modal content-->
       <div class="modal-content">
         <div class="modal-header">
-          <button style="color: #2bbfd9;" type="button" class="close" data-dismiss="modal">&times;</button>
+          <button style="color: #2bbfd9;" type="button" class="close modal-close" data-dismiss="modal">&times;</button>
           <h3 style="color:#e2e2e2;text-align: center;">Sign In & Enjoy</h3>
         </div>
         <div class="modal-body">
@@ -1576,8 +1588,8 @@ body.modal-open .background-container{
                
             <div class="forgotpass" style=" margin-top: 10px;">
             
-              <div style=" color: #000; margin-top: 25px;">
-              <a style="font-size: 12px;" data-toggle="modal" href="#myModal">Forgot Password?</a><br><br>
+              <div style="color: #000; margin-top: 25px;">
+              <a style="font-size: 12px;color: #3394c9;" id="forg-option">Forgot Password?</a><br><br>
               Not a member? <a href="#" class="viewSignupForim">Join Now</a></div>
 
            </div>
@@ -1587,6 +1599,43 @@ body.modal-open .background-container{
             </div>
             </div>
             </div>
+      </div>
+      
+    </div>
+  </div>
+
+  <div class="modal" id="forgotModal" role="dialog">
+    <div class="modal-dialog">
+    
+       <div class="modal-content">
+        <div class="modal-header" style="border-bottom: none;">
+          <button type="button" class="close close-forg" data-dismiss="modal" style="color: #2bbfd9;">&times;</button>
+          <h4 class="modal-title">Forgot Password?</h4>
+        </div>
+        <div class="modal-body" style="background: none;">
+          <?= $this->Form->create('', array('id' => 'forgotpassform', 'url' => ['action' => 'forgetpassword','controller' => 'users'])) ?>
+
+           <div class="col-xs-9 col-sm-9 col-md-9 col-lg-10">
+            <div class="form-group float-label-control">
+             
+             <label for="">Email Address</label>
+             <?= $this->Form->input('email', array('div' => false,'id' => 'email', 'class' => 'form-control form-element text','label' => false,'placeholder' => 'Enter your email address', 'required' => true)) ?>
+            </div>
+        </div>
+
+        <div class="col-xs-9 col-sm-9 col-md-9 col-lg-10">
+          <div class="form-group text-center">
+          <?= $this->Form->submit(__('Recover'), array('id' => 'Login', 'class' => 'btn btn-primary btn-lg cs-signup-button')) ?>
+
+          </div>
+        </div>
+  
+    <?= $this->Form->end() ?>
+
+        </div>
+        <div class="modal-footer" style="border-top: none;">
+         <!--  <button type="button" class="btn btn-default closebtn" data-dismiss="modal">Close</button> -->
+        </div>
       </div>
       
     </div>
@@ -1603,7 +1652,34 @@ body.modal-open .background-container{
     $('#loginSignup').show();
   });
 
+$('.modal-close').click(function(){
+  $('#loginModal').css('display','none');
+  $('#loginSignup').css('display','none');
+  $('.modal-backdrop').hide();
+  $('.in').hide();
+  $('body.modal-open .background-container').css('filter','none');
+});
 
+$('#log-modal').click(function(){
+  $('#loginSignup').css('display','block');
+  // $('body.modal-open .background-container').css('filter','blur(4px)');
+  
+});
+
+$('#forg-option').click(function(){
+  $('#forgotModal').show();
+  $('#loginModal').hide();
+});
+
+
+$('.close-forg').click(function(){
+  $('#loginModal').css('display','none');
+  $('#loginSignup').css('display','none');
+  $('#forgotModal').css('display','none');
+  $('.modal-backdrop').hide();
+  $('.in').hide();
+  $('body.modal-open .background-container').css('filter','none');
+});
   </script>
     
       <script type="text/javascript">
