@@ -125,6 +125,7 @@ max-width: 259px;
         </div>
     </div>
     <div class="col-sm-9 col-md-10 list_event content">
+        <div class="Past-title" style="display: none; margin-top: -20px;"><h3>Past Events</h3><hr></div>
         <div class="row" style="margin-right: 0px;" id="eventResponse">
         </div>
         <div class="loadingDiv"><div id="loading"></div></div>
@@ -132,6 +133,13 @@ max-width: 259px;
 </div>
 </div>
 </div>
+
+<script type="text/javascript">
+    $('.past-events').click(function(){
+    $('.Past-title').css('display','block');
+    });
+</script>
+
 <!-- <div class="row"> &nbsp; </div> -->
 
 <!-- <script type="text/javascript">
