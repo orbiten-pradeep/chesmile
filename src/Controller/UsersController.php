@@ -340,12 +340,14 @@ class UsersController extends AppController
 			    $email->viewVars(['name' => $userData['fullname']]);
 			    $email->send();
 				$this->Flash->success(__('Status updated successfully'));
+				$this->redirect(array('controller' => 'Events', 'action' => 'index'));
 			}
 			else
 			{
 				$this->Flash->error(__('Something went wrong, please try again.'));
+				$this->redirect(array('controller' => 'Events', 'action' => 'index'));
 			}
-			$this->redirect(array('controller' => 'Users', 'action' => 'login'));	
+			$this->redirect(array('controller' => 'Events', 'action' => 'index'));	
 		}
 	}
 	

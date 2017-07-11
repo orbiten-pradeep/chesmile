@@ -540,6 +540,7 @@ class EventsController extends AppController
             } else 
             {
                 $this->Flash->error(__('The event could not be saved. Please, try again.'));
+                return $this->redirect(['action' => 'index']);
             }
         }
 

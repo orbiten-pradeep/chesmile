@@ -152,7 +152,7 @@ background-color: #4fa8b1;
 }
 .category_dropdown.list-group{
   background-color: #337AB7 !important;
-  width: 590px !important;
+  width: 488px !important;
 }
 
 /*.list-group .checkbox label:hover{
@@ -182,13 +182,13 @@ background-color: #286090;
 
 .signin-text{
 top: 45%;
-position: absolute;
+position: sticky;
 
 }
-.login{
+/*.login{
   margin-right: 100px !important;
 }
-
+*/
 
 
   /* .forgotpass { display: none;}*/
