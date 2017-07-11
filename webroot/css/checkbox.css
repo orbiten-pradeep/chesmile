@@ -110,7 +110,7 @@
 .list-group .checkbox{
     position: relative;
    /* display: inline-block;*/
-    margin: 10px 10px 10px 0px;
+    /*margin: 10px 10px 10px 0px;*/
 }
 
 .list-group .checkbox label {
