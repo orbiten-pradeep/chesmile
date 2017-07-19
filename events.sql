@@ -30,10 +30,12 @@ CREATE TABLE IF NOT EXISTS `events` (
   `id` int(11) NOT NULL AUTO_INCREMENT,
   `user_id` int(11) NOT NULL,
   `title` varchar(255) NOT NULL,
+  `slug` varchar(255) DEFAULT NULL,
+  `slug_status` int(11) DEFAULT '0',
   `active` int(11) NOT NULL DEFAULT '0',
   `categories_id` int(11) NOT NULL,
   `descriptioin` text,
-  `descriptioin_more` varchar(255) DEFAULT NULL,
+  `descriptioin_more` text,
   `register_online` int(11) NOT NULL DEFAULT '0',
   `booking_online` int(11) NOT NULL DEFAULT '0',
   `date` date NOT NULL,
@@ -49,7 +51,7 @@ CREATE TABLE IF NOT EXISTS `events` (
   `created` datetime DEFAULT NULL,
   `modified` datetime DEFAULT NULL,
   PRIMARY KEY (`id`)
-) ENGINE=MyISAM  DEFAULT CHARSET=utf8 AUTO_INCREMENT=90 ;
+) ENGINE=MyISAM  DEFAULT CHARSET=utf8 AUTO_INCREMENT=261 ;
 
 --
 -- Dumping data for table `events`
