@@ -9,6 +9,7 @@ use Cake\Routing\Router;
 use Cake\Datasource\ConnectionManager;
 use Cake\Utility\Security;
 use Cake\Event\Event;
+use Cake\Utility\Inflector;
 /**
  * Events Controller
  *
@@ -19,7 +20,7 @@ class EventsController extends AppController
 	public function beforeFilter(Event $event) 
 	{
 		parent::beforeFilter($event);
-    	$this->Auth->allow(['Invitation','about','terms','privacy','partnerwith','contact','thebigbeachmarathon', 'index', 'eventlist','View','viewresult','searchbyeventtitle','search']);
+    	$this->Auth->allow(['Invitation','about','terms','privacy','partnerwith','contact','thebigbeachmarathon', 'index', 'eventlist','View','viewresult','searchbyeventtitle','search','chennai','findslug']);
     	$this->set('Photo',$this->Auth->user('Photo'));
 	}
 
@@ -190,9 +191,86 @@ class EventsController extends AppController
      * @return \Cake\Network\Response|null
      * @throws \Cake\Datasource\Exception\RecordNotFoundException When record not found.
      */
-    public function view($id = null)
+    public function view($id = null, $slug = null)
     {
 		$this->viewBuilder()->layout('event_home');
+
+		if($id == null)
+		{
+			$event_val = $this->Events->findBySlug($slug, [
+	            'contain' => ['Users', 'Categories']
+	        ]);
+			$event_val = $event_val->first();
+			$id = $event_val['id'];
+		}
+        $event = $this->Events->get($id, [
+            'contain' => ['Users', 'Categories']
+        ]);
+        $u_id = "";
+        if(!empty($this->Auth->user('id')))
+		{
+			$u_id = $this->Auth->user('id');
+			$fullname = $this->Auth->user('fullname');
+			$email = $this->Auth->user('email');
+		}
+
+        $this->loadModel('Address');
+        $address = $this->Address->find('all', ['conditions' => ['events_id' => $id]]);
+        $address = $address->first();
+        $this->loadModel('Mediapartners');
+        $mediapartners = $this->Mediapartners->find('all', ['conditions' => ['events_id' => $id]]);
+        $this->loadModel('Galaries');
+        $galaries = $this->Galaries->find('all', ['conditions' => ['events_id' => $id]]);
+
+        $this->loadModel('Sponsors');
+        $sponsors = $this->Sponsors->find('all', ['conditions' => ['events_id' => $id]]);
+        $this->loadModel('Likes');
+        $likes = $this->Likes->find('all', ['conditions' => ['events_id' => $id]]);
+        $query = $this->Likes->find('all', ['select' => 'id',
+		    	'conditions' => ['events_id' => $id]]);
+		$number = $query->count();
+
+        $this->set('event', $event);
+        $this->set('_serialize', ['event']);
+
+        $this->loadModel('Categories');
+        $categories_new = $this->Categories->find()->select(['Categories.name', 'Categories.id'])
+        	->where(['active' => 1]);
+
+        $this->loadModel('SubCategories');
+        $subCategories_new = $this->SubCategories->find('all', ['fields' => 'name',
+			    'conditions' => ['active' => 1]
+			    	]);
+
+        $this->set('categories', $categories_new);
+        $this->set(compact('subCategories_new'));
+        $this->set(compact('address', 'mediapartners', 'sponsors', 'number', 'likes', 'u_id', 'galaries'));
+    }
+
+
+    /**
+     * View method
+     *
+     * @param string|null $id Event id.
+     * @return \Cake\Network\Response|null
+     * @throws \Cake\Datasource\Exception\RecordNotFoundException When record not found.
+     */
+    public function chennai($id = null, $slug = null)
+    {
+		$this->viewBuilder()->layout('event_home');
+        if(!ctype_digit($id))
+        {
+            $slug = $id;
+            $id = null;
+        }
+		if($id == null)
+		{
+			$event_val = $this->Events->findBySlug($slug, [
+	            'contain' => ['Users', 'Categories']
+	        ]);
+			$event_val = $event_val->first();
+			$id = $event_val['id'];
+		}
         $event = $this->Events->get($id, [
             'contain' => ['Users', 'Categories']
         ]);
@@ -450,8 +528,26 @@ class EventsController extends AppController
 			{
 	        	$this->request->data['date'] = new Time($this->request->data['date']);
 			}
+
+			if(empty($this->request->data['slug']))
+			{
+				$name_to_slug = Inflector::slug($this->request->data['title'], $replacement = '-');
+        		$this->request->data['slug'] = strtolower($name_to_slug);
+        	}
+
 	        $event = $this->Events->patchEntity($event, $this->request->data);
             $activation_key = Text::uuid();
+
+            $cnt = $this->findslug($this->request->data['slug']);
+
+            if($cnt > 0)
+            {
+                $this->request->data['slug_status'] = 1;
+            } else 
+            {
+                $this->request->data['slug_status'] = 0;
+            }
+
             if ($this->Events->save($event)) {
             	////////////////////////////////////////////////////////////////////
             	$new_id = $event->id;
@@ -598,6 +694,19 @@ class EventsController extends AppController
 	        $this->request->data['date'] = new Time($this->request->data['date']);
         	/////////////////////////////////////////////////////////////////
         	
+	        $name_to_slug = Inflector::slug($this->request->data['title'], $replacement = '-');
+        	$this->request->data['slug'] = strtolower($name_to_slug);
+
+            $cnt = $this->findslug($this->request->data['slug']);
+
+            if($cnt > 0)
+            {
+                $this->request->data['slug_status'] = 1;
+            } else 
+            {
+                $this->request->data['slug_status'] = 0;
+            }
+
             $event = $this->Events->patchEntity($event, $this->request->data);
             if ($this->Events->save($event)) {
             	
@@ -1152,5 +1261,14 @@ class EventsController extends AppController
         $this->set(compact('address', 'mediapartners', 'sponsors', 'number', 'likes', 'galaries'));
     }
 	
+
+    public function findslug($title = null) 
+    {
+        $this->autoRender = false;            
+        $results = $this->Events->find('all', array('conditions' => array('slug' => $title)));
+        return $results->count();
+    }
+
+
 }
 
