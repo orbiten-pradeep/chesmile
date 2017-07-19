@@ -63,6 +63,13 @@ Router::scope('/', function (RouteBuilder $routes) {
 	    array('controller' => 'Users', 'action' => 'adminlogin', 'admin' => true)
 	);
 
+    Router::connect('/events/:id/:slug',
+                array('controller' => 'events', 'action' => 'view'),
+                array(
+                    'id'   => '[0-9]+',
+                    'slug' => '[A-Za-z0-9\._-]+',
+                    'pass' => array('id', 'slug')
+                ));
 /*    $routes->connect(
         '/events/activate/:id',
         array('controller' => 'events', 'action' => 'activate',
