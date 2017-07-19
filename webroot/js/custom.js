@@ -461,15 +461,20 @@ function getEventList(params) {
 	        if(response!=''){	        
 		        var html = '';
 		        var eventDetailsUrl = $("#event_view_url").val();
-
+		        
 		        for(k in response){
 		        	var likes_count = (response[k].likes_count == null) ? 0 : response[k].likes_count;
-		        	var eventUrl = eventDetailsUrl + '/' + response[k].id;
+		        	var eventUrl = eventDetailsUrl + '/' + response[k].id + '/' + response[k].slug;
 		        	var dispImgHmtl = '';
 		        	var dispImg = response[k].display;
 		        	var dtimeHtml = '';
 		        	dtimeHtml = moment(response[k].date).fromNow();
-
+		        	if(response[k].slug == null)
+		        		eventUrl = eventDetailsUrl + '/' + response[k].id;
+					
+		        	if(response[k].slug_status == 0 && response[k].slug != null)
+		        		eventUrl = eventDetailsUrl + '/' + response[k].slug;
+					
 		        	if(dispImg==''){
 		        		dispImgHmtl = '<img src="img/photos/1.jpg" alt="" style="height:185px;">';
 		        	}
