@@ -535,19 +535,18 @@ class EventsController extends AppController
         		$this->request->data['slug'] = strtolower($name_to_slug);
         	}
 
-	        $event = $this->Events->patchEntity($event, $this->request->data);
-            $activation_key = Text::uuid();
-
             $cnt = $this->findslug($this->request->data['slug']);
 
             if($cnt > 0)
             {
-                $this->request->data['slug_status'] = 1;
+                $this->request->data['slug_status'] = ($cnt+1);
             } else 
             {
                 $this->request->data['slug_status'] = 0;
             }
 
+	        $event = $this->Events->patchEntity($event, $this->request->data);
+            $activation_key = Text::uuid();
             if ($this->Events->save($event)) {
             	////////////////////////////////////////////////////////////////////
             	$new_id = $event->id;
@@ -697,15 +696,17 @@ class EventsController extends AppController
 	        $name_to_slug = Inflector::slug($this->request->data['title'], $replacement = '-');
         	$this->request->data['slug'] = strtolower($name_to_slug);
 
-            $cnt = $this->findslug($this->request->data['slug']);
+            $results = $this->Events->find('all', array('conditions' => array('slug' => $this->request->data['title'], 'id !=' => $id)));
+            $cnt = $results->count();
 
             if($cnt > 0)
             {
-                $this->request->data['slug_status'] = 1;
+                $this->request->data['slug_status'] = ($cnt+1);
             } else 
             {
                 $this->request->data['slug_status'] = 0;
             }
+
 
             $event = $this->Events->patchEntity($event, $this->request->data);
             if ($this->Events->save($event)) {
