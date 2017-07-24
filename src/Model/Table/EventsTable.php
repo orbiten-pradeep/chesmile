@@ -5,7 +5,7 @@ use Cake\ORM\Query;
 use Cake\ORM\RulesChecker;
 use Cake\ORM\Table;
 use Cake\Validation\Validator;
-
+use Cake\Utility\Inflector;
 /**
  * Events Model
  *
@@ -120,4 +120,5 @@ class EventsTable extends Table
 
         return $rules;
     }
+
 }

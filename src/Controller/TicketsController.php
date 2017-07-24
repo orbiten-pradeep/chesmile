@@ -9,20 +9,19 @@ use Cake\Routing\Router;
 use Cake\Datasource\ConnectionManager;
 use Cake\Utility\Security;
 use Cake\Event\Event;
-use Cake\Filesystem\File;
 
 /**
- * Marathon Controller
+ * Tickets Controller
  *
- * @property \App\Model\Table\MarathonTable $Marathon
+ * @property \App\Model\Table\TicketsTable $Tickets
  */
-class MarathonController extends AppController
+class TicketsController extends AppController
 {
 
     public function beforeFilter(Event $event) 
     {
         parent::beforeFilter($event);
-        $this->Auth->allow(['add','getAction','randomTxnId','generateHash','send','registrationsuccess','registrationfailed','isemailexist']);
+        $this->Auth->allow(['add','getAction','randomTxnId','generateHash','send','success','failed','isemailexist', 'edit']);
     }
 
     /**
@@ -35,27 +34,27 @@ class MarathonController extends AppController
         $this->paginate = [
             'contain' => ['Events']
         ];
-        $marathon = $this->paginate($this->Marathon);
+        $tickets = $this->paginate($this->Tickets);
 
-        $this->set(compact('marathon'));
-        $this->set('_serialize', ['marathon']);
+        $this->set(compact('tickets'));
+        $this->set('_serialize', ['tickets']);
     }
 
     /**
      * View method
      *
-     * @param string|null $id Marathon id.
+     * @param string|null $id Ticket id.
      * @return \Cake\Network\Response|null
      * @throws \Cake\Datasource\Exception\RecordNotFoundException When record not found.
      */
     public function view($id = null)
     {
-        $marathon = $this->Marathon->get($id, [
+        $ticket = $this->Tickets->get($id, [
             'contain' => ['Events']
         ]);
 
-        $this->set('marathon', $marathon);
-        $this->set('_serialize', ['marathon']);
+        $this->set('ticket', $ticket);
+        $this->set('_serialize', ['ticket']);
     }
 
     /**
@@ -63,159 +62,95 @@ class MarathonController extends AppController
      *
      * @return \Cake\Network\Response|void Redirects on successful add, renders view otherwise.
      */
-    public function add($id = null)
+    public function add()
     {
-        $marathon = $this->Marathon->newEntity();
-        $activation_key = Text::uuid();
+        $ticket = $this->Tickets->newEntity();
         if ($this->request->is('post')) {
-
-            if(!empty($this->request->data['date']))
-            {
-                $this->request->data['date'] = new Time($this->request->data['date']);
-            }
-            $event = "";
-            $this->loadModel('Events');
-            $this->request->data['activation_key'] = $activation_key;
-            if(isset($id))
-            {
-                $this->request->data['events_id'] = $id;
-                $event = $this->Events->get($id, [
-                    'contain' => ['Users', 'Categories']
-                ]);
-            }
-
-            //$this->merchantKey = 'wBZpGV5E';
-            //$this->salt = 'b8Hg0nhutX';
-            $payu['key'] = 'wBZpGV5E';
-            $payu['salt'] = 'b8Hg0nhutX'; 
-            $payu['txnid'] = $this->randomTxnId();
-            $payu['amount'] = $this->request->data['amount'];
-            $payu['curl'] = '';
-            $payu['productinfo'] = $this->request->data['productinfo'];
-            $payu['service_provider'] = $this->request->data['service_provider'];
-            $payu['firstname'] = $this->request->data['firstname'];
-            $payu['email'] = $this->request->data['email'];
-            $payu['phone'] = $this->request->data['mobile_number'];
-            $payu['surl'] = Router::url(['controller' => 'Marathon', 'action' => 'registrationsuccess/' . $id, '_full' => true ]);
-            $payu['furl'] = Router::url(['controller' => 'Marathon', 'action' => 'registrationfailed/' . $id, '_full' => true ]);
             
-            $marathon = $this->Marathon->patchEntity($marathon, $this->request->data);
-            if ($this->Marathon->save($marathon)) {                
-                $email = new Email();
-                $email->transport('gmail');
-                $name = $event['user']['fullname'];
-                $to = trim($event['user']['email']); 
-                $email->emailFormat('html');
-                $email->template('default');
-                $email->from('admin@chennaismile.com');
-                $email->to($to);
-                $email->cc('admin@chennaismile.com');
-                $subject = "New User registered for your event";
-                $email->subject($subject);
-                $activationUrl = Router::url(['controller' => 'Marathon', 'action' => 'details/' . $activation_key, '_full' => true ]);
-                // Always try to write clean code, so that you can read it :) :
-                $message = "Dear <span style='color:#666666'>" . $name . "</span>,<br/><br/>";
-                $message .= "<br/>New User has been registered successfully for your event. Please find the attached user information as below: <br/>";
-                $message .= "<br/><b>View the registered user information by clicking on the below url:</b> <br/>";
-                $message .= "<a href='$activationUrl'>$activationUrl</a><br/><br/>";
-                $message .= "<br/>Thanks, <br/>Support Team";
-                $email->send($message);
+            $this->loadModel('Events');
 
+            $this->request->data['amount'] = $this->request->data['price'];
+            $this->request->data['phone'] = $this->request->data['mobile_number'];
+            $this->request->data['txnid'] = $this->randomTxnId();
+            $this->request->data['hash'] = $this->hash;
+            
+            $ticket = $this->Tickets->patchEntity($ticket, $this->request->data);
+            if ($this->Tickets->save($ticket)) 
+            {
+                $new_id = $ticket->id;
+                $payu['key'] = 'wBZpGV5E';
+                $payu['salt'] = 'b8Hg0nhutX'; 
+                $payu['txnid'] = $this->randomTxnId();
+                $payu['amount'] = $this->request->data['price'];
+                $payu['curl'] = '';
+                $payu['productinfo'] = $this->request->data['productinfo'];
+                $payu['service_provider'] = $this->request->data['service_provider'];
+                $payu['firstname'] = $this->request->data['firstname'];
+                $payu['lastname'] = $this->request->data['lastname'];
+                $payu['email'] = $this->request->data['email'];
+                $payu['phone'] = $this->request->data['mobile_number'];
+                $payu['surl'] = Router::url(['controller' => 'Tickets', 'action' => 'edit/' . $new_id, '_full' => true ]);
+                $payu['furl'] = Router::url(['controller' => 'Tickets', 'action' => 'edit/' . $new_id, '_full' => true ]);
                 $this->send($payu);
-                return $this->redirect(['controller' => 'Events', 'action' => 'view', $id]);
-                //return $this->redirect(['action' => 'index']);
+                $this->Flash->success(__('The ticket booking completed successfully.'));
+                return $this->redirect(['controller' => 'Events','action' => 'chennai',$this->request->data['events_id']]);
             } else {
-                $this->Flash->error(__('The online registration could not be completed. Please, try again.'));
-                return $this->redirect(['controller' => 'Events', 'action' => 'view', $id]);
+                $this->Flash->error(__('The ticket booking could not be completed. Please, try again.'));
             }
         }
-        $events = $this->Marathon->Events->find('list', ['limit' => 200]);
-        $this->set(compact('marathon', 'events'));
-        $this->set('_serialize', ['marathon']);
+        $events = $this->Tickets->Events->find('list', ['limit' => 200]);
+        $this->set(compact('ticket', 'events'));
+        $this->set('_serialize', ['ticket']);
     }
 
     /**
      * Edit method
      *
-     * @param string|null $id Marathon id.
+     * @param string|null $id Ticket id.
      * @return \Cake\Network\Response|void Redirects on successful edit, renders view otherwise.
      * @throws \Cake\Network\Exception\NotFoundException When record not found.
      */
     public function edit($id = null)
     {
-        $marathon = $this->Marathon->get($id, [
+        $ticket = $this->Tickets->get($id, [
             'contain' => []
         ]);
+        $this->request->data['lastname'] = $ticket['lastname'];        
         if ($this->request->is(['patch', 'post', 'put'])) {
-            $marathon = $this->Marathon->patchEntity($marathon, $this->request->data);
-            if ($this->Marathon->save($marathon)) {
-                $this->Flash->success(__('The marathon has been saved.'));
+            $ticket = $this->Tickets->patchEntity($ticket, $this->request->data);
+            if ($this->Tickets->save($ticket)) {
+               // $this->Flash->success(__('The ticket has been saved.'));
 
-                return $this->redirect(['action' => 'index']);
+                return $this->redirect(['controller' => 'events','action' => 'chennai', $ticket->events_id]);
             } else {
-                $this->Flash->error(__('The marathon could not be saved. Please, try again.'));
+                $this->Flash->error(__('The ticket could not be saved. Please, try again.'));
             }
         }
-        $events = $this->Marathon->Events->find('list', ['limit' => 200]);
-        $this->set(compact('marathon', 'events'));
-        $this->set('_serialize', ['marathon']);
+        $events = $this->Tickets->Events->find('list', ['limit' => 200]);
+        $this->set(compact('ticket', 'events'));
+        $this->set('_serialize', ['ticket']);
     }
 
     /**
      * Delete method
      *
-     * @param string|null $id Marathon id.
+     * @param string|null $id Ticket id.
      * @return \Cake\Network\Response|null Redirects to index.
      * @throws \Cake\Datasource\Exception\RecordNotFoundException When record not found.
      */
     public function delete($id = null)
     {
         $this->request->allowMethod(['post', 'delete']);
-        $marathon = $this->Marathon->get($id);
-        if ($this->Marathon->delete($marathon)) {
-            $this->Flash->success(__('The marathon has been deleted.'));
+        $ticket = $this->Tickets->get($id);
+        if ($this->Tickets->delete($ticket)) {
+            $this->Flash->success(__('The ticket has been deleted.'));
         } else {
-            $this->Flash->error(__('The marathon could not be deleted. Please, try again.'));
+            $this->Flash->error(__('The ticket could not be deleted. Please, try again.'));
         }
 
         return $this->redirect(['action' => 'index']);
     }
 
-    public function details($key = null)
-    {
-        $marathon = $this->Marathon->find('all',array('conditions'=>array('activation_key'=>$key)));
-        $marathon = $marathon->first();
-        //debug($marathon); exit(0);
-        if(isset($marathon))
-        {
-            $id = $marathon['ID'];
-            $marathon = $this->Marathon->get($id, [
-                'contain' => ['Events']
-            ]);
-            $this->set('marathon', $marathon);
-            $this->set('_serialize', ['marathon']);
-        } else
-        {
-            return $this->redirect(['controller' => 'Events', 'action' => 'index']);
-        }
-    }
-    
-
-    public function usersinformation($id = null)
-    {
-        $this->paginate = [
-            'contain' => ['Events'],
-            'order' => [
-            'Marathon.status' => 'desc'
-        ]
-        ];
-        $marathon = $this->paginate($this->Marathon);
-        $this->paginate['conditions'] = array("Marathon.events_id" => $id);
-        //$this->paginate['order'] = array('Marathon.status' => 'desc');
-        //$this->paginate->sort('Marathon.status');
-        $this->set(compact('marathon'));
-        $this->set('_serialize', ['marathon']);
-    }
 
     public function getAction() {
         $this->merchantKey = 'wBZpGV5E';
@@ -259,7 +194,7 @@ class MarathonController extends AppController
             'service_provider'      => 'payu_paisa',
             // Customer details
             'firstname'             => $posted['firstname'],
-            'lastname'              => '',
+            'lastname'              => $posted['lastname'],
             'email'                 => $posted['email'],
             'address1'              => '',
             'address2'              => '',
@@ -318,7 +253,7 @@ class MarathonController extends AppController
         exit;
     }
 
-    public function registrationfailed($id = null)
+    public function failed($id = null)
     {
         $this->autoRender = false;
         if ($this->request->is(['patch', 'post', 'put'])) {
@@ -335,7 +270,7 @@ class MarathonController extends AppController
         exit(0);
     }
 
-    public function registrationsuccess($id = null)
+    public function success($id = null)
     {
         $this->autoRender = false;
         if ($this->request->is(['patch', 'post', 'put'])) {
@@ -346,7 +281,7 @@ class MarathonController extends AppController
 
 
             //Email to registrant
-            $email = new Email();
+           /* $email = new Email();
             $email->transport('gmail');
             $name = $this->request->data['firstname'];
             $to = trim($this->request->data['email']); 
@@ -366,7 +301,7 @@ class MarathonController extends AppController
             $message .= "Thank you, awaiting for your presence on the event day! <br/>";
             $message .= "<br/>Best Regards, <br/>Team ChennaiSmile, <br/>www.chennaismile.com";
             $email->send($message);
-
+*/
             $this->Flash->success(__('online registration is completed successfully.'));
             //return $this->redirect(['controller' => 'Events', 'action' => 'view', $id]);
             return $this->redirect('thebigbeachmarathon');
@@ -396,5 +331,8 @@ class MarathonController extends AppController
         echo json_encode($response);
         exit;
     }
+
+
+
 
 }

@@ -435,14 +435,6 @@ and (max-width: 414px){
 				<button class="btn btn-primary cook-modal" style="float: right; background-color: #4ABAC5;border-color: #e2e2e2;" data-toggle="modal" href="#Register-modal2">Online Registration</button>
 				<?php } ?>
 
-				<?php if($event->register_online == 1) { ?>
-				<button class="btn btn-primary cook-modal2" style="float: right; background-color: #4ABAC5;border-color: #e2e2e2;" data-toggle="modal" href="#Register-modal3">Online Registration</button>
-				<?php } ?>
-
-				<?php if($event->register_online == 1) { ?>
-				<button class="btn btn-primary cook-modal3" style="float: right; background-color: #4ABAC5;border-color: #e2e2e2;" data-toggle="modal" href="#Register-modal4">Online Registration</button>
-				<?php } ?>
-
 			<button class="btn btn-primary view-btn" style="float: right;margin-right: 10px;background-color: #4ABAC5;border-color: #e2e2e2;" data-toggle="modal" href="#view-more">Event Details</button>
 
 			<button class="btn btn-primary route-map" style="float: right;margin-right: 10px;background-color: #4ABAC5;border-color: #e2e2e2;" data-toggle="modal" href="#route-map">Route Map</button>
@@ -687,13 +679,18 @@ if($u_id == $event->user_id){ ?>
 		  <div class="modal-body">
 			<div class="">
         
-         <?= $this->Form->create('$marathon',array('url' => ['controller' => 'Marathon','action' => 'add', $event->id], 'id' => 'mar')) ?>
+         <?= $this->Form->create('$marathon',array('url' => ['controller' => 'Tickets','action' => 'add'], 'id' => 'mar')) ?>
 
-          <input type="hidden" id="checkUrl" name="checkUrl" value="<?php echo $this->Url->build(array('controller' => 'marathon', 'action' => 'isemailexist'));?>">
+
+
+         <input type="hidden" id="checkUrl" name="checkUrl" value="<?php echo $this->Url->build(array('controller' => 'marathon', 'action' => 'isemailexist'));?>">
             
              <input type="hidden" name="amount" value="" id="amount"/>
-             <input type="hidden" name="productinfo" value="Marathon (ChennaiSmile.com)" size="64" />
+             <input type="hidden" name="productinfo" value="<?= $event->title. '_' . $event->id;?>" size="64" />
+             <input type="hidden" name="events_id" value="<?= $event->id?>" size="64" />
              <input type="hidden" name="service_provider" value="payu_paisa" size="64" />
+
+
             <div class="form-group float-label-control">
              
              <label for="">Firstname</label>
@@ -716,9 +713,9 @@ if($u_id == $event->user_id){ ?>
 
         <div class="form-group">
         <label>Select No. of Tickets</label>
-		   <select class="form-control heigh" onchange="calcamount2(this);">
+		   <select class="form-control heigh" required="true" onchange="calcamount2(this);" name="tickets">
 		   	<!-- <option value="0">Select No. of tickets</option> -->
-		      <option value="0">0</option>
+		      <option value="">0</option>
 			 <option value="1">1</option>
 			 <option value="2">2</option>
 			 <option value="3">3</option>
@@ -752,25 +749,29 @@ if($u_id == $event->user_id){ ?>
              <label for="">Mobile number</label>
              <?= $this->Form->input('mobile_number', array('div' => false,'class' => 'form-control form-element text','label' => false,'placeholder' => 'Mobile number', 'required' => true)) ?>
             </div>
+            <input value="0" id="price" type="hidden" name="price" required="true" title="totalprice" readonly="true">
+          <input value="4000" id="defaultprice2" type="hidden" name="defaultprice2" required="true">
+          <input value="1500" id="defaultprice3" type="hidden" name="defaultprice3" required="true">
+          <input value="1200" id="defaultprice4" type="hidden" name="defaultprice4" required="true">
 
         <div class="">
           <div class="form-group text-center">
            
-           <?= $this->Form->button(__('Proceed to pay ( ₹ <span id="priceSpan2">0</span> )'),array('class' => "btn btn-info btn-block")) ?>
+           <?= $this->Form->button(__('Proceed to pay ( ₹ <span id="priceSpan">0</span> )'),array('class' => "btn btn-info btn-block")) ?>
 			
 
     <?= $this->Form->end() ?>
           </div>
         </div>
-        <input value="0" id="price2" type="hidden" name="price" required="true" title="totalprice2" readonly="true">
-          <input value="4000" id="defaultprice2" type="hidden" name="defaultprice2" required="true">
+        
+
   </div>
 </div>
 </div>
 </div>
 </div>
 
-<div class="modal fade" id="Register-modal3" role="dialog">
+<!-- <div class="modal fade" id="Register-modal3" role="dialog">
 	<div class="modal-dialog">
 	  <div class="modal-content">
 		  <div class="modal-header">
@@ -800,17 +801,17 @@ if($u_id == $event->user_id){ ?>
             </div>
     
 
-        <!-- <div class="form-group">
+        <div class="form-group">
                 <label>
            <?= $this->Form->input('date', array('type' => 'text','class' => 'form-control date','placeholder' => 'Date of birth','label' => false,'required' => true));?>
            </label><br>
            <span id="person_type" style="color:black; font-weight: bold;"></span>
-           </div> -->
+           </div>
 
         <div class="form-group">
         <label>Select No. of Tickets</label>
 		   <select class="form-control heigh" onchange="calcamount3(this);">
-		   	<!-- <option value="0">Select No. of tickets</option> -->
+		   	<!-- <option value="0">Select No. of tickets</option>
 		      <option value="0">0</option>
 			 <option value="1">1</option>
 			 <option value="2">2</option>
@@ -855,8 +856,8 @@ if($u_id == $event->user_id){ ?>
 </div>
 </div>
 </div>
-
-<div class="modal fade" id="Register-modal4" role="dialog">
+ --> 
+<!-- <div class="modal fade" id="Register-modal4" role="dialog">
 	<div class="modal-dialog">
 	  <div class="modal-content">
 		  <div class="modal-header">
@@ -886,17 +887,17 @@ if($u_id == $event->user_id){ ?>
             </div>
     
 
-        <!-- <div class="form-group">
+        <div class="form-group">
                 <label>
            <?= $this->Form->input('date', array('type' => 'text','class' => 'form-control date','placeholder' => 'Date of birth','label' => false,'required' => true));?>
            </label><br>
            <span id="person_type" style="color:black; font-weight: bold;"></span>
-           </div> -->
+           </div>
 
         <div class="form-group">
         <label>Select No. of Tickets</label>
 		   <select class="form-control heigh" onchange="calcamount4(this);">
-		   	<!-- <option value="0">Select No. of tickets</option> -->
+		   	<!-- <option value="0">Select No. of tickets</option>
 		      <option value="0">0</option>
 			 <option value="1">1</option>
 			 <option value="2">2</option>
@@ -940,7 +941,7 @@ if($u_id == $event->user_id){ ?>
 </div>
 </div>
 </div>
-</div>
+</div> -->
 
 	  <div class="container">
 
@@ -1024,7 +1025,7 @@ if($u_id == $event->user_id){ ?>
   </div>
   
   <div class="col-xs-3 col-lg-3">
-   <select name="numNames" id="numNames" onchange="calcamount(this);">
+   <select name="tickets" id="numNames" onchange="calcamount(this);">
    <option value="0">0</option>
  <option value="1">1</option>
  <option value="2">2</option>
@@ -1165,26 +1166,47 @@ function calcamount(tkt){
 	$("#priceSpan").text(tktcount * price);	
 }
 
+	
 function calcamount2(tkt2){
 	var tktcount2 = tkt2.value;
-	var price2 = $('#defaultprice2').val();
-    $('#price2').val(tktcount2 * price2);
-	$("#priceSpan2").text(tktcount2 * price2);	
+	var event_id = '<?=$event->id;?>';
+	
+	if(event_id == 278)
+	{
+		var price2 = $('#defaultprice2').val();
+		$('#price').val(tktcount2 * price2);
+		$("#priceSpan").text(tktcount2 * price2);		
+	}
+
+	if(event_id == 279)
+	{
+		var price2 = $('#defaultprice3').val();
+		$('#price').val(tktcount2 * price2);
+		$("#priceSpan").text(tktcount2 * price2);		
+	}
+
+	if(event_id == 277)
+	{
+		var price2 = $('#defaultprice4').val();
+		$('#price').val(tktcount2 * price2);
+		$("#priceSpan").text(tktcount2 * price2);		
+	}
+	
 }
 
-function calcamount3(tkt3){
-	var tktcount3 = tkt3.value;
-	var price3 = $('#defaultprice3').val();
-    $('#price3').val(tktcount3 * price3);
-	$("#priceSpan3").text(tktcount3 * price3);	
-}
+// function calcamount3(tkt3){
+// 	var tktcount3 = tkt3.value;
+// 	var price3 = $('#defaultprice3').val();
+//     $('#price3').val(tktcount3 * price3);
+// 	$("#priceSpan3").text(tktcount3 * price3);	
+// }
 
-function calcamount4(tkt4){
-	var tktcount4 = tkt4.value;
-	var price4 = $('#defaultprice4').val();
-    $('#price4').val(tktcount4 * price4);
-	$("#priceSpan4").text(tktcount4 * price4);	
-}
+// function calcamount4(tkt4){
+// 	var tktcount4 = tkt4.value;
+// 	var price4 = $('#defaultprice4').val();
+//     $('#price4').val(tktcount4 * price4);
+// 	$("#priceSpan4").text(tktcount4 * price4);	
+// }
 </script>
 
  <div class="container">
@@ -1494,33 +1516,13 @@ $(document).ready(function(){
 
 $(document).ready(function(){
 	var event_id = '<?=$event->id;?>';
-	if(event_id==274){
+	if(event_id==277 || event_id==278 || event_id==279){
 		$(".cook-modal").css('display','block');
-		$(".mar-modal").css('display','none');  
-		
+		$(".mar-modal").css('display','none');
 	}
 
 });
 
-$(document).ready(function(){
-	var event_id = '<?=$event->id;?>';
-	if(event_id==275){
-		$(".cook-modal2").css('display','block');
-		$(".mar-modal").css('display','none'); 
-		
-	}
-
-});
-
-$(document).ready(function(){
-	var event_id = '<?=$event->id;?>';
-	if(event_id==273){
-		$(".cook-modal3").css('display','block');
-		$(".mar-modal").css('display','none'); 
-		
-	}
-
-});
 
 // $(document).ready(function(){
 // 	var event_id = '<?=$event->id;?>';
@@ -1648,15 +1650,21 @@ $( function() {
 })(jQuery);
 
 $("#mar" ).validate( {
-	rules: {
-	  fullname: "required",
-	},
-	messages: {
-	  fullname: "Please enter your Fullname",      
-	  email: { 
-		required: "Please enter a valid email address"
-	  }
-	},
+ rules: {
+   fullname: "required",
+   mobile_number:  {
+                    required: true,
+                    minlength: 10,
+                    number: true
+            }
+ },
+ messages: {
+   fullname: "Please enter your Fullname",      
+   email: { 
+  required: "Please enter a valid email address"
+   },
+   mobile_number: "Please enter a valid Mobile number with 10 digits"
+ },
 	errorElement: "em",
 	errorPlacement: function ( error, element ) {
 	  // Add the `help-block` class to the error element

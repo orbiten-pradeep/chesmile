@@ -684,7 +684,7 @@ class EventsController extends AppController
 			$fullname = $this->Auth->user('fullname');
 			$email = $this->Auth->user('email');
 		}
-		//debug($event); exit(0);
+		
         
         if ($this->request->is(['patch', 'post', 'put'])) {
         	$address = $this->Address->patchEntity($address, $this->request->data['Address']);
@@ -707,8 +707,9 @@ class EventsController extends AppController
                 $this->request->data['slug_status'] = 0;
             }
 
-
             $event = $this->Events->patchEntity($event, $this->request->data);
+            //print_r($this->request->data); exit(0);
+
             if ($this->Events->save($event)) {
             	
                 $this->Flash->success(__('The event has been saved.'));
