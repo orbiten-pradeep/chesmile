@@ -3,7 +3,7 @@
 -- http://www.phpmyadmin.net
 --
 -- Host: 127.0.0.1
--- Generation Time: Jul 19, 2017 at 09:31 AM
+-- Generation Time: Jul 25, 2017 at 08:50 AM
 -- Server version: 5.6.17
 -- PHP Version: 5.5.12
 
@@ -37,7 +37,7 @@ CREATE TABLE IF NOT EXISTS `acos` (
   PRIMARY KEY (`id`),
   KEY `lft` (`lft`,`rght`),
   KEY `alias` (`alias`)
-) ENGINE=MyISAM  DEFAULT CHARSET=utf8 AUTO_INCREMENT=211 ;
+) ENGINE=MyISAM  DEFAULT CHARSET=utf8 AUTO_INCREMENT=231 ;
 
 --
 -- Dumping data for table `acos`
@@ -84,7 +84,7 @@ INSERT INTO `acos` (`id`, `parent_id`, `model`, `foreign_key`, `alias`, `lft`, `
 (151, 150, NULL, NULL, 'index', 291, 292),
 (150, 1, NULL, NULL, 'Address', 290, 301),
 (149, 144, NULL, NULL, 'delete', 287, 288),
-(1, NULL, NULL, NULL, 'controllers', 1, 354),
+(1, NULL, NULL, NULL, 'controllers', 1, 390),
 (2, 1, NULL, NULL, 'Groups', 2, 13),
 (3, 2, NULL, NULL, 'index', 3, 4),
 (4, 2, NULL, NULL, 'view', 5, 6),
@@ -220,7 +220,25 @@ INSERT INTO `acos` (`id`, `parent_id`, `model`, `foreign_key`, `alias`, `lft`, `
 (205, 184, NULL, NULL, 'registrationsuccess', 337, 338),
 (210, 111, NULL, NULL, 'findslug', 239, 240),
 (208, 111, NULL, NULL, 'thebigbeachmarathon', 235, 236),
-(209, 111, NULL, NULL, 'chennai', 237, 238);
+(209, 111, NULL, NULL, 'chennai', 237, 238),
+(211, 1, NULL, NULL, 'Payments', 354, 365),
+(212, 211, NULL, NULL, 'index', 355, 356),
+(213, 211, NULL, NULL, 'view', 357, 358),
+(214, 211, NULL, NULL, 'add', 359, 360),
+(215, 211, NULL, NULL, 'edit', 361, 362),
+(216, 211, NULL, NULL, 'delete', 363, 364),
+(217, 1, NULL, NULL, 'Tickets', 366, 389),
+(218, 217, NULL, NULL, 'index', 367, 368),
+(219, 217, NULL, NULL, 'view', 369, 370),
+(220, 217, NULL, NULL, 'add', 371, 372),
+(221, 217, NULL, NULL, 'edit', 373, 374),
+(222, 217, NULL, NULL, 'delete', 375, 376),
+(223, 217, NULL, NULL, 'getAction', 377, 378),
+(224, 217, NULL, NULL, 'randomTxnId', 379, 380),
+(225, 217, NULL, NULL, 'send', 381, 382),
+(228, 217, NULL, NULL, 'isemailexist', 383, 384),
+(229, 217, NULL, NULL, 'failed', 385, 386),
+(230, 217, NULL, NULL, 'success', 387, 388);
 
 /*!40101 SET CHARACTER_SET_CLIENT=@OLD_CHARACTER_SET_CLIENT */;
 /*!40101 SET CHARACTER_SET_RESULTS=@OLD_CHARACTER_SET_RESULTS */;
