@@ -30,7 +30,7 @@
     <?= $this->fetch('script') ?>
 </head>
 <body>
-    <div id="container">
+    <div id="`">
         <div id="header">
             <h1><?= __('Error') ?></h1>
         </div>
