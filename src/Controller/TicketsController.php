@@ -115,10 +115,68 @@ class TicketsController extends AppController
         $ticket = $this->Tickets->get($id, [
             'contain' => []
         ]);
-        $this->request->data['lastname'] = $ticket['lastname'];        
+        $this->request->data['lastname'] = $ticket['lastname']; 
+
+
         if ($this->request->is(['patch', 'post', 'put'])) {
+            $this->loadModel('Events');
             $ticket = $this->Tickets->patchEntity($ticket, $this->request->data);
             if ($this->Tickets->save($ticket)) {
+
+                if(!empty($ticket['events_id']))
+                {
+                    $event = $this->Events->get($ticket['events_id'], [
+                        'contain' => ['Users']
+                    ]);
+                }
+            
+                ////////////////////////////////////////////////
+                if($this->request->data['status'] == 'success')
+                {
+                    $email = new Email();
+                    $email->transport('gmail');
+                    $firstname = $this->request->data['firstname'];
+                    $lastname = $this->request->data['lastname'];
+                    $tickets = $ticket['tickets'];
+                    $amount = $ticket['amount'];
+                    $event_title = $event['title'];
+                    $to = trim($this->request->data['email']); 
+                    $email->emailFormat('html');
+                    $email->template('default');
+                    $email->from('admin@chennaismile.com');
+                    $email->to($to);
+                    $email->cc('admin@chennaismile.com');
+                    $subject = "Thanks for the registration of " . $tickets . " tickets for " . $event_title;
+                    $email->subject($subject);
+
+                    $message = "Dear <span style='color:#666666'>" . $firstname . " " . $lastname . " </span>,<br/><br/>";
+                    $message .= "<br/>We are happy to inform you that your registration of " . $tickets . " tickets for <b>" . $event_title . "</b> is done & payment of " . $amount . " is completed successfully. <br/>";
+                    $message .= "<br/>Thanks and regards, <br/>Team ChennaiSmile, <br/>www.chennaismile.com";
+                    $email->send($message);
+                }
+                if($this->request->data['status'] == 'failure')
+                {
+                    $email = new Email();
+                    $email->transport('gmail');
+                    $firstname = $this->request->data['firstname'];
+                    $lastname = $this->request->data['lastname'];
+                    $tickets = $ticket['tickets'];
+                    $amount = $ticket['amount'];
+                    $event_title = $event['title'];
+                    $to = trim($this->request->data['email']); 
+                    $email->emailFormat('html');
+                    $email->template('default');
+                    $email->from('admin@chennaismile.com');
+                    $email->to($to);
+                    $email->cc('admin@chennaismile.com');
+                    $subject = "Your registration of " . $tickets . " tickets for " . $event_title . " has been failed";
+                    $email->subject($subject);
+
+                    $message = "Dear <span style='color:#666666'>" . $firstname . " " . $lastname . " </span>,<br/><br/>";
+                    $message .= "<br/>We are inform you that your registration of " . $tickets . " tickets for <b>" . $event_title . "</b> is failed. Thanks for your interest. Please try again. <br/>";
+                    $message .= "<br/>Thanks and regards, <br/>Team ChennaiSmile, <br/>www.chennaismile.com";
+                    $email->send($message);
+                }
                // $this->Flash->success(__('The ticket has been saved.'));
 
                 return $this->redirect(['controller' => 'events','action' => 'chennai', $ticket->events_id]);
