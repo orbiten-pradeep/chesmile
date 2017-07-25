@@ -13,6 +13,9 @@ and (max-width: 460px){
     max-width: none !important;
     /*max-height: none !important;*/
 }
+#myCarousel{
+    display: none;
+}
 }
 @media (max-width: 1920px){
 .card-size{
@@ -38,13 +41,13 @@ max-width: 259px;
 
 .back{
     position: absolute;
-    /*opacity: 0;*/
+    opacity: 0.8;
     transition: opacity .3s ease;
     -ms-transition: opacity .3s ease;
     -webkit-transition: opacity .3s ease;
     -o-transition: opacity .3s ease;
     z-index: 2;
-    background: linear-gradient(to top, rgba(0, 0, 0, 0) 0%, rgba(0,0,0,.6) 50%);
+    background: rgba(0,0,0,.6);
     /*top: 0;*/
     width: 100%;
     height: 12%;
@@ -124,17 +127,95 @@ max-width: 259px;
             </div>
         </div>
     </div>
-    <div class="col-sm-9 col-md-10 list_event content">
+    <style type="text/css">
+        body { padding-top: 20px; }
+#myCarousel .nav a small {
+    display:block;
+}
+#myCarousel .nav {
+    background:#eee;
+}
+#myCarousel .nav a {
+    border-radius:0px;
+}
+/*.carousel-inner{
+    height: 50% !important;
+}*/
+    </style>
+    <script type="text/javascript">
+        $(document).ready( function() {
+    $('#myCarousel').carousel({
+        interval:   10000
+    });
+    
+    var clickEvent = false;
+    $('#myCarousel').on('click', '.nav a', function() {
+            clickEvent = true;
+            $('.nav li').removeClass('active');
+            $(this).parent().addClass('active');        
+    }).on('slid.bs.carousel', function(e) {
+        if(!clickEvent) {
+            var count = $('.nav').children().length -1;
+            var current = $('.nav li.active');
+            current.removeClass('active').next().addClass('active');
+            var id = parseInt(current.data('slide-to'));
+            if(count == id) {
+                $('.nav li').first().addClass('active');    
+            }
+        }
+        clickEvent = false;
+    });
+});
+    </script>
+    <div class="container-fluid list_event content col-sm-9 col-md-10">
+    <div id="myCarousel" class="carousel slide" data-ride="carousel">
+    
+      <!-- Wrapper for slides -->
+      <div class="carousel-inner">
+      
+        <div class="item active">
+        <a href="http://localhost/chesmile/events/chennai/evam-presents-baggy-in-and-as-kung-fu-bondadgdfg">
+          <?php echo $this->Html->image('freedom-fighter-marathon.png',array('width' => '1600px' )); ?>
+          </a>
+           <div class="carousel-caption">
+            <!-- <h3>Headline</h3>
+            <p>Lorem ipsum dolor sit amet, consetetur sadipscing elitr, sed diam nonumy eirmod tempor invidunt ut labore et dolore magna aliquyam erat, sed diam voluptua. Lorem ipsum dolor sit amet, consetetur sadipscing elitr, sed diam nonumy eirmod tempor invidunt ut labore et dolore magna aliquyam erat, sed diam voluptua. <a href="http://sevenx.de/demo/bootstrap-carousel/" target="_blank" class="label label-danger">Bootstrap 3 - Carousel Collection</a></p> -->
+          </div>
+        </div><!-- End Item -->
+ 
+         <div class="item">
+         <a href="http://localhost/chesmile/events/chennai/evam-presents-baggy-in-and-as-kung-fu-bondadgdfg">
+         <?php echo $this->Html->image('reema-cooking.png',array('width' => '1600px' )); ?>
+         </a>
+           <div class="carousel-caption">
+            <!-- <h3>Headline</h3>
+            <p>Lorem ipsum dolor sit amet, consetetur sadipscing elitr, sed diam nonumy eirmod tempor invidunt ut labore et dolore magna aliquyam erat, sed diam voluptua. Lorem ipsum dolor sit amet, consetetur sadipscing elitr, sed diam nonumy eirmod tempor invidunt ut labore et dolore magna aliquyam erat, sed diam voluptua. <a href="http://sevenx.de/demo/bootstrap-carousel/" target="_blank" class="label label-danger">Bootstrap 3 - Carousel Collection</a></p> -->
+          </div>
+        </div><!-- End Item -->
+                
+      </div><!-- End Carousel Inner -->
+
+
+        <ul class="nav nav-pills nav-justified">
+          <li data-target="#myCarousel" data-slide-to="0" class="active" style="background: #eee;"><a href="#">International Food World 2017<!-- <small>Extent Digital Marketing & Communications</small> --></a></li>
+          <li data-target="#myCarousel" data-slide-to="1" style="background: #eee;"><a href="#">Chennai Kidathon 2017<!-- <small>Chennai Kidathon</small> --></a></li>
+        </ul>
+
+
+    </div><!-- End Carousel -->
+
+<br><br>
+    <!-- <div class="col-sm-9 col-md-10 list_event content"> -->
         <!-- <div class="btn btn-primary Upcoming-events" style="display: none; float:right;">Upcoming Events</div> -->
         <div class="Past-title" style="display: none; margin-top: -20px;"><h3>Past Events</h3><hr></div>
         <div class="row" style="margin-right: 0px;" id="eventResponse">
         </div>
         <div class="loadingDiv"><div id="loading"></div></div>
-    </div>
+    <!-- </div> -->
 </div>
 </div>
 </div>
-
+</div>
 <script type="text/javascript">
     $('.past-events').click(function(){
     $('.Past-title').css('display','block');
