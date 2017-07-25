@@ -173,7 +173,7 @@ class TicketsController extends AppController
                     $email->subject($subject);
 
                     $message = "Dear <span style='color:#666666'>" . $firstname . " " . $lastname . " </span>,<br/><br/>";
-                    $message .= "<br/>We are inform you that your registration of " . $tickets . " tickets for <b>" . $event_title . "</b> is failed. Thanks for your interest. Please try again. <br/>";
+                    $message .= "<br/>We would like to inform you that your registration of " . $tickets . " tickets for <b>" . $event_title . "</b> is failed. Thanks for your interest. Please try again. <br/>";
                     $message .= "<br/>Thanks and regards, <br/>Team ChennaiSmile, <br/>www.chennaismile.com";
                     $email->send($message);
                 }
