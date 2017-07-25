@@ -318,6 +318,23 @@ and (max-width: 414px){
 	display: none;
 }
 
+@media screen and (min-width: 768px)
+and (max-width: 1920px){
+.form-size{
+	width: 20% !important;
+}
+}
+
+@media screen and (min-width: 321px)
+and (max-width: 414px){
+	.mob-form-size{
+	width: 10% !important;
+}
+}
+.pay-btn{
+	display: none;
+}
+
 /*body.modal-open .background-container{
     -webkit-filter: none !important;
     -moz-filter: none !important;
@@ -629,41 +646,228 @@ if($u_id == $event->user_id){ ?>
 </nav> 
 
 </div>
-		  <div class="container">
+	  <div class="container">
 
-		  <!-- <link href="//maxcdn.bootstrapcdn.com/font-awesome/4.1.0/css/font-awesome.min.css" rel="stylesheet"> -->
+		  
 	<div class="modal fade" id="Register-modal" role="dialog">
-	<div class="modal-dialog">
+	<div class="modal-dialog modal-lg">
 	  <div class="modal-content">
 		  <div class="modal-header">
 			  <button type="button" class="close" data-dismiss="modal"><span aria-hidden="true">×</span><span class="sr-only">Close</span></button>
 			  <h4 class="modal-title" id="myModalLabel">Online Registration</h4>
 		  </div>
 		  <div class="modal-body">
-			  <div class="row">
-				  <div class="col-xs-12 col-lg-12">
-					  <!-- <div class="card"> --> <!-- </div> -->
-						   <p style="line-height: 3;">Online registration is now closed<br/>
+			<div class="">
+        
+         <?= $this->Form->create('$marathon',array('url' => ['controller' => 'Marathon','action' => 'add', $event->id], 'id' => 'mar')) ?>
 
-								  
+          <input type="hidden" id="checkUrl" name="checkUrl" value="<?php echo $this->Url->build(array('controller' => 'marathon', 'action' => 'isemailexist'));?>">
+            
+             <input type="hidden" name="amount" value="" id="amount"/>
+             <input type="hidden" name="productinfo" value="Marathon (ChennaiSmile.com)" size="64" />
+             <input type="hidden" name="service_provider" value="payu_paisa" size="64" />
+            <!-- <div class="form-group float-label-control">
+             
+             <label for="">Firstname</label>
+             <?= $this->Form->input('firstname', array('div' => false, 'class' => 'form-control form-element text','label' => false,'placeholder' => 'Firstname', 'required' => true)) ?>
+            </div>
+       
+            <div class="form-group float-label-control">
+             
+             <label for="">Lastname</label>
+             <?= $this->Form->input('lastname', array('div' => false,'class' => 'form-control form-element text','label' => false,'placeholder' => 'Lastname', 'required' => true)) ?>
+            </div>
+    
 
-On the spot registration is available <br/>At the venue on june 11th<br/>
+        <div class="form-group">
+                <label>
+           <?= $this->Form->input('date', array('type' => 'text','class' => 'form-control date','placeholder' => 'Date of birth','label' => false,'required' => true));?>
+           </label><br>
+           <span id="person_type" style="color:black; font-weight: bold;"></span>
+           </div>
 
-<b>On spot registration Includes:</b> BIB Number, Medal, Certificate & Refreshments.<br/>
+       <div class="form-group">
+            <?php $sex = ['Male' => 'Male', 'Female' => 'Female'];
+             echo $this->Form->select('sex', $sex, array('empty' => '(Select Gender)', 'class' => 'form-control heigh', 'required' => true));?>
+        </div>
+            
+            <div class="form-group float-label-control">
+             
+             <label for="">Email</label>
+             <?= $this->Form->input('email', array('div' => false,'class' => 'form-control form-element text','label' => false,'placeholder' => 'Email address', 'id' => 'email_registration' ,'required' => true, 'onblur' => 'referalpgm();')) ?>
+            </div>
+     
 
-<b>Registration Fee:</b> Rs.150<br/>
+      
+            <div class="form-group float-label-control">
+             <label for="">Mobile number</label>
+             <?= $this->Form->input('mobile_number', array('div' => false,'class' => 'form-control form-element text','label' => false,'placeholder' => 'Mobile number', 'required' => true)) ?>
+            </div>
+     
+            <div class="form-group">
+            <label> Distance </label>
+         <?php $km = ['3 KM' => '3 KM', '5 KM' => '5 KM'];
+           echo $this->Form->select('KM', $km, array('default' => '2 KM','class' => 'form-control heigh', 'required' => true));?>
+           </div>
 
-<span style="font-size: 11px;">*T-shirt will not be provided for on spot registrants</span>
+           <div class="form-group">
+           <label> Select your tshirt size </label>
+           <?php $tshirt = ['XS' => 'XS' ,'S' => 'S', 'M' => 'M', 'L' => 'L', 'XL' => 'XL', 'XXL' => 'XXL', 'XXXL' => 'XXXL'];
+           echo $this->Form->select('TSHIRT', $tshirt, array('default' => 'XS', 'class' => 'form-control heigh', 'required' => true));?>
+           </div> -->
 
-</p>
+           
+  <!-- <div class="panel-heading">Dynamic Form Fields - Add & Remove Multiple fields</div>
+  <div class="panel-heading">Education Experience</div> -->
 
-		  </div>
-	  </div>
+  
+  <div class="row">
+  <div class="col-xs-12 col-lg-12">
+  <div class="col-xs-6 col-lg-6">
+  	<label>Select Seats:</label>
+  </div>
+  
+  <div class="col-xs-3 col-lg-3">
+   <select name="numNames" id="numNames" onchange="calcamount(this);">
+   <option value="0">0</option>
+ <option value="1">1</option>
+ <option value="2">2</option>
+ <option value="3">3</option>
+ <option value="4">4</option>
+ <option value="5">5</option>
+ <option value="6">6</option>
+ <option value="7">7</option>
+ <option value="8">8</option>
+ <option value="9">9</option>
+ <option value="10">10</option>
+</select>
+</div>
+<div class="col-xs-3 col-lg-3">
+	Total Price: <span id="priceSpan">0</span>
+</div>
+</div>
+</div>
+
+  <div id="elcontainer"></div>
+
+
+
+        <div class="">
+          <div class="form-group text-center">
+          <div>
+          <input value="0" id="price" type="hidden" name="price" required="true" title="totalprice" readonly="true">
+          <input value="600" id="defaultprice" type="hidden" name="defaultprice" required="true">
+           </div>
+           
+           <?= $this->Form->button(__('Proceed to payment'),array('class' => "btn btn-info btn-block pay-btn")) ?>
+			
+           <span id="myspan">
+           </span>
+
+    <?= $this->Form->end() ?>
+          </div>
+        </div>
+  
+    <!-- <?= $this->Form->end() ?> -->
   </div>
 </div>
 </div>
 </div>
 </div>
+<script src="//code.jquery.com/jquery-2.1.1.min.js"></script>
+<script type="text/javascript">
+var el ='<br><br><div class="col-xs-3 col-sm-3 col-lg-3 form-size mob-form-size">'+
+ ' <div class="form-group float-label-control">'+
+             
+             '<label for="">Firstname</label>'+
+            ' <?= $this->Form->input('firstname', array('div' => false, 'class' => 'form-control form-element text','label' => false,'placeholder' => 'Firstname', 'required' => true)) ?>'+
+            '</div>'+
+'</div>'+
+
+'<div class="col-xs-3 col-sm-3 col-lg-3 form-size mob-form-size">'+
+ '<div class="form-group float-label-control">'+
+             
+             '<label for="">Email</label>'+
+             '<?= $this->Form->input('email', array('div' => false,'class' => 'form-control form-element text','label' => false,'placeholder' => 'Email address', 'id' => 'email_registration' ,'required' => true, 'onblur' => 'referalpgm();')) ?>'+
+            '</div>'+
+'</div>'+
+
+'<div class="col-xs-3 col-sm-3 col-lg-3 form-size mob-form-size">'+
+   '<div class="form-group float-label-control">'+
+             '<label for="">Mobile number</label>'+
+             '<?= $this->Form->input('mobile_number', array('div' => false,'class' => 'form-control form-element text','label' => false,'placeholder' => 'Mobile number', 'required' => true)) ?>'+
+            '</div>'+
+'</div>'+
+
+'<div class="col-xs-3 col-sm-3 col-lg-3 form-size mob-form-size">'+
+ ' <div class="form-group">'+
+    '<div class="input-group">'+
+      '<select class="form-control" style="height: 35px;">'+
+      
+        '<option value="">Tshirt</option>'+
+        '<option value="XS">XS</option>'+
+        '<option value="S">S</option>'+
+        '<option value="M">M</option>'+
+        '<option value="L">L</option>'+
+        '<option value="XL">XL</option>'+
+        '<option value="XXL">XXL</option>'+
+        '</select>'+
+      '<div class="input-group-btn">'+
+         
+      '</div>'+
+    '</div>'+
+ ' </div>'+
+'</div>'+
+
+'<div class="col-xs-3 col-sm-3 col-lg-3 form-size mob-form-size">'+
+ ' <div class="form-group">'+
+    '<div class="input-group">'+
+      '<select class="form-control" style="height: 35px;">'+
+      
+        '<option value="">KM</option>'+
+        '<option value="3K">3K</option>'+
+        '<option value="5K">5K</option>'+
+        '<option value="10K">10K</option>'+
+        '</select>'+
+      '<div class="input-group-btn">'+
+         
+      '</div>'+
+    '</div>'+
+ ' </div>'+
+'</div><br><br>';
+// var el = '<div class="form-group">' + 
+//  '<label for="Name" class="col-sm-4 control-label">Name:</label>' +
+//   '<div class="col-sm-8 input">' +
+//    '<input type="text" class="form-control" id="name" name="name" placeholder="Enter name" required="required">' +
+//   '</div>' +
+// '</div>'+
+//     '<div class="form-group">' + 
+//  '<label for="Name" class="col-sm-4 control-label">Email:</label>' +
+//   '<div class="col-sm-8 input">' +
+//    '<input type="text" class="form-control" id="name" name="name" placeholder="Enter name" required="required">' +
+//   '</div>' +
+// '</div>';
+
+$('#numNames').on('change', function(e) {
+  var numSelected = Number($(this).val());
+  appendControls(numSelected);
+ $(".pay-btn").css('display','block'); 
+});
+
+function appendControls(num) {
+  $('#elcontainer').empty();
+  for (var i=0; i<num; i++) {
+     $('#elcontainer').append(el);
+  } 
+}
+
+function calcamount(tkt){
+	var tktcount = tkt.value;
+	var price = $('#defaultprice').val();
+    $('#price').val(tktcount * price);
+	$("#priceSpan").text(tktcount * price);	
+}
+</script>
 
  <div class="container">
 

@@ -37,7 +37,7 @@ body{
 .copyrights {
     color: #ffffff;
     padding: 5px 0 15px !important;
-    margin-left: 75px !important;
+    margin-left: 85px !important;
 }
 }
 @media (max-width: 414px){
