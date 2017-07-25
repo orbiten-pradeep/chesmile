@@ -447,7 +447,7 @@ a.socialIcon:hover, .socialHoverClass {
   }
 @media only screen and (max-width: 991px) {
 
-  .desktop-signIn{
+  /*.desktop-signIn{
     display:none;
   }
   .form-signup{
@@ -455,7 +455,7 @@ a.socialIcon:hover, .socialHoverClass {
   }
 .mobile-signIn{
     display:block;
-  }
+  }*/
 
   .viewSignInForim{
     display: block;
@@ -617,6 +617,17 @@ and (max-width: 414px){
   width: 300px !important;
 left: 0px !important;
 }
+
+.wrapper {
+    padding-left: 0px !important;
+}
+
+.card-container-login.card-login {
+    max-width: 350px;
+    background-color: #e2e2e2;
+    padding: 0px 0px;
+}
+
 }
 
 /*html,
@@ -1154,6 +1165,9 @@ body.modal-open .background-container{
     box-shadow: none !important;
 
 }
+body {
+  padding-top: 0px !important;
+}
 
 </style>
 
@@ -1371,7 +1385,7 @@ body.modal-open .background-container{
 
         <h4 class="modal-title">Category</h4>
       </div>
-      <div class="modal-body">
+      <div class="modal-body" style="background: none;">
         <div class="mob-category-list">
           <div class="form-group">
             <input id="mobEventCategorySearch" type="text" class="form-control" placeholder="Search for events, parties, concerts and more">         
@@ -1469,12 +1483,19 @@ body.modal-open .background-container{
     <div class="modal-content">
       <div class="modal-body"> 
           <ul class="list-group">
+           <?php if(!$this->request->session()->read('Auth.User')) { ?>
+            <li class="list-group-item"><a href="#" data-toggle="modal" data-target="#loginSignup">Create Event</a></li>
+            <li class="list-group-item"><a href="#" data-toggle="modal" data-target="#loginSignup">Login/Signup</a></li>
+            <?php }?>
+
+            <?php if($this->request->session()->read('Auth.User')) { ?>
             <li class="list-group-item"><a href="<?php echo $this->Url->build(array('controller' => 'events', 'action' => 'add'));?>" >Create Event</a></li>
             <li class="list-group-item"><a href="#my-events" class="my-events">My Events</a></li>
              <li class="list-group-item"><a href="#liked-events" class="liked-events">Liked Events</a></li>
             <li class="list-group-item"><a href="<?php echo $this->Url->build(array('controller' => 'events'));?>#past-events" >Past Event</a></li>
             <li class="list-group-item"><a href="<?php echo $this->Url->build(array('controller' => 'UserProfile', 'action' => 'add'));?>" >My Profile</a></li>
             <li class="list-group-item"><a href="<?php echo $this->Url->build(array('controller' => 'Users', 'action' => 'logout'));?>" >Logout</a></li>
+            <?php }?>
           </ul>
       </div> 
     </div><!-- /.modal-content -->
@@ -1682,6 +1703,8 @@ $('.close-forg').click(function(){
   $('.in').hide();
   $('body.modal-open .background-container').css('filter','none');
 });
+
+
   </script>
     
       <script type="text/javascript">
@@ -1986,9 +2009,6 @@ $("#forgotpassform" ).validate( {
 
 });
 
-</script>
-<script type="text/javascript">
-  $('#product-options').modal('hide');
 </script>
 </body>
 </html>
