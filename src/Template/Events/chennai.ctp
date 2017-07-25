@@ -771,177 +771,6 @@ if($u_id == $event->user_id){ ?>
 </div>
 </div>
 
-<!-- <div class="modal fade" id="Register-modal3" role="dialog">
-	<div class="modal-dialog">
-	  <div class="modal-content">
-		  <div class="modal-header">
-			  <button type="button" class="close" data-dismiss="modal"><span aria-hidden="true">×</span><span class="sr-only">Close</span></button>
-			  <h4 class="modal-title" id="myModalLabel">Online Registration ( Only For Ladies & Girls )</h4>
-		  </div>
-		  <div class="modal-body">
-			<div class="">
-        
-         <?= $this->Form->create('$marathon',array('url' => ['controller' => 'Marathon','action' => 'add', $event->id], 'id' => 'mar')) ?>
-
-          <input type="hidden" id="checkUrl" name="checkUrl" value="<?php echo $this->Url->build(array('controller' => 'marathon', 'action' => 'isemailexist'));?>">
-            
-             <input type="hidden" name="amount" value="" id="amount"/>
-             <input type="hidden" name="productinfo" value="Marathon (ChennaiSmile.com)" size="64" />
-             <input type="hidden" name="service_provider" value="payu_paisa" size="64" />
-            <div class="form-group float-label-control">
-             
-             <label for="">Firstname</label>
-             <?= $this->Form->input('firstname', array('div' => false, 'class' => 'form-control form-element text','label' => false,'placeholder' => 'Firstname', 'required' => true)) ?>
-            </div>
-       
-            <div class="form-group float-label-control">
-             
-             <label for="">Lastname</label>
-             <?= $this->Form->input('lastname', array('div' => false,'class' => 'form-control form-element text','label' => false,'placeholder' => 'Lastname', 'required' => true)) ?>
-            </div>
-    
-
-        <div class="form-group">
-                <label>
-           <?= $this->Form->input('date', array('type' => 'text','class' => 'form-control date','placeholder' => 'Date of birth','label' => false,'required' => true));?>
-           </label><br>
-           <span id="person_type" style="color:black; font-weight: bold;"></span>
-           </div>
-
-        <div class="form-group">
-        <label>Select No. of Tickets</label>
-		   <select class="form-control heigh" onchange="calcamount3(this);">
-		   	<!-- <option value="0">Select No. of tickets</option>
-		      <option value="0">0</option>
-			 <option value="1">1</option>
-			 <option value="2">2</option>
-			 <option value="3">3</option>
-			 <option value="4">4</option>
-			 <option value="5">5</option>
-			 <option value="6">6</option>
-			 <option value="7">7</option>
-			 <option value="8">8</option>
-			 <option value="9">9</option>
-			 <option value="10">10</option>
-			</select>
-		</div>
-
-            
-            <div class="form-group float-label-control">
-             
-             <label for="">Email</label>
-             <?= $this->Form->input('email', array('div' => false,'class' => 'form-control form-element text','label' => false,'placeholder' => 'Email address', 'id' => 'email_registration' ,'required' => true, 'onblur' => 'referalpgm();')) ?>
-            </div>
-     
-
-      
-            <div class="form-group float-label-control">
-             <label for="">Mobile number</label>
-             <?= $this->Form->input('mobile_number', array('div' => false,'class' => 'form-control form-element text','label' => false,'placeholder' => 'Mobile number', 'required' => true)) ?>
-            </div>
-
-        <div class="">
-          <div class="form-group text-center">
-           
-           <?= $this->Form->button(__('Proceed to pay ( ₹ <span id="priceSpan3">0</span> )'),array('class' => "btn btn-info btn-block")) ?>
-			
-
-    <?= $this->Form->end() ?>
-          </div>
-        </div>
-        <input value="0" id="price3" type="hidden" name="price3" required="true" title="totalprice3" readonly="true">
-          <input value="1500" id="defaultprice3" type="hidden" name="defaultprice3" required="true">
-  </div>
-</div>
-</div>
-</div>
-</div>
- --> 
-<!-- <div class="modal fade" id="Register-modal4" role="dialog">
-	<div class="modal-dialog">
-	  <div class="modal-content">
-		  <div class="modal-header">
-			  <button type="button" class="close" data-dismiss="modal"><span aria-hidden="true">×</span><span class="sr-only">Close</span></button>
-			  <h4 class="modal-title" id="myModalLabel">Online Registration ( Only For Ladies & Girls )</h4>
-		  </div>
-		  <div class="modal-body">
-			<div class="">
-        
-         <?= $this->Form->create('$marathon',array('url' => ['controller' => 'Marathon','action' => 'add', $event->id], 'id' => 'mar')) ?>
-
-          <input type="hidden" id="checkUrl" name="checkUrl" value="<?php echo $this->Url->build(array('controller' => 'marathon', 'action' => 'isemailexist'));?>">
-            
-             <input type="hidden" name="amount" value="" id="amount"/>
-             <input type="hidden" name="productinfo" value="Marathon (ChennaiSmile.com)" size="64" />
-             <input type="hidden" name="service_provider" value="payu_paisa" size="64" />
-            <div class="form-group float-label-control">
-             
-             <label for="">Firstname</label>
-             <?= $this->Form->input('firstname', array('div' => false, 'class' => 'form-control form-element text','label' => false,'placeholder' => 'Firstname', 'required' => true)) ?>
-            </div>
-       
-            <div class="form-group float-label-control">
-             
-             <label for="">Lastname</label>
-             <?= $this->Form->input('lastname', array('div' => false,'class' => 'form-control form-element text','label' => false,'placeholder' => 'Lastname', 'required' => true)) ?>
-            </div>
-    
-
-        <div class="form-group">
-                <label>
-           <?= $this->Form->input('date', array('type' => 'text','class' => 'form-control date','placeholder' => 'Date of birth','label' => false,'required' => true));?>
-           </label><br>
-           <span id="person_type" style="color:black; font-weight: bold;"></span>
-           </div>
-
-        <div class="form-group">
-        <label>Select No. of Tickets</label>
-		   <select class="form-control heigh" onchange="calcamount4(this);">
-		   	<!-- <option value="0">Select No. of tickets</option>
-		      <option value="0">0</option>
-			 <option value="1">1</option>
-			 <option value="2">2</option>
-			 <option value="3">3</option>
-			 <option value="4">4</option>
-			 <option value="5">5</option>
-			 <option value="6">6</option>
-			 <option value="7">7</option>
-			 <option value="8">8</option>
-			 <option value="9">9</option>
-			 <option value="10">10</option>
-			</select>
-		</div>
-
-            
-            <div class="form-group float-label-control">
-             
-             <label for="">Email</label>
-             <?= $this->Form->input('email', array('div' => false,'class' => 'form-control form-element text','label' => false,'placeholder' => 'Email address', 'id' => 'email_registration' ,'required' => true, 'onblur' => 'referalpgm();')) ?>
-            </div>
-     
-
-      
-            <div class="form-group float-label-control">
-             <label for="">Mobile number</label>
-             <?= $this->Form->input('mobile_number', array('div' => false,'class' => 'form-control form-element text','label' => false,'placeholder' => 'Mobile number', 'required' => true)) ?>
-            </div>
-
-        <div class="">
-          <div class="form-group text-center">
-           
-           <?= $this->Form->button(__('Proceed to pay ( ₹ <span id="priceSpan4">0</span> )'),array('class' => "btn btn-info btn-block")) ?>
-			
-
-    <?= $this->Form->end() ?>
-          </div>
-        </div>
-        <input value="0" id="price4" type="hidden" name="price4" required="true" title="totalprice4" readonly="true">
-          <input value="1200" id="defaultprice4" type="hidden" name="defaultprice4" required="true">
-  </div>
-</div>
-</div>
-</div>
-</div> -->
 
 	  <div class="container">
 
@@ -956,13 +785,14 @@ if($u_id == $event->user_id){ ?>
 		  <div class="modal-body">
 			<div class="">
         
-         <?= $this->Form->create('$marathon',array('url' => ['controller' => 'Marathon','action' => 'add', $event->id], 'id' => 'mar')) ?>
+         <?= $this->Form->create('$marathon',array('url' => ['controller' => 'Marathon','action' => 'add'], 'id' => 'mar')) ?>
 
           <input type="hidden" id="checkUrl" name="checkUrl" value="<?php echo $this->Url->build(array('controller' => 'marathon', 'action' => 'isemailexist'));?>">
             
-             <input type="hidden" name="amount" value="" id="amount"/>
-             <input type="hidden" name="productinfo" value="Marathon (ChennaiSmile.com)" size="64" />
-             <input type="hidden" name="service_provider" value="payu_paisa" size="64" />
+	         <input type="hidden" name="amount" value="" id="amount"/>
+	         <input type="hidden" name="productinfo" value="<?= $event->title. '_' . $event->id;?>" size="64" />
+	         <input type="hidden" name="events_id" value="<?= $event->id?>" size="64" />
+	         <input type="hidden" name="service_provider" value="payu_paisa" size="64" /> 
             <!-- <div class="form-group float-label-control">
              
              <label for="">Firstname</label>
@@ -1026,7 +856,7 @@ if($u_id == $event->user_id){ ?>
   
   <div class="col-xs-3 col-lg-3">
    <select name="tickets" id="numNames" onchange="calcamount(this);">
-   <option value="0">0</option>
+   <option value="">0</option>
  <option value="1">1</option>
  <option value="2">2</option>
  <option value="3">3</option>
@@ -1040,7 +870,7 @@ if($u_id == $event->user_id){ ?>
 </select>
 </div>
 <div class="col-xs-5 col-lg-5">
-	Total Price: <span id="priceSpan">0</span>
+	Total Price: <span id="priceSpan_mar">0</span>
 </div>
 </div>
 </div>
@@ -1052,11 +882,11 @@ if($u_id == $event->user_id){ ?>
         <div class="">
           <div class="form-group text-center">
           <div>
-          <input value="0" id="price" type="hidden" name="price" required="true" title="totalprice" readonly="true">
-          <input value="600" id="defaultprice" type="hidden" name="defaultprice" required="true">
+          <input value="0" id="price_mar" type="hidden" name="price" required="true" title="totalprice" readonly="true">
+          <input value="600" id="defaultprice_mar" type="hidden" name="defaultprice" required="true">
            </div>
            
-           <?= $this->Form->button(__('Proceed to payment'),array('class' => "btn btn-info btn-block pay-btn")) ?>
+           <?= $this->Form->button(__('Proceed to pay ( ₹ <span id="priceSpan_mar_proceed">0</span> )'),array('class' => "btn btn-info btn-block pay-btn")) ?>
 			
            <span id="myspan">
            </span>
@@ -1161,9 +991,10 @@ function appendControls(num) {
 
 function calcamount(tkt){
 	var tktcount = tkt.value;
-	var price = $('#defaultprice').val();
-    $('#price').val(tktcount * price);
-	$("#priceSpan").text(tktcount * price);	
+	var price = $('#defaultprice_mar').val();
+    $('#price_mar').val(tktcount * price);
+	$("#priceSpan_mar").text(tktcount * price);	
+	$("#priceSpan_mar_proceed").text(tktcount * price);	
 }
 
 	
