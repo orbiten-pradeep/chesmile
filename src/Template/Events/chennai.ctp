@@ -886,10 +886,9 @@ var el ='<br><br><div class="col-xs-12 col-sm-3 col-lg-3 form-size mob-form-size
 
 '<div class="col-xs-12 col-sm-3 col-lg-3 form-size mob-form-size">'+
  ' <div class="form-group">'+
- '<label for="">Tshirt Size</label>'+
     '<div class="input-group">'+
       '<?php $role = ['XS' => 'XS', 'S' => 'S', 'M' => 'M', 'L' => 'L', 'XL' => 'XL', 'XXL' => 'XXL']; ?>'+
-      '<?php echo $this->Form->select('Marathon.TSHIRT[]', $role, array('div' => false,'class' => 'form-control form-element text form-border sel-size','placeholder' => 'Mobile number','label' => false, 'required' => true)); ?>'+
+      '<?php echo $this->Form->select('Marathon.TSHIRT[]', $role, array('div' => false,'class' => 'form-control form-element text form-border sel-size','placeholder' => 'Mobile number','empty' => '(Select Tshirt Size)','label' => false, 'required' => true)); ?>'+
       '<div class="input-group-btn">'+
          
       '</div>'+
@@ -899,10 +898,9 @@ var el ='<br><br><div class="col-xs-12 col-sm-3 col-lg-3 form-size mob-form-size
 
 '<div class="col-xs-12 col-sm-3 col-lg-3 form-size mob-form-size">'+
  ' <div class="form-group">'+
- '<label for="">KM</label>'+
     '<div class="input-group">'+
       '<?php $role = ['3K' => '3K', '5K' => '5K', '10K' => '10K']; ?>'+
-      '<?php echo $this->Form->select('Marathon.KM[]', $role, array('div' => false,'class' => 'form-control form-element text form-border sel-size','placeholder' => 'Mobile number','label' => false, 'required' => true)); ?>'+
+      '<?php echo $this->Form->select('Marathon.KM[]', $role, array('div' => false,'class' => 'form-control form-element text form-border sel-size','empty' => '(Select KM)','placeholder' => 'Mobile number','label' => false, 'required' => true)); ?>'+
       '<div class="input-group-btn">'+
          
       '</div>'+
