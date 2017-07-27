@@ -182,7 +182,6 @@ class TicketsController extends AppController
         if ($this->request->is(['patch', 'post', 'put'])) {
             $this->loadModel('Events');
             $ticket = $this->Tickets->patchEntity($ticket, $this->request->data);
-            debug($ticket); exit(0);
             if ($this->Tickets->save($ticket)) {
 
                 if(!empty($ticket['events_id']))
