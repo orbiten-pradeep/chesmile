@@ -753,7 +753,18 @@ if($u_id == $event->user_id){ ?>
              <?= $this->Form->input('mobile_number', array('div' => false,'class' => 'form-control form-element text','label' => false,'placeholder' => 'Mobile number', 'required' => true)) ?>
             </div>
             <input value="0" id="price" type="hidden" name="price" required="true" title="totalprice" readonly="true">
+<<<<<<< .mine
+         <!--  <input value="4000" id="defaultprice2" type="hidden" name="defaultprice2" required="true">
+          <input value="1500" id="defaultprice3" type="hidden" name="defaultprice3" required="true">
+          <input value="1200" id="defaultprice4" type="hidden" name="defaultprice4" required="true"> -->
           <input value="<?= $event->price?>" id="defaultprice2" type="hidden" name="defaultprice2" required="true">
+||||||| .r328
+          <input value="4000" id="defaultprice2" type="hidden" name="defaultprice2" required="true">
+          <input value="1500" id="defaultprice3" type="hidden" name="defaultprice3" required="true">
+          <input value="1200" id="defaultprice4" type="hidden" name="defaultprice4" required="true">
+=======
+          <input value="<?= $event->price?>" id="defaultprice2" type="hidden" name="defaultprice2" required="true">
+>>>>>>> .r330
 
         <div class="">
           <div class="form-group text-center">
@@ -886,7 +897,7 @@ var el ='<br><br><div class="col-xs-12 col-sm-3 col-lg-3 form-size mob-form-size
  ' <div class="form-group">'+
     '<div class="input-group">'+
       '<?php $role = ['XS' => 'XS', 'S' => 'S', 'M' => 'M', 'L' => 'L', 'XL' => 'XL', 'XXL' => 'XXL']; ?>'+
-      '<?php echo $this->Form->select('Marathon.TSHIRT[]', $role, array('div' => false,'class' => 'form-control form-element text form-border sel-size','placeholder' => 'TSHIRT','empty' => '(Select Tshirt Size)','label' => false, 'required' => true)); ?>'+
+      '<?php echo $this->Form->select('Marathon.TSHIRT[]', $role, array('div' => false,'class' => 'form-control form-element text form-border sel-size','placeholder' => 'TSHIRT','empty' => '(Tshirt Size)','label' => false, 'required' => true)); ?>'+
       '<div class="input-group-btn">'+
          
       '</div>'+
@@ -898,7 +909,7 @@ var el ='<br><br><div class="col-xs-12 col-sm-3 col-lg-3 form-size mob-form-size
  ' <div class="form-group">'+
     '<div class="input-group">'+
       '<?php $role = ['3K' => '3K', '5K' => '5K', '10K' => '10K']; ?>'+
-      '<?php echo $this->Form->select('Marathon.KM[]', $role, array('div' => false,'class' => 'form-control form-element text form-border sel-size','empty' => '(Select KM)','placeholder' => 'KM','label' => false, 'required' => true)); ?>'+
+      '<?php echo $this->Form->select('Marathon.KM[]', $role, array('div' => false,'class' => 'form-control form-element text form-border sel-size','empty' => '(KM)','placeholder' => 'KM','label' => false, 'required' => true)); ?>'+
       '<div class="input-group-btn">'+
          
       '</div>'+
@@ -946,10 +957,67 @@ function calcamount(tkt){
 
 	
 function calcamount2(tkt2){
+<<<<<<< .mine
 	var tktcount2 = tkt2.value;	
 	var price2 = $('#defaultprice2').val();
 	$('#price').val(tktcount2 * price2);
 	$("#priceSpan").text(tktcount2 * price2);
+	// var tktcount2 = tkt2.value;
+	// var event_id = '<?=$event->id;?>';
+	
+	// if(event_id == 278)
+	// {
+	// 	var price2 = $('#defaultprice2').val();
+	// 	$('#price').val(tktcount2 * price2);
+	// 	$("#priceSpan").text(tktcount2 * price2);		
+	// }
+
+	// if(event_id == 279)
+	// {
+	// 	var price2 = $('#defaultprice3').val();
+	// 	$('#price').val(tktcount2 * price2);
+	// 	$("#priceSpan").text(tktcount2 * price2);		
+	// }
+
+	// if(event_id == 277)
+	// {
+	// 	var price2 = $('#defaultprice4').val();
+	// 	$('#price').val(tktcount2 * price2);
+	// 	$("#priceSpan").text(tktcount2 * price2);		
+	// }
+		
+	
+||||||| .r328
+	var tktcount2 = tkt2.value;
+	var event_id = '<?=$event->id;?>';
+	
+	if(event_id == 278)
+	{
+		var price2 = $('#defaultprice2').val();
+		$('#price').val(tktcount2 * price2);
+		$("#priceSpan").text(tktcount2 * price2);		
+	}
+
+	if(event_id == 279)
+	{
+		var price2 = $('#defaultprice3').val();
+		$('#price').val(tktcount2 * price2);
+		$("#priceSpan").text(tktcount2 * price2);		
+	}
+
+	if(event_id == 277)
+	{
+		var price2 = $('#defaultprice4').val();
+		$('#price').val(tktcount2 * price2);
+		$("#priceSpan").text(tktcount2 * price2);		
+	}
+	
+=======
+	var tktcount2 = tkt2.value;	
+	var price2 = $('#defaultprice2').val();
+	$('#price').val(tktcount2 * price2);
+	$("#priceSpan").text(tktcount2 * price2);
+>>>>>>> .r330
 }
 
 // function calcamount3(tkt3){
