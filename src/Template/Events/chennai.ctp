@@ -385,6 +385,9 @@ and (max-width: 414px){
 .fondant{
 	display: none;
 }
+.sel-size{
+	height: 35px !important;
+}
 </style>
 
 
@@ -785,7 +788,7 @@ if($u_id == $event->user_id){ ?>
 		  <div class="modal-body">
 			<div class="">
         
-         <?= $this->Form->create('$marathon',array('url' => ['controller' => 'Tickets','action' => 'marathon'], 'id' => 'mar')) ?>
+         <?= $this->Form->create('$marathon',array('url' => ['controller' => 'Tickets','action' => 'marathon'])) ?>
 
           <input type="hidden" id="checkUrl" name="checkUrl" value="<?php echo $this->Url->build(array('controller' => 'marathon', 'action' => 'isemailexist'));?>">
             
@@ -883,9 +886,10 @@ var el ='<br><br><div class="col-xs-12 col-sm-3 col-lg-3 form-size mob-form-size
 
 '<div class="col-xs-12 col-sm-3 col-lg-3 form-size mob-form-size">'+
  ' <div class="form-group">'+
+ '<label for="">Tshirt Size</label>'+
     '<div class="input-group">'+
       '<?php $role = ['XS' => 'XS', 'S' => 'S', 'M' => 'M', 'L' => 'L', 'XL' => 'XL', 'XXL' => 'XXL']; ?>'+
-      '<?php echo $this->Form->select('Marathon.TSHIRT[]', $role, array('div' => false,'class' => 'form-control form-element text form-border','placeholder' => 'Mobile number', 'required' => true)); ?>'+
+      '<?php echo $this->Form->select('Marathon.TSHIRT[]', $role, array('div' => false,'class' => 'form-control form-element text form-border sel-size','placeholder' => 'Mobile number','label' => false, 'required' => true)); ?>'+
       '<div class="input-group-btn">'+
          
       '</div>'+
@@ -895,9 +899,10 @@ var el ='<br><br><div class="col-xs-12 col-sm-3 col-lg-3 form-size mob-form-size
 
 '<div class="col-xs-12 col-sm-3 col-lg-3 form-size mob-form-size">'+
  ' <div class="form-group">'+
+ '<label for="">KM</label>'+
     '<div class="input-group">'+
       '<?php $role = ['3K' => '3K', '5K' => '5K', '10K' => '10K']; ?>'+
-      '<?php echo $this->Form->select('Marathon.KM[]', $role, array('div' => false,'class' => 'form-control form-element text form-border','placeholder' => 'Mobile number', 'required' => true)); ?>'+
+      '<?php echo $this->Form->select('Marathon.KM[]', $role, array('div' => false,'class' => 'form-control form-element text form-border sel-size','placeholder' => 'Mobile number','label' => false, 'required' => true)); ?>'+
       '<div class="input-group-btn">'+
          
       '</div>'+
@@ -920,7 +925,11 @@ var el ='<br><br><div class="col-xs-12 col-sm-3 col-lg-3 form-size mob-form-size
 $('#numNames').on('change', function(e) {
   var numSelected = Number($(this).val());
   appendControls(numSelected);
- $(".pay-btn").css('display','block'); 
+  if(numSelected == 0){
+  	$(".pay-btn").css('display','none');
+  } else{
+	 $(".pay-btn").css('display','block'); 
+}
 });
 
 function appendControls(num) {
@@ -1456,6 +1465,7 @@ $("#mar" ).validate( {
 	  $( element ).parents( ".input" ).addClass( "has-success" ).removeClass( "has-error" );
 	}
   });
+
 </script>
 <!-- <nav class="large-3 medium-4 columns" id="actions-sidebar">
 	<ul class="side-nav">
