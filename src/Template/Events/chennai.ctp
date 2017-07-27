@@ -836,7 +836,7 @@ if($u_id == $event->user_id){ ?>
           <div class="form-group text-center">
           <div>
           <input value="0" id="price_mar" type="hidden" name="price" required="true" title="totalprice" readonly="true">
-          <input value="600" id="defaultprice_mar" type="hidden" name="defaultprice" required="true">
+          <input value="<?= $event->price?>" id="defaultprice_mar" type="hidden" name="defaultprice" required="true">
            </div>
            
            <?= $this->Form->button(__('Proceed to pay ( ₹ <span id="priceSpan_mar_proceed">0</span> )'),array('class' => "btn btn-info btn-block pay-btn")) ?>
