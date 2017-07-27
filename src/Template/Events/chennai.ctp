@@ -20,6 +20,7 @@ else {
 		height: 120px; 
 		width: 45px;
 	}
+
 	#lightbox .modal-content {
 	display: inline-block;
 	text-align: center;   
@@ -62,6 +63,7 @@ a {
 	-ms-filter: grayscale(1);
 	padding:10px;
 }
+
 .img-overlay:hover{
 	filter: grayscale(0);
 	-webkit-filter: grayscale(0);
@@ -103,9 +105,11 @@ address {
 .glyphicon-calendar{
 	font-size: 21px !important;
 }
+
 .glyphicon-time{
 	font-size: 21px !important;
 }
+
 .date-txt{
    /* font-size:25px;*/
 }
@@ -115,6 +119,7 @@ address {
 .time-txt{
    /* font-size:25px;*/
 }
+
 	.float-label-control { position: relative; margin-bottom: 1.5em; }
 	/*.float-label-control ::-webkit-input-placeholder { color: transparent; }
 	.float-label-control :-moz-placeholder { color: transparent; }
@@ -138,6 +143,8 @@ address {
 	.float-label-control.label-bottom label { -moz-animation: float-labels-bottom 300ms none ease-out; -webkit-animation: float-labels-bottom 300ms none ease-out; -o-animation: float-labels-bottom 300ms none ease-out; -ms-animation: float-labels-bottom 300ms none ease-out; -khtml-animation: float-labels-bottom 300ms none ease-out; animation: float-labels-bottom 300ms none ease-out; }
 	.float-label-control.label-bottom input:not(.empty) + label,
 	.float-label-control.label-bottom textarea:not(.empty) + label { top: 3em; }
+
+
 @keyframes float-labels {
 	0% { opacity: 1; color: #aaa; top: 0.1em; font-size: 1.5em; }
 	20% { font-size: 1.5em; opacity: 0; }
@@ -145,6 +152,7 @@ address {
 	50% { opacity: 0; font-size: 0.85em; }
 	100% { top: -1em; opacity: 1; }
 }
+
 @-webkit-keyframes float-labels {
 	0% { opacity: 1; color: #aaa; top: 0.1em; font-size: 1.5em; }
 	20% { font-size: 1.5em; opacity: 0; }
@@ -152,6 +160,7 @@ address {
 	50% { opacity: 0; font-size: 0.85em; }
 	100% { top: -1em; opacity: 1; }
 }
+
 @keyframes float-labels-bottom {
 	0% { opacity: 1; color: #aaa; top: 0.1em; font-size: 1.5em; }
 	20% { font-size: 1.5em; opacity: 0; }
@@ -159,6 +168,7 @@ address {
 	50% { opacity: 0; font-size: 0.85em; }
 	100% { top: 3em; opacity: 1; }
 }
+
 @-webkit-keyframes float-labels-bottom {
 	0% { opacity: 1; color: #aaa; top: 0.1em; font-size: 1.5em; }
 	20% { font-size: 1.5em; opacity: 0; }
@@ -166,6 +176,7 @@ address {
 	50% { opacity: 0; font-size: 0.85em; }
 	100% { top: 3em; opacity: 1; }
 }
+
 .card {
 	background-color: #F7F7F7;
 	/* just in case there no content*/
@@ -181,6 +192,7 @@ address {
 	box-shadow: 0px 0px 7px 7px rgba(0, 0, 0, 0.1);*/
 	height: auto;
 }
+
 @media only screen and (max-width:1280px){
 	.cover-pic {
 	/*height: 38% !important;*/
@@ -191,22 +203,26 @@ address {
 	-o-background-size: cover;
 	position: relative;
 }
+
 }
 .btn-tag{
 	background: linear-gradient(to top, rgba(0, 0, 0, 0.55) 50%, rgba(0, 0, 0, 0.63) 50%) !important;
 	border-color: #e2e2e2 !important;
 }
+
 .marg-card{
 	margin-top: -20px !important;
 }
 .user-pic{
 	background: rgba(0, 0, 0, 0) url(<?=$bgCoverImg?>) no-repeat scroll center center / cover;
 }
+
 @media screen and (max-width: 414px){
 .view-btn{
 	float: left !important;
 }
 }
+
 .btn-reg{
 	margin-top: 35px;
 	
@@ -219,6 +235,7 @@ address {
 	margin-top: -45px;
 }
 }
+
 .help-block {
 	display: block;
 	margin-top: 5px;
@@ -240,11 +257,15 @@ a {
 .font-col{
 	color:white !important;
 }
+
 @media screen and (max-width: 414px){
+
 	.bullet-space{
 	margin-left: 10px;
 }
+
 }
+
 #beverage{
 	display: none;
 }
@@ -266,6 +287,7 @@ and (max-width: 1366px){
 	-o-filter: grayscale(1);
 	-ms-filter: grayscale(1);
 	padding:25px;
+
 }
 @media screen and (max-width: 320px){
 	#beve{
@@ -275,6 +297,7 @@ and (max-width: 1366px){
 		margin-left: 30px;
 	}
 }
+
 @media screen and (min-width: 321px)
 and (max-width: 414px){
 	 #beve{
@@ -283,6 +306,7 @@ and (max-width: 414px){
 	#beverage{
 		margin-left: 50px;
 	}
+
 }
 #media-par{
 	display: none;
@@ -293,12 +317,14 @@ and (max-width: 414px){
 #fashion{
 	display: none;
 }
+
 @media screen and (min-width: 768px)
 and (max-width: 1920px){
 .form-size{
 	width: 20% !important;
 }
 }
+
 /*@media screen and (min-width: 321px)
 and (max-width: 414px){
 	.mob-form-size{
@@ -308,6 +334,7 @@ and (max-width: 414px){
 .pay-btn{
 	display: none;
 }
+
 .form-border:focus{
 	border-color: #4abac5 !important;
 }
@@ -320,6 +347,7 @@ and (max-width: 414px){
       filter:none !important;
     filter:none !important;
   }
+
   .modal-backdrop {
     position: relative;
     top: 0;
@@ -329,17 +357,22 @@ and (max-width: 414px){
     z-index: 1040;
     background: none !important;
 }
+
 .modal-backdrop.in {
     filter: none !important;
     opacity: none !important;
 }
+
 .modal-header{
   color: none !important;
   background-color: none !important;
+
 }
+
 .modal-body {
     background-color: none !important;
 }*/
+
 .cook-modal{
 	display: none;
 }
@@ -411,6 +444,7 @@ and (max-width: 414px){
 			<?php
 			//echo $event->google_map; exit;
 			$geoCode = (!empty($event->google_map)) ? $event->google_map : '13.0595365,80.24247919999993';
+
 			?>
 			<div class="col-md-4 col-sm-4 text-center rgt_container">
 				<address>
@@ -497,6 +531,7 @@ and (max-width: 414px){
 													}
 													$count_mepar = $jval;
 													if($count_mepar > 0){
+
 														echo '<h3 class="heading margin25">Media Partners<span></span></h3>';
 														foreach ($mediapartners as $mediapartner) {
 															echo '<div class="col-sm-6 col-xs-12 col-md-3" style="visibility: visible;width: 270px;margin-bottom: 10px;"><a href="#">'.$this->Html->image("Mediapartners/".$mediapartner->MediaPartners, array("alt"=>"Mediapartners","class" => "img-overlay","width" => "250px"));
@@ -522,6 +557,7 @@ and (max-width: 414px){
 													// echo "today".$today;
 													$eventdate = $event->date;
 													// echo "D-".$eventdate;
+
 													if($today >= $eventdate) {
 														$status = "available";
 													?>
@@ -533,6 +569,7 @@ and (max-width: 414px){
 													<?php 
 													$i = 0;
 													foreach ($galaries as $galary):
+
 													$i++;
 													echo "ival"+$i; ?>
 													<div class="col-sm-6 col-xs-12 col-md-3" style="visibility: visible; ">
@@ -748,7 +785,7 @@ if($u_id == $event->user_id){ ?>
 		  <div class="modal-body">
 			<div class="">
         
-         <?= $this->Form->create('$marathon',array('url' => ['controller' => 'Marathon','action' => 'add'], 'id' => 'mar')) ?>
+         <?= $this->Form->create('$marathon',array('url' => ['controller' => 'Tickets','action' => 'marathon'], 'id' => 'mar')) ?>
 
           <input type="hidden" id="checkUrl" name="checkUrl" value="<?php echo $this->Url->build(array('controller' => 'marathon', 'action' => 'isemailexist'));?>">
             
@@ -756,51 +793,7 @@ if($u_id == $event->user_id){ ?>
 	         <input type="hidden" name="productinfo" value="<?= $event->title. '_' . $event->id;?>" size="64" />
 	         <input type="hidden" name="events_id" value="<?= $event->id?>" size="64" />
 	         <input type="hidden" name="service_provider" value="payu_paisa" size="64" /> 
-            <!-- <div class="form-group float-label-control">
-             
-             <label for="">Firstname</label>
-             <?= $this->Form->input('firstname', array('div' => false, 'class' => 'form-control form-element text','label' => false,'placeholder' => 'Firstname', 'required' => true)) ?>
-            </div>
-       
-            <div class="form-group float-label-control">
-             
-             <label for="">Lastname</label>
-             <?= $this->Form->input('lastname', array('div' => false,'class' => 'form-control form-element text','label' => false,'placeholder' => 'Lastname', 'required' => true)) ?>
-            </div>
-    
-        <div class="form-group">
-                <label>
-           <?= $this->Form->input('date', array('type' => 'text','class' => 'form-control date','placeholder' => 'Date of birth','label' => false,'required' => true));?>
-           </label><br>
-           <span id="person_type" style="color:black; font-weight: bold;"></span>
-           </div>
-       <div class="form-group">
-            <?php $sex = ['Male' => 'Male', 'Female' => 'Female'];
-             echo $this->Form->select('sex', $sex, array('empty' => '(Select Gender)', 'class' => 'form-control heigh', 'required' => true));?>
-        </div>
-            
-            <div class="form-group float-label-control">
-             
-             <label for="">Email</label>
-             <?= $this->Form->input('email', array('div' => false,'class' => 'form-control form-element text','label' => false,'placeholder' => 'Email address', 'id' => 'email_registration' ,'required' => true, 'onblur' => 'referalpgm();')) ?>
-            </div>
-     
-      
-            <div class="form-group float-label-control">
-             <label for="">Mobile number</label>
-             <?= $this->Form->input('mobile_number', array('div' => false,'class' => 'form-control form-element text','label' => false,'placeholder' => 'Mobile number', 'required' => true)) ?>
-            </div>
-     
-            <div class="form-group">
-            <label> Distance </label>
-         <?php $km = ['3 KM' => '3 KM', '5 KM' => '5 KM'];
-           echo $this->Form->select('KM', $km, array('default' => '2 KM','class' => 'form-control heigh', 'required' => true));?>
-           </div>
-           <div class="form-group">
-           <label> Select your tshirt size </label>
-           <?php $tshirt = ['XS' => 'XS' ,'S' => 'S', 'M' => 'M', 'L' => 'L', 'XL' => 'XL', 'XXL' => 'XXL', 'XXXL' => 'XXXL'];
-           echo $this->Form->select('TSHIRT', $tshirt, array('default' => 'XS', 'class' => 'form-control heigh', 'required' => true));?>
-           </div> -->
+           
 
            
   <!-- <div class="panel-heading">Dynamic Form Fields - Add & Remove Multiple fields</div>
@@ -861,57 +854,50 @@ if($u_id == $event->user_id){ ?>
 </div>
 </div>
 </div>
+
+
 <script src="//code.jquery.com/jquery-2.1.1.min.js"></script>
 <script type="text/javascript">
 var el ='<br><br><div class="col-xs-12 col-sm-3 col-lg-3 form-size mob-form-size">'+
  ' <div class="form-group float-label-control">'+
              
              '<label for="">Firstname</label>'+
-            ' <?= $this->Form->input('firstname', array('div' => false, 'class' => 'form-control form-element text form-border','label' => false,'placeholder' => 'Firstname', 'required' => true)) ?>'+
+            ' <?= $this->Form->input('Marathon.firstname[]', array('div' => false, 'class' => 'form-control form-element text form-border','label' => false,'placeholder' => 'Firstname', 'required' => true)) ?>'+
             '</div>'+
 '</div>'+
+
 '<div class="col-xs-12 col-sm-3 col-lg-3 form-size mob-form-size">'+
  '<div class="form-group float-label-control">'+
              
              '<label for="">Email</label>'+
-             '<?= $this->Form->input('email', array('div' => false,'class' => 'form-control form-element text form-border','label' => false,'placeholder' => 'Email address', 'id' => 'email_registration' ,'required' => true, 'onblur' => 'referalpgm();')) ?>'+
+             '<?= $this->Form->input('Marathon.email[]', array('div' => false,'class' => 'form-control form-element text form-border','label' => false,'placeholder' => 'Email address', 'id' => 'email_registration' ,'required' => true, 'onblur' => 'referalpgm();')) ?>'+
             '</div>'+
 '</div>'+
+
 '<div class="col-xs-12 col-sm-3 col-lg-3 form-size mob-form-size">'+
    '<div class="form-group float-label-control">'+
              '<label for="">Mobile number</label>'+
-             '<?= $this->Form->input('mobile_number', array('div' => false,'class' => 'form-control form-element text form-border','label' => false,'placeholder' => 'Mobile number', 'required' => true)) ?>'+
+             '<?= $this->Form->input('Marathon.mobile_number[]', array('div' => false,'class' => 'form-control form-element text form-border','label' => false,'placeholder' => 'Mobile number', 'required' => true)) ?>'+
             '</div>'+
 '</div>'+
+
 '<div class="col-xs-12 col-sm-3 col-lg-3 form-size mob-form-size">'+
  ' <div class="form-group">'+
     '<div class="input-group">'+
-      '<select class="form-control form-border" style="height: 35px;">'+
-      
-        '<option value="">Tshirt</option>'+
-        '<option value="XS">XS</option>'+
-        '<option value="S">S</option>'+
-        '<option value="M">M</option>'+
-        '<option value="L">L</option>'+
-        '<option value="XL">XL</option>'+
-        '<option value="XXL">XXL</option>'+
-        '</select>'+
+      '<?php $role = ['XS' => 'XS', 'S' => 'S', 'M' => 'M', 'L' => 'L', 'XL' => 'XL', 'XXL' => 'XXL']; ?>'+
+      '<?php echo $this->Form->select('Marathon.TSHIRT[]', $role, array('div' => false,'class' => 'form-control form-element text form-border','placeholder' => 'Mobile number', 'required' => true)); ?>'+
       '<div class="input-group-btn">'+
          
       '</div>'+
     '</div>'+
  ' </div>'+
 '</div>'+
+
 '<div class="col-xs-12 col-sm-3 col-lg-3 form-size mob-form-size">'+
  ' <div class="form-group">'+
     '<div class="input-group">'+
-      '<select class="form-control form-border" style="height: 35px;">'+
-      
-        '<option value="">KM</option>'+
-        '<option value="3K">3K</option>'+
-        '<option value="5K">5K</option>'+
-        '<option value="10K">10K</option>'+
-        '</select>'+
+      '<?php $role = ['3K' => '3K', '5K' => '5K', '10K' => '10K']; ?>'+
+      '<?php echo $this->Form->select('Marathon.KM[]', $role, array('div' => false,'class' => 'form-control form-element text form-border','placeholder' => 'Mobile number', 'required' => true)); ?>'+
       '<div class="input-group-btn">'+
          
       '</div>'+
@@ -930,17 +916,21 @@ var el ='<br><br><div class="col-xs-12 col-sm-3 col-lg-3 form-size mob-form-size
 //    '<input type="text" class="form-control" id="name" name="name" placeholder="Enter name" required="required">' +
 //   '</div>' +
 // '</div>';
+
 $('#numNames').on('change', function(e) {
   var numSelected = Number($(this).val());
   appendControls(numSelected);
  $(".pay-btn").css('display','block'); 
 });
+
 function appendControls(num) {
   $('#elcontainer').empty();
+  var html = null;
   for (var i=0; i<num; i++) {
-     $('#elcontainer').append(el);
+  	$('#elcontainer').append(el);	
   } 
 }
+
 function calcamount(tkt){
 	var tktcount = tkt.value;
 	var price = $('#defaultprice_mar').val();
@@ -948,6 +938,7 @@ function calcamount(tkt){
 	$("#priceSpan_mar").text(tktcount * price);	
 	$("#priceSpan_mar_proceed").text(tktcount * price);	
 }
+
 	
 function calcamount2(tkt2){
 	var tktcount2 = tkt2.value;
@@ -959,12 +950,14 @@ function calcamount2(tkt2){
 		$('#price').val(tktcount2 * price2);
 		$("#priceSpan").text(tktcount2 * price2);		
 	}
+
 	if(event_id == 279)
 	{
 		var price2 = $('#defaultprice3').val();
 		$('#price').val(tktcount2 * price2);
 		$("#priceSpan").text(tktcount2 * price2);		
 	}
+
 	if(event_id == 277)
 	{
 		var price2 = $('#defaultprice4').val();
@@ -973,12 +966,14 @@ function calcamount2(tkt2){
 	}
 	
 }
+
 // function calcamount3(tkt3){
 // 	var tktcount3 = tkt3.value;
 // 	var price3 = $('#defaultprice3').val();
 //     $('#price3').val(tktcount3 * price3);
 // 	$("#priceSpan3").text(tktcount3 * price3);	
 // }
+
 // function calcamount4(tkt4){
 // 	var tktcount4 = tkt4.value;
 // 	var price4 = $('#defaultprice4').val();
@@ -1030,6 +1025,7 @@ function calcamount2(tkt2){
 		</div>
 		<div class="modal-body">
 		  <?= $this->Form->create('', array('id' => 'forgotpassform', 'url' => ['action' => 'forgetpassword'])) ?>
+
 		   <div class="col-xs-9 col-sm-9 col-md-9 col-lg-10">
 			<div class="form-group float-label-control">
 			 
@@ -1037,6 +1033,7 @@ function calcamount2(tkt2){
 			 <?= $this->Form->input('Firstname', array('div' => false,'id' => 'email', 'class' => 'form-control form-element text','label' => false,'placeholder' => 'Enter your firstname', 'required' => true)) ?>
 			</div>
 		</div>
+
 		<div class="col-xs-9 col-sm-9 col-md-9 col-lg-10">
 			<div class="form-group float-label-control">
 			 
@@ -1044,12 +1041,14 @@ function calcamount2(tkt2){
 			 <?= $this->Form->input('Lastname', array('div' => false,'id' => 'email', 'class' => 'form-control form-element text','label' => false,'placeholder' => 'Enter your lastname', 'required' => true)) ?>
 			</div>
 		</div>
+
 		<div class="form-group">
 				<label>
 		   <?= $this->Form->input('date', array('type' => 'text','class' => 'form-control date','placeholder' => 'Date','label' => false));?>
 		   </label>
 		   <span id="person_type" style="color: #00FF00;"></span>
 		   </div>
+
 		<div class="col-xs-9 col-sm-9 col-md-9 col-lg-10">  
 			 <label>Sex</label>
 			 <ul>
@@ -1062,6 +1061,7 @@ function calcamount2(tkt2){
 			  </li>
 			</ul>
 		</div>
+
 		<div class="col-xs-9 col-sm-9 col-md-9 col-lg-10">
 			<div class="form-group float-label-control">
 			 
@@ -1069,12 +1069,14 @@ function calcamount2(tkt2){
 			 <?= $this->Form->input('Email', array('div' => false,'id' => 'email', 'class' => 'form-control form-element text','label' => false,'placeholder' => 'Enter your email address', 'required' => true)) ?>
 			</div>
 		</div>
+
 		<div class="col-xs-9 col-sm-9 col-md-9 col-lg-10">
 			<div class="form-group float-label-control">
 			 <label for="">Mobile number</label>
 			 <?= $this->Form->input('Mobilenumber', array('div' => false,'id' => 'email', 'class' => 'form-control form-element text','label' => false,'placeholder' => 'Enter your mobile number', 'required' => true)) ?>
 			</div>
 		</div>
+
 		 <div class="col-xs-9 col-sm-9 col-md-9 col-lg-10"> 
 			 <label>KMs</label>
 			 <ul>
@@ -1103,13 +1105,17 @@ function calcamount2(tkt2){
 			</select>
 			</div>
 		</div>
+
+
 		<div class="col-xs-9 col-sm-9 col-md-9 col-lg-10">
 		  <div class="form-group text-center">
 		  <?= $this->Form->submit(__('Register'), array('id' => 'Login', 'class' => 'btn btn-primary btn-lg cs-signup-button')) ?>
+
 		  </div>
 		</div>
   
 	<?= $this->Form->end() ?>
+
 		</div>
 		<div class="modal-footer" style="border-top: none;">
 		 
@@ -1214,6 +1220,7 @@ function calcamount2(tkt2){
 <?php echo $this->Html->script(['jquery.validate.min']); ?>
 
 <script type="text/javascript">
+
 function referalpgm()
 {
 	var email = document.getElementById("email_registration").value;
@@ -1253,6 +1260,7 @@ function referalpgm()
 		});
 	return false;
 }
+
 $(document).ready(function(){
 	var event_id = '<?=$event->id;?>';
 	if(event_id==110){
@@ -1276,14 +1284,19 @@ $(document).ready(function(){
 			$(".user-pic").css('background', 'rgba(0, 0, 0, 0) url("../../../img/banner/banner_def_mar.png") no-repeat scroll center center / cover');        
 		}
 	}
+
 });
+
 $(document).ready(function(){
 	var event_id = '<?=$event->id;?>';
 	if(event_id==277 || event_id==278 || event_id==279){
 		$(".cook-modal").css('display','block');
 		$(".mar-modal").css('display','none');
 	}
+
 });
+
+
 // $(document).ready(function(){
 // 	var event_id = '<?=$event->id;?>';
 // 	if(event_id==126){
@@ -1293,7 +1306,10 @@ $(document).ready(function(){
 // 		$(".mar-modal").css('display','none'); 
 		
 // 	}
+
 // });
+
+
 // function autoHeight() {
 //             $('.content').css('min-height', 0);
 //             $('.content').css('min-height', ($(document).height() - $('#header').height() - $('.footer').height()));
@@ -1317,21 +1333,27 @@ $( function() {
 					$("#amount").val("300");
 				}
 			}
+
 			});
 	  } );
 	/* Float Label Pattern Plugin for Bootstrap 3.1.0 by Travis Wilson
 **************************************************/
 (function ($) {
 	$.fn.floatLabels = function (options) {
+
 		// Settings
 		var self = this;
 		var settings = $.extend({}, options);
+
+
 		// Event Handlers
 		function registerEventHandlers() {
 			self.on('input keyup change', 'input, textarea', function () {
 				actions.swapLabels(this);
 			});
 		}
+
+
 		// Actions
 		var actions = {
 			initialize: function() {
@@ -1339,13 +1361,17 @@ $( function() {
 					var $this = $(this);
 					var $label = $this.children('label');
 					var $field = $this.find('input,textarea').first();
+
 					if ($this.children().first().is('label')) {
 						$this.children().first().remove();
 						$this.append($label);
 					}
+
 					var placeholderText = ($field.attr('placeholder') && $field.attr('placeholder') != $label.text()) ? $field.attr('placeholder') : $label.text();
+
 					$label.data('placeholder-text', placeholderText);
 					$label.data('original-text', $label.text());
+
 					if ($field.val() == '') {
 						$field.addClass('empty')
 					}
@@ -1355,6 +1381,7 @@ $( function() {
 				var $field = $(field);
 				var $label = $(field).siblings('label').first();
 				var isEmpty = Boolean($field.val());
+
 				if (isEmpty) {
 					$field.removeClass('empty');
 					$label.text($label.data('original-text'));
@@ -1365,28 +1392,36 @@ $( function() {
 				}
 			}
 		}
+
+
 		// Initialization
 		function init() {
 			registerEventHandlers();
+
 			actions.initialize();
 			self.each(function () {
 				actions.swapLabels($(this).find('input,textarea').first());
 			});
 		}
 		init();
+
+
 		return this;
 	};
+
 	$(function () {
 		jQuery('.form-element').each(function(){
 		  if($(this).parent().hasClass('required')){
 			 jQuery('.form-element').unwrap();
 		  }
 		});
+
 		setTimeout(function(){
 			$('.float-label-control').floatLabels();
 		},1000);
 	});
 })(jQuery);
+
 $("#mar" ).validate( {
  rules: {
    fullname: "required",
@@ -1407,6 +1442,7 @@ $("#mar" ).validate( {
 	errorPlacement: function ( error, element ) {
 	  // Add the `help-block` class to the error element
 	  error.addClass( "help-block" );
+
 	  if ( element.prop( "type" ) === "checkbox" ) {
 		error.insertAfter( element.parent( "label" ) );
 	  } else {
