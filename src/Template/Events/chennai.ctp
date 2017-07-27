@@ -753,9 +753,7 @@ if($u_id == $event->user_id){ ?>
              <?= $this->Form->input('mobile_number', array('div' => false,'class' => 'form-control form-element text','label' => false,'placeholder' => 'Mobile number', 'required' => true)) ?>
             </div>
             <input value="0" id="price" type="hidden" name="price" required="true" title="totalprice" readonly="true">
-          <input value="4000" id="defaultprice2" type="hidden" name="defaultprice2" required="true">
-          <input value="1500" id="defaultprice3" type="hidden" name="defaultprice3" required="true">
-          <input value="1200" id="defaultprice4" type="hidden" name="defaultprice4" required="true">
+          <input value="<?= $event->price?>" id="defaultprice2" type="hidden" name="defaultprice2" required="true">
 
         <div class="">
           <div class="form-group text-center">
@@ -948,30 +946,10 @@ function calcamount(tkt){
 
 	
 function calcamount2(tkt2){
-	var tktcount2 = tkt2.value;
-	var event_id = '<?=$event->id;?>';
-	
-	if(event_id == 278)
-	{
-		var price2 = $('#defaultprice2').val();
-		$('#price').val(tktcount2 * price2);
-		$("#priceSpan").text(tktcount2 * price2);		
-	}
-
-	if(event_id == 279)
-	{
-		var price2 = $('#defaultprice3').val();
-		$('#price').val(tktcount2 * price2);
-		$("#priceSpan").text(tktcount2 * price2);		
-	}
-
-	if(event_id == 277)
-	{
-		var price2 = $('#defaultprice4').val();
-		$('#price').val(tktcount2 * price2);
-		$("#priceSpan").text(tktcount2 * price2);		
-	}
-	
+	var tktcount2 = tkt2.value;	
+	var price2 = $('#defaultprice2').val();
+	$('#price').val(tktcount2 * price2);
+	$("#priceSpan").text(tktcount2 * price2);
 }
 
 // function calcamount3(tkt3){

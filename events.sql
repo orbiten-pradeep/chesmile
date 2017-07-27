@@ -33,6 +33,7 @@ CREATE TABLE IF NOT EXISTS `events` (
   `slug` varchar(255) DEFAULT NULL,
   `slug_status` int(11) DEFAULT '0',
   `active` int(11) NOT NULL DEFAULT '0',
+  `price` varchar(255) DEFAULT NULL,
   `categories_id` int(11) NOT NULL,
   `descriptioin` text,
   `descriptioin_more` text,
@@ -51,7 +52,8 @@ CREATE TABLE IF NOT EXISTS `events` (
   `created` datetime DEFAULT NULL,
   `modified` datetime DEFAULT NULL,
   PRIMARY KEY (`id`)
-) ENGINE=MyISAM  DEFAULT CHARSET=utf8 AUTO_INCREMENT=261 ;
+) ENGINE=MyISAM  DEFAULT CHARSET=utf8 AUTO_INCREMENT=0 ;
+
 
 --
 -- Dumping data for table `events`
