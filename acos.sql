@@ -3,7 +3,7 @@
 -- http://www.phpmyadmin.net
 --
 -- Host: 127.0.0.1
--- Generation Time: Jul 25, 2017 at 08:50 AM
+-- Generation Time: Jul 27, 2017 at 11:54 AM
 -- Server version: 5.6.17
 -- PHP Version: 5.5.12
 
@@ -37,7 +37,7 @@ CREATE TABLE IF NOT EXISTS `acos` (
   PRIMARY KEY (`id`),
   KEY `lft` (`lft`,`rght`),
   KEY `alias` (`alias`)
-) ENGINE=MyISAM  DEFAULT CHARSET=utf8 AUTO_INCREMENT=231 ;
+) ENGINE=MyISAM  DEFAULT CHARSET=utf8 AUTO_INCREMENT=241 ;
 
 --
 -- Dumping data for table `acos`
@@ -56,7 +56,7 @@ INSERT INTO `acos` (`id`, `parent_id`, `model`, `foreign_key`, `alias`, `lft`, `
 (185, 184, NULL, NULL, 'index', 315, 316),
 (182, 111, NULL, NULL, 'adminindex', 229, 230),
 (183, 111, NULL, NULL, 'searchbyeventtitle', 231, 232),
-(184, 1, NULL, NULL, 'Marathon', 314, 341),
+(184, 1, NULL, NULL, 'Marathon', 314, 337),
 (181, 16, NULL, NULL, 'adminadd', 57, 58),
 (180, 16, NULL, NULL, 'isemailexist', 55, 56),
 (176, 111, NULL, NULL, 'invitation', 227, 228),
@@ -84,7 +84,7 @@ INSERT INTO `acos` (`id`, `parent_id`, `model`, `foreign_key`, `alias`, `lft`, `
 (151, 150, NULL, NULL, 'index', 291, 292),
 (150, 1, NULL, NULL, 'Address', 290, 301),
 (149, 144, NULL, NULL, 'delete', 287, 288),
-(1, NULL, NULL, NULL, 'controllers', 1, 390),
+(1, NULL, NULL, NULL, 'controllers', 1, 402),
 (2, 1, NULL, NULL, 'Groups', 2, 13),
 (3, 2, NULL, NULL, 'index', 3, 4),
 (4, 2, NULL, NULL, 'view', 5, 6),
@@ -203,42 +203,48 @@ INSERT INTO `acos` (`id`, `parent_id`, `model`, `foreign_key`, `alias`, `lft`, `
 (141, 136, NULL, NULL, 'delete', 275, 276),
 (142, 111, NULL, NULL, 'viewresult', 203, 204),
 (189, 184, NULL, NULL, 'delete', 323, 324),
-(190, 184, NULL, NULL, 'details', 325, 326),
-(191, 184, NULL, NULL, 'usersinformation', 327, 328),
-(192, 1, NULL, NULL, 'Contact', 342, 353),
-(193, 192, NULL, NULL, 'index', 343, 344),
-(194, 192, NULL, NULL, 'view', 345, 346),
-(195, 192, NULL, NULL, 'add', 347, 348),
-(196, 192, NULL, NULL, 'edit', 349, 350),
-(197, 192, NULL, NULL, 'delete', 351, 352),
+(236, 234, NULL, NULL, 'view', 393, 394),
+(235, 234, NULL, NULL, 'index', 391, 392),
+(192, 1, NULL, NULL, 'Contact', 338, 349),
+(193, 192, NULL, NULL, 'index', 339, 340),
+(194, 192, NULL, NULL, 'view', 341, 342),
+(195, 192, NULL, NULL, 'add', 343, 344),
+(196, 192, NULL, NULL, 'edit', 345, 346),
+(197, 192, NULL, NULL, 'delete', 347, 348),
 (198, 111, NULL, NULL, 'contact', 233, 234),
-(203, 184, NULL, NULL, 'registrationfailed', 335, 336),
-(200, 184, NULL, NULL, 'getAction', 329, 330),
-(201, 184, NULL, NULL, 'randomTxnId', 331, 332),
-(202, 184, NULL, NULL, 'send', 333, 334),
-(206, 184, NULL, NULL, 'isemailexist', 339, 340),
-(205, 184, NULL, NULL, 'registrationsuccess', 337, 338),
+(234, 1, NULL, NULL, 'Marathonbooking', 390, 401),
+(200, 184, NULL, NULL, 'getAction', 325, 326),
+(201, 184, NULL, NULL, 'randomTxnId', 327, 328),
+(202, 184, NULL, NULL, 'send', 329, 330),
+(206, 184, NULL, NULL, 'isemailexist', 331, 332),
+(233, 217, NULL, NULL, 'marathon', 385, 386),
 (210, 111, NULL, NULL, 'findslug', 239, 240),
 (208, 111, NULL, NULL, 'thebigbeachmarathon', 235, 236),
 (209, 111, NULL, NULL, 'chennai', 237, 238),
-(211, 1, NULL, NULL, 'Payments', 354, 365),
-(212, 211, NULL, NULL, 'index', 355, 356),
-(213, 211, NULL, NULL, 'view', 357, 358),
-(214, 211, NULL, NULL, 'add', 359, 360),
-(215, 211, NULL, NULL, 'edit', 361, 362),
-(216, 211, NULL, NULL, 'delete', 363, 364),
-(217, 1, NULL, NULL, 'Tickets', 366, 389),
-(218, 217, NULL, NULL, 'index', 367, 368),
-(219, 217, NULL, NULL, 'view', 369, 370),
-(220, 217, NULL, NULL, 'add', 371, 372),
-(221, 217, NULL, NULL, 'edit', 373, 374),
-(222, 217, NULL, NULL, 'delete', 375, 376),
-(223, 217, NULL, NULL, 'getAction', 377, 378),
-(224, 217, NULL, NULL, 'randomTxnId', 379, 380),
-(225, 217, NULL, NULL, 'send', 381, 382),
-(228, 217, NULL, NULL, 'isemailexist', 383, 384),
-(229, 217, NULL, NULL, 'failed', 385, 386),
-(230, 217, NULL, NULL, 'success', 387, 388);
+(211, 1, NULL, NULL, 'Payments', 350, 361),
+(212, 211, NULL, NULL, 'index', 351, 352),
+(213, 211, NULL, NULL, 'view', 353, 354),
+(214, 211, NULL, NULL, 'add', 355, 356),
+(215, 211, NULL, NULL, 'edit', 357, 358),
+(216, 211, NULL, NULL, 'delete', 359, 360),
+(217, 1, NULL, NULL, 'Tickets', 362, 389),
+(218, 217, NULL, NULL, 'index', 363, 364),
+(219, 217, NULL, NULL, 'view', 365, 366),
+(220, 217, NULL, NULL, 'add', 367, 368),
+(221, 217, NULL, NULL, 'edit', 369, 370),
+(222, 217, NULL, NULL, 'delete', 371, 372),
+(223, 217, NULL, NULL, 'getAction', 373, 374),
+(224, 217, NULL, NULL, 'randomTxnId', 375, 376),
+(225, 217, NULL, NULL, 'send', 377, 378),
+(228, 217, NULL, NULL, 'isemailexist', 379, 380),
+(229, 217, NULL, NULL, 'failed', 381, 382),
+(230, 217, NULL, NULL, 'success', 383, 384),
+(231, 184, NULL, NULL, 'failed', 333, 334),
+(232, 184, NULL, NULL, 'success', 335, 336),
+(237, 234, NULL, NULL, 'add', 395, 396),
+(238, 234, NULL, NULL, 'edit', 397, 398),
+(239, 234, NULL, NULL, 'delete', 399, 400),
+(240, 217, NULL, NULL, 'marathonedit', 387, 388);
 
 /*!40101 SET CHARACTER_SET_CLIENT=@OLD_CHARACTER_SET_CLIENT */;
 /*!40101 SET CHARACTER_SET_RESULTS=@OLD_CHARACTER_SET_RESULTS */;
