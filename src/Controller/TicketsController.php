@@ -103,6 +103,67 @@ class TicketsController extends AppController
         $this->set('_serialize', ['ticket']);
     }
 
+
+    public function marathon()
+    {
+        $ticket = $this->Tickets->newEntity();
+        if ($this->request->is('post')) {
+            $this->loadModel('Events');
+            $this->loadModel('Marathonbooking');
+            $data['amount'] = $this->request->data['price'];
+            $data['txnid'] = $this->randomTxnId();
+            $data['hash'] = $this->hash;
+            $data['tickets'] = $this->request->data['tickets'];
+            $data['productinfo'] = $this->request->data['productinfo'];
+            $data['events_id'] = $this->request->data['events_id'];
+            $data['service_provider'] =  $this->request->data['service_provider'];            
+            
+            $ticke_cnt = $this->request->data['tickets'];
+            
+            $data['firstname'] = $this->request->data['Marathon']['firstname'][0];
+            $data['email'] = $this->request->data['Marathon']['email'][0];
+            $data['phone'] = $this->request->data['Marathon']['mobile_number'][0];
+
+            $ticket = $this->Tickets->patchEntity($ticket, $data);
+            if ($this->Tickets->save($ticket)) 
+            {
+                $new_id = $ticket->id;
+                for ($i=0;$i < $ticke_cnt; $i++) { 
+                    $marathon = $this->Marathonbooking->newEntity();
+                    $marathon->tickets_id =  $new_id;
+                    $marathon->firstname =  $this->request->data['Marathon']['firstname'][$i];
+                    $marathon->email =  $this->request->data['Marathon']['email'][$i];
+                    $marathon->phone =  $this->request->data['Marathon']['mobile_number'][$i];
+                    $marathon->TSHIRT =  $this->request->data['Marathon']['TSHIRT'][$i];
+                    $marathon->KM =  $this->request->data['Marathon']['KM'][$i];
+                    $this->Marathonbooking->save($marathon);
+                }
+                $payu['key'] = 'wBZpGV5E';
+                $payu['salt'] = 'b8Hg0nhutX'; 
+                $payu['txnid'] = $this->randomTxnId();
+                $payu['amount'] = $data['price'];
+                $payu['curl'] = '';
+                $payu['productinfo'] = $data['productinfo'];
+                $payu['service_provider'] = $data['service_provider'];
+                $payu['firstname'] = $data['firstname'];
+                $payu['lastname'] = '';
+                $payu['email'] = $data['email'];
+                $payu['phone'] = $data['phone'];
+                $payu['surl'] = Router::url(['controller' => 'Tickets', 'action' => 'edit/' . $new_id, '_full' => true ]);
+                $payu['furl'] = Router::url(['controller' => 'Tickets', 'action' => 'edit/' . $new_id, '_full' => true ]);
+                $this->send($payu);
+                
+                $this->Flash->success(__('The ticket booking completed successfully.'));
+                return $this->redirect(['controller' => 'Events','action' => 'chennai',$this->request->data['events_id']]);
+            } else {
+                $this->Flash->error(__('The ticket booking could not be completed. Please, try again.'));
+            }
+        }
+        $events = $this->Tickets->Events->find('list', ['limit' => 200]);
+        $this->set(compact('ticket', 'events'));
+        $this->set('_serialize', ['ticket']);
+    }
+
     /**
      * Edit method
      *
@@ -121,6 +182,7 @@ class TicketsController extends AppController
         if ($this->request->is(['patch', 'post', 'put'])) {
             $this->loadModel('Events');
             $ticket = $this->Tickets->patchEntity($ticket, $this->request->data);
+            debug($ticket); exit(0);
             if ($this->Tickets->save($ticket)) {
 
                 if(!empty($ticket['events_id']))
