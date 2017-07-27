@@ -141,7 +141,7 @@ class TicketsController extends AppController
                 $payu['key'] = 'wBZpGV5E';
                 $payu['salt'] = 'b8Hg0nhutX'; 
                 $payu['txnid'] = $this->randomTxnId();
-                $payu['amount'] = $data['price'];
+                $payu['amount'] = $data['amount'];
                 $payu['curl'] = '';
                 $payu['productinfo'] = $data['productinfo'];
                 $payu['service_provider'] = $data['service_provider'];
