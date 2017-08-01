@@ -566,7 +566,7 @@ and (max-width: 414px){
 													?>
 													<div class="clearfix"></div>
 
-													 <div style="display: <?php if(empty($galaries)) { echo 'none;'; } ?>">
+													 <div style="display: <?php if($galaries->count()==0) { echo 'none;'; } ?>">
 													 <h3 class="heading margin25">Event Galaries<span></span></h3>
 													<!-- Client 1 -->
 													<?php 
