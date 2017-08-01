@@ -337,6 +337,13 @@ function getEventListByFilter() {
 	} else { 
 		var subCategories = mobElt.tagsinput('items');	
 	}
+
+	if(ePage == "chennai"){
+		var eLinks = $("#eventIndexUrl").val();
+		localStorage.setItem("csfilter", JSON.stringify(subCategories));
+		location.href = eLinks+"#from-details";
+		return;
+	}
 	
 	var dateVal = $("#filterDateVal").val();
 	var customDate = $("#customDate").val();
@@ -437,8 +444,8 @@ $(function() {
 		$(".f-sections").css('display','inline-block');
 		$(".filter-date").css('display','inline-block');
 		$(".filter-date > label").html("selected date");
-
-		if(!$("#mobFilter").val()){
+		//alert($("#mobFilter").val());
+		if($("#mobFilter").val() == "false"){
 			getEventListByFilter();
 		}       
 	});
@@ -524,7 +531,17 @@ function getEventList(params) {
 }
 
 if(ePage == 'index') {
-	getEventListByFilter();
+	var type = window.location.hash.substr(1);
+	if(type == 'from-details'){
+		var filterObj = JSON.parse(localStorage.getItem('csfilter'));
+		filterObj.forEach(function(value){
+			elt.tagsinput('add', value);
+		})
+		getEventListByFilter();
+	}
+	else {
+		getEventListByFilter();
+	}
 }
 else if(ePage == 'add') {
 
