@@ -468,6 +468,7 @@ function getEventList(params) {
 		        	var dispImgHmtl = '';
 		        	var dispImg = response[k].display;
 		        	var dtimeHtml = '';
+		        	var buybtn = '';
 		        	dtimeHtml = moment(response[k].date).fromNow();
 		        	if(response[k].slug == null)
 		        		eventUrl = eventDetailsUrl + '/' + response[k].id;
@@ -482,8 +483,12 @@ function getEventList(params) {
 		        		var imgSrc = "img/display/"+dispImg;
 		        		dispImgHmtl = '<img src="'+imgSrc+'" alt="" onerror="this.src=\'img/photos/1.jpg\'" style="height:185px;">';
 		        	}
+		        	if(response[k].register_online  == 1){
+		        		var buybtn;
+		        		buybtn = '<div class="pull-right"><a href="'+eventUrl+'" ><img src="/img/buy-tickets-button.png" style="transition: none;transform: none;margin-top: -15px;cursor: pointer;"></div>';
+		        	}
 		        	html += '<div class="col-sm-6 col-lg-4 col-md-4 card-size">\
-		        					<div class="thumbnail">\
+		        					<div class="thumbnail"><a href="'+eventUrl+'">\
 							        	<div class="back">\
 								            <p class="pull-left tag">'+response[k].category_name+'</p>\
 								            <p class="pull-right post">'+dtimeHtml+'</p>\
@@ -492,8 +497,9 @@ function getEventList(params) {
 							                <h4 class="event_txt"><a href="'+eventUrl+'" class="event-title">'+response[k].title+'</a></h4>\
 							                 <p class="venue_txt">'+response[k].areaname+'</p>\
 							                <p class="date_txt">'+formatDate(response[k].date)+'</p>\
-							                <div class="ratings clearfix">\
-							                    <p class="pull-right"> <a onClick="hide('+response[k].id+', '+response[k].user_id+');"><span class="glyphicon glyphicon-thumbs-up"></span> </a><span class="count_txt" id="'+response[k].id+'">'+likes_count+'</span>\
+							                <div class="">\
+							                    <p class="pull-left"> <a onClick="hide('+response[k].id+', '+response[k].user_id+');"><span class="glyphicon glyphicon-thumbs-up"></span> </a><span class="count_txt" id="'+response[k].id+'">'+likes_count+'</span>\
+							                    '+buybtn+'\
 							                    </p>\
 							                </div>\
 							            </div>\
