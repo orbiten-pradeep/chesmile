@@ -265,8 +265,8 @@ class EventsController extends AppController
         }
 		if($id == null)
 		{
-			$event_val = $this->Events->findBySlug($slug, [
-	            'contain' => ['Users', 'Categories']
+			$event_val = $this->Events->find('all', ['conditions' => array('slug'=>$slug,'active' => '1')],[
+	            'contain' => ['Users', 'Categories'],
 	        ]);
 			$event_val = $event_val->first();
 			$id = $event_val['id'];
@@ -274,6 +274,7 @@ class EventsController extends AppController
         $event = $this->Events->get($id, [
             'contain' => ['Users', 'Categories']
         ]);
+
         $u_id = "";
         if(!empty($this->Auth->user('id')))
 		{
