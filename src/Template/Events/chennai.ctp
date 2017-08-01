@@ -398,7 +398,7 @@ and (max-width: 414px){
 			<div class="row">
 				<div class="col-lg-12">
 					<button class="btn btn-tag"> <?= h($event->category->name) ?></button> <?php echo $this->Html->image('card/'.$event->category->card, array('width' => '65px', 'height' => '65px', 'class' => 'marg-card')); ?>
-					<h1 class="tagline" style="color: #FFFFFF"><?= h($event->title) ?></h1>
+					<h1 class="tagline" style="color: #FFFFFF"><?= h($event->title) ?> <?= h($event->price) ?> </h1>
 				</div>
 			</div>
 		</div>
@@ -561,7 +561,7 @@ and (max-width: 414px){
 													$eventdate = $event->date;
 													// echo "D-".$eventdate;
 
-													if($today >= $eventdate) {
+													if($today > $eventdate) {
 														$status = "available";
 													?>
 													<div class="clearfix"></div>
@@ -677,7 +677,7 @@ if($u_id == $event->user_id){ ?>
 	  <div class="modal-content">
 		  <div class="modal-header">
 			  <button type="button" class="close" data-dismiss="modal"><span aria-hidden="true">×</span><span class="sr-only">Close</span></button>
-			  <h4 class="modal-title" id="myModalLabel">Online Registration ( Only For Ladies & Girls )</h4>
+			  <h4 class="modal-title" id="myModalLabel">Online Registration <span class="cooking-title">( Only For Ladies & Girls )</span></h4>
 		  </div>
 		  <div class="modal-body">
 			<div class="">
@@ -753,7 +753,14 @@ if($u_id == $event->user_id){ ?>
              <?= $this->Form->input('mobile_number', array('div' => false,'class' => 'form-control form-element text','label' => false,'placeholder' => 'Mobile number', 'required' => true)) ?>
             </div>
             <input value="0" id="price" type="hidden" name="price" required="true" title="totalprice" readonly="true">
-          <input value="<?= $event->price?>" id="defaultprice2" type="hidden" name="defaultprice2" required="true">
+          <input value="4000" id="defaultprice2" type="hidden" name="defaultprice2" required="true">
+          <input value="1500" id="defaultprice3" type="hidden" name="defaultprice3" required="true">
+          <input value="1200" id="defaultprice4" type="hidden" name="defaultprice4" required="true">
+          <input value="1999" id="defaultprice5" type="hidden" name="defaultprice5" required="true">
+          <input value="5500" id="defaultprice6" type="hidden" name="defaultprice6" required="true">
+          <input value="5500" id="defaultprice7" type="hidden" name="defaultprice7" required="true">
+
+
 
         <div class="">
           <div class="form-group text-center">
@@ -835,8 +842,8 @@ if($u_id == $event->user_id){ ?>
         <div class="">
           <div class="form-group text-center">
           <div>
-          <input value="0" id="price_mar" type="hidden" name="price" required="true" title="totalprice" readonly="true">
-          <input value="<?= $event->price?>" id="defaultprice_mar" type="hidden" name="defaultprice" required="true">
+           <input value="0" id="price_mar" type="hidden" name="price" required="true" title="totalprice" readonly="true">
+          <input value="600" id="defaultprice_mar" type="hidden" name="defaultprice" required="true">
            </div>
            
            <?= $this->Form->button(__('Proceed to pay ( ₹ <span id="priceSpan_mar_proceed">0</span> )'),array('class' => "btn btn-info btn-block pay-btn")) ?>
@@ -886,7 +893,7 @@ var el ='<br><br><div class="col-xs-12 col-sm-3 col-lg-3 form-size mob-form-size
  ' <div class="form-group">'+
     '<div class="input-group">'+
       '<?php $role = ['XS' => 'XS', 'S' => 'S', 'M' => 'M', 'L' => 'L', 'XL' => 'XL', 'XXL' => 'XXL']; ?>'+
-      '<?php echo $this->Form->select('Marathon.TSHIRT[]', $role, array('div' => false,'class' => 'form-control form-element text form-border sel-size','placeholder' => 'TSHIRT','empty' => '(Select Tshirt Size)','label' => false, 'required' => true)); ?>'+
+      '<?php echo $this->Form->select('Marathon.TSHIRT[]', $role, array('div' => false,'class' => 'form-control form-element text form-border sel-size','placeholder' => 'TSHIRT','empty' => '(Tshirt Size)','label' => false, 'required' => true)); ?>'+
       '<div class="input-group-btn">'+
          
       '</div>'+
@@ -898,7 +905,7 @@ var el ='<br><br><div class="col-xs-12 col-sm-3 col-lg-3 form-size mob-form-size
  ' <div class="form-group">'+
     '<div class="input-group">'+
       '<?php $role = ['3K' => '3K', '5K' => '5K', '10K' => '10K']; ?>'+
-      '<?php echo $this->Form->select('Marathon.KM[]', $role, array('div' => false,'class' => 'form-control form-element text form-border sel-size','empty' => '(Select KM)','placeholder' => 'KM','label' => false, 'required' => true)); ?>'+
+      '<?php echo $this->Form->select('Marathon.KM[]', $role, array('div' => false,'class' => 'form-control form-element text form-border sel-size','empty' => '(KM)','placeholder' => 'KM','label' => false, 'required' => true)); ?>'+
       '<div class="input-group-btn">'+
          
       '</div>'+
@@ -946,25 +953,49 @@ function calcamount(tkt){
 
 	
 function calcamount2(tkt2){
-	var tktcount2 = tkt2.value;	
-	var price2 = $('#defaultprice2').val();
-	$('#price').val(tktcount2 * price2);
-	$("#priceSpan").text(tktcount2 * price2);
+	var tktcount2 = tkt2.value;
+	var event_id = '<?=$event->id;?>';
+	
+	if(event_id == 278)
+	{
+		var price2 = $('#defaultprice2').val();
+		$('#price').val(tktcount2 * price2);
+		$("#priceSpan").text(tktcount2 * price2);		
+	}
+
+	if(event_id == 279)
+	{
+		var price2 = $('#defaultprice3').val();
+		$('#price').val(tktcount2 * price2);
+		$("#priceSpan").text(tktcount2 * price2);		
+	}
+
+	if(event_id == 277)
+	{
+		var price2 = $('#defaultprice4').val();
+		$('#price').val(tktcount2 * price2);
+		$("#priceSpan").text(tktcount2 * price2);		
+	}
+	
+	if(event_id == 286)
+	{
+		var price2 = $('#defaultprice5').val();
+		$('#price').val(tktcount2 * price2);
+		$("#priceSpan").text(tktcount2 * price2);		
+	}
+	if(event_id == 287)
+	{
+		var price2 = $('#defaultprice6').val();
+		$('#price').val(tktcount2 * price2);
+		$("#priceSpan").text(tktcount2 * price2);		
+	}
+	if(event_id == 285)
+	{
+		var price2 = $('#defaultprice7').val();
+		$('#price').val(tktcount2 * price2);
+		$("#priceSpan").text(tktcount2 * price2);
+	}
 }
-
-// function calcamount3(tkt3){
-// 	var tktcount3 = tkt3.value;
-// 	var price3 = $('#defaultprice3').val();
-//     $('#price3').val(tktcount3 * price3);
-// 	$("#priceSpan3").text(tktcount3 * price3);	
-// }
-
-// function calcamount4(tkt4){
-// 	var tktcount4 = tkt4.value;
-// 	var price4 = $('#defaultprice4').val();
-//     $('#price4').val(tktcount4 * price4);
-// 	$("#priceSpan4").text(tktcount4 * price4);	
-// }
 </script>
 
  <div class="container">
@@ -1274,10 +1305,14 @@ $(document).ready(function(){
 
 $(document).ready(function(){
 	var event_id = '<?=$event->id;?>';
-	if(event_id==277 || event_id==278 || event_id==279){
+	if(event_id==277 || event_id==278 || event_id==279 || event_id==287 || event_id==286 || event_id==285){
 		$(".cook-modal").css('display','block');
 		$(".mar-modal").css('display','none');
 	}
+
+if(event_id==287 || event_id==286 || event_id==285){
+	$(".cooking-title").css('display','none');
+}
 
 });
 
