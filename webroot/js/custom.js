@@ -476,6 +476,8 @@ function getEventList(params) {
 		        	var dispImg = response[k].display;
 		        	var dtimeHtml = '';
 		        	var buybtn = '';
+		        	var eventprice = '';
+
 		        	dtimeHtml = moment(response[k].date).fromNow();
 		        	if(response[k].slug == null)
 		        		eventUrl = eventDetailsUrl + '/' + response[k].id;
@@ -492,7 +494,9 @@ function getEventList(params) {
 		        	}
 		        	if(response[k].register_online  == 1){
 		        		var buybtn;
-		        		buybtn = '<div class="pull-right"><a href="'+eventUrl+'" ><img src="/img/buy-tickets-button.png" style="transition: none;transform: none;margin-top: -15px;cursor: pointer;"></div>';
+		        		var eventprice
+		        		eventprice = '<span class="event-price pull-right">₹ '+response[k].price+'</span>';
+		        		buybtn = '<div class="pull-right"><a href="'+eventUrl+'" ><img src="/chesmile/img/buy-tickets-button.png" style="transition: none;transform: none;margin-top: -15px;cursor: pointer;"></div>';
 		        	}
 		        	html += '<div class="col-sm-6 col-lg-4 col-md-4 card-size">\
 		        					<div class="thumbnail"><a href="'+eventUrl+'">\
@@ -502,6 +506,7 @@ function getEventList(params) {
 							            </div>'+dispImgHmtl+'\
 							            <div class="caption dance" style="background-color:#'+response[k].category_color+'">\
 							                <h4 class="event_txt"><a href="'+eventUrl+'" class="event-title">'+response[k].title+'</a></h4>\
+							                '+eventprice+'\
 							                 <p class="venue_txt">'+response[k].areaname+'</p>\
 							                <p class="date_txt">'+formatDate(response[k].date)+'</p>\
 							                <div class="">\
