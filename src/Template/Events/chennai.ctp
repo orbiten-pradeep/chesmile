@@ -398,7 +398,7 @@ and (max-width: 414px){
 			<div class="row">
 				<div class="col-lg-12">
 					<button class="btn btn-tag"> <?= h($event->category->name) ?></button> <?php echo $this->Html->image('card/'.$event->category->card, array('width' => '65px', 'height' => '65px', 'class' => 'marg-card')); ?>
-					<h1 class="tagline" style="color: #FFFFFF"><?= h($event->title) ?> <?= h($event->price) ?> </h1>
+					<h1 class="tagline" style="color: #FFFFFF"><?= h($event->title) ?> <!-- <?= h($event->price) ?> --> </h1>
 				</div>
 			</div>
 		</div>
@@ -844,6 +844,9 @@ if($u_id == $event->user_id){ ?>
           <div>
            <input value="0" id="price_mar" type="hidden" name="price" required="true" title="totalprice" readonly="true">
           <input value="600" id="defaultprice_mar" type="hidden" name="defaultprice" required="true">
+          <input value="600" id="defaultprice_mar2" type="hidden" name="defaultprice_mar2" required="true">
+          <input value="600" id="defaultprice_mar3" type="hidden" name="defaultprice_mar3" required="true">
+          <input value="600" id="defaultprice_mar4" type="hidden" name="defaultprice_mar4" required="true">
            </div>
            
            <?= $this->Form->button(__('Proceed to pay ( ₹ <span id="priceSpan_mar_proceed">0</span> )'),array('class' => "btn btn-info btn-block pay-btn")) ?>
@@ -945,10 +948,39 @@ function appendControls(num) {
 
 function calcamount(tkt){
 	var tktcount = tkt.value;
+	var event_id = '<?=$event->id;?>';
+
+	if(event_id == 272)
+	{
 	var price = $('#defaultprice_mar').val();
     $('#price_mar').val(tktcount * price);
 	$("#priceSpan_mar").text(tktcount * price);	
 	$("#priceSpan_mar_proceed").text(tktcount * price);	
+	}
+
+	if(event_id == 277)
+	{
+	var price = $('#defaultprice_mar2').val();
+    $('#price_mar').val(tktcount * price);
+	$("#priceSpan_mar").text(tktcount * price);	
+	$("#priceSpan_mar_proceed").text(tktcount * price);	
+	}
+
+	if(event_id == 278)
+	{
+	var price = $('#defaultprice_mar3').val();
+    $('#price_mar').val(tktcount * price);
+	$("#priceSpan_mar").text(tktcount * price);	
+	$("#priceSpan_mar_proceed").text(tktcount * price);	
+	}
+
+	if(event_id == 279)
+	{
+	var price = $('#defaultprice_mar4').val();
+    $('#price_mar').val(tktcount * price);
+	$("#priceSpan_mar").text(tktcount * price);	
+	$("#priceSpan_mar_proceed").text(tktcount * price);	
+	}
 }
 
 	
