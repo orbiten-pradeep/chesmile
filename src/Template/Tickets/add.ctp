@@ -16,11 +16,17 @@
             echo $this->Form->input('lastname');
             echo $this->Form->input('name');
             echo $this->Form->input('email');
+            echo $this->Form->input('service_provider');
+            echo $this->Form->input('productinfo');
             echo $this->Form->input('phone');
             echo $this->Form->input('tickets');
             echo $this->Form->input('txnid');
+            echo $this->Form->input('hash');
             echo $this->Form->input('amount');
-            echo $this->Form->input('Status');
+            echo $this->Form->input('status');
+            echo $this->Form->input('unmappedstatus');
+            echo $this->Form->input('field9');
+            echo $this->Form->input('bank_ref_num');
         ?>
     </fieldset>
     <?= $this->Form->button(__('Submit')) ?>

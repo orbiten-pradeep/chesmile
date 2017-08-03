@@ -3,8 +3,8 @@
         <li class="heading"><?= __('Actions') ?></li>
         <li><?= $this->Form->postLink(
                 __('Delete'),
-                ['action' => 'delete', $ticket->ID],
-                ['confirm' => __('Are you sure you want to delete # {0}?', $ticket->ID)]
+                ['action' => 'delete', $ticket->id],
+                ['confirm' => __('Are you sure you want to delete # {0}?', $ticket->id)]
             )
         ?></li>
         <li><?= $this->Html->link(__('List Tickets'), ['action' => 'index']) ?></li>
@@ -22,11 +22,17 @@
             echo $this->Form->input('lastname');
             echo $this->Form->input('name');
             echo $this->Form->input('email');
+            echo $this->Form->input('service_provider');
+            echo $this->Form->input('productinfo');
             echo $this->Form->input('phone');
             echo $this->Form->input('tickets');
             echo $this->Form->input('txnid');
+            echo $this->Form->input('hash');
             echo $this->Form->input('amount');
-            echo $this->Form->input('Status');
+            echo $this->Form->input('status');
+            echo $this->Form->input('unmappedstatus');
+            echo $this->Form->input('field9');
+            echo $this->Form->input('bank_ref_num');
         ?>
     </fieldset>
     <?= $this->Form->button(__('Submit')) ?>
