@@ -890,3 +890,78 @@ else if(ePage == 'view') {
         }        
     }
 }
+else if(ePage == 'chennai') {
+	$(document).ready(function(){
+		//console.log($(".select-km"));
+		$("#clcontainer").on('change', '.select-km', function(e){
+			var val = $(this).val();
+			var amt = parseInt($('#price_cyc').val());
+			var finalAmt = (amt == "") ? 0 : amt;
+			//console.log(val);
+			var parentRow = $(this).parent().parent().parent().parent();
+			var parentAmtVal = parseInt(parentRow.find(".parentRowAmt").val());
+
+			if(val != ""){
+				if(val == "5K"){
+					var fixedAmt = 500;
+					parentRow.find(".select-age option").hide();
+					parentRow.find(".select-age option[value='Minimum age 10 yrs to 15 yrs']").show();
+				}
+				else if(val == "10K"){
+					var fixedAmt = 600;
+					parentRow.find(".select-age option").hide();
+					parentRow.find(".select-age option[value='Minimum age 15 yrs to 50 yrs']").show();
+				}
+				else if(val == "25K"){
+					var fixedAmt = 700;
+					parentRow.find(".select-age option").hide();
+					parentRow.find(".select-age option[value='Minimum age 18 yrs to 40 yrs']").show();
+				}
+				else {
+					//parentRow.find(".select-age option").hide();
+				}
+
+				if(parentAmtVal == 0) {
+					parentRow.find(".parentRowAmt").val(fixedAmt);
+					finalAmt = finalAmt + fixedAmt;
+				}
+				else {
+					finalAmt = finalAmt - parentAmtVal;
+					finalAmt = finalAmt + fixedAmt;
+					parentRow.find(".parentRowAmt").val(fixedAmt);
+				}
+			}
+			else {
+				parentRow.find(".select-age option").show();
+				finalAmt = finalAmt - parentAmtVal;
+				parentRow.find(".parentRowAmt").val(0);
+			}
+
+			$('#price_cyc').val(finalAmt);
+			$('#priceSpan_cyc').html(finalAmt);
+			$('#priceSpan_cyc_proceed').html(finalAmt);
+		});
+
+		$("#clcontainer").on('change', '.select_cycle_show', function(e){
+			var chckParent = $(this).parent();
+			var fixAmt = 200;
+			if($(this).prop("checked")) {
+				var amt = parseInt($('#price_cyc').val());
+				var finAmt = amt + fixAmt;
+				$('#price_cyc').val(finAmt);
+				$('#priceSpan_cyc').html(finAmt);
+				$('#priceSpan_cyc_proceed').html(finAmt);
+				$(chckParent).find('.select_cycle').val(fixAmt);
+			}
+			if(!$(this).prop("checked")) {
+				var amt = parseInt($('#price_cyc').val());
+				var finAmt = amt - fixAmt;
+				$('#price_cyc').val(finAmt);
+				$('#priceSpan_cyc').html(finAmt);
+				$('#priceSpan_cyc_proceed').html(finAmt);
+				$(chckParent).find('.select_cycle').val(0);
+			}
+		});
+
+	});
+}
