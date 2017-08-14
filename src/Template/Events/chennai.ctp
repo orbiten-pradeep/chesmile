@@ -321,7 +321,7 @@ and (max-width: 414px){
 @media screen and (min-width: 768px)
 and (max-width: 1920px){
 .form-size{
-	width: 14% !important;
+	width: 20% !important;
 }
 }
 
@@ -1108,7 +1108,7 @@ var cl ='<div class="row parent-row"><input class="parentRowAmt" value="0" type=
 
 $('#numNames').on('change', function(e) {
   var numSelected = Number($(this).val());
-  appendControls(numSelected);
+  appendControls1(numSelected);
   if(numSelected == 0){
   	$(".pay-btn").css('display','none');
   } else{
@@ -1116,7 +1116,7 @@ $('#numNames').on('change', function(e) {
 }
 });
 
-function appendControls(num) {
+function appendControls1(num) {
   $('#elcontainer').empty();
   var html = null;
   for (var i=0; i<num; i++) {
