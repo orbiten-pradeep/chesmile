@@ -108,6 +108,7 @@ class TicketsController extends AppController
     {
         $ticket = $this->Tickets->newEntity();
         if ($this->request->is('post')) {
+
             $this->loadModel('Events');
             $this->loadModel('Marathonbooking');
             $data['amount'] = $this->request->data['price'];
@@ -136,6 +137,10 @@ class TicketsController extends AppController
                     $marathon->phone =  $this->request->data['Marathon']['mobile_number'][$i];
                     $marathon->TSHIRT =  $this->request->data['Marathon']['TSHIRT'][$i];
                     $marathon->KM =  $this->request->data['Marathon']['KM'][$i];
+                    if(isset($this->request->data['Marathon']['cycle']))
+                    {
+                        $marathon->cycle =  $this->request->data['Marathon']['cycle'][$i];
+                    }
                     $this->Marathonbooking->save($marathon);
                 }
                 $payu['key'] = 'wBZpGV5E';
