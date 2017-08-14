@@ -321,7 +321,7 @@ and (max-width: 414px){
 @media screen and (min-width: 768px)
 and (max-width: 1920px){
 .form-size{
-	width: 20% !important;
+	width: 14% !important;
 }
 }
 
@@ -436,6 +436,10 @@ and (max-width: 414px){
 
 				<?php if($event->register_online == 1) { ?>
 				<button class="btn btn-primary cook-modal" style="float: right; background-color: #4ABAC5;border-color: #e2e2e2;" data-toggle="modal" href="#Register-modal2">Online Registration</button>
+				<?php } ?>
+
+				<?php if($event->register_online == 1) { ?>
+				<button class="btn btn-primary cyc-modal" style="float: right; background-color: #4ABAC5;border-color: #e2e2e2;" data-toggle="modal" href="#Register-modal-cyclathon">Online Registration</button>
 				<?php } ?>
 
 			<button class="btn btn-primary view-btn" style="float: right;margin-right: 10px;background-color: #4ABAC5;border-color: #e2e2e2;" data-toggle="modal" href="#view-more">Event Details</button>
@@ -784,7 +788,7 @@ if($u_id == $event->user_id){ ?>
 
 		  
 	<div class="modal fade" id="Register-modal" role="dialog">
-	<div class="modal-dialog modal-lg">
+	<div class="modal-dialog">
 	  <div class="modal-content">
 		  <div class="modal-header">
 			  <button type="button" class="close" data-dismiss="modal"><span aria-hidden="true">×</span><span class="sr-only">Close</span></button>
@@ -844,9 +848,6 @@ if($u_id == $event->user_id){ ?>
           <div>
            <input value="0" id="price_mar" type="hidden" name="price" required="true" title="totalprice" readonly="true">
           <input value="600" id="defaultprice_mar" type="hidden" name="defaultprice" required="true">
-          <input value="600" id="defaultprice_mar2" type="hidden" name="defaultprice_mar2" required="true">
-          <input value="600" id="defaultprice_mar3" type="hidden" name="defaultprice_mar3" required="true">
-          <input value="600" id="defaultprice_mar4" type="hidden" name="defaultprice_mar4" required="true">
            </div>
            
            <?= $this->Form->button(__('Proceed to pay ( ₹ <span id="priceSpan_mar_proceed">0</span> )'),array('class' => "btn btn-info btn-block pay-btn")) ?>
@@ -866,6 +867,101 @@ if($u_id == $event->user_id){ ?>
 </div>
 </div>
 
+ <div class="container">
+
+		  
+	<div class="modal fade" id="Register-modal-cyclathon" role="dialog">
+	<div class="modal-dialog modal-lg">
+	  <div class="modal-content">
+		  <div class="modal-header">
+			  <button type="button" class="close" data-dismiss="modal"><span aria-hidden="true">×</span><span class="sr-only">Close</span></button>
+			  <h4 class="modal-title" id="myModalLabel">Online Registration</h4>
+		  </div>
+		  <div class="modal-body">
+			<div class="">
+        
+         <?= $this->Form->create('$marathon',array('url' => ['controller' => 'Tickets','action' => 'marathon'])) ?>
+
+          <input type="hidden" id="checkUrl" name="checkUrl" value="<?php echo $this->Url->build(array('controller' => 'marathon', 'action' => 'isemailexist'));?>">
+            
+	         <input type="hidden" name="amount" value="" id="amount"/>
+	         <input type="hidden" name="productinfo" value="<?= $event->title. '_' . $event->id;?>" size="64" />
+	         <input type="hidden" name="events_id" value="<?= $event->id?>" size="64" />
+	         <input type="hidden" name="service_provider" value="payu_paisa" size="64" /> 
+           
+
+           
+  <!-- <div class="panel-heading">Dynamic Form Fields - Add & Remove Multiple fields</div>
+  <div class="panel-heading">Education Experience</div> -->
+
+  
+  <div class="row">
+  <div class="col-xs-12 col-lg-12">
+  <div class="col-xs-4 col-lg-4">
+  	<label>Select Seats:</label>
+  </div>
+  
+  <div class="col-xs-3 col-lg-3">
+   <select name="tickets" id="numNames2" onchange="calccyclo(this);">
+   <option value="">0</option>
+ <option value="1">1</option>
+ <option value="2">2</option>
+ <option value="3">3</option>
+ <option value="4">4</option>
+ <option value="5">5</option>
+ <option value="6">6</option>
+ <option value="7">7</option>
+ <option value="8">8</option>
+ <option value="9">9</option>
+ <option value="10">10</option>
+</select>
+</div>
+<div class="col-xs-5 col-lg-5">
+	Total Price: <span id="priceSpan_cyc">0</span>
+</div>
+</div>
+</div>
+
+  <div id="clcontainer"></div>
+
+
+
+        <div class="">
+          <div class="form-group text-center">
+          <div>
+           <input value="0" id="price_cyc" type="hidden" name="price_cyc" required="true" title="totalprice" readonly="true">
+          <input value="500" id="defaultprice_cyc" type="hidden" name="defaultprice_cyc" required="true">
+           </div>
+           
+           <?= $this->Form->button(__('Proceed to pay ( ₹ <span id="priceSpan_cyc_proceed">0</span> )'),array('class' => "btn btn-info btn-block pay-btn")) ?>
+			
+           <span id="myspan">
+           </span>
+
+    <?= $this->Form->end() ?>
+          </div>
+        </div>
+  
+    <!-- <?= $this->Form->end() ?> -->
+  </div>
+</div>
+</div>
+</div>
+</div>
+</div>
+
+
+<?php 
+	$age5k = ['10' => '10', '11' => '11', '12' => '12', '13' => '13', '14' => '14', '15' => '15'];
+	
+	for($i= 10; $i < 51; $i++) {
+		$age10k[$i] = $i;
+	}
+	for($j= 18; $j < 41; $j++) {
+		$age25k[$j] = $j;
+	}
+?>
+    
 
 <script src="//code.jquery.com/jquery-2.1.1.min.js"></script>
 <script type="text/javascript">
@@ -915,6 +1011,86 @@ var el ='<br><br><div class="col-xs-12 col-sm-3 col-lg-3 form-size mob-form-size
     '</div>'+
  ' </div>'+
 '</div><br><br>';
+
+
+
+
+
+/////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////
+
+
+var cl ='<div class="row parent-row"><input class="parentRowAmt" value="0" type="hidden" /><div class="col-xs-12 col-sm-3 col-lg-3 form-size mob-form-size">'+
+ ' <div class="form-group float-label-control">'+
+             
+             '<label for="">Firstname</label>'+
+            ' <?= $this->Form->input('Marathon.firstname[]', array('div' => false, 'class' => 'form-control form-element text form-border','label' => false,'placeholder' => 'Firstname', 'required' => true)) ?>'+
+            '</div>'+
+'</div>'+
+
+'<div class="col-xs-12 col-sm-3 col-lg-3 form-size mob-form-size">'+
+ '<div class="form-group float-label-control">'+
+             
+             '<label for="">Email</label>'+
+             '<?= $this->Form->input('Marathon.email[]', array('div' => false,'class' => 'form-control form-element text form-border','label' => false,'placeholder' => 'Email address', 'id' => 'email_registration' ,'required' => true, 'onblur' => 'referalpgm();')) ?>'+
+            '</div>'+
+'</div>'+
+
+'<div class="col-xs-12 col-sm-3 col-lg-3 form-size mob-form-size">'+
+   '<div class="form-group float-label-control">'+
+             '<label for="">Mobile number</label>'+
+             '<?= $this->Form->input('Marathon.mobile_number[]', array('div' => false,'class' => 'form-control form-element text form-border','label' => false,'placeholder' => 'Mobile number', 'required' => true)) ?>'+
+            '</div>'+
+'</div>'+
+
+'<div class="col-xs-12 col-sm-3 col-lg-3 form-size mob-form-size">'+
+ ' <div class="form-group">'+
+    '<div class="input-group">'+
+      '<?php $role = ['XS' => 'XS', 'S' => 'S', 'M' => 'M', 'L' => 'L', 'XL' => 'XL', 'XXL' => 'XXL']; ?>'+
+      '<?php echo $this->Form->select('Marathon.TSHIRT[]', $role, array('div' => false,'class' => 'form-control form-element text form-border sel-size','placeholder' => 'TSHIRT','empty' => '(Tshirt Size)','label' => false, 'required' => true)); ?>'+
+      '<div class="input-group-btn">'+
+         
+      '</div>'+
+    '</div>'+
+ ' </div>'+
+'</div>'+
+
+'<div class="col-xs-12 col-sm-3 col-lg-3 form-size mob-form-size">'+
+ ' <div class="form-group">'+
+    '<div class="input-group">'+
+      '<?php $role = ['5K' => '5K', '10K' => '10K', '25K' => '25K']; ?>'+
+      '<?php echo $this->Form->select('Marathon.KM[]', $role, array('div' => false,'class' => 'form-control form-element text form-border sel-size select-km','empty' => '(KM)','placeholder' => 'KM','label' => false, 'required' => true)); ?>'+
+      '<div class="input-group-btn">'+
+         
+      '</div>'+
+    '</div>'+
+ ' </div>'+
+'</div>'+
+
+'<div class="col-xs-12 col-sm-3 col-lg-3 form-size mob-form-size">'+
+ ' <div class="form-group">'+
+    '<div class="input-group">'+
+      '<?php $role = ['Minimum age 10 yrs to 15 yrs' => 'Minimum age 10 yrs to 15 yrs', 'Minimum age 15 yrs to 50 yrs' => 'Minimum age 15 yrs to 50 yrs', 'Minimum age 18 yrs to 40 yrs' => 'Minimum age 18 yrs to 40 yrs']; ?>'+
+      '<?php echo $this->Form->select('age[]', $role, array('div' => false,'class' => 'form-control form-element text form-border sel-size select-age','empty' => '(Age Limit)','placeholder' => 'Age Limit','label' => false, 'required' => true)); ?>'+
+      '<div class="input-group-btn">'+ 
+      '</div>'+
+    '</div>'+
+ '</div>'+
+ '</div>'+
+
+'<div class="col-xs-12 col-sm-3 col-lg-3 form-size mob-form-size">'+
+ '<div class="form-group">'+
+// '<div class="checkbox checkbox-primary">'+
+// 						'<input name="Marathon.cycle[]" value="1" class="select_cycle" style="margin-left:0px;" label="false" type="checkbox">'+
+//                         '<label for="cycle">'+
+//                             'Rent cycle (₹200)'+
+//                         '</label>'+
+//                     '</div>'+
+'<?php echo $this->Form->checkbox('Marathon.cycle_show[]', array('class' => 'select_cycle_show','label' => false,'hiddenField' => false,'value'=>'0')) ?>'+'<?php echo $this->Form->hidden('Marathon.cycle[]', array('class' => 'select_cycle','label' => false, 'value'=>'0')) ?>'+
+					'<label for="cycle">'+
+                    'Rent cycle (₹200)'+
+                    '</label>'+
+                    '</div>'+
+                    '</div></div>';
 // var el = '<div class="form-group">' + 
 //  '<label for="Name" class="col-sm-4 control-label">Name:</label>' +
 //   '<div class="col-sm-8 input">' +
@@ -927,6 +1103,8 @@ var el ='<br><br><div class="col-xs-12 col-sm-3 col-lg-3 form-size mob-form-size
 //    '<input type="text" class="form-control" id="name" name="name" placeholder="Enter name" required="required">' +
 //   '</div>' +
 // '</div>';
+
+
 
 $('#numNames').on('change', function(e) {
   var numSelected = Number($(this).val());
@@ -946,41 +1124,35 @@ function appendControls(num) {
   } 
 }
 
+$('#numNames2').on('change', function(e) {
+  var numSelected = Number($(this).val());
+  appendControls(numSelected);
+  if(numSelected == 0){
+  	$(".pay-btn").css('display','none');
+  } else{
+	 $(".pay-btn").css('display','block'); 
+}
+});
+
+function appendControls(num) {
+  $('#clcontainer').empty();
+  var html = null;
+  for (var i=0; i<num; i++) {
+  	$('#clcontainer').append(cl);	
+  } 
+}
+
 function calcamount(tkt){
 	var tktcount = tkt.value;
-	var event_id = '<?=$event->id;?>';
-
-	if(event_id == 272)
-	{
 	var price = $('#defaultprice_mar').val();
     $('#price_mar').val(tktcount * price);
 	$("#priceSpan_mar").text(tktcount * price);	
 	$("#priceSpan_mar_proceed").text(tktcount * price);	
-	}
+}
 
-	if(event_id == 277)
-	{
-	var price = $('#defaultprice_mar2').val();
-    $('#price_mar').val(tktcount * price);
-	$("#priceSpan_mar").text(tktcount * price);	
-	$("#priceSpan_mar_proceed").text(tktcount * price);	
-	}
-
-	if(event_id == 278)
-	{
-	var price = $('#defaultprice_mar3').val();
-    $('#price_mar').val(tktcount * price);
-	$("#priceSpan_mar").text(tktcount * price);	
-	$("#priceSpan_mar_proceed").text(tktcount * price);	
-	}
-
-	if(event_id == 279)
-	{
-	var price = $('#defaultprice_mar4').val();
-    $('#price_mar').val(tktcount * price);
-	$("#priceSpan_mar").text(tktcount * price);	
-	$("#priceSpan_mar_proceed").text(tktcount * price);	
-	}
+function calccyclo(tkt){
+    $('#price_cyc').val("0");
+	$("#priceSpan_cyc").text("0");
 }
 
 	
@@ -1337,9 +1509,11 @@ $(document).ready(function(){
 
 $(document).ready(function(){
 	var event_id = '<?=$event->id;?>';
-	if(event_id==277 || event_id==278 || event_id==279 || event_id==287 || event_id==286 || event_id==285){
-		$(".cook-modal").css('display','block');
+	if(event_id==126){
+		$(".cook-modal").css('display','none');
 		$(".mar-modal").css('display','none');
+		$(".cyc-modal").css('display','block');
+		
 	}
 
 if(event_id==287 || event_id==286 || event_id==285){
