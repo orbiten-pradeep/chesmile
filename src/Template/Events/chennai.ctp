@@ -97,7 +97,7 @@ a {
 	margin-bottom: 5px;
 }
 .address-info {
-	margin: 10px 10px -5px 10px !important;
+	margin: 30px 10px -5px 10px !important;
 }
 address {
 	margin-bottom: 0 !important;
@@ -322,6 +322,15 @@ and (max-width: 414px){
 and (max-width: 1920px){
 .form-size{
 	width: 20% !important;
+}
+}
+
+
+
+@media screen and (min-width: 768px)
+and (max-width: 1920px){
+.form-size-cyc{
+	width: 14% !important;
 }
 }
 
@@ -788,7 +797,7 @@ if($u_id == $event->user_id){ ?>
 
 		  
 	<div class="modal fade" id="Register-modal" role="dialog">
-	<div class="modal-dialog">
+	<div class="modal-dialog modal-lg">
 	  <div class="modal-content">
 		  <div class="modal-header">
 			  <button type="button" class="close" data-dismiss="modal"><span aria-hidden="true">×</span><span class="sr-only">Close</span></button>
@@ -1019,7 +1028,7 @@ var el ='<br><br><div class="col-xs-12 col-sm-3 col-lg-3 form-size mob-form-size
 /////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////
 
 
-var cl ='<div class="row parent-row"><input class="parentRowAmt" value="0" type="hidden" /><div class="col-xs-12 col-sm-3 col-lg-3 form-size mob-form-size">'+
+var cl ='<div class="row parent-row"><input class="parentRowAmt" value="0" type="hidden" /><div class="col-xs-12 col-sm-3 col-lg-3 form-size-cyc mob-form-size">'+
  ' <div class="form-group float-label-control">'+
              
              '<label for="">Firstname</label>'+
@@ -1027,7 +1036,7 @@ var cl ='<div class="row parent-row"><input class="parentRowAmt" value="0" type=
             '</div>'+
 '</div>'+
 
-'<div class="col-xs-12 col-sm-3 col-lg-3 form-size mob-form-size">'+
+'<div class="col-xs-12 col-sm-3 col-lg-3 form-size-cyc mob-form-size">'+
  '<div class="form-group float-label-control">'+
              
              '<label for="">Email</label>'+
@@ -1035,14 +1044,14 @@ var cl ='<div class="row parent-row"><input class="parentRowAmt" value="0" type=
             '</div>'+
 '</div>'+
 
-'<div class="col-xs-12 col-sm-3 col-lg-3 form-size mob-form-size">'+
+'<div class="col-xs-12 col-sm-3 col-lg-3 form-size-cyc mob-form-size">'+
    '<div class="form-group float-label-control">'+
              '<label for="">Mobile number</label>'+
              '<?= $this->Form->input('Marathon.mobile_number[]', array('div' => false,'class' => 'form-control form-element text form-border','label' => false,'placeholder' => 'Mobile number', 'required' => true)) ?>'+
             '</div>'+
 '</div>'+
 
-'<div class="col-xs-12 col-sm-3 col-lg-3 form-size mob-form-size">'+
+'<div class="col-xs-12 col-sm-3 col-lg-3 form-size-cyc mob-form-size">'+
  ' <div class="form-group">'+
     '<div class="input-group">'+
       '<?php $role = ['XS' => 'XS', 'S' => 'S', 'M' => 'M', 'L' => 'L', 'XL' => 'XL', 'XXL' => 'XXL']; ?>'+
@@ -1054,7 +1063,7 @@ var cl ='<div class="row parent-row"><input class="parentRowAmt" value="0" type=
  ' </div>'+
 '</div>'+
 
-'<div class="col-xs-12 col-sm-3 col-lg-3 form-size mob-form-size">'+
+'<div class="col-xs-12 col-sm-3 col-lg-3 form-size-cyc mob-form-size">'+
  ' <div class="form-group">'+
     '<div class="input-group">'+
       '<?php $role = ['5K' => '5K', '10K' => '10K', '25K' => '25K']; ?>'+
@@ -1066,7 +1075,7 @@ var cl ='<div class="row parent-row"><input class="parentRowAmt" value="0" type=
  ' </div>'+
 '</div>'+
 
-'<div class="col-xs-12 col-sm-3 col-lg-3 form-size mob-form-size">'+
+'<div class="col-xs-12 col-sm-3 col-lg-3 form-size-cyc mob-form-size">'+
  ' <div class="form-group">'+
     '<div class="input-group">'+
       '<?php $role = ['Minimum age 10 yrs to 15 yrs' => 'Minimum age 10 yrs to 15 yrs', 'Minimum age 15 yrs to 50 yrs' => 'Minimum age 15 yrs to 50 yrs', 'Minimum age 18 yrs to 40 yrs' => 'Minimum age 18 yrs to 40 yrs']; ?>'+
@@ -1077,7 +1086,7 @@ var cl ='<div class="row parent-row"><input class="parentRowAmt" value="0" type=
  '</div>'+
  '</div>'+
 
-'<div class="col-xs-12 col-sm-3 col-lg-3 form-size mob-form-size">'+
+'<div class="col-xs-12 col-sm-3 col-lg-3 form-size-cyc mob-form-size">'+
  '<div class="form-group">'+
 // '<div class="checkbox checkbox-primary">'+
 // 						'<input name="Marathon.cycle[]" value="1" class="select_cycle" style="margin-left:0px;" label="false" type="checkbox">'+
@@ -1509,15 +1518,27 @@ $(document).ready(function(){
 
 $(document).ready(function(){
 	var event_id = '<?=$event->id;?>';
-	if(event_id==126){
+	if(event_id==327){
 		$(".cook-modal").css('display','none');
 		$(".mar-modal").css('display','none');
 		$(".cyc-modal").css('display','block');
 		
 	}
 
+	
+
+	if(event_id==272 || event_id==316 || event_id==318 || event_id==319){
+		$(".cook-modal").css('display','none');
+		$(".mar-modal").css('display','block');
+		$(".cyc-modal").css('display','none');
+		
+	}
+
 if(event_id==287 || event_id==286 || event_id==285){
 	$(".cooking-title").css('display','none');
+	$(".cook-modal").css('display','block');
+	$(".mar-modal").css('display','none');
+	$(".cyc-modal").css('display','none');
 }
 
 });
