@@ -11,11 +11,10 @@
                   <th scope="col"><?= $this->Paginator->sort('categories_id') ?></th>
                   <th scope="col"><?= $this->Paginator->sort('date') ?></th>
                   <th scope="col"><?= $this->Paginator->sort('time') ?></th>
-                  <th scope="col"><?= $this->Paginator->sort('contact_number') ?></th>
-                  <th scope="col"><?= $this->Paginator->sort('mobile_number') ?></th>
-                  <th scope="col"><?= $this->Paginator->sort('location') ?></th>
+                  <th scope="col"><?= $this->Paginator->sort('register_online') ?></th>
+                  <th scope="col"><?= $this->Paginator->sort('price') ?></th>
+                  <th scope="col"><?= $this->Paginator->sort('google_map') ?></th>
                   <th scope="col"><?= $this->Paginator->sort('OrganizersName') ?></th>
-                  
                   <th scope="col" class="actions"><?= __('Actions') ?></th>
               </tr>
           </thead>
@@ -39,9 +38,15 @@
                   <td><?= $event->has('category') ? $this->Html->link($event->category->name, ['controller' => 'Categories', 'action' => 'view', $event->category->id]) : '' ?></td>
                   <td><?= h($event->date) ?></td>
                   <td><?= h($event->time) ?></td>
-                  <td><?= h($event->contact_number) ?></td>
-                  <td><?= h($event->mobile_number) ?></td>
-                  <td><?= h($event['Address']['areaname']) ?></td>
+                  <td>
+                  <?php if($event->register_online == 0) {
+                    echo "Disabled";
+                  } else {
+                    echo "Enabled";
+                  }
+                  ?></td>
+                  <td><?= h($event->price) ?></td>
+                  <td><?= h($event->google_map) ?></td>
                   <td><?= h($event->OrganizersName) ?></td>
                   <td class="actions">
                       <?= $this->Html->link(__('View'), ['action' => 'view', $event->id]) ?>
@@ -53,6 +58,8 @@
                                 echo $this->Html->link(__('Activate'), ['action' => 'activate', $event->id]) ;
                             }
                        ?>
+                      <?= $this->Html->link(__('Admin Edit'), ['action' => 'adminedit', $event->id]) ?>
+                      <?= $this->Html->link(__('Edit'), ['action' => 'edit', $event->id]) ?>
                       <?= $this->Form->postLink(__('Delete'), ['action' => 'delete', $event->id], ['confirm' => __('Are you sure you want to delete # {0}?', $event->id)]) ?>
                   </td>
               </tr>

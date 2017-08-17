@@ -1272,6 +1272,48 @@ class EventsController extends AppController
         return $results->count();
     }
 
+    /**
+     * Edit method
+     *
+     * @param string|null $id Event id.
+     * @return \Cake\Network\Response|void Redirects on successful edit, renders view otherwise.
+     * @throws \Cake\Network\Exception\NotFoundException When record not found.
+     */
+    public function adminedit($id = null)
+    {
+        $event = $this->Events->get($id, [
+            'contain' => ['Eventsubcategories']
+        ]);
+        //$this->viewBuilder()->layout('event_home');
+        $this->loadModel('Address');
+        $address = $this->Address->find('all', ['conditions' => ['events_id' => $id]]);
+        $address = $address->first();
+        if(!empty($this->Auth->user('id')))
+        {
+            $users_id = $this->Auth->user('id');
+            $fullname = $this->Auth->user('fullname');
+            $email = $this->Auth->user('email');
+        }
+        
+        
+        if ($this->request->is(['patch', 'post', 'put'])) {
+            $event = $this->Events->patchEntity($event, $this->request->data);
 
+            if ($this->Events->save($event)) {
+                return $this->redirect(['action' => 'adminindex']);
+            }
+        }
+        $event['Address'] =$address;
+
+        $this->loadModel('SubCategories');
+        $this->set(compact('selected', 'selected'));
+        $this->set(compact('userProfile', 'users_id'));
+        $users = $this->Events->Users->find('list', ['limit' => 200]);
+        $categories = $this->Events->Categories->find('list', ['limit' => 200]);
+        $subCategories = $this->SubCategories->find('list', ['limit' => 200]);
+        $categories_list = $this->Events->Categories->find('list', ['limit' => 200]);
+        $this->set(compact('event', 'users', 'categories', 'categories_list', 'subCategories', 'address'));
+        $this->set('_serialize', ['event']);
+    }
 }
 
