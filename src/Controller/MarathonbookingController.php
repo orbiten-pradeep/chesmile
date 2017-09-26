@@ -22,8 +22,8 @@ class MarathonbookingController extends AppController
         $this->paginate = [
             'contain' => ['Tickets']
         ];
-        $marathonbooking = $this->paginate($this->Marathonbooking);
-
+        $marathonbooking = $this->paginate($this->Marathonbooking, array('conditions' => array('Tickets.status IS NOT NULL')));
+        //debug($marathonbooking); exit(0);
         $this->set(compact('marathonbooking'));
         $this->set('_serialize', ['marathonbooking']);
     }
@@ -37,10 +37,11 @@ class MarathonbookingController extends AppController
      */
     public function view($id = null)
     {
+        $this->viewBuilder()->layout('admin');
         $marathonbooking = $this->Marathonbooking->get($id, [
             'contain' => ['Tickets']
         ]);
-
+        //debug($marathonbooking); exit(0);
         $this->set('marathonbooking', $marathonbooking);
         $this->set('_serialize', ['marathonbooking']);
     }

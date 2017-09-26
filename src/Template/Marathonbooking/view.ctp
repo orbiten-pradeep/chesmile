@@ -1,20 +1,9 @@
-<nav class="large-3 medium-4 columns" id="actions-sidebar">
-    <ul class="side-nav">
-        <li class="heading"><?= __('Actions') ?></li>
-        <li><?= $this->Html->link(__('Edit Marathonbooking'), ['action' => 'edit', $marathonbooking->id]) ?> </li>
-        <li><?= $this->Form->postLink(__('Delete Marathonbooking'), ['action' => 'delete', $marathonbooking->id], ['confirm' => __('Are you sure you want to delete # {0}?', $marathonbooking->id)]) ?> </li>
-        <li><?= $this->Html->link(__('List Marathonbooking'), ['action' => 'index']) ?> </li>
-        <li><?= $this->Html->link(__('New Marathonbooking'), ['action' => 'add']) ?> </li>
-        <li><?= $this->Html->link(__('List Tickets'), ['controller' => 'Tickets', 'action' => 'index']) ?> </li>
-        <li><?= $this->Html->link(__('New Ticket'), ['controller' => 'Tickets', 'action' => 'add']) ?> </li>
-    </ul>
-</nav>
 <div class="marathonbooking view large-9 medium-8 columns content">
     <h3><?= h($marathonbooking->id) ?></h3>
     <table class="vertical-table">
         <tr>
             <th scope="row"><?= __('Ticket') ?></th>
-            <td><?= $marathonbooking->has('ticket') ? $this->Html->link($marathonbooking->ticket->name, ['controller' => 'Tickets', 'action' => 'view', $marathonbooking->ticket->id]) : '' ?></td>
+            <td><?= $marathonbooking->has('ticket') ? $this->Html->link($marathonbooking->ticket->id, ['controller' => 'Tickets', 'action' => 'view', $marathonbooking->tickets_id]) : '' ?></td>
         </tr>
         <tr>
             <th scope="row"><?= __('Firstname') ?></th>

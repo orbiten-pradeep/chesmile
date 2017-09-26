@@ -74,8 +74,35 @@
             <td><?= h($ticket->bank_ref_num) ?></td>
         </tr>
         <tr>
-            <th scope="row"><?= __('Id') ?></th>
-            <td><?= $this->Number->format($ticket->id) ?></td>
+            <table cellpadding="0" cellspacing="0">
+                <thead>
+                    <tr>
+                        <th scope="col"><?= __('FirstName') ?></th>
+                        <th scope="col"><?= __('LastName') ?></th>
+                        <th scope="col"><?= __('Email') ?></th>
+                        <th scope="col"><?= __('Phone') ?></th>
+                        <th scope="col"><?= __('TSHIRT') ?></th>
+                        <th scope="col"><?= __('KM') ?></th>
+                        <th scope="col" class="actions"><?= __('Actions') ?></th>
+                    </tr>
+                </thead>
+                <tbody>
+                     <?php foreach ($marathons as $marathon): ?>
+                    <tr>
+                        <td><?= h($marathon->firstname) ?></td>
+                        <td><?= h($marathon->lastname) ?></td>
+                        <td><?= h($marathon->email) ?></td>
+                        <td><?= h($marathon->phone) ?></td>
+                        <td><?= h($marathon->TSHIRT) ?></td>
+                        <td><?= h($marathon->KM) ?></td>
+                        <td class="actions">
+                            <?= $this->Html->link(__('View'), ['controller' => 'Marathonbooking','action' => 'view', $marathon->id]) ?>
+                        </td>
+                    </tr>
+                    <?php endforeach; ?>
+                </tbody>
+            </table>
+                 
         </tr>
         <tr>
             <th scope="row"><?= __('Created') ?></th>

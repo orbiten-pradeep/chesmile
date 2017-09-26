@@ -35,8 +35,9 @@ class TicketsController extends AppController
         $this->paginate = [
             'contain' => ['Events']
         ];
-        $tickets = $this->paginate($this->Tickets);
-
+        //debug($this->paginate); exit(0);
+        $tickets = $this->paginate($this->Tickets, array('conditions' => array(['status IS NOT NULL'])));
+        //debug($tickets); exit(0);
         $this->set(compact('tickets'));
         $this->set('_serialize', ['tickets']);
     }
@@ -50,10 +51,15 @@ class TicketsController extends AppController
      */
     public function view($id = null)
     {
+        $this->viewBuilder()->layout('admin');
         $ticket = $this->Tickets->get($id, [
             'contain' => ['Events']
         ]);
 
+        $this->loadModel('Marathonbooking');
+        $marathons = $this->Marathonbooking->find('all', array('conditions' => array('Marathonbooking.tickets_id' => $id)));
+        //sdebug($marathon->all()); exit(0);
+        $this->set('marathons', $marathons);
         $this->set('ticket', $ticket);
         $this->set('_serialize', ['ticket']);
     }
