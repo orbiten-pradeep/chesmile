@@ -48,11 +48,14 @@ $cakeDescription = 'CakePHP: the rapid development php framework';
 			}
 		?>
             <ul class="right">
+                <li><?= $this->Html->link(__('Home'), ['controller' => 'AdminDashBoard', 'action' => 'index']) ?></li>
 	            <li><?= $this->Html->link(__('List Group'), ['controller' => 'Groups', 'action' => 'index']) ?></li>
                 <li><?= $this->Html->link(__('Tikcets'), ['controller' => 'Tickets', 'action' => 'index']) ?></li>
 	        	<li><?= $this->Html->link(__('List Users'), ['controller' => 'Users', 'action' => 'index']) ?></li>
 	        	<li><?= $this->Html->link(__('List Category'), ['controller' => 'Category', 'action' => 'index']) ?></li>
 	        	<li><?= $this->Html->link(__('List Profiles'), ['controller' => 'Profile', 'action' => 'index']) ?></li>
+                <li><?= $this->Html->link(__('List Tickets'), ['controller' => 'tickets', 'action' => 'index']) ?></li>
+                <li><?= $this->Html->link(__('Marathon Booking'), ['controller' => 'Marathonbooking', 'action' => 'index']) ?></li>
             	<li><?= $this->Html->link(__('Logout'), ['controller' => 'Users', 'action' => 'logout']) ?></li>
             </ul>
         </div>
