@@ -282,7 +282,7 @@ class EventsController extends AppController
 			$fullname = $this->Auth->user('fullname');
 			$email = $this->Auth->user('email');
 		}
-
+		
         $this->loadModel('Address');
         $address = $this->Address->find('all', ['conditions' => ['events_id' => $id]]);
         $address = $address->first();
@@ -298,7 +298,7 @@ class EventsController extends AppController
         $query = $this->Likes->find('all', ['select' => 'id',
 		    	'conditions' => ['events_id' => $id]]);
 		$number = $query->count();
-
+        //debug($sponsors->first()); exit(0);
         $this->set('event', $event);
         $this->set('_serialize', ['event']);
 
@@ -1174,6 +1174,7 @@ class EventsController extends AppController
 
     public function adminindex()
     {
+        $this->viewBuilder()->layout('admin');
 		//$this->viewBuilder()->layout('event_home');
 		$this->paginate = [
             'contain' => ['Users', 'Categories',]
