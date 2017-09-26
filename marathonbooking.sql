@@ -35,6 +35,7 @@ CREATE TABLE IF NOT EXISTS `marathonbooking` (
   `phone` varchar(255) DEFAULT NULL,
   `TSHIRT` varchar(255) DEFAULT NULL,
   `KM` varchar(255) DEFAULT NULL,
+  `Blood` varchar(255) DEFAULT NULL,
   `created` timestamp NULL DEFAULT CURRENT_TIMESTAMP,
   PRIMARY KEY (`id`)
 ) ENGINE=InnoDB  DEFAULT CHARSET=utf8 AUTO_INCREMENT=5 ;

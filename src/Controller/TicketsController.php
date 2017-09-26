@@ -144,6 +144,9 @@ class TicketsController extends AppController
                     $marathon->phone =  $this->request->data['Marathon']['mobile_number'][$i];
                     $marathon->TSHIRT =  $this->request->data['Marathon']['TSHIRT'][$i];
                     $marathon->KM =  $this->request->data['Marathon']['KM'][$i];
+                    if(isset($this->request->data['Marathon']['Blood'])){
+                        $marathon->Blood =  $this->request->data['Marathon']['Blood'][$i];
+                    }
                     if(isset($this->request->data['Marathon']['cycle']))
                     {
                         $marathon->cycle =  $this->request->data['Marathon']['cycle'][$i];
