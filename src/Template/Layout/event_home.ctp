@@ -1226,7 +1226,7 @@ body {
   <div class="mobile-logo"><?php echo $this->Html->image('chennaismile-logo.png',array('alt' => 'Logo Chennai Smile','class' => 'img-responsive mobile-logo-img','url' => array('controller' => 'events', 'action' => 'index') )); ?></div>
   </div>
 </nav>
-<div class="background-container">
+<div class="background-container head-container">
 <nav class="navbar navbar-default hidden-xs">
 
     <div class="navbar-header">
@@ -1777,6 +1777,9 @@ window.onclick = function(event) {
 <script src="https://code.jquery.com/ui/1.12.1/jquery-ui.js"></script>
 <link rel="stylesheet" href="//cdnjs.cloudflare.com/ajax/libs/timepicker/1.3.5/jquery.timepicker.min.css">
 <script src="//cdnjs.cloudflare.com/ajax/libs/timepicker/1.3.5/jquery.timepicker.min.js"></script>
+<script src="//cdnjs.cloudflare.com/ajax/libs/timepicker/1.3.5/jquery.timepicker.min.js"></script>
+<link href="https://cdnjs.cloudflare.com/ajax/libs/select2/4.0.4/css/select2.min.css" rel="stylesheet" />
+<script src="https://cdnjs.cloudflare.com/ajax/libs/select2/4.0.4/js/select2.min.js"></script>
 
 <script src="https://npmcdn.com/tether@1.2.4/dist/js/tether.min.js"></script>
 <!-- <script src="https://maxcdn.bootstrapcdn.com/bootstrap/4.0.0-alpha.4/js/bootstrap.min.js"></script> -->

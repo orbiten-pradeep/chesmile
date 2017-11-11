@@ -268,6 +268,15 @@ $('.tc-button').on('click', function(){
 	getEventListByFilter();
 });
 
+$(".city-red").change(function(){
+	//alert($(this).val());
+	window.location.href = $(this).val();
+});
+
+$(document).ready(function() {
+	$('.city-red').select2({  placeholder: 'Look your city'});
+})
+
 $("#filterClearAll").click(function(){
 	$("#filterDateVal").val("");
 	$("#customDate").val("");

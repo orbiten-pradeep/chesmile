@@ -173,13 +173,22 @@ max-width: 259px;
     </script>
     <div class="container-fluid list_event content col-sm-9 col-md-10">
     <div class="row tc-buttons">
-        <div class="col-lg-12">
+        <div class="col-lg-9">
             <span>Top Categories </span>
             <?php 
             foreach ($topCategories as $key => $value) {
                 echo "<button class='btn btn-sm tc-button' style='background-color:#".$value['color']."' data-text=".$value['name']." data-id=".$value['cid']."> ".$value['name']." (".$value['event_counts'].")"."</button>";
             }
             ?>
+        </div>
+        <div class="col-lg-3">
+            <div class="pull-right redirect-city">
+                <select class="city-red" name="state" style="width:200px">
+                  <option value=""> Look Your City </option>
+                  <option value="http://www.bangaloresmile.com">Banglore Smile</option>
+                  <option value="http://www.goasmile.com"">Goa Smile</option>
+                </select>
+            </div>            
         </div>
     </div>
     <div id="myCarousel" class="carousel slide" data-ride="carousel">
