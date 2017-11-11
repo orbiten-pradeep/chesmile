@@ -172,6 +172,16 @@ max-width: 259px;
 });
     </script>
     <div class="container-fluid list_event content col-sm-9 col-md-10">
+    <div class="row tc-buttons">
+        <div class="col-lg-12">
+            <span>Top Categories </span>
+            <?php 
+            foreach ($topCategories as $key => $value) {
+                echo "<button class='btn btn-sm tc-button' style='background-color:#".$value['color']."' data-text=".$value['name']." data-id=".$value['cid']."> ".$value['name']." (".$value['event_counts'].")"."</button>";
+            }
+            ?>
+        </div>
+    </div>
     <div id="myCarousel" class="carousel slide" data-ride="carousel">
 
       <!-- Wrapper for slides -->

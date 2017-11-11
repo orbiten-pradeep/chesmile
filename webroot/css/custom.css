@@ -981,3 +981,10 @@ and (max-device-width : 1024px) {
 .filter-buttons {
     margin-top: 10px;
 }
+.tc-buttons {
+    margin-bottom: 15px;
+}
+.tc-buttons .btn {
+    margin-right: 10px;
+    color: #fff;
+}

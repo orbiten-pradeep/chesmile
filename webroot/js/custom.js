@@ -257,6 +257,17 @@ $(".filterDate").on('click', function(){
 	getEventListByFilter();
 });
 
+$('.tc-button').on('click', function(){
+	var catID = $(this).attr('data-id');
+ 	var catName = $(this).attr('data-text');
+
+ 	elt.tagsinput('removeAll');
+ 	var parentCatObj = { "id": catID, "text": catName};
+	elt.tagsinput('add', parentCatObj);
+	$('.bootstrap-tagsinput input').attr('placeholder', '');
+	getEventListByFilter();
+});
+
 $("#filterClearAll").click(function(){
 	$("#filterDateVal").val("");
 	$("#customDate").val("");
