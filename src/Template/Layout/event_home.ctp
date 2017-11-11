@@ -1,7 +1,7 @@
 <html>
 <head>
 <style type="text/css">
-   
+
     ul {
   list-style-type: none;
 }
@@ -88,7 +88,7 @@ ul.social li a:hover i { -moz-transform: rotate(360deg); -webkit-transform: rota
 .social li a.linkedin:hover {background-color:#007bb7;}
 
 a {
- background-color: #D3D3D3;   
+ background-color: #D3D3D3;
 }
    .social{
 
@@ -127,7 +127,7 @@ body{
     float: left;
     position: relative;
     display: inline-block;
-    
+
 }
 
 /*.nav .category_btn:hover{
@@ -255,13 +255,13 @@ p{
   position:absolute;
    bottom:0;
    width:100%;
-   height:120px;   
+   height:120px;
 }*/
 /*.footer {
   position: absolute;
   bottom: 0;
   width: 100%;
- 
+
   height: 120px;
   background-color: #f5f5f5;
 }*/
@@ -385,7 +385,7 @@ a.socialIcon:hover, .socialHoverClass {
     text-align: center;
     color: #f8f8f8;
   /*background-image:url(../img/cs-homepage-BG.jpg);*/
-   
+
     /*background-size: cover;*/
 }
 
@@ -400,7 +400,7 @@ a.socialIcon:hover, .socialHoverClass {
 }
 
 /*.btn {
-    
+
     height: 30px;
     -moz-user-select: none;
     -webkit-user-select: none;
@@ -498,7 +498,7 @@ input:required:{
       border: 2px solid red;
       border-radius:0;
     }
-    
+
     input.valid{
       border: 2px solid green;
       border-radius:0;
@@ -669,19 +669,19 @@ body{
 
 @media (min-device-width : 320px) and (max-device-width : 640px) {
     .footer {
-      position: relative !important; 
+      position: relative !important;
     }
 }
 
 @media only screen and (max-device-width : 1280px) and (max-height: 800px)  {
     .footer {
-      position: relative !important; 
+      position: relative !important;
     }
 }
 
 @media only screen and (device-width: 1366px)  {
     .footer {
-      position: relative !important; 
+      position: relative !important;
     }
 }
 
@@ -722,7 +722,7 @@ ul.social li a:hover i { -moz-transform: rotate(360deg); -webkit-transform: rota
 .social li a.linkedin:hover {background-color:#007bb7;}
 
 /*body{
-  
+
   background-color:#f2f2f2;
 } */
 
@@ -751,7 +751,7 @@ ul.social li a:hover i { -moz-transform: rotate(360deg); -webkit-transform: rota
   }
   .cs-h2{
   font-size: 24px;
-  
+
   font-weight: lighter;
     line-height: 1.4;
   margin-top: 10px;
@@ -804,7 +804,7 @@ ul.social li a:hover i { -moz-transform: rotate(360deg); -webkit-transform: rota
   font-size: 16px;
   padding: 13px 40px 13px;
   }
-  .cs-primary-button:focus, .cs-primary-button:hover, .cs-primary-button:visited, 
+  .cs-primary-button:focus, .cs-primary-button:hover, .cs-primary-button:visited,
   .cs-signup-button:hover, .cs-signup-button:focus, .cs-signup-button:visited,
   .cs-find-button:focus , .cs-find-button:hover{
     background-color: #0d9cb7 !important;
@@ -837,7 +837,7 @@ ul.social li a:hover i { -moz-transform: rotate(360deg); -webkit-transform: rota
   min-height:630px;
   /*background-color: #3FD3EF;*/
   /*background-image: url(/styles/images/background.jpg); */
-  } 
+  }
   .cs-signup-wrapper{
    border:2px solid black;
   background:#e2e2e2;
@@ -845,7 +845,7 @@ ul.social li a:hover i { -moz-transform: rotate(360deg); -webkit-transform: rota
   border-radius:5px;
   z-index: 2;
   }
-  
+
   .cs-signup-field{
     height: 38px;
   border:1px solid #fff;
@@ -868,7 +868,7 @@ ul.social li a:hover i { -moz-transform: rotate(360deg); -webkit-transform: rota
   .cs-mt10{
     margin-top: 10px;
   }
-  
+
   /*  panel Changes */
   .cs-npl{
   padding-left: 0;
@@ -897,7 +897,7 @@ ul.social li a:hover i { -moz-transform: rotate(360deg); -webkit-transform: rota
     white-space: nowrap;
     text-overflow: ellipsis;
   }
- 
+
   .cs-list-container{
     background-color: #f2f2f2;
     padding-right: 15px;
@@ -920,7 +920,7 @@ ul.social li a:hover i { -moz-transform: rotate(360deg); -webkit-transform: rota
     color: #2BBFD9;
     font-size: 18px;
     padding-top: 5px;
-    
+
   }
   .cs-spec{
     color: #5e5e5e;
@@ -935,9 +935,9 @@ ul.social li a:hover i { -moz-transform: rotate(360deg); -webkit-transform: rota
   div.profile:nth-child(4n) {
     padding-right: 12px;
  }
-  
- 
-  
+
+
+
 /* Tablet/ Mobile Portrait */
 @media only screen and (max-width: 767px){
   .cs-signup-container{
@@ -996,8 +996,8 @@ ul.social li a:hover i { -moz-transform: rotate(360deg); -webkit-transform: rota
   }
 }
 /* Iphone 5 Portrait and Landscape */
-@media only screen 
-  and (min-device-width: 320px) 
+@media only screen
+  and (min-device-width: 320px)
   and (max-device-width: 568px)
   and (-webkit-min-device-pixel-ratio: 2) {
   .cs-signup-button {
@@ -1011,7 +1011,7 @@ ul.social li a:hover i { -moz-transform: rotate(360deg); -webkit-transform: rota
   }
 }
 @media only screen and (min-width: 768px) and (max-width: 1200px){
-  
+
   .cs-usercounts-button{
     padding: 13px 16px 13px;
 
@@ -1054,7 +1054,7 @@ ul.social li a:hover i { -moz-transform: rotate(360deg); -webkit-transform: rota
   }
   .cs-find-field, .cs-find-button{
     width: 83%;
-  } 
+  }
 }
 
 /* Scroll to top  */
@@ -1110,7 +1110,7 @@ ul.social li a:hover i { -moz-transform: rotate(360deg); -webkit-transform: rota
   }
 }
 .copyrights {
-  color:#ffffff; 
+  color:#ffffff;
   margin:0px !important;
   padding: 5px 0 15px !important;
 }
@@ -1192,7 +1192,7 @@ body {
 <title>ChennaiSmile</title>
 
 <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/4.0.0-alpha.4/css/bootstrap.min.css">
-<link href="https://fonts.googleapis.com/css?family=Raleway:100,200,300,400,500,600,700,800,900" rel="stylesheet"> 
+<link href="https://fonts.googleapis.com/css?family=Raleway:100,200,300,400,500,600,700,800,900" rel="stylesheet">
 <link href="http://maxcdn.bootstrapcdn.com/font-awesome/4.2.0/css/font-awesome.min.css" rel="stylesheet">
 
 
@@ -1221,13 +1221,13 @@ body {
         <span class="glyphicon glyphicon-menu-hamburger"></span>
       </button>
     </div>
-  
+
 
   <div class="mobile-logo"><?php echo $this->Html->image('chennaismile-logo.png',array('alt' => 'Logo Chennai Smile','class' => 'img-responsive mobile-logo-img','url' => array('controller' => 'events', 'action' => 'index') )); ?></div>
-  </div>  
+  </div>
 </nav>
 <div class="background-container">
-<nav class="navbar navbar-default hidden-xs">  
+<nav class="navbar navbar-default hidden-xs">
 
     <div class="navbar-header">
       <?php echo $this->Html->image('chennaismile-logo.png',array('alt' => 'Logo Chennai Smile','class' => 'img-responsive logores','width' => '80%','url' => array('controller' => 'events', 'action' => 'index') )); ?>
@@ -1251,7 +1251,7 @@ body {
         {
         echo $this->Html->image('profile_thumbnail.jpg',array('alt' => 'Logo Chennai Smile','class' => 'dropbtn','onclick' => 'largedrop()'));
         }
-        ?> 
+        ?>
         <div id="mylargeDropdown" class="dropdown-content">
           <?= $this->Html->link($this->Html->tag('i', '', array('class' => 'fa fa-user fa-fw')).'My Account', array('controller' => 'UserProfile', 'action' => 'add'), array('escape' => false)) ?>
 
@@ -1264,7 +1264,7 @@ body {
       <?php } ?>
       <li><a href="#past-events" class="btn btn-primary past-events">View past events</a></li>
       <?php if($this->request->session()->read('Auth.User')) { ?>
-      
+
       <li><?= $this->Html->link(__('Create events'), ['controller' => 'events', 'action' => 'add'], array('class' => 'btn btn-primary')); ?></li>
         <?php }?>
 
@@ -1273,7 +1273,7 @@ body {
       <?php }?>
     </ul>
 
-    
+
     <ul class="nav navbar-nav search-nav">
       <li class="dropdown category_btn">
           <label style="font-weight: normal;">Category</label>
@@ -1286,7 +1286,7 @@ body {
       <li class="search-box-li">
        <form class="navbar-form navbar-left" action="<?php echo $this->Url->build(['action' =>'index']);?>" method="post">
           <div class="form-group">
-            <input id="eventCategorySearch" type="text" class="form-control" placeholder="Search for events, parties, concerts and more">   
+            <input id="eventCategorySearch" type="text" class="form-control" placeholder="Search for events, parties, concerts and more">
             <!-- TEST -->
             <!-- <div class="category_btn" style="background: none;">
               <div class="mini-submenu">
@@ -1299,23 +1299,23 @@ body {
             </div> -->
             <!-- TEST END -->
             <input type="hidden" name="parent_category_id" id="parent_category_id">
-            <input type="hidden" name="sub_categories_id" id="sub_categories_id">   
-            </div>  
+            <input type="hidden" name="sub_categories_id" id="sub_categories_id">
+            </div>
         <button type="button" class="btn btn-primary btn-go" onclick="getEventListByFilter();">GO</button>
       </form>
       </li>
       <li class="mobhide">
-       
+
       </li>
     </ul>
     <div class="category_dropdown list-group">
       <div class="row">
         <?php foreach ($categories as $key => $category): ?>
           <?php //echo "<pre>";print_r($category); echo "</pre>";?>
-          <?php $i=0; if(($i%5)==0) {echo '<div class="col-md-4">';} ?>           
+          <?php $i=0; if(($i%5)==0) {echo '<div class="col-md-4">';} ?>
               <div class="checkbox cs-cat" data-id="<?php echo $category->id; ?>" data-text="<?php echo $category->name; ?>">
                <label><?php echo $category->name; ?></label>
-              </div>  
+              </div>
               <?php if($i!= 0) { echo "<br>";} $i++; ?>
             </div>
         <?php endforeach; ?>
@@ -1333,14 +1333,14 @@ body {
 
    <!--  </div> --><!-- /.navbar-collapse -->
   <!-- </div> --><!--.container-fluid-->
-</nav>   
+</nav>
 </div>
 <div class="container-content">
   <?= $this->fetch('content') ?>
    <?php echo $this->Flash->render(); ?>
 </div>
 
-<div class="background-container">           
+<div class="background-container">
 
 <div align="center" class="footer main-footer" style="font-size: 11px;">
 
@@ -1350,17 +1350,17 @@ body {
     <li><a href="https://twitter.com/chennaismile" class="twit" title="Twitter"><i class="fa fa-twitter"></i></a></li>
     <li><a href="https://plus.google.com/u/0/117145967013827849541" class="google" title="Google +"><i class="fa fa-google-plus"></i></a></li>
     <li><a href="https://www.instagram.com/chennaismile.digital/" class="instagram" title="Instagram"><i class="fa fa-instagram"></i></a></li>
-    </ul> 
+    </ul>
 
   </div>
   <div>
     <ul class="social" style="color:#ffffff !important;">
       <li><?= $this->Html->link(__('About us'), ['controller' => 'events', 'action' => 'about'], array('class' => 'foot')); ?></li>
       <li><?= $this->Html->link(__('Terms of service'), ['controller' => 'events', 'action' => 'terms'], array('class' => 'foot')); ?></li>
-      <li><?= $this->Html->link(__('Privacy Policy'), ['controller' => 'events', 'action' => 'privacy'], array('class' => 'foot')); ?></li>                
-      <li><?= $this->Html->link(__('Disclaimer'), ['controller' => 'events', 'action' => 'partnerwith'], array('class' => 'foot')); ?></li>                
-      <li><?= $this->Html->link(__('Contact us'), ['controller' => 'events', 'action' => 'contact'], array('class' => 'foot')); ?></li>                
-    </ul> 
+      <li><?= $this->Html->link(__('Privacy Policy'), ['controller' => 'events', 'action' => 'privacy'], array('class' => 'foot')); ?></li>
+      <li><?= $this->Html->link(__('Disclaimer'), ['controller' => 'events', 'action' => 'partnerwith'], array('class' => 'foot')); ?></li>
+      <li><?= $this->Html->link(__('Contact us'), ['controller' => 'events', 'action' => 'contact'], array('class' => 'foot')); ?></li>
+    </ul>
   </div>
   <p style="" class="copyrights">Copyright © 2017 ChennaiSmile</p><!--End container-->
 </div>
@@ -1376,7 +1376,7 @@ body {
   <div class="modal-dialog">
     <div class="modal-content">
       <div class="modal-header">
-        <!--<button type="button" class="close" data-dismiss="modal"><span aria-hidden="true">&times;</span><span class="sr-only">Close</span></button>--> 
+        <!--<button type="button" class="close" data-dismiss="modal"><span aria-hidden="true">&times;</span><span class="sr-only">Close</span></button>-->
 
         <div class="btn-group pull-right btn-group-sm" role="group">
           <button type="button" class="btn btn-default" data-dismiss="modal">Close</button>
@@ -1389,11 +1389,11 @@ body {
       <div class="modal-body" style="background: none;">
         <div class="mob-category-list">
           <div class="form-group">
-            <input id="mobEventCategorySearch" type="text" class="form-control" placeholder="Search for events, parties, concerts and more">         
+            <input id="mobEventCategorySearch" type="text" class="form-control" placeholder="Search for events, parties, concerts and more">
           </div>
-          <ul class="list-group inner-mob-category-list"> 
-          <?php foreach ($categories as $key => $category): ?>          
-              <li class="list-group-item mob-cs-cat" data-id="<?php echo $category->id; ?>" data-text="<?php echo $category->name; ?>"><?php echo $category->name; ?></li>            
+          <ul class="list-group inner-mob-category-list">
+          <?php foreach ($categories as $key => $category): ?>
+              <li class="list-group-item mob-cs-cat" data-id="<?php echo $category->id; ?>" data-text="<?php echo $category->name; ?>"><?php echo $category->name; ?></li>
           <?php endforeach; ?>
           </ul>
           <div class="mob-sub-category-list">
@@ -1415,7 +1415,7 @@ body {
   <div class="modal-dialog">
     <div class="modal-content">
       <div class="modal-header">
-        <!--<button type="button" class="close" data-dismiss="modal"><span aria-hidden="true">&times;</span><span class="sr-only">Close</span></button>--> 
+        <!--<button type="button" class="close" data-dismiss="modal"><span aria-hidden="true">&times;</span><span class="sr-only">Close</span></button>-->
 
         <div class="btn-group pull-right btn-group-sm" role="group">
           <button type="button" class="btn btn-default" data-dismiss="modal">Close</button>
@@ -1438,9 +1438,9 @@ body {
             <div class="f-item filter-etitle">
                 <label></label>
                 <span class="glyphicon glyphicon-remove filter-etitle-clear"></span>
-            </div>                   
+            </div>
         </div>
-        <form id="searchbyarea2" class="sx_location"> 
+        <form id="searchbyarea2" class="sx_location">
             <div class="form-group"> <span class="twitter-typeahead" style="position: relative; display: inline-block;">
               <input class="tt-hint dropdown_hint" type="text" autocomplete="off" spellcheck="off" disabled style="">
                <?php echo $this->Form->input('areaname2', array('id' => 'homeAutocomplete2', 'required','class' => 'form-control tt-query dropdown_input','label' => false,'placeholder' => 'Search by location/Area')); ?>
@@ -1452,7 +1452,7 @@ body {
             <div class="form-group"> <span class="twitter-typeahead" style="position: relative; display: inline-block;">
               <input class="tt-hint dropdown_hint" type="text" autocomplete="off" spellcheck="off" disabled style="">
                <?php echo $this->Form->input('eventTitle2', array('id' => 'eTitleAutocomplete2', 'required','class' => 'form-control tt-query dropdown_input','label' => false,'placeholder' => 'Search by event title')); ?>
-              <span style="" class="dropdown_txt1"></span> 
+              <span style="" class="dropdown_txt1"></span>
               <span class="tt-dropdown-menu" style="position: absolute; top: 100%; left: 0px; z-index: 100; display: none;"></span>
               </span>
             </div>
@@ -1482,7 +1482,7 @@ body {
 <div class="modal modal-mob-menus fade">
   <div class="modal-dialog">
     <div class="modal-content">
-      <div class="modal-body"> 
+      <div class="modal-body">
           <ul class="list-group">
            <?php if(!$this->request->session()->read('Auth.User')) { ?>
             <li class="list-group-item"><a href="#" data-toggle="modal" data-target="#loginSignup">Create Event</a></li>
@@ -1498,7 +1498,7 @@ body {
             <li class="list-group-item"><a href="<?php echo $this->Url->build(array('controller' => 'Users', 'action' => 'logout'));?>" >Logout</a></li>
             <?php }?>
           </ul>
-      </div> 
+      </div>
     </div><!-- /.modal-content -->
   </div><!-- /.modal-dialog -->
 </div><!-- /.modal -->
@@ -1506,7 +1506,7 @@ body {
 
 <div class="modal" id="loginSignup" role="dialog">
     <div class="modal-dialog">
-    
+
       <!-- Modal content-->
       <div class="modal-content">
       <div class="modal-header">
@@ -1521,48 +1521,48 @@ body {
    <!-- <h1 style="color:#ffffff">Let's roll like a frisky ball!</h1>
    <h3 style="font-size: 22px; color:#ffffff;">Journey towards memorable experiences begins from here.</h3> -->
         <div class="card-login card-container-login">
-          
+
            <?= $this->Form->create('', array('id' => 'signupForm','class' => 'form-signup formheigh ', 'url' => ['action' => 'add','controller' => 'users'])) ?>
-          
+
             <input type="hidden" id="checkUrl" name="checkUrl" value="<?php echo $this->Url->build(array('controller' => 'users', 'action' => 'isemailexist'));?>">
-            
+
               <div class="form-group float-label-control" style="margin-top: 20px;">
-              <label for="">Name</label> 
+              <label for="">Name</label>
            <?= $this->Form->input('fullname', array('div' => false,'id' => 'fullname', 'class' => 'form-control form-element','label' => false,'placeholder' => 'Full Name','required' => true)) ?>
-            
+
           </div>
           <div class="form-group float-label-control">
-          <label for="">Email</label> 
+          <label for="">Email</label>
         <?= $this->Form->input('email', array('div' => false,'id' => 'email', 'class' => 'form-control form-element','label' => false,'placeholder' => 'Email Address','required' => true)) ?>
-            
+
           </div>
           <div class="form-group float-label-control">
           <label for="">Password</label>
         <?= $this->Form->input('password',array('id' => 'new_password', 'class' => 'form-control form-element','label' => false,'placeholder' => 'Password','required' => true)) ?>
-            
+
           </div>
           <div class="form-group float-label-control">
           <label for="">Confirm Password</label>
 <?= $this->Form->input('confirm_password',array('div' => false,'id' => 'confirm_password', 'type' => 'password', 'class' => 'form-control form-element','label' => false,'placeholder' => 'Re-type Password','required' => true)) ?>
-            
+
           </div>
-              <?= $this->Form->hidden('group_id', array('controller' => 'users', 'action' => 'add'), ['options' => $groups], ['default' => '1']); ?> 
+              <?= $this->Form->hidden('group_id', array('controller' => 'users', 'action' => 'add'), ['options' => $groups], ['default' => '1']); ?>
                   <p style="color:#333333;font-size: 11px;"  align="left">*By clicking Create Account means you're okay with ChennaiSmile Terms and Privacy Policy and Cookie Policy.</p>
-                
+
               <?= $this->Form->button(__('Create Account'), array('id' => 'signup', 'class' => 'btn btn-primary btn-lg cs-signup-button')) ?>
 
               <div style=" color: #000; margin-top: 25px;">
               Already a member? <a href="#" class="viewLoginForim">Login</a></div>
-            
+
             <?= $this->Form->end() ?>
-            
+
         </div><!-- /card-container -->
     </div>
-    </div> 
+    </div>
     </div>
         </div>
       </div>
-      
+
     </div>
   </div>
 
@@ -1572,7 +1572,7 @@ body {
 
     <div class="modal" id="loginModal" role="dialog">
     <div class="modal-dialog">
-    
+
       <!-- Modal content-->
       <div class="modal-content">
         <div class="modal-header">
@@ -1587,31 +1587,31 @@ body {
    <!-- <h1 style="color:#ffffff">Let's roll like a frisky ball!</h1>
    <h3 style="font-size: 22px; color:#ffffff;">Journey towards memorable experiences begins from here.</h3> -->
         <div class="card-login card-container-login">
-           
+
             <?= $this->Form->create('',array('id' => 'loginForm2','class' => 'form-signin', 'url' => ['action' => 'login','controller' => 'users'])) ?>
             <!-- <form class="form-signin"> -->
             <!-- <h3 style="color:#333333">Sign In & Enjoy</h3> -->
-             
+
           <div class="form-group float-label-control">
-   
-    
+
+
     <?= $this->Form->input('email', array('div' => false,'id' => 'email','class' => 'form-control form-element','label' => false,'placeholder' => 'Email Address','required' => true)) ?>
-     <label for="">Email Address</label> 
-    
+     <label for="">Email Address</label>
+
         <div class="forgotpass"> &nbsp;</div>
     </div>
           <div class="form-group float-label-control">
-          <label for="">Password</label> 
+          <label for="">Password</label>
         <?= $this->Form->input('password',array('div' => false,'id' => 'password', 'class' => 'form-control form-element','label' => false,'placeholder' => 'Password','required' => true)) ?>
-           
+
           </div>
-        
+
                <?= $this->Form->submit(__('Log In'), array('id' => 'Login2', 'class' => 'btn btn-primary btn-lg cs-signup-button cs-signin-button')) ?>
 
 
-               
+
             <div class="forgotpass" style=" margin-top: 10px;">
-            
+
               <div style="color: #000; margin-top: 25px;">
               <a style="font-size: 12px;color: #3394c9;" id="forg-option">Forgot Password?</a><br><br>
               Not a member? <a href="#" class="viewSignupForim">Join Now</a></div>
@@ -1624,13 +1624,13 @@ body {
             </div>
             </div>
       </div>
-      
+
     </div>
   </div>
 
   <div class="modal" id="forgotModal" role="dialog">
     <div class="modal-dialog">
-    
+
        <div class="modal-content">
         <div class="modal-header" style="border-bottom: none;">
           <button type="button" class="close close-forg" data-dismiss="modal" style="color: #2bbfd9;">&times;</button>
@@ -1641,7 +1641,7 @@ body {
 
            <div class="col-xs-9 col-sm-9 col-md-9 col-lg-10">
             <div class="form-group float-label-control">
-             
+
              <label for="">Email Address</label>
              <?= $this->Form->input('email', array('div' => false,'id' => 'email', 'class' => 'form-control form-element text','label' => false,'placeholder' => 'Enter your email address', 'required' => true)) ?>
             </div>
@@ -1653,7 +1653,7 @@ body {
 
           </div>
         </div>
-  
+
     <?= $this->Form->end() ?>
 
         </div>
@@ -1661,7 +1661,7 @@ body {
          <!--  <button type="button" class="btn btn-default closebtn" data-dismiss="modal">Close</button> -->
         </div>
       </div>
-      
+
     </div>
   </div>
 
@@ -1687,7 +1687,7 @@ $('.modal-close').click(function(){
 $('#log-modal').click(function(){
   $('#loginSignup').css('display','block');
   // $('body.modal-open .background-container').css('filter','blur(4px)');
-  
+
 });
 
 $('#forg-option').click(function(){
@@ -1707,7 +1707,7 @@ $('.close-forg').click(function(){
 
 
   </script>
-    
+
       <script type="text/javascript">
   function copyTextValue(subcat) {
       var text1 = document.getElementById("sub11");
@@ -1724,9 +1724,9 @@ $('.close-forg').click(function(){
         </script>
 
 <script>
-/* When the user clicks on the button, 
+/* When the user clicks on the button,
 toggle between hiding and showing the dropdown content */
-function smalldrop() { 
+function smalldrop() {
     document.getElementById("myDropdown").classList.toggle("show");
 }
 
@@ -1745,7 +1745,7 @@ window.onclick = function(event) {
   }
 }
 
-/* When the user clicks on the button, 
+/* When the user clicks on the button,
 toggle between hiding and showing the dropdown content */
 function largedrop() {
     document.getElementById("mylargeDropdown").classList.toggle("show");
@@ -1782,7 +1782,7 @@ window.onclick = function(event) {
 <!-- <script src="https://maxcdn.bootstrapcdn.com/bootstrap/4.0.0-alpha.4/js/bootstrap.min.js"></script> -->
 <script src="http://maps.googleapis.com/maps/api/js?libraries=places&key=AIzaSyCx2hb4R1uhaMbmlUAu1_lFasvl3gVHtnw"></script>
 
-<?php  echo $this->Html->script(['general','moment.min', 'daterangepicker', 'bootstrap-tagsinput', 'readmore.min', 'jquery.slimscroll.min', 'mobile-filters', 'custom','jquery.cropit','jquery.validate.min']);?> 
+<?php  echo $this->Html->script(['general','moment.min', 'daterangepicker', 'bootstrap-tagsinput', 'readmore.min', 'jquery.slimscroll.min', 'mobile-filters', 'custom','jquery.cropit','jquery.validate.min']);?>
 
 
 <script type="text/javascript">
@@ -1798,7 +1798,7 @@ window.onclick = function(event) {
             url: "<?php echo $this->Url->build(['action' =>'likes']); ?>",
             async: true,
             success: function(data) {
-                document.getElementById(eventid).textContent = data; 
+                document.getElementById(eventid).textContent = data;
             },
             error: function(tab) {
                 //$select.html('<option id="-1">none available</option>');
@@ -1814,8 +1814,8 @@ window.onclick = function(event) {
         // onDocumentReady function bind
     $(document).ready(function() {
         autoHeight();
-        
-        if ($(window).width() > 767) { 
+
+        if ($(window).width() > 767) {
           $('.search-nav .bootstrap-tagsinput').slimScroll({
               axis: 'x',
               height: '42px',
@@ -1824,7 +1824,7 @@ window.onclick = function(event) {
               color: '#286090',
               allowPageScroll: false
           });
-        } 
+        }
     });
     // onResize bind of the function
     $(window).resize(function() {
@@ -1835,7 +1835,7 @@ window.onclick = function(event) {
 $(document ).ready( function () {
 
 $("#forgotpassform" ).validate( {
-    rules: {    
+    rules: {
       email: {
         required: true,
         email: true
@@ -1863,10 +1863,10 @@ $("#forgotpassform" ).validate( {
       $( element ).parents( ".input" ).addClass( "has-success" ).removeClass( "has-error" );
     }
   });
-  
+
   $("#signupForm" ).validate( {
     rules: {
-      fullname: "required",      
+      fullname: "required",
       email: {
         required: true,
         email: true,
@@ -1880,10 +1880,10 @@ $("#forgotpassform" ).validate( {
           },
           dataFilter: function(response) {
             if(response != "") {
-              var resp = JSON.parse(response); 
+              var resp = JSON.parse(response);
               return (resp.code == true) ? true : false;
-            } 
-            else { 
+            }
+            else {
               return false;
             }
           }
@@ -1900,10 +1900,10 @@ $("#forgotpassform" ).validate( {
       }
     },
     messages: {
-      fullname: "Please enter your Fullname",      
-      email: { 
+      fullname: "Please enter your Fullname",
+      email: {
         required: "Please enter a valid email address",
-        remote: "Email ID already exist" 
+        remote: "Email ID already exist"
       },
       password: {
         required: "Please provide a password",
@@ -1936,7 +1936,7 @@ $("#forgotpassform" ).validate( {
 
 
   $("#loginForm" ).validate( {
-    rules: {    
+    rules: {
       email: {
         required: true,
         email: true
@@ -1948,7 +1948,7 @@ $("#forgotpassform" ).validate( {
     messages: {
       email: "Please enter a email address",
       password: {
-        required: "Please provide a password"      
+        required: "Please provide a password"
       }
     },
     errorElement: "em",
@@ -1973,7 +1973,7 @@ $("#forgotpassform" ).validate( {
 
 
   $("#loginForm2" ).validate( {
-    rules: {    
+    rules: {
       email: {
         required: true,
         email: true
@@ -1985,7 +1985,7 @@ $("#forgotpassform" ).validate( {
     messages: {
       email: "Please enter a email address",
       password: {
-        required: "Please provide a password"      
+        required: "Please provide a password"
       }
     },
     errorElement: "em",

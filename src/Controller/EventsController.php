@@ -17,7 +17,7 @@ use Cake\Utility\Inflector;
  */
 class EventsController extends AppController
 {
-	public function beforeFilter(Event $event) 
+	public function beforeFilter(Event $event)
 	{
 		parent::beforeFilter($event);
     	$this->Auth->allow(['Invitation','about','terms','privacy','partnerwith','contact','thebigbeachmarathon', 'index', 'eventlist','View','viewresult','searchbyeventtitle','search','chennai','findslug']);
@@ -38,7 +38,7 @@ class EventsController extends AppController
     public function terms(){
     	$this->viewBuilder()->layout('event_home');
     }
-    
+
     public function privacy(){
     	$this->viewBuilder()->layout('event_home');
     }
@@ -63,7 +63,7 @@ class EventsController extends AppController
         else
         	$logged = false;
 		$this->viewBuilder()->layout('event_home');
-		
+
         $this->loadModel('Categories');
         $categories_new = $this->Categories->find()->select(['Categories.name', 'Categories.id'])
         	->where(['active' => 1]);
@@ -92,7 +92,7 @@ class EventsController extends AppController
 			$email = $this->Auth->user('email');
 			$this->paginate['conditions'] = array("Events.user_id" => $users_id);
 		}
-        
+
         $filter = false;
         $this->paginate['order'] = array('Events.created' => 'desc');
         //debug($this->paginate);
@@ -135,7 +135,7 @@ class EventsController extends AppController
             'contain' => ['Users', 'Categories']
         ];
         $this->loadModel('Likes');
-        
+
     	if(!empty($this->Auth->user('id')))
 		{
 			$users_id = $this->Auth->user('id');
@@ -151,7 +151,7 @@ class EventsController extends AppController
 			}
 			$this->paginate['conditions'] = array('Events.id IN' => $eventids);
 		}
-        
+
         $this->paginate['order'] = array('Events.created' => 'desc');
         $events = $this->paginate($this->Events);
 
@@ -316,7 +316,7 @@ class EventsController extends AppController
         $this->set(compact('address', 'mediapartners', 'sponsors', 'number', 'likes', 'u_id', 'galaries'));
     }
 
-		
+
     /**
      * Add method
      *
@@ -333,18 +333,18 @@ class EventsController extends AppController
 		}
         $event = $this->Events->newEntity();
         if ($this->request->is('post')) {
-        	
+
         	$this->loadModel('Address');
         	$this->loadModel('Mediapartners');
         	$this->loadModel('Sponsors');
-        	
+
         	$addres = $this->Address->newEntity();
         	$mediapartner = $this->Mediapartners->newEntity();
         	$sponsor = $this->Sponsors->newEntity();
         	$data = $this->request->data;
-        	
+
         	//debug($this->request->data['Mediapartners'][0]);
-        	
+
         	/////////////////////////////////////////////////////////////////////////
         	if(!empty($this->request->data['Mediapartners']))
         	{
@@ -361,8 +361,8 @@ class EventsController extends AppController
 			        	if( !file_exists($uploadFolder) ){
 					        mkdir($uploadFolder);
 					    }
-					    
-					    
+
+
 					    $filename = str_replace(" ", "-", rand(1, 3000) . $file_name);
 	                	//move_uploaded_file($file_tmp=$this->request->data['Mediapartners'][$key]["tmp_name"], WWW_ROOT . 'img/Mediapartners' . DS . $filename);
 	                	if(!file_exists(WWW_ROOT . 'img/Mediapartners' . DS . $filename))
@@ -384,7 +384,7 @@ class EventsController extends AppController
 	                }
 	            }
         	}
-        	
+
         	//////////////////////////////////////////////////////////////////////////////////////////////////
         	if(!empty($this->request->data['Sponsors']))
         	{
@@ -401,8 +401,8 @@ class EventsController extends AppController
 			        	if( !file_exists($uploadFolder) ){
 					        mkdir($uploadFolder);
 					    }
-					    
-					    
+
+
 					    $filename = str_replace(" ", "-", rand(1, 3000) . $file_name);
 	                	//move_uploaded_file($file_tmp=$this->request->data['Mediapartners'][$key]["tmp_name"], WWW_ROOT . 'img/Mediapartners' . DS . $filename);
 	                	if(!file_exists(WWW_ROOT . 'img/Sponsors' . DS . $filename))
@@ -423,18 +423,18 @@ class EventsController extends AppController
 	                    array_push($error,"$file_name, ");
 	                }
 	            }
-        	}      	
+        	}
         	$display = null;
         	$banner = null;
         	$OrganizersLogo = null;
 
-        	//banner Image 
+        	//banner Image
         	if(!empty($this->request->data['banner']))
 	        {
 	        	$banner = $this->request->data['banner'];
 		        $ext = substr(strtolower(strrchr($banner['name'], '.')), 1); //get the extension
 		        $arr_ext = array('jpg', 'jpeg', 'png'); //set allowed extensions
-		        
+
 		        if($banner['size']/1024 > '2048')
 		        {
 		        	$this->Flash->error(__('"imageLogs", __METHOD__." The uploaded file exceeds the MAX_FILE_SIZE(2MB) '));
@@ -455,14 +455,14 @@ class EventsController extends AppController
 	                $banner = $filename;
 		        }
         	}
-        	
-        	
+
+
         	if(!empty($this->request->data['display']))
         	{
 	        	$display = $this->request->data['display'];
 		        $ext = substr(strtolower(strrchr($display['name'], '.')), 1); //get the extension
 		        $arr_ext = array('jpg', 'jpeg', 'png'); //set allowed extensions
-		        
+
 		        if($display['size']/1024 > '2048')
 		        {
 		        	$this->Flash->error(__('"imageLogs", __METHOD__." The uploaded file exceeds the MAX_FILE_SIZE(2MB) '));
@@ -483,13 +483,13 @@ class EventsController extends AppController
 	                $display = $filename;
 		        }
         	}
-	        
+
         	if(!empty($this->request->data['OrganizersLogo']))
         	{
 	        	$OrganizersLogo = $this->request->data['OrganizersLogo'];
 		        $ext = substr(strtolower(strrchr($OrganizersLogo['name'], '.')), 1); //get the extension
 		        $arr_ext = array('jpg', 'jpeg', 'png'); //set allowed extensions
-		        
+
 		        if($OrganizersLogo['size']/1024 > '2048')
 		        {
 		        	$this->Flash->error(__('"imageLogs", __METHOD__." The uploaded file exceeds the MAX_FILE_SIZE(2MB) '));
@@ -541,7 +541,7 @@ class EventsController extends AppController
             if($cnt > 0)
             {
                 $this->request->data['slug_status'] = ($cnt+1);
-            } else 
+            } else
             {
                 $this->request->data['slug_status'] = 0;
             }
@@ -582,12 +582,12 @@ class EventsController extends AppController
 	            	$sponsor['Sponsors'] = $this->request->data['Sponsors'][$key]["name"];
 	            	$this->Sponsors->save($sponsor);
 	            }
-	            
+
 	            $addres = $this->Address->patchEntity($addres, $this->request->data);
-	            $addres->events_id = $new_id; 
+	            $addres->events_id = $new_id;
 	            $this->Address->save($addres);
             	////////////////////////////////////////////////////////////////////
-	            
+
             	//Send email to admin to active
             	$email = new Email();
         		$email->transport('gmail');
@@ -613,7 +613,7 @@ class EventsController extends AppController
     			$email->from('admin@chennaismile.com');
     			$email->viewVars(['name' => $name]);
     			$email->send();
-            	
+
     //         	//Email to customer, who created the events
     //         	$email->transport('gmail');
     //     		$email->template('default');
@@ -628,12 +628,12 @@ class EventsController extends AppController
     //         	$message .= "<b>Event Activation is waiting for Admin review.. Will let you know, once its activated.</b> <br/>";
 			 //    $message .= "<br/>Thanks, <br/>Support Team";
 			 //    $email->send($message);
-			    
+
             	////////////////////////////////////////////////////////////////////
                 $this->Flash->success(__('The event has been saved, kindly wait for an approval mail from the admin.'));
 
                 return $this->redirect(['action' => 'index']);
-            } else 
+            } else
             {
                 $this->Flash->error(__('The event could not be saved. Please, try again.'));
                 return $this->redirect(['action' => 'index']);
@@ -647,10 +647,10 @@ class EventsController extends AppController
         $this->loadModel('SubCategories');
         $subCategories_new = $this->SubCategories->find('all', ['fields' => 'name',
 			    'conditions' => ['active' => 1]
-			]); 
+			]);
 
         $this->set('categories', $categories_new);
-        $this->set('subCategories', $subCategories_new); 
+        $this->set('subCategories', $subCategories_new);
         $this->set(compact('subCategories_new'));
 
 
@@ -659,7 +659,7 @@ class EventsController extends AppController
         $users = $this->Events->Users->find('list', ['limit' => 200]);
 
         $categories_list = $this->Events->Categories->find('list', ['limit' => 200]);
-        $this->set(compact('event', 'users', 'categories_list', 'subCategories')); 
+        $this->set(compact('event', 'users', 'categories_list', 'subCategories'));
         $this->set('_serialize', ['event']);
     }
 
@@ -685,15 +685,15 @@ class EventsController extends AppController
 			$fullname = $this->Auth->user('fullname');
 			$email = $this->Auth->user('email');
 		}
-		
-        
+
+
         if ($this->request->is(['patch', 'post', 'put'])) {
         	$address = $this->Address->patchEntity($address, $this->request->data['Address']);
-	        $address->events_id = $id; 
+	        $address->events_id = $id;
 	        $this->Address->save($address);
 	        $this->request->data['date'] = new Time($this->request->data['date']);
         	/////////////////////////////////////////////////////////////////
-        	
+
 	        $name_to_slug = Inflector::slug($this->request->data['title'], $replacement = '-');
         	$this->request->data['slug'] = strtolower($name_to_slug);
 
@@ -703,7 +703,7 @@ class EventsController extends AppController
             if($cnt > 0)
             {
                 $this->request->data['slug_status'] = ($cnt+1);
-            } else 
+            } else
             {
                 $this->request->data['slug_status'] = 0;
             }
@@ -712,7 +712,7 @@ class EventsController extends AppController
             //print_r($this->request->data); exit(0);
 
             if ($this->Events->save($event)) {
-            	
+
                 $this->Flash->success(__('The event has been saved.'));
 
                 return $this->redirect(['action' => 'index']);
@@ -752,7 +752,7 @@ class EventsController extends AppController
 
         return $this->redirect(['action' => 'index']);
     }
-    
+
 	public function viewresult($id = null)
 	{
 		if ($this->request->is('ajax')) {
@@ -764,7 +764,7 @@ class EventsController extends AppController
 		$this->autoRender = false;
 		exit;
 	}
-	
+
 	/**
      * Activate method
      *
@@ -779,20 +779,20 @@ class EventsController extends AppController
         ]);
         $this->request->session()->write('Activate', '1');
         $this->request->session()->write('eventid', $id);
-     	
+
        	if($this->Auth->user('group_id') == 4)
        	{
 	        $users_email = $event['user']['email'];
 	        //$users_email['email']
-	        if ($this->request->is(['patch', 'post', 'put'])) 
+	        if ($this->request->is(['patch', 'post', 'put']))
 	        {
 	            //$event = $this->Events->patchEntity($event, $this->request->data['active']);
-	            if ($this->Events->updateAll(['active' => $this->request->data['active']], ['id' => $id])) 
+	            if ($this->Events->updateAll(['active' => $this->request->data['active']], ['id' => $id]))
 	            {
-	            	//Send eamil to user 
+	            	//Send eamil to user
 	            	$email = new Email();
 	        		$email->transport('gmail');
-	        		
+
 				    // Always try to write clean code, so that you can read it :) :
 				    if($this->request->data['active'] == '1')
 				    {
@@ -807,8 +807,8 @@ class EventsController extends AppController
 				    	$subject = "Event Activated";
 				    	$email->subject($subject);
 				    	$email->send();
-				    } 
-				    else 
+				    }
+				    else
 				    {
 				    	$email->template('default');
 		            	$name = $event['user']['fullname'];
@@ -876,42 +876,42 @@ class EventsController extends AppController
     }
 
     //Search AreaName
-	public function search() 
+	public function search()
 	{
         if ($this->request->is('ajax')) {
             $this->loadModel('Area');
-            $this->autoRender = false;            
-            $name = $this->request->query('term');            
+            $this->autoRender = false;
+            $name = $this->request->query('term');
             $results = $this->Area->find('all', array(
                                            'conditions' => array('area_name LIKE ' =>  $name . '%')
-                                         
+
                                            ));
-            
+
             $resultArr = array();
             foreach($results as $result) {
                $resultArr[] = array('label' =>$result['area_name'] , 'value' => $result['area_name'] );
             }
-            echo json_encode($resultArr);              
+            echo json_encode($resultArr);
 		}
 	}
 
-	public function searchbyeventtitle() 
+	public function searchbyeventtitle()
 	{
         if ($this->request->is('ajax')) {
-            $this->autoRender = false;            
-            $title = $this->request->query('term');            
+            $this->autoRender = false;
+            $title = $this->request->query('term');
             $results = $this->Events->find('all', array('conditions' => array('title LIKE ' => '%'.$title.'%')));
-            
+
             $resultArr = array();
             foreach($results as $result) {
                $resultArr[] = array('label' =>$result['title'] , 'value' => $result['title'] );
             }
-            echo json_encode($resultArr);              
+            echo json_encode($resultArr);
 		}
 	}
 
-	public function eventlist() 
-	{    
+	public function eventlist()
+	{
 		if ($this->request->is('ajax')) {
 			$userId = $this->Auth->user('id');
 			$filter = false;
@@ -938,7 +938,7 @@ class EventsController extends AppController
 		        	$cond .= " AND e.title like '%".$eTitle."%'";
 		        	$filter = true;
 	        	}
-	        	
+
 	        	if(isset($this->request->data['action']) && $this->request->data['action'] !='') {
 	        		$action = $this->request->data['action'];
 	        		if($action == "pastevents"){
@@ -956,6 +956,17 @@ class EventsController extends AppController
 	        		}
 	        	}
 	        	if(isset($this->request->data['date']) && !empty($this->request->data['date'])){
+
+					if($this->request->data['date'] == "register") {
+		        		$filter = true;
+		        		$cond .= " AND e.register_online = 1";
+		        	}
+
+                    if($this->request->data['date'] == "free_events") {
+                        $filter = true;
+                        $cond .= " AND e.register_online = 0";
+                    }
+
 		        	if($this->request->data['date'] == "today") {
 		        		$filter = true;
 		        		$cond .= " AND e.date = CURDATE()";
@@ -983,16 +994,16 @@ class EventsController extends AppController
 	        }
 	        if(!$filter) {
 		        $cond .= " AND e.date > DATE_ADD(CURDATE(),INTERVAL -1 DAY)";
-	        } 
+	        }
 
-            $conn = ConnectionManager::get('default'); 
+            $conn = ConnectionManager::get('default');
             $query = "SELECT e.*, c.name as category_name, c.color as category_color, (SELECT count(l.events_id) FROM likes l WHERE l.events_id = e.id GROUP BY l.events_id) as likes_count, (SELECT a.areaname FROM address a WHERE a.events_id = e.id) as areaname FROM events e LEFT JOIN categories c ON c.id = e.categories_id $joins WHERE e.active = 1 $cond order by e.date asc";
 
             $stmt = $conn->execute($query);
             $results = $stmt->fetchAll('assoc');
             //sleep(100);
-          
-        	echo json_encode($results);    
+
+        	echo json_encode($results);
 		}
 		$this->autoRender = false;
 		exit;
@@ -1000,12 +1011,12 @@ class EventsController extends AppController
 
 	public function likes($id = null)
 	{
-		if ($this->request->is('ajax')) 
+		if ($this->request->is('ajax'))
         {
 			$this->loadModel('Likes');
 	        $this->autoRender = false;
-	        $events_id = $this->request->data('eventid'); 
-	        $user_id = $this->Auth->user('id'); 
+	        $events_id = $this->request->data('eventid');
+	        $user_id = $this->Auth->user('id');
 	        $likes = $this->Likes->newEntity();
 	        $likes = $this->Likes->patchEntity($likes, $this->request->data);
 	        $likes->events_id = $events_id;
@@ -1014,7 +1025,7 @@ class EventsController extends AppController
 	        $query = $this->Likes->find('all', ['select' => 'id',
 		    	'conditions' => ['events_id' => $events_id, 'user_id' => $user_id]]);
 			$number = $query->count();
-			
+
 			if($number < 1)
 			{
 	        	$likes->likes = '1';
@@ -1029,7 +1040,7 @@ class EventsController extends AppController
 				{
 	        		$this->Likes->delete($query_1->first());
 	        		$likes->likes = '0';
-				} 
+				}
 
 				$query_2 = $this->Likes->find('all', ['select' => 'id',
 		    	'conditions' => ['events_id' => $events_id, 'user_id' => $user_id, 'likes' => '0']]);
@@ -1058,12 +1069,12 @@ class EventsController extends AppController
 	}
 	public function sendemail()
     {
-		if ($this->request->is('ajax')) 
+		if ($this->request->is('ajax'))
         {
         	$this->autoRender = false;
-        	
+
         	$events_id = $this->request->data('eventid');
-        	$email_req = $this->request->data('email');        	
+        	$email_req = $this->request->data('email');
 	        $event = $this->Events->get($events_id, [
 	            'contain' => ['Users', 'Categories']
 	        ]);
@@ -1077,7 +1088,7 @@ class EventsController extends AppController
     			$invitefriend = $this->Invitefriends->get($invitefriends['ID']);
     			$this->Invitefriends->delete($invitefriend);
     		}
-	        
+
 	        $activation_key = Text::uuid();
 	        $invitefriend = $this->Invitefriends->newEntity();
 	        $invitefriend['events_id'] = $events_id;
@@ -1103,7 +1114,7 @@ class EventsController extends AppController
 		    $email->to($email_req);
 		    $email->cc('admin@chennaismile.com');
 		    $email->subject($subject);
-		    $email->viewVars(['title' => $event['title'], 'descriptioin' => $event['descriptioin'], 'URL' => $activationUrl, 'date' => $event['date'], 'time' => $event['time'], 'contact' => $event['contact_number'], 'mobile' => $event['mobile_number'],  'address_1' => $address['address_1'],  'address_2' => $address['address_2'],  'landmark' => $address['landmark'], 
+		    $email->viewVars(['title' => $event['title'], 'descriptioin' => $event['descriptioin'], 'URL' => $activationUrl, 'date' => $event['date'], 'time' => $event['time'], 'contact' => $event['contact_number'], 'mobile' => $event['mobile_number'],  'address_1' => $address['address_1'],  'address_2' => $address['address_2'],  'landmark' => $address['landmark'],
 		    	'city' => $address['city'], 'state' => $address['state'], 'country' => $address['country'], 'google_map' => $event['google_map']]);
 		    $email->send();
 		    $return = 'Success';
@@ -1133,12 +1144,12 @@ class EventsController extends AppController
     	{
     		return $this->redirect(['controller' => 'Users', 'action' => 'login']);
     	}
-    
+
 		$this->viewBuilder()->layout('event_home');
         $event = $this->Events->get($id, [
             'contain' => ['Users', 'Categories']
         ]);
-        
+
         $this->loadModel('Address');
         $address = $this->Address->find('all', ['conditions' => ['events_id' => $id]]);
         $address = $address->first();
@@ -1197,7 +1208,7 @@ class EventsController extends AppController
         	 $eventss[$i] =$event;
         	 $i++;
         }
-        
+
         $users_id = $this->Auth->user('id');
         $this->set(compact('eventss'));
         $this->set(compact('address'));
@@ -1205,7 +1216,7 @@ class EventsController extends AppController
         $this->set('usersId', $users_id);
         $this->set(compact('subCategories_new'));
     }
-	
+
 	/**
      * View method
      *
@@ -1226,12 +1237,12 @@ class EventsController extends AppController
     	{
     		return $this->redirect(['controller' => 'Users', 'action' => 'login']);
     	}
-    
+
 		$this->viewBuilder()->layout('event_home');
         $event = $this->Events->get($id, [
             'contain' => ['Users', 'Categories']
         ]);
-        
+
         $this->loadModel('Address');
         $address = $this->Address->find('all', ['conditions' => ['events_id' => $id]]);
         $address = $address->first();
@@ -1264,11 +1275,11 @@ class EventsController extends AppController
         $this->set(compact('subCategories_new'));
         $this->set(compact('address', 'mediapartners', 'sponsors', 'number', 'likes', 'galaries'));
     }
-	
 
-    public function findslug($title = null) 
+
+    public function findslug($title = null)
     {
-        $this->autoRender = false;            
+        $this->autoRender = false;
         $results = $this->Events->find('all', array('conditions' => array('slug' => $title)));
         return $results->count();
     }
@@ -1295,8 +1306,8 @@ class EventsController extends AppController
             $fullname = $this->Auth->user('fullname');
             $email = $this->Auth->user('email');
         }
-        
-        
+
+
         if ($this->request->is(['patch', 'post', 'put'])) {
             $event = $this->Events->patchEntity($event, $this->request->data);
 
@@ -1317,4 +1328,3 @@ class EventsController extends AppController
         $this->set('_serialize', ['event']);
     }
 }
-

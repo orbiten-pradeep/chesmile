@@ -2,7 +2,7 @@
 <style type="text/css">
     a:hover {
         cursor: pointer;
-    } 
+    }
 
     .popover-content {
     color: black;
@@ -66,15 +66,15 @@ max-width: 259px;
 <div class="background-container">
 <div class="container-fluid">
 <div class="row" style="margin-left: 0px;">
-    <div class="col-sm-3 col-md-2"> 
+    <div class="col-sm-3 col-md-2">
         <div class="panel bs-example side_panel hidden-xs">
             <div class="panel-heading">
-                <h3 class="panel-title">Filters 
+                <h3 class="panel-title">Filters
                     <a href="javascript:;" class="pull-right" id="filterDD"><i class="filter-dd-icon icon-chevron-right" data-toggle="tooltip" title="expand"></i></a>
                     <a href="javascript:;" class="pull-right" id="filterClearAll"><i class="icon-trash" data-toggle="tooltip" title="Clear"></i></a>
                 </h3>
             </div> <!-- <button type="button" class="btn btn-primary" data-toggle="popover" title="Popover title" data-content="Default popover">Popover</button> -->
-                
+
             <div class="panel-body filter-panel-body">
                 <div class="list-group">
                     <div class="f-sections">
@@ -89,7 +89,7 @@ max-width: 259px;
                         <div class="f-item filter-etitle">
                             <label></label>
                             <span class="glyphicon glyphicon-remove filter-etitle-clear"></span>
-                        </div>                   
+                        </div>
                     </div>
                     <form id="searchbyarea" class="sx_location">
                         <!--  <div class="ui-widget">
@@ -108,12 +108,11 @@ max-width: 259px;
                         <div class="form-group"> <span class="twitter-typeahead" style="position: relative; display: inline-block;">
                           <input class="tt-hint dropdown_hint" type="text" autocomplete="off" spellcheck="off" disabled style="">
                            <?php echo $this->Form->input('eventTitle', array('id' => 'eTitleAutocomplete', 'required','class' => 'form-control tt-query dropdown_input','label' => false,'placeholder' => 'Search by event title')); ?>
-                          <span style="" class="dropdown_txt1"></span> 
+                          <span style="" class="dropdown_txt1"></span>
                           <span class="tt-dropdown-menu" style="position: absolute; top: 100%; left: 0px; z-index: 100; display: none;"></span>
                           </span>
                         </div>
                     </form>
-
                     <a href="javascript:;" class="filterDate list-group-item" data="today">Today's Events</a>
                     <a href="javascript:;" class="filterDate list-group-item" data="tomorrow">Tomorrow's Events</a>
                     <a href="javascript:;" class="filterDate list-group-item" data="weekend">This Weekend Events</a>
@@ -122,6 +121,11 @@ max-width: 259px;
                     <p class="text-primary">Specific Date Events</p>
                     <div id="reportrange"><i class="glyphicon glyphicon-calendar fa fa-calendar"></i> <span></span>
                     <b class="caret"></b>
+                    </div>
+
+                    <div class="filter-buttons">
+                        <a href="javascript:;" class="filterDate btn btn-sm btn-primary" data="register">Booking Events</a>
+                        <a href="javascript:;" class="filterDate btn btn-sm btn-primary" data="free_events">Free Events</a>
                     </div>
                 </div>
             </div>
@@ -147,12 +151,12 @@ max-width: 259px;
     $('#myCarousel').carousel({
         interval:   10000
     });
-    
+
     var clickEvent = false;
     $('#myCarousel').on('click', '.nav a', function() {
             clickEvent = true;
             $('.nav li').removeClass('active');
-            $(this).parent().addClass('active');        
+            $(this).parent().addClass('active');
     }).on('slid.bs.carousel', function(e) {
         if(!clickEvent) {
             var count = $('.nav').children().length -1;
@@ -160,7 +164,7 @@ max-width: 259px;
             current.removeClass('active').next().addClass('active');
             var id = parseInt(current.data('slide-to'));
             if(count == id) {
-                $('.nav li').first().addClass('active');    
+                $('.nav li').first().addClass('active');
             }
         }
         clickEvent = false;
@@ -169,10 +173,10 @@ max-width: 259px;
     </script>
     <div class="container-fluid list_event content col-sm-9 col-md-10">
     <div id="myCarousel" class="carousel slide" data-ride="carousel">
-    
+
       <!-- Wrapper for slides -->
       <div class="carousel-inner">
-      
+
         <div class="item active">
         <a href="http://localhost/chesmile/events/chennai/evam-presents-baggy-in-and-as-kung-fu-bondadgdfg">
           <?php echo $this->Html->image('freedom-fighter-marathon.png',array('width' => '1600px' )); ?>
@@ -182,7 +186,7 @@ max-width: 259px;
             <p>Lorem ipsum dolor sit amet, consetetur sadipscing elitr, sed diam nonumy eirmod tempor invidunt ut labore et dolore magna aliquyam erat, sed diam voluptua. Lorem ipsum dolor sit amet, consetetur sadipscing elitr, sed diam nonumy eirmod tempor invidunt ut labore et dolore magna aliquyam erat, sed diam voluptua. <a href="http://sevenx.de/demo/bootstrap-carousel/" target="_blank" class="label label-danger">Bootstrap 3 - Carousel Collection</a></p> -->
           </div>
         </div><!-- End Item -->
- 
+
          <div class="item">
          <a href="http://localhost/chesmile/events/chennai/evam-presents-baggy-in-and-as-kung-fu-bondadgdfg">
          <?php echo $this->Html->image('reema-cooking.png',array('width' => '1600px' )); ?>
@@ -192,7 +196,7 @@ max-width: 259px;
             <p>Lorem ipsum dolor sit amet, consetetur sadipscing elitr, sed diam nonumy eirmod tempor invidunt ut labore et dolore magna aliquyam erat, sed diam voluptua. Lorem ipsum dolor sit amet, consetetur sadipscing elitr, sed diam nonumy eirmod tempor invidunt ut labore et dolore magna aliquyam erat, sed diam voluptua. <a href="http://sevenx.de/demo/bootstrap-carousel/" target="_blank" class="label label-danger">Bootstrap 3 - Carousel Collection</a></p> -->
           </div>
         </div><!-- End Item -->
-                
+
       </div><!-- End Carousel Inner -->
 
 

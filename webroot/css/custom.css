@@ -978,3 +978,6 @@ and (max-device-width : 1024px) {
 .dropdown-content {
     z-index: 1514 !important;
 }
+.filter-buttons {
+    margin-top: 10px;
+}
