@@ -96,13 +96,9 @@ a {
 	font-size: 13px;
 	margin-bottom: 5px;
 }
-/*.address-info {
-	margin: 30px 10px -5px 10px !important;
-}*/
 .address-info {
-    margin: 30px 10px 20px 10px !important;
+	margin: 30px 10px -5px 10px !important;
 }
-
 address {
 	margin-bottom: 0 !important;
 }
@@ -325,7 +321,7 @@ and (max-width: 414px){
 @media screen and (min-width: 768px)
 and (max-width: 1920px){
 .form-size{
-	width: 20% !important;
+	width: 17% !important;
 }
 }
 
@@ -333,17 +329,33 @@ and (max-width: 1920px){
 
 @media screen and (min-width: 768px)
 and (max-width: 1920px){
-.form-size-cyc{
-	width: 14% !important;
+/*.form-size-cyc{
+	width: 20% !important;
+}*/
+.form-size-peddle{
+	width: 12%;
 }
 }
-
 @media screen and (min-width: 768px)
 and (max-width: 1920px){
 .form-size-kab{
 	width: 20% !important;
 }
 }
+
+@media screen and (min-width: 768px)
+and (max-width: 1920px){
+/*.form-size-lg{
+	width: 15%;
+}*/
+}
+@media screen and (min-width: 768px)
+and (max-width: 1920px){
+/*.form-size-sl{
+	width: 15%;
+}*/
+}
+
 /*@media screen and (min-width: 321px)
 and (max-width: 414px){
 	.mob-form-size{
@@ -407,23 +419,13 @@ and (max-width: 414px){
 .sel-size{
 	height: 35px !important;
 }
-.nav-tabs > li.active > a{
-color: white;
-background-color: #4c96c7;
-}
-.nav-tabs > li.active > a:hover{
-	color: white;
-	cursor: default;
-	background-color: #4c96c7;
-
-}
 </style>
 
 
 <div class="background-container">
 <div class="cover-picdiv">
 <div class="cover-pic img-responsive user-pic" alt="The BigBeach Marathon">
-		<div class="container-fluid heading_txt" style="background: rgba(0,0,0,.6);position: absolute;bottom: 0;z-index: 1;width: 100%;box-sizing: border-box;">
+		<div class="container-fluid heading_txt" style="background: linear-gradient(to bottom, rgba(0, 0, 0, 0) 0%, rgba(0, 0, 0, 0.63) 50%);position: absolute;bottom: 0;z-index: 1;width: 100%;box-sizing: border-box;">
 			<div class="row">
 				<div class="col-lg-12">
 					<button class="btn btn-tag"> <?= h($event->category->name) ?></button> <?php echo $this->Html->image('card/'.$event->category->card, array('width' => '65px', 'height' => '65px', 'class' => 'marg-card')); ?>
@@ -446,10 +448,11 @@ background-color: #4c96c7;
 			$organizerLogoImageUrl = $this->Url->image('profile.png');
 		}
 		?>
+
 		<div class="row">
 			<div class="col-md-8 col-sm-8 lft_container event-details">
 				<h2><img src="<?=$organizerLogoImageUrl?>" class="img-thumbnail profile-img organizer-logo"><?= h($event->OrganizersName) ?></h2>
-				<h3 style="font-size: 14px;"><div id="eventDescription" style="height:160px; overflow: hidden; margin-top: 0px;text-align: justify;line-height: 20px;"><?=  $this->Text->autoParagraph(h($event->descriptioin));?></div></h3>
+				<h3 style="font-size: 14px;"><div id="eventDescription" style="height:100px; overflow: hidden; margin-top: 0px;text-align: justify;line-height: 20px;"><?=  $this->Text->autoParagraph(h($event->descriptioin));?></div></h3>
 				<p class="margin25 or-date" style="font-size: 17px;">
 				<?php echo $this->Html->image('cal.png')?><span style="margin-left: 10px;"><?= date_format($event->date, "j M Y") ?></span></p>
 				<p class="margin25 fondant" style="font-size: 17px;">
@@ -458,14 +461,12 @@ background-color: #4c96c7;
 					<!-- <span class="glyphicon glyphicon-time" aria-hidden="true"></span> --><?php echo $this->Html->image('clock-chennaismile.png')?><span style="margin-left: 10px;"><?= h($event->time) ?></span>
 				</p>
 				<div class="btn-reg">
-
-				<?php 
-					$today = date('n/j/y');
-					$eventdate = $event->date;
-					if($eventdate > $today) {
-				?>
 				<?php if($event->register_online == 1) { ?>
 				<button class="btn btn-primary mar-modal" style="float: right; background-color: #4ABAC5;border-color: #e2e2e2;" data-toggle="modal" href="#Register-modal">Online Registration</button>
+				<?php } ?>
+
+				<?php if($event->register_online == 1) { ?>
+				<button class="btn btn-primary river-modal" style="float: right; background-color: #4ABAC5;border-color: #e2e2e2;" data-toggle="modal" href="#Register-modal-river">Online Registration</button>
 				<?php } ?>
 
 				<?php if($event->register_online == 1) { ?>
@@ -488,9 +489,16 @@ background-color: #4c96c7;
 				<button class="btn btn-primary mini-modal" style="float: right; background-color: #4ABAC5;border-color: #e2e2e2;" data-toggle="modal" href="#Register-modal-mini">Online Registration</button>
 				<?php } ?>
 
+				<?php if($event->register_online == 1) { ?>
+				<button class="btn btn-primary legends-modal" style="float: right; background-color: #4ABAC5;border-color: #e2e2e2;" data-toggle="modal" href="#Register-modal-legends">Online Registration</button>
 				<?php } ?>
 
-			<button class="btn btn-primary view-btn" style="float: right;margin-right: 10px;background-color: #4ABAC5;border-color: #e2e2e2; display: none;" data-toggle="modal" href="#view-more">Event Details</button>
+				<?php if($event->register_online == 1) { ?>
+				<button class="btn btn-primary sports-modal" style="float: right; background-color: #4ABAC5;border-color: #e2e2e2;" data-toggle="modal" href="#Register-modal-sports">Online Registration</button>
+				<?php } ?>
+
+
+			<button class="btn btn-primary view-btn" style="float: right;margin-right: 10px;background-color: #4ABAC5;border-color: #e2e2e2;" data-toggle="modal" href="#view-more">Event Details</button>
 
 			<button class="btn btn-primary route-map" style="float: right;margin-right: 10px;background-color: #4ABAC5;border-color: #e2e2e2;" data-toggle="modal" href="#route-map">Route Map</button>
 			 </div>
@@ -530,86 +538,83 @@ background-color: #4c96c7;
 									<div class="row">
 										<div class="col-sm-8 lft_container">
 											<div class="row">
-											 <ul class="nav nav-tabs">
-                    <div class="liner"></div>
-                     <li class="active">
-                     <a href="#home" data-toggle="tab" title="welcome">
-                   Event Information
-                  </a></li>
-                  <li style="display: <?php if($sponsors->count() < 2) { echo 'none;'; } ?>"><a href="#sponsor" data-toggle="tab" title="profile">
-                     <span class="round-tabs two">
-                       Sponsors
-
-                     </span> 
-                    </a>
-                 </li>
-
-                <li style="display: <?php if($mediapartners->count() < 2) { echo 'none;'; } ?>"><a href="#mediapartner" data-toggle="tab" title="profile">
-                     <span class="round-tabs two">
-                       Media Partners
-                     </span> 
-                    </a>
-                 </li>
-
-                  <li style="display: <?php if($galaries->count()==0) { echo 'none;'; } ?>"><a href="#gallery" data-toggle="tab" title="profile">
-                     <span class="round-tabs two">
-                       Event Galleries
-                     </span> 
-                    </a>
-                 </li>
-                     
-                     </ul>
-
-    <div class="card card-container">
-    <!-- <div class="col-sm-8"> -->
-    <div class="tab-content">
-    <div class="tab-pane fade in active" id="home">
-            <?=  $this->Text->autoParagraph(h($event->descriptioin));?>
-		  <?=  $this->Text->autoParagraph(h($event->descriptioin_more));?>
-            </div>
-            
-
-            <div class="tab-pane fade" id="sponsor">
-            <!-- Client 1 -->
+												
+													<!-- Client 1 -->
 													<?php
-													if($sponsors->count() > 0){
+													// code for show the sponsers 
+													$ival = 0;
+													foreach ($sponsors as $sponsor) {
+														$ival++;
+													}
+													if($ival==1){
+														foreach ($sponsors as $sponsor) {
+															if(strpos($sponsor->Sponsors,'jpg') !== false || strpos($sponsor->Sponsors,'png') !== false){
+																$ival=1;
+																// image available
+															}else{
+																$ival=0;
+																//image not available
+															}
+														}
+													}
+													$count_sponser = $ival;
+													if($count_sponser > 0){
 													   echo '<h3 class="heading margin25">Sponsors<span></span></h3>';
 														foreach ($sponsors as $sponsor) {
-														$file = WWW_ROOT . 'img' . DS . 'Sponsors'. DS . $sponsor->Sponsors;
-														if(file_exists($file)) {
 															echo '<div class="col-sm-6 col-xs-12 col-md-3 col-lg-3" style="visibility: visible;width: 270px; margin-bottom: 10px;"><a href="#">';
-															
-																echo $this->Html->image("Sponsors/".$sponsor->Sponsors, array("alt"=>"Sponsors","class" =>"img-overlay", "width" => "250px"));
-																echo '</a></div>';												
-															}
+															echo $this->Html->image("Sponsors/".$sponsor->Sponsors, array("alt"=>"Sponsors","class" =>"img-overlay", "width" => "250px"));
+															echo '</a></div>';
 														}
 													}
 													?>
-													<?php //endforeach; ?> 
-            
-            </div>
 
-            <div class="tab-pane fade" id="mediapartner">
-            	
+													 <!-- <?php //foreach ($sponsors as $sponsor): ?>
+													<div class="col-sm-6 col-xs-12 col-md-3 col-lg-3" style="visibility: visible;width: 270px; margin-bottom: 10px;">
+														<a href="#">
+														<?php //echo $this->Html->image('Sponsors/'.$sponsor->Sponsors, array('alt'=>'Sponsors','class' =>'img-overlay','height' => '150px', 'width' => '250px')); ?>
+													</a>
+													</div> -->
+													<?php //endforeach; ?> 
 													<div class="clearfix"></div>
 													<?php
-													if($mediapartners->count() > 0){
-														echo '<h3 class="heading margin25">Media Partners<span></span></h3>';
+													$jval = 0;
+													foreach ($mediapartners as $mediapartner) {
+														$jval++;
+													}
+													if($jval==1){
 														foreach ($mediapartners as $mediapartner) {
-
-															$file = WWW_ROOT . 'img' . DS . 'Mediapartners'. DS . $mediapartner->MediaPartners;
-															if(file_exists($file)) {
-																echo '<div class="col-sm-6 col-xs-12 col-md-3" style="visibility: visible;width: 270px;margin-bottom: 10px;"><a href="#">'.$this->Html->image("Mediapartners/".$mediapartner->MediaPartners, array("alt"=>"Mediapartners","class" => "img-overlay","width" => "250px"));
-																echo '</a></div>';
+															if(strpos($mediapartner->MediaPartners,'jpg') !== false || strpos($mediapartner->MediaPartners,'png') !== false){
+																$jval=1;
+																// image available
+															}else{
+																$jval=0;
+																//image not available
 															}
 														}
 													}
+													$count_mepar = $jval;
+													if($count_mepar > 0){
+
+														echo '<h3 class="heading margin25">Media Partners<span></span></h3>';
+														foreach ($mediapartners as $mediapartner) {
+															echo '<div class="col-sm-6 col-xs-12 col-md-3" style="visibility: visible;width: 270px;margin-bottom: 10px;"><a href="#">'.$this->Html->image("Mediapartners/".$mediapartner->MediaPartners, array("alt"=>"Mediapartners","class" => "img-overlay","width" => "250px"));
+															echo '</a></div>';
+														}
+													}
 													?>
-													<?php //endforeach; ?> 
-            </div>
+													</div>
+													
+													<!-- Client 1 -->
+													<!-- <?php //foreach ($mediapartners as $mediapartner): ?>
+													<div class="col-sm-6 col-xs-12 col-md-3" style="visibility: visible;width: 270px;margin-bottom: 10px;">
+														<a href="#">
+														<?php //echo $this->Html->image('Mediapartners/'.$mediapartner->MediaPartners, array('alt'=>'Mediapartners','class' => 'img-overlay','height' => '150px', 'width' => '250px')); ?>
+														</a>
+													</div>
+													<?php// endforeach; ?> -->
+													<!-- Client 2 -->
 
-            <div class="tab-pane fade" id="gallery">
-
+													<div class="clearfix"></div>
 													<?php 
 													$today = date('n/j/y');
 													// echo "today".$today;
@@ -621,7 +626,7 @@ background-color: #4c96c7;
 													?>
 													<div class="clearfix"></div>
 
-													<!--  <div style="display: <?php if($galaries->count()==0) { echo 'none;'; } ?>"> -->
+													 <div style="display: <?php if($galaries->count()==0) { echo 'none;'; } ?>">
 													 <h3 class="heading margin25">Event Galaries<span></span></h3>
 													<!-- Client 1 -->
 													<?php 
@@ -636,95 +641,8 @@ background-color: #4c96c7;
 														</a>
 													</div>
 													<?php endforeach; ?>
-            
-            </div>
-
-
-
-            <!-- </div> -->
-
-
-</div>
-</div>
-												
-													<!-- Client 1 -->
-													<?php
-													// code for show the sponsers 
-													//$ival = 0;
-													//foreach ($sponsors as $sponsor) {
-														//$ival++;
-													//}
-													//if($ival==1){
-														//foreach ($sponsors as $sponsor) {
-															//if(strpos($sponsor->Sponsors,'jpg') !== false || strpos($sponsor->Sponsors,'png') !== false){
-																//$ival=1;
-																// image available
-															//}else{
-																//$ival=0;
-																//image not available
-															//}
-														//}
-													//}
-													//$count_sponser = $ival;
-													//if($count_sponser > 0){
-													  // echo '<h3 class="heading margin25">Sponsors<span></span></h3>';
-														//foreach ($sponsors as $sponsor) {
-															//echo '<div class="col-sm-6 col-xs-12 col-md-3 col-lg-3" style="visibility: visible;width: 270px; margin-bottom: 10px;"><a href="#">';
-															//echo $this->Html->image("Sponsors/".$sponsor->Sponsors, array("alt"=>"Sponsors","class" =>"img-overlay", "width" => "250px"));
-															//echo '</a></div>';
-														//}
-													//}
-													//?>
-
-													 <!-- <?php //foreach ($sponsors as $sponsor): ?>
-													<div class="col-sm-6 col-xs-12 col-md-3 col-lg-3" style="visibility: visible;width: 270px; margin-bottom: 10px;">
-														<a href="#">
-														<?php //echo $this->Html->image('Sponsors/'.$sponsor->Sponsors, array('alt'=>'Sponsors','class' =>'img-overlay','height' => '150px', 'width' => '250px')); ?>
-													</a>
-													</div> -->
-													<?php //endforeach; ?> 
-													<!-- <div class="clearfix"></div> -->
-													<?php
-													//$jval = 0;
-													//foreach ($mediapartners as $mediapartner) {
-														//$jval++;
-													//}
-													//if($jval==1){
-														//foreach ($mediapartners as $mediapartner) {
-															//if(strpos($mediapartner->MediaPartners,'jpg') !== false || strpos($mediapartner->//MediaPartners,'png') !== false){
-																//$jval=1;
-																// image available
-															//}else{
-																//$jval=0;
-																////image not available
-															//}
-														//}
-													//}
-													//$count_mepar = $jval;
-													//if($count_mepar > 0){
-
-														//echo '<h3 class="heading margin25">Media Partners<span></span></h3>';
-														//foreach ($mediapartners as $mediapartner) {
-															//echo '<div class="col-sm-6 col-xs-12 col-md-3" style="visibility: visible;width: 270px;margin-bottom: 10px;"><a href="#">'.$this->Html->image("Mediapartners/".$mediapartner->MediaPartners, array("alt"=>"Mediapartners","class" => "img-overlay","width" => "250px"));
-															//echo '</a></div>';
-														//}
-													//}
-													//?>
-												<!-- 	</div> -->
-													
-													<!-- Client 1 -->
-													<!-- <?php //foreach ($mediapartners as $mediapartner): ?>
-													<div class="col-sm-6 col-xs-12 col-md-3" style="visibility: visible;width: 270px;margin-bottom: 10px;">
-														<a href="#">
-														<?php //echo $this->Html->image('Mediapartners/'.$mediapartner->MediaPartners, array('alt'=>'Mediapartners','class' => 'img-overlay','height' => '150px', 'width' => '250px')); ?>
-														</a>
-													</div>
-													<?php// endforeach; ?> -->
 													<!-- Client 2 -->
-
-													
-													<!-- Client 2 -->
-													<!-- <div class="clearfix"></div>
+													<div class="clearfix"></div>
 													<h3 class="heading margin25">Thank You Note:<span></span></h3>
 													<p><?= $this->Text->autoParagraph(h($event->note));?></p>
 													</div>
@@ -732,7 +650,7 @@ background-color: #4c96c7;
 													<div class="clearfix"></div>
 													 <button class="btn btn-info btn-lg" data-toggle="modal" data-target="#myModal" style="display: <?php if($event->note=="" && $status!="" && $u_id == $event->user_id ) { echo 'inline-block;'; }else{echo 'none;';} ?>">Open Modal</button>
 
-													 <?php } ?> -->
+													 <?php } ?>
 													 <!-- Modal -->
 												  <div class="modal fade" tabindex="-1" id="myModal" role="dialog">
 													<div class="modal-dialog">
@@ -926,7 +844,7 @@ if($u_id == $event->user_id){ ?>
 
 		  
 	<div class="modal fade" id="Register-modal" role="dialog">
-	<div class="modal-dialog modal-lg">
+	<div class="modal-dialog">
 	  <div class="modal-content">
 		  <div class="modal-header">
 			  <button type="button" class="close" data-dismiss="modal"><span aria-hidden="true">×</span><span class="sr-only">Close</span></button>
@@ -986,6 +904,8 @@ if($u_id == $event->user_id){ ?>
           <div>
            <input value="0" id="price_mar" type="hidden" name="price" required="true" title="totalprice" readonly="true">
           <input value="600" id="defaultprice_mar" type="hidden" name="defaultprice" required="true">
+         <!--  <input value="600" id="defaultprice_mar2" type="hidden" name="defaultprice2" required="true"> -->
+
            </div>
            
            <?= $this->Form->button(__('Proceed to pay ( ₹ <span id="priceSpan_mar_proceed">0</span> )'),array('class' => "btn btn-info btn-block pay-btn")) ?>
@@ -1005,10 +925,10 @@ if($u_id == $event->user_id){ ?>
 </div>
 </div>
 
- <div class="container">
+	  <div class="container">
 
 		  
-	<div class="modal fade" id="Register-modal-cyclathon" role="dialog">
+	<div class="modal fade" id="Register-modal-river" role="dialog">
 	<div class="modal-dialog modal-lg">
 	  <div class="modal-content">
 		  <div class="modal-header">
@@ -1040,6 +960,91 @@ if($u_id == $event->user_id){ ?>
   </div>
   
   <div class="col-xs-3 col-lg-3">
+   <select name="tickets" id="numNamesriver" onchange="calcamountriver(this);">
+   <option value="">0</option>
+ <option value="1">1</option>
+ <option value="2">2</option>
+ <option value="3">3</option>
+ <option value="4">4</option>
+ <option value="5">5</option>
+ <option value="6">6</option>
+ <option value="7">7</option>
+ <option value="8">8</option>
+ <option value="9">9</option>
+ <option value="10">10</option>
+</select>
+</div>
+<div class="col-xs-5 col-lg-5">
+	Total Price: <span id="priceSpan_river">0</span>
+</div>
+</div>
+</div>
+
+  <div id="rivercontainer"></div>
+
+
+
+        <div class="">
+          <div class="form-group text-center">
+          <div>
+           <input value="0" id="price_river" type="hidden" name="price" required="true" title="totalprice" readonly="true">
+          <input value="300" id="defaultprice_river" type="hidden" name="defaultprice_river" required="true">
+         <!--  <input value="600" id="defaultprice_mar2" type="hidden" name="defaultprice2" required="true"> -->
+
+           </div>
+           
+           <?= $this->Form->button(__('Proceed to pay ( ₹ <span id="priceSpan_river_proceed">0</span> )'),array('class' => "btn btn-info btn-block pay-btn")) ?>
+			
+           <span id="myspan">
+           </span>
+
+    <?= $this->Form->end() ?>
+          </div>
+        </div>
+  
+  </div>
+</div>
+</div>
+</div>
+</div>
+</div>
+
+
+ <div class="container">
+
+		  
+	<div class="modal fade" id="Register-modal-cyclathon" role="dialog">
+	<div class="modal-dialog">
+	  <div class="modal-content">
+		  <div class="modal-header">
+			  <button type="button" class="close" data-dismiss="modal"><span aria-hidden="true">×</span><span class="sr-only">Close</span></button>
+			  <h4 class="modal-title" id="myModalLabel">Online Registration</h4>
+		  </div>
+		  <div class="modal-body">
+			<div class="">
+        
+         <?= $this->Form->create('$marathon',array('url' => ['controller' => 'Tickets','action' => 'marathon'])) ?>
+
+          <input type="hidden" id="checkUrl" name="checkUrl" value="<?php echo $this->Url->build(array('controller' => 'marathon', 'action' => 'isemailexist'));?>">
+            
+	         <input type="hidden" name="amount" value="" id="amount"/>
+	         <input type="hidden" name="productinfo" value="<?= $event->title. '_' . $event->id;?>" size="64" />
+	         <input type="hidden" name="events_id" value="<?= $event->id?>" size="64" />
+	         <input type="hidden" name="service_provider" value="payu_paisa" size="64" /> 
+           
+
+           
+  <!-- <div class="panel-heading">Dynamic Form Fields - Add & Remove Multiple fields</div>
+  <div class="panel-heading">Education Experience</div> -->
+
+  
+  <div class="row">
+  <div class="col-xs-12 col-lg-12">
+  <div class="col-xs-4 col-lg-4">
+  	<label>Select Tickets:</label>
+  </div>
+  
+  <div class="col-xs-3 col-lg-3">
    <select name="tickets" id="numNames2" onchange="calccyclo(this);">
    <option value="">0</option>
  <option value="1">1</option>
@@ -1067,8 +1072,8 @@ if($u_id == $event->user_id){ ?>
         <div class="">
           <div class="form-group text-center">
           <div>
-           <input value="0" id="price_cyc" type="hidden" name="price_cyc" required="true" title="totalprice" readonly="true">
-         <!--  <input value="500" id="defaultprice_cyc" type="hidden" name="defaultprice_cyc" required="true"> -->
+           <input value="0" id="price_cyc" type="hidden" name="price" required="true" title="totalprice" readonly="true">
+          <input value="500" id="defaultprice_cyc" type="hidden" name="defaultprice_cyc" required="true">
            </div>
            
            <?= $this->Form->button(__('Proceed to pay ( ₹ <span id="priceSpan_cyc_proceed">0</span> )'),array('class' => "btn btn-info btn-block pay-btn")) ?>
@@ -1087,6 +1092,18 @@ if($u_id == $event->user_id){ ?>
 </div>
 </div>
 </div>
+
+
+<?php 
+	$age5k = ['10' => '10', '11' => '11', '12' => '12', '13' => '13', '14' => '14', '15' => '15'];
+	
+	for($i= 10; $i < 51; $i++) {
+		$age10k[$i] = $i;
+	}
+	for($j= 18; $j < 41; $j++) {
+		$age25k[$j] = $j;
+	}
+?>
 
 <div class="container">	  
 	<div class="modal fade" id="Register-modal-kabali" role="dialog">
@@ -1148,7 +1165,7 @@ if($u_id == $event->user_id){ ?>
         <div class="">
           <div class="form-group text-center">
           <div>
-           <input value="0" id="price_kab" type="hidden" name="price_cyc" required="true" title="totalprice" readonly="true">
+           <input value="0" id="price_kab" type="hidden" name="price" required="true" title="totalprice" readonly="true">
          <!--  <input value="500" id="defaultprice_cyc" type="hidden" name="defaultprice_cyc" required="true"> -->
            </div>
            
@@ -1169,6 +1186,87 @@ if($u_id == $event->user_id){ ?>
 </div>
 </div>
 
+
+<div class="container">	  
+	<div class="modal fade" id="Register-modal-legends" role="dialog">
+	<div class="modal-dialog">
+	  <div class="modal-content">
+		  <div class="modal-header">
+			  <button type="button" class="close" data-dismiss="modal"><span aria-hidden="true">×</span><span class="sr-only">Close</span></button>
+			  <h4 class="modal-title" id="myModalLabel">Online Registration</h4>
+		  </div>
+		  <div class="modal-body">
+			<div class="">
+        
+         <?= $this->Form->create('$marathon',array('url' => ['controller' => 'Tickets','action' => 'marathon'])) ?>
+
+          <input type="hidden" id="checkUrl" name="checkUrl" value="<?php echo $this->Url->build(array('controller' => 'marathon', 'action' => 'isemailexist'));?>">
+            
+	         <input type="hidden" name="amount" value="" id="amount"/>
+	         <input type="hidden" name="productinfo" value="<?= $event->title. '_' . $event->id;?>" size="64" />
+	         <input type="hidden" name="events_id" value="<?= $event->id?>" size="64" />
+	         <input type="hidden" name="service_provider" value="payu_paisa" size="64" /> 
+           
+
+           
+  <!-- <div class="panel-heading">Dynamic Form Fields - Add & Remove Multiple fields</div>
+  <div class="panel-heading">Education Experience</div> -->
+
+  
+  <div class="row">
+  <div class="col-xs-12 col-lg-12">
+  <div class="col-xs-4 col-lg-4">
+  	<label>Select Seats:</label>
+  </div>
+  
+  <div class="col-xs-3 col-lg-3">
+   <select name="tickets" id="numNameslg" onchange="calclegends(this);">
+   <option value="">0</option>
+ <option value="1">1</option>
+ <option value="2">2</option>
+ <option value="3">3</option>
+ <option value="4">4</option>
+ <option value="5">5</option>
+ <option value="6">6</option>
+ <option value="7">7</option>
+ <option value="8">8</option>
+ <option value="9">9</option>
+ <option value="10">10</option>
+</select>
+</div>
+<div class="col-xs-5 col-lg-5">
+	Total Price: <span id="priceSpan_lg">0</span>
+</div>
+</div>
+</div>
+
+  <div id="lgcontainer"></div>
+
+
+
+        <div class="">
+          <div class="form-group text-center">
+          <div>
+           <input value="0" id="price_lg" type="hidden" name="price" required="true" title="totalprice" readonly="true">
+         <!--  <input value="500" id="defaultprice_cyc" type="hidden" name="defaultprice_cyc" required="true"> -->
+           </div>
+           
+           <?= $this->Form->button(__('Proceed to pay ( ₹ <span id="priceSpan_lg_proceed">0</span> )'),array('class' => "btn btn-info btn-block pay-btn")) ?>
+			
+           <span id="myspan">
+           </span>
+
+    <?= $this->Form->end() ?>
+          </div>
+        </div>
+  
+    <!-- <?= $this->Form->end() ?> -->
+  </div>
+</div>
+</div>
+</div>
+</div>
+</div>
 <div class="container">	  
 	<div class="modal fade" id="Register-modal-christ" role="dialog">
 	<div class="modal-dialog modal-lg">
@@ -1229,7 +1327,7 @@ if($u_id == $event->user_id){ ?>
         <div class="">
           <div class="form-group text-center">
           <div>
-           <input value="0" id="price_chris" type="hidden" name="price_chris" required="true" title="totalprice" readonly="true">
+           <input value="0" id="price_chris" type="hidden" name="price" required="true" title="totalprice" readonly="true">
          <!--  <input value="500" id="defaultprice_cyc" type="hidden" name="defaultprice_cyc" required="true"> -->
            </div>
            
@@ -1310,7 +1408,7 @@ if($u_id == $event->user_id){ ?>
         <div class="">
           <div class="form-group text-center">
           <div>
-           <input value="0" id="price_mini" type="hidden" name="price_mini" required="true" title="totalprice" readonly="true">
+           <input value="0" id="price_mini" type="hidden" name="price" required="true" title="totalprice" readonly="true">
          <!--  <input value="500" id="defaultprice_cyc" type="hidden" name="defaultprice_cyc" required="true"> -->
            </div>
            
@@ -1330,11 +1428,179 @@ if($u_id == $event->user_id){ ?>
 </div>
 </div>
 </div>
+<div class="container">	  
+	<div class="modal fade" id="Register-modal-mini" role="dialog">
+	<div class="modal-dialog modal-lg">
+	  <div class="modal-content">
+		  <div class="modal-header">
+			  <button type="button" class="close" data-dismiss="modal"><span aria-hidden="true">×</span><span class="sr-only">Close</span></button>
+			  <h4 class="modal-title" id="myModalLabel">Online Registration</h4>
+		  </div>
+		  <div class="modal-body">
+			<div class="">
+        
+         <?= $this->Form->create('$marathon',array('url' => ['controller' => 'Tickets','action' => 'marathon'])) ?>
+
+          <input type="hidden" id="checkUrl" name="checkUrl" value="<?php echo $this->Url->build(array('controller' => 'marathon', 'action' => 'isemailexist'));?>">
+            
+	         <input type="hidden" name="amount" value="" id="amount"/>
+	         <input type="hidden" name="productinfo" value="<?= $event->title. '_' . $event->id;?>" size="64" />
+	         <input type="hidden" name="events_id" value="<?= $event->id?>" size="64" />
+	         <input type="hidden" name="service_provider" value="payu_paisa" size="64" /> 
+           
+
+           
+  <!-- <div class="panel-heading">Dynamic Form Fields - Add & Remove Multiple fields</div>
+  <div class="panel-heading">Education Experience</div> -->
+
+  
+  <div class="row">
+  <div class="col-xs-12 col-lg-12">
+  <div class="col-xs-4 col-lg-4">
+  	<label>Select Seats:</label>
+  </div>
+  
+  <div class="col-xs-3 col-lg-3">
+   <select name="tickets" id="numNames5" onchange="calcmini(this);">
+   <option value="">0</option>
+ <option value="1">1</option>
+ <option value="2">2</option>
+ <option value="3">3</option>
+ <option value="4">4</option>
+ <option value="5">5</option>
+ <option value="6">6</option>
+ <option value="7">7</option>
+ <option value="8">8</option>
+ <option value="9">9</option>
+ <option value="10">10</option>
+</select>
+</div>
+<div class="col-xs-5 col-lg-5">
+	Total Price: <span id="priceSpan_mini">0</span>
+</div>
+</div>
+</div>
+
+  <div id="minicontainer"></div>
+
+
+
+        <div class="">
+          <div class="form-group text-center">
+          <div>
+           <input value="0" id="price_mini" type="hidden" name="price" required="true" title="totalprice" readonly="true">
+         <!--  <input value="500" id="defaultprice_cyc" type="hidden" name="defaultprice_cyc" required="true"> -->
+           </div>
+           
+           <?= $this->Form->button(__('Proceed to pay ( ₹ <span id="priceSpan_mini_proceed">0</span> )'),array('class' => "btn btn-info btn-block pay-btn")) ?>
+			
+           <span id="myspan">
+           </span>
+
+    <?= $this->Form->end() ?>
+          </div>
+        </div>
+  
+    <!-- <?= $this->Form->end() ?> -->
+  </div>
+</div>
+</div>
+</div>
+</div>
+</div>
+
+ <div class="container">
+
+		  
+	<div class="modal fade" id="Register-modal-sports" role="dialog">
+	<div class="modal-dialog">
+	  <div class="modal-content">
+		  <div class="modal-header">
+			  <button type="button" class="close" data-dismiss="modal"><span aria-hidden="true">×</span><span class="sr-only">Close</span></button>
+			  <h4 class="modal-title" id="myModalLabel">Online Registration</h4>
+		  </div>
+		  <div class="modal-body">
+			<div class="">
+        
+         <?= $this->Form->create('$marathon',array('url' => ['controller' => 'Tickets','action' => 'marathon'])) ?>
+
+          <input type="hidden" id="checkUrl" name="checkUrl" value="<?php echo $this->Url->build(array('controller' => 'marathon', 'action' => 'isemailexist'));?>">
+            
+	         <input type="hidden" name="amount" value="" id="amount"/>
+	         <input type="hidden" name="productinfo" value="<?= $event->title. '_' . $event->id;?>" size="64" />
+	         <input type="hidden" name="events_id" value="<?= $event->id?>" size="64" />
+	         <input type="hidden" name="service_provider" value="payu_paisa" size="64" /> 
+           
+
+           
+  <!-- <div class="panel-heading">Dynamic Form Fields - Add & Remove Multiple fields</div>
+  <div class="panel-heading">Education Experience</div> -->
+
+  
+  <div class="row">
+  <div class="col-xs-12 col-lg-12">
+  <div class="col-xs-4 col-lg-4">
+  	<label>Select Seats:</label>
+  </div>
+  
+  <div class="col-xs-3 col-lg-3">
+   <select name="tickets" id="numNamessport" onchange="calcamountsport(this);">
+   <option value="">0</option>
+ <option value="1">1</option>
+ <option value="2">2</option>
+ <option value="3">3</option>
+ <option value="4">4</option>
+ <option value="5">5</option>
+ <option value="6">6</option>
+ <option value="7">7</option>
+ <option value="8">8</option>
+ <option value="9">9</option>
+ <option value="10">10</option>
+</select>
+</div>
+<div class="col-xs-5 col-lg-5">
+	Total Price: <span id="priceSpan_sport">0</span>
+</div>
+</div>
+</div>
+
+  <div id="slcontainer"></div>
+
+
+
+        <div class="">
+          <div class="form-group text-center">
+          <div>
+           <input value="0" id="price_sport" type="hidden" name="price" required="true" title="totalprice" readonly="true">
+          <input value="600" id="defaultprice_sport" type="hidden" name="defaultprice" required="true">
+         <!--  <input value="600" id="defaultprice_mar2" type="hidden" name="defaultprice2" required="true"> -->
+
+           </div>
+           
+           <?= $this->Form->button(__('Proceed to pay ( ₹ <span id="priceSpan_sport_proceed">0</span> )'),array('class' => "btn btn-info btn-block pay-btn")) ?>
+			
+           <span id="myspan">
+           </span>
+
+    <?= $this->Form->end() ?>
+          </div>
+        </div>
+  
+    <!-- <?= $this->Form->end() ?> -->
+  </div>
+</div>
+</div>
+</div>
+</div>
+</div>
+
     
 
 <script src="//code.jquery.com/jquery-2.1.1.min.js"></script>
+
 <script type="text/javascript">
-var el ='<br><br><div class="col-xs-12 col-sm-3 col-lg-3 form-size mob-form-size">'+
+
+var sl ='<div class="row parent-row"><input class="parentRowAmt" value="0" type="hidden" /><div class="col-xs-12 col-sm-3 col-lg-12 form-size-sl mob-form-size">'+
  ' <div class="form-group float-label-control">'+
              
              '<label for="">Firstname</label>'+
@@ -1342,7 +1608,7 @@ var el ='<br><br><div class="col-xs-12 col-sm-3 col-lg-3 form-size mob-form-size
             '</div>'+
 '</div>'+
 
-'<div class="col-xs-12 col-sm-3 col-lg-3 form-size mob-form-size">'+
+'<div class="col-xs-12 col-sm-3 col-lg-12 form-size-sl mob-form-size">'+
  '<div class="form-group float-label-control">'+
              
              '<label for="">Email</label>'+
@@ -1350,17 +1616,31 @@ var el ='<br><br><div class="col-xs-12 col-sm-3 col-lg-3 form-size mob-form-size
             '</div>'+
 '</div>'+
 
-'<div class="col-xs-12 col-sm-3 col-lg-3 form-size mob-form-size">'+
+'<div class="col-xs-12 col-sm-3 col-lg-12 form-size-sl mob-form-size">'+
    '<div class="form-group float-label-control">'+
              '<label for="">Mobile number</label>'+
              '<?= $this->Form->input('Marathon.mobile_number[]', array('div' => false,'class' => 'form-control form-element text form-border','label' => false,'placeholder' => 'Mobile number', 'required' => true)) ?>'+
             '</div>'+
 '</div>'+
 
-'<div class="col-xs-12 col-sm-3 col-lg-3 form-size mob-form-size">'+
+// '<div class="col-xs-12 col-sm-3 col-lg-12 form-size-sl mob-form-size">'+
+//    '<div class="form-group float-label-control">'+
+//              '<label for="">Date of Birth</label>'+
+// '<?= $this->Form->input('Marathon.date[]', array('id' => 'date','type' => 'text','class' => 'form-control date','placeholder' => 'Date of birth','label' => false,'required' => true));?>'+
+//             '</div>'+
+// '</div>'+
+
+// '<div class="col-xs-12 col-sm-3 col-lg-12 form-size-sl mob-form-size">'+
+// '<div class="form-group float-label-control">'+
+//                 '<label for="">Date</label>'+
+//         '<?= $this->Form->input('Marathon.Date[]', array('div' => false,'type' => 'date','class' => 'form-control form-element text form-border','placeholder' => 'Date Of Birth','label' => false, 'required' => true));?>'+
+// '</div>'+
+// '</div>'+
+
+'<div class="col-xs-12 col-sm-3 col-lg-12 form-size-sl mob-form-size">'+
  ' <div class="form-group">'+
     '<div class="input-group">'+
-      '<?php $role = ['XS' => 'XS', 'S' => 'S', 'M' => 'M', 'L' => 'L', 'XL' => 'XL', 'XXL' => 'XXL']; ?>'+
+      '<?php $role = ['S' => 'S', 'M' => 'M', 'L' => 'L', 'XL' => 'XL', 'XXL' => 'XXL', 'XXXL' => 'XXXL']; ?>'+
       '<?php echo $this->Form->select('Marathon.TSHIRT[]', $role, array('div' => false,'class' => 'form-control form-element text form-border sel-size','placeholder' => 'TSHIRT','empty' => '(Tshirt Size)','label' => false, 'required' => true)); ?>'+
       '<div class="input-group-btn">'+
          
@@ -1369,53 +1649,11 @@ var el ='<br><br><div class="col-xs-12 col-sm-3 col-lg-3 form-size mob-form-size
  ' </div>'+
 '</div>'+
 
-'<div class="col-xs-12 col-sm-3 col-lg-3 form-size mob-form-size">'+
+'<div class="col-xs-12 col-sm-3 col-lg-12 form-size-sl mob-form-size">'+
  ' <div class="form-group">'+
     '<div class="input-group">'+
-      '<?php $role = ['3K' => '3K', '5K' => '5K', '10K' => '10K']; ?>'+
-      '<?php echo $this->Form->select('Marathon.KM[]', $role, array('div' => false,'class' => 'form-control form-element text form-border sel-size','empty' => '(KM)','placeholder' => 'KM','label' => false, 'required' => true)); ?>'+
-      '<div class="input-group-btn">'+
-         
-      '</div>'+
-    '</div>'+
- ' </div>'+
-'</div><br><br>';
-
-
-
-
-
-/////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////
-
-
-var cl ='<div class="row parent-row"><input class="parentRowAmt" value="0" type="hidden" /><div class="col-xs-12 col-sm-3 col-lg-3 form-size-cyc mob-form-size">'+
- ' <div class="form-group float-label-control">'+
-             
-             '<label for="">Firstname</label>'+
-            ' <?= $this->Form->input('Marathon.firstname[]', array('div' => false, 'class' => 'form-control form-element text form-border','label' => false,'placeholder' => 'Firstname', 'required' => true)) ?>'+
-            '</div>'+
-'</div>'+
-
-'<div class="col-xs-12 col-sm-3 col-lg-3 form-size-cyc mob-form-size">'+
- '<div class="form-group float-label-control">'+
-             
-             '<label for="">Email</label>'+
-             '<?= $this->Form->input('Marathon.email[]', array('div' => false,'class' => 'form-control form-element text form-border','label' => false,'placeholder' => 'Email address', 'id' => 'email_registration' ,'required' => true, 'onblur' => 'referalpgm();')) ?>'+
-            '</div>'+
-'</div>'+
-
-'<div class="col-xs-12 col-sm-3 col-lg-3 form-size-cyc mob-form-size">'+
-   '<div class="form-group float-label-control">'+
-             '<label for="">Mobile number</label>'+
-             '<?= $this->Form->input('Marathon.mobile_number[]', array('div' => false,'class' => 'form-control form-element text form-border','label' => false,'placeholder' => 'Mobile number', 'required' => true)) ?>'+
-            '</div>'+
-'</div>'+
-
-'<div class="col-xs-12 col-sm-3 col-lg-3 form-size-cyc mob-form-size">'+
- ' <div class="form-group">'+
-    '<div class="input-group">'+
-      '<?php $role = ['XS' => 'XS', 'S' => 'S', 'M' => 'M', 'L' => 'L', 'XL' => 'XL', 'XXL' => 'XXL']; ?>'+
-      '<?php echo $this->Form->select('Marathon.TSHIRT[]', $role, array('div' => false,'class' => 'form-control form-element text form-border sel-size','placeholder' => 'TSHIRT','empty' => '(Tshirt Size)','label' => false, 'required' => true)); ?>'+
+      '<?php $role = ['Male' => 'Male', 'Female' => 'Female' ]; ?>'+
+      '<?php echo $this->Form->select('Marathon.Gender[]', $role, array('div' => false,'class' => 'form-control form-element text form-border sel-size','placeholder' => 'Gender','empty' => '(Select Gender)','label' => false, 'required' => true)); ?>'+
       '<div class="input-group-btn">'+
          
       '</div>'+
@@ -1423,30 +1661,117 @@ var cl ='<div class="row parent-row"><input class="parentRowAmt" value="0" type=
  ' </div>'+
 '</div>'+
 
-'<div class="col-xs-12 col-sm-3 col-lg-3 form-size-cyc mob-form-size">'+
+'<div class="col-xs-12 col-sm-3 col-lg-12 form-size-sl mob-form-size">'+
  ' <div class="form-group">'+
     '<div class="input-group">'+
-      '<?php $role = ['5K' => '5K', '10K' => '10K', '25K' => '25K']; ?>'+
+      '<?php $role = ['A-' => 'A-', 'B+' => 'B+','B-' => 'B-','O+' => 'O+','O-' => 'O-','AB+' => 'AB+','AB-' => 'AB-']; ?>'+
+      '<?php echo $this->Form->select('Marathon.Blood[]', $role, array('div' => false,'class' => 'form-control form-element text form-border sel-size','placeholder' => 'Bloodgroup','empty' => '(Select Bloodgroup)','label' => false, 'required' => true)); ?>'+
+      '<div class="input-group-btn">'+
+         
+      '</div>'+
+    '</div>'+
+ ' </div>'+
+'</div>'+
+
+'<div class="col-xs-12 col-sm-3 col-lg-12 form-size-sl mob-form-size">'+
+ ' <div class="form-group">'+
+    '<div class="input-group">'+
+      '<?php $role = ['4K' => '4K', '7.5K' => '7.5K']; ?>'+
       '<?php echo $this->Form->select('Marathon.KM[]', $role, array('div' => false,'class' => 'form-control form-element text form-border sel-size select-km','empty' => '(KM)','placeholder' => 'KM','label' => false, 'required' => true)); ?>'+
       '<div class="input-group-btn">'+
          
       '</div>'+
     '</div>'+
  ' </div>'+
+'</div>';
+
+
+/////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////
+var el ='<div class="parent-row"><input class="parentRowAmt" value="0" type="hidden" /><div class="col-xs-12 col-sm-3 col-lg-12 form-size-cyc mob-form-size">'+
+ ' <div class="form-group float-label-control">'+
+             
+             '<label for="">Firstname</label>'+
+            ' <?= $this->Form->input('Marathon.firstname[]', array('div' => false, 'class' => 'form-control form-element text form-border','label' => false,'placeholder' => 'Firstname', 'required' => true)) ?>'+
+            '</div>'+
 '</div>'+
 
-'<div class="col-xs-12 col-sm-3 col-lg-3 form-size-cyc mob-form-size">'+
+'<div class="col-xs-12 col-sm-3 col-lg-12 form-size-cyc mob-form-size">'+
+ '<div class="form-group float-label-control">'+
+             
+             '<label for="">Email</label>'+
+             '<?= $this->Form->input('Marathon.email[]', array('div' => false,'class' => 'form-control form-element text form-border','label' => false,'placeholder' => 'Email address', 'id' => 'email_registration' ,'required' => true, 'onblur' => 'referalpgm();')) ?>'+
+            '</div>'+
+'</div>'+
+
+'<div class="col-xs-12 col-sm-3 col-lg-12 form-size-cyc mob-form-size">'+
+   '<div class="form-group float-label-control">'+
+             '<label for="">Mobile number</label>'+
+             '<?= $this->Form->input('Marathon.mobile_number[]', array('div' => false,'class' => 'form-control form-element text form-border','label' => false,'placeholder' => 'Mobile number', 'required' => true)) ?>'+
+            '</div>'+
+'</div>'+
+
+'<div class="col-xs-12 col-sm-3 col-lg-12 form-size-cyc mob-form-size">'+
+   '<div class="form-group float-label-control">'+
+             '<label for="">Communication Address</label>'+
+             '<?= $this->Form->input('Marathon.address[]', array('div' => false,'class' => 'form-control form-element text form-border','label' => false,'placeholder' => 'Communication Address', 'required' => true)) ?>'+
+            '</div>'+
+'</div>'+
+
+'<div class="col-xs-12 col-sm-3 col-lg-12 form-size-cyc mob-form-size">'+
+   '<div class="form-group float-label-control">'+
+             '<label for="">Emergency Contact No</label>'+
+             '<?= $this->Form->input('Marathon.emergency_contact[]', array('div' => false,'class' => 'form-control form-element text form-border','label' => false,'placeholder' => 'Emergency Contact No', 'required' => true)) ?>'+
+            '</div>'+
+'</div>'+
+
+'<div class="col-xs-12 col-sm-3 col-lg-12 form-size-cyc mob-form-size">'+
  ' <div class="form-group">'+
     '<div class="input-group">'+
-      '<?php $role = ['Minimum age 10 yrs to 15 yrs' => 'Minimum age 10 yrs to 15 yrs', 'Minimum age 15 yrs to 50 yrs' => 'Minimum age 15 yrs to 50 yrs', 'Minimum age 18 yrs to 40 yrs' => 'Minimum age 18 yrs to 40 yrs']; ?>'+
-      '<?php echo $this->Form->select('age[]', $role, array('div' => false,'class' => 'form-control form-element text form-border sel-size select-age','empty' => '(Age Limit)','placeholder' => 'Age Limit','label' => false, 'required' => true)); ?>'+
-      '<div class="input-group-btn">'+ 
+      '<?php $role = ['Male' => 'Male', 'Female' => 'Female' ]; ?>'+
+      '<?php echo $this->Form->select('Marathon.Gender[]', $role, array('div' => false,'class' => 'form-control form-element text form-border sel-size','placeholder' => 'Gender','empty' => '(Select Gender)','label' => false, 'required' => true)); ?>'+
+      '<div class="input-group-btn">'+
+         
       '</div>'+
     '</div>'+
- '</div>'+
- '</div>'+
+ ' </div>'+
+'</div>'+
 
-'<div class="col-xs-12 col-sm-3 col-lg-3 form-size-cyc mob-form-size">'+
+'<div class="col-xs-12 col-sm-3 col-lg-12 form-size-cyc mob-form-size">'+
+ ' <div class="form-group">'+
+    '<div class="input-group">'+
+      '<?php $role = ['A-' => 'A-', 'B+' => 'B+','B-' => 'B-','O+' => 'O+','O-' => 'O-','AB+' => 'AB+','AB-' => 'AB-']; ?>'+
+      '<?php echo $this->Form->select('Marathon.Blood[]', $role, array('div' => false,'class' => 'form-control form-element text form-border sel-size','placeholder' => 'Bloodgroup','empty' => '(Select Bloodgroup)','label' => false, 'required' => true)); ?>'+
+      '<div class="input-group-btn">'+
+         
+      '</div>'+
+    '</div>'+
+ ' </div>'+
+'</div>'+
+
+'<div class="col-xs-12 col-sm-3 col-lg-12 form-size-cyc mob-form-size">'+
+ ' <div class="form-group">'+
+    '<div class="input-group">'+
+      '<?php $role = ['S' => 'S', 'M' => 'M', 'L' => 'L', 'XL' => 'XL', 'XXL' => 'XXL','XXXL' => 'XXXL']; ?>'+
+      '<?php echo $this->Form->select('Marathon.TSHIRT[]', $role, array('div' => false,'class' => 'form-control form-element text form-border sel-size','placeholder' => 'TSHIRT','empty' => '(Select Tshirt Size)','label' => false, 'required' => true)); ?>'+
+      '<div class="input-group-btn">'+
+         
+      '</div>'+
+    '</div>'+
+ ' </div>'+
+'</div>'+
+
+'<div class="col-xs-12 col-sm-3 col-lg-6 form-size-cyc mob-form-size">'+
+ ' <div class="form-group">'+
+    '<div class="input-group">'+
+      '<?php $role = ['22K' => '22K', '49K' => '49K', '68K' => '68K', '90K' => '90K']; ?>'+
+      '<?php echo $this->Form->select('Marathon.KM[]', $role, array('div' => false,'class' => 'form-control form-element text form-border sel-size select-km','empty' => '(Select KM)','placeholder' => 'KM','label' => false, 'required' => true)); ?>'+
+      '<div class="input-group-btn">'+
+         
+      '</div>'+
+    '</div>'+
+ ' </div>'+
+'</div>'+
+ '<div class="col-xs-12 col-sm-4 col-lg-4 mob-form-size">'+
  '<div class="form-group">'+
 // '<div class="checkbox checkbox-primary">'+
 // 						'<input name="Marathon.cycle[]" value="1" class="select_cycle" style="margin-left:0px;" label="false" type="checkbox">'+
@@ -1456,10 +1781,133 @@ var cl ='<div class="row parent-row"><input class="parentRowAmt" value="0" type=
 //                     '</div>'+
 '<?php echo $this->Form->checkbox('Marathon.cycle_show[]', array('class' => 'select_cycle_show','label' => false,'hiddenField' => false,'value'=>'0')) ?>'+'<?php echo $this->Form->hidden('Marathon.cycle[]', array('class' => 'select_cycle','label' => false, 'value'=>'0')) ?>'+
 					'<label for="cycle">'+
-                    'Rent cycle (₹200)'+
+                    'Rent cycle (₹350)'+
                     '</label>'+
                     '</div>'+
-                    '</div></div>';
+                    '</div>'+
+'</div><br><br>';
+
+
+
+
+
+/////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////
+
+
+var cl ='<div class="parent-row"><input class="parentRowAmt" value="0" type="hidden" /><div class="col-xs-12 col-sm-3 col-lg-12 form-size-cyc mob-form-size">'+
+ ' <div class="form-group float-label-control">'+
+             
+             '<label for="">Firstname</label>'+
+            ' <?= $this->Form->input('Marathon.firstname[]', array('div' => false, 'class' => 'form-control form-element text form-border','label' => false,'placeholder' => 'Firstname', 'required' => true)) ?>'+
+            '</div>'+
+'</div>'+
+
+'<div class="col-xs-12 col-sm-3 col-lg-12 form-size-cyc mob-form-size">'+
+ '<div class="form-group float-label-control">'+
+             
+             '<label for="">Email</label>'+
+             '<?= $this->Form->input('Marathon.email[]', array('div' => false,'class' => 'form-control form-element text form-border','label' => false,'placeholder' => 'Email address', 'id' => 'email_registration' ,'required' => true, 'onblur' => 'referalpgm();')) ?>'+
+            '</div>'+
+'</div>'+
+
+'<div class="col-xs-12 col-sm-3 col-lg-12 form-size-cyc mob-form-size">'+
+   '<div class="form-group float-label-control">'+
+             '<label for="">Mobile number</label>'+
+             '<?= $this->Form->input('Marathon.mobile_number[]', array('div' => false,'class' => 'form-control form-element text form-border','label' => false,'placeholder' => 'Mobile number', 'required' => true)) ?>'+
+            '</div>'+
+'</div>'+
+
+
+'<div class="col-xs-12 col-sm-3 col-lg-12 form-size-cyc mob-form-size">'+
+   '<div class="form-group float-label-control">'+
+             '<label for="">Communication Address</label>'+
+             '<?= $this->Form->input('Marathon.address[]', array('div' => false,'class' => 'form-control form-element text form-border','label' => false,'placeholder' => 'Communication Address', 'required' => true)) ?>'+
+            '</div>'+
+'</div>'+
+
+'<div class="col-xs-12 col-sm-3 col-lg-12 form-size-cyc mob-form-size">'+
+   '<div class="form-group float-label-control">'+
+             '<label for="">Emergency Contact No</label>'+
+             '<?= $this->Form->input('Marathon.emergency_contact[]', array('div' => false,'class' => 'form-control form-element text form-border','label' => false,'placeholder' => 'Emergency Contact No', 'required' => true)) ?>'+
+            '</div>'+
+'</div>'+
+
+'<div class="col-xs-12 col-sm-3 col-lg-12 form-size-cyc mob-form-size">'+
+ ' <div class="form-group">'+
+    '<div class="input-group">'+
+      '<?php $role = ['Male' => 'Male', 'Female' => 'Female' ]; ?>'+
+      '<?php echo $this->Form->select('Marathon.Gender[]', $role, array('div' => false,'class' => 'form-control form-element text form-border sel-size','placeholder' => 'Gender','empty' => '(Select Gender)','label' => false, 'required' => true)); ?>'+
+      '<div class="input-group-btn">'+
+         
+      '</div>'+
+    '</div>'+
+ ' </div>'+
+'</div>'+
+
+'<div class="col-xs-12 col-sm-3 col-lg-12 form-size-cyc mob-form-size">'+
+ ' <div class="form-group">'+
+    '<div class="input-group">'+
+      '<?php $role = ['A-' => 'A-', 'B+' => 'B+','B-' => 'B-','O+' => 'O+','O-' => 'O-','AB+' => 'AB+','AB-' => 'AB-']; ?>'+
+      '<?php echo $this->Form->select('Marathon.Blood[]', $role, array('div' => false,'class' => 'form-control form-element text form-border sel-size','placeholder' => 'Bloodgroup','empty' => '(Select Bloodgroup)','label' => false, 'required' => true)); ?>'+
+      '<div class="input-group-btn">'+
+         
+      '</div>'+
+    '</div>'+
+ ' </div>'+
+'</div>'+
+
+'<div class="col-xs-12 col-sm-3 col-lg-12 form-size-cyc mob-form-size">'+
+ ' <div class="form-group">'+
+    '<div class="input-group">'+
+      '<?php $role = ['S' => 'S', 'M' => 'M', 'L' => 'L', 'XL' => 'XL', 'XXL' => 'XXL','XXXL' => 'XXXL']; ?>'+
+      '<?php echo $this->Form->select('Marathon.TSHIRT[]', $role, array('div' => false,'class' => 'form-control form-element text form-border sel-size','placeholder' => 'TSHIRT','empty' => '(Select Tshirt Size)','label' => false, 'required' => true)); ?>'+
+      '<div class="input-group-btn">'+
+         
+      '</div>'+
+    '</div>'+
+ ' </div>'+
+'</div>'+
+
+'<div class="col-xs-12 col-sm-3 col-lg-12 form-size-cyc mob-form-size">'+
+ ' <div class="form-group">'+
+    '<div class="input-group">'+
+      '<?php $role = ['Senior Citizens - Men (60 years & above) / Women (58 years & above)' => 'Senior Citizens - Men (60 years & above) / Women (58 years & above)', 'Adults - Men (30 - 59 years) / Women (30 - 57 years)' => 'Adults - Men (30 - 59 years) / Women (30 - 57 years)', 'Youths - Men & Women (16 - 29 years)' => 'Youths - Men & Women (16 - 29 years)', 'School Students - Boys & Girls (10 - 15 years)' => 'School Students - Boys & Girls (10 - 15 years)', 'Kids - Boys & Girls (5 - 9 years)' => 'Kids - Boys & Girls (5 - 9 years)']; ?>'+
+      '<?php echo $this->Form->select('age[]', $role, array('div' => false,'class' => 'form-control form-element text form-border sel-size select-age','empty' => '(Select Age Limit)','placeholder' => 'Age Limit','label' => false, 'required' => true)); ?>'+
+      '<div class="input-group-btn">'+ 
+      '</div>'+
+    '</div>'+
+ '</div>'+
+ '</div>'+
+
+
+
+'<div class="col-xs-12 col-sm-3 col-lg-12 form-size-cyc mob-form-size">'+
+ ' <div class="form-group">'+
+    '<div class="input-group">'+
+      '<?php $role = ['1.5K' => '1.5K', '5K' => '5K', '10K' => '10K', '3K' => '3K']; ?>'+
+      '<?php echo $this->Form->select('Marathon.KM[]', $role, array('div' => false,'class' => 'form-control form-element text form-border sel-size select-km','empty' => '(Select KM)','placeholder' => 'KM','label' => false, 'required' => true)); ?>'+
+      '<div class="input-group-btn">'+
+         
+      '</div>'+
+    '</div>'+
+ ' </div>'+
+'</div>'+
+
+// '<div class="col-xs-12 col-sm-3 col-lg-3 form-size-cyc mob-form-size">'+
+//  '<div class="form-group">'+
+// // '<div class="checkbox checkbox-primary">'+
+// // 						'<input name="Marathon.cycle[]" value="1" class="select_cycle" style="margin-left:0px;" label="false" type="checkbox">'+
+// //                         '<label for="cycle">'+
+// //                             'Rent cycle (₹200)'+
+// //                         '</label>'+
+// //                     '</div>'+
+// '<?php echo $this->Form->checkbox('Marathon.cycle_show[]', array('class' => 'select_cycle_show','label' => false,'hiddenField' => false,'value'=>'0')) ?>'+'<?php echo $this->Form->hidden('Marathon.cycle[]', array('class' => 'select_cycle','label' => false, 'value'=>'0')) ?>'+
+// 					'<label for="cycle">'+
+//                     'Rent cycle (₹200)'+
+//                     '</label>'+
+//                     '</div>'+
+//                     '</div>'+
+                    '</div>';
 // var el = '<div class="form-group">' + 
 //  '<label for="Name" class="col-sm-4 control-label">Name:</label>' +
 //   '<div class="col-sm-8 input">' +
@@ -1514,6 +1962,79 @@ var kl ='<div class="row parent-row"><input class="parentRowAmt" value="0" type=
  ' <div class="form-group">'+
     '<div class="input-group">'+
       '<?php $role = ['3K' => '3K', '5K' => '5K', '10K' => '10K']; ?>'+
+      '<?php echo $this->Form->select('Marathon.KM[]', $role, array('div' => false,'class' => 'form-control form-element text form-border sel-size select-km','empty' => '(KM)','placeholder' => 'KM','label' => false, 'required' => true)); ?>'+
+      '<div class="input-group-btn">'+
+         
+      '</div>'+
+    '</div>'+
+ ' </div>'+
+'</div>';
+
+/////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////
+
+var lg ='<div class="row parent-row"><input class="parentRowAmt" value="0" type="hidden" /><div class="col-xs-12 col-sm-3 col-lg-12 form-size-lg mob-form-size">'+
+ ' <div class="form-group float-label-control">'+
+             
+             '<label for="">Firstname</label>'+
+            ' <?= $this->Form->input('Marathon.firstname[]', array('div' => false, 'class' => 'form-control form-element text form-border','label' => false,'placeholder' => 'Firstname', 'required' => true)) ?>'+
+            '</div>'+
+'</div>'+
+
+'<div class="col-xs-12 col-sm-3 col-lg-12 form-size-lg mob-form-size">'+
+ '<div class="form-group float-label-control">'+
+             
+             '<label for="">Email</label>'+
+             '<?= $this->Form->input('Marathon.email[]', array('div' => false,'class' => 'form-control form-element text form-border','label' => false,'placeholder' => 'Email address', 'id' => 'email_registration' ,'required' => true, 'onblur' => 'referalpgm();')) ?>'+
+            '</div>'+
+'</div>'+
+
+'<div class="col-xs-12 col-sm-3 col-lg-12 form-size-lg mob-form-size">'+
+   '<div class="form-group float-label-control">'+
+             '<label for="">Mobile number</label>'+
+             '<?= $this->Form->input('Marathon.mobile_number[]', array('div' => false,'class' => 'form-control form-element text form-border','label' => false,'placeholder' => 'Mobile number', 'required' => true)) ?>'+
+            '</div>'+
+'</div>'+
+
+'<div class="col-xs-12 col-sm-3 col-lg-12 form-size-lg mob-form-size">'+
+ ' <div class="form-group">'+
+    '<div class="input-group">'+
+      '<?php $role = ['XS' => 'XS', 'S' => 'S', 'M' => 'M', 'L' => 'L', 'XL' => 'XL', 'XXL' => 'XXL']; ?>'+
+      '<?php echo $this->Form->select('Marathon.TSHIRT[]', $role, array('div' => false,'class' => 'form-control form-element text form-border sel-size','placeholder' => 'TSHIRT','empty' => '(Tshirt Size)','label' => false, 'required' => true)); ?>'+
+      '<div class="input-group-btn">'+
+         
+      '</div>'+
+    '</div>'+
+ ' </div>'+
+'</div>'+
+
+'<div class="col-xs-12 col-sm-3 col-lg-12 form-size-lg mob-form-size">'+
+ ' <div class="form-group">'+
+    '<div class="input-group">'+
+      '<?php $role = ['Male' => 'Male', 'Female' => 'Female' ]; ?>'+
+      '<?php echo $this->Form->select('Marathon.Gender[]', $role, array('div' => false,'class' => 'form-control form-element text form-border sel-size','placeholder' => 'Gender','empty' => '(Select Gender)','label' => false, 'required' => true)); ?>'+
+      '<div class="input-group-btn">'+
+         
+      '</div>'+
+    '</div>'+
+ ' </div>'+
+'</div>'+
+
+'<div class="col-xs-12 col-sm-3 col-lg-12 form-size-lg mob-form-size">'+
+ ' <div class="form-group">'+
+    '<div class="input-group">'+
+      '<?php $role = ['A-' => 'A-', 'B+' => 'B+','B-' => 'B-','O+' => 'O+','O-' => 'O-','AB+' => 'AB+','AB-' => 'AB-']; ?>'+
+      '<?php echo $this->Form->select('Marathon.Blood[]', $role, array('div' => false,'class' => 'form-control form-element text form-border sel-size','placeholder' => 'Bloodgroup','empty' => '(Select Bloodgroup)','label' => false, 'required' => true)); ?>'+
+      '<div class="input-group-btn">'+
+         
+      '</div>'+
+    '</div>'+
+ ' </div>'+
+'</div>'+
+
+'<div class="col-xs-12 col-sm-3 col-lg-12 form-size-lg mob-form-size">'+
+ ' <div class="form-group">'+
+    '<div class="input-group">'+
+      '<?php $role = ['5K' => '5K', '10K' => '10K']; ?>'+
       '<?php echo $this->Form->select('Marathon.KM[]', $role, array('div' => false,'class' => 'form-control form-element text form-border sel-size select-km','empty' => '(KM)','placeholder' => 'KM','label' => false, 'required' => true)); ?>'+
       '<div class="input-group-btn">'+
          
@@ -1633,6 +2154,73 @@ var mini ='<div class="row parent-row"><input class="parentRowAmt" value="0" typ
 //  '</div>';
 
 
+////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////
+
+var river ='<div class="parent-row"><input class="parentRowAmt" value="0" type="hidden" /><div class="col-xs-12 col-sm-3 col-lg-3 form-size mob-form-size">'+
+ ' <div class="form-group float-label-control">'+
+             
+             '<label for="">Firstname</label>'+
+            ' <?= $this->Form->input('Marathon.firstname[]', array('div' => false, 'class' => 'form-control form-element text form-border','label' => false,'placeholder' => 'Firstname', 'required' => true)) ?>'+
+            '</div>'+
+'</div>'+
+
+'<div class="col-xs-12 col-sm-3 col-lg-3 form-size mob-form-size">'+
+ '<div class="form-group float-label-control">'+
+             
+             '<label for="">Email</label>'+
+             '<?= $this->Form->input('Marathon.email[]', array('div' => false,'class' => 'form-control form-element text form-border','label' => false,'placeholder' => 'Email address', 'id' => 'email_registration' ,'required' => true, 'onblur' => 'referalpgm();')) ?>'+
+            '</div>'+
+'</div>'+
+
+'<div class="col-xs-12 col-sm-3 col-lg-3 form-size mob-form-size">'+
+   '<div class="form-group float-label-control">'+
+             '<label for="">Mobile number</label>'+
+             '<?= $this->Form->input('Marathon.mobile_number[]', array('div' => false,'class' => 'form-control form-element text form-border','label' => false,'placeholder' => 'Mobile number', 'required' => true)) ?>'+
+            '</div>'+
+'</div>'+
+
+'<div class="col-xs-12 col-sm-3 col-lg-3 form-size mob-form-size">'+
+ ' <div class="form-group">'+
+    '<div class="input-group">'+
+      '<?php $role = ['3K' => '3K', '5K' => '5K', '10K' => '10K']; ?>'+
+      '<?php echo $this->Form->select('Marathon.KM[]', $role, array('div' => false,'class' => 'form-control form-element text form-border sel-size','empty' => '(KM)','placeholder' => 'KM','label' => false, 'required' => true)); ?>'+
+      '<div class="input-group-btn">'+
+         
+      '</div>'+
+    '</div>'+
+ ' </div>'+
+ '</div>'+
+
+ '<div class="col-xs-12 col-sm-3 col-lg-3 form-size mob-form-size">'+
+ ' <div class="form-group">'+
+    '<div class="input-group">'+
+      '<?php $role = ['XS' => 'XS', 'S' => 'S', 'M' => 'M', 'L' => 'L', 'XL' => 'XL', 'XXL' => 'XXL']; ?>'+
+      '<?php echo $this->Form->select('Marathon.TSHIRT[]', $role, array('id' => 'tshirt-select', 'div' => false,'class' => 'form-control form-element text form-border sel-size tshirt-select','placeholder' => 'TSHIRT','empty' => '(Tshirt Size)','label' => false, 'required' => true, 'disabled' => true)); ?>'+
+      '<div class="input-group-btn">'+
+         
+      '</div>'+
+    '</div>'+
+ ' </div>'+
+'</div>'+
+
+ '<div class="col-xs-12 col-sm-3 col-lg-3 form-size-peddle mob-form-size">'+
+ '<div class="form-group">'+
+// '<div class="checkbox checkbox-primary">'+
+// 						'<input name="Marathon.cycle[]" value="1" class="select_cycle" style="margin-left:0px;" label="false" type="checkbox">'+
+//                         '<label for="cycle">'+
+//                             'Rent cycle (₹200)'+
+//                         '</label>'+
+//                     '</div>'+
+'<?php echo $this->Form->checkbox('Marathon.cycle_show[]', array('class' => 'select_tshirt_show','label' => false,'hiddenField' => false,'value'=>'0')) ?>'+'<?php echo $this->Form->hidden('Marathon.cycle[]', array('class' => 'select_tshirt','label' => false, 'value'=>'0')) ?>'+
+					'<label for="tshirt">'+
+                    'Buy Tshirt (₹200)'+
+                    '</label>'+
+                    '</div>'+
+                    '</div>'+
+'</div><br><br>';
+
+////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////
+
 $('#numNames').on('change', function(e) {
   var numSelected = Number($(this).val());
   appendControls1(numSelected);
@@ -1648,6 +2236,24 @@ function appendControls1(num) {
   var html = null;
   for (var i=0; i<num; i++) {
   	$('#elcontainer').append(el);	
+  } 
+}
+
+$('#numNamesriver').on('change', function(e) {
+  var numSelected = Number($(this).val());
+  appendControlsriver(numSelected);
+  if(numSelected == 0){
+  	$(".pay-btn").css('display','none');
+  } else{
+	 $(".pay-btn").css('display','block'); 
+}
+});
+
+function appendControlsriver(num) {
+  $('#rivercontainer').empty();
+  var html = null;
+  for (var i=0; i<num; i++) {
+  	$('#rivercontainer').append(river);	
   } 
 }
 
@@ -1676,6 +2282,42 @@ function appendControls2(num) {
   	$('#klcontainer').append(kl);	
   } 
 }
+
+function appendControlslg(num) {
+  $('#lgcontainer').empty();
+  var html = null;
+  for (var i=0; i<num; i++) {
+  	$('#lgcontainer').append(lg);	
+  } 
+}
+
+$('#numNameslg').on('change', function(e) {
+  var numSelected = Number($(this).val());
+  appendControlslg(numSelected);
+  if(numSelected == 0){
+  	$(".pay-btn").css('display','none');
+  } else{
+	 $(".pay-btn").css('display','block'); 
+}
+});
+
+function appendControlssport(num) {
+  $('#slcontainer').empty();
+  var html = null;
+  for (var i=0; i<num; i++) {
+  	$('#slcontainer').append(sl);	
+  } 
+}
+
+$('#numNamessport').on('change', function(e) {
+  var numSelected = Number($(this).val());
+  appendControlssport(numSelected);
+  if(numSelected == 0){
+  	$(".pay-btn").css('display','none');
+  } else{
+	 $(".pay-btn").css('display','block'); 
+}
+});
 
 $('#numNames3').on('change', function(e) {
   var numSelected = Number($(this).val());
@@ -1738,9 +2380,27 @@ function calckabali(tkt){
 	$("#priceSpan_kab").text("0");
 }
 
+function calclegends(tkt){
+    $('#price_lg').val("0");
+	$("#priceSpan_lg").text("0");
+}
+
 function calcchrist(tkt){
     $('#price_chris').val("0");
 	$("#priceSpan_chris").text("0");
+}
+
+function calcsport(tkt){
+    $('#price_sport').val("0");
+	$("#priceSpan_sport").text("0");
+}
+
+function calcamountsport(tkt){
+	var tktcount = tkt.value;
+	var price_sport = $('#defaultprice_sport').val();
+    $('#price_sport').val(tktcount * price_sport);
+	$("#priceSpan_sport").text(tktcount * price_sport);	
+	$("#priceSpan_sport_proceed").text(tktcount * price_sport);	
 }
 
 function calcamount(tkt){
@@ -1749,13 +2409,31 @@ function calcamount(tkt){
     $('#price_mar').val(tktcount * price);
 	$("#priceSpan_mar").text(tktcount * price);	
 	$("#priceSpan_mar_proceed").text(tktcount * price);	
+	
+	var event_id = '<?=$event->id;?>';
+if(event_id == 316 || event_id == 318 || event_id == 319)
+	{
+		var price = $('#defaultprice_mar2').val();
+		$('#price_mar').val(tktcount * price);
+		$("#priceSpan_mar").text(tktcount * price);	
+		$("#priceSpan_mar_proceed").text(tktcount * price);	
+	}
 }
+
+function calcamountriver(tkt1){
+	var tktcount1 = tkt1.value;
+	var price_river = $('#defaultprice_river').val();
+    $('#price_river').val(tktcount1 * price_river);
+	$("#priceSpan_river").text(tktcount1 * price_river);	
+	$("#priceSpan_river_proceed").text(tktcount1 * price_river);	
+}
+
+
 
 function calccyclo(tkt){
     $('#price_cyc').val("0");
 	$("#priceSpan_cyc").text("0");
 }
-
 	
 function calcamount2(tkt2){
 	var tktcount2 = tkt2.value;
@@ -2110,22 +2788,72 @@ $(document).ready(function(){
 
 $(document).ready(function(){
 	var event_id = '<?=$event->id;?>';
+	if(event_id==546){
+		$(".cook-modal").css('display','none');
+		$(".mar-modal").css('display','none');
+		$(".cyc-modal").css('display','block');
+		$(".kab-modal").css('display','none');
+		$(".chris-modal").css('display','none');
+		$(".mini-modal").css('display','none');
+		
+	}
+	if(event_id==557){
+		$(".cook-modal").css('display','none');
+		$(".mar-modal").css('display','block');
+		$(".cyc-modal").css('display','none');
+		$(".kab-modal").css('display','none');
+		$(".chris-modal").css('display','none');
+		$(".mini-modal").css('display','none');
+		
+	}
+	if(event_id==403){
+		$(".cook-modal").css('display','none');
+		$(".mar-modal").css('display','none');
+		$(".cyc-modal").css('display','none');
+		$(".kab-modal").css('display','block');
+		$(".chris-modal").css('display','none');
+		$(".mini-modal").css('display','none');
+
+	}
+
+	if(event_id==402){
+		$(".cook-modal").css('display','none');
+		$(".mar-modal").css('display','none');
+		$(".cyc-modal").css('display','none');
+		$(".kab-modal").css('display','none');
+		$(".chris-modal").css('display','block');
+		$(".mini-modal").css('display','none');
+	}
+
 	if(event_id==126){
 		$(".cook-modal").css('display','none');
 		$(".mar-modal").css('display','none');
 		$(".cyc-modal").css('display','none');
 		$(".kab-modal").css('display','none');
 		$(".chris-modal").css('display','none');
-		$(".mini-modal").css('display','block');
-			
+		$(".mini-modal").css('display','none');
+		$(".river-modal").css('display','none');
+		$(".legends-modal").css('display','none');
+		$(".sports-modal").css('display','block');
 	}
 
-	
+	if(event_id==401){
+		$(".cook-modal").css('display','none');
+		$(".mar-modal").css('display','none');
+		$(".cyc-modal").css('display','none');
+		$(".kab-modal").css('display','none');
+		$(".chris-modal").css('display','none');
+		$(".mini-modal").css('display','block');	
+	}
 
 	if(event_id==272 || event_id==316 || event_id==318 || event_id==319){
 		$(".cook-modal").css('display','none');
 		$(".mar-modal").css('display','block');
 		$(".cyc-modal").css('display','none');
+		$(".cyc-modal").css('display','none');
+		$(".kab-modal").css('display','none');
+		$(".chris-modal").css('display','none');
+		$(".mini-modal").css('display','none');
 		
 	}
 
@@ -2156,28 +2884,28 @@ if(event_id==287 || event_id==286 || event_id==285){
 //             $('.content').css('min-height', 0);
 //             $('.content').css('min-height', ($(document).height() - $('#header').height() - $('.footer').height()));
 //         }
-$( function() {
-		$('#date').datepicker({
-			changeMonth: true,
-			changeYear: true,
-			yearRange: '1950:2017',
-			maxDate: '+60Y',
-			minDate: new Date(1950, 10 - 1, 25),
-			onSelect: function (dateText, inst) {
-				var dob_year = dateText.split('/');
-				var curyear = 2017;
-				var year = curyear-dob_year[2];
-				if(year<=14){
-					$("#person_type").text("Kids"+", Rs. 200");
-					$("#amount").val("200");
-				}else{
-					$("#person_type").text("Adults"+", Rs. 300");
-					$("#amount").val("300");
-				}
-			}
+// $(document).ready(function(){
+// 		$('#date').datepicker({
+// 			changeMonth: true,
+// 			changeYear: true,
+// 			yearRange: '1950:2017',
+// 			maxDate: '+60Y',
+// 			minDate: new Date(1950, 10 - 1, 25),
+// 			onSelect: function (dateText, inst) {
+// 				var dob_year = dateText.split('/');
+// 				var curyear = 2017;
+// 				var year = curyear-dob_year[2];
+// 				if(year<=14){
+// 					$("#person_type").text("Kids"+", Rs. 200");
+// 					$("#amount").val("200");
+// 				}else{
+// 					$("#person_type").text("Adults"+", Rs. 300");
+// 					$("#amount").val("300");
+// 				}
+// 			}
 
-			});
-	  } );
+// 			});
+// 	  } );
 	/* Float Label Pattern Plugin for Bootstrap 3.1.0 by Travis Wilson
 **************************************************/
 (function ($) {

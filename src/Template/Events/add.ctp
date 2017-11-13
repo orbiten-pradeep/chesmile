@@ -349,7 +349,7 @@ input{
 
             <div class="form-group">
                    <label for="">Description</label>
-                  <?= $this->Form->input('descriptioin',array('div' => false, 'label' => false,'class' => 'form-control form-element','placeholder' => 'Description about your event','rows' => '4', 'cols' => '50', 'resize'=> 'none' ));?>
+                  <?= $this->Form->input('descriptioin',array('div' => false, 'label' => false,'class' => 'form-control form-element','placeholder' => 'Description about your event','rows' => '4', 'cols' => '50', 'maxlength' => '250', 'resize'=> 'none' ));?>
                   <span id="description_error" style="color: #FF0000; font-size: 11px;"></span>
                   <br/>
                   <!--  <textarea class="form-control" placeholder="Some Words about your event" rows="1"></textarea> -->
