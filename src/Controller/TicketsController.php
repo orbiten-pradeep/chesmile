@@ -147,6 +147,12 @@ class TicketsController extends AppController
                     if(isset($this->request->data['Marathon']['Blood'])){
                         $marathon->Blood =  $this->request->data['Marathon']['Blood'][$i];
                     }
+                    if(isset($this->request->data['Marathon']['address'])){
+                        $marathon->address=  $this->request->data['Marathon']['address'][$i];
+                    }
+                    if(isset($this->request->data['Marathon']['emergency_contact'])){
+                        $marathon->emergency_contact =  $this->request->data['Marathon']['emergency_contact'][$i];
+                    }
                     if(isset($this->request->data['Marathon']['cycle']))
                     {
                         $marathon->cycle =  $this->request->data['Marathon']['cycle'][$i];
