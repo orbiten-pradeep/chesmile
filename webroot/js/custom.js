@@ -515,7 +515,7 @@ function getEventList(params) {
 		        		var buybtn;
 		        		var eventprice
 		        		eventprice = '<span class="event-price pull-right">₹ '+response[k].price+'</span>';
-		        		buybtn = '<div class="pull-right"><a href="'+eventUrl+'" ><img src="/chesmile/img/buy-tickets-button.png" style="transition: none;transform: none;margin-top: -15px;cursor: pointer;"></div>';
+		        		buybtn = '<div class="pull-right"><a href="'+eventUrl+'" ><img src="http://chennaismile.com/img/buy-tickets-button.png" style="transition: none;transform: none;margin-top: -15px;cursor: pointer;"></div>';
 		        	}
 		        	html += '<div class="col-sm-6 col-lg-4 col-md-4 card-size">\
 		        					<div class="thumbnail"><a href="'+eventUrl+'">\
@@ -910,9 +910,16 @@ else if(ePage == 'view') {
     }
 }
 else if(ePage == 'chennai') {
+	$( function() {
+	    $('#date').datepicker({
+	        changeMonth: true,
+	        changeYear: true,
+	        minDate: new Date()
+	        });
+	  } );
 	$(document).ready(function(){
 		//console.log($(".select-km"));
-		$("#clcontainer").on('change', '.select-km', function(e){
+		$("#clcontainer").on('change', '.select-age', function(e){
 			var val = $(this).val();
 			var amt = parseInt($('#price_cyc').val());
 			var finalAmt = (amt == "") ? 0 : amt;
@@ -921,23 +928,43 @@ else if(ePage == 'chennai') {
 			var parentAmtVal = parseInt(parentRow.find(".parentRowAmt").val());
 
 			if(val != ""){
-				if(val == "5K"){
+				if(val == "Senior Citizens - Men (60 years & above) / Women (58 years & above)"){
 					var fixedAmt = 500;
-					parentRow.find(".select-age option").hide();
-					parentRow.find(".select-age option[value='Minimum age 10 yrs to 15 yrs']").show();
+					parentRow.find(".select-km option").hide();
+					parentRow.find(".select-km option").prop("selected", false);
+					parentRow.find(".select-km option[value='1.5K']").show();
 				}
-				else if(val == "10K"){
+				else if(val == "Adults - Men (30 - 59 years) / Women (30 - 57 years)"){
 					var fixedAmt = 600;
-					parentRow.find(".select-age option").hide();
-					parentRow.find(".select-age option[value='Minimum age 15 yrs to 50 yrs']").show();
+					parentRow.find(".select-km option").hide();
+					parentRow.find(".select-km option").prop("selected", false);
+					parentRow.find(".select-km option[value='5K']").show();
 				}
-				else if(val == "25K"){
-					var fixedAmt = 700;
-					parentRow.find(".select-age option").hide();
-					parentRow.find(".select-age option[value='Minimum age 18 yrs to 40 yrs']").show();
+				else if(val == "Youths - Men & Women (16 - 29 years)"){
+					var fixedAmt = 600;
+					parentRow.find(".select-km option").hide();
+					parentRow.find(".select-km option").prop("selected", false);
+					parentRow.find(".select-km option[value='10K']").show();
 				}
+				else if(val == "School Students - Boys & Girls (10 - 15 years)"){
+					var fixedAmt = 500;
+					parentRow.find(".select-km option").hide();
+					parentRow.find(".select-km option").prop("selected", false);
+					parentRow.find(".select-km option[value='3K']").show();
+				}
+				// else if(val == "Kids - Boys & Girls (5 - 9 years)"){
+				// 	var fixedAmt = 400;
+				// 	parentRow.find(".select-km option").hide();
+				// 	parentRow.find(".select-km option").prop("selected", false);
+				// 	parentRow.find(".select-km option[value='1.5K']").show();
+				// }
+				// else if(val == "25K"){
+				// 	var fixedAmt = 700;
+				// 	parentRow.find(".select-age option").hide();
+				// 	parentRow.find(".select-age option[value='Minimum age 18 yrs to 40 yrs']").show();
+				// }
 				else {
-					//parentRow.find(".select-age option").hide();
+					parentRow.find(".select-km option").hide();
 				}
 
 				if(parentAmtVal == 0) {
@@ -961,25 +988,264 @@ else if(ePage == 'chennai') {
 			$('#priceSpan_cyc_proceed').html(finalAmt);
 		});
 
-		$("#clcontainer").on('change', '.select_cycle_show', function(e){
+		// $("#clcontainer").on('change', '.select_cycle_show', function(e){
+		// 	var chckParent = $(this).parent();
+		// 	var fixAmt = 200;
+		// 	if($(this).prop("checked")) {
+		// 		var amt = parseInt($('#price_cyc').val());
+		// 		var finAmt = amt + fixAmt;
+		// 		$('#price_cyc').val(finAmt);
+		// 		$('#priceSpan_cyc').html(finAmt);
+		// 		$('#priceSpan_cyc_proceed').html(finAmt);
+		// 		$(chckParent).find('.select_cycle').val(fixAmt);
+		// 	}
+		// 	if(!$(this).prop("checked")) {
+		// 		var amt = parseInt($('#price_cyc').val());
+		// 		var finAmt = amt - fixAmt;
+		// 		$('#price_cyc').val(finAmt);
+		// 		$('#priceSpan_cyc').html(finAmt);
+		// 		$('#priceSpan_cyc_proceed').html(finAmt);
+		// 		$(chckParent).find('.select_cycle').val(0);
+		// 	}
+		// });
+
+		$("#elcontainer").on('change', '.select_cycle_show', function(e){
 			var chckParent = $(this).parent();
-			var fixAmt = 200;
+			var fixAmt = 350;
 			if($(this).prop("checked")) {
-				var amt = parseInt($('#price_cyc').val());
+				var amt = parseInt($('#price_mar').val());
 				var finAmt = amt + fixAmt;
-				$('#price_cyc').val(finAmt);
-				$('#priceSpan_cyc').html(finAmt);
-				$('#priceSpan_cyc_proceed').html(finAmt);
+				$('#price_mar').val(finAmt);
+				$('#priceSpan_mar').html(finAmt);
+				$('#priceSpan_mar_proceed').html(finAmt);
 				$(chckParent).find('.select_cycle').val(fixAmt);
 			}
 			if(!$(this).prop("checked")) {
-				var amt = parseInt($('#price_cyc').val());
+				var amt = parseInt($('#price_mar').val());
 				var finAmt = amt - fixAmt;
-				$('#price_cyc').val(finAmt);
-				$('#priceSpan_cyc').html(finAmt);
-				$('#priceSpan_cyc_proceed').html(finAmt);
+				$('#price_mar').val(finAmt);
+				$('#priceSpan_mar').html(finAmt);
+				$('#priceSpan_mar_proceed').html(finAmt);
 				$(chckParent).find('.select_cycle').val(0);
 			}
+		});
+
+		// $("#rivercontainer").on('change', '.select_tshirt_show', function(e){
+		// 	var chckParent = $(this).parent();
+		// 	var fixAmt = 200;
+		// 	var parentRow = $(this).parent().parent().parent();
+		// 	if($(this).prop("checked")) {
+		// 		$(parentRow).find('#tshirt-select').removeAttr('disabled');
+		// 		// $('.tshirt-select').removeAttr('disabled');
+		// 		var amt = parseInt($('#price_river').val());
+		// 		var finAmt = amt + fixAmt;
+		// 		$('#price_river').val(finAmt);
+		// 		$('#priceSpan_river').html(finAmt);
+		// 		$('#priceSpan_river_proceed').html(finAmt);
+		// 		$(chckParent).find('.select_tshirt').val(fixAmt);
+		// 	}
+		// 	if(!$(this).prop("checked")) {
+		// 		$(parentRow).find('#tshirt-select').attr('disabled', 'disabled');
+		// 		// $('.tshirt-select').attr('disabled', 'disabled');
+		// 		var amt = parseInt($('#price_river').val());
+		// 		var finAmt = amt - fixAmt;
+		// 		$('#price_river').val(finAmt);
+		// 		$('#priceSpan_river').html(finAmt);
+		// 		$('#priceSpan_river_proceed').html(finAmt);
+		// 		$(chckParent).find('.select_tshirt').val(0);
+		// 	}
+		// });
+
+		$("#klcontainer").on('change', '.select-km', function(e){
+			var val = $(this).val();
+			var amt = parseInt($('#price_kab').val());
+			var finalAmt = (amt == "") ? 0 : amt;
+			//console.log(val);
+			var parentRow = $(this).parent().parent().parent().parent();
+			var parentAmtVal = parseInt(parentRow.find(".parentRowAmt").val());
+
+			if(val != ""){
+				if(val == "3K"){
+					var fixedAmt = 300;
+					// parentRow.find(".select-age option").hide();
+					// parentRow.find(".select-age option[value='Minimum age 10 yrs to 15 yrs']").show();
+				}
+				else if(val == "5K"){
+					var fixedAmt = 400;
+					// parentRow.find(".select-age option").hide();
+					// parentRow.find(".select-age option[value='Minimum age 15 yrs to 50 yrs']").show();
+				}
+				else if(val == "10K"){
+					var fixedAmt = 500;
+					// parentRow.find(".select-age option").hide();
+					// parentRow.find(".select-age option[value='Minimum age 18 yrs to 40 yrs']").show();
+				}
+				else {
+					//parentRow.find(".select-age option").hide();
+				}
+
+				if(parentAmtVal == 0) {
+					parentRow.find(".parentRowAmt").val(fixedAmt);
+					finalAmt = finalAmt + fixedAmt;
+				}
+				else {
+					finalAmt = finalAmt - parentAmtVal;
+					finalAmt = finalAmt + fixedAmt;
+					parentRow.find(".parentRowAmt").val(fixedAmt);
+				}
+			}
+			else {
+				parentRow.find(".select-age option").show();
+				finalAmt = finalAmt - parentAmtVal;
+				parentRow.find(".parentRowAmt").val(0);
+			}
+
+			$('#price_kab').val(finalAmt);
+			$('#priceSpan_kab').html(finalAmt);
+			$('#priceSpan_kab_proceed').html(finalAmt);
+		});
+
+
+		$("#lgcontainer").on('change', '.select-km', function(e){
+			var val = $(this).val();
+			var amt = parseInt($('#price_lg').val());
+			var finalAmt = (amt == "") ? 0 : amt;
+			//console.log(val);
+			var parentRow = $(this).parent().parent().parent().parent();
+			var parentAmtVal = parseInt(parentRow.find(".parentRowAmt").val());
+
+			if(val != ""){
+				if(val == "5K"){
+					var fixedAmt = 650;
+					// parentRow.find(".select-age option").hide();
+					// parentRow.find(".select-age option[value='Minimum age 10 yrs to 15 yrs']").show();
+				}
+				else if(val == "10K"){
+					var fixedAmt = 850;
+					// parentRow.find(".select-age option").hide();
+					// parentRow.find(".select-age option[value='Minimum age 15 yrs to 50 yrs']").show();
+				}
+				// else if(val == "10K"){
+				// 	var fixedAmt = 500;
+				// 	parentRow.find(".select-age option").hide();
+				// 	parentRow.find(".select-age option[value='Minimum age 18 yrs to 40 yrs']").show();
+				// }
+				else {
+					//parentRow.find(".select-age option").hide();
+				}
+
+				if(parentAmtVal == 0) {
+					parentRow.find(".parentRowAmt").val(fixedAmt);
+					finalAmt = finalAmt + fixedAmt;
+				}
+				else {
+					finalAmt = finalAmt - parentAmtVal;
+					finalAmt = finalAmt + fixedAmt;
+					parentRow.find(".parentRowAmt").val(fixedAmt);
+				}
+			}
+			else {
+				parentRow.find(".select-age option").show();
+				finalAmt = finalAmt - parentAmtVal;
+				parentRow.find(".parentRowAmt").val(0);
+			}
+
+			$('#price_lg').val(finalAmt);
+			$('#priceSpan_lg').html(finalAmt);
+			$('#priceSpan_lg_proceed').html(finalAmt);
+		});
+
+		$("#cslcontainer").on('change', '.select-km', function(e){
+			var val = $(this).val();
+			var amt = parseInt($('#price_chris').val());
+			var finalAmt = (amt == "") ? 0 : amt;
+			//console.log(val);
+			var parentRow = $(this).parent().parent().parent().parent();
+			var parentAmtVal = parseInt(parentRow.find(".parentRowAmt").val());
+
+			if(val != ""){
+				if(val == "3K"){
+					var fixedAmt = 300;
+					// parentRow.find(".select-age option").hide();
+					// parentRow.find(".select-age option[value='Minimum age 10 yrs to 15 yrs']").show();
+				}
+				else if(val == "5K"){
+					var fixedAmt = 400;
+					// parentRow.find(".select-age option").hide();
+					// parentRow.find(".select-age option[value='Minimum age 15 yrs to 50 yrs']").show();
+				}
+				else {
+					//parentRow.find(".select-age option").hide();
+				}
+
+				if(parentAmtVal == 0) {
+					parentRow.find(".parentRowAmt").val(fixedAmt);
+					finalAmt = finalAmt + fixedAmt;
+				}
+				else {
+					finalAmt = finalAmt - parentAmtVal;
+					finalAmt = finalAmt + fixedAmt;
+					parentRow.find(".parentRowAmt").val(fixedAmt);
+				}
+			}
+			else {
+				parentRow.find(".select-age option").show();
+				finalAmt = finalAmt - parentAmtVal;
+				parentRow.find(".parentRowAmt").val(0);
+			}
+
+			$('#price_chris').val(finalAmt);
+			$('#priceSpan_chris').html(finalAmt);
+			$('#priceSpan_chris_proceed').html(finalAmt);
+		});
+
+		$("#minicontainer").on('change', '.select-km', function(e){
+			var val = $(this).val();
+			var amt = parseInt($('#price_mini').val());
+			var finalAmt = (amt == "") ? 0 : amt;
+			//console.log(val);
+			var parentRow = $(this).parent().parent().parent().parent();
+			var parentAmtVal = parseInt(parentRow.find(".parentRowAmt").val());
+
+			if(val != ""){
+				if(val == "3K"){
+					var fixedAmt = 400;
+					// parentRow.find(".select-age option").hide();
+					// parentRow.find(".select-age option[value='Minimum age 10 yrs to 15 yrs']").show();
+				}
+				else if(val == "5K"){
+					var fixedAmt = 500;
+					// parentRow.find(".select-age option").hide();
+					// parentRow.find(".select-age option[value='Minimum age 15 yrs to 50 yrs']").show();
+				}
+				else if(val == "10K"){
+					var fixedAmt = 600;
+					// parentRow.find(".select-age option").hide();
+					// parentRow.find(".select-age option[value='Minimum age 15 yrs to 50 yrs']").show();
+				}
+				else {
+					//parentRow.find(".select-age option").hide();
+				}
+
+				if(parentAmtVal == 0) {
+					parentRow.find(".parentRowAmt").val(fixedAmt);
+					finalAmt = finalAmt + fixedAmt;
+				}
+				else {
+					finalAmt = finalAmt - parentAmtVal;
+					finalAmt = finalAmt + fixedAmt;
+					parentRow.find(".parentRowAmt").val(fixedAmt);
+				}
+			}
+			else {
+				parentRow.find(".select-age option").show();
+				finalAmt = finalAmt - parentAmtVal;
+				parentRow.find(".parentRowAmt").val(0);
+			}
+
+			$('#price_mini').val(finalAmt);
+			$('#priceSpan_mini').html(finalAmt);
+			$('#priceSpan_mini_proceed').html(finalAmt);
 		});
 
 	});
