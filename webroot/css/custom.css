@@ -1012,3 +1012,29 @@ and (max-device-width : 1024px) {
 .background-container.head-container {
     box-shadow: 0px 2px 4px #e6e4e4;
 }
+
+.card-size .thumbnail {
+    transition: all 0.2s ease;
+    background: rgba(0, 0, 0, 0.05);
+    border-radius: 8px;
+}
+.card-size .thumbnail .caption {
+    color: #fff;
+}
+.card-size .thumbnail .caption .event_txt a {
+    color: #fff;
+    font-weight: bold;
+    text-shadow: none !important;
+}
+.card-size .thumbnail .caption .event_txt a:hover {
+    text-decoration: none;
+}
+.card-size .thumbnail img {
+    border-radius: 8px !important;
+}
+.card-size .thumbnail .back {
+}
+.card-size {
+    padding-right: 5px !important;
+    padding-left: 15px !important;
+}

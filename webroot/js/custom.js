@@ -471,15 +471,24 @@ $(function() {
 
 });
 
+
 function getEventList(params) {
 	var dataParams = (params!='') ? params : '';
 	//console.log(dataParams);
-	$("#eventResponse").html('').hide();
+	if(jQuery().masonry){
+    	$('#eventResponse').masonry('destroy');
+    	$("#eventResponse").html('').hide();
+	}
+	else {
+		$("#eventResponse").html('').hide();
+	}
+	//$("#eventResponse").html('').hide();
 	$(".loadingDiv").show();
 	$.ajax({
 	    type: "POST",
 	    ContentType: 'application/json',
 	    data: dataParams,
+	    async: false,
 	    dataType: 'json',
 	    url: $("#event_list_url").val(),
 	    success: function(response) {
@@ -505,42 +514,53 @@ function getEventList(params) {
 		        		eventUrl = eventDetailsUrl + '/' + response[k].slug;
 
 		        	if(dispImg==''){
-		        		dispImgHmtl = '<img src="img/photos/1.jpg" alt="" style="height:185px;">';
+		        		dispImgHmtl = '<img src="img/photos/1.jpg" alt="" style="height:auto;">';
 		        	}
 		        	else {
 		        		var imgSrc = "img/display/"+dispImg;
-		        		dispImgHmtl = '<img src="'+imgSrc+'" alt="" onerror="this.src=\'img/photos/1.jpg\'" style="height:185px;">';
+		        		dispImgHmtl = '<img src="'+imgSrc+'" alt="" onerror="this.src=\'img/photos/1.jpg\'" style="height:auto;">';
 		        	}
 		        	if(response[k].register_online  == 1){
 		        		var buybtn;
 		        		var eventprice
 		        		eventprice = '<span class="event-price pull-right">₹ '+response[k].price+'</span>';
-		        		buybtn = '<div class="pull-right"><a href="'+eventUrl+'" ><img src="http://chennaismile.com/img/buy-tickets-button.png" style="transition: none;transform: none;margin-top: -15px;cursor: pointer;"></div>';
+		        		buybtn = '<div class="pull-right"><a href="'+eventUrl+'" ><img src="http://chennaismile.com/img/buy-tickets-button.png" style="transition: none;transform: none;margin-top: -15px;cursor: pointer;" /> </a></div>';
 		        	}
-		        	html += '<div class="col-sm-6 col-lg-4 col-md-4 card-size">\
-		        					<div class="thumbnail"><a href="'+eventUrl+'">\
+		        	html += '<div class="col-sm-6 col-lg-4 col-md-4 card-size" data-attrib-hcolor="'+response[k].category_color+'" >\
+		        					<div class="thumbnail" style="background-color:#'+response[k].category_color+'"><a href="'+eventUrl+'">\
 							        	<div class="back">\
 								            <p class="pull-left tag">'+response[k].category_name+'</p>\
 								            <p class="pull-right post">'+dtimeHtml+'</p>\
-							            </div>'+dispImgHmtl+'\
-							            <div class="caption dance" style="background-color:#'+response[k].category_color+'">\
-							                <h4 class="event_txt"><a href="'+eventUrl+'" class="event-title">'+response[k].title+'</a></h4>\
-							                '+eventprice+'\
-							                 <p class="venue_txt">'+response[k].areaname+'</p>\
-							                <p class="date_txt">'+formatDate(response[k].date)+'</p>\
-							                <div class="">\
-							                    <p class="pull-left"> <a onClick="hide('+response[k].id+', '+response[k].user_id+');"><span class="glyphicon glyphicon-thumbs-up"></span> </a><span class="count_txt" id="'+response[k].id+'">'+likes_count+'</span>\
-							                    '+buybtn+'\
-							                    </p>\
+							            </div>'+dispImgHmtl+'</a>\
+							            <div class="caption">\
+							            	<div class="caption_inner">\
+								                <h4 class="event_txt"><a href="'+eventUrl+'" class="event-title">'+response[k].title+'</a></h4>\
+								                '+eventprice+'\
+								                 <p class="venue_txt">'+response[k].areaname+'</p>\
+								                <p class="date_txt">'+formatDate(response[k].date)+'</p>\
+								                <div class="">\
+								                    <p class="pull-left"> <a onClick="hide('+response[k].id+', '+response[k].user_id+');"><span class="glyphicon glyphicon-thumbs-up"></span> </a><span class="count_txt" id="'+response[k].id+'">'+likes_count+'</span>\
+								                    '+buybtn+'\
+								                    </p>\
+								                </div>\
 							                </div>\
 							            </div>\
 							        </div>\
 							    </div>';
 		        }
 		        //console.log(html);
-		        $("#eventResponse").html(html);
-		        $(".loadingDiv").hide();
-		        $("#eventResponse").fadeIn('slow');
+		        $("#eventResponse").html(html);	
+		        setTimeout(function(){ 
+		        	$('#eventResponse').imagesLoaded( function() {
+		        		$("#eventResponse").fadeIn('slow');
+		        		$(".loadingDiv").hide();
+		        		$('#eventResponse').masonry({
+		        			itemSelector: '.card-size'
+						});
+						$("#eventResponse").fadeIn('slow');
+					});	        		
+	        	}, 5);
+		        
 		    } else {
 		    	$(".loadingDiv").hide();
 		    	$("#eventResponse").html("<h2 class='no_events'>No events found!!!</h2>");
@@ -552,6 +572,7 @@ function getEventList(params) {
 	        //$select.html('<option id="-1">none available</option>');
 	    }
 	});
+	
 }
 
 if(ePage == 'index') {
@@ -1250,3 +1271,4 @@ else if(ePage == 'chennai') {
 
 	});
 }
+
