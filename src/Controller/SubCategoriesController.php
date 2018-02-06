@@ -58,6 +58,7 @@ class SubCategoriesController extends AppController
      */
     public function add()
     {
+        $this->viewBuilder()->layout('admin');
         $subCategory = $this->SubCategories->newEntity();
         if ($this->request->is('post')) {
             $subCategory = $this->SubCategories->patchEntity($subCategory, $this->request->data);

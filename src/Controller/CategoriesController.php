@@ -49,6 +49,7 @@ class CategoriesController extends AppController
      */
     public function add()
     {
+        $this->viewBuilder()->layout('admin');
         $category = $this->Categories->newEntity();
         if ($this->request->is('post')) {
 
