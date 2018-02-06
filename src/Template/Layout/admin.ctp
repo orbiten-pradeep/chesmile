@@ -32,6 +32,17 @@
 
     <!-- AdminBSB Themes. You can choose a theme from css/themes instead of get all themes -->
     <link href="<?php echo $this->Url->build('/admin/css/themes/all-themes.css'); ?>" rel="stylesheet">
+
+    <link href="<?php echo $this->Url->build('/admin/plugins/jquery-datatable/skin/bootstrap/css/dataTables.bootstrap.css'); ?>" rel="stylesheet">
+
+<style type="text/css">
+    div.dataTables_wrapper div.dataTables_paginate{
+        display: none !important;
+    }
+    .pagination{
+        float: right;
+    }
+</style>
 </head>
 
 <body class="theme-red">
@@ -311,18 +322,64 @@
                     <li class="header">MAIN NAVIGATION</li>
 
                     <li class="active"><?php echo $this->Html->link( $this->Html->tag('i', 'home', array('class' => 'material-icons')).$this->Html->tag('span', 'Home'), ['controller' => 'AdminDashBoard', 'action' => 'index'], array('escape'=>false)); ?></li>
+                    <li>
+                        <a href="javascript:void(0);" class="menu-toggle">
+                            <i class="material-icons">web</i>
+                            <span>Events</span>
+                        </a>
+                        <ul class="ml-menu">
+                            <li><?php echo $this->Html->link($this->Html->tag('span', 'List Events'), ['controller' => 'events', 'action' => 'adminindex'], array('escape'=>false)); ?></li>
+                        </ul>
+                    </li>
 
-                    <li><?php echo $this->Html->link( $this->Html->tag('i', 'supervisor_account', array('class' => 'material-icons')).$this->Html->tag('span', 'Events'), ['controller' => 'events', 'action' => 'adminindex'], array('escape'=>false)); ?></li>
+                    <li>
+                        <a href="javascript:void(0);" class="menu-toggle">
+                            <i class="material-icons">supervisor_account</i>
+                            <span>Users</span>
+                        </a>
+                        <ul class="ml-menu">
+                        <li><?php echo $this->Html->link($this->Html->tag('span', 'List Users'), ['controller' => 'users', 'action' => 'index'], array('escape'=>false)); ?></li>
+                        <li><?php echo $this->Html->link($this->Html->tag('span', 'Add User'), ['controller' => 'users', 'action' => 'add'], array('escape'=>false)); ?></li>
+                        </ul>
+                    </li>
 
-                    <li><?php echo $this->Html->link( $this->Html->tag('i', 'supervisor_account', array('class' => 'material-icons')).$this->Html->tag('span', 'Users'), ['controller' => 'Users', 'action' => 'index'], array('escape'=>false)); ?></li>
+                    <li>
+                        <a href="javascript:void(0);" class="menu-toggle">
+                            <i class="material-icons">web</i>
+                            <span>Groups</span>
+                        </a>
+                        <ul class="ml-menu">
+                            <li><?php echo $this->Html->link( $this->Html->tag('i', 'widgets', array('class' => 'material-icons')).$this->Html->tag('span', 'List Groups'), ['controller' => 'Groups', 'action' => 'index'], array('escape'=>false)); ?></li>
 
-                    <li><?php echo $this->Html->link( $this->Html->tag('i', 'widgets', array('class' => 'material-icons')).$this->Html->tag('span', 'List Groups'), ['controller' => 'Groups', 'action' => 'index'], array('escape'=>false)); ?></li>
+                            <li><?php echo $this->Html->link( $this->Html->tag('i', 'widgets', array('class' => 'material-icons')).$this->Html->tag('span', 'New Group'), ['controller' => 'Groups', 'action' => 'add'], array('escape'=>false)); ?></li>
+                        </ul>
+                    </li>
 
-                    <li><?php echo $this->Html->link( $this->Html->tag('i', 'view_list', array('class' => 'material-icons')).$this->Html->tag('span', 'List Categories'), ['controller' => 'Categories', 'action' => 'index'], array('escape'=>false)); ?></li>
+                    <li>
+                        <a href="javascript:void(0);" class="menu-toggle">
+                            <i class="material-icons">web</i>
+                            <span>Categories</span>
+                        </a>
+                        <ul class="ml-menu">
+                           <li><?php echo $this->Html->link( $this->Html->tag('i', 'view_list', array('class' => 'material-icons')).$this->Html->tag('span', 'List Categories'), ['controller' => 'Categories', 'action' => 'index'], array('escape'=>false)); ?></li>
 
-                    <li><?php echo $this->Html->link( $this->Html->tag('i', 'layers', array('class' => 'material-icons')).$this->Html->tag('span', 'List Sub Categories'), ['controller' => 'SubCategories','action' => 'index'], array('escape'=>false)); ?></li>
+                            <li><?php echo $this->Html->link( $this->Html->tag('i', 'widgets', array('class' => 'material-icons')).$this->Html->tag('span', 'New Category'), ['controller' => 'Categories', 'action' => 'add'], array('escape'=>false)); ?></li>
+                        </ul>
+                    </li>
 
-                    <li><?php echo $this->Html->link( $this->Html->tag('i', 'layers', array('class' => 'material-icons')).$this->Html->tag('span', 'List Tickets'), ['controller' => 'Tickets','action' => 'index'], array('escape'=>false)); ?></li>
+                    <li>
+                        <a href="javascript:void(0);" class="menu-toggle">
+                            <i class="material-icons">web</i>
+                            <span>Subcategories</span>
+                        </a>
+                        <ul class="ml-menu">
+                           <li><?php echo $this->Html->link( $this->Html->tag('i', 'layers', array('class' => 'material-icons')).$this->Html->tag('span', 'List Sub Categories'), ['controller' => 'SubCategories','action' => 'index'], array('escape'=>false)); ?></li>
+
+                            <li><?php echo $this->Html->link( $this->Html->tag('i', 'widgets', array('class' => 'material-icons')).$this->Html->tag('span', 'New Category'), ['controller' => 'SubCategories', 'action' => 'add'], array('escape'=>false)); ?></li>
+                        </ul>
+                    </li>
+
+                    <li><?php echo $this->Html->link( $this->Html->tag('i', 'layers', array('class' => 'material-icons')).$this->Html->tag('span', 'Ticket Details'), ['controller' => 'Tickets','action' => 'index'], array('escape'=>false)); ?></li>
 
                     <li><?php echo $this->Html->link( $this->Html->tag('i', 'exit_to_app', array('class' => 'material-icons')).$this->Html->tag('span', 'Logout'), ['controller' => 'Users', 'action' => 'logout'], array('escape'=>false)); ?></li>
                     
@@ -500,6 +557,9 @@
 
     <!-- Demo Js -->
     <script src="<?php echo $this->Url->build('/admin/js/demo.js'); ?>"></script>
+    <script src="<?php echo $this->Url->build('/admin/js/pages/tables/jquery-datatable.js'); ?>"></script>
+
+    <script src="<?php echo $this->Url->build('/admin/plugins/jquery-datatable/jquery.dataTables.js'); ?>"></script>
 </body>
 
 </html>

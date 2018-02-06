@@ -24,7 +24,7 @@
                 </ul>
             </div>
             <div class="body table-responsive">
-                <table class="table">
+                <table class="table table-bordered table-striped table-hover js-basic-example dataTable">
                     <thead>
                         <tr>
                             <th scope="col"><?= $this->Paginator->sort('id') ?></th>
