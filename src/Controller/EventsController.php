@@ -20,7 +20,7 @@ class EventsController extends AppController
 	public function beforeFilter(Event $event)
 	{
 		parent::beforeFilter($event);
-    	$this->Auth->allow(['Invitation','about','terms','privacy','partnerwith','contact','thebigbeachmarathon', 'index', 'eventlist','View','viewresult','searchbyeventtitle','search','chennai','findslug']);
+    	$this->Auth->allow(['Invitation','about','terms','privacy','partnerwith','contact','thebigbeachmarathon', 'index', 'eventlist','View','viewresult','searchbyeventtitle','search','chennai','findslug', 'demolist']);
     	$this->set('Photo',$this->Auth->user('Photo'));
 	}
 
@@ -1333,5 +1333,47 @@ class EventsController extends AppController
         $categories_list = $this->Events->Categories->find('list', ['limit' => 200]);
         $this->set(compact('event', 'users', 'categories', 'categories_list', 'subCategories', 'address'));
         $this->set('_serialize', ['event']);
+    }
+
+    public function demolist()
+    {
+       $this->loadModel('Groups');
+        $groups = $this->Groups->find('list', ['limit' => 200,'conditions' => array('role' => 'Users')]);
+        $this->set(compact('user', 'groups'));
+        $logged = false;
+        if($this->Auth->user())
+            $logged = true;
+        else
+            $logged = false;
+        //$this->viewBuilder()->layout('event_home');
+
+        $this->loadModel('Categories');
+        $categories_new = $this->Categories->find()->select(['Categories.name', 'Categories.id'])
+            ->where(['active' => 1]);
+
+        $this->loadModel('SubCategories');
+        $subCategories_new = $this->SubCategories->find('all', ['fields' => 'name',
+                'conditions' => ['active' => 1]
+            ]);
+
+        $tcConn = ConnectionManager::get('default');
+        $topCategoriesQuery = "SELECT count(e.id) as event_counts, c.name, c.color, c.id as cid FROM `events` e LEFT JOIN categories c on c.id = e.categories_id WHERE c.id!='' AND e.active = 1 GROUP BY c.id ORDER BY rand() limit 5";
+
+        $tcStmt = $tcConn->execute($topCategoriesQuery);
+        $topCategories = $tcStmt->fetchAll('assoc');
+
+        $users_id = $this->Auth->user('id');
+
+        //$this->set('categories', $categories_new);
+        $this->set('usersId', $users_id);
+        //$this->set('topCategories', $topCategories);
+        //$this->set(compact('subCategories_new'));
+        echo json_encode($topCategories);
+        echo json_encode($categories_new);
+        echo json_encode($subCategories_new);
+
+        $this->autoRender = false;
+        exit;
+
     }
 }

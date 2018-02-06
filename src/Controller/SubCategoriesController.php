@@ -24,6 +24,7 @@ class SubCategoriesController extends AppController
      */
     public function index()
     {
+        $this->viewBuilder()->layout('admin');
         $this->paginate = [
             'contain' => ['Categories']
         ];

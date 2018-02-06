@@ -26,6 +26,7 @@ class GroupsController extends AppController
      */
     public function index()
     {
+        $this->viewBuilder()->layout('admin');
         $groups = $this->paginate($this->Groups);
 
         $this->set(compact('groups'));
