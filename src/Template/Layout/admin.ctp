@@ -310,7 +310,9 @@
                 <ul class="list">
                     <li class="header">MAIN NAVIGATION</li>
 
-                    <li class="active"><?php echo $this->Html->link( $this->Html->tag('i', 'home', array('class' => 'material-icons')).$this->Html->tag('span', 'Home'), ['controller' => 'events', 'action' => 'adminindex'], array('escape'=>false)); ?></li>
+                    <li class="active"><?php echo $this->Html->link( $this->Html->tag('i', 'home', array('class' => 'material-icons')).$this->Html->tag('span', 'Home'), ['controller' => 'AdminDashBoard', 'action' => 'index'], array('escape'=>false)); ?></li>
+
+                    <li><?php echo $this->Html->link( $this->Html->tag('i', 'supervisor_account', array('class' => 'material-icons')).$this->Html->tag('span', 'Events'), ['controller' => 'events', 'action' => 'adminindex'], array('escape'=>false)); ?></li>
 
                     <li><?php echo $this->Html->link( $this->Html->tag('i', 'supervisor_account', array('class' => 'material-icons')).$this->Html->tag('span', 'Users'), ['controller' => 'Users', 'action' => 'index'], array('escape'=>false)); ?></li>
 
@@ -319,6 +321,8 @@
                     <li><?php echo $this->Html->link( $this->Html->tag('i', 'view_list', array('class' => 'material-icons')).$this->Html->tag('span', 'List Categories'), ['controller' => 'Categories', 'action' => 'index'], array('escape'=>false)); ?></li>
 
                     <li><?php echo $this->Html->link( $this->Html->tag('i', 'layers', array('class' => 'material-icons')).$this->Html->tag('span', 'List Sub Categories'), ['controller' => 'SubCategories','action' => 'index'], array('escape'=>false)); ?></li>
+
+                    <li><?php echo $this->Html->link( $this->Html->tag('i', 'layers', array('class' => 'material-icons')).$this->Html->tag('span', 'List Tickets'), ['controller' => 'Tickets','action' => 'index'], array('escape'=>false)); ?></li>
 
                     <li><?php echo $this->Html->link( $this->Html->tag('i', 'exit_to_app', array('class' => 'material-icons')).$this->Html->tag('span', 'Logout'), ['controller' => 'Users', 'action' => 'logout'], array('escape'=>false)); ?></li>
                     
