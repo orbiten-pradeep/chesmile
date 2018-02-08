@@ -80,7 +80,7 @@
 
                               <?= $this->Html->link( $this->Html->tag('i', 'edit', array('class' => 'material-icons', 'title'=>'Edit')), ['action' => 'edit', $event->id], array('escape'=>false)); ?>
 
-                              <?= $this->Form->postLink($this->Html->tag('i', 'delete', array('class' => 'material-icons', 'title'=>'View Event')), ['action' => 'delete', $event->id], ['escape'=>false, 'confirm' => __('Are you sure you want to delete # {0}?', $event->id)]) ?>
+                              <?= $this->Form->postLink($this->Html->tag('i', 'delete', array('class' => 'material-icons', 'title'=>'Delete Event')), ['action' => 'delete', $event->id], ['escape'=>false, 'confirm' => __('Are you sure you want to delete # {0}?', $event->id)]) ?>
                             </td>
                         </tr>
                         <?php endforeach; ?>

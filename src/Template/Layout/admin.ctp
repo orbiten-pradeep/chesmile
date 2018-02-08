@@ -35,6 +35,11 @@
 
     <link href="<?php echo $this->Url->build('/admin/plugins/jquery-datatable/skin/bootstrap/css/dataTables.bootstrap.css'); ?>" rel="stylesheet">
 
+    <link href="<?php echo $this->Url->build('/admin/plugins/bootstrap-select/css/bootstrap-select.css'); ?>" rel="stylesheet">
+
+    <link href="<?php echo $this->Url->build('/admin/plugins/bootstrap-colorpicker/css/bootstrap-colorpicker.css'); ?>" rel="stylesheet">
+
+
 <style type="text/css">
     div.dataTables_wrapper div.dataTables_paginate{
         display: none !important;
@@ -375,7 +380,7 @@
                         <ul class="ml-menu">
                            <li><?php echo $this->Html->link( $this->Html->tag('i', 'layers', array('class' => 'material-icons')).$this->Html->tag('span', 'List Sub Categories'), ['controller' => 'SubCategories','action' => 'index'], array('escape'=>false)); ?></li>
 
-                            <li><?php echo $this->Html->link( $this->Html->tag('i', 'widgets', array('class' => 'material-icons')).$this->Html->tag('span', 'New Category'), ['controller' => 'SubCategories', 'action' => 'add'], array('escape'=>false)); ?></li>
+                            <li><?php echo $this->Html->link( $this->Html->tag('i', 'widgets', array('class' => 'material-icons')).$this->Html->tag('span', 'New SubCategory'), ['controller' => 'SubCategories', 'action' => 'add'], array('escape'=>false)); ?></li>
                         </ul>
                     </li>
 
@@ -560,6 +565,8 @@
     <script src="<?php echo $this->Url->build('/admin/js/pages/tables/jquery-datatable.js'); ?>"></script>
 
     <script src="<?php echo $this->Url->build('/admin/plugins/jquery-datatable/jquery.dataTables.js'); ?>"></script>
+
+     <script src="<?php echo $this->Url->build('/admin/plugins/bootstrap-colorpicker/js/bootstrap-colorpicker.js'); ?>"></script>
 </body>
 
 </html>
