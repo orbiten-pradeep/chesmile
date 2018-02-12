@@ -34,6 +34,7 @@ class CategoriesController extends AppController
      */
     public function view($id = null)
     {
+        $this->viewBuilder()->layout('admin');
         $category = $this->Categories->get($id, [
             'contain' => []
         ]);
@@ -107,6 +108,7 @@ class CategoriesController extends AppController
      */
     public function edit($id = null)
     {
+        $this->viewBuilder()->layout('admin');
         $category = $this->Categories->get($id, [
             'contain' => []
         ]);

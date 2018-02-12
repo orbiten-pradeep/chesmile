@@ -115,7 +115,9 @@ class UsersController extends AppController
      * @throws \Cake\Network\Exception\NotFoundException When record not found.
      */
     public function edit($id = null)
+
     {
+    	 $this->viewBuilder()->layout('admin');
         $user = $this->Users->get($id, [
             'contain' => []
         ]);
