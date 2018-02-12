@@ -57,7 +57,11 @@
 
                                     <?= $this->Html->link( $this->Html->tag('i', 'edit', array('class' => 'material-icons', 'title'=>'Edit')), ['action' => 'edit', $group->id], array('escape'=>false)); ?>
 
-                                    <?= $this->Form->postLink($this->Html->tag('i', 'delete', array('class' => 'material-icons', 'title'=>'Delete')), ['action' => 'delete', $group->id], ['escape'=>false, 'confirm' => __('Are you sure you want to delete # {0}?', $group->id)]) ?>
+                                    <?= $this->Html->link( $this->Html->tag('i', 'add_circle', array('class' => 'material-icons', 'title'=>'Activate')), ['action' => '', $group->id], array('escape'=>false));?>
+
+                                    <?= $this->Html->link( $this->Html->tag('i', 'remove_circle', array('class' => 'material-icons', 'title'=>'De-Activate')), ['action' => '', $group->id], array('escape'=>false));?>
+
+                                    <!-- <?= $this->Form->postLink($this->Html->tag('i', 'delete', array('class' => 'material-icons', 'title'=>'Delete')), ['action' => 'delete', $group->id], ['escape'=>false, 'confirm' => __('Are you sure you want to delete # {0}?', $group->id)]) ?> -->
                                 </td>
                             </tr>
                             <?php endforeach; ?>

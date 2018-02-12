@@ -69,10 +69,10 @@
                                     echo $this->Html->link( $this->Html->tag('i', 'remove_red_eye', array('class' => 'material-icons', 'title'=>'View Event')), ['action' => 'view', $event->id], array('escape'=>false)); ?>
                                     <?php 
                                     if($event->active == 1) {
-                                        echo $this->Html->link( $this->Html->tag('i', 'add_circle', array('class' => 'material-icons', 'title'=>'De-Activate')), ['action' => 'activate', $event->id], array('escape'=>false));
+                                        echo $this->Html->link( $this->Html->tag('i', 'remove_circle', array('class' => 'material-icons', 'title'=>'De-Activate')), ['action' => 'activate', $event->id], array('escape'=>false));
                                     }
                                     else {
-                                        echo $this->Html->link( $this->Html->tag('i', 'remove_circle', array('class' => 'material-icons', 'title'=>'Activate')), ['action' => 'activate', $event->id], array('escape'=>false));
+                                        echo $this->Html->link( $this->Html->tag('i', 'add_circle', array('class' => 'material-icons', 'title'=>'Activate')), ['action' => 'activate', $event->id], array('escape'=>false));
                                     }
                                 ?>
 
@@ -80,7 +80,7 @@
 
                               <?= $this->Html->link( $this->Html->tag('i', 'edit', array('class' => 'material-icons', 'title'=>'Edit')), ['action' => 'edit', $event->id], array('escape'=>false)); ?>
 
-                              <?= $this->Form->postLink($this->Html->tag('i', 'delete', array('class' => 'material-icons', 'title'=>'Delete Event')), ['action' => 'delete', $event->id], ['escape'=>false, 'confirm' => __('Are you sure you want to delete # {0}?', $event->id)]) ?>
+                              <!-- <?= $this->Form->postLink($this->Html->tag('i', 'delete', array('class' => 'material-icons', 'title'=>'Delete Event')), ['action' => 'delete', $event->id], ['escape'=>false, 'confirm' => __('Are you sure you want to delete # {0}?', $event->id)]) ?> -->
                             </td>
                         </tr>
                         <?php endforeach; ?>
