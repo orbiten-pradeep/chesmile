@@ -294,7 +294,7 @@
             <!-- User Info -->
             <div class="user-info">
                 <div class="image">
-                    <img src="<?php echo $this->Url->build('/admin/images/user.png'); ?>" width="48" height="48" alt="User" />
+                    <img src="<?php echo $this->Url->build('/dashboard/images/user.png'); ?>" width="48" height="48" alt="User" />
                 </div>
                 <div class="info-container">
                     <div class="name" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
@@ -333,11 +333,11 @@
                             <span>Events</span>
                         </a>
                         <ul class="ml-menu">
-                            <li><?php echo $this->Html->link($this->Html->tag('span', 'My Events'), ['controller' => 'events', 'action' => 'adminindex'], array('escape'=>false)); ?></li>
+                            <li><?php echo $this->Html->link($this->Html->tag('span', 'List Events'), ['controller' => 'events', 'action' => 'adminindex'], array('escape'=>false)); ?></li>
                         </ul>
                     </li>
 
-                   <!--  <li>
+                    <li>
                         <a href="javascript:void(0);" class="menu-toggle">
                             <i class="material-icons">supervisor_account</i>
                             <span>Users</span>
@@ -346,9 +346,9 @@
                         <li><?php echo $this->Html->link($this->Html->tag('span', 'List Users'), ['controller' => 'users', 'action' => 'index'], array('escape'=>false)); ?></li>
                         <li><?php echo $this->Html->link($this->Html->tag('span', 'Add User'), ['controller' => 'users', 'action' => 'add'], array('escape'=>false)); ?></li>
                         </ul>
-                    </li> -->
+                    </li>
 
-                    <!-- <li>
+                    <li>
                         <a href="javascript:void(0);" class="menu-toggle">
                             <i class="material-icons">web</i>
                             <span>Groups</span>
@@ -358,9 +358,9 @@
 
                             <li><?php echo $this->Html->link( $this->Html->tag('i', 'widgets', array('class' => 'material-icons')).$this->Html->tag('span', 'New Group'), ['controller' => 'Groups', 'action' => 'add'], array('escape'=>false)); ?></li>
                         </ul>
-                    </li> -->
+                    </li>
 
-                    <!-- <li>
+                    <li>
                         <a href="javascript:void(0);" class="menu-toggle">
                             <i class="material-icons">web</i>
                             <span>Categories</span>
@@ -382,13 +382,13 @@
 
                             <li><?php echo $this->Html->link( $this->Html->tag('i', 'widgets', array('class' => 'material-icons')).$this->Html->tag('span', 'New SubCategory'), ['controller' => 'SubCategories', 'action' => 'add'], array('escape'=>false)); ?></li>
                         </ul>
-                    </li> -->
+                    </li>
 
                     <li><?php echo $this->Html->link( $this->Html->tag('i', 'layers', array('class' => 'material-icons')).$this->Html->tag('span', 'Ticket Details'), ['controller' => 'Tickets','action' => 'index'], array('escape'=>false)); ?></li>
 
                     <li><?php echo $this->Html->link( $this->Html->tag('i', 'layers', array('class' => 'material-icons')).$this->Html->tag('span', 'Settlements'), ['controller' => '','action' => ''], array('escape'=>false)); ?></li>
 
-                    <li><?php echo $this->Html->link( $this->Html->tag('i', 'layers', array('class' => 'material-icons')).$this->Html->tag('span', 'Feedback'), ['controller' => '','action' => ''], array('escape'=>false)); ?></li>
+                    <li><?php echo $this->Html->link( $this->Html->tag('i', 'layers', array('class' => 'material-icons')).$this->Html->tag('span', 'Contact Query'), ['controller' => '','action' => ''], array('escape'=>false)); ?></li>
 
                     <li><?php echo $this->Html->link( $this->Html->tag('i', 'exit_to_app', array('class' => 'material-icons')).$this->Html->tag('span', 'Logout'), ['controller' => 'Users', 'action' => 'logout'], array('escape'=>false)); ?></li>
                     

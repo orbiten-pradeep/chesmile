@@ -16,28 +16,28 @@
     <link href="https://fonts.googleapis.com/icon?family=Material+Icons" rel="stylesheet" type="text/css">
 
     <!-- Bootstrap Core Css -->
-    <link href="<?php echo $this->Url->build('/admin/plugins/bootstrap/css/bootstrap.css'); ?>" rel="stylesheet">
+    <link href="<?php echo $this->Url->build('/dashboard/plugins/bootstrap/css/bootstrap.css'); ?>" rel="stylesheet">
 
     <!-- Waves Effect Css -->
-    <link href="<?php echo $this->Url->build('/admin/plugins/node-waves/waves.css'); ?>" rel="stylesheet">
+    <link href="<?php echo $this->Url->build('/dashboard/plugins/node-waves/waves.css'); ?>" rel="stylesheet">
 
     <!-- Animation Css -->
-    <link href="<?php echo $this->Url->build('/admin/plugins/animate-css/animate.css'); ?>" rel="stylesheet">
+    <link href="<?php echo $this->Url->build('/dashboard/plugins/animate-css/animate.css'); ?>" rel="stylesheet">
 
     <!-- Morris Chart Css-->
-    <link href="<?php echo $this->Url->build('/admin/plugins/morrisjs/morris.css'); ?>" rel="stylesheet">
+    <link href="<?php echo $this->Url->build('/dashboard/plugins/morrisjs/morris.css'); ?>" rel="stylesheet">
 
     <!-- Custom Css -->
-    <link href="<?php echo $this->Url->build('/admin/css/style.css'); ?>" rel="stylesheet">
+    <link href="<?php echo $this->Url->build('/dashboard/css/style.css'); ?>" rel="stylesheet">
 
     <!-- AdminBSB Themes. You can choose a theme from css/themes instead of get all themes -->
-    <link href="<?php echo $this->Url->build('/admin/css/themes/all-themes.css'); ?>" rel="stylesheet">
+    <link href="<?php echo $this->Url->build('/dashboard/css/themes/all-themes.css'); ?>" rel="stylesheet">
 
-    <link href="<?php echo $this->Url->build('/admin/plugins/jquery-datatable/skin/bootstrap/css/dataTables.bootstrap.css'); ?>" rel="stylesheet">
+    <link href="<?php echo $this->Url->build('/dashboard/plugins/jquery-datatable/skin/bootstrap/css/dataTables.bootstrap.css'); ?>" rel="stylesheet">
 
-    <link href="<?php echo $this->Url->build('/admin/plugins/bootstrap-select/css/bootstrap-select.css'); ?>" rel="stylesheet">
+    <link href="<?php echo $this->Url->build('/dashboard/plugins/bootstrap-select/css/bootstrap-select.css'); ?>" rel="stylesheet">
 
-    <link href="<?php echo $this->Url->build('/admin/plugins/bootstrap-colorpicker/css/bootstrap-colorpicker.css'); ?>" rel="stylesheet">
+    <link href="<?php echo $this->Url->build('/dashboard/plugins/bootstrap-colorpicker/css/bootstrap-colorpicker.css'); ?>" rel="stylesheet">
 
 
 <style type="text/css">
@@ -288,13 +288,13 @@
         </div>
     </nav>
     <!-- #Top Bar -->
-    <section>
+    <section><!-- menu bar for admin panel -->
         <!-- Left Sidebar -->
-        <aside id="leftsidebar" class="sidebar">
+        <aside id="leftsidebar" class="sidebar" style="display: none;">
             <!-- User Info -->
             <div class="user-info">
                 <div class="image">
-                    <img src="<?php echo $this->Url->build('/admin/images/user.png'); ?>" width="48" height="48" alt="User" />
+                    <img src="<?php echo $this->Url->build('/dashboard/images/user.png'); ?>" width="48" height="48" alt="User" />
                 </div>
                 <div class="info-container">
                     <div class="name" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
@@ -546,31 +546,31 @@
     </section>
 
     <!-- Jquery Core Js -->
-    <script src="<?php echo $this->Url->build('/admin/plugins/jquery/jquery.min.js'); ?>"></script>
+    <script src="<?php echo $this->Url->build('/dashboard/plugins/jquery/jquery.min.js'); ?>"></script>
 
     <!-- Bootstrap Core Js -->
-    <script src="<?php echo $this->Url->build('/admin/plugins/bootstrap/js/bootstrap.js'); ?>"></script>
+    <script src="<?php echo $this->Url->build('/dashboard/plugins/bootstrap/js/bootstrap.js'); ?>"></script>
 
     <!-- Select Plugin Js -->
-    <script src="<?php echo $this->Url->build('/admin/plugins/bootstrap-select/js/bootstrap-select.js'); ?>"></script>
+    <script src="<?php echo $this->Url->build('/dashboard/plugins/bootstrap-select/js/bootstrap-select.js'); ?>"></script>
 
     <!-- Slimscroll Plugin Js -->
-    <script src="<?php echo $this->Url->build('/admin/plugins/jquery-slimscroll/jquery.slimscroll.js'); ?>"></script>
+    <script src="<?php echo $this->Url->build('/dashboard/plugins/jquery-slimscroll/jquery.slimscroll.js'); ?>"></script>
 
     <!-- Waves Effect Plugin Js -->
-    <script src="<?php echo $this->Url->build('/admin/plugins/node-waves/waves.js'); ?>"></script>
+    <script src="<?php echo $this->Url->build('/dashboard/plugins/node-waves/waves.js'); ?>"></script>
 
     <!-- Custom Js -->
-    <script src="<?php echo $this->Url->build('/admin/js/admin.js'); ?>"></script>
-    <script src="<?php echo $this->Url->build('/admin/js/pages/index.js'); ?>"></script>
+    <script src="<?php echo $this->Url->build('/dashboard/js/admin.js'); ?>"></script>
+    <script src="<?php echo $this->Url->build('/dashboard/js/pages/index.js'); ?>"></script>
 
     <!-- Demo Js -->
-    <script src="<?php echo $this->Url->build('/admin/js/demo.js'); ?>"></script>
-    <script src="<?php echo $this->Url->build('/admin/js/pages/tables/jquery-datatable.js'); ?>"></script>
+    <script src="<?php echo $this->Url->build('/dashboard/js/demo.js'); ?>"></script>
+    <script src="<?php echo $this->Url->build('/dashboard/js/pages/tables/jquery-datatable.js'); ?>"></script>
 
-    <script src="<?php echo $this->Url->build('/admin/plugins/jquery-datatable/jquery.dataTables.js'); ?>"></script>
+    <script src="<?php echo $this->Url->build('/dashboard/plugins/jquery-datatable/jquery.dataTables.js'); ?>"></script>
 
-     <script src="<?php echo $this->Url->build('/admin/plugins/bootstrap-colorpicker/js/bootstrap-colorpicker.js'); ?>"></script>
+     <script src="<?php echo $this->Url->build('/dashboard/plugins/bootstrap-colorpicker/js/bootstrap-colorpicker.js'); ?>"></script>
 </body>
 
 </html>

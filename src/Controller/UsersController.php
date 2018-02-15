@@ -301,6 +301,11 @@ class UsersController extends AppController
 	            	return $this->redirect(array('controller' => 'AdminDashBoard', 'action' => 'index'));
 	            }
 	        }
+	        elseif ($user && $user['group_id'] == 2) {
+	        	  $this->Auth->setUser($user);
+	        $this->viewBuilder()->layout('admin-organizer');
+	       // $this->redirect(array('controller' => 'AdminDashBoard', 'action' => 'index'));
+	        }
 	        $this->Flash->error(__('Your username or password was incorrect.'));
 	    }
 	}

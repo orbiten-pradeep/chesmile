@@ -13,16 +13,16 @@
     <link href="https://fonts.googleapis.com/icon?family=Material+Icons" rel="stylesheet" type="text/css">
 
     <!-- Bootstrap Core Css -->
-    <link href="<?php echo $this->Url->build('/admin/plugins/bootstrap/css/bootstrap.css'); ?>" rel="stylesheet">
+    <link href="<?php echo $this->Url->build('/dashboard/plugins/bootstrap/css/bootstrap.css'); ?>" rel="stylesheet">
 
     <!-- Waves Effect Css -->
-    <link href="<?php echo $this->Url->build('/admin/plugins/node-waves/waves.css'); ?>" rel="stylesheet">
+    <link href="<?php echo $this->Url->build('/dashboard/plugins/node-waves/waves.css'); ?>" rel="stylesheet">
 
     <!-- Animation Css -->
-    <link href="<?php echo $this->Url->build('/admin/plugins/animate-css/animate.css'); ?>" rel="stylesheet">
+    <link href="<?php echo $this->Url->build('/dashboard/plugins/animate-css/animate.css'); ?>" rel="stylesheet">
 
     <!-- Custom Css -->
-    <link href="<?php echo $this->Url->build('/admin/css/style.css'); ?>" rel="stylesheet">
+    <link href="<?php echo $this->Url->build('/dashboard/css/style.css'); ?>" rel="stylesheet">
 </head>
 
 <body class="login-page">
@@ -30,20 +30,20 @@
     <?php echo $this->Flash->render(); ?>
 
     <!-- Jquery Core Js -->
-    <script src="<?php echo $this->Url->build('/admin/plugins/jquery/jquery.min.js'); ?>"></script>
+    <script src="<?php echo $this->Url->build('/dashboard/plugins/jquery/jquery.min.js'); ?>"></script>
 
     <!-- Bootstrap Core Js -->
-    <script src="<?php echo $this->Url->build('/admin/plugins/bootstrap/js/bootstrap.js'); ?>"></script>
+    <script src="<?php echo $this->Url->build('/dashboard/plugins/bootstrap/js/bootstrap.js'); ?>"></script>
 
     <!-- Waves Effect Plugin Js -->
-    <script src="<?php echo $this->Url->build('/admin/plugins/node-waves/waves.js'); ?>"></script>
+    <script src="<?php echo $this->Url->build('/dashboard/plugins/node-waves/waves.js'); ?>"></script>
 
     <!-- Validation Plugin Js -->
-    <script src="<?php echo $this->Url->build('/admin/plugins/jquery-validation/jquery.validate.js'); ?>"></script>
+    <script src="<?php echo $this->Url->build('/dashboard/plugins/jquery-validation/jquery.validate.js'); ?>"></script>
 
     <!-- Custom Js -->
-    <script src="<?php echo $this->Url->build('/admin/js/admin.js'); ?>"></script>
-    <script src="<?php echo $this->Url->build('/admin/js/pages/examples/sign-in.js'); ?>"></script>
+    <script src="<?php echo $this->Url->build('/dashboard/js/admin.js'); ?>"></script>
+    <script src="<?php echo $this->Url->build('/dashboard/js/pages/examples/sign-in.js'); ?>"></script>
 </body>
 
 </html>
