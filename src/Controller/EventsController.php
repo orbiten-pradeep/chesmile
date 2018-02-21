@@ -1223,7 +1223,6 @@ class EventsController extends AppController
         $this->set('usersId', $users_id);
         $this->set(compact('subCategories_new'));
     }
-
 	/**
      * View method
      *

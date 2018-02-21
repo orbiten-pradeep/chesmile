@@ -31,8 +31,8 @@
             <div class="body table-responsive">
                 <table class="table table-bordered table-striped table-hover js-basic-example dataTable">
                     <thead>
-                        <tr>
-                            <th scope="col"><?= $this->Paginator->sort('id') ?></th>
+                        <tr> <th scope="col"><?= $this->Paginator->sort('Select') ?></th>
+                            <th scope="col"><?= $this->Paginator->sort('Serial No') ?></th>
                             <th scope="col"><?= $this->Paginator->sort('name') ?></th>
                             <th scope="col"><?= $this->Paginator->sort('color') ?></th>
                             <th scope="col"><?= $this->Paginator->sort('card') ?></th>
@@ -43,9 +43,16 @@
                         </tr>
                     </thead>
                     <tbody>
-                        <?php foreach ($categories as $category): ?>
-                            <tr>
-                                <td><?= $this->Number->format($category->id) ?></td>
+                        <?php $n=0;
+                         foreach ($categories as $category): $n++;?>
+                            <tr><td> 
+                                        <span class="input-group-addon">
+                                            <input type="radio" class="with-gap" id="ig_radio">
+                                            <label for="ig_radio"></label>
+                                        </span>
+                                      
+      </td>
+                                <td><?= $this->Number->format($n) ?></td>
                                 <td><?= h($category->name) ?></td>
                                 <td style="background-color: <?php echo "#".$category->color; ?>"><?= h($category->color) ?></td>
                                 <td><?php echo $this->Html->image('card/'.$category->card, array('width' => '20px', 'height' => '20px','alt'=>'Card')); ?></td>
@@ -64,6 +71,12 @@
                             <?php endforeach; ?>
                     </tbody>
                 </table>
+                 <div class="pull-right"> <button type="button" class="btn btn-primary waves-effect">Add</button>
+     <button type="button" class="btn btn-primary waves-effect">View</button>
+      <button type="button" class="btn btn-primary waves-effect">Edit</button>
+       <button type="button" class="btn btn-primary waves-effect">Activate</button>
+        <button type="button" class="btn btn-primary waves-effect">Deactivate</button>
+    </div><br>
                 <div class="paginator">
                     <ul class="pagination">
                     <?= $this->Paginator->prev('< ' . __('previous')) ?>

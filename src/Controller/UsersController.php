@@ -36,6 +36,60 @@ class UsersController extends AppController
         $this->set('_serialize', ['users']);
     }
 
+ public function organizerindex()
+    {
+    	$this->viewBuilder()->layout('admin');
+        $this->paginate = [
+            'contain' => ['Groups']
+        ];
+       // $user = $this->Users->find('all',['limit' => 200, 'conditions' => array('group_id' => 2 )]);
+        $users = $this->paginate($this->Users->find('all',['limit' => 200, 'conditions' => array('group_id' => 2 )]));
+        $this->set(compact('users'));
+        $this->set('_serialize', ['users']);
+
+    	//$groups = $this->Users->Groups->find('list', ['limit' => 200,'conditions' => array('id' => 2)]);
+    }
+ public function adminmanager()
+    {
+    	$this->viewBuilder()->layout('admin');
+        $this->paginate = [
+            'contain' => ['Groups']
+        ];
+       // $user = $this->Users->find('all',['limit' => 200, 'conditions' => array('group_id' => 2 )]);
+        $users = $this->paginate($this->Users->find('all',['limit' => 200, 'conditions' => array('group_id' => 5 )]));
+        $this->set(compact('users'));
+        $this->set('_serialize', ['users']);
+
+    	//$groups = $this->Users->Groups->find('list', ['limit' => 200,'conditions' => array('id' => 2)]);
+    }
+ public function emanagerindex()
+    {
+    	$this->viewBuilder()->layout('admin');
+        $this->paginate = [
+            'contain' => ['Groups']
+        ];
+       // $user = $this->Users->find('all',['limit' => 200, 'conditions' => array('group_id' => 2 )]);
+        $users = $this->paginate($this->Users->find('all',['limit' => 200, 'conditions' => array('group_id' => 6 )]));
+        $this->set(compact('users'));
+        $this->set('_serialize', ['users']);
+
+    	//$groups = $this->Users->Groups->find('list', ['limit' => 200,'conditions' => array('id' => 2)]);
+    }
+	
+	public function userlist()
+    {
+    	$this->viewBuilder()->layout('admin');
+        $this->paginate = [
+            'contain' => ['Groups']
+        ];
+       // $user = $this->Users->find('all',['limit' => 200, 'conditions' => array('group_id' => 2 )]);
+        $users = $this->paginate($this->Users->find('all',['limit' => 200, 'conditions' => array('group_id' => 1 )]));
+        $this->set(compact('users'));
+        $this->set('_serialize', ['users']);
+
+    	//$groups = $this->Users->Groups->find('list', ['limit' => 200,'conditions' => array('id' => 2)]);
+    }
+		
     /**
      * View method
      *
@@ -290,7 +344,7 @@ class UsersController extends AppController
 		$this->viewBuilder()->layout('admin_login');
 	    if ($this->request->is('post')) {
 	        $user = $this->Auth->identify();
-			if ($user && $user['group_id'] == 4) {
+			if ($user && $user['group_id'] != 1) {
 	            $this->Auth->setUser($user);
 	            if($this->request->session()->read('Activate') == 1)
 	            {

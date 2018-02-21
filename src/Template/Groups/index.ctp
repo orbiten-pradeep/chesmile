@@ -35,23 +35,33 @@
                 <table class="table table-bordered table-striped table-hover js-basic-example dataTable">
                     <thead>
                         <tr>
-                            <th scope="col"><?= $this->Paginator->sort('id') ?></th>
+                         <th scope="col"><?= $this->Paginator->sort('Select') ?></th>
+                            <th scope="col"><?= $this->Paginator->sort('Serial No') ?></th>
                             <th scope="col"><?= $this->Paginator->sort('name') ?></th>
                             <th scope="col"><?= $this->Paginator->sort('role') ?></th>
                             <th scope="col"><?= $this->Paginator->sort('created') ?></th>
                             <th scope="col"><?= $this->Paginator->sort('modified') ?></th>
-                            <th scope="col" class="actions"><?= __('Actions') ?></th>
+                            <!-- <th scope="col" class="actions"><?= __('Actions') ?></th> -->
                         </tr>
                     </thead>
                     <tbody>
-                        <?php foreach ($groups as $group): ?>
+                        <?php
+                        $n = 0;
+                         foreach ($groups as $group): $n++; ?>
                             <tr>
-                               <td><?= $this->Number->format($group->id) ?></td>
+                            <td> 
+                                        <span class="input-group-addon">
+                                            <input type="radio" class="with-gap" id="ig_radio">
+                                            <label for="ig_radio"></label>
+                                        </span>
+                                      
+      </td>
+                               <td><?= $this->Number->format($n) ?></td>
                                 <td><?= h($group->name) ?></td>
                                 <td><?= h($group->role) ?></td>
                                 <td><?= h($group->created) ?></td>
                                 <td><?= h($group->modified) ?></td>
-                                <td class="actions">
+                             <!--  <td class="actions">
                                     <?php
                                     echo $this->Html->link( $this->Html->tag('i', 'remove_red_eye', array('class' => 'material-icons', 'title'=>'View Group')), ['action' => 'view', $group->id], array('escape'=>false)); ?>
 
@@ -61,12 +71,18 @@
 
                                     <?= $this->Html->link( $this->Html->tag('i', 'remove_circle', array('class' => 'material-icons', 'title'=>'De-Activate')), ['action' => '', $group->id], array('escape'=>false));?>
 
-                                    <!-- <?= $this->Form->postLink($this->Html->tag('i', 'delete', array('class' => 'material-icons', 'title'=>'Delete')), ['action' => 'delete', $group->id], ['escape'=>false, 'confirm' => __('Are you sure you want to delete # {0}?', $group->id)]) ?> -->
-                                </td>
+                                   <?= $this->Form->postLink($this->Html->tag('i', 'delete', array('class' => 'material-icons', 'title'=>'Delete')), ['action' => 'delete', $group->id], ['escape'=>false, 'confirm' => __('Are you sure you want to delete # {0}?', $group->id)]) ?>
+                                </td> -->
                             </tr>
                             <?php endforeach; ?>
                     </tbody>
                 </table>
+                <div class="pull-right"> <button type="button" class="btn btn-primary waves-effect">Add</button>
+     <button type="button" class="btn btn-primary waves-effect">View</button>
+      <button type="button" class="btn btn-primary waves-effect">Edit</button>
+       <button type="button" class="btn btn-primary waves-effect">Activate</button>
+        <button type="button" class="btn btn-primary waves-effect">Deactivate</button>
+    </div><br>
                 <div class="paginator">
                     <ul class="pagination">
                     <?= $this->Paginator->prev('< ' . __('previous')) ?>

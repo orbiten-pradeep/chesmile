@@ -26,21 +26,28 @@
             <div class="body table-responsive">
                 <table class="table table-bordered table-striped table-hover js-basic-example dataTable">
                     <thead>
-                        <tr>
-                            <th scope="col"><?= $this->Paginator->sort('id') ?></th>
+                        <tr> <th scope="col"><?= $this->Paginator->sort('Select') ?></th>
+                            <th scope="col"><?= $this->Paginator->sort('Serial No') ?></th>
                             <th scope="col"><?= $this->Paginator->sort('title') ?></th>
                             <th scope="col"><?= $this->Paginator->sort('active') ?></th>
                             <th scope="col"><?= $this->Paginator->sort('categories_id') ?></th>
                             <th scope="col"><?= $this->Paginator->sort('date') ?></th>
                             <th scope="col"><?= $this->Paginator->sort('time') ?></th>
                             <th scope="col"><?= $this->Paginator->sort('register_online') ?></th>
-                            <th scope="col" class="actions"><?= __('Actions') ?></th>
+                           <!--  <th scope="col" class="actions"><?= __('Actions') ?></th> -->
                         </tr>
                     </thead>
                     <tbody>
-                        <?php foreach ($eventss as $event): ?>
-                        <tr>
-                            <td><?= $this->Number->format($event->id) ?></td>
+                        <?php $n=0;
+                         foreach ($eventss as $event): $n++; ?>
+                        <tr><td> 
+                                        <span class="input-group-addon">
+                                            <input type="radio" class="with-gap" id="ig_radio">
+                                            <label for="ig_radio"></label>
+                                        </span>
+                                      
+      </td>
+                            <td><?= $this->Number->format($n) ?></td>
                             <td><?= h($event->title) ?></td>
                             <td>
                             <?php 
@@ -64,7 +71,7 @@
                             echo "Enabled";
                             }
                             ?></td>
-                            <td class="actions">
+                          <!--   <td class="actions">
                                 <?php
                                     echo $this->Html->link( $this->Html->tag('i', 'remove_red_eye', array('class' => 'material-icons', 'title'=>'View Event')), ['action' => 'view', $event->id], array('escape'=>false)); ?>
                                     <?php 
@@ -80,12 +87,18 @@
 
                               <?= $this->Html->link( $this->Html->tag('i', 'edit', array('class' => 'material-icons', 'title'=>'Edit')), ['action' => 'edit', $event->id], array('escape'=>false)); ?>
 
-                              <!-- <?= $this->Form->postLink($this->Html->tag('i', 'delete', array('class' => 'material-icons', 'title'=>'Delete Event')), ['action' => 'delete', $event->id], ['escape'=>false, 'confirm' => __('Are you sure you want to delete # {0}?', $event->id)]) ?> -->
-                            </td>
+                              <!-- <?= $this->Form->postLink($this->Html->tag('i', 'delete', array('class' => 'material-icons', 'title'=>'Delete Event')), ['action' => 'delete', $event->id], ['escape'=>false, 'confirm' => __('Are you sure you want to delete # {0}?', $event->id)]) ?> 
+                            </td> -->
                         </tr>
                         <?php endforeach; ?>
                     </tbody>
                 </table>
+                 <div class="pull-right"> <button type="button" class="btn btn-primary waves-effect">Add</button>
+     <button type="button" class="btn btn-primary waves-effect">View</button>
+      <button type="button" class="btn btn-primary waves-effect">Edit</button>
+       <button type="button" class="btn btn-primary waves-effect">Activate</button>
+        <button type="button" class="btn btn-primary waves-effect">Deactivate</button>
+    </div><br>
                 <div class="paginator">
                     <ul class="pagination">
                     <?= $this->Paginator->prev('< ' . __('previous')) ?>

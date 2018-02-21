@@ -27,7 +27,8 @@
                 <table class="table table-bordered table-striped table-hover js-basic-example dataTable">
                     <thead>
                         <tr>
-                            <th scope="col"><?= $this->Paginator->sort('id') ?></th>
+                        <th scope="col"><?= $this->Paginator->sort('Select') ?></th>
+                            <th scope="col"><?= $this->Paginator->sort('Serial No') ?></th>
                             <th scope="col"><?= $this->Paginator->sort('events_id') ?></th>
                             <th scope="col"><?= $this->Paginator->sort('firstname') ?></th>
                             <th scope="col"><?= $this->Paginator->sort('name') ?></th>
@@ -37,13 +38,20 @@
                             <th scope="col"><?= $this->Paginator->sort('amount') ?></th>
                             <th scope="col"><?= $this->Paginator->sort('status') ?></th>
                             <th scope="col"><?= $this->Paginator->sort('unmappedstatus') ?></th>
-                            <th scope="col" class="actions"><?= __('Actions') ?></th>
+                           <!--  <th scope="col" class="actions"><?= __('Actions') ?></th> -->
                         </tr>
                     </thead>
                     <tbody>
-                        <?php foreach ($tickets as $ticket): ?>
-                            <tr>
-                                <td><?= $this->Number->format($ticket->id) ?></td>
+                        <?php $n=0;
+                        foreach ($tickets as $ticket): $n++; ?>
+                            <tr> <td> 
+                                        <span class="input-group-addon">
+                                            <input type="radio" class="with-gap" id="ig_radio">
+                                            <label for="ig_radio"></label>
+                                        </span>
+                                      
+      </td>
+                                <td><?= $this->Number->format($n) ?></td>
                                 <td><?= $ticket->has('event') ? $this->Html->link($ticket->event->title, ['controller' => 'Events', 'action' => 'view', $ticket->event->id]) : '' ?></td>
                                 <td><?= h($ticket->firstname) ?></td>
                                 <td><?= h($ticket->name) ?></td>
@@ -53,18 +61,24 @@
                                 <td><?= h($ticket->amount) ?></td>
                                 <td><?= h($ticket->status) ?></td>
                                 <td><?= h($ticket->unmappedstatus) ?></td>
-                                <td class="actions">
+                               <!--  <td class="actions">
                                     <?php
                                     echo $this->Html->link( $this->Html->tag('i', 'remove_red_eye', array('class' => 'material-icons', 'title'=>'View Sub Category')), ['action' => 'view', $ticket->id], array('escape'=>false)); ?>
 
                                     <?= $this->Html->link( $this->Html->tag('i', 'edit', array('class' => 'material-icons', 'title'=>'Edit')), ['action' => 'edit', $ticket->id], array('escape'=>false)); ?>
 
                                     <?= $this->Form->postLink($this->Html->tag('i', 'delete', array('class' => 'material-icons', 'title'=>'Delete')), ['action' => 'delete', $ticket->id], ['escape'=>false, 'confirm' => __('Are you sure you want to delete # {0}?', $ticket->id)]) ?>
-                                </td>
+                                </td> -->
                             </tr>
                             <?php endforeach; ?>
                     </tbody>
                 </table>
+                 <div class="pull-right"> <button type="button" class="btn btn-primary waves-effect">Add</button>
+     <button type="button" class="btn btn-primary waves-effect">View</button>
+      <button type="button" class="btn btn-primary waves-effect">Edit</button>
+       <button type="button" class="btn btn-primary waves-effect">Activate</button>
+        <button type="button" class="btn btn-primary waves-effect">Deactivate</button>
+    </div><br>
                 <div class="paginator">
                     <ul class="pagination">
                     <?= $this->Paginator->prev('< ' . __('previous')) ?>

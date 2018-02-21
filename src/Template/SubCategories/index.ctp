@@ -34,8 +34,8 @@
             <div class="body table-responsive">
                 <table class="table table-bordered table-striped table-hover js-basic-example dataTable">
                     <thead>
-                        <tr>
-                            <th scope="col"><?= $this->Paginator->sort('id') ?></th>
+                        <tr> <th scope="col"><?= $this->Paginator->sort('Select') ?></th>
+                            <th scope="col"><?= $this->Paginator->sort('Serial No') ?></th>
                             <th scope="col"><?= $this->Paginator->sort('categories_id') ?></th>
                             <th scope="col"><?= $this->Paginator->sort('name') ?></th>
                             <th scope="col"><?= $this->Paginator->sort('active') ?></th>
@@ -45,9 +45,17 @@
                         </tr>
                     </thead>
                     <tbody>
-                        <?php foreach ($subCategories as $subCategory): ?>
+                        <?php $n=0;
+                        foreach ($subCategories as $subCategory):$n++; ?>
                             <tr>
-                                <td><?= $this->Number->format($subCategory->id) ?></td>
+                            <td> 
+                                        <span class="input-group-addon">
+                                            <input type="radio" class="with-gap" id="ig_radio">
+                                            <label for="ig_radio"></label>
+                                        </span>
+                                      
+      </td>
+                                <td><?= $this->Number->format($n) ?></td>
                                 <td><?= $subCategory->has('category') ? $this->Html->link($subCategory->category->name, ['controller' => 'Categories', 'action' => 'view', $subCategory->category->id]) : '' ?></td>
                                 <td><?= h($subCategory->name) ?></td>
                                 <td><?= h($subCategory->active) ?></td>
@@ -65,6 +73,12 @@
                             <?php endforeach; ?>
                     </tbody>
                 </table>
+                 <div class="pull-right"> <button type="button" class="btn btn-primary waves-effect">Add</button>
+     <button type="button" class="btn btn-primary waves-effect">View</button>
+      <button type="button" class="btn btn-primary waves-effect">Edit</button>
+       <button type="button" class="btn btn-primary waves-effect">Activate</button>
+        <button type="button" class="btn btn-primary waves-effect">Deactivate</button>
+    </div><br>
                 <div class="paginator">
                     <ul class="pagination">
                     <?= $this->Paginator->prev('< ' . __('previous')) ?>
