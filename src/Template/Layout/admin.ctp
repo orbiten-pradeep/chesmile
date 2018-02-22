@@ -91,12 +91,12 @@
                 <a class="navbar-brand" href="index.html">Chennaismile - <?= $this->fetch('title') ?></a>
             </div>
             <div class="collapse navbar-collapse" id="navbar-collapse">
-            <div> <button type="button" class="btn btn-primary waves-effect">Add</button>
+          <!--   <div> <button type="button" class="btn btn-primary waves-effect">Add</button>
      <button type="button" class="btn btn-primary waves-effect">View</button>
       <button type="button" class="btn btn-primary waves-effect">Edit</button>
        <button type="button" class="btn btn-primary waves-effect">Activate</button>
         <button type="button" class="btn btn-primary waves-effect">Deactivate</button>
-    </div>
+    </div> -->
                 <ul class="nav navbar-nav navbar-right">
                     <!-- Call Search -->
                     <li><a href="javascript:void(0);" class="js-search" data-close="true"><i class="material-icons">search</i></a></li>
@@ -409,7 +409,6 @@
                     <li><?php echo $this->Html->link( $this->Html->tag('i', 'layers', array('class' => 'material-icons')).$this->Html->tag('span', 'Contact Query'), ['controller' => 'Contact','action' => 'index'], array('escape'=>false)); ?></li>
 
                     <li><?php echo $this->Html->link( $this->Html->tag('i', 'exit_to_app', array('class' => 'material-icons')).$this->Html->tag('span', 'Logout'), ['controller' => 'Users', 'action' => 'logout'], array('escape'=>false)); ?></li>
-<<<<<<< .mine
                 </ul>
             </div>
             <!-- #Menu -->
@@ -503,8 +502,8 @@
                     <li><?php echo $this->Html->link( $this->Html->tag('i', 'layers', array('class' => 'material-icons')).$this->Html->tag('span', 'Contact Query'), ['controller' => 'Contact','action' => 'index'], array('escape'=>false)); ?></li>
 
                     <li><?php echo $this->Html->link( $this->Html->tag('i', 'exit_to_app', array('class' => 'material-icons')).$this->Html->tag('span', 'Logout'), ['controller' => 'Users', 'action' => 'logout'], array('escape'=>false)); ?></li>
-||||||| .r379
-=======
+
+
                 </ul>
             </div>
             <!-- #Menu -->
@@ -598,7 +597,7 @@
                     <li><?php echo $this->Html->link( $this->Html->tag('i', 'layers', array('class' => 'material-icons')).$this->Html->tag('span', 'Contact Query'), ['controller' => 'Contact','action' => 'index'], array('escape'=>false)); ?></li>
 
                     <li><?php echo $this->Html->link( $this->Html->tag('i', 'exit_to_app', array('class' => 'material-icons')).$this->Html->tag('span', 'Logout'), ['controller' => 'Users', 'action' => 'logout'], array('escape'=>false)); ?></li>
->>>>>>> .r384
+
                     
                 </ul>
             </div>
@@ -611,13 +610,12 @@
                 <ul class="list">
                     <li class="header">MAIN NAVIGATION</li>
 
-<<<<<<< .mine
-                    <li class="active"><?php echo $this->Html->link( $this->Html->tag('i', 'home', array('class' => 'material-icons')).$this->Html->tag('span', 'Home - Super Admin'), ['controller' => 'AdminDashBoard', 'action' => 'index'], array('escape'=>false)); ?></li>
+                    <li class="active"><?php echo $this->Html->link( $this->Html->tag('i', 'home', array('class' => 'material-icons')).$this->Html->tag('span', 'Home -  Admin Manager'), ['controller' => 'AdminDashBoard', 'action' => 'index'], array('escape'=>false)); ?></li>
                      <li>
                         <a href="javascript:void(0);" class="menu-toggle">
                             <i class="material-icons">web</i>
                             <span>Groups</span>
-||||||| .r379
+
                     <!-- <li>
                         <a href="pages/typography.html">
                             <i class="material-icons">text_fields</i>
@@ -628,7 +626,7 @@
                         <a href="javascript:void(0);" class="menu-toggle">
                             <i class="material-icons">web</i>
                             <span>Groups</span>
->>>>>>> .r384
+
                         </a>
                         <ul class="ml-menu">
                             <li><?php echo $this->Html->link( $this->Html->tag('i', 'widgets', array('class' => 'material-icons')).$this->Html->tag('span', 'List Groups'), ['controller' => 'Groups', 'action' => 'index'], array('escape'=>false)); ?></li>

@@ -1169,6 +1169,10 @@ body {
   padding-top: 0px !important;
 }
 
+.org-btn{
+  display: none;
+}
+
 </style>
 
 <script type="text/javascript">
@@ -1194,6 +1198,7 @@ body {
 <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/4.0.0-alpha.4/css/bootstrap.min.css">
 <link href="https://fonts.googleapis.com/css?family=Raleway:100,200,300,400,500,600,700,800,900" rel="stylesheet">
 <link href="http://maxcdn.bootstrapcdn.com/font-awesome/4.2.0/css/font-awesome.min.css" rel="stylesheet">
+<link href="https://gitcdn.github.io/bootstrap-toggle/2.2.2/css/bootstrap-toggle.min.css" rel="stylesheet">
 
 
 <?php echo $this->Html->css(['style', 'custom', 'checkbox', 'daterangepicker', 'bootstrap-tagsinput']); ?>
@@ -1263,10 +1268,15 @@ body {
       </div>
       <?php } ?>
       <li><a href="#past-events" class="btn btn-primary past-events">View past events</a></li>
-      <?php if($this->request->session()->read('Auth.User')) { ?>
+      <?php $user = $this->request->session()->read('Auth.User'); if($user && $user['group_id'] != 1) { ?>
 
       <li><?= $this->Html->link(__('Create events'), ['controller' => 'events', 'action' => 'add'], array('class' => 'btn btn-primary')); ?></li>
         <?php }?>
+
+        <?php $user = $this->request->session()->read('Auth.User'); if($user && $user['group_id'] == 1) { ?>
+
+        <li><a href="#" class="btn btn-primary" data-toggle="modal" data-target="#orgSignup">Create events</a></li>
+     <?php }?>
 
       <?php if(!$this->request->session()->read('Auth.User')){?>
       <li><a href="#" class="btn btn-primary" data-toggle="modal" data-target="#loginSignup">Create events</a></li>
@@ -1665,6 +1675,37 @@ body {
     </div>
   </div>
 
+
+    <!-- Modal -->
+  <div class="modal fade" id="orgSignup" role="dialog">
+    <div class="modal-dialog">
+    
+      <!-- Modal content-->
+      <div class="modal-content con">
+        <div class="modal-header" style="border-bottom: none;">
+          <button type="button" class="close hide" data-dismiss="modal" style="color: #4abac5 !important;">&times;</button>
+          <h4 class="modal-title"></h4>
+        </div>
+        <div class="modal-body" style="text-align: center;background: none;">
+          <p >Do you want to upgrade your account as an event organizer?</p>
+          <input data-on="Yes" data-off="No" id="toggle-event" data-toggle="toggle" type="checkbox">
+          <div id="console-event"></div>
+          <script>
+            $(function() {
+              $('#toggle-event').change(function() {
+                $('#console-event').html('Toggle: ' + $(this).prop('checked'))
+              })
+            })
+          </script>
+        </div>
+        <div class="modal-footer" style="border-top: none;">
+          <button type="button" class="btn btn-default closebtn" data-dismiss="modal">Close</button>
+        </div>
+      </div>
+      
+    </div>
+  </div>
+
   <script type="text/javascript">
     $('.viewLoginForim').click(function(){
   $('#loginModal').show();
@@ -1775,6 +1816,7 @@ window.onclick = function(event) {
 <link rel="stylesheet" href="//code.jquery.com/ui/1.12.1/themes/base/jquery-ui.css">
 <script src="https://code.jquery.com/jquery-1.12.4.js"></script>
 <script src="https://code.jquery.com/ui/1.12.1/jquery-ui.js"></script>
+<script src="https://gitcdn.github.io/bootstrap-toggle/2.2.2/js/bootstrap-toggle.min.js"></script>
 <link rel="stylesheet" href="//cdnjs.cloudflare.com/ajax/libs/timepicker/1.3.5/jquery.timepicker.min.css">
 <script src="//cdnjs.cloudflare.com/ajax/libs/timepicker/1.3.5/jquery.timepicker.min.js"></script>
 <script src="//cdnjs.cloudflare.com/ajax/libs/timepicker/1.3.5/jquery.timepicker.min.js"></script>
