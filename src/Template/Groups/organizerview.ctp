@@ -1,14 +1,3 @@
-<!-- <nav class="large-3 medium-4 columns" id="actions-sidebar" style="display: none;">
-    <ul class="side-nav">
-        <li class="heading"><?= __('Actions') ?></li>
-        <li><?= //$this->Html->link(__('Edit Group'), ['action' => 'edit', $group->id]) ?> </li>
-        <li><?= //$this->Form->postLink(__('Delete Group'), ['action' => 'delete', $group->id], ['confirm' => __('Are you sure you want to delete # {0}?', $group->id)]) ?> </li>
-        <li><?= //$this->Html->link(__('List Groups'), ['action' => 'index']) ?> </li>
-        <li><?=// $this->Html->link(__('New Group'), ['action' => 'add']) ?> </li>
-        <li><?= //$this->Html->link(__('List Users'), ['controller' => 'Users', 'action' => 'index']) ?> </li>
-        <li><?= //$this->Html->link(__('New User'), ['controller' => 'Users', 'action' => 'add']) ?> </li>
-    </ul>
-</nav>-->
  <div class="block-header">
     <h2><?= h($group->name) ?></h2>
 </div>
@@ -93,12 +82,6 @@
                             <?php endforeach; ?>
                     </tbody>
                 </table>
-                 <div class="pull-right"> <button type="button" class="btn btn-primary waves-effect">Add</button>
-     <button type="button" class="btn btn-primary waves-effect">View</button>
-      <button type="button" class="btn btn-primary waves-effect">Edit</button>
-       <button type="button" class="btn btn-primary waves-effect">Activate</button>
-        <button type="button" class="btn btn-primary waves-effect">Deactivate</button>
-    </div><br>
                 <div class="paginator" style="display: none;">
                     <ul class="pagination">
                     <?= $this->Paginator->prev('< ' . __('previous')) ?>

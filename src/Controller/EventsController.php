@@ -135,6 +135,53 @@ class EventsController extends AppController
         $this->set('_serialize', ['events', 'likes']);
     }
 
+public function organizerevents()
+    {
+        $this->paginate = [
+            'contain' => ['Users', 'Categories']
+        ];
+        if(!empty($this->Auth->user('id')))
+        {
+            $users_id = $this->Auth->user('id');
+            $fullname = $this->Auth->user('fullname');
+            $email = $this->Auth->user('email');
+            $this->paginate['conditions'] = array("Events.user_id" => $users_id);
+        }
+
+        $filter = false;
+        $this->paginate['order'] = array('Events.created' => 'desc');
+        //debug($this->paginate);
+        //exit(0);
+        //$this->paginate['conditions'] = array('Events.active' => '1');
+        $events = $this->paginate($this->Events);
+        //$events->orderAsc();
+
+        $this->viewBuilder()->layout('admin');
+        $this->loadModel('Likes');
+        $likes = '';
+        foreach ($events as $key => $value) {
+            $query_count = $this->Likes->find('all', [
+                'conditions' => ['events_id' => $value['id'], 'likes' => 1]
+            ]);
+            $number_cnt = $query_count->count();
+            $likes[$key]['events'] = $value['id'];
+            $likes[$key]['likes'] = $number_cnt;
+        }
+        $this->loadModel('Categories');
+        $categories_new = $this->Categories->find()->select(['Categories.name'])
+            ->where(['active' => 1]);
+
+        $this->loadModel('SubCategories');
+        $subCategories_new = $this->SubCategories->find('all', ['fields' => 'name',
+                'conditions' => ['active' => 1]
+            ]);
+
+        $this->set('categories', $categories_new);
+        $this->set(compact('subCategories_new'));
+        $this->set(compact('events'));
+        $this->set(compact('likes'));
+        $this->set('_serialize', ['events', 'likes']);
+    }
 
 	public function likedevents()
     {

@@ -42,6 +42,25 @@ class TicketsController extends AppController
         $this->set('_serialize', ['tickets']);
     }
 
+ public function mytickets()
+    {
+        if(!empty($this->Auth->user('id')))
+        {
+            $users_id = $this->Auth->user('id');
+            $fullname = $this->Auth->user('fullname');
+            $email = $this->Auth->user('email');
+            //$this->paginate['conditions'] = array("Events.user_id" => $users_id);
+        }
+
+        $this->viewBuilder()->layout('admin');
+        $this->paginate = ['contain' => ['Events']
+        ];
+        //debug($this->paginate); exit(0);
+        $tickets = $this->paginate($this->Tickets, array('conditions' => array(['status IS NOT NULL'])));
+        //debug($tickets); exit(0);
+        $this->set(compact('tickets'));
+        $this->set('_serialize', ['tickets']);
+    }
     /**
      * View method
      *
