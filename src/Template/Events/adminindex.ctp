@@ -40,7 +40,7 @@
                     <tbody>
                         <?php $n=0;
                          foreach ($eventss as $event): $n++; ?>
-                        <tr><td> <div class="form-check mb-4">
+                        <tr><td> <!-- <div class="form-check mb-4">
     <input class="form-check-input" type="radio" name="exampleRadios" id="exampleRadios1" value="option1" checked>
     
 </div>
@@ -55,11 +55,11 @@
         'nestingLabel' => '{{hidden}}<label{{attrs}}>{{text}}</label>{{input}}',
         'radioWrapper' => '<div class="radio">{{label}}</div>'
     ]
-]);?>
-                                        <!-- <span class="input-group-addon">
+]);?> -->
+                                        <span class="input-group-addon">
                                             <input type="radio" class="with-gap" id="ig_radio">
                                             <label for="ig_radio"></label>
-                                        </span> -->
+                                        </span>
                                       
       </td>
                             <td><?= $this->Number->format($n) ?></td>
@@ -107,7 +107,12 @@
                         </tr>
                         <?php endforeach; ?>
                     </tbody>
-                </table>
+                </table> <div class="pull-right"> <button type="button" class="btn btn-primary waves-effect">Add</button>
+     <button type="button" class="btn btn-primary waves-effect">View</button>
+      <button type="button" class="btn btn-primary waves-effect">Edit</button>
+       <button type="button" class="btn btn-primary waves-effect">Activate</button>
+        <button type="button" class="btn btn-primary waves-effect">Deactivate</button>
+    </div><br>
                 <div class="paginator">
                     <ul class="pagination">
                     <?= $this->Paginator->prev('< ' . __('previous')) ?>

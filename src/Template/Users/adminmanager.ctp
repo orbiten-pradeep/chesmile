@@ -4,7 +4,7 @@
         <div class="card">
             <div class="header">
                 <h2>
-                    Event Organizers List
+                    Admin Managers List
                 </h2>
                 <ul class="header-dropdown m-r--5">
                     <li class="dropdown">
@@ -64,7 +64,12 @@
                             </tr>
                             <?php endforeach; ?>
                     </tbody>
-                </table>
+                </table> <div class="pull-right"> <button type="button" class="btn btn-primary waves-effect">Add</button>
+     <button type="button" class="btn btn-primary waves-effect">View</button>
+      <button type="button" class="btn btn-primary waves-effect">Edit</button>
+       <button type="button" class="btn btn-primary waves-effect">Activate</button>
+        <button type="button" class="btn btn-primary waves-effect">Deactivate</button>
+    </div><br>
                 <div class="paginator">
                     <ul class="pagination">
                     <?= $this->Paginator->prev('< ' . __('previous')) ?>
