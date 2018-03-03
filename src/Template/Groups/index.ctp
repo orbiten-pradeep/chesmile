@@ -51,8 +51,8 @@
                             <tr>
                             <td> 
                                         <span class="input-group-addon">
-                                            <input type="radio" class="with-gap" id="ig_radio">
-                                            <label for="ig_radio"></label>
+                                            <input type="radio" name="groupId" id="g<?= h($group->id) ?>" class="with-gap">
+                                            <label for="g<?= h($group->id) ?>"></label>
                                         </span>
                                       
       </td>

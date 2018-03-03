@@ -46,8 +46,8 @@
                         foreach ($tickets as $ticket): $n++; ?>
                             <tr> <td> 
                                         <span class="input-group-addon">
-                                            <input type="radio" class="with-gap" id="ig_radio">
-                                            <label for="ig_radio"></label>
+                                            <input type="radio" name="ticketId" id="t<?= h($ticket->id) ?>" class="with-gap">
+                                            <label for="t<?= h($ticket->id) ?>"></label>
                                         </span>
                                       
       </td>

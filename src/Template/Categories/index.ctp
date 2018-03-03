@@ -47,8 +47,8 @@
                          foreach ($categories as $category): $n++;?>
                             <tr><td> 
                                         <span class="input-group-addon">
-                                            <input type="radio" class="with-gap" id="ig_radio">
-                                            <label for="ig_radio"></label>
+                                            <input type="radio" name="category_id" id="c<?= h($category->id) ?>" class="with-gap">
+                                            <label for="c<?= h($category->id) ?>"></label>
                                         </span>
                                       
       </td>

@@ -50,9 +50,10 @@
                             <tr>
                             <td> 
                                         <span class="input-group-addon">
-                                            <input type="radio" class="with-gap" id="ig_radio">
-                                            <label for="ig_radio"></label>
+                                            <input type="radio" name="category_id" id="sc<?= h($subCategory->id) ?>" class="with-gap">
+                                            <label for="sc<?= h($subCategory->id) ?>"></label>
                                         </span>
+                                      
                                       
       </td>
                                 <td><?= $this->Number->format($n) ?></td>

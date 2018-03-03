@@ -55,7 +55,15 @@
                                     </div>
                                 </div> -->
                                 <div class="form-group">
-                                    <?php echo $this->Form->input('color', array('class' => 'jscolor form-control'));?>
+                                    <!-- <?php echo $this->Form->input('color', array('class' => 'jscolor form-control'));?> -->
+                                    <div class="input-group colorpicker">
+                                        <div class="form-line">
+                                            <input type="text" class="form-control" value="#00AABB" name="color" id="color">
+                                        </div>
+                                        <span class="input-group-addon">
+                                            <i></i>
+                                        </span>
+                                    </div>
                                 </div>
 
                                 <div class="form-group">
