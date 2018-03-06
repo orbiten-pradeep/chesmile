@@ -39,7 +39,7 @@
                             <th scope="col"><?= $this->Paginator->sort('active') ?></th>
                             <th scope="col"><?= $this->Paginator->sort('created') ?></th>
                             <th scope="col"><?= $this->Paginator->sort('modified') ?></th>
-                            <th scope="col" class="actions"><?= __('Actions') ?></th>
+                           <!--  <th scope="col" class="actions"><?= __('Actions') ?></th> -->
                         </tr>
                     </thead>
                     <tbody>
@@ -59,14 +59,14 @@
                                 <td><?= h($category->active) ?></td>
                                 <td><?= h($category->created) ?></td>
                                 <td><?= h($category->modified) ?></td>
-                                <td class="actions">
+                              <!--   <td class="actions">
                                     <?php
-                                    echo $this->Html->link( $this->Html->tag('i', 'remove_red_eye', array('class' => 'material-icons', 'title'=>'View Category')), ['action' => 'view', $category->id], array('escape'=>false)); ?>
+                                   echo $this->Html->link( $this->Html->tag('i', 'remove_red_eye', array('class' => 'material-icons', 'title'=>'View Category')), ['action' => 'view', $category->id], array('escape'=>false)); ?>
 
                                     <?= $this->Html->link( $this->Html->tag('i', 'edit', array('class' => 'material-icons', 'title'=>'Edit')), ['action' => 'edit', $category->id], array('escape'=>false)); ?>
 
                                     <?= $this->Form->postLink($this->Html->tag('i', 'delete', array('class' => 'material-icons', 'title'=>'Delete')), ['action' => 'delete', $category->id], ['escape'=>false, 'confirm' => __('Are you sure you want to delete # {0}?', $category->id)]) ?>
-                                </td>
+                                </td> -->
                             </tr>
                             <?php endforeach; ?>
                     </tbody>

@@ -41,7 +41,7 @@
                             <th scope="col"><?= $this->Paginator->sort('active') ?></th>
                             <th scope="col"><?= $this->Paginator->sort('created') ?></th>
                             <th scope="col"><?= $this->Paginator->sort('modified') ?></th>
-                            <th scope="col" class="actions"><?= __('Actions') ?></th>
+                           <!--  <th scope="col" class="actions"><?= __('Actions') ?></th> -->
                         </tr>
                     </thead>
                     <tbody>
@@ -62,14 +62,14 @@
                                 <td><?= h($subCategory->active) ?></td>
                                 <td><?= h($subCategory->created) ?></td>
                                 <td><?= h($subCategory->modified) ?></td>
-                                <td class="actions">
+                               <!--  <td class="actions">
                                     <?php
                                     echo $this->Html->link( $this->Html->tag('i', 'remove_red_eye', array('class' => 'material-icons', 'title'=>'View Sub Category')), ['action' => 'view', $subCategory->id], array('escape'=>false)); ?>
 
                                     <?= $this->Html->link( $this->Html->tag('i', 'edit', array('class' => 'material-icons', 'title'=>'Edit')), ['action' => 'edit', $subCategory->id], array('escape'=>false)); ?>
 
                                     <?= $this->Form->postLink($this->Html->tag('i', 'delete', array('class' => 'material-icons', 'title'=>'Delete')), ['action' => 'delete', $subCategory->id], ['escape'=>false, 'confirm' => __('Are you sure you want to delete # {0}?', $subCategory->id)]) ?>
-                                </td>
+                                </td> -->
                             </tr>
                             <?php endforeach; ?>
                     </tbody>

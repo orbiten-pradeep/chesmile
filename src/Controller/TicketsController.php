@@ -44,11 +44,28 @@ class TicketsController extends AppController
 
  public function mytickets()
     {
+
         if(!empty($this->Auth->user('id')))
         {
             $users_id = $this->Auth->user('id');
-            $fullname = $this->Auth->user('fullname');
-            $email = $this->Auth->user('email');
+
+            //$userss = $user['id'];
+             $query = $this->Tickets->find('all')
+        //->fields('Tickets.*', 'Events.id', 'Users.id')
+        ->order(['Tickets.id' => 'ASC'])
+        ->join([
+            'events' => [
+                'table' => 'Events',
+                'type' => 'right',
+                'conditions' => 'events.id = Tickets.events_id'
+            ],
+            'users' => [
+                'table' => 'Users',
+                'type' => 'right',
+                'conditions' => 'users.id = Tickets.user_id ' 
+            ]
+        ]);
+         
             //$this->paginate['conditions'] = array("Events.user_id" => $users_id);
         }
 
@@ -56,10 +73,13 @@ class TicketsController extends AppController
         $this->paginate = ['contain' => ['Events']
         ];
         //debug($this->paginate); exit(0);
-        $tickets = $this->paginate($this->Tickets, array('conditions' => array(['status IS NOT NULL'])));
+       
+        $tickets = $this->paginate($this->Tickets, array('conditions' => array("Tickets.user_id" => $users_id)));
         //debug($tickets); exit(0);
         $this->set(compact('tickets'));
+        $this->set(compact('query'));
         $this->set('_serialize', ['tickets']);
+         $this->set('_serialize', ['query']);
     }
     /**
      * View method

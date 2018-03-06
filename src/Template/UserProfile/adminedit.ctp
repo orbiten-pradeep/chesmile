@@ -1,4 +1,4 @@
-<style type="text/css">
+<!-- <style type="text/css">
   select.form-control:not([size]):not([multiple])
   {
     height: 3.5rem;
@@ -204,8 +204,8 @@ margin-left: 70px;
 }
 }
 </style>
-
-<div class="container-fluid height">
+ -->
+<!-- <div class="container-fluid height">
     <div class="col-md-1 col-md-offset-2">
         <div class="card-prof card-container-prof">
         <div class="text-center">
@@ -215,17 +215,17 @@ margin-left: 70px;
                 echo $this->Html->image('profile.png',array('alt' => '','class' => 'avatar img-style','height' => '100px', 'width' => '100px')); 
             }
             ?>
-            
+ -->            
            <!--  <h3><?= h($userProfile->fullname) ?></h3> -->
             <!-- <h6>Upload a different photo...</h6>
            <?= $this->Form->input('Photo', ['type' => 'file']);?> -->
-        </div>
+        <!-- </div>
         </div>
     </div>
     <div class="col-md-9 col-lg-4 name-space" style="margin-top:35px;">
                 <h3 style="color: white;"><?= h($userProfile->fullname) ?></h3>
             </div>
-</div>
+</div> -->
 
 <!-- <div class="container-fluid height">
     <div class="col-md-offset-2">
@@ -236,7 +236,149 @@ margin-left: 70px;
         </div>
     </div>
 </div> -->
+<!-- Tabs With Icon Title -->
+            <div class="row clearfix">
+                <div class="col-lg-12 col-md-12 col-sm-12 col-xs-12">
+                    <div class="card">
+                        <div class="header bg-pink">
+                            <h2> <?php if($userProfile->Photo) {
+                echo $this->Html->image('profile/'.$userProfile->Photo, array('height' => '100px','width' => '100px','alt'=>'aswq','class' => 'img-style'));
+            }  else {
+                echo $this->Html->image('profile.png',array('alt' => '','class' => 'avatar img-style','height' => '100px', 'width' => '100px')); 
+            }
+            ?><?= h($userProfile->fullname) ?>
+                            </h2>
+                            <ul class="header-dropdown m-r--5">
+                                <li class="dropdown">
+                                    <a href="javascript:void(0);" class="dropdown-toggle" data-toggle="dropdown" role="button" aria-haspopup="true" aria-expanded="false">
+                                        <i class="material-icons">more_vert</i>
+                                    </a>
+                                    <ul class="dropdown-menu pull-right">
+                                        <li><a href="javascript:void(0);">Action</a></li>
+                                        <li><a href="javascript:void(0);">Another action</a></li>
+                                        <li><a href="javascript:void(0);">Something else here</a></li>
+                                    </ul>
+                                </li>
+                            </ul>
+                        </div>
+                        <div class="body">
+                            <!-- Nav tabs -->
+                            <ul class="nav nav-tabs" role="tablist">
+                                <li role="presentation" class="active">
+                                    <a href="#home_with_icon_title" data-toggle="tab">
+                                        <i class="material-icons">face</i> Basic Info
+                                    </a>
+                                </li>
+                                <li role="presentation">
+                                    <a href="#profile_with_icon_title" data-toggle="tab">
+                                        <i class="material-icons">face</i> Change Password
+                                    </a>
+                                </li>
+                               
+                            </ul>
 
+                            <!-- Tab panes -->
+                            <div class="tab-content">
+                                <div role="tabpanel" class="tab-pane fade in active" id="home_with_icon_title">
+                                    <b>Basic Infos</b>
+                                     <?php echo $this->Html->image('profile.png',array('alt' => '','class' => 'avatar img-circle','height' => '100px')); ?>
+        <?= $this->Form->create($userProfile,array('enctype' => 'multipart/form-data','class' => 'form-horizontal')); ?>
+          <?= $this->Form->input('Photo', ['type' => 'file','label' => false,'div' => false]);?>
+        <?= $this->Form->hidden('user_id', ['options' => $users,'default'=> $users_id]); ?>
+
+                    <div class="form-group float-label-control">
+                        <label for="">Fullname</label>
+                       <?php echo  $this->Form->input('fullname',array('default'=> $fullname, 'label' => false, 'div' => false ,'class' => 'form-control form-element','type' => 'text', 'placeholder' => 'Fullname','required' => true)); ?>
+                      
+                    </div>
+
+                    <div class="form-group float-label-control">
+                        <label for="">Email Address</label>
+                        <?php echo $this->Form->input('email', array('default'=> $email,'div' => false, 'label' => false, 'readonly' => 'readonly', 'class' => 'form-control form-element email-bg', 'placeholder' => 'Your email address'));?>
+                    </div>
+
+            <?= $this->Form->hidden('active');?>
+
+
+            <div class="form-group float-label-control">
+                   <label for="">Mobile Number</label>
+                    <?php echo $this->Form->input('Mobile',array('class' => 'form-control form-element','div' => false, 'label' => false, 'placeholder' => 'Enter your mobile number')); ?>
+            </div>
+
+             <div class="form-group float-label-control">
+              <label for="">Mobile Number</label>
+            <?=  $this->Form->input('group_id', array('options' => $groups,'class' => 'form-control size')); ?>
+            </div>
+
+
+            <div class="form-group float-label-control">
+                   <label for="">Address-1</label>
+                   <?php echo $this->Form->input('Address_1',array('class' => 'form-control','div' => false, 'label' => false,'class' => 'form-control form-element','placeholder' => 'Enter your address-1'));?>
+            </div>
+
+            <div class="form-group float-label-control">
+                   <label for="">Address-2 (Optional)</label>
+                   <?php echo $this->Form->input('Address_2',array('class' => 'form-control','div' => false, 'label' => false,'class' => 'form-control form-element','placeholder' => 'Enter your address-2'));?>
+            </div>
+
+            <div class="form-group float-label-control">
+                   <label for="">City</label>
+                    <?=$this->Form->input('City',array('div' => false,'label' => false,'class' => 'form-control form-element','placeholder' => 'Enter your city'));?>
+            </div>
+
+              <div class="form-group float-label-control">
+                <label for="">State</label>
+                 <?= $this->Form->input('State',array('div' => false,'label' => false,'class' => 'form-control form-element','placeholder' => 'Enter your state'));?>
+
+                </div>
+
+                <div class="form-group float-label-control">
+                <label for="">Country</label>
+                 <?= $this->Form->input('Country',array('div' => false,'label' => false,'class' => 'form-control form-element','placeholder' => 'Enter your Country'));?>
+                 </div>
+                 <div class="form-group float-label-control">
+                <label for="">Zipcode</label>
+                 <?= $this->Form->input('Zipcode',array('div' => false,'label' => false,'class' => 'form-control form-element','placeholder' => 'Enter your Zipcode'));?>
+                 </div>
+                 <?= $this->Form->button(__('Submit'),array('class' => 'btn btn-primary')); ?>
+
+            <?= $this->Form->end() ?>
+
+                                    
+                                </div>
+
+
+                                <div role="tabpanel" class="tab-pane fade" id="profile_with_icon_title">
+                                   <!--  <b>Change Password</b> -->
+                                   <?= $this->Form->create('', array('id' => 'animdiv','class' => 'form-signup formheigh changepass', 'url' => ['controller' => 'Users', 'action' => 'changepassword'])) ?>
+             <?=  $this->Form->input('fullname',array('default'=> $fullname,'class' => 'form-control','type' => 'hidden')); ?>
+
+              <?= $this->Form->hidden('user_id', ['options' => $users,'default'=> $users_id]); ?>
+
+               <div class="form-group float-label-control">
+                <label for="">New Password</label>
+                 <?= $this->Form->input('password',array('id' => 'password', 'class' => 'form-control form-element','div' => false,'label' => false,'placeholder' => 'Enter a new password','required' => true)) ?>
+                 </div>
+
+                 <div class="form-group float-label-control">
+                <label for="">Confirm Password</label>
+                 <?= $this->Form->input('password',array('div' => false,'id' => 'confirm_password', 'class' => 'form-control form-element','label' => false,'placeholder' => 'Confirm Password','required' => true)) ?>
+                 </div>
+           
+
+             <?= $this->Form->submit(__('Update'), array('id' => 'Login', 'class' => 'btn btn-primary btn-lg cs-signup-button')) ?>
+            <?= $this->Form->end() ?>
+                                </div>
+                                
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+            <!-- #END# Tabs With Icon Title -->
+
+
+<!-- 
 <div class="container content">
     <div class="row">
  <ul class="nav nav-tabs col-md-offset-2" style="margin-top:70px;" id="myTab">
@@ -350,7 +492,7 @@ margin-left: 70px;
 </div>
     </div>
 </div>
-
+ -->
 <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.1.1/jquery.min.js"></script>
   <script src="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/js/bootstrap.min.js"></script>
 

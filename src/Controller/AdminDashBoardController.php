@@ -19,6 +19,15 @@ class AdminDashBoardController extends AppController
     public function index()
     {
     	$this->viewBuilder()->layout('admin');
+        $this->loadModel('Tickets');
+        $numtic = $this->Tickets->find()->where(['status' => 'success'])->count();
+        $this->loadModel('Contact');
+        $numcontact = $this->Contact->find()->where(['id' != 0])->count();
+         $this->loadModel('Events');
+        $numevent = $this->Events->find()->where(['id' != 0])->count();
+        $this->loadModel('Users');
+        $number = $this->Users->find()->where(['group_id' => 1])->count();
+        $this->set(compact('number','numevent','numcontact','numtic'));
         //$adminDashBoard = $this->paginate($this->AdminDashBoard);
 
         //$this->set(compact('adminDashBoard'));

@@ -84,7 +84,8 @@ class UsersController extends AppController
         ];
        // $user = $this->Users->find('all',['limit' => 200, 'conditions' => array('group_id' => 2 )]);
         $users = $this->paginate($this->Users->find('all',['limit' => 200, 'conditions' => array('group_id' => 1 )]));
-        $this->set(compact('users'));
+       // $this->set('count',$this->Users->getCount($users));
+            $this->set(compact('users'));
         $this->set('_serialize', ['users']);
 
     	//$groups = $this->Users->Groups->find('list', ['limit' => 200,'conditions' => array('id' => 2)]);

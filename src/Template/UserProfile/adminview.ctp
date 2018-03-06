@@ -1,4 +1,4 @@
-<style type="text/css">
+<!-- <style type="text/css">
   select.form-control:not([size]):not([multiple])
   {
     height: 3.5rem;
@@ -172,7 +172,95 @@ and (max-width: 980px){
 margin-left: 70px;
 }
 }
-</style>
+</style> -->
+ <style>
+ th{
+padding-right: 0px !important;
+}
+</style> 
+<!--     <section class="content">
+        <div class="container-fluid"> -->
+            <div class="block-header">
+                <h2>Profile</h2>
+            </div>
+            <!-- Basic Example -->
+            <div class="row clearfix">
+                <div class="col-lg-8 col-md-4 col-sm-6 col-xs-12">
+                    <div class="card">
+                        <div class="header bg-pink"><h2>
+                         <?php if($userProfile->Photo) {
+                echo $this->Html->image('profile/'.$userProfile->Photo, array('height' => '100px','width' => '100px','alt'=>'aswq','class' => 'img-style'));
+            }  else {
+                echo $this->Html->image('profile.png',array('alt' => '','class' => 'avatar img-style','height' => '100px', 'width' => '100px')); 
+            }
+            ?>
+                <?= h($userProfile->fullname) ?> 
+                            </h2>
+                            <ul class="header-dropdown m-r--5">
+                            <li></li>
+                                <li class="dropdown">
+                                    <a href="javascript:void(0);" class="dropdown-toggle" data-toggle="dropdown" role="button" aria-haspopup="true" aria-expanded="false">
+                                        <i class="material-icons">more_vert</i>
+                                    </a>
+                                    <ul class="dropdown-menu pull-right">
+                                        <li><a href="javascript:void(0);">Action</a></li>
+                                        <li><a href="javascript:void(0);">Another action</a></li>
+                                        <li><a href="javascript:void(0);">Something else here</a></li>
+                                    </ul>
+                                </li>
+                            </ul>
+                        </div>
+                        <div class="body">
+                            <table class="table borderless" cellspacing="0" cellpadding="0" border="0">
+         <tr style="border-top-style: hidden;">
+            <th scope="row"><?= __('Email') ?></th>
+            <td><?= h($user->email) ?></td>
+        </tr>
+         <tr>
+            <th style="padding-top: 30px;" scope="row"><?= __('Fullname') ?></th>
+            <td style="padding-top: 30px;"><?= h($user->fullname) ?></td>
+        </tr>
+        <tr>
+            <th style="padding-top: 30px; " scope="row"><?= __('Account Type') ?></th>
+            <td style="padding-top: 30px;"><?= h($group->name) ?></td>
+        </tr>
+        <tr>
+            <th style="padding-top: 30px;" scope="row"><?= __('Mobile') ?></th>
+            <td style="padding-top: 30px;"><?= h($userProfile->Mobile) ?></td>
+        </tr>
+        <tr>
+            <th style="padding-top: 30px;" scope="row"><?= __('Address 1') ?></th>
+            <td style="padding-top: 30px;"><?= h($userProfile->Address_1) ?></td>
+        </tr>
+        <tr>
+            <th style="padding-top: 30px; padding-right: 0px;" scope="row"><?= __('Address 2') ?></th>
+            <td style="padding-top: 30px;"><?= h($userProfile->Address_2) ?></td>
+        </tr>
+        <tr>
+            <th style="padding-top: 30px;" scope="row"><?= __('City') ?></th>
+            <td style="padding-top: 30px;"><?= h($userProfile->City) ?></td>
+        </tr>
+        <tr>
+            <th style="padding-top: 30px;" scope="row"><?= __('State') ?></th>
+            <td style="padding-top: 30px;"><?= h($userProfile->State) ?></td>
+        </tr>
+        <tr>
+            <th style="padding-top: 30px;" scope="row"><?= __('Country') ?></th>
+            <td style="padding-top: 30px;"><?= h($userProfile->Country) ?></td>
+        </tr>
+        <tr>
+            <th style="padding-top: 30px;" scope="row"><?= __('Zipcode') ?></th>
+            <td style="padding-top: 30px;"><?= $this->Number->format($userProfile->Zipcode) ?></td>
+        </tr> <?= $this->Html->link($this->Html->tag('i', '', array('class' => 'fa fa-pencil-square-o')).'Edit', array('action' => 'adminedit', $userProfile->id), array('class' => 'btn btn-primary pull-right','escape' => false)) ?>
+    </table>
+
+                        </div>
+                    </div>
+</div>
+</div>
+<!-- </div>
+</section> -->
+<!-- 
 <div class="container-fluid height">
     <div class="col-md-1 col-md-offset-2">
         <div class="card-prof card-container-prof">
@@ -182,24 +270,24 @@ margin-left: 70px;
             }  else {
                 echo $this->Html->image('profile.png',array('alt' => '','class' => 'avatar img-style','height' => '100px', 'width' => '100px')); 
             }
-            ?>
+            ?> -->
             
            <!--  <h3><?= h($userProfile->fullname) ?></h3> -->
             <!-- <h6>Upload a different photo...</h6>
            <?= $this->Form->input('Photo', ['type' => 'file']);?> -->
-        </div>
+       <!--  </div>
         </div>
     </div>
     <div class="col-md-9 col-lg-4 name-space" style="margin-top:35px;">
                 <h3 style="color: white;"><?= h($userProfile->fullname) ?></h3>
             </div>
-</div>
+</div> -->
 <!-- <div class="container">
     <div class="col-md-offset-2" style="margin-top: 50px;">
             <h1 style="margin-left: -10px;">My Profile</h1>
         </div>
 </div> -->
-
+<!-- 
 <div class="container content">
     <div class="row">
 
@@ -211,7 +299,7 @@ margin-left: 70px;
             </div>
 
                    <!--  <h3><?= h($userProfile->fullname) ?></h3> -->
-    <table class="table borderless" cellspacing="0" cellpadding="0" border="0">
+    <!-- <table class="table borderless" cellspacing="0" cellpadding="0" border="0">
          <tr style="border-top-style: hidden;">
             <th scope="row"><?= __('Email') ?></th>
             <td><?= h($user->email) ?></td>
@@ -262,7 +350,7 @@ margin-left: 70px;
 
 </div>
 </div>
-</div>
+</div> --> 
 <script type="text/javascript">
  // function to set the height on fly
  function autoHeight() {
@@ -492,4 +580,3 @@ margin-left: 70px;
         </tr>
     </table>
 </div>
- -->

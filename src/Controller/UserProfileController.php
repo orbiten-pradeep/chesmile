@@ -449,7 +449,7 @@ public function adminedit($id = null)
               $userProfile = $this->UserProfile->patchEntity($userProfile, $this->request->data);
               if ($this->UserProfile->save($userProfile)) {
                     $this->Flash->success(__('The user profile has been saved.'));
-                    return $this->redirect(['action' => 'view/', $id]);
+                    return $this->redirect(['action' => 'adminview/', $id]);
                 } else {
                     $this->Flash->error(__('The user profile could not be saved. Please, try again.'));
                 }
