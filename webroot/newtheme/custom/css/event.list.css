@@ -1,0 +1,22 @@
+.event-list {
+	min-height: 250px;
+}
+.event-list .card-size {
+	margin-bottom: 30px;
+}
+.event-list #loading {
+    background: #fff url("../img/ajax-loader.gif") no-repeat scroll center center;
+    height: 190px;
+    margin: 10% auto;
+    position: relative;
+    top: 50%;
+    width: 50px;
+    z-index: 1000;
+}
+.event-list .loadingDiv {
+    width: 100%; 
+    display: none;
+}
+.event-list #eventResponse {
+    display: none;
+}
