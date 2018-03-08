@@ -284,6 +284,27 @@ input{
   z-index: 0 !important;
 }*/
 </style>
+<style>
+.thumb {
+  width:50px;
+    height: 50px;
+    margin: 0.2em -0.7em 0 0;
+}
+.remove_img_preview {
+    position:relative;
+    top:-25px;
+    right:5px;
+    background:black;
+    color:white;
+    border-radius:50px;
+    font-size:0.9em;
+    padding: 0 0.3em 0;
+    text-align:center;
+    cursor:pointer;
+}
+.remove_img_preview:before {
+    content: "×";
+}</style> 
 <div class="container-fluid height">
     <div class="col-md-offset-2">
         <div class="card-prof card-container-prof">
@@ -343,6 +364,7 @@ input{
             <div id="subdiv" class="form-group" style="display: none;">
                 <label>
             <?=$this->Form->input('Eventsubcategories.sub_categories',array( 'subcategory_id'=>'', 'class' => 'form-control subclass','options' => $subCategories, 'multiple' => 'true', 'empty' => '(choose one)','label' => false,'empty' => false));?>
+
             </label>
             <span id="subcate_error" style="color: #FF0000; font-size: 11px;"></span>
             </div>
@@ -484,7 +506,8 @@ input{
                     <label>
                         <?=$this->Form->input('banner',['type' => 'file','accept' => 'image/*', 'class' => 'cropit-image-input']);?>
                         [Image Size: 1311px * 985px]
-                    </label>
+                    </label><img src="" id="profile-img-tag" width="200px" />
+
                     <!-- <div id="container-size" style="width:200px; height:200px; display: none;">
                     <div class="cropit-preview" id="banner-preview" style="display: none;"></div></div>
                       <div class="image-size-label">
@@ -498,9 +521,9 @@ input{
              <div class="form-group">
                 <!-- <div class="image-editor"> -->
                    <label>
-                <?=$this->Form->input('display',['type' => 'file','accept' => 'image/*','class' => 'cropit-image-input']);?>
+                <?=$this->Form->input('display',['type' => 'file','accept' => 'image/*','id' =>'display','class' => 'cropit-image-input']);?>
                 [Size: 280px * 185px]
-                </label>
+                </label><img src="" id="display-img-tag" width="200px" />
             </div>
                       <!-- <input type="file" id="imgsel" class="cropit-image-input" accept="images/*"> -->
                       <!-- <div class="cropit-preview" id="display-preview" style="display: none;"></div>
@@ -516,7 +539,7 @@ input{
                     <label>
                             <?=$this->Form->input('OrganizersLogo',['type' => 'file','id' => 'org','accept' => 'image/*','class' => 'cropit-image-input']);?>
                             Size: 75 * 75px]
-                    </label>
+                    </label><img src="" id="org-img-tag" width="200px" />
                     <!-- <div class="cropit-preview" id="organizer-preview" style="display: none;"></div>
                     <div class="image-size-label"></div>
                     <input id="organizers-zoom" type="range" class="cropit-image-zoom-input" style="display: none;"> -->
@@ -525,16 +548,24 @@ input{
 
              <div class="form-group">
                     <label>
-                        <?= $this->Form->input('Mediapartners[]',['type' => 'file', 'multiple' => 'true','label' => 'Mediapartners','accept' => 'image/*']);?>
+                        <?= $this->Form->input('Mediapartners[]',['type' => 'file', 'multiple' => 'true','id'=>'files','label' => 'Mediapartners','accept' => 'image/*']);?>
                         [Size: 250px]
                     </label>
+
+
+   <!--  <input type="file" id="files" name="image_file_arr[]" multiple> -->
+<br><output id="list"></output>
+     
+
             </div>
 
              <div class="form-group">
                 <label>
-            <?=$this->Form->input('Sponsors[]',['type' => 'file', 'multiple' => 'true', 'label' => 'Sponsors','accept' => 'image/*']);?>
+            <?=$this->Form->input('Sponsors[]',['type' => 'file', 'multiple' => 'true','id'=>'files1', 'label' => 'Sponsors','accept' => 'image/*']);?>
             [Size: 250px]
             </label>
+            <output id="list1"></output>
+           
             </div>
 
 
@@ -586,7 +617,7 @@ input{
   </div>
 </div>
 
-
+<script class="jsbin" src="http://ajax.googleapis.com/ajax/libs/jquery/1/jquery.min.js"></script>
 
         <script src="//code.jquery.com/jquery-1.9.1.js"></script>
 
@@ -625,7 +656,7 @@ $("#banner").change(function () {
 
 <script type="text/javascript">
     /* Float Label Pattern Plugin for Bootstrap 3.1.0 by Travis Wilson
-**************************************************/
+**********************************************************************/
 
 (function ($) {
     $.fn.floatLabels = function (options) {
@@ -767,12 +798,52 @@ $(document ).ready( function () {
 });
 </script>
 <script type="text/javascript">
+    function readURL(input) {
+        if (input.files && input.files[0]) {
+            var reader = new FileReader();
+            
+            reader.onload = function (e) {
+                $('#profile-img-tag').attr('src', e.target.result);
+            }
+            reader.readAsDataURL(input.files[0]);
+        }
+    }
+    $("#banner").change(function(){
+        readURL(this);
+    });
+</script>
+<script type="text/javascript">
+    function readdisplay(input) {
+        if (input.files && input.files[0]) {
+            var reader = new FileReader();
+            
+            reader.onload = function (e) {
+                $('#display-img-tag').attr('src', e.target.result);
+            }
+            reader.readAsDataURL(input.files[0]);
+        }
+    }
+    $("#display").change(function(){
+        readdisplay(this);
+    });
+</script>
+<script type="text/javascript">
+    function readorganizerlogo(input) {
+        if (input.files && input.files[0]) {
+            var reader = new FileReader();
+            
+            reader.onload = function (e) {
+                $('#org-img-tag').attr('src', e.target.result);
+            }
+            reader.readAsDataURL(input.files[0]);
+        }
+    }
+    $("#org").change(function(){
+        readorganizerlogo(this);
+    });
+</script>
 
-// $(document).ready(function() {
-//         $(".imagevalid").validate();
-//     });
-
-
+<script type="text/javascript">
 $("#display").click(function(){
       $("#display-preview").css('display','block');
       $("#display-zoom").css('display', 'block');
@@ -780,7 +851,7 @@ $("#display").click(function(){
 
 $("#banner").click(function(){
       $("#container-size").css('display','block');
-      $("#banner-preview").css('display','block');
+     $("#banner-preview").css('display','block');
       $("#banner-zoom").css('display', 'block');
     });
 
@@ -873,3 +944,103 @@ $('#id_typemore').on('click', function () {
         return status;
     });
 </script>
+<script type="text/javascript">
+var count=0;
+  function handleFileSelect(evt) {
+    var $fileUpload = $("input#files[type='file']");
+    count=count+parseInt($fileUpload.get(0).files.length);
+    
+    if (parseInt($fileUpload.get(0).files.length) > 6 || count>5) {
+      alert("You can only upload a maximum of 5 files");
+      count=count-parseInt($fileUpload.get(0).files.length);
+      evt.preventDefault();
+      evt.stopPropagation();
+      return false;
+    }
+    var files = evt.target.files;
+    for (var i = 0, f; f = files[i]; i++) {
+      if (!f.type.match('image.*')) {
+        continue;
+      }
+      var reader = new FileReader();
+
+      reader.onload = (function (theFile) {
+        return function (e) {
+          var span = document.createElement('span');
+          span.innerHTML = ['<img class="thumb" src="', e.target.result, '" title="', escape(theFile.name), '"/><span class="remove_img_preview"></span>'].join('');
+          document.getElementById('list').insertBefore(span, null);
+        };
+      })(f);
+
+      reader.readAsDataURL(f);
+    }
+  }
+  
+  $('#files').change(function(evt){
+    handleFileSelect(evt);
+  });  
+
+  $('#list').on('click', '.remove_img_preview',function () {
+    $(this).parent('span').remove();
+        
+        //this is not working...
+        var i = array.indexOf($(this));
+        if(i != -1) {
+            array.splice(i, 1);
+        }
+        // tried this too:
+        //$(this).parent('span').splice( 1, 1 );
+        
+        count--;
+  });
+  </script>
+  <script type="text/javascript">
+var count=0;
+  function handleFilesponser(evt) {
+    var $fileUpload = $("input#files1[type='file']");
+    count=count+parseInt($fileUpload.get(0).files.length);
+    
+    if (parseInt($fileUpload.get(0).files.length) > 6 || count>5) {
+      alert("You can only upload a maximum of 5 files");
+      count=count-parseInt($fileUpload.get(0).files.length);
+      evt.preventDefault();
+      evt.stopPropagation();
+      return false;
+    }
+    var files = evt.target.files;
+    for (var i = 0, f; f = files[i]; i++) {
+      if (!f.type.match('image.*')) {
+        continue;
+      }
+      var reader = new FileReader();
+
+      reader.onload = (function (theFile) {
+        return function (e) {
+          var span = document.createElement('span');
+          span.innerHTML = ['<img class="thumb" src="', e.target.result, '" title="', escape(theFile.name), '"/><span class="remove_img_preview"></span>'].join('');
+          document.getElementById('list1').insertBefore(span, null);
+        };
+      })(f);
+
+      reader.readAsDataURL(f);
+    }
+  }
+  
+  $('#files1').change(function(evt){
+    handleFilesponser(evt);
+  });  
+
+  $('#list1').on('click', '.remove_img_preview',function () {
+    $(this).parent('span').remove();
+        
+        //this is not working...
+        var i = array.indexOf($(this));
+        if(i != -1) {
+            array.splice(i, 1);
+        }
+        // tried this too:
+        //$(this).parent('span').splice( 1, 1 );
+        
+        count--;
+  });
+  </script>
