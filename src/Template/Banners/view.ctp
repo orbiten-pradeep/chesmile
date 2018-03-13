@@ -5,11 +5,17 @@
         <li><?= $this->Form->postLink(__('Delete Banner'), ['action' => 'delete', $banner->id], ['confirm' => __('Are you sure you want to delete # {0}?', $banner->id)]) ?> </li>
         <li><?= $this->Html->link(__('List Banners'), ['action' => 'index']) ?> </li>
         <li><?= $this->Html->link(__('New Banner'), ['action' => 'add']) ?> </li>
+        <li><?= $this->Html->link(__('List Events'), ['controller' => 'Events', 'action' => 'index']) ?> </li>
+        <li><?= $this->Html->link(__('New Event'), ['controller' => 'Events', 'action' => 'add']) ?> </li>
     </ul>
 </nav>
 <div class="banners view large-9 medium-8 columns content">
     <h3><?= h($banner->id) ?></h3>
     <table class="vertical-table">
+        <tr>
+            <th scope="row"><?= __('Event') ?></th>
+            <td><?= $banner->has('event') ? $this->Html->link($banner->event->title, ['controller' => 'Events', 'action' => 'view', $banner->event->id]) : '' ?></td>
+        </tr>
         <tr>
             <th scope="row"><?= __('Image') ?></th>
             <td><?= h($banner->image) ?></td>
@@ -28,17 +34,7 @@
         </tr>
         <tr>
             <th scope="row"><?= __('Active') ?></th>
-            <td>
-                <?php 
-                    if($banner->active == 1)
-                            { echo "Activated"; } 
-                        else if($event->active == 0)
-                            { echo "DeActivated"; } 
-                        elseif ($banner->active == 2) {
-                            echo "Deleted";
-                        }
-                ?>
-            </td>
+            <td><?= $this->Number->format($banner->active) ?></td>
         </tr>
         <tr>
             <th scope="row"><?= __('Created') ?></th>

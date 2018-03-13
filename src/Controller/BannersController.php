@@ -2,6 +2,14 @@
 namespace App\Controller;
 
 use App\Controller\AppController;
+use Cake\I18n\Time;
+use Cake\Utility\Text;
+use Cake\Mailer\Email;
+use Cake\Routing\Router;
+use Cake\Datasource\ConnectionManager;
+use Cake\Utility\Security;
+use Cake\Event\Event;
+use Cake\Utility\Inflector;
 
 /**
  * Banners Controller
@@ -18,6 +26,9 @@ class BannersController extends AppController
      */
     public function index()
     {
+        $this->paginate = [
+            'contain' => ['Events']
+        ];
         $banners = $this->paginate($this->Banners);
 
         $this->set(compact('banners'));
@@ -34,7 +45,7 @@ class BannersController extends AppController
     public function view($id = null)
     {
         $banner = $this->Banners->get($id, [
-            'contain' => []
+            'contain' => ['Events']
         ]);
 
         $this->set('banner', $banner);
@@ -51,14 +62,13 @@ class BannersController extends AppController
         $banner = $this->Banners->newEntity();
         if ($this->request->is('post')) {
 
-
             if(!empty($this->request->data['image']))
             {
-                $banner_new = $this->request->data['image'];
-                $ext = substr(strtolower(strrchr($banner_new['name'], '.')), 1); //get the extension
+                $banners = $this->request->data['image'];
+                $ext = substr(strtolower(strrchr($banners['name'], '.')), 1); //get the extension
                 $arr_ext = array('jpg', 'jpeg', 'png'); //set allowed extensions
-                
-                if($banner_new['size']/1024 > '2048')
+
+                if($banners['size']/1024 > '2048')
                 {
                     $this->Flash->error(__('"imageLogs", __METHOD__." The uploaded file exceeds the MAX_FILE_SIZE(2MB) '));
                     $errCheck = true;
@@ -67,21 +77,16 @@ class BannersController extends AppController
                 {
                     //do the actual uploading of the file. First arg is the tmp name, second arg is
                     //where we are putting it
-                    $uploadFolder = WWW_ROOT . 'img/banner_home';
+                    $uploadFolder = WWW_ROOT . 'img/banners_hme';
                     if( !file_exists($uploadFolder) ){
                         mkdir($uploadFolder);
                     }
-                    $filename = str_replace(" ", "-", rand(1, 3000) . $banner_new['name']);
-                    move_uploaded_file($banner['tmp_name'], WWW_ROOT . 'img/banner_home' . DS . $filename);
+                    $filename = str_replace(" ", "-", rand(1, 3000) . $banners['name']);
+                    move_uploaded_file($banners['tmp_name'], WWW_ROOT . 'img/banners_hme' . DS . $filename);
                      //prepare the filename for database entry
                     $this->request->data['image']['name'] = $filename;
-                    $banner_new = $filename;
+                    $banners = $filename;
                 }
-            }
-
-            if(!is_null($banner_new))
-            {
-                $this->request->data['image'] = $banner_new;
             }
             $banner = $this->Banners->patchEntity($banner, $this->request->data);
             if ($this->Banners->save($banner)) {
@@ -92,7 +97,8 @@ class BannersController extends AppController
                 $this->Flash->error(__('The banner could not be saved. Please, try again.'));
             }
         }
-        $this->set(compact('banner'));
+        $events = $this->Banners->Events->find('list', ['limit' => 200]);
+        $this->set(compact('banner', 'events'));
         $this->set('_serialize', ['banner']);
     }
 
@@ -118,7 +124,8 @@ class BannersController extends AppController
                 $this->Flash->error(__('The banner could not be saved. Please, try again.'));
             }
         }
-        $this->set(compact('banner'));
+        $events = $this->Banners->Events->find('list', ['limit' => 200]);
+        $this->set(compact('banner', 'events'));
         $this->set('_serialize', ['banner']);
     }
 

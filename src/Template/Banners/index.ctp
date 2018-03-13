@@ -2,6 +2,8 @@
     <ul class="side-nav">
         <li class="heading"><?= __('Actions') ?></li>
         <li><?= $this->Html->link(__('New Banner'), ['action' => 'add']) ?></li>
+        <li><?= $this->Html->link(__('List Events'), ['controller' => 'Events', 'action' => 'index']) ?></li>
+        <li><?= $this->Html->link(__('New Event'), ['controller' => 'Events', 'action' => 'add']) ?></li>
     </ul>
 </nav>
 <div class="banners index large-9 medium-8 columns content">
@@ -10,6 +12,7 @@
         <thead>
             <tr>
                 <th scope="col"><?= $this->Paginator->sort('id') ?></th>
+                <th scope="col"><?= $this->Paginator->sort('events_id') ?></th>
                 <th scope="col"><?= $this->Paginator->sort('image') ?></th>
                 <th scope="col"><?= $this->Paginator->sort('url') ?></th>
                 <th scope="col"><?= $this->Paginator->sort('caption') ?></th>
@@ -22,20 +25,11 @@
             <?php foreach ($banners as $banner): ?>
             <tr>
                 <td><?= $this->Number->format($banner->id) ?></td>
+                <td><?= $banner->has('event') ? $this->Html->link($banner->event->title, ['controller' => 'Events', 'action' => 'view', $banner->event->id]) : '' ?></td>
                 <td><?= h($banner->image) ?></td>
                 <td><?= h($banner->url) ?></td>
                 <td><?= h($banner->caption) ?></td>
-                <td>
-                <?php 
-                    if($banner->active == 1)
-                            { echo "Activated"; } 
-                        else if($event->active == 0)
-                            { echo "DeActivated"; } 
-                        elseif ($banner->active == 2) {
-                            echo "Deleted";
-                        }
-                ?>
-                </td>
+                <td><?= $this->Number->format($banner->active) ?></td>
                 <td><?= h($banner->created) ?></td>
                 <td class="actions">
                     <?= $this->Html->link(__('View'), ['action' => 'view', $banner->id]) ?>

@@ -8,6 +8,8 @@
             )
         ?></li>
         <li><?= $this->Html->link(__('List Banners'), ['action' => 'index']) ?></li>
+        <li><?= $this->Html->link(__('List Events'), ['controller' => 'Events', 'action' => 'index']) ?></li>
+        <li><?= $this->Html->link(__('New Event'), ['controller' => 'Events', 'action' => 'add']) ?></li>
     </ul>
 </nav>
 <div class="banners form large-9 medium-8 columns content">
@@ -15,6 +17,7 @@
     <fieldset>
         <legend><?= __('Edit Banner') ?></legend>
         <?php
+            echo $this->Form->input('events_id', ['options' => $events]);
             echo $this->Form->input('image');
             echo $this->Form->input('url');
             echo $this->Form->input('caption');
