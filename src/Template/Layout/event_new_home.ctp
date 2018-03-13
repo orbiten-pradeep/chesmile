@@ -35,7 +35,7 @@
     <!--Main Navigation-->
 
     <!-- Start your project here-->
-    <div class="container-fluid pr-sm-0 pl-sm-0">
+    <div class="container-fluid pr-0 pl-0">
         <?php echo $this->fetch('content'); ?>
         <?php echo $this->Flash->render(); ?>
     </div>
@@ -73,6 +73,8 @@
     <script type="text/javascript" src="<?php echo $this->Url->build('/newtheme/lib/imagesloaded.pkgd.min.js'); ?>"></script>
 
     <script type="text/javascript" src="<?php echo $this->Url->build('/newtheme/custom/js/event.list.js'); ?>"></script>
+
+    <script src="http://maps.googleapis.com/maps/api/js?libraries=places&key=AIzaSyCx2hb4R1uhaMbmlUAu1_lFasvl3gVHtnw"></script>
 
 </body>
 </html>

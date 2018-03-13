@@ -62,7 +62,8 @@ class EventsController extends AppController
         	$logged = true;
         else
         	$logged = false;
-		$this->viewBuilder()->layout('event_home');
+		//$this->viewBuilder()->layout('event_home');
+        $this->viewBuilder()->layout('event_new_home');
 
         $this->loadModel('Categories');
         $categories_new = $this->Categories->find()->select(['Categories.name', 'Categories.id'])
@@ -311,7 +312,8 @@ public function organizerevents()
      */
     public function chennai($id = null, $slug = null)
     {
-		$this->viewBuilder()->layout('event_home');
+		//$this->viewBuilder()->layout('event_home');
+        $this->viewBuilder()->layout('event_new_home');
         if(!ctype_digit($id))
         {
             $slug = $id;
