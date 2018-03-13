@@ -950,7 +950,7 @@ var count=0;
     var $fileUpload = $("input#files[type='file']");
     count=count+parseInt($fileUpload.get(0).files.length);
     
-    if (parseInt($fileUpload.get(0).files.length) > 6 || count>5) {
+    if (parseInt($fileUpload.get(0).files.length) > 11 || count>10) {
       alert("You can only upload a maximum of 5 files");
       count=count-parseInt($fileUpload.get(0).files.length);
       evt.preventDefault();
@@ -1000,7 +1000,7 @@ var count=0;
     var $fileUpload = $("input#files1[type='file']");
     count=count+parseInt($fileUpload.get(0).files.length);
     
-    if (parseInt($fileUpload.get(0).files.length) > 6 || count>5) {
+    if (parseInt($fileUpload.get(0).files.length) > 11 || count>10) {
       alert("You can only upload a maximum of 5 files");
       count=count-parseInt($fileUpload.get(0).files.length);
       evt.preventDefault();
