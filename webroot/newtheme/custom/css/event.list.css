@@ -2,7 +2,12 @@
 	min-height: 250px;
 }
 .event-list .card-size {
-	margin-bottom: 30px;
+	margin-bottom: 15px;
+    padding-left: 7px;
+    padding-right: 7px;
+}
+.event-list .card-size .card {
+    box-shadow: 0 1px 0px 0 rgba(0,0,0,.1), 0 1px 3px 0px rgba(0,0,0,.1) !important;
 }
 .event-list #loading {
     background: #fff url("../img/ajax-loader.gif") no-repeat scroll center center;
@@ -19,4 +24,60 @@
 }
 .event-list #eventResponse {
     display: none;
+}
+
+.event-list #loading.append {
+    height: 120px !important;
+    margin: 0 auto !important;
+    top: 0 !important;
+}
+
+.event-list .filter-params {
+    border-radius: 0;
+    box-shadow: none;
+    border: 1px solid #eee;
+    margin-bottom: 20px;
+    padding: 0px;
+    margin-left: 7px;
+    margin-right: 7px;
+}
+.event-list .card-title {
+    line-height: 1 !important;
+}
+.event-list .card-title a, .event-list .card-title a:hover{
+    color: #212529;
+    font-size: 15px;
+}
+.event-list .card-body .card-text {
+    font-size: 0.8rem !important;
+}
+.filter-params .chip {
+    display: inline-block;
+    margin-right: 10px;
+    border: 1px solid #eee;
+    border-radius: 3px;
+    padding: 3px 10px;
+    font-size: smaller;
+    margin-bottom: 10px;
+}
+.filter-params .chip i.close.fa.fa-times {
+    font-size: smaller;
+    padding: 4px 0 0 9px;
+}
+.event-filters .filter-tc-button {
+    padding-left: 10px !important;
+    padding-right: 10px !important;
+    margin-right: 10px !important;
+}
+.event-filters .top-categories {
+    padding-left: 20px;
+}
+.event-filters .top-categories label {
+    font-weight: bolder;
+    padding-right: 9px;
+    margin-bottom: 0 !important;
+    padding-top: 2px;
+} 
+.event-filters .filter-date {
+    font-size: 14px;
 }

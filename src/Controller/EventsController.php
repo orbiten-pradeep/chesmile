@@ -973,11 +973,14 @@ public function organizerevents()
 			$filter = false;
 	        $cond = '';
 	        $joins = '';
+            $page = 0;
+            $limit = 25;
+            $limitQry = " LIMIT $page, $limit";
 
 	        if (!empty($this->request->data)){
 	        	//echo "<pre>";print_r($this->request->query);echo "</pre>";
 	        	if(isset($this->request->data['category']) && $this->request->data['category'] !='') {
-	        		$category = $this->request->data['category'];
+	        		$category = implode(',', $this->request->data['category']);
 	        		$cond .= " AND e.categories_id IN ($category)";
 	        		$filter = true;
 	        	}
@@ -995,6 +998,14 @@ public function organizerevents()
 		        	$filter = true;
 	        	}
 
+                if((isset($this->request->data['page']) && $this->request->data['page'] !='') &&
+                    isset($this->request->data['limit']) && $this->request->data['limit'] !='') {
+                    $page = $this->request->data['page'];
+                    $limit = $this->request->data['limit'];
+                    $page = ($page > 0) ? ($page * $limit) : $page;
+                    $limitQry = " LIMIT $page, $limit";
+                }
+
 	        	if(isset($this->request->data['action']) && $this->request->data['action'] !='') {
 	        		$action = $this->request->data['action'];
 	        		if($action == "pastevents"){
@@ -1011,17 +1022,20 @@ public function organizerevents()
 	        			$filter = true;
 	        		}
 	        	}
-	        	if(isset($this->request->data['date']) && !empty($this->request->data['date'])){
 
-					if($this->request->data['date'] == "register") {
-		        		$filter = true;
-		        		$cond .= " AND e.register_online = 1";
-		        	}
+                if(isset($this->request->data['type']) && !empty($this->request->data['type'])){
+                    if($this->request->data['type'] == "register") {
+                        $filter = true;
+                        $cond .= " AND e.register_online = 1";
+                    }
 
-                    if($this->request->data['date'] == "free_events") {
+                    if($this->request->data['type'] == "freeEvents") {
                         $filter = true;
                         $cond .= " AND e.register_online = 0";
                     }
+                }
+
+	        	if(isset($this->request->data['date']) && !empty($this->request->data['date'])){					
 
 		        	if($this->request->data['date'] == "today") {
 		        		$filter = true;
@@ -1053,7 +1067,8 @@ public function organizerevents()
 	        }
 
             $conn = ConnectionManager::get('default');
-            $query = "SELECT e.*, c.name as category_name, c.color as category_color, (SELECT count(l.events_id) FROM likes l WHERE l.events_id = e.id GROUP BY l.events_id) as likes_count, (SELECT a.areaname FROM address a WHERE a.events_id = e.id) as areaname FROM events e LEFT JOIN categories c ON c.id = e.categories_id $joins WHERE e.active = 1 $cond order by e.date asc";
+            $query = "SELECT e.*, c.name as category_name, c.color as category_color, (SELECT count(l.events_id) FROM likes l WHERE l.events_id = e.id GROUP BY l.events_id) as likes_count, (SELECT a.areaname FROM address a WHERE a.events_id = e.id) as areaname FROM events e LEFT JOIN categories c ON c.id = e.categories_id $joins WHERE e.active = 1 $cond ORDER BY e.date DESC $limitQry";
+            //echo $query;
 
             $stmt = $conn->execute($query);
             $results = $stmt->fetchAll('assoc');
