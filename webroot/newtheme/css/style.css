@@ -1,1 +1,34 @@
 /* Your custom styles */
+.search-box {
+
+}
+.search-box button {
+	box-shadow: none !important;
+    border-radius: 0;
+    margin: 0;
+    padding: .84rem 1.14rem;
+}
+.search-box button i {
+	margin-top: 2px;
+}
+.search-box button label {
+	margin-bottom: 0;
+	padding-right: .5rem;
+}
+.search-box input {	
+    border-radius: 0;
+    height: 46px;
+    border-width: 1px 0 1px 0;
+    border-spacing: 0;
+    width: 25rem;
+}
+.search-box .waves-input-wrapper {
+	border-radius: 0px;
+}
+.nav-flex-icons .fa-user-circle {
+	color: cadetblue;
+}
+.nav-flex-icons button {
+	box-shadow: none;
+	padding: .84rem 1.14rem;
+}

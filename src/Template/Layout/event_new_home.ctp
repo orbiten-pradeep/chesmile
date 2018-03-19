@@ -32,7 +32,32 @@
                 <span class="navbar-toggler-icon"></span>
             </button>
             <div class="collapse navbar-collapse" id="navbarSupportedContent">
-                
+                <ul class="navbar-nav mr-auto search-box">
+                    <li class="search-category-dd">
+                      <button type="button" class="btn btn-primary" onclick="getEventListByFilter();">
+                        <label>Category</label>
+                        <i class="fa fa-bars float-right"></i>
+                      </button>
+                    </li>
+                    <li class="search-text-box">
+                      <input id="eventCategorySearch" type="text" class="form-control" placeholder="Search for events, parties, concerts and more">
+                    </li>
+                    <li class="search-button">
+                        <button type="button" class="btn btn-primary btn-go" onclick="getEventListByFilter();">GO</button>
+                    </li>
+                </ul>
+
+                <ul class="navbar-nav nav-flex-icons">
+                    <!-- <li class="nav-item">
+                      <i class="fa fa-user-circle fa-3x" aria-hidden="true"></i>
+                    </li> -->
+                    <li class="nav-item">
+                        <button type="button" class="btn btn-primary">Create Events</button>
+                    </li>
+                    <li class="nav-item">
+                        <button type="button" class="btn btn-default">Past Events</button>
+                    </li>
+                </ul>
             </div>
         </nav>
 

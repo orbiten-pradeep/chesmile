@@ -14,12 +14,24 @@ chennaiSmile.filterParams.limit = 10;
 chennaiSmile.filterParams.category = [];
 
 chennaiSmile.filterTextArr = [];
+chennaiSmile.previousFilterParams = "";
 
 chennaiSmile.eventListContainer = $('#eventResponse');
 chennaiSmile.noEventsMsg = $('#noEventsMsg');
 chennaiSmile.eventListLoading = $(".loadingDiv");
 chennaiSmile.eventListResponse = ''; 
 chennaiSmile.eventsMasonryInstance = '';
+
+chennaiSmile.eventScrollDisabled = false;
+
+chennaiSmile.equalPreviousCurrentFilterParams = function(){
+	var prevParams = JSON.stringify(this.prevParams);
+	var currentParams = JSON.stringify(this.filterParams);
+	if(prevParams == currentParams){
+		return true;
+	}
+	return false;
+}
 
  
 chennaiSmile.formatDate = function (date){
@@ -38,6 +50,10 @@ chennaiSmile.getEventList = function() {
 	var self = this;
 	var dataParams = this.filterParams;
 
+	if(!this.equalPreviousCurrentFilterParams()) {
+		self.eventScrollDisabled = false;
+	}
+
 	this.eventListLoading.show();
 	$.ajax({
 	    type: "POST",
@@ -47,12 +63,26 @@ chennaiSmile.getEventList = function() {
 	    dataType: 'json',
 	    url: $("#event_list_url").val(),
 	    success: function(response) {
-	        self.eventListResponse = response;
+	    	if(response.length > 0) {
+	    		if(response.length < self.filterParams.limit){
+	    			self.eventScrollDisabled = true;
+	    		}
+	    		self.eventListResponse = response;
+	    		self.previousFilterParams = this.filterParams;
 
-	        if(self.filterParams.page > 0)
-	        	self.updateEventGridList(); 
-	        else
-	        	self.addEventGridList();
+		        if(self.filterParams.page > 0)
+		        	self.updateEventGridList(); 
+		        else
+		        	self.addEventGridList();
+	    	}
+	    	else {
+	    		self.eventScrollDisabled = true;
+	    		self.eventListLoading.hide();
+		    	self.eventListContainer.html("<h2 class='no-events'>No events found!!!</h2>");
+		    	self.eventListContainer.fadeIn('slow');
+	    		return false;
+	    	}
+	        
 	    },
 	    error: function() {
 	    	console.log("Error while getting event list!!!");
@@ -64,13 +94,7 @@ chennaiSmile.addEventGridList = function() {
 	if(this.eventListResponse.length > 0){
         var grid = this.generateEventGridList();
 		this.eventListContainer.html(grid);
-        this.masonryInitialize();
-        
-    }
-    else {
-    	this.eventListLoading.hide();
-    	this.eventListContainer.html("<h2 class='no_events'>No events found!!!</h2>");
-    	this.eventListContainer.fadeIn('slow');
+        this.masonryInitialize();        
     }
 }
 
@@ -217,7 +241,7 @@ $(document).ready(function() {
 
 	self.filterElem.category.click(function() {
 		var catValue = $(this).attr('data');
-		
+
 		var index = self.filterParams.category.indexOf(catValue);
 		if (index !== -1) return false;
 
@@ -269,9 +293,11 @@ $(document).ready(function() {
 
 	let page = chennaiSmile.filterParams.page;
 	$(window).scroll(function() {
-	    if ($(window).scrollTop() == $(document).height() - $(window).height()) {	      
-	      self.filterParams.page = ++page;
-	      self.getEventList();
+	    if ($(window).scrollTop() == $(document).height() - $(window).height()) {
+	    	if(!self.eventScrollDisabled) {
+	    		self.filterParams.page = ++page;
+	      		self.getEventList();		
+	    	}	      
 	    }
 	});
 });

@@ -81,3 +81,7 @@
 .event-filters .filter-date {
     font-size: 14px;
 }
+.event-filters .no-events {
+    padding-left: 7px;
+    padding-right: 7px;
+}
