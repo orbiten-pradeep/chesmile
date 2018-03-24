@@ -45,12 +45,18 @@
                     </thead>
                     <tbody>
                         <?php 
-                        $n=0;
+                         $n=0 + (10 * $page);
                         foreach ($users as $user): $n++;?>
                             <tr><td> 
-                                        <span class="input-group-addon">
-                                            <input type="radio" class="with-gap" id="ig_radio">
-                                            <label for="ig_radio"></label>
+                                        <span class="input-group-addon"><!-- 
+                                            <input type="radio" class="with-gap" id="ig_radio" -->
+                                            <input type="radio" name="userId" id="u<?= h($user->id) ?>" value ="<?=($user->id)?>" class="with-gap" 
+                                             edit-href-url="<?=$this->Url->build(array('controller' => 'Users', 'action' => 'edit', $user->id)); ?>"
+                                            view-href-url="<?=$this->Url->build(array('controller' => 'Users', 'action' => 'view', $user->id)); ?>"
+                                            add-href-url="<?=$this->Url->build(array('controller' => 'Users', 'action' => 'add', $user->id)); ?>"
+                                            activate-href-url="<?=$this->Url->build(array('controller' => 'Users', 'action' => 'activate', $user->id)); ?>"
+                                            deactivate-href-url="<?=$this->Url->build(array('controller' => 'Users', 'action' => 'deactivate', $user->id)); ?>">
+                                             <label for="u<?= h($user->id) ?>"></label>
                                         </span>
                                       
       </td>
@@ -77,12 +83,17 @@
                             </tr>
                             <?php endforeach; ?>
                     </tbody>
-                </table> <div class="pull-right"> <button type="button" class="btn btn-primary waves-effect">Add</button>
+                </table> <div class="pull-right">  <a id="add" href=""><button class="btn btn-primary waves-effect">Add</button></a>
+                <a id ="edit" href=""><button class="btn btn-primary waves-effect">Edit</button></a>
+                  <a id ="view" href=""><button class="btn btn-primary waves-effect">View</button></a>
+                    <a id ="activate" href=""><button class="btn btn-primary waves-effect">Activate</button></a>
+                      <a id ="deactivate" href=""><button class="btn btn-primary waves-effect">Deactivate</button></a>
+<!-- <button type="button" class="btn btn-primary waves-effect">Add</button>
      <button type="button" class="btn btn-primary waves-effect">View</button>
       <button type="button" class="btn btn-primary waves-effect">Edit</button>
        <button type="button" class="btn btn-primary waves-effect">Activate</button>
         <button type="button" class="btn btn-primary waves-effect">Deactivate</button>
-    </div><br>
+ -->    </div><br>
                 <div class="paginator">
                     <ul class="pagination">
                     <?= $this->Paginator->prev('< ' . __('previous')) ?>
@@ -95,6 +106,19 @@
         </div>
     </div>
 </div>
+<script src="//ajax.googleapis.com/ajax/libs/jquery/1.11.1/jquery.min.js"></script>
+<script>
+$(function(){
+  $('input:radio').change(function(){
+$('a#deactivate').attr('href',  $(this).attr('deactivate-href-url')); // better if you add an id to anchor & then
+     $('a#activate').attr('href', $(this).attr('activate-href-url')); // better if you add an id to anchor & then
+     $('a#view').attr('href', $(this).attr('view-href-url')); // better if you add an id to anchor & then
+      $('a#edit').attr('href',  $(this).attr('edit-href-url')); // better if you add an id to anchor & then 
+    $('a#add').attr('href',  $(this).attr('add-href-url')); // better if you add an id to anchor & then $('a#idofAnchor')
+});
+
+});</script>
+
 <!-- <div class="users index large-9 medium-8 columns content">
     <h3><?= __('Users') ?></h3>
     <table cellpadding="0" cellspacing="0">

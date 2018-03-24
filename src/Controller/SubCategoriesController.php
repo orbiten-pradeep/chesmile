@@ -29,7 +29,8 @@ class SubCategoriesController extends AppController
             'contain' => ['Categories']
         ];
         $subCategories = $this->paginate($this->SubCategories);
-
+        $page = (isset($this->request->query['page'])) ? $this->request->query['page'] : 0;
+        $this->set(compact('page'));
         $this->set(compact('subCategories'));
         $this->set('_serialize', ['subCategories']);
     }

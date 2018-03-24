@@ -562,6 +562,7 @@
 
     <!-- Custom Js -->
     <script src="<?php echo $this->Url->build('/dashboard/js/admin.js'); ?>"></script>
+    <script src="<?php echo $this->Url->build('/dashboard/js/script.js'); ?>"></script>
     <script src="<?php echo $this->Url->build('/dashboard/js/pages/index.js'); ?>"></script>
 
     <!-- Demo Js -->

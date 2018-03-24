@@ -128,6 +128,48 @@ class BannersController extends AppController
         $this->set(compact('banner', 'events'));
         $this->set('_serialize', ['banner']);
     }
+/**
+     * Activate method
+     *
+     * @param string|null $id Banner id.
+     * @return \Cake\Network\Response|void Redirects on successful edit, renders view otherwise.
+     * @throws \Cake\Network\Exception\NotFoundException When record not found.
+     */
+    public function activate($id = null)
+    {
+       
+        $this->request->allowMethod(['post', 'activate']);
+        $banner = $this->Banners->get($id);
+        if ($this->Banners->updateAll(['active' => '1'], ['id' => $id])) {
+            $this->Flash->success(__('The Banner has been Activated.'));
+        } else {
+            $this->Flash->error(__('The Banner could not be Activated. Please, try again.'));
+        }
+
+        return $this->redirect(['action' => 'index']);
+
+    }
+    /**
+     * Deactivate method
+     *
+     * @param string|null $id Banner id.
+     * @return \Cake\Network\Response|void Redirects on successful edit, renders view otherwise.
+     * @throws \Cake\Network\Exception\NotFoundException When record not found.
+     */
+    public function deactivate($id = null)
+    {
+       
+        $this->request->allowMethod(['post', 'activate']);
+        $banner = $this->Banners->get($id);
+        if ($this->Banners->updateAll(['active' => '2'], ['id' => $id])) {
+            $this->Flash->success(__('The Banner has been Dectivated.'));
+        } else {
+            $this->Flash->error(__('The Banner could not be Deactivated. Please, try again.'));
+        }
+
+        return $this->redirect(['action' => 'index']);
+
+    }
 
     /**
      * Delete method

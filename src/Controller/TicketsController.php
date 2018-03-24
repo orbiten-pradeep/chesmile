@@ -38,6 +38,8 @@ class TicketsController extends AppController
         //debug($this->paginate); exit(0);
         $tickets = $this->paginate($this->Tickets, array('conditions' => array(['status IS NOT NULL'])));
         //debug($tickets); exit(0);
+        $page = (isset($this->request->query['page'])) ? $this->request->query['page'] : 0;
+        $this->set(compact('page'));
         $this->set(compact('tickets'));
         $this->set('_serialize', ['tickets']);
     }

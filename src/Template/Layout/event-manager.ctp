@@ -193,6 +193,7 @@
     <!-- Custom Js -->
     <script src="<?php echo $this->Url->build('/dashboard/js/admin.js'); ?>"></script>
     <script src="<?php echo $this->Url->build('/dashboard/js/pages/index.js'); ?>"></script>
+    <script src="<?php echo $this->Url->build('/dashboard/js/script.js'); ?>"></script>
 
     <!-- Demo Js -->
     <script src="<?php echo $this->Url->build('/dashboard/js/demo.js'); ?>"></script>

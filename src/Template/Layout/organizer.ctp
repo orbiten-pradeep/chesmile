@@ -563,6 +563,7 @@
     <!-- Custom Js -->
     <script src="<?php echo $this->Url->build('/admin/js/admin.js'); ?>"></script>
     <script src="<?php echo $this->Url->build('/admin/js/pages/index.js'); ?>"></script>
+    <script src="<?php echo $this->Url->build('/dashboard/js/script.js'); ?>"></script>
 
     <!-- Demo Js -->
     <script src="<?php echo $this->Url->build('/admin/js/demo.js'); ?>"></script>

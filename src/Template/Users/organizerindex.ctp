@@ -34,12 +34,17 @@
                     <tbody>
                    
                    <?php 
-                   $n = 0;
+                   $n=0 + (10 * $page);
                    foreach ($users as $user): $n++;?>
                             <tr><td> 
                                         <span class="input-group-addon">
-                                            <input type="radio" class="with-gap" id="ig_radio">
-                                            <label for="ig_radio"></label>
+                                            <input type="radio" name="userId" id="u<?= h($user->id) ?>" value ="<?=($user->id)?>" class="with-gap radio-select-list" 
+                                             edit-href-url="<?=$this->Url->build(array('controller' => 'Users', 'action' => 'edit', $user->id)); ?>"
+                                            view-href-url="<?=$this->Url->build(array('controller' => 'Users', 'action' => 'view', $user->id)); ?>"
+                                            add-href-url="<?=$this->Url->build(array('controller' => 'Users', 'action' => 'add')); ?>"
+                                            activate-href-url="<?=$this->Url->build(array('controller' => 'Users', 'action' => 'activate', $user->id)); ?>"
+                                            deactivate-href-url="<?=$this->Url->build(array('controller' => 'Users', 'action' => 'deactivate', $user->id)); ?>">
+                                             <label for="u<?= h($user->id) ?>"></label>
                                         </span>
                                       
       </td>
@@ -64,11 +69,15 @@
                             </tr>
                             <?php endforeach; ?>
                     </tbody>
-                </table> <div class="pull-right"> <button type="button" class="btn btn-primary waves-effect">Add</button>
+                </table> <div class="pull-right">  <a id="add" href=""><button class="btn btn-primary waves-effect">Add</button></a>
+                <a id ="edit" href=""><button class="btn btn-primary waves-effect">Edit</button></a>
+                  <a id ="view" href=""><button class="btn btn-primary waves-effect">View</button></a>
+                    <a id ="activate" href=""><button class="btn btn-primary waves-effect">Activate</button></a>
+                      <a id ="deactivate" href=""><button class="btn btn-primary waves-effect">Deactivate</button></a><!--  <button type="button" class="btn btn-primary waves-effect">Add</button>
      <button type="button" class="btn btn-primary waves-effect">View</button>
       <button type="button" class="btn btn-primary waves-effect">Edit</button>
        <button type="button" class="btn btn-primary waves-effect">Activate</button>
-        <button type="button" class="btn btn-primary waves-effect">Deactivate</button>
+        <button type="button" class="btn btn-primary waves-effect">Deactivate</button> -->
     </div><br>
                 <div class="paginator">
                     <ul class="pagination">

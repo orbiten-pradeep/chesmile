@@ -31,8 +31,10 @@ class ContactController extends AppController
      */
     public function index()
     {
+        $this->viewBuilder()->layout('admin');
         $contact = $this->paginate($this->Contact);
-
+        $page = (isset($this->request->query['page'])) ? $this->request->query['page'] : 0;
+        $this->set(compact('page'));
         $this->set(compact('contact'));
         $this->set('_serialize', ['contact']);
     }

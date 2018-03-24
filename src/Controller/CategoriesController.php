@@ -20,7 +20,8 @@ class CategoriesController extends AppController
     {
         $this->viewBuilder()->layout('admin');
         $categories = $this->paginate($this->Categories);
-
+		$page = (isset($this->request->query['page'])) ? $this->request->query['page'] : 0;
+        $this->set(compact('page'));
         $this->set(compact('categories'));
         $this->set('_serialize', ['categories']);
     }

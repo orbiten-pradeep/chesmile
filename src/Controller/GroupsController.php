@@ -28,7 +28,8 @@ class GroupsController extends AppController
     {
         $this->viewBuilder()->layout('admin');
         $groups = $this->paginate($this->Groups);
-
+		$page = (isset($this->request->query['page'])) ? $this->request->query['page'] : 0;
+        $this->set(compact('page'));
         $this->set(compact('groups'));
         $this->set('_serialize', ['groups']);
     }

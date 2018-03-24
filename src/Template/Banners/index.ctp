@@ -32,8 +32,10 @@
                 <td><?= $this->Number->format($banner->active) ?></td>
                 <td><?= h($banner->created) ?></td>
                 <td class="actions">
-                    <?= $this->Html->link(__('View'), ['action' => 'view', $banner->id]) ?>
+               <?= $this->Html->link(__('View'), ['action' => 'view', $banner->id]) ?>
                     <?= $this->Html->link(__('Edit'), ['action' => 'edit', $banner->id]) ?>
+                    <?= $this->Form->postLink(__('Activate'), ['action' => 'activate', $banner->id], ['confirm' => __('Are you sure you want to Activate # {0}?', $banner->id)]) ?>
+                     <?= $this->Form->postLink(__('Deactivate'), ['action' => 'deactivate', $banner->id], ['confirm' => __('Are you sure you want to Deactivate # {0}?', $banner->id)]) ?>
                     <?= $this->Form->postLink(__('Delete'), ['action' => 'delete', $banner->id], ['confirm' => __('Are you sure you want to delete # {0}?', $banner->id)]) ?>
                 </td>
             </tr>

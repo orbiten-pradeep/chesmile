@@ -32,6 +32,8 @@ class UsersController extends AppController
             'contain' => ['Groups']
         ];
         $users = $this->paginate($this->Users);
+		$page = (isset($this->request->query['page'])) ? $this->request->query['page'] : 0;
+        $this->set(compact('page'));
         $this->set(compact('users'));
         $this->set('_serialize', ['users']);
     }
@@ -44,6 +46,8 @@ class UsersController extends AppController
         ];
        // $user = $this->Users->find('all',['limit' => 200, 'conditions' => array('group_id' => 2 )]);
         $users = $this->paginate($this->Users->find('all',['limit' => 200, 'conditions' => array('group_id' => 2 )]));
+         $page = (isset($this->request->query['page'])) ? $this->request->query['page'] : 0;
+        $this->set(compact('page'));
         $this->set(compact('users'));
         $this->set('_serialize', ['users']);
 
@@ -57,6 +61,8 @@ class UsersController extends AppController
         ];
        // $user = $this->Users->find('all',['limit' => 200, 'conditions' => array('group_id' => 2 )]);
         $users = $this->paginate($this->Users->find('all',['limit' => 200, 'conditions' => array('group_id' => 5 )]));
+         $page = (isset($this->request->query['page'])) ? $this->request->query['page'] : 0;
+        $this->set(compact('page'));
         $this->set(compact('users'));
         $this->set('_serialize', ['users']);
 
@@ -70,6 +76,8 @@ class UsersController extends AppController
         ];
        // $user = $this->Users->find('all',['limit' => 200, 'conditions' => array('group_id' => 2 )]);
         $users = $this->paginate($this->Users->find('all',['limit' => 200, 'conditions' => array('group_id' => 6 )]));
+         $page = (isset($this->request->query['page'])) ? $this->request->query['page'] : 0;
+        $this->set(compact('page'));
         $this->set(compact('users'));
         $this->set('_serialize', ['users']);
 
@@ -84,6 +92,8 @@ class UsersController extends AppController
         ];
        // $user = $this->Users->find('all',['limit' => 200, 'conditions' => array('group_id' => 2 )]);
         $users = $this->paginate($this->Users->find('all',['limit' => 200, 'conditions' => array('group_id' => 1 )]));
+         $page = (isset($this->request->query['page'])) ? $this->request->query['page'] : 0;
+        $this->set(compact('page'));
        // $this->set('count',$this->Users->getCount($users));
             $this->set(compact('users'));
         $this->set('_serialize', ['users']);

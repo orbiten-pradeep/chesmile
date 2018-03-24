@@ -43,3 +43,15 @@
         <p><?= $this->Paginator->counter() ?></p>
     </div>
 </div>
+<script src="//ajax.googleapis.com/ajax/libs/jquery/1.11.1/jquery.min.js"></script>
+<script>
+$(function(){
+  $('input:radio').change(function(){
+$('a#deactivate').attr('href', '/chesmile%2816%29/groups/deactivate/'+$(this).val()); // better if you add an id to anchor & then
+     $('a#activate').attr('href', '/chesmile%2816%29/groups/activate/'+$(this).val()); // better if you add an id to anchor & then
+     $('a#view').attr('href', '/chesmile%2816%29/groups/view/'+$(this).val()); // better if you add an id to anchor & then
+      $('a#edit').attr('href', '/chesmile%2816%29/groups/edit/'+$(this).val()); // better if you add an id to anchor & then 
+    $('a#add').attr('href', '/chesmile%2816%29/groups/add/'+$(this).val()); // better if you add an id to anchor & then $('a#idofAnchor')
+});
+
+});</script>

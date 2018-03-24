@@ -1281,6 +1281,8 @@ public function organizerevents()
         }
 
         $users_id = $this->Auth->user('id');
+        $page = (isset($this->request->query['page'])) ? $this->request->query['page'] : 0;
+        $this->set(compact('page'));
         $this->set(compact('eventss'));
         $this->set(compact('address'));
         $this->set('categories', $categories_new);
