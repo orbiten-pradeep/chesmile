@@ -12,6 +12,11 @@
     <link href="<?php echo $this->Url->build('/newtheme/css/bootstrap.min.css'); ?>" rel="stylesheet">
     <!-- Material Design Bootstrap -->
     <link href="<?php echo $this->Url->build('/newtheme/css/mdb.min.css'); ?>" rel="stylesheet">
+
+    <link href="<?php echo $this->Url->build('/newtheme/css/bootstrap-tagsinput.css'); ?>" rel="stylesheet">
+
+    <link href="<?php echo $this->Url->build('/newtheme/css/check-box.css'); ?>" rel="stylesheet">
+    
     <!-- Your custom styles (optional) -->
     <link href="<?php echo $this->Url->build('/newtheme/css/style.css'); ?>" rel="stylesheet">
 
@@ -34,17 +39,33 @@
             </button>
             <div class="collapse navbar-collapse" id="navbarSupportedContent">
                 <ul class="navbar-nav mr-auto search-box">
-                    <li class="search-category-dd">
-                      <button type="button" class="btn btn-primary" onclick="getEventListByFilter();">
-                        <label>Category</label>
-                        <i class="fa fa-bars float-right"></i>
-                      </button>
+                    <li class="search-category">
+                      <div class="search-menu">
+                        <button type="button" class="btn btn-primary cat-not-selected" type="button">
+                          <label>Category</label>
+                          <i class="fa fa-bars float-right"></i>
+                        </button>
+                      </div>
+                      <div class="category-dropdown">
+                          <div class="row">
+                              <?php foreach ($categories as $key=> $category): ?>
+                              <div class="col-md-4">
+                                  <div class="checkbox parent-category" data-id="<?php echo $category->id; ?>" data-text="<?php echo $category->name; ?>"><?php echo $category->name; ?></div>
+                              </div>
+                              <?php endforeach; ?>
+                          </div>
+                      </div>
+                      <div class="subcategory-dd list-group">
+                          <div class="row" id="subCategoriesResp">
+
+                          </div>
+                      </div>
                     </li>
                     <li class="search-text-box">
-                      <input id="eventCategorySearch" type="text" class="form-control" placeholder="Search for events, parties, concerts and more">
+                      <input id="eventCategorySearch" type="text" class="form-control search-input" placeholder="Search for events, parties, concerts and more">
                     </li>
                     <li class="search-button">
-                        <button type="button" class="btn btn-primary btn-go" onclick="getEventListByFilter();">GO</button>
+                        <button type="button" class="btn btn-primary btn-go btn-category-search"><i class="fa fa-search" aria-hidden="true"></i></button>
                     </li>
                 </ul>
 
@@ -269,6 +290,10 @@
     <script type="text/javascript" src="<?php echo $this->Url->build('/newtheme/lib/masonry.pkgd.min.js'); ?>"></script>
 
     <script type="text/javascript" src="<?php echo $this->Url->build('/newtheme/lib/imagesloaded.pkgd.min.js'); ?>"></script>
+
+    <script type="text/javascript" src="<?php echo $this->Url->build('/newtheme/js/bootstrap-tagsinput.js'); ?>"></script>
+
+    <script type="text/javascript" src="<?php echo $this->Url->build('/newtheme/js/jquery.slimscroll.min.js'); ?>"></script>
 
     <script type="text/javascript" src="<?php echo $this->Url->build('/newtheme/custom/js/event.list.js'); ?>"></script>
 

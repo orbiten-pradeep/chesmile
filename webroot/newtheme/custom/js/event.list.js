@@ -16,6 +16,32 @@ chennaiSmile.filterParams.category = [];
 chennaiSmile.filterTextArr = [];
 chennaiSmile.previousFilterParams = "";
 
+
+chennaiSmile.searchTextBoxElem = $('#eventCategorySearch');
+chennaiSmile.searchTextBoxPlaceholder = chennaiSmile.searchTextBoxElem.attr('placeholder');
+chennaiSmile.searchTextBoxElem.tagsinput({
+	allowDuplicates: false,
+	itemValue: 'id',  // this will be used to set id of tag
+	itemText: 'text' // this will be used to set text of tag
+});
+chennaiSmile.searchTagsInputElem = $('.bootstrap-tagsinput');
+chennaiSmile.searchMenuButtonElem = $('.search-menu');
+chennaiSmile.searchCategoryBtnElem = $('.btn-category-search');
+
+chennaiSmile.parentCategoryElem = $('.parent-category');
+chennaiSmile.parentCategory = {};
+chennaiSmile.parentCategory.id;
+chennaiSmile.parentCategory.text;
+chennaiSmile.parentCategoryDivElem = $('.category-dropdown');
+
+chennaiSmile.subCategoryElem = $('.sub-category');
+chennaiSmile.subCategory = {};
+chennaiSmile.subCategory.id;
+chennaiSmile.subCategory.text;
+chennaiSmile.subCategoryDivElem = $('.subcategory-dd'); 
+chennaiSmile.subCategoryRespDivElem = $('#subCategoriesResp');
+
+
 chennaiSmile.eventListContainer = $('#eventResponse');
 chennaiSmile.noEventsMsg = $('#noEventsMsg');
 chennaiSmile.eventListLoading = $(".loadingDiv");
@@ -48,7 +74,6 @@ chennaiSmile.formatDate = function (date){
 
 chennaiSmile.getEventList = function() {
 	var self = this;
-	var dataParams = this.filterParams;
 
 	if(!this.equalPreviousCurrentFilterParams()) {
 		self.eventScrollDisabled = false;
@@ -209,6 +234,54 @@ chennaiSmile.generateFilterText = function() {
 	this.filterTextContainer.html(innerTextHtml);
 	this.filterTextParentContainer.removeClass('d-none').show();
 }
+
+chennaiSmile.getSubCategoryList = function() {
+	var self = this;
+	var pCategoryId = this.parentCategory.id;
+	var pCcategoryText = this.parentCategory.text;
+	var subCategoryApiUrl = $("#sub_category_api_url").val();
+
+    $.ajax({
+        type:"POST",
+        data: { "id": pCategoryId },
+        ContentType : 'application/json',
+        dataType: 'json',
+        url: subCategoryApiUrl,
+        async:true,
+        success: function(data) {
+        	if(data != '') {
+        		var html ="";
+	            $.each(data, function(key, val){
+					html += '<div class="col-md-4"><div class="sub-category">\
+								<div class="form-check checkbox-primary" id="'+key+'" text="'+val+'">\
+							    <input type="checkbox" class="form-check-input sub-category" id="checkbox'+key+'" value="'+key+'">\
+							    <label class="form-check-label" for="checkbox'+key+'">'+val+'</label>\
+								</div>\
+							</div></div>'
+	            })
+
+	            self.subCategoryRespDivElem.html(html);
+	            self.parentCategoryDivElem.hide();
+	            self.subCategoryDivElem.show();
+	            self.searchMenuButtonElem.html('<button type="button" class="btn btn-primary category-selected" type="button"><label>'+pCcategoryText+'</label><i class="fa fa-close" aria-hidden="true"></i></button>');
+        	}
+        	else {
+        		self.searchTextBoxElem.tagsinput('removeAll');
+        		self.parentCategory = {};
+        		self.parentCategory.id = pCategoryId;
+				self.parentCategory.text = pCcategoryText;
+				self.searchTextBoxElem.tagsinput('add', self.parentCategory);				
+				self.searchMenuButtonElem.html('<button type="button" class="btn btn-primary cat-not-selected" type="button"><label>Category</label><i class="fa fa-bars float-right"></i></button>');
+				self.parentCategoryDivElem.hide();
+				self.searchTextBoxElem.tagsinput('items')
+        	}
+        },
+        error: function (tab) {
+            //$select.html('<option id="-1">none available</option>');
+        }
+    });
+}
+
 $(document).ready(function() {
 	var self = chennaiSmile;
 	self.getEventList();
@@ -250,7 +323,7 @@ $(document).ready(function() {
 		self.filterParams.page = 0;
 		self.masonryDestory();
 		self.generateFilterText();
-		self.getEventList();		
+		self.getEventList();
 	});
 
 	self.filterTextParentContainer.on('click', '.filter-close', function() {
@@ -286,18 +359,99 @@ $(document).ready(function() {
 		self.filterParams.type = '';
 		self.filterTextArr = [];
 		self.filterTextParentContainer.hide();
+		self.searchMenuButtonElem.find('.fa-close').trigger('click');
 
 		self.masonryDestory();
 		self.getEventList();
 	});	
+
+	self.parentCategoryElem.click(function() {
+		self.searchTextBoxElem.tagsinput('removeAll');
+		self.parentCategory = {};
+		self.parentCategory.id = $(this).attr('data-id');
+		self.parentCategory.text = $(this).attr('data-text');
+		self.searchTextBoxElem.tagsinput('add', self.parentCategory);
+		self.searchTagsInputElem.find('input').attr('placeholder', '');
+		self.getSubCategoryList();
+	});
+
+	self.subCategoryRespDivElem.on('click','.sub-category input', function(event){
+		event.stopPropagation();
+		self.subCategory = {};
+		self.subCategory.id = $(this).parent().attr('id');
+		self.subCategory.text = $(this).parent().attr('text');
+		if($(this).is(':checked')) {
+			self.searchTextBoxElem.tagsinput('add', self.subCategory);
+			self.searchTagsInputElem.find('input').attr('placeholder', '');
+		} else {
+			self.searchTextBoxElem.tagsinput('remove', self.subCategory);
+		}
+		//console.log(elt.tagsinput('items'));
+	});
+
+	self.searchMenuButtonElem.on('click', '.fa-close', function(event) {
+		event.stopPropagation();
+		self.searchTextBoxElem.tagsinput('removeAll');
+		self.parentCategoryDivElem.hide();
+		self.subCategoryDivElem.hide();
+		self.searchMenuButtonElem.html('<button type="button" class="btn btn-primary cat-not-selected" type="button"><label>Category</label><i class="fa fa-bars float-right"></i></button>');
+		self.searchTagsInputElem.find('input').attr('placeholder', self.searchTextBoxPlaceholder);
+	});
 
 	let page = chennaiSmile.filterParams.page;
 	$(window).scroll(function() {
 	    if ($(window).scrollTop() == $(document).height() - $(window).height()) {
 	    	if(!self.eventScrollDisabled) {
 	    		self.filterParams.page = ++page;
-	      		self.getEventList();		
+	      		self.getEventList();
 	    	}	      
 	    }
 	});
+
+	self.searchTagsInputElem.slimScroll({
+	    axis: 'x',
+	    height: '46px',
+	    size: '7px',
+	    position: 'left',
+	    color: '#286090',
+	    allowPageScroll: false
+	});
+
+	self.searchMenuButtonElem.on('click', '.cat-not-selected', function(event){
+		event.stopPropagation();
+		self.parentCategoryDivElem.toggle();
+	});
+
+	self.searchMenuButtonElem.on('click', '.category-selected', function(event){
+		event.stopPropagation();
+		self.subCategoryDivElem.toggle();
+	});
+
+	self.searchCategoryBtnElem.click(function(){
+		var categoryItems = self.searchTextBoxElem.tagsinput('items');
+
+		categoryItems.forEach(function(item){
+			self.filterParams.category.push(item.id);
+			self.filterTextArr.push({'type':'category', 'text': item.text, 'value': item.id });
+		});
+
+		self.filterParams.page = 0;
+		self.masonryDestory();
+		self.generateFilterText();
+		self.getEventList();
+	});
+
 });
+
+
+$(document).click(function (e) {
+    var self = chennaiSmile;
+
+    if(self.parentCategoryDivElem.has(e.target).length === 0) {
+        self.parentCategoryDivElem.hide();
+    }
+
+    if(self.subCategoryDivElem.has(e.target).length === 0) {
+        self.subCategoryDivElem.hide();
+    }
+})
