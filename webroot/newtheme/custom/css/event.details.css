@@ -1,0 +1,41 @@
+	.flex-cont{
+		background-color: #f4f4f4;
+	}
+	.cs-descr-box{
+		height: 250px; 
+		overflow-y: scroll;
+	}
+	.cs-title{
+		color: #4ABAC5;
+	}
+	.buy-btn{
+		background-color: #FD7809;
+	}
+	.tag{
+		background: linear-gradient(to top, rgba(0, 0, 0, 0.55) 50%, rgba(0, 0, 0, 0.63) 50%) !important;
+	}
+	.cs-tag-title{
+		position: absolute;
+		bottom: 0;
+	}
+	.mob-container{
+		display: none;
+	}
+	.desk-container{
+		display: block;
+	}
+	.rs-details{
+		margin-left: 10px;
+	}
+	.cname-span{
+		margin-top: 22px;
+		color: #f4f4f4;
+	}
+	@media (max-width: 768px){
+		.mob-container{
+			display: block;
+		}
+		.desk-container{
+		display: none;
+	}
+	}
