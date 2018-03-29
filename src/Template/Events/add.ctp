@@ -25,7 +25,6 @@ else {
      			<?= $this->Form->input('categories_id',array('class' => 'form-control heigh','options' => $categories_list, 'onChange' => 'checkForOther(this);', 'empty' => 'Choose Category','label' => false));?>
      		</div>
      		<div class="md-form">
-     			<label>Choose Subcategory</label>
      			<div id="subdiv" class="form-group" style="display: none;">
             		<?=$this->Form->input('Eventsubcategories.sub_categories',array( 'subcategory_id'=>'', 'class' => 'form-control subclass','options' => $subCategories, 'multiple' => 'true', 'empty' => '(choose one)','label' => false,'empty' => false));?>
             	</div>
