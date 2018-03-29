@@ -385,7 +385,8 @@ public function organizerevents()
 			$users_id = $this->Auth->user('id');
 			$fullname = $this->Auth->user('fullname');
 			$email = $this->Auth->user('email');
-		$this->viewBuilder()->layout('event_home');
+		//$this->viewBuilder()->layout('event_home');
+            $this->viewBuilder()->layout('event_new_home');
 		}
         $event = $this->Events->newEntity();
         if ($this->request->is('post')) {
