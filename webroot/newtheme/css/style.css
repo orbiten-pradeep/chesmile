@@ -32,6 +32,42 @@
 	box-shadow: none;
 	padding: .84rem 1.14rem;
 }
+.cs-login-modal-head{
+    border: 0;
+    padding: .7rem;
+    margin-left: 1rem;
+    margin-right: 1rem;
+    margin-bottom: -20px;
+    background-color: #2bbbad;
+    z-index: 2;
+    position: relative;
+    border-radius: 2px;
+}
+.nav-tabs .nav-item.open .nav-link, .nav-tabs .nav-link.active {
+    background-color: rgba(255,255,255,.2);
+    color: #fff;
+    -webkit-transition: all 1s;
+    transition: all 1s;
+    border-radius: 2px;
+}
+.nav-tabs .nav-link{
+    border: 0;
+    color: #fff;
+}
+.cs-anchor > a{
+    width: 18%;
+}
+.btn.btn-primary.dropdown-toggle.cs-dropbtn.waves-effect.waves-light {
+    background: none !important;
+    box-shadow: none !important;
+}
+.btn.btn-primary.dropdown-toggle.cs-dropbtn.waves-effect.waves-light:hover {
+    background: none !important;
+    box-shadow: none !important;
+}
+.btn.btn-primary.dropdown-toggle.cs-dropbtn.waves-effect.waves-light:active {
+    box-shadow: none !important;
+}
 .category-dropdown, .subcategory-dd {
 	display: none;
     position: absolute;
