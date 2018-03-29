@@ -380,6 +380,14 @@ public function organizerevents()
      */
     public function add()
     {
+          if($this->Auth->user('group_id') == 1)
+        {
+           $this->loadModel('Users');
+         $users_id = $this->Auth->user('id');
+           $this->Users->updateAll(['group_id' => '2'], ['id' => $users_id]);
+            $this->Flash->success(__('Now, You are a Event Organizer.'));
+        }
+         
     	if(!empty($this->Auth->user('id')))
 		{
 			$users_id = $this->Auth->user('id');

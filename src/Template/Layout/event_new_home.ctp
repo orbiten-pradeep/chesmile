@@ -74,8 +74,9 @@
                     <li class="nav-item">
                         <a href="#" class="btn btn-default btn-rounded btn-sm" data-toggle="modal" data-target="#cs-login-modal">Login/Signup</a>
                     </li>
-                    
-
+                    <li class="nav-item">
+                        <a href="#" class="btn btn-primary " data-toggle="modal" data-target="#cs-login-modal">Create Events</a>
+                    </li>
                 </ul>
                 <?php }  else { ?>
                 <ul class="navbar-nav nav-flex-icons">
@@ -101,10 +102,18 @@
                     </li> -->
                     <!-- <li class="nav-item">
                         <button type="button" class="btn btn-primary">Create Events</button>
-                    </li> -->
+                    </li> --> <li class="nav-item">
+                    <?php $user = $this->request->session()->read('Auth.User'); if($user && $user['group_id'] != 1) { ?>
+
+     <?= $this->Html->link(__('Create Events'), ['controller' => 'events', 'action' => 'add'], array('class' => 'btn btn-primary')); ?></li>
+        <?php }?>
+                    <li class="nav-item">
+                     <?php $user = $this->request->session()->read('Auth.User'); if($user && $user['group_id'] == 1) { ?>
+         <a href="#" class="btn btn-primary" data-toggle="modal" data-target="#orgSignup">Create events</a></li>
+     <?php }?><!-- 
                     <li class="nav-item">
                         <?= $this->Html->link(__('Create events'), ['controller' => 'events', 'action' => 'add'], array('class' => 'btn btn-primary')); ?>
-                    </li>
+                    </li> -->
                     <li class="nav-item">
                         <button type="button" class="btn btn-default">Past Events</button>
                     </li>
@@ -138,6 +147,37 @@
     <!--/.Footer-->
 
 
+   <!-- Modal -->
+  <div class="modal fade" id="orgSignup" role="dialog">
+    <div class="modal-dialog">
+    
+      <!-- Modal content-->
+      <div class="modal-content con">
+        <div class="modal-header" style="border-bottom: none;">
+          <button type="button" class="close hide" data-dismiss="modal" style="color: #4abac5 !important;">&times;</button>
+          <h4 class="modal-title"></h4>
+        </div>
+        <div class="modal-body" style="text-align: center;background: none;">
+          <p >Do you want to upgrade your account as an event organizer?</p>
+          <input data-on="Yes" data-off="No" id="toggle-event" data-toggle="toggle" type="checkbox">
+          <div id="console-event"></div>
+          <script>
+            $(function() {
+              $('#toggle-event').change(function() {
+                $('#console-event').html('Toggle: ' + $(this).prop('checked'))
+              })
+            })
+          </script>
+        </div>
+        <div class="modal-footer" style="border-top: none;">
+          <?= $this->Html->link(__('Promote'), ['controller' => 'events', 'action' => 'add'], array('class' => 'btn btn-default closebtn')); ?>
+          <button type="button" class="btn btn-default closebtn" data-dismiss="modal">Close</button>
+        </div>
+      </div>
+      
+    </div>
+  </div>
+  
     <!--Modal: Login / Register Form-->
     <div class="modal fade" id="cs-login-modal" tabindex="-1" role="dialog" aria-labelledby="myModalLabel" aria-hidden="true">
         <div class="modal-dialog cascading-modal" role="document">
