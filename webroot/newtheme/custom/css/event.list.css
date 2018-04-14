@@ -112,3 +112,26 @@
     font-size: 13px;
     text-transform: capitalize;
 }
+.cs-category-title.text-center{
+    color: #474747;
+}
+.cs-fav-icons{
+    width: 100px;    
+}
+.cs-fav-icons-div{
+    display: inline-block;
+    padding: 20px;
+}
+.cs-fav-icons-div p{
+    text-align: center;
+    color: #474747;
+}
+.carousel .carousel-control-prev-icon.prev {
+    background-image: url("../img/arrow_left_black.svg") !important;
+}
+.carousel .carousel-control-next-icon.next {
+    background-image: url("../img/arrow_right_black.svg") !important;
+}
+.carousel-control-next.cs-arrow, .carousel-control-prev.cs-arrow {
+    width: auto !important;
+}
