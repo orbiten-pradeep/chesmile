@@ -33,16 +33,16 @@
   <input type="hidden" id="search_etitle_url" name="search_etitle_url" value="<?php echo $this->Url->build(array('controller' => 'events', 'action' => 'searchbyeventtitle'));?>">
     <header>
         <nav class="navbar navbar-expand-lg navbar-dark white scrolling-navbar cs-anchor">
-            <?php echo $this->Html->image('chennaismile-logo.png',array('alt' => 'Logo Chennai Smile','class' => 'navbar-brand','width' => '95%','url' => array('controller' => 'events', 'action' => 'index'))); ?>
+            <?php echo $this->Html->image('chennaismile-logo.png',array('alt' => 'Logo Chennai Smile','class' => 'navbar-brand','url' => array('controller' => 'events', 'action' => 'index'))); ?>
             <button class="navbar-toggler" type="button" data-toggle="collapse" data-target="#navbarSupportedContent" aria-controls="navbarSupportedContent" aria-expanded="false" aria-label="Toggle navigation">
                 <span class="navbar-toggler-icon"></span>
             </button>
             <div class="collapse navbar-collapse" id="navbarSupportedContent">
-                <ul class="navbar-nav mr-auto search-box">
+                <ul class="navbar-nav mr-auto search-box ml-4">
                     <li class="search-category">
                       <div class="search-menu">
                         <button type="button" class="btn btn-primary cat-not-selected" type="button">
-                          <label>Category</label>
+                          <label>Browse Category</label>
                           <i class="fa fa-bars float-right"></i>
                         </button>
                       </div>
@@ -67,26 +67,35 @@
                     <li class="search-button">
                         <button type="button" class="btn btn-primary btn-go btn-category-search"><i class="fa fa-search" aria-hidden="true"></i></button>
                     </li>
-                </ul>
-
-                <?php if(!$this->request->session()->read('Auth.User')) { ?>
-                <ul class="navbar-nav nav-flex-icons">
-                    <li class="nav-item">
-                        <a href="#" class="btn btn-default btn-rounded btn-sm" data-toggle="modal" data-target="#cs-login-modal">Login/Signup</a>
+                    <?php if(!$this->request->session()->read('Auth.User')) { ?>
+                    <li class="nav-item dropdown ml-4">
+                        <a class="nav-link btn btn-default btn-sm dropdown-toggle cs-city-btn" id="navbarDropdownMenuLink" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">Look your city</a>
+                        <div class="dropdown-menu dropdown-primary" aria-labelledby="navbarDropdownMenuLink">
+                            <a class="dropdown-item" href="http://www.bangaloresmile.com">Bangalore Smile</a>
+                            <a class="dropdown-item" href="http://www.mumbaismile.com">Mumbai Smile</a>
+                            <a class="dropdown-item" href="http://www.punesmile.com">Pune Smile</a>
+                        </div>
                     </li>
-                    <li class="nav-item">
-                        <a href="#" class="btn btn-primary " data-toggle="modal" data-target="#cs-login-modal">Create Events</a>
+                  </ul>
+                  <form class="form-inline float-right">
+                    <a href="#" class="btn btn-default btn-rounded btn-sm" data-toggle="modal" data-target="#cs-login-modal">Login/Signup</a>
+                    <a href="#" class="btn btn-primary" data-toggle="modal" data-target="#cs-login-modal" style="display: none;">Create Events</a>
+                  </form>
+                    <?php }  else { ?>
+                    <li class="nav-item dropdown ml-4">
+                        <a class="nav-link btn btn-default btn-sm dropdown-toggle cs-city-btn" id="navbarDropdownMenuLink" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">Look your city</a>
+                        <div class="dropdown-menu dropdown-primary" aria-labelledby="navbarDropdownMenuLink">
+                            <a class="dropdown-item" href="http://www.bangaloresmile.com">Bangalore Smile</a>
+                            <a class="dropdown-item" href="http://www.mumbaismile.com">Mumbai Smile</a>
+                            <a class="dropdown-item" href="http://www.punesmile.com">Pune Smile</a>
+                        </div>
                     </li>
-                </ul>
-                <?php }  else { ?>
-                <ul class="navbar-nav nav-flex-icons">
-                    <div class="dropdown">
+                    <div class="dropdown ml-4">
                         <button class="btn btn-primary dropdown-toggle cs-dropbtn p-0" type="button" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
                             <div class="avatar">
-                                <?=  $this->Html->image('profile_thumbnail.jpg',array('alt' => 'Logo Chennai Smile','class' => 'img-fluid rounded-circle')); ?>
+                              <?=  $this->Html->image('profile_thumbnail.jpg',array('alt' => 'Profile Picture','class' => 'img-fluid rounded-circle')); ?>
                             </div>
                         </button>
-                       
                         <div class="dropdown-menu" aria-labelledby="dropdownMenu4">
                             <li><?= $this->Html->link($this->Html->tag('i', '', array('class' => 'fa fa-user fa-fw')).'My Account', array('controller' => 'UserProfile', 'action' => 'add','class' => 'dropdown-item'), array('escape' => false)) ?></li>
                             <li> <a href="#my-events" class="my-events dropdown-item"><i class="fa fa-calendar-o fa-fw"></i>My Events</a></li>
@@ -94,26 +103,18 @@
                             <li><?= $this->Html->link($this->Html->tag('i', '', array('class' => 'fa fa-sign-out')).'Logout', array('controller' => 'Users', 'action' => 'logout','class' => 'dropdown-item'),array('escape' => false))?></li>
                         </div>
                     </div>
-                </ul>
-                  <?php } ?>
-                <ul class="navbar-nav nav-flex-icons">
-                    <!-- <li class="nav-item">
-                      <i class="fa fa-user-circle fa-3x" aria-hidden="true"></i>
-                    </li> -->
-                    <!-- <li class="nav-item">
-                        <button type="button" class="btn btn-primary">Create Events</button>
-                    </li> --> <li class="nav-item">
+                    <?php } ?>
+                  </ul>
+                <ul class="navbar-nav nav-flex-icons" style="display: none;">
+                  <li class="nav-item">
                     <?php $user = $this->request->session()->read('Auth.User'); if($user && $user['group_id'] != 1) { ?>
 
-     <?= $this->Html->link(__('Create Events'), ['controller' => 'events', 'action' => 'add'], array('class' => 'btn btn-primary')); ?></li>
-        <?php }?>
+                    <?= $this->Html->link(__('Create Events'), ['controller' => 'events', 'action' => 'add'], array('class' => 'btn btn-primary')); ?></li>
+                    <?php }?>
                     <li class="nav-item">
                      <?php $user = $this->request->session()->read('Auth.User'); if($user && $user['group_id'] == 1) { ?>
-         <a href="#" class="btn btn-primary" data-toggle="modal" data-target="#orgSignup">Create events</a></li>
-     <?php }?><!-- 
-                    <li class="nav-item">
-                        <?= $this->Html->link(__('Create events'), ['controller' => 'events', 'action' => 'add'], array('class' => 'btn btn-primary')); ?>
-                    </li> -->
+                    <a href="#" class="btn btn-primary" data-toggle="modal" data-target="#orgSignup">Create events</a></li>
+                    <?php }?>
                     <li class="nav-item">
                         <button type="button" class="btn btn-default">Past Events</button>
                     </li>
@@ -132,7 +133,51 @@
     <!-- /Start your project here-->
 
     <!--Footer-->
-    <footer class="page-footer font-small blue pt-4 mt-4">
+    <footer class="page-footer font-small pt-4 mt-4 cs-footer">
+      <div class="container">
+        <div class="row">
+          <div class="text-center cs-footer-social">
+            <ul class="list-unstyled list-inline">
+                <li class="list-inline-item">
+                    <a class="btn-floating btn-sm btn-fb mx-1">
+                        <i class="fa fa-facebook"> </i>
+                    </a>
+                </li>
+                <li class="list-inline-item">
+                    <a class="btn-floating btn-sm btn-tw mx-1">
+                        <i class="fa fa-twitter"> </i>
+                    </a>
+                </li>
+                <li class="list-inline-item">
+                    <a class="btn-floating btn-sm btn-gplus mx-1">
+                        <i class="fa fa-google-plus"> </i>
+                    </a>
+                </li>
+                <li class="list-inline-item">
+                    <a class="btn-floating btn-sm btn-li mx-1">
+                        <i class="fa fa-linkedin"> </i>
+                    </a>
+                </li>
+                <li class="list-inline-item">
+                    <a class="btn-floating btn-sm btn-dribbble mx-1">
+                        <i class="fa fa-dribbble"> </i>
+                    </a>
+                </li>
+            </ul>
+          </div>
+        </div>
+        <div class="row">
+          <div class="text-center cs-footer-social">
+            <ul class="list-unstyled list-inline">
+                <li class="list-inline-item"><?= $this->Html->link(__('About us'), ['controller' => 'events', 'action' => 'about'], array('class' => 'btn-floating btn-sm btn-tw mx-1')); ?></li>
+                <li class="list-inline-item"><?= $this->Html->link(__('Terms of service'), ['controller' => 'events', 'action' => 'terms'], array('class' => 'btn-floating btn-sm btn-tw mx-1')); ?></li>
+                <li class="list-inline-item"><?= $this->Html->link(__('Privacy Policy'), ['controller' => 'events', 'action' => 'privacy'], array('class' => 'btn-floating btn-sm btn-tw mx-1')); ?></li>
+                <li class="list-inline-item"><?= $this->Html->link(__('Disclaimer'), ['controller' => 'events', 'action' => 'partnerwith'], array('class' => 'btn-floating btn-sm btn-tw mx-1')); ?></li>
+                <li class="list-inline-item"><?= $this->Html->link(__('Contact us'), ['controller' => 'events', 'action' => 'contact'], array('class' => 'btn-floating btn-sm btn-tw mx-1')); ?></li>
+            </ul>
+          </div>
+        </div>
+      </div>
       <!--/.Footer Links-->
 
       <!--Copyright-->
@@ -150,8 +195,6 @@
    <!-- Modal -->
   <div class="modal fade" id="orgSignup" role="dialog">
     <div class="modal-dialog">
-    
-      <!-- Modal content-->
       <div class="modal-content con">
         <div class="modal-header" style="border-bottom: none;">
           <button type="button" class="close hide" data-dismiss="modal" style="color: #4abac5 !important;">&times;</button>
@@ -159,22 +202,16 @@
         </div>
         <div class="modal-body" style="text-align: center;background: none;">
           <p >Do you want to upgrade your account as an event organizer?</p>
-          <input data-on="Yes" data-off="No" id="toggle-event" data-toggle="toggle" type="checkbox">
-          <div id="console-event"></div>
-          <script>
-            $(function() {
-              $('#toggle-event').change(function() {
-                $('#console-event').html('Toggle: ' + $(this).prop('checked'))
-              })
-            })
-          </script>
+          <label class="switch">
+            <input type="checkbox">
+            <span class="slider round"></span>
+          </label>
         </div>
         <div class="modal-footer" style="border-top: none;">
           <?= $this->Html->link(__('Promote'), ['controller' => 'events', 'action' => 'add'], array('class' => 'btn btn-default closebtn')); ?>
           <button type="button" class="btn btn-default closebtn" data-dismiss="modal">Close</button>
         </div>
       </div>
-      
     </div>
   </div>
   

@@ -36,12 +36,12 @@
     <!--Dropdown primary-->
     
     <div class="pull-right">
-        <button type="button" class="btn btn-sm btn-indigo filter-type" data="freeEvents" data-text="Free Events">Free Events</button>
-        <button type="button" class="btn btn-sm btn-indigo filter-type" data="register" data-text="Booking Events">Booking Events</button>
+        <button type="button" class="btn btn-sm cs-btn-filter-free filter-type" data="freeEvents" data-text="Free Events">Free Events</button>
+        <button type="button" class="btn btn-sm cs-btn-filter-paid filter-type" data="register" data-text="Booking Events">Booking Events</button>
     </div>
     <div class="dropdown d-inline-block">
         <!--Trigger-->
-        <button class="btn btn-sm btn-default dropdown-toggle" type="button" id="dropdownMenu1" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">Filter By</button>        
+        <button class="btn btn-sm btn-default dropdown-toggle cs-filter-btn" type="button" id="dropdownMenu1" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">Filter By</button>        
 
         <!--Menu-->
         <div class="dropdown-menu dropdown-primary">
