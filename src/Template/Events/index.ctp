@@ -62,6 +62,113 @@
     
     <!--/Dropdown primary-->
 </div>
+<div class="container-fluid">
+    <div class="row">
+        <div class="col-lg-12 col-md-12">
+            <div class="cs-category-title text-center">
+                <h2>Your Favourite Category Events</h2>
+                <hr>
+            </div>
+            <!--Carousel Wrapper-->
+            <div id="carousel-example-2" class="carousel slide" data-ride="carousel" data-interval="false">
+                <!--Indicators-->
+                <!-- <ol class="carousel-indicators">
+                    <li data-target="#carousel-example-2" data-slide-to="0" class="active"></li>
+                    <li data-target="#carousel-example-2" data-slide-to="1"></li>
+                    <li data-target="#carousel-example-2" data-slide-to="2"></li>
+                </ol> -->
+                <!--/.Indicators-->
+                <!--Slides-->
+                <div class="carousel-inner" role="listbox">
+                    <div class="carousel-item active">
+                        <div class="view cs-fav-icons-div pl-4">
+                            <?php echo $this->Html->image('card/671theatrical-events.png',array('alt' => 'Theatrical Category','class' => 'cs-fav-icons')); ?><p><span>Theatrical</span></p>
+                        </div>
+                        <div class="view cs-fav-icons-div">
+                            <?php echo $this->Html->image('card/1653fun-and-entertainment-events.png',array('alt' => 'Fun and Entertainment Category','class' => 'cs-fav-icons')); ?><p><span>Fun And Entertainment</span></p>
+                        </div>
+                        <div class="view cs-fav-icons-div">
+                            <?php echo $this->Html->image('card/2477roadshows-events.png',array('alt' => 'Roadshow Category','class' => 'cs-fav-icons')); ?><p><span>Road Shows</span></p>
+                        </div>
+                        <div class="view cs-fav-icons-div">
+                            <?php echo $this->Html->image('card/2382education-events.png',array('alt' => 'Education Category','class' => 'cs-fav-icons')); ?><p><span>Education</span></p>
+                        </div>
+                        <div class="view cs-fav-icons-div">
+                            <?php echo $this->Html->image('card/854dance-events.png',array('alt' => 'Dance Category','class' => 'cs-fav-icons')); ?><p><span>Dance</span></p>
+                        </div>
+                        <div class="view cs-fav-icons-div">
+                            <?php echo $this->Html->image('card/2088health-and-wellness-events.png',array('alt' => 'Health and Wellness Category','class' => 'cs-fav-icons')); ?><p><span>Health And Wellness</span></p>
+                        </div>
+                        <div class="view cs-fav-icons-div">
+                            <?php echo $this->Html->image('card/2258sports-events.png',array('alt' => 'Sports Category','class' => 'navbar-brand','class' => 'cs-fav-icons')); ?><p><span>Sports</span></p>
+                        </div>
+                         <div class="view cs-fav-icons-div">
+                            <?php echo $this->Html->image('card/528business-events.png',array('alt' => 'Business Events Category','class' => 'cs-fav-icons')); ?><p><span>Business</span></p>
+                        </div>
+                         <div class="view cs-fav-icons-div">
+                            <?php echo $this->Html->image('card/363arts-and-crafts-events.png',array('alt' => 'Arts Category','class' => 'cs-fav-icons')); ?><p><span>Arts And Crafts</span></p>
+                        </div>
+                         <div class="view cs-fav-icons-div">
+                            <?php echo $this->Html->image('card/384audition-events.png',array('alt' => 'Audition Category','class' => 'cs-fav-icons')); ?><p><span>Audition</span></p>
+                        </div>
+                        <div class="view cs-fav-icons-div">
+                            <?php echo $this->Html->image('card/756exhibitions-events.png',array('alt' => 'Exhibitions Category','class' => 'cs-fav-icons')); ?><p><span>Exhibitions</span></p>
+                        </div>
+                        <div class="view cs-fav-icons-div">
+                            <?php echo $this->Html->image('card/773party-and-nightlife-events.png',array('alt' => 'Party and Nightlife Category','class' => 'cs-fav-icons')); ?><p><span>Part And Nightlife</span></p>
+                        </div>
+                    </div>
+
+                    <div class="carousel-item">
+                       <div class="view cs-fav-icons-div pl-4">
+                            <?php echo $this->Html->image('card/1244music-events.png',array('alt' => 'Music Category','class' => 'cs-fav-icons')); ?><p><span>Music</span></p>
+                        </div>
+                        <div class="view cs-fav-icons-div">
+                            <?php echo $this->Html->image('card/1555beauty-and-fashion-events.png',array('alt' => 'Beauty and Fashion Category','class' => 'cs-fav-icons')); ?><p><span>Beauty And Fashion</span></p>
+                        </div>
+                        <div class="view cs-fav-icons-div">
+                            <?php echo $this->Html->image('card/1586charity-events.png',array('alt' => 'Charity Category','class' => 'cs-fav-icons')); ?><p><span>Charity</span></span></p>
+                        </div>
+                        <div class="view cs-fav-icons-div">
+                            <?php echo $this->Html->image('card/1615day-events-events.png',array('alt' => 'Day events Category','class' => 'cs-fav-icons')); ?><p><span>Day Events</span></p>
+                        </div>
+                        <div class="view cs-fav-icons-div">
+                            <?php echo $this->Html->image('card/1781food-and-dining-events.png',array('alt' => 'Food Category','class' => 'cs-fav-icons')); ?><p><span>Food And Dining</span></p>
+                        </div>
+                        <div class="view cs-fav-icons-div">
+                            <?php echo $this->Html->image('card/1788competitions-events.png',array('alt' => 'Competitions events Category','class' => 'cs-fav-icons')); ?><p><span>Competitions</span></p>
+                        </div>
+                        <div class="view cs-fav-icons-div">
+                            <?php echo $this->Html->image('card/2660spiritual-events.png',array('alt' => 'Spiritual events Category','class' => 'cs-fav-icons')); ?><p><span>Spiritual</span></p>
+                        </div>
+                        <div class="view cs-fav-icons-div">
+                            <?php echo $this->Html->image('card/1059kids-events.png',array('alt' => 'Kids events Category','class' => 'cs-fav-icons')); ?><p><span>Kids</span></p>
+                        </div>
+                        <div class="view cs-fav-icons-div">
+                            <?php echo $this->Html->image('card/1099festivals-events.png',array('alt' => 'Festivals Category','class' => 'cs-fav-icons')); ?><p><span>Festivals</span></p>
+                        </div>
+                        <div class="view cs-fav-icons-div">
+                            <?php echo $this->Html->image('card/1126adventure-events.png',array('alt' => 'Adventures Category','class' => 'cs-fav-icons')); ?><p><span>Adventure</span></p>
+                        </div>
+                    </div>
+                </div>
+                <!--/.Slides-->
+                <!--Controls-->
+                <a class="carousel-control-prev cs-arrow" href="#carousel-example-2" role="button" data-slide="prev">
+                    <span class="carousel-control-prev-icon prev" aria-hidden="true"></span>
+                    <span class="sr-only">Previous</span>
+                </a>
+                <a class="carousel-control-next cs-arrow" href="#carousel-example-2" role="button" data-slide="next">
+                    <span class="carousel-control-next-icon next" aria-hidden="true"></span>
+                    <span class="sr-only">Next</span>
+                </a>
+                <!--/.Controls-->
+            </div>
+            <!--/.Carousel Wrapper-->  
+        </div>
+    </div>
+</div>
+
 <div class="container event-list">
     <div class="row filter-parent-container d-none">
         <div class="col-lg-12 col-md-12">

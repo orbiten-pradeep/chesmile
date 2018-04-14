@@ -79,7 +79,7 @@
                   </ul>
                   <form class="form-inline float-right">
                     <a href="#" class="btn btn-default btn-rounded btn-sm" data-toggle="modal" data-target="#cs-login-modal">Login/Signup</a>
-                    <a href="#" class="btn btn-primary" data-toggle="modal" data-target="#cs-login-modal" style="display: none;">Create Events</a>
+                    <a href="#" class="btn btn-primary" data-toggle="modal" data-target="#cs-login-modal">Create Events</a>
                   </form>
                     <?php }  else { ?>
                     <li class="nav-item dropdown ml-4">
@@ -105,7 +105,7 @@
                     </div>
                     <?php } ?>
                   </ul>
-                <ul class="navbar-nav nav-flex-icons" style="display: none;">
+                <ul class="navbar-nav nav-flex-icons">
                   <li class="nav-item">
                     <?php $user = $this->request->session()->read('Auth.User'); if($user && $user['group_id'] != 1) { ?>
 
@@ -254,27 +254,9 @@
                                     </div>
                                         <?= $this->Form->submit(__('Log In'), array('id' => 'Login2', 'class' => 'btn btn-primary btn-lg cs-signup-button cs-signin-button')) ?>
                                   <?= $this->Form->end() ?>
-                                <!-- <div class="md-form form-sm mb-5">
-                                    <i class="fa fa-envelope prefix"></i>
-                                    <input type="email" id="modalLRInput10" class="form-control form-control-sm validate">
-                                    <label data-error="wrong" data-success="right" for="modalLRInput10">Your email</label>
-                                </div>
-
-                                <div class="md-form form-sm mb-4">
-                                    <i class="fa fa-lock prefix"></i>
-                                    <input type="password" id="modalLRInput11" class="form-control form-control-sm validate">
-                                    <label data-error="wrong" data-success="right" for="modalLRInput11">Your password</label>
-                                </div>
-                                <div class="text-center mt-2">
-                                    <button class="btn btn-info">Log in <i class="fa fa-sign-in ml-1"></i></button>
-                                </div> -->
                             </div>
                             <!--Footer-->
                             <div class="modal-footer">
-                                <!-- <div class="options text-center text-md-right mt-1">
-                                    <p>Not a member? <a href="#" class="blue-text">Sign Up</a></p>
-                                    <p>Forgot <a href="#" class="blue-text">Password?</a></p>
-                                </div> -->
                                 <button type="button" class="btn btn-outline-info waves-effect ml-auto" data-dismiss="modal">Close</button>
                             </div>
                         </div>
@@ -310,35 +292,10 @@
 
                                 <?= $this->Form->button(__('Create Account'), array('id' => 'signup', 'class' => 'btn btn-primary btn-lg cs-signup-button')) ?>
                                 <?= $this->Form->end() ?>
-                                <!-- <div class="md-form form-sm mb-5">
-                                    <i class="fa fa-envelope prefix"></i>
-                                    <input type="email" id="modalLRInput12" class="form-control form-control-sm validate">
-                                    <label data-error="wrong" data-success="right" for="modalLRInput12">Your email</label>
-                                </div>
-
-                                <div class="md-form form-sm mb-5">
-                                    <i class="fa fa-lock prefix"></i>
-                                    <input type="password" id="modalLRInput13" class="form-control form-control-sm validate">
-                                    <label data-error="wrong" data-success="right" for="modalLRInput13">Your password</label>
-                                </div>
-
-                                <div class="md-form form-sm mb-4">
-                                    <i class="fa fa-lock prefix"></i>
-                                    <input type="password" id="modalLRInput14" class="form-control form-control-sm validate">
-                                    <label data-error="wrong" data-success="right" for="modalLRInput14">Repeat password</label>
-                                </div> -->
-
-                                <!-- <div class="text-center form-sm mt-2">
-                                    <button class="btn btn-info">Sign up <i class="fa fa-sign-in ml-1"></i></button>
-                                </div> -->
-
                             </div>
                             <!--Footer-->
                             <div class="modal-footer">
-                                <!-- <div class="options text-right">
-                                    <p class="pt-1">Already have an account? <a href="#" class="blue-text">Log In</a></p>
-                                </div> -->
-                                <button type="button" class="btn btn-outline-info waves-effect ml-auto" data-dismiss="modal">Close</button>
+                              <button type="button" class="btn btn-outline-info waves-effect ml-auto" data-dismiss="modal">Close</button>
                             </div>
                         </div>
                         <!--/.Panel 8-->
