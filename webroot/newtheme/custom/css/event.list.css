@@ -85,3 +85,30 @@
     padding-left: 7px;
     padding-right: 7px;
 }
+.btn-default.dropdown-toggle.cs-filter-btn{
+    background-color: #e7e7e7 !important;
+    color: #474747 !important;
+    box-shadow: none;
+    border: 1px solid #d4d4d4;
+    font-size: 13px;
+    text-transform: capitalize;
+}
+.btn-default.cs-filter-btn:not([disabled]):not(.disabled):active{
+    background-color: #e7e7e7  !important;
+}
+.btn.btn-sm.cs-btn-filter-free{
+    background-color: #fafafa !important;
+    color: #474747 !important;
+    box-shadow: none;
+    border: 1px solid #d4d4d4;
+    font-size: 13px;
+    text-transform: capitalize;
+}
+.btn.btn-sm.cs-btn-filter-paid{
+    background-color: #e7e7e7 !important;
+    color: #474747 !important;
+    box-shadow: none;
+    border: 1px solid #d4d4d4;
+    font-size: 13px;
+    text-transform: capitalize;
+}

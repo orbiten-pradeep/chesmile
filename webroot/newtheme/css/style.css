@@ -7,6 +7,7 @@
     border-radius: 0;
     margin: 0;
     padding: .84rem 1.14rem;
+    background-color: #50bac4 !important;
 }
 .search-box button i {
 	margin-top: 2px;
@@ -14,6 +15,7 @@
 .search-box button label {
 	margin-bottom: 0;
 	padding-right: .5rem;
+    text-transform: capitalize;
 }
 .search-box .search-text-box input {	
     border-radius: 0;
@@ -92,8 +94,8 @@
     text-shadow: none;
 }
 .search-text-box .bootstrap-tagsinput .tag {
-    background-color: #dee2e6;
-    color: #000 !important;
+    background-color: #e7e7e7;
+    color: #a8a8a8 !important;
     padding: 3px 7px;
     font-size: 14px;
     font-weight: 400;
@@ -115,4 +117,85 @@
 .subcategory-dd [type=checkbox]:checked+label:before {
     width:9px;
     height:20px;
+}
+.btn-default.dropdown-toggle.cs-city-btn{
+    background-color: #e7e7e7 !important;
+    color: #474747 !important;
+    box-shadow: none;
+    font-size: 13px;
+    text-transform: capitalize;
+    border: 1px solid #d4d4d4;
+}
+.btn-default.cs-city-btn:not([disabled]):not(.disabled):active{
+    background-color: #e7e7e7  !important;
+}
+.btn.btn-primary.cat-not-selected,
+.btn.btn-primary.category-selected {
+    background-color: #474747 !important;
+}
+.bootstrap-tagsinput .tag [data-role="remove"]::after {
+    content: "x";
+    padding: 0px 2px;
+    color: #4a4a4a !important;
+}
+.cs-footer{
+    background-color: #4abac5;
+}
+.cs-footer-social{
+    margin: 0 auto;
+}
+.switch {
+  position: relative;
+  display: inline-block;
+  width: 60px;
+  height: 34px;
+}
+
+.switch input {display:none;}
+
+.slider {
+  position: absolute;
+  cursor: pointer;
+  top: 0;
+  left: 0;
+  right: 0;
+  bottom: 0;
+  background-color: #ccc;
+  -webkit-transition: .4s;
+  transition: .4s;
+}
+
+.slider:before {
+  position: absolute;
+  content: "";
+  height: 26px;
+  width: 26px;
+  left: 4px;
+  bottom: 4px;
+  background-color: white;
+  -webkit-transition: .4s;
+  transition: .4s;
+}
+
+input:checked + .slider {
+  background-color: #2196F3;
+}
+
+input:focus + .slider {
+  box-shadow: 0 0 1px #2196F3;
+}
+
+input:checked + .slider:before {
+  -webkit-transform: translateX(26px);
+  -ms-transform: translateX(26px);
+  transform: translateX(26px);
+}
+
+/ Rounded sliders /
+.slider.round {
+  border-radius: 34px;
+}
+
+.slider.round:before {
+  border-radius: 50%;
 }

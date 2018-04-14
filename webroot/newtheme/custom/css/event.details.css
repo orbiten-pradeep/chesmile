@@ -11,8 +11,8 @@
 	.buy-btn{
 		background-color: #FD7809;
 	}
-	.tag{
-		background: linear-gradient(to top, rgba(0, 0, 0, 0.55) 50%, rgba(0, 0, 0, 0.63) 50%) !important;
+	.cs-tag-title .tag {
+	    background: linear-gradient(to top, rgba(0, 0, 0, 0.55) 50%, rgba(0, 0, 0, 0.63) 50%) !important;
 	}
 	.cs-tag-title{
 		position: absolute;
