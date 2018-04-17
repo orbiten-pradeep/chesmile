@@ -1,12 +1,15 @@
 var chennaiSmile = {};
-
+chennaiSmile.eventPage = $("#eventPage");
 chennaiSmile.filterElem = {};
 chennaiSmile.filterElem.date = $('.filter-date');
 chennaiSmile.filterElem.category = $('.filter-tc-button');
 chennaiSmile.filterElem.type = $('.filter-type');
+chennaiSmile.filterElem.action = $('.filter-action');
 chennaiSmile.filterTextContainer = $('#chipsId');
 chennaiSmile.filterTextParentContainer = $('.filter-parent-container');
 chennaiSmile.filterClose = $('.filter-close');
+chennaiSmile.favCategoryDivElem = $('.favourite-category');
+chennaiSmile.showEventPageTitleHeader = $('.epage-title');
 
 chennaiSmile.filterParams = {};
 chennaiSmile.filterParams.page = 0;
@@ -80,6 +83,7 @@ chennaiSmile.getEventList = function() {
 	}
 
 	this.eventListLoading.show();
+
 	$.ajax({
 	    type: "POST",
 	    ContentType: 'application/json',
@@ -235,6 +239,32 @@ chennaiSmile.generateFilterText = function() {
 	this.filterTextParentContainer.removeClass('d-none').show();
 }
 
+chennaiSmile.getHashValues = function() {
+	var self = this;
+	var type = window.location.hash.substr(1);
+	if(type!=''){
+		var action = '';
+		var titleText = '';
+		if(type == "my-events") {
+			action = "myevents";
+			titleText = "My Events";
+		}
+		if(type == "liked-events") {
+			action = "likedevents";
+			titleText = "My Liked Events"
+		}
+		if(type == "past-events") {
+			action = "pastevents";
+			titleText = "Past Events";
+		}
+
+		self.filterParams.action = action;
+		self.showEventPageTitleHeader.show();
+		self.showEventPageTitleHeader.find('.epage-title-text').html(titleText);
+		self.favCategoryDivElem.hide();
+	}
+}
+
 chennaiSmile.getSubCategoryList = function() {
 	var self = this;
 	var pCategoryId = this.parentCategory.id;
@@ -284,7 +314,48 @@ chennaiSmile.getSubCategoryList = function() {
 
 $(document).ready(function() {
 	var self = chennaiSmile;
+	self.getHashValues();
 	self.getEventList();
+
+	self.filterElem.action.click(function() {
+		var action = $(this).attr('data');
+		var titleText = "";
+
+		if(self.eventPage.val() != "index") {
+			var eLinks = $("#eventIndexUrl").val();
+			location.href = eLinks+"#"+action;
+			return;
+		}
+
+		self.filterParams.page = 0;
+		self.filterParams.date = '';
+		self.filterParams.category = [];
+		self.filterParams.type = '';
+		self.filterTextArr = [];
+		self.filterTextParentContainer.hide();
+		self.searchMenuButtonElem.find('.fa-close').trigger('click');
+		self.favCategoryDivElem.hide();
+
+		self.filterParams.action = action;
+		if(action == "myevents") {
+			titleText = "My Events";
+		}
+		if(action == "likedevents") {
+			titleText = "My Liked Events";
+		}
+		if(action == "pastevents") {
+			titleText = "Past Events";
+		}
+		self.showEventPageTitleHeader.show();
+		self.showEventPageTitleHeader.find('.epage-title-text').html(titleText);
+
+		if(($('.modal-mob-menus').data('bs.modal') || {})._isShown) {
+			$('.modal-mob-menus').modal('toggle');
+		}
+
+		self.masonryDestory();
+		self.getEventList();
+	});
 
 	self.filterElem.date.click(function() {
 		self.filterParams.date = $(this).attr('data');
@@ -297,6 +368,7 @@ $(document).ready(function() {
 		self.masonryDestory();
 		self.generateFilterText();
 		self.getEventList();
+		self.favCategoryDivElem.hide();
 	});
 
 	self.filterElem.type.click(function() {
@@ -310,6 +382,7 @@ $(document).ready(function() {
 		self.masonryDestory();
 		self.generateFilterText();
 		self.getEventList();
+		self.favCategoryDivElem.hide();
 	});
 
 	self.filterElem.category.click(function() {
@@ -324,6 +397,7 @@ $(document).ready(function() {
 		self.masonryDestory();
 		self.generateFilterText();
 		self.getEventList();
+		self.favCategoryDivElem.hide();
 	});
 
 	self.filterTextParentContainer.on('click', '.filter-close', function() {
@@ -439,6 +513,7 @@ $(document).ready(function() {
 		self.masonryDestory();
 		self.generateFilterText();
 		self.getEventList();
+		self.favCategoryDivElem.hide();
 	});
 
 });
@@ -453,5 +528,5 @@ $(document).click(function (e) {
 
     if(self.subCategoryDivElem.has(e.target).length === 0) {
         self.subCategoryDivElem.hide();
-    }
+    }  
 })

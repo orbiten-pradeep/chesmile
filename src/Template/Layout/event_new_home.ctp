@@ -25,99 +25,149 @@
 </head>
 
 <body>
- <input type="hidden" id="sub_category_api_url" name="sub_category_api_url" value="<?php echo $this->Url->build(array('controller' => 'events', 'action' => 'viewresult'));?>">
-  <input type="hidden" id="event_list_url" name="event_list_url" value="<?php echo $this->Url->build(array('controller' => 'events', 'action' => 'eventlist'));?>">
-  <input type="hidden" id="eventIndexUrl" name="event_index_url" value="<?php echo $this->Url->build(array('controller' => 'events', 'action' => 'index'));?>">
-  <input type="hidden" id="event_view_url" name="event_view_url" value="<?php echo $this->Url->build(array('controller' => 'events', 'action' => 'chennai'));?>">
-  <input type="hidden" id="search_area_url" name="search_area_url" value="<?php echo $this->Url->build(array('controller' => 'events', 'action' => 'search'));?>">
-  <input type="hidden" id="search_etitle_url" name="search_etitle_url" value="<?php echo $this->Url->build(array('controller' => 'events', 'action' => 'searchbyeventtitle'));?>">
+    <input type="hidden" id="sub_category_api_url" name="sub_category_api_url" value="<?php echo $this->Url->build(array('controller' => 'events', 'action' => 'viewresult'));?>">
+    <input type="hidden" id="event_list_url" name="event_list_url" value="<?php echo $this->Url->build(array('controller' => 'events', 'action' => 'eventlist'));?>">
+    <input type="hidden" id="eventIndexUrl" name="event_index_url" value="<?php echo $this->Url->build(array('controller' => 'events', 'action' => 'index'));?>">
+    <input type="hidden" id="event_view_url" name="event_view_url" value="<?php echo $this->Url->build(array('controller' => 'events', 'action' => 'chennai'));?>">
+    <input type="hidden" id="search_area_url" name="search_area_url" value="<?php echo $this->Url->build(array('controller' => 'events', 'action' => 'search'));?>">
+    <input type="hidden" id="search_etitle_url" name="search_etitle_url" value="<?php echo $this->Url->build(array('controller' => 'events', 'action' => 'searchbyeventtitle'));?>">
+    <input type="hidden" id="eventPage" name="eventPage" value="<?php echo $this->request->params['action']; ?>">
     <header>
         <nav class="navbar navbar-expand-lg navbar-dark white scrolling-navbar cs-anchor">
-            <?php echo $this->Html->image('chennaismile-logo.png',array('alt' => 'Logo Chennai Smile','class' => 'navbar-brand','url' => array('controller' => 'events', 'action' => 'index'))); ?>
-            <button class="navbar-toggler" type="button" data-toggle="collapse" data-target="#navbarSupportedContent" aria-controls="navbarSupportedContent" aria-expanded="false" aria-label="Toggle navigation">
-                <span class="navbar-toggler-icon"></span>
-            </button>
-            <div class="collapse navbar-collapse" id="navbarSupportedContent">
-                <ul class="navbar-nav mr-auto search-box ml-4">
-                    <li class="search-category">
-                      <div class="search-menu">
-                        <button type="button" class="btn btn-primary cat-not-selected" type="button">
-                          <label>Browse Category</label>
-                          <i class="fa fa-bars float-right"></i>
-                        </button>
-                      </div>
-                      <div class="category-dropdown">
-                          <div class="row">
-                              <?php foreach ($categories as $key=> $category): ?>
-                              <div class="col-md-4">
-                                  <div class="checkbox parent-category" data-id="<?php echo $category->id; ?>" data-text="<?php echo $category->name; ?>"><?php echo $category->name; ?></div>
-                              </div>
-                              <?php endforeach; ?>
-                          </div>
-                      </div>
-                      <div class="subcategory-dd list-group">
-                          <div class="row" id="subCategoriesResp">
+            
+            <a class="navbar-brand" href="<?php echo $this->Url->build(array('controller' => 'events', 'action' => 'index'));?>"><?php echo $this->Html->image('chennaismile-logo.png',array('alt' => 'Logo Chennai Smile')); ?></a>
 
-                          </div>
+            <div class="mobile-menu pull-right" id="mobileMenuBtn" data-direction='bottom'>
+                <button type="button" class="btn btn-mdb-color btn-md">
+                    <i class="fa fa-bars" aria-hidden="true"></i>
+                </button>
+            </div>
+
+            
+
+            <!-- IPAD navbar links -->
+            <ul class="navbar-nav pull-right ipad-nav-links">
+              <?php if($this->request->session()->read('Auth.User')) { ?>
+              <div class="dropdown ipad-user-profile">
+                  <button class="btn btn-primary user-dropdown dropdown-toggle cs-dropbtn p-0" type="button" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
+                      <div class="avatar">
+                        <?=  $this->Html->image('profile_thumbnail.jpg',array('alt' => 'Profile Picture','class' => 'img-fluid rounded-circle')); ?>
                       </div>
-                    </li>
-                    <li class="search-text-box">
-                      <input id="eventCategorySearch" type="text" class="form-control search-input" placeholder="Search for events, parties, concerts and more">
-                    </li>
-                    <li class="search-button">
-                        <button type="button" class="btn btn-primary btn-go btn-category-search"><i class="fa fa-search" aria-hidden="true"></i></button>
-                    </li>
-                    <?php if(!$this->request->session()->read('Auth.User')) { ?>
-                    <li class="nav-item dropdown ml-4">
-                        <a class="nav-link btn btn-default btn-sm dropdown-toggle cs-city-btn" id="navbarDropdownMenuLink" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">Look your city</a>
-                        <div class="dropdown-menu dropdown-primary" aria-labelledby="navbarDropdownMenuLink">
-                            <a class="dropdown-item" href="http://www.bangaloresmile.com">Bangalore Smile</a>
-                            <a class="dropdown-item" href="http://www.mumbaismile.com">Mumbai Smile</a>
-                            <a class="dropdown-item" href="http://www.punesmile.com">Pune Smile</a>
-                        </div>
-                    </li>
-                  </ul>
-                  <form class="form-inline float-right">
-                    <a href="#" class="btn btn-default btn-rounded btn-sm" data-toggle="modal" data-target="#cs-login-modal">Login/Signup</a>
-                    <a href="#" class="btn btn-primary" data-toggle="modal" data-target="#cs-login-modal">Create Events</a>
-                  </form>
-                    <?php }  else { ?>
-                    <li class="nav-item dropdown ml-4">
-                        <a class="nav-link btn btn-default btn-sm dropdown-toggle cs-city-btn" id="navbarDropdownMenuLink" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">Look your city</a>
-                        <div class="dropdown-menu dropdown-primary" aria-labelledby="navbarDropdownMenuLink">
-                            <a class="dropdown-item" href="http://www.bangaloresmile.com">Bangalore Smile</a>
-                            <a class="dropdown-item" href="http://www.mumbaismile.com">Mumbai Smile</a>
-                            <a class="dropdown-item" href="http://www.punesmile.com">Pune Smile</a>
-                        </div>
-                    </li>
-                    <div class="dropdown ml-4">
-                        <button class="btn btn-primary dropdown-toggle cs-dropbtn p-0" type="button" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
-                            <div class="avatar">
-                              <?=  $this->Html->image('profile_thumbnail.jpg',array('alt' => 'Profile Picture','class' => 'img-fluid rounded-circle')); ?>
+                  </button>
+                  <div class="dropdown-menu" aria-labelledby="dropdownMenu4">                        
+                      <li><?= $this->Html->link($this->Html->tag('i', '', array('class' => 'fa fa-user fa-fw')).'My Account', array('controller' => 'UserProfile', 'action' => 'add','class' => 'dropdown-item'), array('escape' => false)) ?></li>
+                      <li> <a href="#my-events" class="my-events dropdown-item filter-action" data="myevents"><i class="fa fa-calendar-o fa-fw"></i>My Events</a></li>
+                      <li><a href="#liked-events" class="liked-events dropdown-item filter-action" data="likedevents"><i class="fa fa-thumbs-up fa-fw"></i>Liked Events</a></li>
+                      <li><?= $this->Html->link($this->Html->tag('i', '', array('class' => 'fa fa-sign-out')).'Logout', array('controller' => 'Users', 'action' => 'logout','class' => 'dropdown-item'),array('escape' => false))?></li>
+                  </div>
+              </div>                  
+              <?php } ?>
+              <li class="nav-item dropdown nav-city-link">
+                  <a class="nav-link btn btn-default btn-sm dropdown-toggle cs-city-btn" id="navbarDropdownMenuLink" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">Look your city</a>
+                  <div class="dropdown-menu dropdown-primary" aria-labelledby="navbarDropdownMenuLink">
+                      <a class="dropdown-item" href="http://www.bangaloresmile.com">Bangalore Smile</a>
+                      <a class="dropdown-item" href="http://www.mumbaismile.com">Mumbai Smile</a>
+                      <a class="dropdown-item" href="http://www.punesmile.com">Pune Smile</a>
+                  </div>
+              </li>
+              
+              <?php if(!$this->request->session()->read('Auth.User')) { ?>
+              <li class="nav-item">
+                <a href="#" class="btn btn-md btn-primary" data-toggle="modal" data-target="#cs-login-modal">Create Events</a>
+              </li>
+              <?php } ?>
+
+              <?php $user = $this->request->session()->read('Auth.User'); if($user && $user['group_id'] == 1) { ?>
+              <li class="nav-item">                    
+                <?= $this->Html->link(__('Create Events'), ['controller' => 'events', 'action' => 'add'], array('class' => 'btn btn-md btn-primary')); ?>                    
+              </li>
+              <?php } ?>
+
+              <li class="nav-item">
+                <a href="#past-events" class="btn btn-md btn-default filter-action" data="pastevents" text="Past Events">
+                  Past Events
+                </a>
+              </li>
+              
+            </ul>
+            <!-- IPAD navbar links ends -->
+
+            <div class="collapse navbar-collapse" id="navbarSupportedContent">
+                <ul class="navbar-nav mr-auto search-box">
+                  <li class="search-category">
+                    <div class="search-menu">
+                      <button type="button" class="btn btn-primary cat-not-selected" type="button">
+                        <label>Category</label>
+                        <i class="fa fa-bars float-right"></i>
+                      </button>
+                    </div>
+                    <div class="category-dropdown">
+                        <div class="row">
+                            <?php foreach ($categories as $key=> $category): ?>
+                            <div class="col-md-4">
+                                <div class="checkbox parent-category" data-id="<?php echo $category->id; ?>" data-text="<?php echo $category->name; ?>"><?php echo $category->name; ?></div>
                             </div>
-                        </button>
-                        <div class="dropdown-menu" aria-labelledby="dropdownMenu4">
-                            <li><?= $this->Html->link($this->Html->tag('i', '', array('class' => 'fa fa-user fa-fw')).'My Account', array('controller' => 'UserProfile', 'action' => 'add','class' => 'dropdown-item'), array('escape' => false)) ?></li>
-                            <li> <a href="#my-events" class="my-events dropdown-item"><i class="fa fa-calendar-o fa-fw"></i>My Events</a></li>
-                            <li><a href="#liked-events" class="liked-events dropdown-item"><i class="fa fa-thumbs-up fa-fw"></i>Liked Events</a></li>
-                            <li><?= $this->Html->link($this->Html->tag('i', '', array('class' => 'fa fa-sign-out')).'Logout', array('controller' => 'Users', 'action' => 'logout','class' => 'dropdown-item'),array('escape' => false))?></li>
+                            <?php endforeach; ?>
                         </div>
                     </div>
-                    <?php } ?>
-                  </ul>
-                <ul class="navbar-nav nav-flex-icons">
-                  <li class="nav-item">
-                    <?php $user = $this->request->session()->read('Auth.User'); if($user && $user['group_id'] != 1) { ?>
+                    <div class="subcategory-dd list-group">
+                        <div class="row" id="subCategoriesResp">
 
-                    <?= $this->Html->link(__('Create Events'), ['controller' => 'events', 'action' => 'add'], array('class' => 'btn btn-primary')); ?></li>
-                    <?php }?>
-                    <li class="nav-item">
-                     <?php $user = $this->request->session()->read('Auth.User'); if($user && $user['group_id'] == 1) { ?>
-                    <a href="#" class="btn btn-primary" data-toggle="modal" data-target="#orgSignup">Create events</a></li>
-                    <?php }?>
-                    <li class="nav-item">
-                        <button type="button" class="btn btn-default">Past Events</button>
-                    </li>
+                        </div>
+                    </div>
+                  </li>
+                  <li class="search-text-box">
+                    <input id="eventCategorySearch" type="text" class="form-control search-input" placeholder="Search for events, parties, concerts and more">
+                  </li>
+                  <li class="search-button">
+                      <button type="button" class="btn btn-primary btn-go btn-category-search"><i class="fa fa-search" aria-hidden="true"></i></button>
+                  </li>
+                </ul>
+
+                <?php if($this->request->session()->read('Auth.User')) { ?>
+                <ul class="navbar-nav nav-cs-action">                  
+                  <div class="dropdown ml-4">
+                      <button class="btn btn-primary user-dropdown dropdown-toggle cs-dropbtn p-0" type="button" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
+                          <div class="avatar">
+                            <?=  $this->Html->image('profile_thumbnail.jpg',array('alt' => 'Profile Picture','class' => 'img-fluid rounded-circle')); ?>
+                          </div>
+                      </button>
+                      <div class="dropdown-menu" aria-labelledby="dropdownMenu4">                        
+                          <li><?= $this->Html->link($this->Html->tag('i', '', array('class' => 'fa fa-user fa-fw')).'My Account', array('controller' => 'UserProfile', 'action' => 'add','class' => 'dropdown-item'), array('escape' => false)) ?></li>
+                          <li> <a href="#my-events" class="my-events dropdown-item filter-action" data="myevents"><i class="fa fa-calendar-o fa-fw"></i>My Events</a></li>
+                          <li><a href="#liked-events" class="liked-events dropdown-item filter-action" data="likedevents"><i class="fa fa-thumbs-up fa-fw"></i>Liked Events</a></li>
+                          <li><?= $this->Html->link($this->Html->tag('i', '', array('class' => 'fa fa-sign-out')).'Logout', array('controller' => 'Users', 'action' => 'logout','class' => 'dropdown-item'),array('escape' => false))?></li>
+                      </div>
+                  </div>                  
+                </ul>
+                <?php } ?>
+
+                <ul class="navbar-nav nav-cs-action pull-right">
+                  <li class="nav-item dropdown nav-city-link">
+                      <a class="nav-link btn btn-default btn-sm dropdown-toggle cs-city-btn" id="navbarDropdownMenuLink" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">Look your city</a>
+                      <div class="dropdown-menu dropdown-primary" aria-labelledby="navbarDropdownMenuLink">
+                          <a class="dropdown-item" href="http://www.bangaloresmile.com">Bangalore Smile</a>
+                          <a class="dropdown-item" href="http://www.mumbaismile.com">Mumbai Smile</a>
+                          <a class="dropdown-item" href="http://www.punesmile.com">Pune Smile</a>
+                      </div>
+                  </li>
+                  <?php if(!$this->request->session()->read('Auth.User')) { ?>
+                  <li class="nav-item">
+                    <a href="#" class="btn btn-md btn-primary" data-toggle="modal" data-target="#cs-login-modal">Create Events</a>
+                  </li>
+                  <?php } ?>
+
+                  <?php $user = $this->request->session()->read('Auth.User'); if($user && $user['group_id'] == 1) { ?>
+                  <li class="nav-item">                    
+                    <?= $this->Html->link(__('Create Events'), ['controller' => 'events', 'action' => 'add'], array('class' => 'btn btn-md btn-primary')); ?>                    
+                  </li>
+                  <?php } ?>
+
+                  <li class="nav-item">
+                    <a href="#past-events" class="btn btn-md btn-default filter-action" data="pastevents" text="Past Events">
+                      Past Events
+                    </a>
+                  </li>
                 </ul>
             </div>
         </nav>
@@ -192,31 +242,31 @@
     <!--/.Footer-->
 
 
-   <!-- Modal -->
-  <div class="modal fade" id="orgSignup" role="dialog">
-    <div class="modal-dialog">
-      <div class="modal-content con">
-        <div class="modal-header" style="border-bottom: none;">
-          <button type="button" class="close hide" data-dismiss="modal" style="color: #4abac5 !important;">&times;</button>
-          <h4 class="modal-title"></h4>
-        </div>
-        <div class="modal-body" style="text-align: center;background: none;">
-          <p >Do you want to upgrade your account as an event organizer?</p>
-          <label class="switch">
-            <input type="checkbox">
-            <span class="slider round"></span>
-          </label>
-        </div>
-        <div class="modal-footer" style="border-top: none;">
-          <?= $this->Html->link(__('Promote'), ['controller' => 'events', 'action' => 'add'], array('class' => 'btn btn-default closebtn')); ?>
-          <button type="button" class="btn btn-default closebtn" data-dismiss="modal">Close</button>
+     <!-- Modal -->
+    <div class="modal fade" id="orgSignup" role="dialog">
+      <div class="modal-dialog">
+        <div class="modal-content con">
+          <div class="modal-header" style="border-bottom: none;">
+            <button type="button" class="close hide" data-dismiss="modal" style="color: #4abac5 !important;">&times;</button>
+            <h4 class="modal-title"></h4>
+          </div>
+          <div class="modal-body" style="text-align: center;background: none;">
+            <p >Do you want to upgrade your account as an event organizer?</p>
+            <label class="switch">
+              <input type="checkbox">
+              <span class="slider round"></span>
+            </label>
+          </div>
+          <div class="modal-footer" style="border-top: none;">
+            <?= $this->Html->link(__('Promote'), ['controller' => 'events', 'action' => 'add'], array('class' => 'btn btn-default closebtn')); ?>
+            <button type="button" class="btn btn-default closebtn" data-dismiss="modal">Close</button>
+          </div>
         </div>
       </div>
     </div>
-  </div>
   
     <!--Modal: Login / Register Form-->
-    <div class="modal fade" id="cs-login-modal" tabindex="-1" role="dialog" aria-labelledby="myModalLabel" aria-hidden="true">
+    <div class="modal login-popup fade" id="cs-login-modal" tabindex="-1" role="dialog" aria-labelledby="myModalLabel" aria-hidden="true">
         <div class="modal-dialog cascading-modal" role="document">
             <!--Content-->
             <div class="modal-content">
@@ -307,6 +357,133 @@
         </div>
     </div>
     <!--Modal: Login / Register Form-->
+
+    <!-- Modal: Mobile Menus -->
+    <div class="modal mobile-modal modal-mob-menus fade">
+        <div class="modal-dialog">
+            <div class="modal-content">
+                <div class="modal-body">
+                    <ul class="list-group">
+                        <?php if(!$this->request->session()->read('Auth.User')) { ?>
+                        <li class="list-group-item"><span class="mob-open-login">Create Event</span></li>
+                        <li class="list-group-item"><span class="mob-open-login">Login/Signup</span></li>
+                        <?php }?>
+
+                        <?php if($this->request->session()->read('Auth.User')) { ?>
+                        <li class="list-group-item">
+                          <a href="<?php echo $this->Url->build(array('controller' => 'events', 'action' => 'add'));?>">Create Event</a>
+                        </li>
+                        <li class="list-group-item">
+                          <a href="#my-events" class="my-events filter-action" data="myevents">My Events</a>
+                        </li>
+                        <li class="list-group-item">
+                          <a href="#liked-events" class="liked-events filter-action" data="likedevents">Liked Events</a>
+                        </li>
+                        <li class="list-group-item">
+                          <a href="#past-events" class="past-events filter-action" data="pastevents">Past Event</a>
+                        </li>
+                        <li class="list-group-item">
+                          <a href="<?php echo $this->Url->build(array('controller' => 'UserProfile', 'action' => 'add'));?>">My Profile</a>
+                        </li>
+                        <li class="list-group-item">
+                          <a href="<?php echo $this->Url->build(array('controller' => 'Users', 'action' => 'logout'));?>">Logout</a>
+                        </li>
+                        <?php }?>
+                    </ul>
+                </div>
+            </div>
+            <!-- /.modal-content -->
+        </div>
+        <!-- /.modal-dialog -->
+    </div>
+    <!-- /.modal -->
+    <div class="mobile-footer" id="mobFooter">
+        <div class="container">
+            <div class="left"><a href="javascript:;" id="mobileFilterCategoryBtn">Search Events</a>
+            </div>
+            <div class="right"><a href="javascript:;" id="mobileFilterBtn" data-direction='bottom'>Filter</a>
+            </div>
+        </div>
+    </div>
+    <!-- Modal: Mobile Categories Menus -->
+    <div class="modal mobile-modal modal-mob-filter-cat fade">
+        <div class="modal-dialog">
+            <div class="modal-content">
+                <div class="modal-header">
+                    <!--<button type="button" class="close" data-dismiss="modal"><span aria-hidden="true">&times;</span><span class="sr-only">Close</span></button>-->
+                    <h4 class="modal-title">Category</h4>
+
+                    <div class="btn-group pull-right btn-group-sm" role="group">
+                        <button type="button" class="btn btn-mdb-color" data-dismiss="modal">Close</button>
+                        <button type="button" class="btn btn-blue-grey mob-cat-clear">Clear</button>
+                        <button type="button" class="btn btn-default mob-cat-apply">Apply</button>
+                    </div>                   
+                </div>
+                <div class="modal-body" style="background: none;">
+                    <div class="mob-category-list">
+                        <div class="form-group search-text-box">
+                            <input id="mobEventCategorySearch" type="text" class="form-control" placeholder="Search for events, parties, concerts and more">
+                        </div>
+                        <ul class="list-group inner-mob-category-list">
+                            <?php foreach ($categories as $key=> $category): ?>
+                            <li class="list-group-item mob-cs-cat" data-id="<?php echo $category->id; ?>" data-text="<?php echo $category->name; ?>">
+                                <?php echo $category->name; ?></li>
+                            <?php endforeach; ?>
+                        </ul>
+                        <div class="mob-sub-category-list">
+
+                        </div>
+                    </div>
+                </div>
+                <div class="modal-footer">
+                    <div class="btn-group pull-right btn-group-sm" role="group">
+                        <button type="button" class="btn btn-default" data-dismiss="modal">Close</button>
+                        <button type="button" class="btn btn-default mob-cat-clear">Clear</button>
+                        <button type="button" class="btn btn-primary mob-cat-apply">Apply</button>
+                    </div>
+                </div>
+            </div>
+            <!-- /.modal-content -->
+        </div>
+        <!-- /.modal-dialog -->
+    </div>
+    <!-- /.modal -->
+
+    <!-- Modal: Mobile Filter Menus -->
+    <div class="modal mobile-modal modal-mob-filter fade">
+        <div class="modal-dialog">
+            <div class="modal-content">
+                <div class="modal-header">
+                    <!--<button type="button" class="close" data-dismiss="modal"><span aria-hidden="true">&times;</span><span class="sr-only">Close</span></button>-->
+                    <h4 class="modal-title">Filters</h4>
+                    <div class="btn-group pull-right btn-group-sm" role="group">
+                        <button type="button" class="btn btn-blue-grey" data-dismiss="modal">Close</button>
+                    </div>                    
+                </div>
+                <div class="modal-body">
+
+                    <a href="javascript:;" class="mob-filter-date list-group-item" data="today">Today's Events</a>
+                    <a href="javascript:;" class="mob-filter-date list-group-item" data="tomorrow">Tomorrow's Events</a>
+                    <a href="javascript:;" class="mob-filter-date list-group-item" data="weekend">This Weekend Events</a>
+                    <a href="javascript:;" class="mob-filter-date list-group-item" data="month">This Month Events</a>
+
+                    <br>
+
+                    <a href="javascript:;" class="list-group-item mob-filter-type" data-text="Booking Events" data="register">Booking Events</a>
+                    <a href="javascript:;" class="list-group-item mob-filter-type" data-text="Free Events" data="freeEvents">Free Events</a>
+
+                </div>
+                <div class="modal-footer">
+                    <div class="btn-group pull-right btn-group-sm" role="group">
+                        <button type="button" class="btn btn-blue-grey" data-dismiss="modal">Close</button>
+                    </div>
+                </div>
+            </div>
+            <!-- /.modal-content -->
+        </div>
+        <!-- /.modal-dialog -->
+    </div>
+    <!-- /.modal -->
                 
 
     <!-- SCRIPTS -->
@@ -330,6 +507,8 @@
     <script type="text/javascript" src="<?php echo $this->Url->build('/newtheme/js/jquery.slimscroll.min.js'); ?>"></script>
 
     <script type="text/javascript" src="<?php echo $this->Url->build('/newtheme/custom/js/event.list.js'); ?>"></script>
+
+    <script type="text/javascript" src="<?php echo $this->Url->build('/newtheme/custom/js/mobile.event.list.js'); ?>"></script>
 
     <script type="text/javascript" src="<?php echo $this->Url->build('/newtheme/custom/js/event.add.js'); ?>"></script>
 

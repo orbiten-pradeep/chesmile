@@ -1,5 +1,5 @@
 <!--Carousel Wrapper-->
-<div id="ce-1z" class="carousel slide carousel-fade" data-ride="carousel">
+<div id="ce-1z" class="carousel slide main-carousel carousel-fade" data-ride="carousel">
     <!--Indicators-->
     <ol class="carousel-indicators">
         <li data-target="#ce-1z" data-slide-to="0" class="active"></li>
@@ -35,11 +35,11 @@
 <div class="jumbotron p-sm-2 event-filters">
     <!--Dropdown primary-->
     
-    <div class="pull-right">
+    <div class="pull-right filter-buttons">
         <button type="button" class="btn btn-sm cs-btn-filter-free filter-type" data="freeEvents" data-text="Free Events">Free Events</button>
         <button type="button" class="btn btn-sm cs-btn-filter-paid filter-type" data="register" data-text="Booking Events">Booking Events</button>
     </div>
-    <div class="dropdown d-inline-block">
+    <div class="dropdown d-inline-block filter-dropdowns">
         <!--Trigger-->
         <button class="btn btn-sm btn-default dropdown-toggle cs-filter-btn" type="button" id="dropdownMenu1" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">Filter By</button>        
 
@@ -62,7 +62,7 @@
     
     <!--/Dropdown primary-->
 </div>
-<div class="container-fluid">
+<div class="container-fluid favourite-category">
     <div class="row">
         <div class="col-lg-12 col-md-12">
             <div class="cs-category-title text-center">
@@ -170,6 +170,11 @@
 </div>
 
 <div class="container event-list">
+    <div class="row epage-title">
+        <div class="col-lg-12 col-md-12">
+            <div><h3 class="epage-title-text"></h3><hr></div>
+        </div>
+    </div>
     <div class="row filter-parent-container d-none">
         <div class="col-lg-12 col-md-12">
             <div class="filter-params card animated bounceInDown bounceInUp">
