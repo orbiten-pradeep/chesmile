@@ -22,6 +22,8 @@
 
     <link href="<?php echo $this->Url->build('/newtheme/custom/css/event.list.css'); ?>" rel="stylesheet">
     <link href="<?php echo $this->Url->build('/newtheme/custom/css/event.details.css'); ?>" rel="stylesheet">
+    <link rel="stylesheet" href="//code.jquery.com/ui/1.12.1/themes/base/jquery-ui.css">
+    <?php echo $this->Html->css(['daterangepicker']); ?>
 </head>
 
 <body>
@@ -513,6 +515,53 @@
     <script type="text/javascript" src="<?php echo $this->Url->build('/newtheme/custom/js/event.add.js'); ?>"></script>
 
     <script src="http://maps.googleapis.com/maps/api/js?libraries=places&key=AIzaSyCx2hb4R1uhaMbmlUAu1_lFasvl3gVHtnw"></script>
+
+    <link rel="stylesheet" href="//cdnjs.cloudflare.com/ajax/libs/timepicker/1.3.5/jquery.timepicker.min.css">
+<script src="//cdnjs.cloudflare.com/ajax/libs/timepicker/1.3.5/jquery.timepicker.min.js"></script>
+    <script src="http://code.jquery.com/ui/1.11.0/jquery-ui.js"></script>
+<?php  echo $this->Html->script(['daterangepicker']);?>
+
+<script type="text/javascript">
+  $( function() {
+      $('#date').datepicker({
+          changeMonth: true,
+          changeYear: true,
+          minDate: new Date()
+          });
+    } );
+  $(document).ready(function(){
+      $('#time').timepicker({ timeFormat: 'H:mm' });
+      var e = document.getElementById("categories-id");
+      var strUser = e.options[e.selectedIndex].value;
+      $select = $('#eventsubcategories-sub-categories');
+      $.ajax({
+          type:"POST",
+          data:strUser,
+          data:{"id":strUser},
+          ContentType : 'application/json',
+          dataType: 'json',
+          url: $("#sub_category_api_url").val(),
+          async:true,
+          success: function(data) {
+              $select.html('');
+              //iterate over the data and append a select option
+              $.each(data, function(key, val){
+                  //alert(val);
+                  $select.append('<option value="' + key + '">' + val + '</option>');
+              })
+          },
+          error: function (tab) {
+              $select.html('<option id="-1">none available</option>');
+          }
+      });
+
+       $('#Autocomplete').autocomplete({
+              source:$("#search_area_url").val(),
+              minLength: 1
+       });
+
+  });
+</script>
 
 </body>
 </html>
