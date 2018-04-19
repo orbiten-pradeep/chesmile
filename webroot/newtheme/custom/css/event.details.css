@@ -37,5 +37,27 @@
 		}
 		.desk-container{
 		display: none;
+	}	
+	}
+	img.marg-card {
+	    width: 50px;
+	    height: 50px;
+	}
+	.cs_right_details_mob{
+			display: none !important;
+		}
+	@media (max-width: 420px){
+		.cs_right_details_desk{
+			display: none !important;
+		}
+		.cs_right_details_mob{
+			display: block !important;
+		}
+		.cname-span{
+			font-size: 12px;
+		}
+		img.marg-card {
+	    width: 40px;
+	    height: 40px;
 	}
 	}
