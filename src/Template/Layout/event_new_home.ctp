@@ -161,6 +161,9 @@
                   </li>
                   <?php if(!$this->request->session()->read('Auth.User')) { ?>
                   <li class="nav-item">
+                    <a href="#" class="btn btn-md btn-primary" data-toggle="modal" data-target="#cs-login-modal">Login/signup</a>
+                  </li>
+                  <li class="nav-item">
                     <a href="#" class="btn btn-md btn-primary" data-toggle="modal" data-target="#cs-login-modal">Create Events</a>
                   </li>
                   <?php } ?>
