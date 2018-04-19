@@ -20,7 +20,7 @@ else {
 		<div class="container">
 			<div class="cs-tag-title">
 				<div class="d-inline-flex rounded pt-0 pr-2 pl-2 pb-2 tag border z-depth-1">
-					<?php echo $this->Html->image('card/'.$event->category->card, array('width' => '50px', 'height' => '50px', 'class' => 'marg-card')); ?>
+					<?php echo $this->Html->image('card/'.$event->category->card, array('class' => 'marg-card')); ?>
 					<span class="cname-span"><?= h($event->category->name) ?></span>
 				</div>
 				<h1 class="tagline" style="color: #FFFFFF;"><?= h($event->title) ?></h1>
@@ -31,7 +31,7 @@ else {
 		<div class="container">
 			<div class="cs-tag-title">
 				<div class="d-inline-flex rounded pt-0 pr-2 pl-2 pb-2 tag">
-					<?php echo $this->Html->image('card/'.$event->category->card, array('width' => '50px', 'height' => '50px', 'class' => 'marg-card')); ?>
+					<?php echo $this->Html->image('card/'.$event->category->card, array('class' => 'marg-card')); ?>
 					<span class="cname-span"><?= h($event->category->name) ?></span>
 				</div>
 				<h1 class="tagline" style="color: #FFFFFF; font-size: 13px;"><?= h($event->title) ?></h1>
@@ -52,6 +52,22 @@ else {
 			}	?>
 			<div class="row">
 				<div class="col-md-12">
+					<div class="d-flex flex-column cs_right_details_mob">
+					    <div class="p-4 mb-4 flex-cont rounded">
+					    	<div class="text-center">
+						    	<h5>₹ 699</h5>
+						    	<button type="button" class="btn buy-btn">Get Tickets</button>
+					    	</div>
+					    	<div class="cs-details">
+					    		<p><i class="fa fa-map-marker"></i><span class="rs-details"><?php echo empty(!$address->areaname) ? $address->areaname : ''; ?></span></p>
+					    		<p><?php echo $this->Html->image('cal.png')?><span class="rs-details"><?= date_format($event->date, "j M Y") ?></span></p>
+					    		<p><?php echo $this->Html->image('clock-chennaismile.png')?><span class="rs-details"><?= h($event->time) ?></span></p>
+					    		<p><i class="fa fa-share-alt" aria-hidden="true"></i><span class="rs-details">1k shared</span></p>
+					    		<p><i class="fa fa-heart-o" aria-hidden="true"></i><span class="rs-details">1k Liked</span></p>
+					    		<p><i class="fa fa-eye" aria-hidden="true"></i><span class="rs-details">1k People Viewed</span></p>
+					    	</div>
+					    </div>
+					</div>
 					<div class="d-flex flex-column">
 						<div class="p-4 mb-4 flex-cont cs-descr-box rounded">
 						    <h5 class="cs-title">Event Details</h5>
@@ -66,7 +82,7 @@ else {
 			</div>
 		</div>
 		<div class="col-md-4 mb-4">
-			<div class="d-flex flex-column">
+			<div class="d-flex flex-column cs_right_details_desk">
 			    <div class="p-4 mb-4 flex-cont rounded">
 			    	<div class="text-center">
 				    	<h5>₹ 699</h5>
