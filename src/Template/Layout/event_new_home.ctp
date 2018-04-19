@@ -81,6 +81,12 @@
 
               <?php $user = $this->request->session()->read('Auth.User'); if($user && $user['group_id'] == 1) { ?>
               <li class="nav-item">                    
+                <a href="#" class="btn btn-primary" data-toggle="modal" data-target="#orgSignup">Create events</a>                    
+              </li>
+              <?php } ?>
+
+              <?php $user = $this->request->session()->read('Auth.User'); if($user && $user['group_id'] != 1) { ?>
+              <li class="nav-item">                    
                 <?= $this->Html->link(__('Create Events'), ['controller' => 'events', 'action' => 'add'], array('class' => 'btn btn-md btn-primary')); ?>                    
               </li>
               <?php } ?>
@@ -161,7 +167,13 @@
 
                   <?php $user = $this->request->session()->read('Auth.User'); if($user && $user['group_id'] == 1) { ?>
                   <li class="nav-item">                    
-                    <?= $this->Html->link(__('Create Events'), ['controller' => 'events', 'action' => 'add'], array('class' => 'btn btn-md btn-primary')); ?>                    
+                    <a href="#" class="btn btn-primary" data-toggle="modal" data-target="#orgSignup">Create events</a>                   
+                  </li>
+                  <?php } ?>
+
+                  <?php $user = $this->request->session()->read('Auth.User'); if($user && $user['group_id'] != 1) { ?>
+                  <li class="nav-item">                    
+                    <?= $this->Html->link(__('Create Events'), ['controller' => 'events', 'action' => 'add'], array('class' => 'btn btn-primary')); ?>                 
                   </li>
                   <?php } ?>
 
