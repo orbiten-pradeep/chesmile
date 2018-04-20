@@ -1,54 +1,7 @@
 <style type="text/css">
-    .lap-fav, .ipad-fav, .ipadpro-fav, .mob-fav{
-        display: none;
-    }
-        @media (max-width: 1366px){
-        .cs-fav-icons-div{
-            padding: 15px;
-        }
-        .desk-fav, .ipad-fav, .ipadpro-fav, .mob-fav{
-            display: none;
-        }
-        .lap-fav{
-        display: block;
-        }
-}
-    @media (device-width: 768px) and (device-height: 1024px){
-        .ipad-fav{
-            display: block !important;
-        }
-         .lap-fav{
-        display: none;
-    }
-    .ipadpro-fav, .mob-fav{
-            display: none !important;
-        }
-    }
-    @media (max-width: 1024px){
-        .ipadpro-fav{
-            display: block;
-        }
-        .ipad-fav{
-            display: none;
-        }
-         .lap-fav, .mob-fav{
-        display: none;
-    }
-    }
-    @media (max-width: 420px){
-        .mob-fav{
-            display: block;
-        }
-        .desk-fav, .ipad-fav, .ipadpro-fav, .lap-fav{
-            display: none;
-        }
-        .cs-fav-icons-div p{          
-        overflow: hidden;
-        text-overflow: ellipsis !important;
-        white-space: nowrap !important;
-        width: 100px !important;
-        }
-    }
+    /*.event-list .card-size .card:hover{
+        background-color:#"'+response[k].category_color+'";
+    }*/
 </style>
 <!--Carousel Wrapper-->
 <div id="ce-1z" class="carousel slide main-carousel carousel-fade" data-ride="carousel">
@@ -116,11 +69,10 @@
 </div>
 <div class="container-fluid favourite-category desk-fav">
     <div class="row">
-        <div class="col-lg-12 col-md-12">
-            <div class="cs-category-title text-center">
+            <div class="cs-category-title text-center mx-auto">
                 <h2>Your Favourite Category Events</h2>
-                <hr>
             </div>
+            <div class="col-lg-12 col-md-12">
             <!--Carousel Wrapper-->
             <div id="carousel-example-2" class="carousel slide" data-ride="carousel" data-interval="false">
                 <!--Indicators-->
@@ -132,7 +84,7 @@
                 <!--/.Indicators-->
                 <!--Slides-->
                 <div class="carousel-inner" role="listbox">
-                    <div class="carousel-item active">
+                    <div class="carousel-item active pl-5">
                         <div class="view cs-fav-icons-div pl-4">
                             <?php echo $this->Html->image('card/671theatrical-events.png',array('alt' => 'Theatrical Category','class' => 'img-fluid cs-fav-icons')); ?><p><span>Theatrical</span></p>
                         </div>
@@ -169,12 +121,12 @@
                         <div class="view cs-fav-icons-div">
                             <?php echo $this->Html->image('card/773party-and-nightlife-events.png',array('alt' => 'Party and Nightlife Category','class' => 'img-fluid cs-fav-icons')); ?><p><span>Part And Nightlife</span></p>
                         </div>
-                    </div>
-
-                    <div class="carousel-item">
-                       <div class="view cs-fav-icons-div pl-4">
+                        <div class="view cs-fav-icons-div pl-4">
                             <?php echo $this->Html->image('card/1244music-events.png',array('alt' => 'Music Category','class' => 'img-fluid cs-fav-icons')); ?><p><span>Music</span></p>
                         </div>
+                    </div>
+
+                    <div class="carousel-item pl-5">
                         <div class="view cs-fav-icons-div">
                             <?php echo $this->Html->image('card/1555beauty-and-fashion-events.png',array('alt' => 'Beauty and Fashion Category','class' => 'img-fluid cs-fav-icons')); ?><p><span>Beauty And Fashion</span></p>
                         </div>
@@ -226,7 +178,6 @@
         <div class="col-lg-12 col-md-12">
             <div class="cs-category-title text-center">
                 <h2>Your Favourite Category Events</h2>
-                <hr>
             </div>
             <!--Carousel Wrapper-->
             <div id="carousel-example-3" class="carousel slide" data-ride="carousel" data-interval="false">
@@ -239,7 +190,7 @@
                 <!--/.Indicators-->
                 <!--Slides-->
                 <div class="carousel-inner cs-fav-carousel" role="listbox">
-                    <div class="carousel-item active">
+                    <div class="carousel-item active pl-5">
                         <div class="view cs-fav-icons-div pl-4">
                             <?php echo $this->Html->image('card/671theatrical-events.png',array('alt' => 'Theatrical Category','class' => 'img-fluid cs-fav-icons')); ?><p><span>Theatrical</span></p>
                         </div>
@@ -264,12 +215,12 @@
                          <div class="view cs-fav-icons-div">
                             <?php echo $this->Html->image('card/528business-events.png',array('alt' => 'Business Events Category','class' => 'img-fluid cs-fav-icons')); ?><p><span>Business</span></p>
                         </div>
-                    </div>
-
-                    <div class="carousel-item">
-                         <div class="view cs-fav-icons-div">
+                        <div class="view cs-fav-icons-div">
                             <?php echo $this->Html->image('card/363arts-and-crafts-events.png',array('alt' => 'Arts Category','class' => 'img-fluid cs-fav-icons')); ?><p><span>Arts And Crafts</span></p>
                         </div>
+                    </div>
+
+                    <div class="carousel-item pl-5">
                          <div class="view cs-fav-icons-div">
                             <?php echo $this->Html->image('card/384audition-events.png',array('alt' => 'Audition Category','class' => 'img-fluid cs-fav-icons')); ?><p><span>Audition</span></p>
                         </div>
@@ -291,14 +242,14 @@
                         <div class="view cs-fav-icons-div">
                             <?php echo $this->Html->image('card/1615day-events-events.png',array('alt' => 'Day events Category','class' => 'img-fluid cs-fav-icons')); ?><p><span>Day Events</span></p>
                         </div>
-                    </div>
-                    <div class="carousel-item">
                         <div class="view cs-fav-icons-div">
                             <?php echo $this->Html->image('card/1781food-and-dining-events.png',array('alt' => 'Food Category','class' => 'img-fluid cs-fav-icons')); ?><p><span>Food And Dining</span></p>
                         </div>
                         <div class="view cs-fav-icons-div">
                             <?php echo $this->Html->image('card/1788competitions-events.png',array('alt' => 'Competitions events Category','class' => 'img-fluid cs-fav-icons')); ?><p><span>Competitions</span></p>
                         </div>
+                    </div>
+                    <div class="carousel-item pl-5">
                         <div class="view cs-fav-icons-div">
                             <?php echo $this->Html->image('card/2660spiritual-events.png',array('alt' => 'Spiritual events Category','class' => 'img-fluid cs-fav-icons')); ?><p><span>Spiritual</span></p>
                         </div>
@@ -335,7 +286,6 @@
         <div class="col-lg-12 col-md-12">
             <div class="cs-category-title text-center">
                 <h2>Your Favourite Category Events</h2>
-                <hr>
             </div>
             <!--Carousel Wrapper-->
             <div id="carousel-example-4" class="carousel slide" data-ride="carousel" data-interval="false">
@@ -348,7 +298,7 @@
                 <!--/.Indicators-->
                 <!--Slides-->
                 <div class="carousel-inner cs-fav-carousel" role="listbox">
-                    <div class="carousel-item active">
+                    <div class="carousel-item active pl-5">
                         <div class="view cs-fav-icons-div pl-4">
                             <?php echo $this->Html->image('card/671theatrical-events.png',array('alt' => 'Theatrical Category','class' => 'img-fluid cs-fav-icons')); ?><p><span>Theatrical</span></p>
                         </div>
@@ -366,7 +316,7 @@
                         </div>
                     </div>
 
-                    <div class="carousel-item">
+                    <div class="carousel-item pl-5">
                         <div class="view cs-fav-icons-div">
                             <?php echo $this->Html->image('card/2088health-and-wellness-events.png',array('alt' => 'Health and Wellness Category','class' => 'img-fluid cs-fav-icons')); ?><p><span>Health And Wellness</span></p>
                         </div>
@@ -383,7 +333,7 @@
                             <?php echo $this->Html->image('card/384audition-events.png',array('alt' => 'Audition Category','class' => 'img-fluid cs-fav-icons')); ?><p><span>Audition</span></p>
                         </div>
                     </div>
-                    <div class="carousel-item">
+                    <div class="carousel-item pl-5">
                         <div class="view cs-fav-icons-div">
                             <?php echo $this->Html->image('card/756exhibitions-events.png',array('alt' => 'Exhibitions Category','class' => 'img-fluid cs-fav-icons')); ?><p><span>Exhibitions</span></p>
                         </div>
@@ -400,7 +350,7 @@
                             <?php echo $this->Html->image('card/1586charity-events.png',array('alt' => 'Charity Category','class' => 'img-fluid cs-fav-icons')); ?><p><span>Charity</span></span></p>
                         </div>
                     </div>
-                    <div class="carousel-item">
+                    <div class="carousel-item pl-5">
                         <div class="view cs-fav-icons-div">
                             <?php echo $this->Html->image('card/1615day-events-events.png',array('alt' => 'Day events Category','class' => 'img-fluid cs-fav-icons')); ?><p><span>Day Events</span></p>
                         </div>
@@ -417,7 +367,7 @@
                             <?php echo $this->Html->image('card/1059kids-events.png',array('alt' => 'Kids events Category','class' => 'img-fluid cs-fav-icons')); ?><p><span>Kids</span></p>
                         </div>
                     </div>
-                    <div class="carousel-item">
+                    <div class="carousel-item pl-5">
                         <div class="view cs-fav-icons-div">
                             <?php echo $this->Html->image('card/1099festivals-events.png',array('alt' => 'Festivals Category','class' => 'img-fluid cs-fav-icons')); ?><p><span>Festivals</span></p>
                         </div>
@@ -448,7 +398,6 @@
         <div class="col-lg-12 col-md-12">
             <div class="cs-category-title text-center">
                 <h2>Your Favourite Category Events</h2>
-                <hr>
             </div>
             <!--Carousel Wrapper-->
             <div id="carousel-example-5" class="carousel slide" data-ride="carousel" data-interval="false">
@@ -461,7 +410,7 @@
                 <!--/.Indicators-->
                 <!--Slides-->
                 <div class="carousel-inner cs-fav-carousel" role="listbox">
-                    <div class="carousel-item active">
+                    <div class="carousel-item active pl-5">
                         <div class="view cs-fav-icons-div pl-4">
                             <?php echo $this->Html->image('card/671theatrical-events.png',array('alt' => 'Theatrical Category','class' => 'img-fluid cs-fav-icons')); ?><p><span>Theatrical</span></p>
                         </div>
@@ -480,12 +429,12 @@
                         <div class="view cs-fav-icons-div">
                             <?php echo $this->Html->image('card/2088health-and-wellness-events.png',array('alt' => 'Health and Wellness Category','class' => 'img-fluid cs-fav-icons')); ?><p><span>Health And Wellness</span></p>
                         </div>
-                    </div>
-
-                    <div class="carousel-item">
                         <div class="view cs-fav-icons-div">
                             <?php echo $this->Html->image('card/2258sports-events.png',array('alt' => 'Sports Category','class' => 'navbar-brand','class' => 'img-fluid cs-fav-icons')); ?><p><span>Sports</span></p>
                         </div>
+                    </div>
+
+                    <div class="carousel-item pl-5">
                          <div class="view cs-fav-icons-div">
                             <?php echo $this->Html->image('card/528business-events.png',array('alt' => 'Business Events Category','class' => 'img-fluid cs-fav-icons')); ?><p><span>Business</span></p>
                         </div>
@@ -501,14 +450,14 @@
                         <div class="view cs-fav-icons-div">
                             <?php echo $this->Html->image('card/773party-and-nightlife-events.png',array('alt' => 'Party and Nightlife Category','class' => 'img-fluid cs-fav-icons')); ?><p><span>Part And Nightlife</span></p>
                         </div>
-                    </div>
-                    <div class="carousel-item">   
                         <div class="view cs-fav-icons-div pl-4">
                             <?php echo $this->Html->image('card/1244music-events.png',array('alt' => 'Music Category','class' => 'img-fluid cs-fav-icons')); ?><p><span>Music</span></p>
                         </div>
                         <div class="view cs-fav-icons-div">
                             <?php echo $this->Html->image('card/1555beauty-and-fashion-events.png',array('alt' => 'Beauty and Fashion Category','class' => 'img-fluid cs-fav-icons')); ?><p><span>Beauty And Fashion</span></p>
                         </div>
+                    </div>
+                    <div class="carousel-item pl-5">   
                         <div class="view cs-fav-icons-div">
                             <?php echo $this->Html->image('card/1586charity-events.png',array('alt' => 'Charity Category','class' => 'img-fluid cs-fav-icons')); ?><p><span>Charity</span></span></p>
                         </div>
@@ -521,9 +470,6 @@
                         <div class="view cs-fav-icons-div">
                             <?php echo $this->Html->image('card/1788competitions-events.png',array('alt' => 'Competitions events Category','class' => 'img-fluid cs-fav-icons')); ?><p><span>Competitions</span></p>
                         </div>
-                    </div>
-                    <div class="carousel-item">
-                        
                         <div class="view cs-fav-icons-div">
                             <?php echo $this->Html->image('card/2660spiritual-events.png',array('alt' => 'Spiritual events Category','class' => 'img-fluid cs-fav-icons')); ?><p><span>Spiritual</span></p>
                         </div>
@@ -533,6 +479,8 @@
                         <div class="view cs-fav-icons-div">
                             <?php echo $this->Html->image('card/1099festivals-events.png',array('alt' => 'Festivals Category','class' => 'img-fluid cs-fav-icons')); ?><p><span>Festivals</span></p>
                         </div>
+                    </div>
+                    <div class="carousel-item pl-5">
                         <div class="view cs-fav-icons-div">
                             <?php echo $this->Html->image('card/1126adventure-events.png',array('alt' => 'Adventures Category','class' => 'img-fluid cs-fav-icons')); ?><p><span>Adventure</span></p>
                         </div>
@@ -560,7 +508,6 @@
         <div class="col-lg-12 col-md-12">
             <div class="cs-category-title text-center">
                 <h2>Your Favourite Category Events</h2>
-                <hr>
             </div>
             <!--Carousel Wrapper-->
             <div id="carousel-example-6" class="carousel slide" data-ride="carousel" data-interval="false">
@@ -672,6 +619,9 @@
 </div>
 
 <div class="container event-list">
+    <div class="cs-category-title text-center mx-auto">
+        <h2>Upcoming Events - Chennai </h2>
+    </div>
     <div class="row epage-title">
         <div class="col-lg-12 col-md-12">
             <div><h3 class="epage-title-text"></h3><hr></div>

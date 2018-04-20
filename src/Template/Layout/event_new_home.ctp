@@ -75,19 +75,19 @@
               
               <?php if(!$this->request->session()->read('Auth.User')) { ?>
               <li class="nav-item">
-                <a href="#" class="btn btn-md btn-primary" data-toggle="modal" data-target="#cs-login-modal">Create Events</a>
+                <a href="#" class="btn btn-md btn-primary cs_create_btn" data-toggle="modal" data-target="#cs-login-modal">Create Events</a>
               </li>
               <?php } ?>
 
               <?php $user = $this->request->session()->read('Auth.User'); if($user && $user['group_id'] == 1) { ?>
               <li class="nav-item">                    
-                <a href="#" class="btn btn-primary" data-toggle="modal" data-target="#orgSignup">Create events</a>                    
+                <a href="#" class="btn btn-primary cs_create_btn" data-toggle="modal" data-target="#orgSignup">Create events</a>                    
               </li>
               <?php } ?>
 
               <?php $user = $this->request->session()->read('Auth.User'); if($user && $user['group_id'] != 1) { ?>
               <li class="nav-item">                    
-                <?= $this->Html->link(__('Create Events'), ['controller' => 'events', 'action' => 'add'], array('class' => 'btn btn-md btn-primary')); ?>                    
+                <?= $this->Html->link(__('Create Events'), ['controller' => 'events', 'action' => 'add'], array('class' => 'btn btn-md btn-primary cs_create_btn')); ?>                    
               </li>
               <?php } ?>
 
@@ -130,6 +130,14 @@
                   <li class="search-button">
                       <button type="button" class="btn btn-primary btn-go btn-category-search"><i class="fa fa-search" aria-hidden="true"></i></button>
                   </li>
+                  <li class="nav-item dropdown nav-city-link">
+                      <a class="nav-link btn btn-default btn-sm dropdown-toggle cs-city-btn" id="navbarDropdownMenuLink" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">Look your city</a>
+                      <div class="dropdown-menu dropdown-primary" aria-labelledby="navbarDropdownMenuLink">
+                          <a class="dropdown-item" href="http://www.bangaloresmile.com">Bangalore Smile</a>
+                          <a class="dropdown-item" href="http://www.mumbaismile.com">Mumbai Smile</a>
+                          <a class="dropdown-item" href="http://www.punesmile.com">Pune Smile</a>
+                      </div>
+                  </li>
                 </ul>
 
                 <?php if($this->request->session()->read('Auth.User')) { ?>
@@ -151,40 +159,32 @@
                 <?php } ?>
 
                 <ul class="navbar-nav nav-cs-action pull-right">
-                  <li class="nav-item dropdown nav-city-link">
-                      <a class="nav-link btn btn-default btn-sm dropdown-toggle cs-city-btn" id="navbarDropdownMenuLink" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">Look your city</a>
-                      <div class="dropdown-menu dropdown-primary" aria-labelledby="navbarDropdownMenuLink">
-                          <a class="dropdown-item" href="http://www.bangaloresmile.com">Bangalore Smile</a>
-                          <a class="dropdown-item" href="http://www.mumbaismile.com">Mumbai Smile</a>
-                          <a class="dropdown-item" href="http://www.punesmile.com">Pune Smile</a>
-                      </div>
-                  </li>
                   <?php if(!$this->request->session()->read('Auth.User')) { ?>
                   <li class="nav-item">
-                    <a href="#" class="btn btn-md btn-primary" data-toggle="modal" data-target="#cs-login-modal">Login/signup</a>
+                    <a href="#" class="btn btn-md btn-primary cs_login_btn" data-toggle="modal" data-target="#cs-login-modal">Login/signup</a>
                   </li>
                   <li class="nav-item">
-                    <a href="#" class="btn btn-md btn-primary" data-toggle="modal" data-target="#cs-login-modal">Create Events</a>
+                    <a href="#" class="btn btn-md btn-primary cs_create_btn" data-toggle="modal" data-target="#cs-login-modal">Create Events</a>
                   </li>
                   <?php } ?>
 
                   <?php $user = $this->request->session()->read('Auth.User'); if($user && $user['group_id'] == 1) { ?>
                   <li class="nav-item">                    
-                    <a href="#" class="btn btn-primary" data-toggle="modal" data-target="#orgSignup">Create events</a>                   
+                    <a href="#" class="btn btn-primary cs_create_btn" data-toggle="modal" data-target="#orgSignup">Create events</a>                   
                   </li>
                   <?php } ?>
 
                   <?php $user = $this->request->session()->read('Auth.User'); if($user && $user['group_id'] != 1) { ?>
                   <li class="nav-item">                    
-                    <?= $this->Html->link(__('Create Events'), ['controller' => 'events', 'action' => 'add'], array('class' => 'btn btn-primary')); ?>                 
+                    <?= $this->Html->link(__('Create Events'), ['controller' => 'events', 'action' => 'add'], array('class' => 'btn btn-primary cs_create_btn')); ?>                 
                   </li>
                   <?php } ?>
 
-                  <li class="nav-item">
+                  <!-- <li class="nav-item">
                     <a href="#past-events" class="btn btn-md btn-default filter-action" data="pastevents" text="Past Events">
                       Past Events
                     </a>
-                  </li>
+                  </li> -->
                 </ul>
             </div>
         </nav>
