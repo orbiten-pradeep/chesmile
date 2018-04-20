@@ -191,11 +191,11 @@ chennaiSmile.generateEventGridList = function() {
 	    		eventUrl = eventDetailsUrl + '/' + response[k].slug;
 
 	    	if(dispImg==''){
-	    		dispImgHmtl = '<img src="img/photos/1.jpg" alt="" style="height:auto;" class="img-fluid">';
+	    		dispImgHmtl = '<img src="img/photos/1.jpg" alt="" style="height:auto;" class="img-fluid cs_dispimg">';
 	    	}
 	    	else {
 	    		var imgSrc = "img/display/"+dispImg;
-	    		dispImgHmtl = '<img src="'+imgSrc+'" alt="" onerror="this.src=\'img/photos/1.jpg\'" style="height:auto;" class="img-fluid">';
+	    		dispImgHmtl = '<img src="'+imgSrc+'" alt="" onerror="this.src=\'img/photos/1.jpg\'" style="height:auto;" class="img-fluid cs_dispimg">';
 	    	}
 
 	    	if(response[k].register_online  == 1){
@@ -205,7 +205,7 @@ chennaiSmile.generateEventGridList = function() {
 	    		buybtn = '<div class="btn btn-sm btn-warning pull-right" onClick="javascript:location.href='+eventUrl+'">Buy Tickets</div>';
 	    	}
 			html += '<div class="col-sm-6 col-lg-3 col-md-3 card-size">\
-				<div class="card" data-attrib-hcolor="'+response[k].category_color+'">\
+				<div class="card" data-attrib-hcolor="'+response[k].category_color+'" onmouseover= this.style.backgroundColor="#'+response[k].category_color+'" onmouseout= this.style.backgroundColor="#f4f4f4">\
 			        <div class="view overlay">\
 			            '+dispImgHmtl+'\
 			            <a href="#">\
