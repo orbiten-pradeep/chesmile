@@ -205,7 +205,7 @@ chennaiSmile.generateEventGridList = function() {
 	    		buybtn = '<div class="btn btn-sm btn-warning pull-right" onClick="javascript:location.href='+eventUrl+'">Buy Tickets</div>';
 	    	}
 			html += '<div class="col-sm-6 col-lg-3 col-md-3 card-size">\
-				<div class="card" data-attrib-hcolor="'+response[k].category_color+'" onmouseover= this.style.backgroundColor="#'+response[k].category_color+'" onmouseout= this.style.backgroundColor="#f4f4f4">\
+				<div class="card" data-attrib-hcolor="'+response[k].category_ltecolor+'" onmouseover= this.style.backgroundColor="#'+response[k].category_ltecolor+'" onmouseout= this.style.backgroundColor="#f4f4f4">\
 			        <div class="view overlay">\
 			            '+dispImgHmtl+'\
 			            <a href="#">\
