@@ -100,6 +100,9 @@ foreach ($categories as $category): $n++;?>
               <td style="background-color: <?php echo "#".$category->color; ?>">
                 <?= h($category->color) ?>
               </td>
+               <td style="background-color: <?php echo "#".$category->categorylitecolor; ?>">
+                <?= h($category->categorylitecolor) ?>
+              </td>
               <td>
                 <?php echo $this->Html->image('card/'.$category->card, array('width' => '20px', 'height' => '20px','alt'=>'Card')); ?>
               </td>

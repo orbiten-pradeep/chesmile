@@ -75,7 +75,7 @@ class EventsController extends AppController
 			]);
 
         $tcConn = ConnectionManager::get('default');
-        $topCategoriesQuery = "SELECT count(e.id) as event_counts, c.name, c.color, c.id as cid FROM `events` e LEFT JOIN categories c on c.id = e.categories_id WHERE c.id!='' AND e.active = 1 GROUP BY c.id ORDER BY rand() limit 5";
+        $topCategoriesQuery = "SELECT count(e.id) as event_counts, c.name, c.color, c.categorylitecolor, c.id as cid FROM `events` e LEFT JOIN categories c on c.id = e.categories_id WHERE c.id!='' AND e.active = 1 GROUP BY c.id ORDER BY rand() limit 5";
 
         $tcStmt = $tcConn->execute($topCategoriesQuery);
         $topCategories = $tcStmt->fetchAll('assoc');
@@ -1076,7 +1076,7 @@ public function organizerevents()
 	        }
 
             $conn = ConnectionManager::get('default');
-            $query = "SELECT e.*, c.name as category_name, c.color as category_color, (SELECT count(l.events_id) FROM likes l WHERE l.events_id = e.id GROUP BY l.events_id) as likes_count, (SELECT a.areaname FROM address a WHERE a.events_id = e.id) as areaname FROM events e LEFT JOIN categories c ON c.id = e.categories_id $joins WHERE e.active = 1 $cond ORDER BY e.date DESC $limitQry";
+            $query = "SELECT e.*, c.name as category_name, c.color as category_color, c.categorylitecolor as category_ltecolor, (SELECT count(l.events_id) FROM likes l WHERE l.events_id = e.id GROUP BY l.events_id) as likes_count, (SELECT a.areaname FROM address a WHERE a.events_id = e.id) as areaname FROM events e LEFT JOIN categories c ON c.id = e.categories_id $joins WHERE e.active = 1 $cond ORDER BY e.date DESC $limitQry";
             //echo $query;
 
             $stmt = $conn->execute($query);
@@ -1431,7 +1431,7 @@ public function organizerevents()
             ]);
 
         $tcConn = ConnectionManager::get('default');
-        $topCategoriesQuery = "SELECT count(e.id) as event_counts, c.name, c.color, c.id as cid FROM `events` e LEFT JOIN categories c on c.id = e.categories_id WHERE c.id!='' AND e.active = 1 GROUP BY c.id ORDER BY rand() limit 5";
+        $topCategoriesQuery = "SELECT count(e.id) as event_counts, c.name, c.color,c.categorylitecolor, c.id as cid FROM `events` e LEFT JOIN categories c on c.id = e.categories_id WHERE c.id!='' AND e.active = 1 GROUP BY c.id ORDER BY rand() limit 5";
 
         $tcStmt = $tcConn->execute($topCategoriesQuery);
         $topCategories = $tcStmt->fetchAll('assoc');

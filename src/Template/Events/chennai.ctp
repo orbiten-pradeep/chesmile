@@ -54,10 +54,10 @@ else {
 				<div class="col-md-12">
 					<div class="d-flex flex-column cs_right_details_mob">
 					    <div class="p-4 mb-4 flex-cont rounded">
-					    	<div class="text-center">
+					    	<!-- <div class="text-center">
 						    	<h5>₹ 699</h5>
 						    	<button type="button" class="btn buy-btn">Get Tickets</button>
-					    	</div>
+					    	</div> -->
 					    	<div class="cs-details">
 					    		<p><i class="fa fa-map-marker"></i><span class="rs-details"><?php echo empty(!$address->areaname) ? $address->areaname : ''; ?></span></p>
 					    		<p><?php echo $this->Html->image('cal.png')?><span class="rs-details"><?= date_format($event->date, "j M Y") ?></span></p>
@@ -84,11 +84,11 @@ else {
 		<div class="col-md-4 mb-4">
 			<div class="d-flex flex-column cs_right_details_desk">
 			    <div class="p-4 mb-4 flex-cont rounded">
-			    	<div class="text-center">
+			    	<!-- <div class="text-center">
 				    	<h5>₹ 699</h5>
 				    	<button type="button" class="btn buy-btn">Get Tickets</button>
 			    	</div>
-			    	<div class="cs-details">
+ -->			    	<div class="cs-details">
 			    		<p><i class="fa fa-map-marker"></i><span class="rs-details"><?php echo empty(!$address->areaname) ? $address->areaname : ''; ?></span></p>
 			    		<p><?php echo $this->Html->image('cal.png')?><span class="rs-details"><?= date_format($event->date, "j M Y") ?></span></p>
 			    		<p><?php echo $this->Html->image('clock-chennaismile.png')?><span class="rs-details"><?= h($event->time) ?></span></p>

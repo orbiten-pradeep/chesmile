@@ -48,7 +48,7 @@
             
 
             <!-- IPAD navbar links -->
-            <ul class="navbar-nav pull-right ipad-nav-links">
+            <ul class="navbar-nav ipad-nav-links">
               <?php if($this->request->session()->read('Auth.User')) { ?>
               <div class="dropdown ipad-user-profile">
                   <button class="btn btn-primary user-dropdown dropdown-toggle cs-dropbtn p-0" type="button" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
@@ -138,9 +138,7 @@
                           <a class="dropdown-item" href="http://www.punesmile.com">Pune Smile</a>
                       </div>
                   </li>
-                </ul>
-
-                <?php if($this->request->session()->read('Auth.User')) { ?>
+                  <?php if($this->request->session()->read('Auth.User')) { ?>
                 <ul class="navbar-nav nav-cs-action">                  
                   <div class="dropdown ml-4">
                       <button class="btn btn-primary user-dropdown dropdown-toggle cs-dropbtn p-0" type="button" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
@@ -157,6 +155,9 @@
                   </div>                  
                 </ul>
                 <?php } ?>
+                </ul>
+
+                
 
                 <ul class="navbar-nav nav-cs-action pull-right">
                   <?php if(!$this->request->session()->read('Auth.User')) { ?>
