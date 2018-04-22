@@ -1,5 +1,6 @@
 var chennaiSmile = {};
 chennaiSmile.eventPage = $("#eventPage");
+
 chennaiSmile.filterElem = {};
 chennaiSmile.filterElem.date = $('.filter-date');
 chennaiSmile.filterElem.category = $('.filter-tc-button');
@@ -293,7 +294,7 @@ chennaiSmile.getSubCategoryList = function() {
 	            self.subCategoryRespDivElem.html(html);
 	            self.parentCategoryDivElem.hide();
 	            self.subCategoryDivElem.show();
-	            self.searchMenuButtonElem.html('<button type="button" class="btn btn-primary category-selected" type="button"><label>'+pCcategoryText+'</label><i class="fa fa-close" aria-hidden="true"></i></button>');
+	            self.searchMenuButtonElem.html('<button type="button" class="btn btn-head btn-primary category-selected" type="button"><label>'+pCcategoryText+'</label><i class="fa fa-close" aria-hidden="true"></i></button>');
         	}
         	else {
         		self.searchTextBoxElem.tagsinput('removeAll');
@@ -301,7 +302,7 @@ chennaiSmile.getSubCategoryList = function() {
         		self.parentCategory.id = pCategoryId;
 				self.parentCategory.text = pCcategoryText;
 				self.searchTextBoxElem.tagsinput('add', self.parentCategory);				
-				self.searchMenuButtonElem.html('<button type="button" class="btn btn-primary cat-not-selected" type="button"><label>Category</label><i class="fa fa-bars float-right"></i></button>');
+				self.searchMenuButtonElem.html('<button type="button" class="btn btn-head btn-primary cat-not-selected" type="button"><label>Category</label><i class="fa fa-bars float-right"></i></button>');
 				self.parentCategoryDivElem.hide();
 				self.searchTextBoxElem.tagsinput('items')
         	}
@@ -316,6 +317,10 @@ $(document).ready(function() {
 	var self = chennaiSmile;
 	self.getHashValues();
 	self.getEventList();
+
+	if(self.eventPage.val() != "index") {
+		$("#mobFooter").hide();
+	}
 
 	self.filterElem.action.click(function() {
 		var action = $(this).attr('data');
@@ -434,6 +439,7 @@ $(document).ready(function() {
 		self.filterTextArr = [];
 		self.filterTextParentContainer.hide();
 		self.searchMenuButtonElem.find('.fa-close').trigger('click');
+		self.favCategoryDivElem.show();
 
 		self.masonryDestory();
 		self.getEventList();
@@ -468,7 +474,7 @@ $(document).ready(function() {
 		self.searchTextBoxElem.tagsinput('removeAll');
 		self.parentCategoryDivElem.hide();
 		self.subCategoryDivElem.hide();
-		self.searchMenuButtonElem.html('<button type="button" class="btn btn-primary cat-not-selected" type="button"><label>Category</label><i class="fa fa-bars float-right"></i></button>');
+		self.searchMenuButtonElem.html('<button type="button" class="btn btn-primary btn-head cat-not-selected" type="button"><label>Category</label><i class="fa fa-bars float-right"></i></button>');
 		self.searchTagsInputElem.find('input').attr('placeholder', self.searchTextBoxPlaceholder);
 	});
 
@@ -484,7 +490,7 @@ $(document).ready(function() {
 
 	self.searchTagsInputElem.slimScroll({
 	    axis: 'x',
-	    height: '46px',
+	    height: '34px',
 	    size: '7px',
 	    position: 'left',
 	    color: '#286090',

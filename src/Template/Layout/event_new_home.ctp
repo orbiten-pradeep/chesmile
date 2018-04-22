@@ -16,13 +16,22 @@
     <link href="<?php echo $this->Url->build('/newtheme/css/bootstrap-tagsinput.css'); ?>" rel="stylesheet">
 
     <link href="<?php echo $this->Url->build('/newtheme/css/check-box.css'); ?>" rel="stylesheet">
+
+    <link href="<?php echo $this->Url->build('/newtheme/css/thumbnail-slider.css'); ?>" rel="stylesheet">
+
+    <link href="<?php echo $this->Url->build('/newtheme/css/thumbs2.css'); ?>" rel="stylesheet">
     
     <!-- Your custom styles (optional) -->
     <link href="<?php echo $this->Url->build('/newtheme/css/style.css'); ?>" rel="stylesheet">
 
     <link href="<?php echo $this->Url->build('/newtheme/custom/css/event.list.css'); ?>" rel="stylesheet">
-    <link href="<?php echo $this->Url->build('/newtheme/custom/css/event.details.css'); ?>" rel="stylesheet">
+
+    <link href="<?php echo $this->Url->build('/newtheme/custom/css/event.details.css'); ?>" rel="stylesheet">    
+
     <link rel="stylesheet" href="//code.jquery.com/ui/1.12.1/themes/base/jquery-ui.css">
+
+    <link rel="stylesheet" href="//cdnjs.cloudflare.com/ajax/libs/timepicker/1.3.5/jquery.timepicker.min.css">
+
     <?php echo $this->Html->css(['daterangepicker']); ?>
 </head>
 
@@ -48,10 +57,10 @@
             
 
             <!-- IPAD navbar links -->
-            <ul class="navbar-nav ipad-nav-links">
+            <ul class="navbar-nav pull-right ipad-nav-links">
               <?php if($this->request->session()->read('Auth.User')) { ?>
               <div class="dropdown ipad-user-profile">
-                  <button class="btn btn-primary user-dropdown dropdown-toggle cs-dropbtn p-0" type="button" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
+                  <button class="btn btn-head btn-primary user-dropdown dropdown-toggle cs-dropbtn p-0" type="button" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
                       <div class="avatar">
                         <?=  $this->Html->image('profile_thumbnail.jpg',array('alt' => 'Profile Picture','class' => 'img-fluid rounded-circle')); ?>
                       </div>
@@ -65,7 +74,7 @@
               </div>                  
               <?php } ?>
               <li class="nav-item dropdown nav-city-link">
-                  <a class="nav-link btn btn-default btn-sm dropdown-toggle cs-city-btn" id="navbarDropdownMenuLink" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">Look your city</a>
+                  <a class="nav-link btn-head btn btn-grey btn-md dropdown-toggle cs-city-btn" id="navbarDropdownMenuLink" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">Look your city</a>
                   <div class="dropdown-menu dropdown-primary" aria-labelledby="navbarDropdownMenuLink">
                       <a class="dropdown-item" href="http://www.bangaloresmile.com">Bangalore Smile</a>
                       <a class="dropdown-item" href="http://www.mumbaismile.com">Mumbai Smile</a>
@@ -75,24 +84,24 @@
               
               <?php if(!$this->request->session()->read('Auth.User')) { ?>
               <li class="nav-item">
-                <a href="#" class="btn btn-md btn-primary cs_create_btn" data-toggle="modal" data-target="#cs-login-modal">Create Events</a>
+                <a href="#" class="btn btn-head btn-md btn-primary" data-toggle="modal" data-target="#cs-login-modal">Create Events</a>
               </li>
               <?php } ?>
 
               <?php $user = $this->request->session()->read('Auth.User'); if($user && $user['group_id'] == 1) { ?>
               <li class="nav-item">                    
-                <a href="#" class="btn btn-primary cs_create_btn" data-toggle="modal" data-target="#orgSignup">Create events</a>                    
+                <a href="#" class="btn btn-head btn-primary" data-toggle="modal" data-target="#orgSignup">Create events</a>                    
               </li>
               <?php } ?>
 
               <?php $user = $this->request->session()->read('Auth.User'); if($user && $user['group_id'] != 1) { ?>
               <li class="nav-item">                    
-                <?= $this->Html->link(__('Create Events'), ['controller' => 'events', 'action' => 'add'], array('class' => 'btn btn-md btn-primary cs_create_btn')); ?>                    
+                <?= $this->Html->link(__('Create Events'), ['controller' => 'events', 'action' => 'add'], array('class' => 'btn btn-md btn-head btn-primary')); ?>                    
               </li>
               <?php } ?>
 
               <li class="nav-item">
-                <a href="#past-events" class="btn btn-md btn-default filter-action" data="pastevents" text="Past Events">
+                <a href="#past-events" class="btn btn-head btn-md btn-default filter-action" data="pastevents" text="Past Events">
                   Past Events
                 </a>
               </li>
@@ -104,7 +113,7 @@
                 <ul class="navbar-nav mr-auto search-box">
                   <li class="search-category">
                     <div class="search-menu">
-                      <button type="button" class="btn btn-primary cat-not-selected" type="button">
+                      <button type="button" class="btn btn-head btn-primary btn-md cat-not-selected" type="button">
                         <label>Category</label>
                         <i class="fa fa-bars float-right"></i>
                       </button>
@@ -128,20 +137,14 @@
                     <input id="eventCategorySearch" type="text" class="form-control search-input" placeholder="Search for events, parties, concerts and more">
                   </li>
                   <li class="search-button">
-                      <button type="button" class="btn btn-primary btn-go btn-category-search"><i class="fa fa-search" aria-hidden="true"></i></button>
+                      <button type="button" class="btn btn-head btn-md btn-primary btn-go btn-category-search"><i class="fa fa-search" aria-hidden="true"></i></button>
                   </li>
-                  <li class="nav-item dropdown nav-city-link">
-                      <a class="nav-link btn btn-default btn-sm dropdown-toggle cs-city-btn" id="navbarDropdownMenuLink" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">Look your city</a>
-                      <div class="dropdown-menu dropdown-primary" aria-labelledby="navbarDropdownMenuLink">
-                          <a class="dropdown-item" href="http://www.bangaloresmile.com">Bangalore Smile</a>
-                          <a class="dropdown-item" href="http://www.mumbaismile.com">Mumbai Smile</a>
-                          <a class="dropdown-item" href="http://www.punesmile.com">Pune Smile</a>
-                      </div>
-                  </li>
-                  <?php if($this->request->session()->read('Auth.User')) { ?>
+                </ul>
+
+                <?php if($this->request->session()->read('Auth.User')) { ?>
                 <ul class="navbar-nav nav-cs-action">                  
                   <div class="dropdown ml-4">
-                      <button class="btn btn-primary user-dropdown dropdown-toggle cs-dropbtn p-0" type="button" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
+                      <button class="btn btn-primary btn-head user-dropdown dropdown-toggle cs-dropbtn p-0" type="button" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
                           <div class="avatar">
                             <?=  $this->Html->image('profile_thumbnail.jpg',array('alt' => 'Profile Picture','class' => 'img-fluid rounded-circle')); ?>
                           </div>
@@ -155,37 +158,42 @@
                   </div>                  
                 </ul>
                 <?php } ?>
-                </ul>
-
-                
 
                 <ul class="navbar-nav nav-cs-action pull-right">
+                  <li class="nav-item dropdown nav-city-link">
+                      <a class="nav-link btn btn-head btn-grey btn-md dropdown-toggle cs-city-btn" id="navbarDropdownMenuLink" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">Look your city</a>
+                      <div class="dropdown-menu dropdown-primary" aria-labelledby="navbarDropdownMenuLink">
+                          <a class="dropdown-item" href="http://www.bangaloresmile.com">Bangalore Smile</a>
+                          <a class="dropdown-item" href="http://www.mumbaismile.com">Mumbai Smile</a>
+                          <a class="dropdown-item" href="http://www.punesmile.com">Pune Smile</a>
+                      </div>
+                  </li>
                   <?php if(!$this->request->session()->read('Auth.User')) { ?>
                   <li class="nav-item">
-                    <a href="#" class="btn btn-md btn-primary cs_login_btn" data-toggle="modal" data-target="#cs-login-modal">Login/signup</a>
+                    <a href="#" class="btn btn-md btn-head btn-primary" data-toggle="modal" data-target="#cs-login-modal">Login/signup</a>
                   </li>
                   <li class="nav-item">
-                    <a href="#" class="btn btn-md btn-primary cs_create_btn" data-toggle="modal" data-target="#cs-login-modal">Create Events</a>
+                    <a href="#" class="btn btn-md btn-head btn-primary" data-toggle="modal" data-target="#cs-login-modal">Create Events</a>
                   </li>
                   <?php } ?>
 
                   <?php $user = $this->request->session()->read('Auth.User'); if($user && $user['group_id'] == 1) { ?>
                   <li class="nav-item">                    
-                    <a href="#" class="btn btn-primary cs_create_btn" data-toggle="modal" data-target="#orgSignup">Create events</a>                   
+                    <a href="#" class="btn btn-head btn-primary" data-toggle="modal" data-target="#orgSignup">Create events</a>                   
                   </li>
                   <?php } ?>
 
                   <?php $user = $this->request->session()->read('Auth.User'); if($user && $user['group_id'] != 1) { ?>
                   <li class="nav-item">                    
-                    <?= $this->Html->link(__('Create Events'), ['controller' => 'events', 'action' => 'add'], array('class' => 'btn btn-primary cs_create_btn')); ?>                 
+                    <?= $this->Html->link(__('Create Events'), ['controller' => 'events', 'action' => 'add'], array('class' => 'btn btn-head btn-primary')); ?>                 
                   </li>
                   <?php } ?>
 
-                  <!-- <li class="nav-item">
-                    <a href="#past-events" class="btn btn-md btn-default filter-action" data="pastevents" text="Past Events">
+                  <li class="nav-item">
+                    <a href="#past-events" class="btn btn-head btn-md btn-default filter-action" data="pastevents" text="Past Events">
                       Past Events
                     </a>
-                  </li> -->
+                  </li>
                 </ul>
             </div>
         </nav>
@@ -524,6 +532,16 @@
 
     <script type="text/javascript" src="<?php echo $this->Url->build('/newtheme/js/jquery.slimscroll.min.js'); ?>"></script>
 
+    <script type="text/javascript" src="<?php echo $this->Url->build('/newtheme/js/thumbnail-slider.js'); ?>"></script>
+
+    <script src="//cdnjs.cloudflare.com/ajax/libs/timepicker/1.3.5/jquery.timepicker.min.js"></script>
+
+    <script src="http://code.jquery.com/ui/1.11.0/jquery-ui.js"></script>
+
+    <?php  echo $this->Html->script(['daterangepicker']);?>
+
+    <script type="text/javascript" src="<?php echo $this->Url->build('/newtheme/custom/js/common.js'); ?>"></script>
+
     <script type="text/javascript" src="<?php echo $this->Url->build('/newtheme/custom/js/event.list.js'); ?>"></script>
 
     <script type="text/javascript" src="<?php echo $this->Url->build('/newtheme/custom/js/mobile.event.list.js'); ?>"></script>
@@ -531,53 +549,6 @@
     <script type="text/javascript" src="<?php echo $this->Url->build('/newtheme/custom/js/event.add.js'); ?>"></script>
 
     <script src="http://maps.googleapis.com/maps/api/js?libraries=places&key=AIzaSyCx2hb4R1uhaMbmlUAu1_lFasvl3gVHtnw"></script>
-
-    <link rel="stylesheet" href="//cdnjs.cloudflare.com/ajax/libs/timepicker/1.3.5/jquery.timepicker.min.css">
-<script src="//cdnjs.cloudflare.com/ajax/libs/timepicker/1.3.5/jquery.timepicker.min.js"></script>
-    <script src="http://code.jquery.com/ui/1.11.0/jquery-ui.js"></script>
-<?php  echo $this->Html->script(['daterangepicker']);?>
-
-<script type="text/javascript">
-  $( function() {
-      $('#date').datepicker({
-          changeMonth: true,
-          changeYear: true,
-          minDate: new Date()
-          });
-    } );
-  $(document).ready(function(){
-      $('#time').timepicker({ timeFormat: 'H:mm' });
-      var e = document.getElementById("categories-id");
-      var strUser = e.options[e.selectedIndex].value;
-      $select = $('#eventsubcategories-sub-categories');
-      $.ajax({
-          type:"POST",
-          data:strUser,
-          data:{"id":strUser},
-          ContentType : 'application/json',
-          dataType: 'json',
-          url: $("#sub_category_api_url").val(),
-          async:true,
-          success: function(data) {
-              $select.html('');
-              //iterate over the data and append a select option
-              $.each(data, function(key, val){
-                  //alert(val);
-                  $select.append('<option value="' + key + '">' + val + '</option>');
-              })
-          },
-          error: function (tab) {
-              $select.html('<option id="-1">none available</option>');
-          }
-      });
-
-       $('#Autocomplete').autocomplete({
-              source:$("#search_area_url").val(),
-              minLength: 1
-       });
-
-  });
-</script>
 
 </body>
 </html>

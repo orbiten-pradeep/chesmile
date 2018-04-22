@@ -66,7 +66,7 @@ class EventsController extends AppController
         $this->viewBuilder()->layout('event_new_home');
 
         $this->loadModel('Categories');
-        $categories_new = $this->Categories->find()->select(['Categories.name', 'Categories.id'])
+        $categories_new = $this->Categories->find()->select(['Categories.name', 'Categories.id', 'Categories.card'])
         	->where(['active' => 1]);
 
         $this->loadModel('SubCategories');
