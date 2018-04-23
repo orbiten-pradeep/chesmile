@@ -143,5 +143,47 @@ class SubCategoriesController extends AppController
     		//$this->set('_serialize', ['text']);
 		}
 	}
-    
+    /**
+     * Activate method
+     *
+     * @param string|null $id Banner id.
+     * @return \Cake\Network\Response|void Redirects on successful edit, renders view otherwise.
+     * @throws \Cake\Network\Exception\NotFoundException When record not found.
+     */
+    public function activate($id = null)
+    {
+       
+        $this->request->allowMethod(['post', 'activate']);
+        $subcategory = $this->SubCategories->get($id);
+        if ($this->SubCategories->updateAll(['active' => '1'], ['id' => $id])) {
+            $this->Flash->success(__('The SubCategory has been Activated.'));
+        } else {
+            $this->Flash->error(__('The SubCategory could not be Activated. Please, try again.'));
+        }
+
+        return $this->redirect(['action' => 'index']);
+
+    }
+    /**
+     * Deactivate method
+     *
+     * @param string|null $id Banner id.
+     * @return \Cake\Network\Response|void Redirects on successful edit, renders view otherwise.
+     * @throws \Cake\Network\Exception\NotFoundException When record not found.
+     */
+    public function deactivate($id = null)
+    {
+       
+        $this->request->allowMethod(['post', 'deactivate']);
+        $subcategory = $this->SubCategories->get($id);
+        if ($this->SubCategories->updateAll(['active' => '2'], ['id' => $id])) {
+            $this->Flash->success(__('The SubCategory has been Dectivated.'));
+        } else {
+            $this->Flash->error(__('The SubCategory could not be Deactivated. Please, try again.'));
+        }
+
+        return $this->redirect(['action' => 'index']);
+
+    }
+ 
 }

@@ -1,4 +1,4 @@
-<?php 
+<!-- <?php 
 use Cake\Routing\Router;
 ?>
 
@@ -74,7 +74,7 @@ use Cake\Routing\Router;
     <!-- <div class="container-fluid content"> -->
      <div class="row" style="margin-left: 0px;">
 
-                  <div class="col-sm-4 col-lg-2 col-md-4">
+                 <!--  <div class="col-sm-4 col-lg-2 col-md-4">
                     <div class="panel bs-example side_panel"> 
                         <div class="panel-heading"> 
                           <h3 class="panel-title">Sort By</h3> 
@@ -85,7 +85,9 @@ use Cake\Routing\Router;
                              <div class="ui-widget">
                               <label for="Autocomplete"></label>
                                  <?php echo $this->Form->input('areaname', array('id' => 'Autocomplete', 'required','class' => 'list-group-item sizebox','label' => false,'placeholder' => 'searchbyarea')); ?>
-                            </div>
+                            </div> -->
+
+
              <!-- <div class="form-group"> 
 
               <span class="twitter-typeahead" style="position: relative; display: inline-block;">
@@ -94,17 +96,17 @@ use Cake\Routing\Router;
               <span style="" class="dropdown_txt1"></span>
               <span class="tt-dropdown-menu" style="position: absolute; top: 100%; left: 0px; z-index: 100; display: none;"></span></span> 
              </div>  -->
-           </form> 
-                              <!-- <a href="#" class="list-group-item">Select Category</a> -->
-                                  <?= $this->Html->link(__("Today's Events"), ['action' => 'index', '?' => ['query' => 'Today']], array('class' => 'list-group-item')) ?>
-                                  <!-- <a href="#" id="today" class="list-group-item">Today's Events</a>
+          <!--  </form> 
+           -->                    <!-- <a href="#" class="list-group-item">Select Category</a> -->
+                                  <!-- <?= $this->Html->link(__("Today's Events"), ['action' => 'index', '?' => ['query' => 'Today']], array('class' => 'list-group-item')) ?>
+                                   --><!-- <a href="#" id="today" class="list-group-item">Today's Events</a>
                                   <a href="#" class="list-group-item">Tomorrow's Events</a>
                                    <a href="#" class="list-group-item">This Weekend Events</a>
                                   
                                   <a href="#" class="list-group-item">This Month Events</a>
                                    -->
                                   
-                                  <?= $this->Html->link(__("Tomorrow's Events"), ['action' => 'index', '?' => ['query' => 'Tomorrow']], array('class' => 'list-group-item')) ?>
+                                  <!-- <?= $this->Html->link(__("Tomorrow's Events"), ['action' => 'index', '?' => ['query' => 'Tomorrow']], array('class' => 'list-group-item')) ?>
 
                                   <?= $this->Html->link(__("This Weekend Events"), ['action' => 'index', '?' => ['query' => 'Weekend']], array('class' => 'list-group-item')) ?>
 
@@ -121,9 +123,9 @@ use Cake\Routing\Router;
                         </div> 
                       </div>
                     
-                  </div>
+                  </div> -->
 
-                  <div class="col-sm-8 col-lg-10 col-md-8 list_event content">
+         <!--          <div class="col-sm-8 col-lg-10 col-md-8 list_event content">
 
                       <div class="row" style="margin-right: 0px;">
                       <?php foreach ($events as $event): ?>
@@ -132,7 +134,7 @@ use Cake\Routing\Router;
                               <div class="thumbnail">
                               <p class="pull-left tag"><?= $event->has('category') ? $event->category->name : '' ?></p>
                               <p class="pull-right post"><!--<?= h($event->created) ?>--></p>
-                                  <img src="/chesmile/img/photos/1.jpg" alt="">
+                                 <!--  <img src="/chesmile/img/photos/1.jpg" alt="">
                                   <div class="caption dance" style="background-color:<?php echo "#".$event->category->color; ?>">
                                       <h4 class="event_txt"><a href="#"><?= $this->Html->link(h($event->title), ['action' => 'view', $event->id]) ?></a></h4>
                                       <p class="venue_txt"><?= h($event->OrganizersName) ?></p>
@@ -168,8 +170,8 @@ use Cake\Routing\Router;
               <div class="row">
               &nbsp;
                   </div>
-
-<script type="text/javascript">
+ -->
+<!-- <script type="text/javascript">
   
    function autoHeight() {
    $('.content').css('min-height', 0);
@@ -189,7 +191,7 @@ use Cake\Routing\Router;
  $(window).resize(function() {
    autoHeight();
  });
-</script>
+</script> -->
  <!--              </div> -->
 <!-- <nav class="large-3 medium-4 columns" id="actions-sidebar">
           <ul class="side-nav">
@@ -261,3 +263,173 @@ use Cake\Routing\Router;
           </div>
       </div>
        -->
+       <div class="block-header">
+  <h2>
+    <?= __('Events') ?>
+  </h2>
+</div>
+<!-- Basic Table -->
+<div class="row clearfix">
+  <div class="col-lg-12 col-md-12 col-sm-12 col-xs-12">
+    <div class="card">
+      <div class="header">
+        <h2>
+          Listing
+          <small>All Events Listing
+          </small>
+        </h2>
+        <ul class="header-dropdown m-r--5">
+          <li class="dropdown">
+            <a href="javascript:void(0);" class="dropdown-toggle" data-toggle="dropdown" role="button" aria-haspopup="true" aria-expanded="false">
+              <i class="material-icons">more_vert
+              </i>
+            </a>
+            <ul class="dropdown-menu pull-right">
+              <li>
+                <a href="javascript:void(0);">Action
+                </a>
+              </li>
+              <li>
+                <a href="javascript:void(0);">Another action
+                </a>
+              </li>
+              <li>
+                <a href="javascript:void(0);">Something else here
+                </a>
+              </li>
+            </ul>
+          </li>
+        </ul>
+      </div>
+      <div class="body table-responsive">
+        <table class="table table-bordered table-striped table-hover js-basic-example dataTable">
+          <thead>
+            <tr> 
+              <th scope="col">
+                <?= $this->Paginator->sort('Select') ?>
+              </th>
+              <th scope="col">
+                <?= $this->Paginator->sort('Serial No') ?>
+              </th>
+              <th scope="col">
+                <?= $this->Paginator->sort('title') ?>
+              </th>
+              <th scope="col">
+                <?= $this->Paginator->sort('active') ?>
+              </th>
+              <th scope="col">
+                <?= $this->Paginator->sort('categories_id') ?>
+              </th>
+              <th scope="col">
+                <?= $this->Paginator->sort('date') ?>
+              </th>
+              <th scope="col">
+                <?= $this->Paginator->sort('time') ?>
+              </th>
+              <th scope="col">
+                <?= $this->Paginator->sort('register_online') ?>
+              </th>
+              <!--  <th scope="col" class="actions"><?= __('Actions') ?></th> -->
+            </tr>
+          </thead>
+          <tbody>
+            <?php  
+   $n=0 + (10 * $page);
+  foreach ($events as $event): $n++ ?>
+            <tr>
+              <td> 
+               
+                <span class="input-group-addon">
+                  <input type="radio" name="eventId" id="e<?= h($event->id) ?>" value ="<?=($event->id)?>" class="with-gap radio-select-list"
+                   admin-href-url="<?=$this->Url->build(array('controller' => 'Events', 'action' => 'adminedit', $event->id)); ?>"
+                         edit-href-url="<?=$this->Url->build(array('controller' => 'Events', 'action' => 'edit', $event->id)); ?>"
+                         view-href-url="<?=$this->Url->build(array('controller' => 'Events', 'action' => 'view', $event->id)); ?>"
+                         add-href-url="<?=$this->Url->build(array('controller' => 'Events', 'action' => 'add', $event->id)); ?>"
+                         activate-href-url="<?=$this->Url->build(array('controller' => 'Events', 'action' => 'activate', $event->id)); ?>"
+                         deactivate-href-url="<?=$this->Url->build(array('controller' => 'Events', 'action' => 'deactivate', $event->id)); ?>">
+                  <label for="e<?= h($event->id) ?>">
+                  </label>
+                </span>
+              </td>
+              <td>
+                <?= $this->Number->format($n) ?>
+              </td>
+              <td>
+                <?= h($event->title) ?>
+              </td>
+              <td>
+                <?php 
+if($event->active == 1)
+{ echo "Enabled"; } 
+else if($event->active == 0)
+{ echo "Waiting for Admin Review.."; } 
+elseif ($event->active == 2) {
+echo "Deleted";
+}
+//echo $event;
+?>  
+              </td>
+              <td>
+                <?= $event->has('category') ? $this->Html->link($event->category->name, ['controller' => 'Categories', 'action' => 'view', $event->category->id]) : '' ?>
+              </td>
+              <td>
+                <?= h($event->date) ?>
+              </td>
+              <td>
+                <?= h($event->time) ?>
+              </td>
+              <td>
+                <?php if($event->register_online == 0) {
+                  ?>
+                   <a id ="admin" href="">
+            <button class="btn btn-primary waves-effect">Add Ticketing
+            </button>
+          </a>
+          <?php
+// echo $this->Form->postLink($this->Html->tag('i', 'Add Ticketing', array('class' => 'btn btn-primary waves-effect', 'title'=>'Ticketing')), ['action' => 'adminedit', $event->id], ['escape'=>false, 'confirm' => __('Are you sure you want to Add Ticketing For Ur Event', $event->id)]) ;
+} else {
+echo "Ticketing Enabled";
+}
+?>
+              </td>
+        
+            </tr>
+            <?php endforeach; ?>
+          </tbody>
+        </table> 
+        <div class="pull-right"> 
+         <?php
+echo $this->Html->link( $this->Html->tag('i', 'Add Event', array('class' => 'btn btn-primary waves-effect', 'title'=>'Add Event')), ['action' => 'add'], array('escape'=>false)); ?> 
+
+          <a id ="edit" href="">
+            <button class="btn btn-primary waves-effect">Edit
+            </button>
+          </a>
+          <a id ="view" href="">
+            <button class="btn btn-primary waves-effect">View
+            </button>
+          </a>
+          <a id ="activate" href="">
+            <button class="btn btn-primary waves-effect">Activate
+            </button>
+          </a>
+          <a id ="deactivate" href="">
+            <button class="btn btn-primary waves-effect">Deactivate
+            </button>
+          </a>
+        </div>
+        <br>
+        <div class="paginator">
+          <ul class="pagination">
+            <?= $this->Paginator->prev('< ' . __('previous')) ?>
+            <?= $this->Paginator->numbers() ?>
+            <?= $this->Paginator->next(__('next') . ' >') ?>
+          </ul>
+          <p>
+            <?= $this->Paginator->counter() ?>
+          </p>
+        </div>
+      </div>
+    </div>
+  </div>
+</div>

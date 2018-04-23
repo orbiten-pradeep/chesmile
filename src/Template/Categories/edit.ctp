@@ -65,6 +65,16 @@
                                     <?php echo $this->Form->input('color', array('class' => 'jscolor form-control'));?>
                                 </div>
 
+                    <label for="">Category Litecolor</label>
+                                                    <div class="form-group">
+                                                        <div class="form-line">
+                                                            <?php echo $this->Form->input('categorylitecolor',array('div' => false,'class' => 'form-control','label' => false));?>
+                                                        </div>
+                                                    </div>
+                                                    <div class="form-group">
+                                                        <?php echo $this->Form->input('categorylitecolor', array('class' => 'jscolor form-control'));?>
+                                                    </div>
+
                                 <div class="form-group">
                                    <?php  echo $this->Form->input('Card Image',['type' => 'file', 'accept' => 'image/*','class' => 'form-control']);?>
                                 </div>

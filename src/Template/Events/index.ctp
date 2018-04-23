@@ -11,20 +11,24 @@
         <li data-target="#ce-1z" data-slide-to="1"></li>
     </ol>
     <!--/.Indicators-->
-    <!--Slides-->
+     <!--Slides-->
     <div class="carousel-inner" role="listbox">
         <!--First slide-->
+                 <?php foreach ($banners as $banner): ?>
         <div class="carousel-item active">
-            <img class="d-block w-100" src="http://chennaismile.com/img/high-on-laughter.png" alt="High on Laughter">
+            <a href="<?= h($banner->url) ?>" ><?php echo $this->Html->image('banners_hme/'. $banner->image ,array('alt' => 'High on Laughter','class' => 'd-block w-100'));  ?></a>
         </div>
         <!--/First slide-->
         <!--Second slide-->
         <div class="carousel-item">
-            <img class="d-block w-100" src="http://chennaismile.com/img/legends-marathon.jpg" alt="Legends Marathon 2018">
+             <a href="<?= h($banner->url) ?>" ><?php echo $this->Html->image('banners_hme/'. $banner->image ,array('alt' => 'High on Laughter','class' => 'd-block w-100'));  ?></a>
         </div>
+         <?php endforeach; ?>
         <!--/Second slide-->
     </div>
     <!--/.Slides-->
+
+   
     <!--Controls-->
     <a class="carousel-control-prev" href="#ce-1z" role="button" data-slide="prev">
         <span class="carousel-control-prev-icon" aria-hidden="true"></span>

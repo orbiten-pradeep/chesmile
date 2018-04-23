@@ -84,6 +84,7 @@ class GroupsController extends AppController
      */
     public function edit($id = null)
     {
+         $this->viewBuilder()->layout('admin');
         $group = $this->Groups->get($id, [
             'contain' => []
         ]);

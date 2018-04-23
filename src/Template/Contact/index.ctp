@@ -7,16 +7,16 @@
       <?= $this->Html->link(__('New Group'), ['action' => 'add']) ?>
     </li>
     <li>
-      <?= $this->Html->link(__('List Users'), ['controller' => 'Contact', 'action' => 'index']) ?>
+      <?= $this->Html->link(__('List Users'), ['controller' => 'Users', 'action' => 'index']) ?>
     </li>
     <li>
-      <?= $this->Html->link(__('New User'), ['controller' => 'Contact', 'action' => 'add']) ?>
+      <?= $this->Html->link(__('New User'), ['controller' => 'Users', 'action' => 'add']) ?>
     </li>
   </ul>
 </nav>
 <div class="block-header">
   <h2>
-    <?= __('Contacts') ?>
+    <?= __('Contact Us') ?>
   </h2>
 </div>
 <!-- Basic Table -->
@@ -67,27 +67,36 @@
                 <?= $this->Paginator->sort('email') ?>
               </th>
               <th scope="col">
+                <?= $this->Paginator->sort('Message') ?>
+              </th>
+              <th scope="col">
+                <?= $this->Paginator->sort('Replied') ?>
+              </th>
+              <th scope="col">
                 <?= $this->Paginator->sort('created') ?>
               </th>
+              <th scope="col">
+                <?= $this->Paginator->sort('Status') ?>
+              </th>
+              
               <!-- <th scope="col" class="actions"><?= __('Actions') ?></th> -->
             </tr>
           </thead>
           <tbody>
-            <?php  $n=0 + (10 * $page);
+             <?php  $n=0 + (10 * $page);
 foreach ($contact as $contact):  $n++; ?>
             <tr>
-              <td>  
+              <td> 
                 <span class="input-group-addon">
-                  <input type="radio" name="contactId" id="c<?= h($contact->id) ?>" value ="<?=($contact->id)?>" class="with-gap radio-select-list" 
-                         edit-href-url="<?=$this->Url->build(array('controller' => 'Contact', 'action' => 'edit', $contact->id)); ?>"
-                         view-href-url="<?=$this->Url->build(array('controller' => 'Contact', 'action' => 'view', $contact->id)); ?>"
-                         add-href-url="<?=$this->Url->build(array('controller' => 'Contact', 'action' => 'add', $contact->id)); ?>"
-                         activate-href-url="<?=$this->Url->build(array('controller' => 'Contact', 'action' => 'activate', $contact->id)); ?>"
-                         deactivate-href-url="<?=$this->Url->build(array('controller' => 'Contact', 'action' => 'deactivate', $contact->id)); ?>">
-                  <label for="c<?= h($contact->id) ?>">
+                  <input type="radio" name="contactId" id="g<?= h($contact->ID) ?>" value ="<?=($contact->ID)?>" class="with-gap radio-select-list" 
+                   reply-href-url="<?=$this->Url->build(array('controller' => 'Contact', 'action' => 'reply', $contact->ID)); ?>"
+                         edit-href-url="<?=$this->Url->build(array('controller' => 'Contact', 'action' => 'edit', $contact->ID)); ?>"
+                         view-href-url="<?=$this->Url->build(array('controller' => 'Contact', 'action' => 'view', $contact->ID)); ?>"
+                       >
+                  <label for="g<?= h($contact->ID) ?>">
                   </label>
                 </span>
-              </td> 
+              </td>
               <td>
                 <?= $this->Number->format($n) ?>
               </td>
@@ -97,18 +106,32 @@ foreach ($contact as $contact):  $n++; ?>
               <td>
                 <?= h($contact->email) ?>
               </td>
+               <td>
+                <?= h($contact->comments) ?>
+              </td>
+               <td>
+                <?= h($contact->reply) ?>
+              </td>
               <td>
-                <?= h($contact->created) ?>
+                <?= h($contact->created)?>
+              </td>
+              <td>
+                <?php 
+if($contact->status == 1)
+{ echo "Replied"; } 
+else if($contact->active == 0)
+{ echo "Waiting for Reply.."; } 
+//echo $event;
+?>  
               </td>
             </tr>
             <?php endforeach; ?>
           </tbody>
-        </table> 
+        </table>
         <div class="pull-right">
-          <a id="add" href="">
-            <button class="btn btn-primary waves-effect">Add
-            </button>
-          </a>
+        <!--  <?php
+echo $this->Html->link( $this->Html->tag('i', 'Add Group', array('class' => 'btn btn-primary waves-effect', 'title'=>'Add Group')), ['action' => 'add'], array('escape'=>false)); ?> 
+        -->
           <a id ="edit" href="">
             <button class="btn btn-primary waves-effect">Edit
             </button>
@@ -117,20 +140,11 @@ foreach ($contact as $contact):  $n++; ?>
             <button class="btn btn-primary waves-effect">View
             </button>
           </a>
-          <a id ="activate" href="">
-            <button class="btn btn-primary waves-effect">Activate
+           <a id ="reply" href="">
+            <button class="btn btn-primary waves-effect">Reply
             </button>
           </a>
-          <a id ="deactivate" href="">
-            <button class="btn btn-primary waves-effect">Deactivate
-            </button>
-          </a>
-          <!-- <button type="button" class="btn btn-primary waves-effect">Add</button>
-<button type="button" class="btn btn-primary waves-effect">View</button>
-<button type="button" class="btn btn-primary waves-effect">Edit</button>
-<button type="button" class="btn btn-primary waves-effect">Activate</button>
-<button type="button" class="btn btn-primary waves-effect">Deactivate</button> -->
-        </div>
+         </div>
         <br>
         <div class="paginator">
           <ul class="pagination">

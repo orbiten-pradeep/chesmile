@@ -120,10 +120,13 @@ echo $this->Html->link( $this->Html->tag('i', 'remove_red_eye', array('class' =>
           </tbody>
         </table>
         <div class="pull-right">
-          <a id="add" href="">
+         <?php
+echo $this->Html->link( $this->Html->tag('i', 'Add Group', array('class' => 'btn btn-primary waves-effect', 'title'=>'Add Group')), ['action' => 'add'], array('escape'=>false)); ?> 
+         
+          <!-- <a id="add" href="">
             <button class="btn btn-primary waves-effect">Add
             </button>
-          </a>
+          </a> -->
           <a id ="edit" href="">
             <button class="btn btn-primary waves-effect">Edit
             </button>
@@ -132,14 +135,14 @@ echo $this->Html->link( $this->Html->tag('i', 'remove_red_eye', array('class' =>
             <button class="btn btn-primary waves-effect">View
             </button>
           </a>
-          <a id ="activate" href="">
+          <!-- <a id ="activate" href="">
             <button class="btn btn-primary waves-effect">Activate
             </button>
           </a>
           <a id ="deactivate" href="">
             <button class="btn btn-primary waves-effect">Deactivate
             </button>
-          </a>
+          </a> -->
           <!-- <button type="button" class="btn btn-primary waves-effect">Add</button>
 <button type="button" class="btn btn-primary waves-effect">View</button>
 <button type="button" class="btn btn-primary waves-effect">Edit</button>

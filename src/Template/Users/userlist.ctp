@@ -51,7 +51,7 @@
               <th scope="col">
                 <?= $this->Paginator->sort('active') ?>
               </th>
-              <!-- <th scope="col" class="actions"><?= __('Actions') ?></th> -->
+            <th scope="col" class="actions"><?= __('Actions') ?></th> 
             </tr>
           </thead>
           <tbody>
@@ -85,11 +85,14 @@ foreach ($users as $user): $n++;?>
               </td>
               <td>
                 <?php 
-if($user->Active) 
+if($user->Active == 1) 
 { echo "Enabled"; } 
 else 
 { echo "Disabled"; } 
 ?>
+              </td>
+               <td><?= $this->Form->postLink(__('Activate'), ['action' => 'activateindividual', $user->id], ['confirm' => __('Are you sure you want to Activate # {0}?', $user->id)]) ?>
+                     <?= $this->Form->postLink(__('Deactivate'), ['action' => 'deactivateindividual', $user->id], ['confirm' => __('Are you sure you want to Deactivate # {0}?', $user->id)]) ?>        
               </td>
               <!-- <td class="actions">
 <?php
@@ -100,11 +103,14 @@ echo $this->Html->link( $this->Html->tag('i', 'remove_red_eye', array('class' =>
             <?php endforeach; ?>
           </tbody>
         </table> 
-        <div class="pull-right"> 
-          <a id="add" href="">
+        <div class="pull-right">
+         <?php
+echo $this->Html->link( $this->Html->tag('i', 'Add Users', array('class' => 'btn btn-primary waves-effect', 'title'=>'Add Users')), ['action' => 'add'], array('escape'=>false)); ?> 
+          
+          <!-- <a id="add" href="">
             <button class="btn btn-primary waves-effect">Add
             </button>
-          </a>
+          </a> -->
           <a id ="edit" href="">
             <button class="btn btn-primary waves-effect">Edit
             </button>
@@ -113,14 +119,14 @@ echo $this->Html->link( $this->Html->tag('i', 'remove_red_eye', array('class' =>
             <button class="btn btn-primary waves-effect">View
             </button>
           </a>
-          <a id ="activate" href="">
+          <!-- <a id ="activate" href="">
             <button class="btn btn-primary waves-effect">Activate
             </button>
           </a>
           <a id ="deactivate" href="">
             <button class="btn btn-primary waves-effect">Deactivate
             </button>
-          </a>
+          </a> -->
           <!--  <button type="button" class="btn btn-primary waves-effect">Add</button>
 <button type="button" class="btn btn-primary waves-effect">View</button>
 <button type="button" class="btn btn-primary waves-effect">Edit</button>

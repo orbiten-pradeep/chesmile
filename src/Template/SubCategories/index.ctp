@@ -1,3 +1,10 @@
+<style>
+.input-group-addon:last-child {
+    border-left: 0;
+    border: 0;
+    background:  0;
+}
+</style>
 <nav class="large-3 medium-4 columns" id="actions-sidebar" style="display: none;">
   <ul class="side-nav">
     <li class="heading">
@@ -64,7 +71,7 @@
                 <?= $this->Paginator->sort('categories_id') ?>
               </th>
               <th scope="col">
-                <?= $this->Paginator->sort('name') ?>
+                <?= $this->Paginator->sort('SubCategory') ?>
               </th>
               <th scope="col">
                 <?= $this->Paginator->sort('active') ?>
@@ -84,7 +91,7 @@ $n=0 + (10 * $page);
 foreach ($subCategories as $subCategory):$n++; ?>
             <tr>
               <td> 
-                <span class="input-group-addon">
+                <span class="input-group-addon input-radio" >
                   <input type="radio" name="subCategoryId" 
                          id="s<?= h($subCategory->id) ?>" value ="<?=($subCategory->id)?>" class="with-gap radio-select-list" 
                          edit-href-url="<?=$this->Url->build(array('controller' => 'SubCategories', 'action' => 'edit', $subCategory->id)); ?>"
@@ -111,24 +118,19 @@ foreach ($subCategories as $subCategory):$n++; ?>
               <td>
                 <?= h($subCategory->created) ?>
               </td>
-              <td>
-                <?= h($subCategory->modified) ?>
-              </td>
-              <!--  <td class="actions">
-<?php
-echo $this->Html->link( $this->Html->tag('i', 'remove_red_eye', array('class' => 'material-icons', 'title'=>'View Sub Category')), ['action' => 'view', $subCategory->id], array('escape'=>false)); ?>
-<?= $this->Html->link( $this->Html->tag('i', 'edit', array('class' => 'material-icons', 'title'=>'Edit')), ['action' => 'edit', $subCategory->id], array('escape'=>false)); ?>
-<?= $this->Form->postLink($this->Html->tag('i', 'delete', array('class' => 'material-icons', 'title'=>'Delete')), ['action' => 'delete', $subCategory->id], ['escape'=>false, 'confirm' => __('Are you sure you want to delete # {0}?', $subCategory->id)]) ?>
-</td> -->
+             <td><?= $this->Form->postLink(__('Activate'), ['action' => 'activate', $subCategory->id], ['confirm' => __('Are you sure you want to Activate # {0}?', $subCategory->id)]) ?>
+                     <?= $this->Form->postLink(__('Deactivate'), ['action' => 'deactivate', $subCategory->id], ['confirm' => __('Are you sure you want to Deactivate # {0}?', $subCategory->id)]) ?></td>
             </tr>
             <?php endforeach; ?>
           </tbody>
         </table>
         <div class="pull-right"> 
-          <a id="add" href="">
+         <!--  <a id="add" href="">
             <button class="btn btn-primary waves-effect">Add
             </button>
-          </a>
+          </a> -->
+           <?php
+echo $this->Html->link( $this->Html->tag('i', 'Add SubCategory', array('class' => 'btn btn-primary waves-effect', 'title'=>'Add SubCategory')), ['action' => 'add'], array('escape'=>false)); ?> 
           <a id ="edit" href="">
             <button class="btn btn-primary waves-effect">Edit
             </button>
@@ -137,14 +139,14 @@ echo $this->Html->link( $this->Html->tag('i', 'remove_red_eye', array('class' =>
             <button class="btn btn-primary waves-effect">View
             </button>
           </a>
-          <a id ="activate" href="">
+         <!--  <a id ="activate" href="">
             <button class="btn btn-primary waves-effect">Activate
             </button>
           </a>
           <a id ="deactivate" href="">
             <button class="btn btn-primary waves-effect">Deactivate
             </button>
-          </a> 
+          </a>  -->
           <!-- <button type="button" class="btn btn-primary waves-effect">Add</button>
 <button type="button" class="btn btn-primary waves-effect">View</button>
 <button type="button" class="btn btn-primary waves-effect">Edit</button>

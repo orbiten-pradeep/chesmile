@@ -25,16 +25,35 @@ class BannersController extends AppController
      * @return \Cake\Network\Response|null
      */
     public function index()
-    {
+    { $this->viewBuilder()->layout('admin');
         $this->paginate = [
             'contain' => ['Events']
         ];
         $banners = $this->paginate($this->Banners);
-
+        $page = (isset($this->request->query['page'])) ? $this->request->query['page'] : 0;
+        $this->set(compact('page'));
         $this->set(compact('banners'));
         $this->set('_serialize', ['banners']);
     }
-
+    /**
+     * IndexView method
+     *
+     * @param string|null $id Banner id.
+     * @return \Cake\Network\Response|null
+     * @throws \Cake\Datasource\Exception\RecordNotFoundException When record not found.
+     */
+     public function indexview()
+    {
+       $this->paginate = [
+             'contain' => ['Events']
+         ];
+        $this->loadModel('Events');
+        $banner= $this->paginate['conditions'] = array('Events.date >'=>date("Y-m-d") , 'Banners.active' => '1');
+        $banners = $this->paginate($this->Banners);
+       $this->set(compact('banners','banner'));
+       $this->set('_serialize', ['banners']);
+       $this->set('_serialize', ['banner']);
+    }
     /**
      * View method
      *
@@ -44,6 +63,7 @@ class BannersController extends AppController
      */
     public function view($id = null)
     {
+         $this->viewBuilder()->layout('admin');
         $banner = $this->Banners->get($id, [
             'contain' => ['Events']
         ]);
@@ -59,15 +79,14 @@ class BannersController extends AppController
      */
     public function add()
     {
-        $banner = $this->Banners->newEntity();
+         $this->viewBuilder()->layout('admin');
+         $banner = $this->Banners->newEntity();
         if ($this->request->is('post')) {
-
             if(!empty($this->request->data['image']))
             {
                 $banners = $this->request->data['image'];
                 $ext = substr(strtolower(strrchr($banners['name'], '.')), 1); //get the extension
                 $arr_ext = array('jpg', 'jpeg', 'png'); //set allowed extensions
-
                 if($banners['size']/1024 > '2048')
                 {
                     $this->Flash->error(__('"imageLogs", __METHOD__." The uploaded file exceeds the MAX_FILE_SIZE(2MB) '));
@@ -88,10 +107,13 @@ class BannersController extends AppController
                     $banners = $filename;
                 }
             }
+             if(!is_null($banners))
+            {
+                $this->request->data['image'] = $banners;
+            }
             $banner = $this->Banners->patchEntity($banner, $this->request->data);
             if ($this->Banners->save($banner)) {
                 $this->Flash->success(__('The banner has been saved.'));
-
                 return $this->redirect(['action' => 'index']);
             } else {
                 $this->Flash->error(__('The banner could not be saved. Please, try again.'));
@@ -100,6 +122,7 @@ class BannersController extends AppController
         $events = $this->Banners->Events->find('list', ['limit' => 200]);
         $this->set(compact('banner', 'events'));
         $this->set('_serialize', ['banner']);
+
     }
 
     /**
@@ -111,6 +134,7 @@ class BannersController extends AppController
      */
     public function edit($id = null)
     {
+         $this->viewBuilder()->layout('admin');
         $banner = $this->Banners->get($id, [
             'contain' => []
         ]);

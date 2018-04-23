@@ -1272,9 +1272,7 @@ body {
 
       <li><?= $this->Html->link(__('Create events'), ['controller' => 'events', 'action' => 'add'], array('class' => 'btn btn-primary')); ?></li>
         <?php }?>
-
         <?php $user = $this->request->session()->read('Auth.User'); if($user && $user['group_id'] == 1) { ?>
-
         <li><a href="#" class="btn btn-primary" data-toggle="modal" data-target="#orgSignup">Create events</a></li>
      <?php }?>
 

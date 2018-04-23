@@ -19,15 +19,75 @@ class AdminDashBoardController extends AppController
     public function index()
     {
     	$this->viewBuilder()->layout('admin');
-        $this->loadModel('Tickets');
-        $numtic = $this->Tickets->find()->where(['status' => 'success'])->count();
-        $this->loadModel('Contact');
-        $numcontact = $this->Contact->find()->where(['id' != 0])->count();
+        
          $this->loadModel('Events');
-        $numevent = $this->Events->find()->where(['id' != 0])->count();
+         // $banner= $this->paginate['conditions'] = array('Events.date >'=>date("Y-m-d") , 'Banners.active' => '1');
+        $numevent = $this->Events->find()->where(['active' =>1])->count();
+         $ticevent = $this->Events->find()->where(['register_online' => 1])->count();
+        $numbevent = $this->Events->find()->where(['active' => 0])->count();
+        $upevent = $this->Events->find()->where([ 'date >'=>date("Y-m-d") ])->count();
+         if(!empty($this->Auth->user('id')))
+        {
+            $users_id = $this->Auth->user('id');
+           // $this->paginate['conditions'] = array("Events.user_id" => $users_id);
+             $orgevent = $this->Events->find()->where(["Events.user_id" => $users_id])->count();
+             $orgactiveevent = $this->Events->find()->where(["Events.user_id" => $users_id,'active' => 1])->count();
+            $orgwaitevent = $this->Events->find()->where(["Events.user_id" => $users_id,'active' => 0])->count();
+             $orgpaidevent = $this->Events->find()->where(["Events.user_id" => $users_id,'register_online' => 1])->count();
+              $orgfreeevent = $this->Events->find()->where(["Events.user_id" => $users_id,'register_online' => 0])->count();
+             $uporgevent = $this->Events->find()->where(["Events.user_id" => $users_id,'date >' => date("Y-m-d") ])->count();       
+        }
+
         $this->loadModel('Users');
+         $neworg = $this->Users->find()->where(['created >'=> date("Y-m-d"),'group_id' => 2])->count();
+        $newuser = $this->Users->find()->where(['created >'=> date("Y-m-d")])->count();
+        $yesterday = date("Y-m-d", mktime(0, 0, 0, date("m") , date("d")-1,date("Y")));
+        $yesuser = $this->Users->find()->where(['created'=> $yesterday])->count();
+           $yesorg = $this->Users->find()->where(['created'=> $yesterday,'group_id' => 2])->count();
+        $week = date("Y-m-d", mktime(0, 0, 0, date("m") , date("d")-7,date("Y")));
+        $weekuser = $this->Users->find()->where(['created'=> $week ])->count();
+         $weekorg = $this->Users->find()->where(['created'=> $week ,'group_id' => 2])->count();
         $number = $this->Users->find()->where(['group_id' => 1])->count();
-        $this->set(compact('number','numevent','numcontact','numtic'));
+         $numorg = $this->Users->find()->where(['group_id' => 2])->count();
+
+        $users = $this->paginate($this->Users->find('all',['limit' => 200, 'conditions' => array('group_id' => 2 )]));
+          $managers = $this->paginate($this->Users->find('all',['limit' => 200, 'conditions' => array('group_id' => 6 )]));
+  $this->loadModel('Contact');
+        $numcontact = $this->Contact->find()->where(['id' != 0])->count();
+        $newcontact = $this->Contact->find()->where(['created >'=> date("Y-m-d")])->count();
+        $yescontact = $this->Contact->find()->where(['created'=> $yesterday])->count();
+        $weekcontact = $this->Contact->find()->where(['created'=> $week ])->count();
+       
+ $this->loadModel('Tickets');
+        $numtic = $this->Tickets->find()->where(['status' => 'success'])->count();
+        $tictoday = $this->Tickets->find()->where(['status' => 'success','created >'=> date("Y-m-d")])->count();
+        $ticyes = $this->Tickets->find()->where(['status' => 'success','created'=> $yesterday])->count();
+        $ticweek = $this->Tickets->find()->where(['status' => 'success','created'=> $week ])->count();
+        $month = date("Y-m-d", mktime(0, 0, 0, date("m")-1 , date("d"),date("Y")));
+        $year = date("Y-m-d", mktime(0, 0, 0, date("m") , date("d"),date("Y")-1));
+        $ticmonth = $this->Tickets->find()->where(['status' => 'success','created'=> $week])->count();
+        $ticyr = $this->Tickets->find()->where(['status' => 'success','created'=> $week])->count();
+       
+ $this->paginate = [
+            'contain' => ['Events']
+        ];
+        if(!empty($this->Auth->user('id')))
+        {
+            $users_id = $this->Auth->user('id');
+            $fullname = $this->Auth->user('fullname');
+            $email = $this->Auth->user('email');
+            $this->paginate['conditions'] = array("Events.user_id" => $users_id);
+        }
+        $filter = false;
+        $this->paginate['order'] = array('Tickets.created' => 'desc');
+        $orgeventtic = $this->paginate($this->Tickets)->count();
+
+       $page = (isset($this->request->query['page'])) ? $this->request->query['page'] : 0;
+          $this->set(compact('users'));
+        $this->set('_serialize', ['users']);
+
+        $this->set(compact('number','numevent','numcontact','numtic','numbevent','upevent','newuser','yesuser','weekuser','tictoday','ticyes','ticweek','ticmonth','ticyr','numorg','managers','orgevent','orgwaitevent','uporgevent','orgactiveevent','neworg','yesorg','weekorg','newcontact','weekcontact','yescontact','ticevent','orgpaidevent','orgfreeevent','orgeventtic'));
+        
         //$adminDashBoard = $this->paginate($this->AdminDashBoard);
 
         //$this->set(compact('adminDashBoard'));

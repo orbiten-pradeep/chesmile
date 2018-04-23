@@ -29,8 +29,7 @@ class UsersController extends AppController
     {
     	$this->viewBuilder()->layout('admin');
         $this->paginate = [
-            'contain' => ['Groups']
-        ];
+        'contain' => ['Groups'] ];
         $users = $this->paginate($this->Users);
 		$page = (isset($this->request->query['page'])) ? $this->request->query['page'] : 0;
         $this->set(compact('page'));
@@ -46,7 +45,7 @@ class UsersController extends AppController
         ];
        // $user = $this->Users->find('all',['limit' => 200, 'conditions' => array('group_id' => 2 )]);
         $users = $this->paginate($this->Users->find('all',['limit' => 200, 'conditions' => array('group_id' => 2 )]));
-         $page = (isset($this->request->query['page'])) ? $this->request->query['page'] : 0;
+        $page = (isset($this->request->query['page'])) ? $this->request->query['page'] : 0;
         $this->set(compact('page'));
         $this->set(compact('users'));
         $this->set('_serialize', ['users']);
@@ -55,7 +54,7 @@ class UsersController extends AppController
     }
  public function adminmanager()
     {
-    	$this->viewBuilder()->layout('admin');
+        $this->viewBuilder()->layout('admin');
         $this->paginate = [
             'contain' => ['Groups']
         ];
@@ -110,8 +109,9 @@ class UsersController extends AppController
      */
     public function view($id = null)
     {
+       $this->viewBuilder()->layout('admin'); 
         $user = $this->Users->get($id, [
-            'contain' => ['Groups', 'Aros', 'Events']
+            'contain' => ['Groups']
         ]);
 
         $this->set('user', $user);
@@ -588,6 +588,47 @@ class UsersController extends AppController
         $this->set(compact('user', 'groups'));
         $this->set('_serialize', ['user']);
     }
+  /**
+     * Activate method
+     *
+     * @param string|null $id Banner id.
+     * @return \Cake\Network\Response|void Redirects on successful edit, renders view otherwise.
+     * @throws \Cake\Network\Exception\NotFoundException When record not found.
+     */
+    public function activateindividual($id = null)
+    {
+       
+        $this->request->allowMethod(['post', 'activate']);
+        $users = $this->Users->get($id);
+        if ($this->Users->updateAll(['active' => '1'], ['id' => $id])) {
+            $this->Flash->success(__('The User has been Activated.'));
+        } else {
+            $this->Flash->error(__('The User could not be Activated. Please, try again.'));
+        }
 
-	
+        return $this->redirect(['action' => 'index']);
+
+    }
+    /**
+     * Deactivate method
+     *
+     * @param string|null $id Banner id.
+     * @return \Cake\Network\Response|void Redirects on successful edit, renders view otherwise.
+     * @throws \Cake\Network\Exception\NotFoundException When record not found.
+     */
+    public function deactivateindividual($id = null)
+    {
+       
+        $this->request->allowMethod(['post', 'deactivate']);
+        $user = $this->Users->get($id);
+        if ($this->Users->updateAll(['active' => '2'], ['id' => $id])) {
+            $this->Flash->success(__('The User has been Dectivated.'));
+        } else {
+            $this->Flash->error(__('The User could not be Deactivated. Please, try again.'));
+        }
+
+        return $this->redirect(['action' => 'index']);
+
+    }
+  
 }

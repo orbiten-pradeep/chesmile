@@ -65,6 +65,7 @@
               <th scope="col">
                 <?= $this->Paginator->sort('amount') ?>
               </th>
+             
               <th scope="col">
                 <?= $this->Paginator->sort('status') ?>
               </th>
@@ -114,12 +115,16 @@ foreach ($tickets as $ticket): $n++; ?>
               <td>
                 <?= h($ticket->amount) ?>
               </td>
+
+ 
               <td>
                 <?= h($ticket->status) ?>
               </td>
               <td>
                 <?= h($ticket->unmappedstatus) ?>
               </td>
+             
+
               <!--  <td class="actions">
 <?php
 echo $this->Html->link( $this->Html->tag('i', 'remove_red_eye', array('class' => 'material-icons', 'title'=>'View Sub Category')), ['action' => 'view', $ticket->id], array('escape'=>false)); ?>
@@ -131,26 +136,27 @@ echo $this->Html->link( $this->Html->tag('i', 'remove_red_eye', array('class' =>
           </tbody>
         </table>
         <div class="pull-right">
-          <a id="add" href="">
+        <!--   <a id="add" href="">
             <button class="btn btn-primary waves-effect">Add
             </button>
-          </a>
+          </a> <?php
+echo $this->Html->link( $this->Html->tag('i', 'Add Event', array('class' => 'btn btn-primary waves-effect', 'title'=>'Add Event')), ['action' => 'add'], array('escape'=>false)); ?> 
           <a id ="edit" href="">
             <button class="btn btn-primary waves-effect">Edit
             </button>
-          </a>
+          </a> -->
           <a id ="view" href="">
             <button class="btn btn-primary waves-effect">View
             </button>
           </a>
-          <a id ="activate" href="">
+          <!-- <a id ="activate" href="">
             <button class="btn btn-primary waves-effect">Activate
             </button>
           </a>
           <a id ="deactivate" href="">
             <button class="btn btn-primary waves-effect">Deactivate
             </button>
-          </a>
+          </a> -->
         </div>
         <br>
         <div class="paginator">

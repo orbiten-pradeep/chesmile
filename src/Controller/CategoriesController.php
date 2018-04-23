@@ -183,4 +183,44 @@ class CategoriesController extends AppController
 
         return $this->redirect(['action' => 'index']);
     }
+   /**
+     * Activate method
+     *
+     * @param string|null $id category id.
+     * @return \Cake\Network\Response|void Redirects on successful edit, renders view otherwise.
+     * @throws \Cake\Network\Exception\NotFoundException When record not found.
+     */
+    public function activate($id = null)
+    {
+       
+        $this->request->allowMethod(['post', 'activate']);
+        $category = $this->Categories->get($id);
+        if ($this->Categories->updateAll(['active' => '1'], ['id' => $id])) {
+            $this->Flash->success(__('The Category has been Activated.'));
+        } else {
+            $this->Flash->error(__('The Category could not be Activated!.. Please, try again.'));
+        }
+        return $this->redirect(['action' => 'index']);
+
+    }
+    /**
+     * Deactivate method
+     *
+     * @param string|null $id category id.
+     * @return \Cake\Network\Response|void Redirects on successful edit, renders view otherwise.
+     * @throws \Cake\Network\Exception\NotFoundException When record not found.
+     */
+    public function deactivate($id = null)
+    {
+       
+        $this->request->allowMethod(['post', 'deactivate']);
+        $category = $this->Categories->get($id);
+        if ($this->Categories->updateAll(['active' => '2'], ['id' => $id])) {
+            $this->Flash->success(__('The Category has been Dectivated.'));
+        } else {
+            $this->Flash->error(__('The Category could not be Deactivated. Please, try again.'));
+        }
+
+        return $this->redirect(['action' => 'index']);
+    }
 }

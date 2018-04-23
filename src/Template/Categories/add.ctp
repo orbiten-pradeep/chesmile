@@ -46,7 +46,12 @@
                                         <?php echo $this->Form->input('color',array('div' => false,'class' => 'form-control','label' => false,'placeholder' => 'Enter Category Name'));?>
                                     </div>
                                 </div>
-
+                            <label for="">Category Litecolor</label>
+                                                            <div class="form-group">
+                                                                <div class="form-line">
+                                                                    <?php echo $this->Form->input('categorylitecolor',array('div' => false,'class' => 'form-control','label' => false));?>
+                                                                </div>
+                                                            </div>
                                 
                                 <!-- <label for="password">Password</label>
                                 <div class="form-group">

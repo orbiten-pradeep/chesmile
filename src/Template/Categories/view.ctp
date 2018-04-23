@@ -48,6 +48,7 @@
                             <tr>
                                 <td><?= h($category->name) ?></td>
                                 <td style="background-color: <?php echo "#".$category->color; ?>"><?= h($category->color) ?></td>
+                                <td style="background-color: <?php echo "#".$category->categorylitecolor; ?>"><?= h($category->categorylitecolorcolor) ?></td>
                                 <td><?php if($category->card) 
                                     {
                                         echo $this->Html->image('card/'.$category->card, array('width' => '100px', 'height' => '100px','alt'=>'Card'));
