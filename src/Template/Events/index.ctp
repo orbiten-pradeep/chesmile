@@ -13,9 +13,18 @@
     <!--/.Indicators-->
      <!--Slides-->
     <div class="carousel-inner" role="listbox">
+        <div class="carousel-item active">
+            <img class="d-block w-100" src="<?php echo $this->Url->build('/img/nam-parambhariyam.JPG'); ?>" alt="">
+        </div>
         <!--First slide-->
+
+        <div class="carousel-item">
+
+        <div class="carousel-item active">
+
                  <?php foreach ($banners as $banner): ?>
         <div class="carousel-item active">
+
             <a href="<?= h($banner->url) ?>" ><?php echo $this->Html->image('banners_hme/'. $banner->image ,array('alt' => 'High on Laughter','class' => 'd-block w-100'));  ?></a>
         </div>
         <!--/First slide-->
