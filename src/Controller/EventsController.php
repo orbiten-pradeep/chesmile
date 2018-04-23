@@ -1076,7 +1076,7 @@ public function organizerevents()
 	        }
 
             $conn = ConnectionManager::get('default');
-            $query = "SELECT e.*, c.name as category_name, c.color as category_color, c.categorylitecolor as category_ltecolor, (SELECT count(l.events_id) FROM likes l WHERE l.events_id = e.id GROUP BY l.events_id) as likes_count, (SELECT a.areaname FROM address a WHERE a.events_id = e.id) as areaname FROM events e LEFT JOIN categories c ON c.id = e.categories_id $joins WHERE e.active = 1 $cond ORDER BY e.date DESC $limitQry";
+            $query = "SELECT e.*, c.name as category_name,c.card as category_card ,c.color as category_color, c.categorylitecolor as category_ltecolor, (SELECT count(l.events_id) FROM likes l WHERE l.events_id = e.id GROUP BY l.events_id) as likes_count, (SELECT a.areaname FROM address a WHERE a.events_id = e.id) as areaname FROM events e LEFT JOIN categories c ON c.id = e.categories_id $joins WHERE e.active = 1 $cond ORDER BY e.date DESC $limitQry";
             //echo $query;
 
             $stmt = $conn->execute($query);
