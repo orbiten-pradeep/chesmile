@@ -183,6 +183,8 @@ chennaiSmile.generateEventGridList = function() {
 	    	var dtimeHtml = '';
 	    	var buybtn = '';
 	    	var eventprice = '';
+	    	var iconsrc = "img/card/"+response[k].category_card;
+	    	var catgoryicon = '<img src="'+iconsrc+'" style="height:auto;" class="img-fluid cs_card_icon">';
 
 	    	dtimeHtml = moment(response[k].date).fromNow();
 	    	if(response[k].slug == null)
@@ -208,7 +210,11 @@ chennaiSmile.generateEventGridList = function() {
 			html += '<div class="col-sm-6 col-lg-3 col-md-3 card-size">\
 				<div class="card" data-attrib-hcolor="'+response[k].category_ltecolor+'" onmouseover= this.style.backgroundColor="#'+response[k].category_ltecolor+'" onmouseout= this.style.backgroundColor="#f4f4f4">\
 			        <div class="view overlay">\
-			            '+dispImgHmtl+'\
+			        	<div class="back">\
+							<div class="pull-left tag col-sm-7">'+catgoryicon+'</div>\
+							<div class="pull-right cs_event_time col-sm-5">'+dtimeHtml+'</div>\
+						</div>\
+						'+dispImgHmtl+'\
 			            <a href="#">\
 			                <div class="mask rgba-white-slight"></div>\
 			            </a>\

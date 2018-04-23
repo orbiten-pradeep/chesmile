@@ -139,8 +139,6 @@
     text-overflow: ellipsis !important;
     white-space: nowrap !important;
     width: 90px !important;
-
-
 }
 .carousel .carousel-control-prev-icon.prev {
     background-image: url("../img/arrow_left_black.svg") !important;
@@ -154,4 +152,30 @@
 
 .event-list .epage-title {
     margin-bottom: 15px;
+}
+.cs_dispimg{
+    padding: 7px;
+    border-radius: 0.9rem !important;
+}
+.view.overlay .back {
+    position: absolute;
+    opacity: 0.8;
+    transition: opacity .3s ease;
+    -ms-transition: opacity .3s ease;
+    -webkit-transition: opacity .3s ease;
+    -o-transition: opacity .3s ease;
+    z-index: 2;
+    /*background: rgba(0,0,0,.6);*/
+    top: 0;
+    width: 100%;
+    height: 12%;
+    bottom: 0;
+    padding: 10px;
+}
+.img-fluid.cs_card_icon {
+    width: 26%;
+}
+.cs_event_time{
+    background: #4c4c4c;
+    color: #eeeeee;
 }
