@@ -3,7 +3,6 @@
         background-color:#"'+response[k].category_color+'";
     }*/
 </style>
-<!--Carousel Wrapper-->
 <div id="ce-1z" class="carousel slide main-carousel carousel-fade" data-ride="carousel">
     <!--Indicators-->
     <ol class="carousel-indicators">
@@ -11,33 +10,23 @@
         <li data-target="#ce-1z" data-slide-to="1"></li>
     </ol>
     <!--/.Indicators-->
-     <!--Slides-->
+    <!--Slides-->
     <div class="carousel-inner" role="listbox">
         <div class="carousel-item active">
             <img class="d-block w-100" src="<?php echo $this->Url->build('/img/nam-parambhariyam.JPG'); ?>" alt="">
         </div>
         <!--First slide-->
-
         <div class="carousel-item">
-
-        <div class="carousel-item active">
-
-                 <?php foreach ($banners as $banner): ?>
-        <div class="carousel-item active">
-
-            <a href="<?= h($banner->url) ?>" ><?php echo $this->Html->image('banners_hme/'. $banner->image ,array('alt' => 'High on Laughter','class' => 'd-block w-100'));  ?></a>
+            <img class="d-block w-100" src="http://chennaismile.com/img/high-on-laughter.png" alt="High on Laughter">
         </div>
         <!--/First slide-->
         <!--Second slide-->
         <div class="carousel-item">
-             <a href="<?= h($banner->url) ?>" ><?php echo $this->Html->image('banners_hme/'. $banner->image ,array('alt' => 'High on Laughter','class' => 'd-block w-100'));  ?></a>
+            <img class="d-block w-100" src="http://chennaismile.com/img/legends-marathon.jpg" alt="Legends Marathon 2018">
         </div>
-         <?php endforeach; ?>
         <!--/Second slide-->
     </div>
     <!--/.Slides-->
-
-   
     <!--Controls-->
     <a class="carousel-control-prev" href="#ce-1z" role="button" data-slide="prev">
         <span class="carousel-control-prev-icon" aria-hidden="true"></span>
