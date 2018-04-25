@@ -99,12 +99,6 @@
                 <?= $this->Html->link(__('Create Events'), ['controller' => 'events', 'action' => 'add'], array('class' => 'btn btn-md btn-head btn-primary')); ?>                    
               </li>
               <?php } ?>
-
-              <li class="nav-item">
-                <a href="#past-events" class="btn btn-head btn-md btn-default filter-action" data="pastevents" text="Past Events">
-                  Past Events
-                </a>
-              </li>
               
             </ul>
             <!-- IPAD navbar links ends -->
@@ -188,12 +182,6 @@
                     <?= $this->Html->link(__('Create Events'), ['controller' => 'events', 'action' => 'add'], array('class' => 'btn btn-head btn-primary')); ?>                 
                   </li>
                   <?php } ?>
-
-                  <li class="nav-item">
-                    <a href="#past-events" class="btn btn-head btn-md btn-default filter-action" data="pastevents" text="Past Events">
-                      Past Events
-                    </a>
-                  </li>
                 </ul>
             </div>
         </nav>

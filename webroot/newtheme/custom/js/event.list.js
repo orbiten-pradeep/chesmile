@@ -496,7 +496,7 @@ $(document).ready(function() {
 
 	self.searchTagsInputElem.slimScroll({
 	    axis: 'x',
-	    height: '34px',
+	    height: '45px',
 	    size: '7px',
 	    position: 'left',
 	    color: '#286090',

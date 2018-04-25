@@ -19,12 +19,12 @@
 }
 .search-box .search-text-box input {	
     border-radius: 0;
-    height: 32px;
+    height: 45px;
     border-width: 1px 0 1px 0;
     border-spacing: 0;
     width: 22rem;
     padding: 8px 10px !important;
-    font-size: 12px;
+    font-size: 14px;
 }
 .search-box .waves-input-wrapper {
 	border-radius: 0px;
@@ -63,11 +63,11 @@
     display: inline-block;
 }
 .navbar .btn-head {
-    padding: 8px 10px !important;
+    padding: 12px 14px !important;
     box-shadow: none;
     border-radius: 0;
     text-shadow: none;
-    font-size: 12px;
+    font-size: 14px;
     text-transform: capitalize !important;
 }
 .show>.btn-head.dropdown-toggle {
