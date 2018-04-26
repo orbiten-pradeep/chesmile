@@ -122,8 +122,11 @@
     text-transform: capitalize;
     border-radius: 0;
 }
-.cs-category-title.text-center{
+.cs-category-title.text-center, .epage-title-text{
     color: #474747;
+    color: #474747;
+    font-family: avenir, sans-serif;
+    font-weight: 100;
 }
 .cs-fav-icons{
     width: 70px;    
@@ -173,7 +176,7 @@
     padding: 10px;
 }
 .img-fluid.cs_card_icon {
-    width: 26%;
+    width: 35%;
 }
 .cs_event_time{
     background: #4c4c4c;

@@ -1,4 +1,15 @@
 /* Your custom styles */
+@font-face {
+    font-family: PTsans;
+    src: url("../font/ptsans/PTSans-Regular-01.ttf");
+}
+@font-face {
+    font-family: Avenir;
+    src: url("../font/avenir/Avenir-Light-07.ttf");
+}
+body{
+    font-family:  'PTsans';
+}
 .search-box {
 
 }
@@ -16,6 +27,11 @@
 	margin-bottom: 0;
 	padding-right: .5rem;
     text-transform: capitalize;
+    width: 80px;
+    overflow: hidden;
+    text-overflow: ellipsis;
+    white-space: nowrap;
+    text-transform: uppercase;
 }
 .search-box .search-text-box input {	
     border-radius: 0;
@@ -31,6 +47,7 @@
 }
 .search-box .nav-city-link {
     margin-left: 1.5rem! important;
+    margin-top: -5px;
 }
 .nav-flex-icons .fa-user-circle {
 	color: cadetblue;
@@ -68,7 +85,7 @@
     border-radius: 0;
     text-shadow: none;
     font-size: 14px;
-    text-transform: capitalize !important;
+    text-transform: uppercase;
 }
 .show>.btn-head.dropdown-toggle {
     color: #fff !important;
@@ -77,7 +94,7 @@
     background-color: #e7e7e7 !important;
     color: #474747 !important;
     box-shadow: none;
-    text-transform: capitalize !important;
+    text-transform: uppercase !important;
 }
 
 .navbar .nav-cs-action .nav-item .cs-city-btn:not([disabled]):not(.disabled):active{
@@ -108,7 +125,7 @@
 .btn.btn-primary.dropdown-toggle.cs-dropbtn.waves-effect.waves-light:active {
     box-shadow: none !important;
 }
-.category-dropdown, .subcategory-dd {
+.category-dropdown {
 	display: none;
     position: absolute;
     color: #212121;
@@ -117,6 +134,19 @@
     float: none;
     clear: both;
     background-color: #e9ecef !important;
+    width: 575px !important;
+    font-size: 13px;
+    font-weight: bolder;
+}
+.subcategory-dd{
+    display: none;
+    position: absolute;
+    color: #ffffff;
+    padding: 7px 10px;
+    z-index: 99;
+    float: none;
+    clear: both;
+    background-color: #50bac4 !important;
     width: 575px !important;
     font-size: 13px;
     font-weight: bolder;
@@ -150,7 +180,7 @@
 .subcategory-dd [type=checkbox]+label:before {
     width: 15px;
     height: 15px;
-    border: 1px solid #8a8a8a;
+    border: 1px solid #ffffff;
 }
 .subcategory-dd [type=checkbox]:checked+label:before {
     width:9px;
@@ -323,9 +353,17 @@ input:checked + .slider:before {
 .event-filters .filbtn {
     padding: 5px 10px !important;
     text-shadow: none;
-    text-transform: capitalize !important;
+    text-transform: uppercase !important;
+    padding-left: 10px;
+    padding-right: 10px;
+    margin-right: 10px;
 }
-
+.cs_login_btn{
+    background-color: #50bac4;
+}
+.cs_create_btn{
+    background-color: #337ab7;
+}
 @media (min-width: 1024px) and (max-width: 1365px) {
     /*.search-box .search-text-box input {
         width: 15rem !important;
@@ -342,16 +380,17 @@ input:checked + .slider:before {
         width: 40px !important;
     }
     .search-box .search-menu button {
-        padding: .84rem 1.14rem !important;
+        padding: .76rem 1.14rem !important;
         flex-wrap: nowrap;
         display: flex;
     }
     .search-box .nav-city-link {
         margin-left: 1rem !important;
     }
-    /*.navbar-brand img {
-        width: 200px !important;
-    }*/
+}
+.search-box .search-menu button{
+    padding: 0.58rem ;
+    height: 2.80rem;
 }
 @media (min-width: 768px) and (max-width: 1023px) {
     .collapse {
@@ -453,4 +492,12 @@ input:checked + .slider:before {
     .search-box{
         margin-left: 20px;
     }
+}
+.dropdown-item.cs_filter_dropdown:focus, .dropdown-item.cs_filter_dropdown:hover{
+    color: #377bb5;
+    background: none;
+}
+.cs_city_drpdwn{
+    width: 450px;
+    left: -60% !important;
 }

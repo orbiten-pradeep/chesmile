@@ -211,8 +211,8 @@ chennaiSmile.generateEventGridList = function() {
 				<div class="card" data-attrib-hcolor="'+response[k].category_ltecolor+'" onmouseover= this.style.backgroundColor="#'+response[k].category_ltecolor+'" onmouseout= this.style.backgroundColor="#f4f4f4">\
 			        <div class="view overlay">\
 			        	<div class="back">\
-							<div class="pull-left tag col-sm-7">'+catgoryicon+'</div>\
-							<div class="pull-right cs_event_time col-sm-5">'+dtimeHtml+'</div>\
+							<div class="pull-left tag col-sm-6 col-6">'+catgoryicon+'</div>\
+							<div class="pull-right cs_event_time col-sm-6 col-6">'+dtimeHtml+'</div>\
 						</div>\
 						'+dispImgHmtl+'\
 			            <a href="#">\
