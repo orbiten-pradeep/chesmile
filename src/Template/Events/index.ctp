@@ -52,10 +52,10 @@
 
         <!--Menu-->
         <div class="dropdown-menu dropdown-primary">
-            <a class="dropdown-item filter-date" href="javascript:;" data="today">Today's Events</a>
-            <a class="dropdown-item filter-date" href="javascript:;" data="tomorrow">Tomorrow's Events</a>
-            <a class="dropdown-item filter-date" href="javascript:;" data="weekend">This Weekend Events</a>
-            <a class="dropdown-item filter-date" href="javascript:;" data="month">This Month Events</a>
+            <a class="dropdown-item filter-date cs_filter_dropdown" href="javascript:;" data="today">Today's Events</a>
+            <a class="dropdown-item filter-date cs_filter_dropdown" href="javascript:;" data="tomorrow">Tomorrow's Events</a>
+            <a class="dropdown-item filter-date cs_filter_dropdown" href="javascript:;" data="weekend">This Weekend Events</a>
+            <a class="dropdown-item filter-date cs_filter_dropdown" href="javascript:;" data="month">This Month Events</a>
         </div>
     </div>
     <div class="btn-group top-categories" data-toggle="buttons">
