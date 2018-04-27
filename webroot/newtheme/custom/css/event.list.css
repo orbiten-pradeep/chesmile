@@ -7,6 +7,11 @@
     padding-left: 7px;
     padding-right: 7px;
 }
+@media (min-width: 1024px) and (max-width: 1366px){
+    .event-list .card-size {
+        max-width: 25%;
+    }
+}
 .event-list .card-size .card {
     box-shadow: 0 1px 0px 0 rgba(0,0,0,.1), 0 1px 3px 0px rgba(0,0,0,.1) !important;
     background-color: #f4f4f4;
@@ -75,6 +80,8 @@
     padding-left: 10px;
     padding-right: 10px;
     margin-right: 10px;
+    text-transform: capitalize;
+    font-size: 12px;
 }
 .event-filters .top-categories {
     padding-left: 20px;

@@ -94,7 +94,10 @@ body{
     background-color: #e7e7e7 !important;
     color: #474747 !important;
     box-shadow: none;
-    text-transform: uppercase !important;
+    text-transform: capitalize;
+    border: 1px solid #d4d4d4;
+    font-size: 14px;
+    border-radius: 0;
 }
 
 .navbar .nav-cs-action .nav-item .cs-city-btn:not([disabled]):not(.disabled):active{
@@ -353,7 +356,7 @@ input:checked + .slider:before {
 .event-filters .filbtn {
     padding: 5px 10px !important;
     text-shadow: none;
-    text-transform: uppercase !important;
+    text-transform: capitalize !important;
     padding-left: 10px;
     padding-right: 10px;
     margin-right: 10px;
@@ -482,11 +485,15 @@ input:checked + .slider:before {
         width: auto !important;
     }
 }
-.cs_create_btn{
-    background-color: #258fc6 !important;
+.navbar .cs_create_btn{
+    background-color: #377bb5 !important;
+    border: 1px solid #35638a;
+    color: #f4f4f4 !important;
 }
-.cs_login_btn{
+.navbar .cs_login_btn{
     background-color: #4abac5 !important;
+    border: 1px solid #52a0a8;
+    color: #f4f4f4 !important;
 }
 @media (min-width: 1900px){
     .search-box{
