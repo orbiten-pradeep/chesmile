@@ -69,7 +69,7 @@
     
     <!--/Dropdown primary-->
 </div>
-<div class="container-fluid favourite-category">
+<div class="container favourite-category">
     <div class="row">
         <div class="col-lg-12 col-md-12">
             <div class="cs-category-title text-center">
@@ -105,7 +105,7 @@
     </div>
 </div>
 
-<div class="container event-list">
+<div class="container-fluid event-list">
     <div class="row epage-title">
         <div class="col-lg-12 col-md-12">
             <div><h2 class="epage-title-text text-center mx-auto">Upcoming Events - Chennai</h2></div>
@@ -123,10 +123,12 @@
             </div>
         </div>
     </div>
-    <div class="row">
-        <div class="col-lg-12 col-md-12">
-            <div id="eventResponse"></div>
-            <div class="loadingDiv"><div id="loading"></div></div>
+    <div class="container-fluid">
+        <div class="row">
+            <div class="col-lg-12 col-md-12">
+                <div id="eventResponse"></div>
+                <div class="loadingDiv"><div id="loading"></div></div>
+            </div>
         </div>
     </div> 
 </div>

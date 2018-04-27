@@ -1,7 +1,5 @@
 <style type="text/css">
-  .container{
-    background:#f2f2f2;
-}
+
 .about{
     max-width: 900px;
     margin: 0 auto;
