@@ -341,7 +341,7 @@ input:checked + .slider:before {
 } 
 
 .favourite-category {
-    background-color: #fafafa;
+    /*background-color: #fafafa;*/
     padding: 20px 20px 30px;
     margin-bottom: 25px;
 }
@@ -366,6 +366,10 @@ input:checked + .slider:before {
 }
 .cs_create_btn{
     background-color: #337ab7;
+}
+.nav-city-link .btn-grey:not([disabled]):not(.disabled).active, .btn-grey:not([disabled]):not(.disabled):active, .show > .btn-grey.dropdown-toggle.cs-city-btn:active,
+.show > .btn-grey.dropdown-toggle.cs-city-btn{
+    background-color: #f4f4f4 !important;
 }
 @media (min-width: 1024px) and (max-width: 1365px) {
     /*.search-box .search-text-box input {
@@ -507,4 +511,22 @@ input:checked + .slider:before {
 .cs_city_drpdwn{
     width: 450px;
     left: -60% !important;
+}
+@media (min-width: 768px) and (max-width: 1024px){
+    .search-box .search-menu button {
+        padding: 0.76rem 0.5rem !important;
+    }
+    /*.search-text-box{
+        width: 50%;
+    }*/
+    .search-box .waves-input-wrapper {
+        border-radius: 0px;
+        width: 15rem;
+    }
+    .navbar .btn-head{
+        font-size: 13px;
+    }
+    .navbar .cs-city-btn{
+        font-size: 12px;
+    }
 }

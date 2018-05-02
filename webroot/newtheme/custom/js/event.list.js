@@ -194,11 +194,11 @@ chennaiSmile.generateEventGridList = function() {
 	    		eventUrl = eventDetailsUrl + '/' + response[k].slug;
 
 	    	if(dispImg==''){
-	    		dispImgHmtl = '<img src="img/photos/1.jpg" alt="" style="height:auto;" class="img-fluid cs_dispimg">';
+	    		dispImgHmtl = '<a href="'+eventUrl+'"><img src="img/photos/1.jpg" alt="" style="height:auto;" class="img-fluid cs_dispimg"></a>';
 	    	}
 	    	else {
 	    		var imgSrc = "img/display/"+dispImg;
-	    		dispImgHmtl = '<img src="'+imgSrc+'" alt="" onerror="this.src=\'img/photos/1.jpg\'" style="height:auto;" class="img-fluid cs_dispimg">';
+	    		dispImgHmtl = '<a href="'+eventUrl+'"><img src="'+imgSrc+'" alt="" onerror="this.src=\'img/photos/1.jpg\'" style="height:auto;" class="img-fluid cs_dispimg"></a>';
 	    	}
 
 	    	if(response[k].register_online  == 1){
@@ -215,7 +215,7 @@ chennaiSmile.generateEventGridList = function() {
 							<div class="pull-right cs_event_time col-sm-6 col-6">'+dtimeHtml+'</div>\
 						</div>\
 						'+dispImgHmtl+'\
-			            <a href="#">\
+			            <a href="'+eventUrl+'">\
 			                <div class="mask rgba-white-slight"></div>\
 			            </a>\
 			        </div>\

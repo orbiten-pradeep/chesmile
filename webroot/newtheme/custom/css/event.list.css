@@ -166,6 +166,8 @@
 .cs_dispimg{
     padding: 7px;
     border-radius: 0.9rem !important;
+    /*min-width: 18.28rem;*/
+    min-width: 100%;
 }
 .view.overlay .back {
     position: absolute;

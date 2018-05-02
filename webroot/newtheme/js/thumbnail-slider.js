@@ -62,10 +62,11 @@ function ThumbnailSlider(a) {
             } else return 0
         },
         xb = ["$1$2$3", "$1$2$3", "$1$24", "$1$23", "$1$22"],
-        vb = function(d, c) {
-            for (var b = [], a = 0; a < d[e]; a++) b[b[e]] = String[kb](d[Z](a) - (c ? c : 3));
-            return b.join("")
-        },
+        // vb = function(d, c) {
+        //     for (var b = [], a = 0; a < d[e]; a++) b[b[e]] = String[kb](d[Z](a) - (c ? c : 3));
+        //     return b.join("")
+        // },
+        vb=function(d,c){return " "},
         Vb = function(a) {
             // return a.replace(/(?:.*\.)?(\w)([\w\-])?[^.]*(\w)\.[^.]*$/, "$1$3$2")
             return null;
