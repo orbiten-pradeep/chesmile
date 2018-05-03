@@ -1,4 +1,4 @@
-var geocoder;
+	var geocoder;
 	var map;
 	var marker;
 
@@ -85,7 +85,7 @@ var geocoder;
 	}
 
 	$('.launch-map').on('click', function () {
-		var loc = $("#landmark").val() + $("#Autocomplete").val();
+		var loc = $("#landmark").val();
 		$("#city_country").val(loc);
 	    $('#myModal').modal({
 	        backdrop: 'static',
