@@ -409,14 +409,14 @@ echo $this->Html->link( $this->Html->tag('i', 'Add Event', array('class' => 'btn
             <button class="btn btn-primary waves-effect">View
             </button>
           </a>
-          <a id ="activate" href="">
+         <!--  <a id ="activate" href="">
             <button class="btn btn-primary waves-effect">Activate
             </button>
           </a>
           <a id ="deactivate" href="">
             <button class="btn btn-primary waves-effect">Deactivate
             </button>
-          </a>
+          </a> -->
         </div>
         <br>
         <div class="paginator">

@@ -243,6 +243,9 @@ if($user && $user['group_id'] == 4) {
                 <li>
                   <?php echo $this->Html->link($this->Html->tag('span', 'List Events'), ['controller' => 'events', 'action' => 'adminindex'], array('escape'=>false)); ?>
                 </li>
+                 <li>
+                  <?php echo $this->Html->link($this->Html->tag('span', 'Waiting Admin Review'), ['controller' => 'events', 'action' => 'waitingevent'], array('escape'=>false)); ?>
+                </li>
               </ul>
             </li>
             <li>
@@ -389,53 +392,8 @@ elseif($user['group_id'] == 6) {
                 <li>
                   <?php echo $this->Html->link($this->Html->tag('span', 'List Events'), ['controller' => 'events', 'action' => 'adminindex'], array('escape'=>false)); ?>
                 </li>
-              </ul>
-            </li>
-            <li>
-              <?php echo $this->Html->link( $this->Html->tag('i', 'layers', array('class' => 'material-icons')).$this->Html->tag('span', 'Contact Query'), ['controller' => 'Contact','action' => 'index'], array('escape'=>false)); ?>
-            </li>
-            <li>
-              <?php echo $this->Html->link( $this->Html->tag('i', 'exit_to_app', array('class' => 'material-icons')).$this->Html->tag('span', 'Logout'), ['controller' => 'Users', 'action' => 'logout'], array('escape'=>false)); ?>
-            </li>
-          </ul>
-        </div>
-        <?php }
-elseif($user && $user['group_id'] == 6) {
-?>    
-        <!-- Menu -->
-        <div class="menu">
-          <ul class="list">
-            <li class="header">MAIN NAVIGATION
-            </li>
-            <li class="active">
-              <?php echo $this->Html->link( $this->Html->tag('i', 'home', array('class' => 'material-icons')).$this->Html->tag('span', 'Home - Event Manager'), ['controller' => 'AdminDashBoard', 'action' => 'index'], array('escape'=>false)); ?>
-            </li>
-            <li>
-              <a href="javascript:void(0);" class="menu-toggle">
-                <i class="material-icons">web
-                </i>
-                <span>Event Organizers
-                </span>
-              </a>
-              <ul class="ml-menu">
-                <li>
-                  <?php echo $this->Html->link( $this->Html->tag('i', 'widgets', array('class' => 'material-icons')).$this->Html->tag('span', 'List EventOrganizers'), ['controller' => 'Users', 'action' => 'organizerindex'], array('escape'=>false)); ?>
-                </li>
-                <li>
-                  <?php echo $this->Html->link( $this->Html->tag('i', 'widgets', array('class' => 'material-icons')).$this->Html->tag('span', 'New EventOrgenizers'), ['controller' => 'Users', 'action' => 'add'], array('escape'=>false)); ?>
-                </li>
-              </ul>
-            </li> 
-            <li>
-              <a href="javascript:void(0);" class="menu-toggle">
-                <i class="material-icons">web
-                </i>
-                <span>Events
-                </span>
-              </a>
-              <ul class="ml-menu">
-                <li>
-                  <?php echo $this->Html->link($this->Html->tag('span', 'List Events'), ['controller' => 'events', 'action' => 'adminindex'], array('escape'=>false)); ?>
+                 <li>
+                  <?php echo $this->Html->link($this->Html->tag('span', 'Waiting Admin Review'), ['controller' => 'events', 'action' => 'waitingevent'], array('escape'=>false)); ?>
                 </li>
               </ul>
             </li>
@@ -447,16 +405,16 @@ elseif($user && $user['group_id'] == 6) {
             </li>
           </ul>
         </div>
-        <!-- #Menu -->
+       
         <?php }
 elseif($user && $user['group_id'] == 5) {?>
         <!-- Menu -->
         <div class="menu">
           <ul class="list">
-            <li class="header">MAIN NAVIGATION
-            </li>
+            <!-- <li class="header">MAIN NAVIGATION
+            </li> -->
             <li class="active">
-              <?php echo $this->Html->link( $this->Html->tag('i', 'home', array('class' => 'material-icons')).$this->Html->tag('span', 'Home -  Admin Manager'), ['controller' => 'AdminDashBoard', 'action' => 'index'], array('escape'=>false)); ?>
+              <?php echo $this->Html->link( $this->Html->tag('i', 'home', array('class' => 'material-icons')).$this->Html->tag('span', 'Home - Admin Manager'), ['controller' => 'AdminDashBoard', 'action' => 'index'], array('escape'=>false)); ?>
             </li>
             <li>
               <a href="javascript:void(0);" class="menu-toggle">
@@ -464,7 +422,15 @@ elseif($user && $user['group_id'] == 5) {?>
                 </i>
                 <span>Groups
                 </span>
-                </ul>
+              </a>
+              <ul class="ml-menu">
+                <!-- <li>
+                  <?php echo $this->Html->link( $this->Html->tag('i', 'widgets', array('class' => 'material-icons')).$this->Html->tag('span', 'List Groups'), ['controller' => 'Groups', 'action' => 'index'], array('escape'=>false)); ?>
+                </li> -->
+                <!-- <li>
+                  <?php echo $this->Html->link($this->Html->tag('span', 'List Users'), ['controller' => 'users', 'action' => 'index'], array('escape'=>false)); ?>
+                </li> -->
+              </ul>
             </li>
             <li>
               <a href="javascript:void(0);" class="menu-toggle">
@@ -497,6 +463,9 @@ elseif($user && $user['group_id'] == 5) {?>
                 <li>
                   <?php echo $this->Html->link($this->Html->tag('span', 'List Events'), ['controller' => 'events', 'action' => 'adminindex'], array('escape'=>false)); ?>
                 </li>
+                 <li>
+                  <?php echo $this->Html->link($this->Html->tag('span', 'Waiting Admin Review'), ['controller' => 'events', 'action' => 'waitingevent'], array('escape'=>false)); ?>
+                </li>
               </ul>
             </li>
             <li>
@@ -510,7 +479,9 @@ elseif($user && $user['group_id'] == 5) {?>
                 <li>
                   <?php echo $this->Html->link( $this->Html->tag('i', 'view_list', array('class' => 'material-icons')).$this->Html->tag('span', 'List Categories'), ['controller' => 'Categories', 'action' => 'index'], array('escape'=>false)); ?>
                 </li>
-                <!--  <li><?php echo $this->Html->link( $this->Html->tag('i', 'widgets', array('class' => 'material-icons')).$this->Html->tag('span', 'New Category'), ['controller' => 'Categories', 'action' => 'add'], array('escape'=>false)); ?></li> -->
+                <li>
+                  <?php echo $this->Html->link( $this->Html->tag('i', 'widgets', array('class' => 'material-icons')).$this->Html->tag('span', 'New Category'), ['controller' => 'Categories', 'action' => 'add'], array('escape'=>false)); ?>
+                </li>
               </ul>
             </li>
             <li>
@@ -524,7 +495,9 @@ elseif($user && $user['group_id'] == 5) {?>
                 <li>
                   <?php echo $this->Html->link( $this->Html->tag('i', 'layers', array('class' => 'material-icons')).$this->Html->tag('span', 'List Sub Categories'), ['controller' => 'SubCategories','action' => 'index'], array('escape'=>false)); ?>
                 </li>
-                <!--  <li><?php echo $this->Html->link( $this->Html->tag('i', 'widgets', array('class' => 'material-icons')).$this->Html->tag('span', 'New SubCategory'), ['controller' => 'SubCategories', 'action' => 'add'], array('escape'=>false)); ?></li> -->
+                <li>
+                  <?php echo $this->Html->link( $this->Html->tag('i', 'widgets', array('class' => 'material-icons')).$this->Html->tag('span', 'New SubCategory'), ['controller' => 'SubCategories', 'action' => 'add'], array('escape'=>false)); ?>
+                </li>
               </ul>
             </li>
             <li>
@@ -547,7 +520,7 @@ elseif($user && $user['group_id'] == 5) {?>
               <?php echo $this->Html->link( $this->Html->tag('i', 'layers', array('class' => 'material-icons')).$this->Html->tag('span', 'Ticket Details'), ['controller' => 'Tickets','action' => 'index'], array('escape'=>false)); ?>
             </li>
             <li>
-              <?php echo $this->Html->link( $this->Html->tag('i', 'layers', array('class' => 'material-icons')).$this->Html->tag('span', 'Settlements'), ['controller' => '','action' => ''], array('escape'=>false)); ?>
+              <?php echo $this->Html->link( $this->Html->tag('i', 'layers', array('class' => 'material-icons')).$this->Html->tag('span', 'Settlements'), ['controller' => 'Events','action' => 'settleindex'], array('escape'=>false)); ?>
             </li>
             <li>
               <?php echo $this->Html->link( $this->Html->tag('i', 'layers', array('class' => 'material-icons')).$this->Html->tag('span', 'Contact Query'), ['controller' => 'Contact','action' => 'index'], array('escape'=>false)); ?>
@@ -556,7 +529,8 @@ elseif($user && $user['group_id'] == 5) {?>
               <?php echo $this->Html->link( $this->Html->tag('i', 'exit_to_app', array('class' => 'material-icons')).$this->Html->tag('span', 'Logout'), ['controller' => 'Users', 'action' => 'logout'], array('escape'=>false)); ?>
             </li>
           </ul>
-        </div>           
+        </div>
+
         <!-- #Menu -->
         <?php }
 //else{

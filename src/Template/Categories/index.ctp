@@ -61,6 +61,9 @@
                 <?= $this->Paginator->sort('color') ?>
               </th>
               <th scope="col">
+                <?= $this->Paginator->sort('Litecolor') ?>
+              </th>
+              <th scope="col">
                 <?= $this->Paginator->sort('card') ?>
               </th>
               <th scope="col">
@@ -72,7 +75,7 @@
               <th scope="col">
                 <?= $this->Paginator->sort('modified') ?>
               </th>
-              <!--  <th scope="col" class="actions"><?= __('Actions') ?></th> -->
+            <th scope="col" class="actions"><?= __('Actions') ?></th>
             </tr>
           </thead>
           <tbody>
@@ -80,8 +83,9 @@
 foreach ($categories as $category): $n++;?>
             <tr>
               <td> 
+
                 <span class="input-group-addon">
-                  <input type="radio" name="category_id" id="c<?= h($category->id) ?>" value ="<?=($category->id)?>" class="with-gap radio-select-list" 
+                 <input type="radio" name="category_id" id="c<?= h($category->id) ?>" value ="<?=($category->id)?>" class="with-gap radio-select-list" 
                          edit-href-url="<?=$this->Url->build(array('controller' => 'Categories', 'action' => 'edit', $category->id)); ?>"
                          view-href-url="<?=$this->Url->build(array('controller' => 'Categories', 'action' => 'view', $category->id)); ?>"
                          add-href-url="<?=$this->Url->build(array('controller' => 'Categories', 'action' => 'add', $category->id)); ?>"
@@ -89,9 +93,10 @@ foreach ($categories as $category): $n++;?>
                          deactivate-href-url="<?=$this->Url->build(array('controller' => 'Categories', 'action' => 'deactivate', $category->id)); ?>">
                   <label for="c<?= h($category->id) ?>">
                   </label>
-                </span>                      
+               </span>                      
               </td>
-              <td>
+            <!--   <td><?= $this->Number->format($category->id) ?></td> -->
+            <td>
                 <?= $this->Number->format($n) ?>
               </td>
               <td>
@@ -100,36 +105,46 @@ foreach ($categories as $category): $n++;?>
               <td style="background-color: <?php echo "#".$category->color; ?>">
                 <?= h($category->color) ?>
               </td>
-               <td style="background-color: <?php echo "#".$category->categorylitecolor; ?>">
+              <td style="background-color: <?php echo "#".$category->categorylitecolor; ?>">
                 <?= h($category->categorylitecolor) ?>
               </td>
               <td>
                 <?php echo $this->Html->image('card/'.$category->card, array('width' => '20px', 'height' => '20px','alt'=>'Card')); ?>
               </td>
-              <td>
+              <!-- <td>
                 <?= h($category->active) ?>
-              </td>
+              </td> -->
+               <td>
+                <?php 
+if($category->active == 1)
+{ echo "Enabled"; } 
+else if($category->active == 0)
+{ echo "Waiting for Admin Review.."; } 
+elseif ($category->active == 2) {
+echo "Deactivated";
+}
+//echo $event;
+?>  </td>
               <td>
                 <?= h($category->created) ?>
               </td>
-              <td>
+               <td>
                 <?= h($category->modified) ?>
               </td>
-              <!--   <td class="actions">
-<?php
-echo $this->Html->link( $this->Html->tag('i', 'remove_red_eye', array('class' => 'material-icons', 'title'=>'View Category')), ['action' => 'view', $category->id], array('escape'=>false)); ?>
-<?= $this->Html->link( $this->Html->tag('i', 'edit', array('class' => 'material-icons', 'title'=>'Edit')), ['action' => 'edit', $category->id], array('escape'=>false)); ?>
-<?= $this->Form->postLink($this->Html->tag('i', 'delete', array('class' => 'material-icons', 'title'=>'Delete')), ['action' => 'delete', $category->id], ['escape'=>false, 'confirm' => __('Are you sure you want to delete # {0}?', $category->id)]) ?>
-</td> -->
+               <td><?= $this->Form->postLink(__('Activate'), ['action' => 'activate', $category->id], ['confirm' => __('Are you sure you want to Activate # {0}?', $category->id)]) ?>
+                     <?= $this->Form->postLink(__('Deactivate'), ['action' => 'deactivate', $category->id], ['confirm' => __('Are you sure you want to Deactivate # {0}?', $category->id)]) ?></td>
+             
             </tr>
             <?php endforeach; ?>
           </tbody>
         </table>
-        <div class="pull-right"> 
-          <a id="add" href="">
+         <div class="pull-right"> 
+          <!-- <a id="add" href="">
             <button class="btn btn-primary waves-effect">Add
             </button>
-          </a>
+          </a> -->
+           <?php
+echo $this->Html->link( $this->Html->tag('i', 'Add New Category', array('class' => 'btn btn-primary waves-effect', 'title'=>'Add Banner')), ['action' => 'add'], array('escape'=>false)); ?> 
           <a id ="edit" href="">
             <button class="btn btn-primary waves-effect">Edit
             </button>
@@ -138,14 +153,16 @@ echo $this->Html->link( $this->Html->tag('i', 'remove_red_eye', array('class' =>
             <button class="btn btn-primary waves-effect">View
             </button>
           </a>
-          <a id ="activate" href="">
-            <button class="btn btn-primary waves-effect">Activate
+       
+           <!--  <a id ="activate" href="">
+            <button class="btn btn-primary waves-effect" >Activate
             </button>
           </a>
-          <a id ="deactivate" href="">
-            <button class="btn btn-primary waves-effect">Deactivate
+          <a id ="deactivate" href="" >
+            <button class="btn btn-primary waves-effect" >Deactivate
             </button>
-          </a>
+          </a> -->
+
           <!-- <button type="button" class="btn btn-primary waves-effect">Add</button>
 <button type="button" class="btn btn-primary waves-effect">View</button>
 <button type="button" class="btn btn-primary waves-effect">Edit</button>

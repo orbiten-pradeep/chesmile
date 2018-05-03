@@ -144,8 +144,19 @@ foreach ($banners as $banner): $n++;?>
                <!--  <td><?= h($banner->image) ?></td> -->
                 <td><?= h($banner->url) ?></td>
                 <td><?= h($banner->caption) ?></td>
-                <td><?= $this->Number->format($banner->active) ?></td>
-                <td><?= h($banner->created) ?></td>
+                 <td>
+                <?php 
+if($banner->active == 1)
+{ echo "Enabled"; } 
+else if($banner->active == 0)
+{ echo "Waiting for Admin Review.."; } 
+elseif ($banner->active == 2) {
+echo "Deactivated";
+}
+//echo $event;
+?>  </td>
+                <!-- <td><?= $this->Number->format($banner->active) ?></td>
+                 --><td><?= h($banner->created) ?></td>
  <td><?= $this->Form->postLink(__('Activate'), ['action' => 'activate', $banner->id], ['confirm' => __('Are you sure you want to Activate # {0}?', $banner->id)]) ?>
                      <?= $this->Form->postLink(__('Deactivate'), ['action' => 'deactivate', $banner->id], ['confirm' => __('Are you sure you want to Deactivate # {0}?', $banner->id)]) ?></td>
             </tr>

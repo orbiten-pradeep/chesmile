@@ -112,9 +112,20 @@ foreach ($subCategories as $subCategory):$n++; ?>
               <td>
                 <?= h($subCategory->name) ?>
               </td>
-              <td>
+               <td>
+                <?php 
+if($subCategory->active == 1)
+{ echo "Enabled"; } 
+else if($subCategory->active == 0)
+{ echo "Waiting for Admin Review.."; } 
+elseif ($subCategory->active == 2) {
+echo "Deactivated";
+}
+//echo $event;
+?>  </td>
+              <!-- <td>
                 <?= h($subCategory->active) ?>
-              </td>
+              </td> -->
               <td>
                 <?= h($subCategory->created) ?>
               </td>

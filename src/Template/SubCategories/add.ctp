@@ -46,10 +46,14 @@
                                         <?php echo $this->Form->input('name',array('div' => false,'class' => 'form-control','label' => false,'placeholder' => 'Enter Subcategory Name'));?>
                                     </div>
                                 </div>
-                               
                                <div class="form-group">
+                                    <div class="form-line">
+                                         <?php  echo $this->Form->input('active');?> 
+                                    </div>
+                                </div>
+                               <!-- <div class="form-group">
                                     <?php  echo $this->Form->input('Active',['type' => 'checkbox','class' => 'form-control filled-in','id' => 'ig_checkbox']);?>
-                               </div>
+                               </div> -->
                                 <!-- <button type="button" class="btn btn-primary m-t-15 waves-effect">LOGIN</button> -->
                                 <?= $this->Form->button(__('Submit'),array('class' => 'btn btn-primary m-t-15 waves-effect')) ?>
                             <?= $this->Form->end() ?>

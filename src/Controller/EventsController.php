@@ -135,8 +135,58 @@ class EventsController extends AppController
         $this->set(compact('likes'));
         $this->set('_serialize', ['events', 'likes']);
     }
+      public function settleindex()
+    {
+        $this->viewBuilder()->layout('admin');
+        //$this->viewBuilder()->layout('event_home');
+        $this->paginate = [
+            'contain' => ['Users', 'Categories',]
+        ];
+         $events = $this->paginate($this->Events->find('all',['limit' => 200, 'conditions' => array('register_online'=> 1 )]));
+        // $events = $this->Events->find('all',array('conditions'=>array('register_online'=> 1)));
+        // $events = $this->paginate($this->Events);
+        $this->loadModel('Categories');
+        $categories_new = $this->Categories->find()->select(['Categories.name', 'Categories.id'])
+            ->where(['active' => 1]);
 
-public function organizerevents()
+        $this->loadModel('SubCategories');
+        $subCategories_new = $this->SubCategories->find('all', ['fields' => 'name',
+                'conditions' => ['active' => 1]
+            ]);
+        $this->loadModel('Address');
+        $eventss = array();
+        $i = 0;
+        foreach ($events as $event) {
+             $address= $this->Address->find('all', array('conditions' => array('events_id'=> $event['id'])));
+             $event['Address'] = $address->first();
+             $eventss[$i] =$event;
+             $i++;
+        }
+
+        $users_id = $this->Auth->user('id');
+        $page = (isset($this->request->query['page'])) ? $this->request->query['page'] : 0;
+        $this->set(compact('page'));
+        $this->set(compact('eventss'));
+        $this->set(compact('address'));
+        $this->set('categories', $categories_new);
+        $this->set('usersId', $users_id);
+        $this->set(compact('subCategories_new'));
+    }
+   public function addticketing($id = null)
+    {
+       
+        $this->request->allowMethod(['post', 'addticketing']);
+        $addticket = $this->Events->get($id);
+        if ($this->Events->updateAll(['register_online' => '1'], ['id' => $id])) {
+            $this->Flash->success(__('The Tickets has been Activated.'));
+        } else {
+            $this->Flash->error(__('The Tickets could not be Activated. Please, try again.'));
+        }
+
+        return $this->redirect(['action' => 'index']);
+
+    }
+  public function organizermyevents()
     {
         $this->paginate = [
             'contain' => ['Users', 'Categories']
@@ -177,6 +227,97 @@ public function organizerevents()
                 'conditions' => ['active' => 1]
             ]);
 
+        $this->set('categories', $categories_new);
+        $this->set(compact('subCategories_new'));
+        $this->set(compact('events'));
+        $this->set(compact('likes'));
+        $this->set('_serialize', ['events', 'likes']);
+    }
+
+ public function mysettle()
+    {
+        $this->viewBuilder()->layout('admin');
+       if(!empty($this->Auth->user('id')))
+        {
+            $users_id = $this->Auth->user('id');
+            $fullname = $this->Auth->user('fullname');
+            $email = $this->Auth->user('email');
+            $this->paginate['conditions'] = array("Events.user_id" => $users_id);
+        }
+
+        $filter = false;
+          $events = $this->paginate($this->Events->find('all',['limit' => 200, 'conditions' => array('register_online'=> 1 )]));
+        $this->loadModel('Categories');
+        $categories_new = $this->Categories->find()->select(['Categories.name', 'Categories.id'])
+            ->where(['active' => 1]);
+
+        $this->loadModel('SubCategories');
+        $subCategories_new = $this->SubCategories->find('all', ['fields' => 'name',
+                'conditions' => ['active' => 1]
+            ]);
+        $this->loadModel('Address');
+        $eventss = array();
+        $i = 0;
+        foreach ($events as $event) {
+             $address= $this->Address->find('all', array('conditions' => array('events_id'=> $event['id'])));
+             $event['Address'] = $address->first();
+             $eventss[$i] =$event;
+             $i++;
+        }
+
+        $users_id = $this->Auth->user('id');
+        $page = (isset($this->request->query['page'])) ? $this->request->query['page'] : 0;
+        $this->set(compact('page'));
+        $this->set(compact('eventss'));
+        $this->set(compact('address'));
+        $this->set('categories', $categories_new);
+        $this->set('usersId', $users_id);
+        $this->set(compact('subCategories_new'));
+    }
+   
+public function organizerevents()
+    {
+        $this->paginate = [
+            'contain' => ['Users', 'Categories']
+        ];
+        if(!empty($this->Auth->user('id')))
+        {
+            $users_id = $this->Auth->user('id');
+            $fullname = $this->Auth->user('fullname');
+            $email = $this->Auth->user('email');
+            $this->paginate['conditions'] = array("Events.user_id" => $users_id);
+        }
+
+        $filter = false;
+        $this->paginate['order'] = array('Events.created' => 'desc');
+        //debug($this->paginate);
+        //exit(0);
+        //$this->paginate['conditions'] = array('Events.active' => '1');
+        $events = $this->paginate($this->Events);
+        //$events->orderAsc();
+
+        $this->viewBuilder()->layout('admin');
+        $this->loadModel('Likes');
+        $likes = '';
+        foreach ($events as $key => $value) {
+            $query_count = $this->Likes->find('all', [
+                'conditions' => ['events_id' => $value['id'], 'likes' => 1]
+            ]);
+            $number_cnt = $query_count->count();
+            $likes[$key]['events'] = $value['id'];
+            $likes[$key]['likes'] = $number_cnt;
+        }
+        $this->loadModel('Categories');
+        $categories_new = $this->Categories->find()->select(['Categories.name'])
+            ->where(['active' => 1]);
+
+        $this->loadModel('SubCategories');
+        $subCategories_new = $this->SubCategories->find('all', ['fields' => 'name',
+                'conditions' => ['active' => 1]
+            ]);
+ $page = (isset($this->request->query['page'])) ? $this->request->query['page'] : 0;
+        $this->set(compact('page'));
+       
         $this->set('categories', $categories_new);
         $this->set(compact('subCategories_new'));
         $this->set(compact('events'));
@@ -1298,6 +1439,42 @@ public function organizerevents()
         $this->set('usersId', $users_id);
         $this->set(compact('subCategories_new'));
     }
+     public function waitingevent()
+    {
+        $this->viewBuilder()->layout('admin');
+        //$this->viewBuilder()->layout('event_home');
+        $this->paginate = [
+            'contain' => ['Users', 'Categories',]
+        ];
+         $events = $this->paginate($this->Events->find('all',['limit' => 200, 'conditions' => array('Events.active' => 0 )]));
+       // $events = $this->paginate($this->Events);
+        $this->loadModel('Categories');
+        $categories_new = $this->Categories->find()->select(['Categories.name', 'Categories.id'])
+            ->where(['active' => 1]);
+
+        $this->loadModel('SubCategories');
+        $subCategories_new = $this->SubCategories->find('all', ['fields' => 'name',
+                'conditions' => ['active' => 1]
+            ]);
+        $this->loadModel('Address');
+        $eventss = array();
+        $i = 0;
+        foreach ($events as $event) {
+             $address= $this->Address->find('all', array('conditions' => array('events_id'=> $event['id'])));
+             $event['Address'] = $address->first();
+             $eventss[$i] =$event;
+             $i++;
+        }
+
+        $users_id = $this->Auth->user('id');
+        $page = (isset($this->request->query['page'])) ? $this->request->query['page'] : 0;
+        $this->set(compact('page'));
+        $this->set(compact('eventss'));
+        $this->set(compact('address'));
+        $this->set('categories', $categories_new);
+        $this->set('usersId', $users_id);
+        $this->set(compact('subCategories_new'));
+    }
 	/**
      * View method
      *
@@ -1377,6 +1554,7 @@ public function organizerevents()
         $event = $this->Events->get($id, [
             'contain' => ['Eventsubcategories']
         ]);
+         $this->viewBuilder()->layout('admin');
         //$this->viewBuilder()->layout('event_home');
         $this->loadModel('Address');
         $address = $this->Address->find('all', ['conditions' => ['events_id' => $id]]);

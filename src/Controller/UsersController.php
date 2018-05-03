@@ -351,24 +351,24 @@ class UsersController extends AppController
 	
 	
 	public function adminlogin() {
-			
-		$this->viewBuilder()->layout('admin_login');
-	    if ($this->request->is('post')) {
-	        $user = $this->Auth->identify();
-			if ($user && $user['group_id'] != 1) {
-	            $this->Auth->setUser($user);
-	            if($this->request->session()->read('Activate') == 1)
-	            {
-	            	return $this->redirect(array('controller' => 'events', 'action' => 'activate',$this->request->session()->read('eventid')));
-	            }
-	            else
-	            {
-	            	return $this->redirect(array('controller' => 'AdminDashBoard', 'action' => 'index'));
-	            }
-	        }
-	        $this->Flash->error(__('Your username or password was incorrect.'));
-	    }
-	}
+            
+        $this->viewBuilder()->layout('admin_login');
+        if ($this->request->is('post')) {
+            $user = $this->Auth->identify();
+            if ($user && $user['group_id'] != 1) {
+                $this->Auth->setUser($user);
+                if($this->request->session()->read('Activate') == 1)
+                {
+                    return $this->redirect(array('controller' => 'events', 'action' => 'activate',$this->request->session()->read('eventid')));
+                }
+                else
+                {
+                    return $this->redirect(array('controller' => 'AdminDashBoard', 'action' => 'index'));
+                }
+            }
+            $this->Flash->error(__('Your username or password was incorrect.'));
+        }
+    }
     
 	public function logout() {
 		$this->Auth->logout();
