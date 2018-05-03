@@ -7,7 +7,7 @@ $( function() {
 } );
 
 $(document).ready(function() {
-    $('#time').timepicker({ timeFormat: 'H:mm' });
+    $('#time').timepicker({ timeFormat: 'h:mm p' });
     var e = document.getElementById("categories-id");
     if(e){
       var strUser = e.options[e.selectedIndex].value;
