@@ -1,4 +1,4 @@
-<<<<<<< .mine
+
 <?php
 namespace App\Controller;
 
@@ -634,4 +634,4 @@ class CategoriesController extends AppController
         return $this->redirect(['action' => 'index']);
     }
 }
->>>>>>> .r439
+

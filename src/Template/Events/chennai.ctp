@@ -118,6 +118,26 @@ else {
 	</div>
 </div>
 
+<nav class="large-3 medium-4 columns" id="actions-sidebar">
+<ul class="side-nav">
+
+<?php 
+	if(isset($u_id))
+	{
+if($u_id == $event->user_id){ ?>
+		<li><?= $this->Form->postLink(__('Delete Event'), ['action' => 'delete', $event->id], ['confirm' => __('Are you sure you want to delete # {0}?', $event->id)]) ?> </li>
+		<?php } ?>
+		<?php if($u_id == $event->user_id){ ?>
+
+		<li><?= $this->Html->link(__('Edit Event'), ['action' => 'edit', $event->id]) ?> </li> 
+		<!--<li><?= $this->Form->postLink(__('Edit Event'), ['action' => 'edit', $event->id], ['confirm' => __('Are you sure you want to edit ?', $event->id)]) ?> </li> -->
+		
+		<?php } 
+}
+		?>
+		</ul>
+</nav>
+
 <script type='text/javascript'>
 	function init_map(){
 		var myOptions = {

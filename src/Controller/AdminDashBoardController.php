@@ -1,4 +1,4 @@
-<<<<<<< .mine
+
 <?php
 namespace App\Controller;
 
@@ -475,4 +475,3 @@ class AdminDashBoardController extends AppController
         return $this->redirect(['action' => 'index']);
     }
 }
->>>>>>> .r439
