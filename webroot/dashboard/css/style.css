@@ -80,6 +80,11 @@
 .ls-closed .navbar-brand {
   margin-left: 30px; }
 
+.cs_admin_logo{
+  margin: auto;
+  display: block;
+}
+
 .overlay-open .bars:before {
   -moz-transform: scale(0);
   -ms-transform: scale(0);
@@ -3064,7 +3069,15 @@ section.content {
   background-color: #fff;
   position: relative;
   overflow: hidden;
-  margin-bottom: 30px; }
+  margin-bottom: 30px;
+  cursor: pointer;
+}
+.dashboard-stat-list li a {
+    color: #ffff;
+}
+.cs_admin_nav{
+  margin-top: 15px;
+}
   .info-box .icon {
     display: inline-block;
     text-align: center;
@@ -6744,7 +6757,14 @@ fieldset[disabled] .form-control {
   margin-left: 5px; }
 
 .navbar-nav .dropdown-menu {
-  margin-top: -40px !important; }
+  /*margin-top: -40px !important; */
+  margin-top: 5px !important;
+}
+.user-helper-dropdown{
+  cursor: pointer;
+  box-shadow: none;
+  bottom: -20px;
+}
 
 .label-count {
   position: absolute;
@@ -7463,7 +7483,9 @@ fieldset[disabled] .form-control {
   background-color: rgba(0, 0, 0, 0.5);
   display: none;
   z-index: 10; }
-
+a:hover{
+  text-decoration: none !important;
+}
 .overlay-open .sidebar {
   margin-left: 0;
   z-index: 99999999; }
@@ -7480,7 +7502,7 @@ fieldset[disabled] .form-control {
   display: inline-block;
   height: calc(100vh - 70px);
   position: fixed;
-  top: 70px;
+  /*top: 70px;*/
   left: 0;
   -webkit-box-shadow: 2px 2px 5px rgba(0, 0, 0, 0.1);
   -moz-box-shadow: 2px 2px 5px rgba(0, 0, 0, 0.1);
@@ -7720,7 +7742,7 @@ fieldset[disabled] .form-control {
 
 /* Login Page ================================== */
 .login-page {
-  background-color: #00BCD4;
+  /*background-color: #00BCD4;*/
   padding-left: 0;
   max-width: 360px;
   margin: 5% auto;
