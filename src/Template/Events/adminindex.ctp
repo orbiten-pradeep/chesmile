@@ -13,28 +13,6 @@
           <small>All Events Listing
           </small>
         </h2>
-        <ul class="header-dropdown m-r--5">
-          <li class="dropdown">
-            <a href="javascript:void(0);" class="dropdown-toggle" data-toggle="dropdown" role="button" aria-haspopup="true" aria-expanded="false">
-              <i class="material-icons">more_vert
-              </i>
-            </a>
-            <ul class="dropdown-menu pull-right">
-              <li>
-                <a href="javascript:void(0);">Action
-                </a>
-              </li>
-              <li>
-                <a href="javascript:void(0);">Another action
-                </a>
-              </li>
-              <li>
-                <a href="javascript:void(0);">Something else here
-                </a>
-              </li>
-            </ul>
-          </li>
-        </ul>
       </div>
       <div class="body table-responsive">
         <table class="table table-bordered table-striped table-hover ">
@@ -147,8 +125,7 @@ echo $this->Html->link( $this->Html->tag('i', 'add_circle', array('class' => 'ma
 }
 ?>
 <?= $this->Html->link( $this->Html->tag('i', 'mode_edit', array('class' => 'material-icons', 'title'=>'Admin Edit')), ['action' => 'adminedit', $event->id], array('escape'=>false)); ?>
-<?= $this->Html->link( $this->Html->tag('i', 'edit', array('class' => 'material-icons', 'title'=>'Edit')), ['action' => 'edit', $event->id], array('escape'=>false)); ?>
-<!-- <?= $this->Form->postLink($this->Html->tag('i', 'delete', array('class' => 'material-icons', 'title'=>'Delete Event')), ['action' => 'delete', $event->id], ['escape'=>false, 'confirm' => __('Are you sure you want to delete # {0}?', $event->id)]) ?> 
+<?= $this->Html->link( $this->Html->tag('i', 'edit', array('class' => 'material-icons', 'title'=>'Edit')), ['action' => 'edit', $event->id], array('escape'=>false)); ?> <?= $this->Form->postLink($this->Html->tag('i', 'delete', array('class' => 'material-icons', 'title'=>'Delete Event')), ['action' => 'delete', $event->id], ['escape'=>false, 'confirm' => __('Are you sure you want to delete # {0}?', $event->id)]) ?> 
 </td> -->
             </tr>
             <?php endforeach; ?>
@@ -173,14 +150,14 @@ echo $this->Html->link( $this->Html->tag('i', 'Add Event', array('class' => 'btn
             <button class="btn btn-primary waves-effect">View
             </button>
           </a>
-          <a id ="activate" href="">
+<!--           <a id ="activate" href="">
             <button class="btn btn-primary waves-effect">Activate
             </button>
           </a>
           <a id ="deactivate" href="">
             <button class="btn btn-primary waves-effect">Deactivate
             </button>
-          </a>
+          </a> -->
           <!--   <button type="button" class="btn btn-primary waves-effect">Add</button>
 <button type="button" class="btn btn-primary waves-effect">View</button>
 <button type="button" class="btn btn-primary waves-effect">Edit</button>

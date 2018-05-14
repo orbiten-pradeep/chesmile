@@ -69,7 +69,7 @@
         </tr>
     </table>
     </div>
-            <div class="body table-responsive">
+          <!--   <div class="body table-responsive">
              <h4><?= __('Related Posts') ?></h4>
         <?php if (!empty($user->posts)): ?>
 
@@ -111,7 +111,7 @@
                     </ul>
                     <p><?= $this->Paginator->counter() ?></p>
                 </div>
-            </div>
+            </div> -->
         </div>
     </div>
 </div>

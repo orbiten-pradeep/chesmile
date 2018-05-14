@@ -58,7 +58,7 @@
     <div class="navbar-header">
       <a href="javascript:void(0);" class="navbar-toggle collapsed" data-toggle="collapse" data-target="#navbar-collapse" aria-expanded="false"></a>
       <a href="javascript:void(0);" class="bars"></a>
-      <?php echo $this->Html->image('chennaismile-logo.png',array('alt' => 'Logo Chennai Smile','width' => '60%','class' => 'img-responsive mobile-logo-img','url' => array('controller' => 'events', 'action' => 'index') )); ?>
+      <?php echo $this->Html->image('chennaismile-logo.png',array('alt' => 'Logo Chennai Smile','class' => 'img-responsive mobile-logo-img','url' => array('controller' => 'AdminDashBoard', 'action' => 'index') )); ?>
       <!-- User Info -->
     </div>
     <!-- Tasks -->
@@ -80,6 +80,8 @@ echo $user['fullname'];
               <?php echo $user['email'];
 }
 ?>
+</div>
+</li>
               <div class="btn-group user-helper-dropdown">
                 <i class="material-icons" data-toggle="dropdown" aria-haspopup="true" aria-expanded="true">keyboard_arrow_down
               </i>
@@ -112,8 +114,9 @@ echo $user['fullname'];
                   <li role="seperator" class="divider"></li>
                   <li>
                     <?php echo $this->Html->link( $this->Html->tag('i', 'input', array('class' => 'material-icons')).$this->Html->tag('span', 'Logout'), ['controller' => 'Users', 'action' => 'logout'], array('escape'=>false)); ?>
-                  </li></ul></div>
                   </li>
+                </ul>
+              </div>
                   </ul></div>
                   </div></nav>
               

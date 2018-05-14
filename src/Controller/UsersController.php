@@ -565,7 +565,7 @@ class UsersController extends AppController
     public function adminadd()
     {
     	$activation_key = Text::uuid();
-		$this->viewBuilder()->layout('signin');
+		$this->viewBuilder()->layout('admin_login');
         $user = $this->Users->newEntity();
         if ($this->request->is('post')) {
         	//$this->request->data['activation_key'] = $activation_key = String::uuid();

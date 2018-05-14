@@ -138,6 +138,7 @@ if($u_id == $event->user_id){ ?>
 		</ul>
 </nav>
 
+
 <script type='text/javascript'>
 	function init_map(){
 		var myOptions = {
@@ -152,3 +153,9 @@ if($u_id == $event->user_id){ ?>
 			}
 		google.maps.event.addDomListener(window, 'load', init_map);
 </script>
+<?php if($groups == 6 || $groups == 5 || $groups == 4 ){?>
+<?= $this->Form->create('',array('url' => ['controller' => 'Events', 'action' => 'activate',$event->id]));?>
+<?= $this->Form->radio('active', ['DeActivate','Activate']);?>
+<?= $this->Form->button(__('Submit')); ?>
+<?= $this->Form->end() ?>
+<?php } ?>

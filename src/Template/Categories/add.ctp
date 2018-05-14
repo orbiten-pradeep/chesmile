@@ -43,13 +43,13 @@
                                 <label for="">Category color</label>
                                 <div class="form-group">
                                     <div class="form-line">
-                                        <?php echo $this->Form->input('color',array('div' => false,'class' => 'form-control','label' => false,'placeholder' => 'Category Color'));?>
+                                        <?php echo $this->Form->input('color',array('div' => false,'class' => 'form-control','label' => false,'placeholder' => 'Enter Category Name'));?>
                                     </div>
                                 </div>
                             <label for="">Category Litecolor</label>
                                                             <div class="form-group">
                                                                 <div class="form-line">
-                                                                    <?php echo $this->Form->input('categorylitecolor',array('div' => false,'class' => 'form-control','label' => false,'placeholder' => 'Category LiteColor'));?>
+                                                                    <?php echo $this->Form->input('categorylitecolor',array('div' => false,'class' => 'form-control','label' => false));?>
                                                                 </div>
                                                             </div>
                                 
@@ -59,9 +59,9 @@
                                         <input type="password" id="password" class="form-control" placeholder="Enter your password">
                                     </div>
                                 </div> -->
-                             <!--    <div class="form-group">
-                                    <?php //echo $this->Form->input('color', array('class' => 'jscolor form-control'));?> 
-                                   <div class="input-group colorpicker">
+                                <div class="form-group">
+                                    <!-- <?php echo $this->Form->input('color', array('class' => 'jscolor form-control'));?> -->
+                                    <div class="input-group colorpicker">
                                         <div class="form-line">
                                             <input type="text" class="form-control" value="#00AABB" name="color" id="color">
                                         </div>
@@ -69,19 +69,17 @@
                                             <i></i>
                                         </span>
                                     </div>
-                                </div> -->
+                                </div>
 
                                 <div class="form-group">
                                    <?php  echo $this->Form->input('Card Image',['type' => 'file', 'accept' => 'image/*','class' => 'form-control']);?>
                                 </div>
+                               
                                <div class="form-group">
-                                    <div class="form-line">
-                                         <?php  echo $this->Form->input('active');?> 
-                                    </div>
-                                </div>
-                               <!-- <div class="form-group">
-                                    <?php  echo $this->Form->input('active',['type' => 'checkbox','class' => 'form-control filled-in','id' => 'ig_checkbox']);?>
-                               </div> -->
+                                <label for="basic_checkbox_2"></label>
+                                    <?php  echo $this->Form->input('Active',['div' => false,'type' => 'checkbox','class' => 'form-control filled-in','id' => 'basic_checkbox_2','label' => false]);?>
+
+                               </div>
                                 <!-- <button type="button" class="btn btn-primary m-t-15 waves-effect">LOGIN</button> -->
                                 <?= $this->Form->button(__('Submit'),array('class' => 'btn btn-primary m-t-15 waves-effect')) ?>
                             <?= $this->Form->end() ?>

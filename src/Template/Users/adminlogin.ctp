@@ -1,7 +1,6 @@
 <div class="login-box">
     <div class="logo">
-        <a href="javascript:void(0);">Chennaismile <b>Admin</b></a>
-        <small>experience the happening</small>
+        <?php echo $this->Html->image('chennaismile-logo.png',array('alt' => 'Logo Chennai Smile','class' => 'cs_admin_logo')); ?>
     </div>
     <div class="card">
         <div class="body">

@@ -86,6 +86,7 @@ class SubCategoriesController extends AppController
      */
     public function edit($id = null)
     {
+        $this->viewBuilder()->layout('admin');
         $subCategory = $this->SubCategories->get($id, [
             'contain' => []
         ]);

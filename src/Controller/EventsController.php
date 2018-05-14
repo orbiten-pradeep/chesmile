@@ -453,6 +453,9 @@ public function organizerevents()
      */
     public function chennai($id = null, $slug = null)
     {
+        $groups = $this->Auth->user('group_id');
+        $this->set('groups', $groups);
+        //$grp =$this->Auth->user('group_id');
 		//$this->viewBuilder()->layout('event_home');
         $this->viewBuilder()->layout('event_new_home');
         if(!ctype_digit($id))
@@ -511,6 +514,12 @@ public function organizerevents()
         $this->set('categories', $categories_new);
         $this->set(compact('subCategories_new'));
         $this->set(compact('address', 'mediapartners', 'sponsors', 'number', 'likes', 'u_id', 'galaries'));
+        
+       //  if(!empty($this->Auth->user('id')))
+       // {
+       //     $groups = $this->Auth->user('group_id');
+       //     $this->set('groups', $groups);
+       // }
     }
 
 
@@ -1038,7 +1047,7 @@ public function organizerevents()
 	                $this->Flash->error(__('The event could not be updated. Please, try again.'));
 	            }
 	        }
-	        $this->viewBuilder()->layout('event_home');
+	        $this->viewBuilder()->layout('event_new_home');
 	        $u_id = "";
 	        if(!empty($this->Auth->user('id')))
 			{
@@ -1411,6 +1420,8 @@ public function organizerevents()
 		$this->paginate = [
             'contain' => ['Users', 'Categories',]
         ];
+        
+        $this->paginate['order'] = array('Events.created' => 'desc');
         $events = $this->paginate($this->Events);
         $this->loadModel('Categories');
         $categories_new = $this->Categories->find()->select(['Categories.name', 'Categories.id'])
