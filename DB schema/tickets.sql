@@ -1,0 +1,21 @@
+CREATE TABLE IF NOT EXISTS `tickets` (
+  `id` int(11) NOT NULL AUTO_INCREMENT,
+  `events_id` int(11) NOT NULL,
+  `firstname` varchar(255) DEFAULT NULL,
+  `lastname` varchar(255) DEFAULT NULL,
+  `name` varchar(255) DEFAULT NULL,
+  `email` varchar(255) DEFAULT NULL,
+  `service_provider` varchar(255) DEFAULT NULL,
+  `productinfo` varchar(255) DEFAULT NULL,
+  `phone` varchar(255) DEFAULT NULL,
+  `tickets` varchar(255) DEFAULT NULL,
+  `txnid` varchar(255) DEFAULT NULL,
+  `hash` varchar(255) DEFAULT NULL,
+  `amount` varchar(255) DEFAULT NULL,
+  `created` timestamp NULL DEFAULT CURRENT_TIMESTAMP,
+  `status` varchar(255) DEFAULT NULL,
+  `unmappedstatus` varchar(255) DEFAULT NULL,
+  `field9` varchar(255) DEFAULT NULL,
+  `bank_ref_num` varchar(255) DEFAULT NULL,
+  PRIMARY KEY (`id`)
+) ENGINE=InnoDB AUTO_INCREMENT=26 DEFAULT CHARSET=utf8;

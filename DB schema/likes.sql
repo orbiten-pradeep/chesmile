@@ -1,0 +1,8 @@
+CREATE TABLE IF NOT EXISTS `likes` (
+  `ID` int(11) NOT NULL AUTO_INCREMENT,
+  `events_id` int(11) DEFAULT NULL,
+  `user_id` int(11) NOT NULL,
+  `likes` int(11) NOT NULL,
+  `created` timestamp NOT NULL DEFAULT CURRENT_TIMESTAMP,
+  PRIMARY KEY (`ID`)
+) ENGINE=InnoDB AUTO_INCREMENT=520 DEFAULT CHARSET=utf8;
