@@ -488,7 +488,7 @@ $(document).ready(function() {
 	$(window).scroll(function() {
 	    if ($(window).scrollTop() == $(document).height() - $(window).height()) {
 	    	if(!self.eventScrollDisabled) {
-	    		self.filterParams.page = ++page;
+	    		self.filterParams.page++;
 	      		self.getEventList();
 	    	}	      
 	    }
