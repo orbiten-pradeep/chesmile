@@ -205,7 +205,7 @@
     <!-- /Start your project here-->
 
     <!--Footer-->
-    <footer class="page-footer font-small pt-4 mt-4 cs-footer">
+    <footer class="page-footer font-small pt-4 cs-footer">
       <div class="container">
         <div class="row">
           <div class="text-center cs-footer-social">
