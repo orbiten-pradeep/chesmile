@@ -207,13 +207,11 @@ chennaiSmile.generateEventGridList = function() {
 	    		eventprice = '<span class="event-price pull-right">₹ '+response[k].price+'</span>';
 	    		buybtn = '<div class="btn btn-sm btn-warning pull-right" onClick="javascript:location.href='+eventUrl+'">Buy Tickets</div>';
 	    	}
-			html += '<div class="col-sm-6 col-lg-2 col-md-2 card-size">\
-				<div class="card" data-attrib-hcolor="'+response[k].category_ltecolor+'" onmouseover= this.style.backgroundColor="#'+response[k].category_ltecolor+'" onmouseout= this.style.backgroundColor="#f4f4f4">\
-			        <div class="view overlay">\
-			        	<div class="back">\
-							<div class="pull-left tag col-sm-6 col-6">'+catgoryicon+'</div>\
-							<div class="pull-right cs_event_time col-sm-6 col-6">'+dtimeHtml+'</div>\
-						</div>\
+			html += '<div class="col-sm-6 col-lg-3 col-md-3 card-size">\
+				<div class="card" data-attrib-hcolor="#'+response[k].category_ltecolor+'" >\
+			        <div class="view">\
+			        	<span class="category-icon tag">'+catgoryicon+'</span>\
+			        	<span class="days-ago">'+dtimeHtml+'</span>\
 						'+dispImgHmtl+'\
 			            <a href="'+eventUrl+'">\
 			                <div class="mask rgba-white-slight"></div>\
@@ -486,7 +484,10 @@ $(document).ready(function() {
 
 	let page = chennaiSmile.filterParams.page;
 	$(window).scroll(function() {
-	    if ($(window).scrollTop() == $(document).height() - $(window).height()) {
+		var winHeight = Math.round($(window).scrollTop());
+		var docHeight = Math.round($(document).height() - $(window).height());
+		console.log(winHeight, docHeight);
+	    if (winHeight == docHeight) {
 	    	if(!self.eventScrollDisabled) {
 	    		self.filterParams.page++;
 	      		self.getEventList();
@@ -527,6 +528,20 @@ $(document).ready(function() {
 		self.getEventList();
 		self.favCategoryDivElem.hide();
 	});
+
+	self.eventListContainer.on({
+	    mouseenter: function () {
+	    	var hColor = $(this).attr('data-attrib-hcolor');	
+	    	$(this).css('backgroundColor', hColor+" !important");
+	        $(this).addClass('entered').removeClass('not-entered');
+	        $(this).find('.category-icon').css('backgroundColor', hColor+" !important");
+	        $(this).find('.days-ago').css('backgroundColor', hColor+" !important");
+	    },
+	    mouseleave: function () {
+	    	$(this).css('backgroundColor', '#fff !important');
+	        $(this).addClass('not-entered').removeClass('entered');
+	    }
+	}, ".card");
 
 });
 
