@@ -184,9 +184,10 @@ chennaiSmile.generateEventGridList = function() {
 	    	var buybtn = '';
 	    	var eventprice = '';
 	    	var iconsrc = "img/card/"+response[k].category_card;
-	    	var catgoryicon = '<img src="'+iconsrc+'" style="height:auto;" class="img-fluid cs_card_icon">';
+	    	var catgoryicon = '<span class="ctxt">'+response[k].category_name+'</span><img src="'+iconsrc+'" style="height:auto;" class="img-fluid cs_card_icon">';
 
-	    	dtimeHtml = moment(response[k].date).fromNow();
+	    	var dtimeHtmlArr = moment(response[k].date).fromNow().split(" ");
+	    	dtimeHtml = '<ul><li>'+dtimeHtmlArr[0]+'</li><li>'+dtimeHtmlArr[1]+'</li><li>'+dtimeHtmlArr[2]+'</li></ul>';
 	    	if(response[k].slug == null)
 	    		eventUrl = eventDetailsUrl + '/' + response[k].id;
 
@@ -205,13 +206,14 @@ chennaiSmile.generateEventGridList = function() {
 	    		var buybtn;
 	    		var eventprice
 	    		eventprice = '<span class="event-price pull-right">₹ '+response[k].price+'</span>';
-	    		buybtn = '<div class="btn btn-sm btn-warning pull-right" onClick="javascript:location.href='+eventUrl+'">Buy Tickets</div>';
+	    		buybtn = '<div class="btn buy-btn btn-warning pull-right" onClick="javascript:location.href='+eventUrl+'">Get Tickets</div>';
 	    	}
 			html += '<div class="col-sm-6 col-lg-3 col-md-3 card-size">\
 				<div class="card" data-attrib-hcolor="#'+response[k].category_ltecolor+'" >\
 			        <div class="view">\
 			        	<span class="category-icon tag">'+catgoryicon+'</span>\
 			        	<span class="days-ago">'+dtimeHtml+'</span>\
+			        	'+eventprice+'\
 						'+dispImgHmtl+'\
 			            <a href="'+eventUrl+'">\
 			                <div class="mask rgba-white-slight"></div>\
@@ -534,8 +536,8 @@ $(document).ready(function() {
 	    	var hColor = $(this).attr('data-attrib-hcolor');	
 	    	$(this).css('backgroundColor', hColor+" !important");
 	        $(this).addClass('entered').removeClass('not-entered');
-	        $(this).find('.category-icon').css('backgroundColor', hColor+" !important");
-	        $(this).find('.days-ago').css('backgroundColor', hColor+" !important");
+	        //$(this).find('.category-icon').css('backgroundColor', hColor+" !important");
+	        //$(this).find('.days-ago').css('backgroundColor', hColor+" !important");
 	    },
 	    mouseleave: function () {
 	    	$(this).css('backgroundColor', '#fff !important');

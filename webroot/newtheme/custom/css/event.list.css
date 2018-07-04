@@ -20,6 +20,8 @@
     box-shadow: none;
     background-color: #fff;
     border-radius: 9px !important;
+    border: 1px solid;
+    border-color: #e9ecef;
 }
 .event-list .card-size .card:hover {
     cursor: pointer;
@@ -32,7 +34,7 @@
 }
 .event-list .card-size .card.entered img {
     padding: 0 !important;
-    border-radius: 10px !important;
+    border-radius: 8px !important;
     transition: transform .2s,-webkit-transform .2s;
 }
 
@@ -42,34 +44,110 @@
 .event-list .card-size .card.entered p.card-text {
     color: #212529;
 }
-.event-list .card-size .card .days-ago{
-    color: #212529;
+.event-list .card-size .card .event-price {
+    font-weight: bolder;
+    color: #fff;
     font-size: 1rem !important;
     width: auto;
+    bottom: 6px;
+    margin: 10px;
+    position: absolute;
+    z-index: 1000;
+    padding: 2px 7px;
+    display: block;
+    border-radius: 0;
+    right: 6px;
+
+    background: #696969;
+    background: -moz-linear-gradient(left, #696969 0%, #474747 39%, #2b2b2b 73%, #131313 100%);
+    background: -webkit-gradient(left top, right top, color-stop(0%, #696969), color-stop(39%, #474747), color-stop(73%, #2b2b2b), color-stop(100%, #131313));
+    background: -webkit-linear-gradient(left, #696969 0%, #474747 39%, #2b2b2b 73%, #131313 100%);
+    background: -o-linear-gradient(left, #696969 0%, #474747 39%, #2b2b2b 73%, #131313 100%);
+    background: -ms-linear-gradient(left, #696969 0%, #474747 39%, #2b2b2b 73%, #131313 100%);
+    background: linear-gradient(to right, #696969 0%, #474747 39%, #2b2b2b 73%, #131313 100%);
+    filter: progid:DXImageTransform.Microsoft.gradient( startColorstr='#696969', endColorstr='#131313', GradientType=1 );
+}
+.event-list .card-size .card .days-ago {
+    color: #212529;
+    font-size: 1rem !important;
+    width: 74px;
     right: 0;
     margin: 10px;
     position: absolute;
     z-index: 1000;
-    padding: 0 8px;
+    padding: 5px;
     display: none;
-    border-radius: 6px;
-}
+    border-radius: 0;
 
+    background: rgba(255,255,255,1);
+    background: -moz-linear-gradient(top, rgba(255,255,255,1) 0%, rgba(246,246,246,1) 47%, rgba(237,237,237,1) 100%);
+    background: -webkit-gradient(left top, left bottom, color-stop(0%, rgba(255,255,255,1)), color-stop(47%, rgba(246,246,246,1)), color-stop(100%, rgba(237,237,237,1)));
+    background: -webkit-linear-gradient(top, rgba(255,255,255,1) 0%, rgba(246,246,246,1) 47%, rgba(237,237,237,1) 100%);
+    background: -o-linear-gradient(top, rgba(255,255,255,1) 0%, rgba(246,246,246,1) 47%, rgba(237,237,237,1) 100%);
+    background: -ms-linear-gradient(top, rgba(255,255,255,1) 0%, rgba(246,246,246,1) 47%, rgba(237,237,237,1) 100%);
+    background: linear-gradient(to bottom, rgba(255,255,255,1) 0%, rgba(246,246,246,1) 47%, rgba(237,237,237,1) 100%);
+    filter: progid:DXImageTransform.Microsoft.gradient( startColorstr='#ffffff', endColorstr='#ededed', GradientType=0 );
+}
+.event-list .card-size .card .days-ago ul {
+    margin-bottom: 5px;
+    padding-left: 0;
+    list-style: none;
+    text-align: center;
+}
+.event-list .card-size .card .days-ago li {
+    font-size: 12px;
+}
+.event-list .card-size .card .days-ago li:nth-child(1) {
+    height: 12px;
+}
+.event-list .card-size .card .days-ago li:nth-child(2) {
+    font-size: 20px;
+    height: 23px;
+}
+.event-list .card-size .card .days-ago li:nth-child(3) {
+    height: 14px;
+}
 .event-list .card-size .card.entered .days-ago {
     display: block;
 }
 .event-list .card-size .card.entered .category-icon {
     display: block;
 }
+.event-list .card-size .card.entered .category-icon img {
+    width: 24px !important;
+    min-width: 24px;
+}
+.event-list .card-size .card.entered .category-icon .ctxt {   
+    float: right;
+    font-size: 13px;
+    font-weight: bolder;
+    margin-top: 2px;
+    padding-left: 3px;
+}
 .event-list .card-size .card .category-icon {
     position: absolute;
-    width: 42px;
+    width: auto;
     /* left: -33px; */
     display: none;
     z-index: 1014;
-    border-radius: 20px;
-    padding: 4px;
+    border-radius: 6px;
+    padding: 2px 7px;
     margin: 10px 0 0 10px;
+    
+    background: rgba(255,255,255,1);
+    background: -moz-linear-gradient(top, rgba(255,255,255,1) 0%, rgba(246,246,246,1) 47%, rgba(237,237,237,1) 100%);
+    background: -webkit-gradient(left top, left bottom, color-stop(0%, rgba(255,255,255,1)), color-stop(47%, rgba(246,246,246,1)), color-stop(100%, rgba(237,237,237,1)));
+    background: -webkit-linear-gradient(top, rgba(255,255,255,1) 0%, rgba(246,246,246,1) 47%, rgba(237,237,237,1) 100%);
+    background: -o-linear-gradient(top, rgba(255,255,255,1) 0%, rgba(246,246,246,1) 47%, rgba(237,237,237,1) 100%);
+    background: -ms-linear-gradient(top, rgba(255,255,255,1) 0%, rgba(246,246,246,1) 47%, rgba(237,237,237,1) 100%);
+    background: linear-gradient(to bottom, rgba(255,255,255,1) 0%, rgba(246,246,246,1) 47%, rgba(237,237,237,1) 100%);
+    filter: progid:DXImageTransform.Microsoft.gradient( startColorstr='#ffffff', endColorstr='#ededed', GradientType=0 );
+}
+
+.event-list .card-size .card .buy-btn {
+    padding: 7px 12px;
+    box-shadow: none !important;
+    border-radius: 0;
 }
 
 .event-list #loading {  
