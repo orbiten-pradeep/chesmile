@@ -11,16 +11,39 @@
         <h2>
           Tickets List
         </h2>
+        <ul class="header-dropdown m-r--5">
+          <li class="dropdown">
+            <a href="javascript:void(0);" class="dropdown-toggle" data-toggle="dropdown" role="button" aria-haspopup="true" aria-expanded="false">
+              <i class="material-icons">more_vert
+              </i>
+            </a>
+            <ul class="dropdown-menu pull-right">
+              <li>
+                <a href="javascript:void(0);">Action
+                </a>
+              </li>
+              <li>
+                <a href="javascript:void(0);">Another action
+                </a>
+              </li>
+              <li>
+                <a href="javascript:void(0);">Something else here
+                </a>
+              </li>
+            </ul>
+          </li>
+        </ul>
       </div>
       <div class="body table-responsive">
-        <table class="table table-bordered table-striped table-hover js-basic-example dataTable">
+        <table class="table table-bordered table-striped table-hover">
           <thead>
             <tr>
               <th scope="col">
-                <?= $this->Paginator->sort('Select') ?>
+              <?= __('Select') ?>
+                <!-- <?= $this->Paginator->sort('Select') ?> -->
               </th>
               <th scope="col">
-                <?= $this->Paginator->sort('Serial No') ?>
+                <?= __('Serial No') ?>
               </th>
               <th scope="col">
                 <?= $this->Paginator->sort('events_id') ?>
@@ -28,6 +51,7 @@
               <th scope="col">
                 <?= $this->Paginator->sort('firstname') ?>
               </th>
+              
               <th scope="col">
                 <?= $this->Paginator->sort('name') ?>
               </th>
@@ -61,7 +85,7 @@ foreach ($tickets as $ticket): $n++; ?>
                 <span class="input-group-addon">
                   <input type="radio" name="ticketId" id="t<?= h($ticket->id) ?>" class="with-gap radio-select-list"
                          edit-href-url="<?=$this->Url->build(array('controller' => 'Tickets', 'action' => 'edit', $ticket->id)); ?>"
-                         view-href-url="<?=$this->Url->build(array('controller' => 'Tickets', 'action' => 'view', $ticket->id)); ?>"
+                        view-href-url="<?=$this->Url->build(array('controller' => 'Tickets', 'action' => 'view', $ticket->id)); ?>"
                          add-href-url="<?=$this->Url->build(array('controller' => 'Tickets', 'action' => 'add', $ticket->id)); ?>"
                          activate-href-url="<?=$this->Url->build(array('controller' => 'Tickets', 'action' => 'activate', $ticket->id)); ?>"
                          deactivate-href-url="<?=$this->Url->build(array('controller' => 'Tickets', 'action' => 'deactivate', $ticket->id)); ?>">
@@ -73,7 +97,7 @@ foreach ($tickets as $ticket): $n++; ?>
                 <?= $this->Number->format($n) ?>
               </td>
               <td>
-                <?= $ticket->has('event') ? $this->Html->link($ticket->event->title, ['controller' => 'Events', 'action' => 'view', $ticket->event->id]) : '' ?>
+          <?= $ticket->has('event') ? $this->Html->link($ticket->event->title, ['controller' => 'Events', 'action' => 'chennai', $ticket->event->id]) : '' ?>
               </td>
               <td>
                 <?= h($ticket->firstname) ?>

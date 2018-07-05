@@ -76,10 +76,11 @@
                                 </div>
                                
                                <div class="form-group">
-                                <label for="basic_checkbox_2"></label>
-                                    <?php  echo $this->Form->input('Active',['div' => false,'type' => 'checkbox','class' => 'form-control filled-in','id' => 'basic_checkbox_2','label' => false]);?>
-
+                                    <!-- <?php  echo $this->Form->input('Active',['div' => false,'type' => 'checkbox','class' => 'form-control filled-in','id' => 'basic_checkbox_2','label' => false]);?> -->
+                                    <input type="checkbox" name="Active" id="basic_checkbox_2" value ="1" class="form-control filled-in">
+                                    <label for="basic_checkbox_2">Active</label>
                                </div>
+                               
                                 <!-- <button type="button" class="btn btn-primary m-t-15 waves-effect">LOGIN</button> -->
                                 <?= $this->Form->button(__('Submit'),array('class' => 'btn btn-primary m-t-15 waves-effect')) ?>
                             <?= $this->Form->end() ?>

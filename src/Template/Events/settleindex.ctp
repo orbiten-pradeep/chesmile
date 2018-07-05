@@ -15,14 +15,14 @@
         </h2>
       </div>
       <div class="body table-responsive">
-        <table class="table table-bordered table-striped table-hover js-basic-example dataTable">
+        <table class="table table-bordered table-striped table-hover ">
           <thead>
             <tr> 
               <th scope="col">
-                <?= $this->Paginator->sort('Select') ?>
+               <?= __('Select') ?><!--  <?= $this->Paginator->sort('Select') ?> -->
               </th>
               <th scope="col">
-                <?= $this->Paginator->sort('Serial No') ?>
+                <?= __('Serial No') ?><!-- <?= $this->Paginator->sort('Serial No') ?> -->
               </th>
               <th scope="col">
                 <?= $this->Paginator->sort('title') ?>
@@ -71,9 +71,9 @@ foreach ($eventss as $event): $n++; ?>
 ]);?> -->
                 <span class="input-group-addon">
                   <input type="radio" name="eventId" id="e<?= h($event->id) ?>" value ="<?=($event->id)?>" class="with-gap radio-select-list"
-                  admin-href-url="<?=$this->Url->build(array('controller' => 'Events', 'action' => 'adminedit', $event->id)); ?>"
+                  admin-href-url="<?=$this->Url->build(array('controller' => 'Events', 'action' => 'settlementedit', $event->id)); ?>"
                      edit-href-url="<?=$this->Url->build(array('controller' => 'Events', 'action' => 'edit', $event->id)); ?>"
-                         view-href-url="<?=$this->Url->build(array('controller' => 'Events', 'action' => 'view', $event->id)); ?>"
+                         view-href-url="<?=$this->Url->build(array('controller' => 'Events', 'action' => 'settlementview', $event->id)); ?>"
                          add-href-url="<?=$this->Url->build(array('controller' => 'Events', 'action' => 'add', $event->id)); ?>"
                          activate-href-url="<?=$this->Url->build(array('controller' => 'Events', 'action' => 'activate', $event->id)); ?>"
                          deactivate-href-url="<?=$this->Url->build(array('controller' => 'Events', 'action' => 'deactivate', $event->id)); ?>">
@@ -144,11 +144,11 @@ echo $this->Html->link( $this->Html->tag('i', 'add_circle', array('class' => 'ma
         <div class="pull-right">
        <!--  <?php
 echo $this->Html->link( $this->Html->tag('i', 'Add Event', array('class' => 'btn btn-primary waves-effect', 'title'=>'Add Event')), ['action' => 'add'], array('escape'=>false)); ?>  -->
-          <a id ="edit" href="">
+         <!--  <a id ="edit" href="">
             <button class="btn btn-primary waves-effect">Edit
             </button>
           </a>
-           <a id ="admin" href="">
+          -->  <a id ="admin" href="">
             <button class="btn btn-primary waves-effect">AdminEdit
             </button>
           </a>

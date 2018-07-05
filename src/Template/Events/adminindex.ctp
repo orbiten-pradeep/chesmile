@@ -12,32 +12,77 @@
           Listing
           <small>All Events Listing
           </small>
-        </h2>
+        </h2> <ul class="header-dropdown m-r--5 pull-right">
+            <?= $this->Form->create("",['type'=> 'get'])?>
+           <?= $this->Form->control('keyword',['default'=> $this->request->query('keyword')]); ?>
+           <button>Search</button>
+            <?= $this->Form->end()?>
+          </ul>
+        <!-- <ul class="header-dropdown m-r--5">
+          <li class="dropdown">
+            <a href="javascript:void(0);" class="dropdown-toggle" data-toggle="dropdown" role="button" aria-haspopup="true" aria-expanded="false">
+              <i class="material-icons">more_vert
+              </i>
+            </a>
+            <ul class="dropdown-menu pull-right">
+              <li>
+                <a href="javascript:void(0);">Action
+                </a>
+              </li>
+              <li>
+                <a href="javascript:void(0);">Another action
+                </a>
+              </li>
+              <li>
+                <a href="javascript:void(0);">Something else here
+                </a>
+              </li>
+            </ul>
+          </li>
+        </ul> -->
       </div>
       <div class="body table-responsive">
+      <!-- <?= $this->Form->create("",['type'=> 'get'])?>
+       <?= $this->Form->control('keyword',['default'=> $this->request->query('keyword')]); ?>
+       <button>Search</button>
+        <?= $this->Form->end()?>
+        -->
         <table class="table table-bordered table-striped table-hover ">
           <thead>
             <tr> 
-              <th scope="col">
-                <?= $this->Paginator->sort('Select') ?>
+              <th scope="col"><?= __('Select') ?>
+               <!--  <?= $this->Paginator->sort('Select') ?> -->
               </th>
               <th scope="col">
-                <?= $this->Paginator->sort('Serial No') ?>
+                <?= $this->Paginator->sort('id') ?>
               </th>
               <th scope="col">
                 <?= $this->Paginator->sort('title') ?>
+              </th>
+              
+              <th scope="col">
+                <?= $this->Paginator->sort('categories_id') ?>
+              </th>
+              <th scope="col">
+                <?= $this->Paginator->sort('Created By') ?>
+              </th>
+              <th scope="col">
+                <?= $this->Paginator->sort('Organizers') ?>
               </th>
               <th scope="col">
                 <?= $this->Paginator->sort('active') ?>
               </th>
               <th scope="col">
-                <?= $this->Paginator->sort('categories_id') ?>
-              </th>
-              <th scope="col">
                 <?= $this->Paginator->sort('date') ?>
               </th>
               <th scope="col">
+                <?= $this->Paginator->sort('todate') ?>
+              </th>
+              <th scope="col">
                 <?= $this->Paginator->sort('time') ?>
+              </th>
+              <th scope="col">
+                <?= $this->Paginator->sort('totime') ?>
               </th>
               <th scope="col">
                 <?= $this->Paginator->sort('register_online') ?>
@@ -47,8 +92,9 @@
           </thead>
           <tbody>
             <?php  
-$n=0 + (10 * $page);
-foreach ($eventss as $event): $n++; ?>
+//$n=0 + (10 * $page);
+foreach ($eventss as $event): 
+  //$n++; ?>
             <tr>
               <td> 
                 <!-- <div class="form-check mb-4">
@@ -73,16 +119,26 @@ foreach ($eventss as $event): $n++; ?>
                          view-href-url="<?=$this->Url->build(array('controller' => 'Events', 'action' => 'chennai', $event->id)); ?>"
                          add-href-url="<?=$this->Url->build(array('controller' => 'Events', 'action' => 'add', $event->id)); ?>"
                          activate-href-url="<?=$this->Url->build(array('controller' => 'Events', 'action' => 'activate', $event->id)); ?>"
-                         deactivate-href-url="<?=$this->Url->build(array('controller' => 'Events', 'action' => 'deactivate', $event->id)); ?>">
+                         deactivate-href-url="<?=$this->Url->build(array('controller' => 'Events', 'action' => 'activate', $event->id)); ?>">
                   <label for="e<?= h($event->id) ?>">
                   </label>
                 </span>
               </td>
-              <td>
-                <?= $this->Number->format($n) ?>
+              <td><?= h($event->id) ?>
+                <!-- <?= $this->Number->format($n) ?> -->
               </td>
               <td>
                 <?= h($event->title) ?>
+              </td>
+              
+              <td>
+                <?= $event->has('category') ? $this->Html->link($event->category->name, ['controller' => 'Categories', 'action' => 'view', $event->category->id]) : '' ?>
+              </td>
+              <td>
+                <?= $event->has('user') ? $this->Html->link($event->user->fullname, ['controller' => 'Users', 'action' => 'view', $event->user->id]) : '' ?>
+              </td>
+               <td>
+                <?= h($event->OrganizersName) ?>
               </td>
               <td>
                 <?php 
@@ -97,13 +153,16 @@ echo "Deleted";
 ?>  
               </td>
               <td>
-                <?= $event->has('category') ? $this->Html->link($event->category->name, ['controller' => 'Categories', 'action' => 'view', $event->category->id]) : '' ?>
-              </td>
-              <td>
                 <?= h($event->date) ?>
+              </td>
+               <td>
+                <?= h($event->todate) ?>
               </td>
               <td>
                 <?= h($event->time) ?>
+              </td>
+              <td>
+                <?= h($event->totime) ?>
               </td>
               <td>
                 <?php if($event->register_online == 0) {
@@ -125,7 +184,8 @@ echo $this->Html->link( $this->Html->tag('i', 'add_circle', array('class' => 'ma
 }
 ?>
 <?= $this->Html->link( $this->Html->tag('i', 'mode_edit', array('class' => 'material-icons', 'title'=>'Admin Edit')), ['action' => 'adminedit', $event->id], array('escape'=>false)); ?>
-<?= $this->Html->link( $this->Html->tag('i', 'edit', array('class' => 'material-icons', 'title'=>'Edit')), ['action' => 'edit', $event->id], array('escape'=>false)); ?> <?= $this->Form->postLink($this->Html->tag('i', 'delete', array('class' => 'material-icons', 'title'=>'Delete Event')), ['action' => 'delete', $event->id], ['escape'=>false, 'confirm' => __('Are you sure you want to delete # {0}?', $event->id)]) ?> 
+<?= $this->Html->link( $this->Html->tag('i', 'edit', array('class' => 'material-icons', 'title'=>'Edit')), ['action' => 'edit', $event->id], array('escape'=>false)); ?>
+<!-- <?= $this->Form->postLink($this->Html->tag('i', 'delete', array('class' => 'material-icons', 'title'=>'Delete Event')), ['action' => 'delete', $event->id], ['escape'=>false, 'confirm' => __('Are you sure you want to delete # {0}?', $event->id)]) ?> 
 </td> -->
             </tr>
             <?php endforeach; ?>
@@ -150,7 +210,7 @@ echo $this->Html->link( $this->Html->tag('i', 'Add Event', array('class' => 'btn
             <button class="btn btn-primary waves-effect">View
             </button>
           </a>
-<!--           <a id ="activate" href="">
+         <!--  <a id ="activate" href="">
             <button class="btn btn-primary waves-effect">Activate
             </button>
           </a>

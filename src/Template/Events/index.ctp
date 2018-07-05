@@ -2,55 +2,70 @@
     /*.event-list .card-size .card:hover{
         background-color:#"'+response[k].category_color+'";
     }*/
+    .cat_icon {
+    display: inline-block;
+    width: 85px !important;
+    height: 85px !important;
+    z-index: 0;
+}
+.btn-oceanblue {
+    background-color: #424242!important;
+    box-shadow: 10px;
+    outline-color: #f38599 !important;
+    font-size: .70rem !important;
+}
+.btnfont {
+   font-size: .88rem;
+    font-weight: bold; 
+}
+
 </style>
+
 <div id="ce-1z" class="carousel slide main-carousel carousel-fade" data-ride="carousel">
-    <!--Indicators-->
-    <ol class="carousel-indicators">
-        <li data-target="#ce-1z" data-slide-to="0" class="active"></li>
-        <li data-target="#ce-1z" data-slide-to="1"></li>
-    </ol>
-    <!--/.Indicators-->
-    <!--Slides-->
-    <div class="carousel-inner" role="listbox">
-        <div class="carousel-item active">
-            <a href="http://chennaismile.com/events/chennai/903/chennaiyil-oru-shopping-thiruvizha-nam-parambariyam">
-                <img class="d-block w-100" src="<?php echo $this->Url->build('/img/nam_parambhariyam_1600x400.jpg'); ?>" alt="">
-            </a>
-        </div>
-        <!--First slide-->
-        <div class="carousel-item">
-            <img class="d-block w-100" src="http://chennaismile.com/img/high-on-laughter.png" alt="High on Laughter">
-        </div>
-        <!--/First slide-->
-        <!--Second slide-->
-        <div class="carousel-item">
-            <img class="d-block w-100" src="http://chennaismile.com/img/legends-marathon.jpg" alt="Legends Marathon 2018">
-        </div>
-        <!--/Second slide-->
-    </div>
-    <!--/.Slides-->
-    <!--Controls-->
-    <a class="carousel-control-prev" href="#ce-1z" role="button" data-slide="prev">
-        <span class="carousel-control-prev-icon" aria-hidden="true"></span>
-        <span class="sr-only">Previous</span>
-    </a>
-    <a class="carousel-control-next" href="#ce-1z" role="button" data-slide="next">
-        <span class="carousel-control-next-icon" aria-hidden="true"></span>
-        <span class="sr-only">Next</span>
-    </a>
-    <!--/.Controls-->
+   <!--Indicators-->
+   <ol class="carousel-indicators">
+       <li data-target="#ce-1z" data-slide-to="0" class="active"></li>
+       <li data-target="#ce-1z" data-slide-to="1"></li>
+   </ol>
+   <!--/.Indicators-->
+   <!--Slides-->
+   <div class="carousel-inner" role="listbox">
+
+    <?php 
+$flag=0;
+foreach ($banners as $banner): ?>
+<?php if($flag==0){ ?>
+       <div class="carousel-item active">
+          
+               <img class="d-block w-100" src="webroot/img/banners_hme/<?php echo $banner->image; ?>" alt="<?php echo $banner->image; ?>">
+          
+       </div>
+<?php
+$flag=1;
+}else{ ?>
+
+       <!--First slide-->
+       <div class="carousel-item">
+           <img class="d-block w-100" src="webroot/img/banners_hme/<?php echo $banner->image; ?>" alt="<?php echo $banner->image; ?>">
+       </div>
+<?php } ?>
+<!--/First slide-->
+ <?php endforeach; ?>
 </div>
+</div>
+
+
 <!--/.Carousel Wrapper-->
 <div class="jumbotron p-sm-2 event-filters">
     <!--Dropdown primary-->
     
     <div class="pull-right filter-buttons">
-        <button type="button" class="btn btn-sm filbtn cs-btn-filter-free filter-type" data="freeEvents" data-text="Free Events">Free Events</button>
-        <button type="button" class="btn btn-sm filbtn cs-btn-filter-paid filter-type" data="register" data-text="Booking Events">Booking Events</button>
+        <button type="button" class="btn btn-sm btn btn-oceanblue btnfont" data="freeEvents" data-text="Free Events" >Free Events</button>
+        <button type="button" class="btn btn-sm btn btn-oceanblue btnfont waves-effect " data="register" data-text="Booking Events">Booking Events</button>
     </div>
     <div class="dropdown d-inline-block filter-dropdowns">
         <!--Trigger-->
-        <button class="btn btn-sm btn-default filbtn dropdown-toggle cs-filter-btn" type="button" id="dropdownMenu1" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">Filter By</button>        
+        <button class="btn btn-sm dropdown-toggle btn btn-oceanblue  filter-type" type="button" id="dropdownMenu1" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">Filter By</button>        
 
         <!--Menu-->
         <div class="dropdown-menu dropdown-primary">
@@ -88,7 +103,7 @@
                             foreach ($categories as $key=> $category) {
                                 $card = $category['card'];
                                 if($card!="") {
-                                    echo "<li>";
+                                    echo "<li class='cat_icon'>";
                                     $imagePath = "/img/card/".$card;
                                     $imageUrl = $this->Url->build($imagePath);
                                     echo "<a class='thumb filter-tc-button' href='".$imageUrl."' data-text='".$category['name']."' data='".$category['id']."'></a><span>".$category['name']."</span>";

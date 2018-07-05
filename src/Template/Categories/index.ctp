@@ -21,17 +21,23 @@
         <h2>
           Categories List
         </h2>
+            <ul class="header-dropdown m-r--5 pull-right"> <?= $this->Form->create("",['type'=> 'get'])?>
+       <?= $this->Form->control('keyword',['default'=> $this->request->query('keyword')]); ?>
+       <button>Search</button>
+        <?= $this->Form->end()?>
+        </ul>
       </div>
       <div class="body table-responsive">
-        <table class="table table-bordered table-striped table-hover js-basic-example dataTable">
+     
+        <table class="table table-bordered table-striped table-hover ">
           <thead>
             <tr> 
-              <th scope="col">
-                <?= $this->Paginator->sort('Select') ?>
-              </th>
-              <th scope="col">
-                <?= $this->Paginator->sort('Serial No') ?>
-              </th>
+              <th scope="col"><?= __('Select') ?>
+              <!--   <?= $this->Paginator->sort('Select') ?>
+               --></th>
+              <th scope="col"><?= __('Serial No') ?>
+               <!--  <?= $this->Paginator->sort('Serial No') ?>
+               --></th>
               <th scope="col">
                 <?= $this->Paginator->sort('name') ?>
               </th>

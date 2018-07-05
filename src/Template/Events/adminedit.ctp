@@ -20,7 +20,7 @@ if($user && $user['group_id'] == 4) {
         <legend><?= __('Edit Event') ?></legend>
 <?php
             echo $this->Form->hidden('user_id', ['options' => $users,'default'=> $users_id]);?>
- <?= __('Ticketing') ?>
+  <?= __('Ticketing') ?>
  <div class="form-group">
                                 
            <?php  $options = ['0' => 'Disabled', '1' => 'Enabled'];

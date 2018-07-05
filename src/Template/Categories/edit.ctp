@@ -79,8 +79,12 @@
                                    <?php  echo $this->Form->input('Card Image',['type' => 'file', 'accept' => 'image/*','class' => 'form-control']);?>
                                 </div>
                                
-                               <div class="form-group">
+                               <!-- <div class="form-group">
                                    <?php echo $this->Form->input('active');?>
+                               </div> -->
+                               <div class="form-group">
+                                    <input type="checkbox" name="Active" id="basic_checkbox_2" value ="1" class="form-control filled-in">
+                                    <label for="basic_checkbox_2">Active</label>
                                </div>
                                 <!-- <button type="button" class="btn btn-primary m-t-15 waves-effect">LOGIN</button> -->
                                 <?= $this->Form->button(__('Submit'),array('class' => 'btn btn-primary m-t-15 waves-effect')) ?>

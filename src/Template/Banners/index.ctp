@@ -80,18 +80,18 @@
         </h2>
       </div>
       <div class="body table-responsive">
-        <table class="table table-bordered table-striped table-hover js-basic-example dataTable">
+        <table class="table table-bordered table-striped table-hover ">
           <thead>
             <tr>
-             <th scope="col"><?= $this->Paginator->sort('Select') ?></th>
-             <th scope="col"><?= $this->Paginator->sort('Serial No') ?></th>
+             <th scope="col"><?= __('Select') ?><!-- <?= $this->Paginator->sort('Select') ?> --></th>
+             <th scope="col"><?= __('Serial No') ?><!-- <?= $this->Paginator->sort('Serial No') ?> --></th>
                 <th scope="col"><?= $this->Paginator->sort('events_id') ?></th>
                 <th scope="col"><?= $this->Paginator->sort('image') ?></th>
                 <th scope="col"><?= $this->Paginator->sort('url') ?></th>
                 <th scope="col"><?= $this->Paginator->sort('caption') ?></th>
                 <th scope="col"><?= $this->Paginator->sort('active') ?></th>
                 <th scope="col"><?= $this->Paginator->sort('created') ?></th>
-                <th scope="col"><?= $this->Paginator->sort('Actions') ?></th>
+                <th scope="col"><?= __('Actions') ?><!-- <?= $this->Paginator->sort('Actions') ?> --></th>
             </tr>
           </thead>
           <tbody>
@@ -109,8 +109,7 @@ foreach ($banners as $banner): $n++;?>
                   <label for="c<?= h($banner->id) ?>">
                   </label>
                 </span>                      
-              </td><!-- <td><?= $this->Number->format($banner->id) ?></td>
- -->
+              </td>
                <td>
                 <?= $this->Number->format($n) ?>
               </td> 
@@ -122,19 +121,8 @@ foreach ($banners as $banner): $n++;?>
                <!--  <td><?= h($banner->image) ?></td> -->
                 <td><?= h($banner->url) ?></td>
                 <td><?= h($banner->caption) ?></td>
-                 <td>
-                <?php 
-if($banner->active == 1)
-{ echo "Enabled"; } 
-else if($banner->active == 0)
-{ echo "Waiting for Admin Review.."; } 
-elseif ($banner->active == 2) {
-echo "Deactivated";
-}
-//echo $event;
-?>  </td>
-                <!-- <td><?= $this->Number->format($banner->active) ?></td>
-                 --><td><?= h($banner->created) ?></td>
+                <td><?= $this->Number->format($banner->active) ?></td>
+                <td><?= h($banner->created) ?></td>
  <td><?= $this->Form->postLink(__('Activate'), ['action' => 'activate', $banner->id], ['confirm' => __('Are you sure you want to Activate # {0}?', $banner->id)]) ?>
                      <?= $this->Form->postLink(__('Deactivate'), ['action' => 'deactivate', $banner->id], ['confirm' => __('Are you sure you want to Deactivate # {0}?', $banner->id)]) ?></td>
             </tr>

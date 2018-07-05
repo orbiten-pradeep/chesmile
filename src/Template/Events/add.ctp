@@ -96,9 +96,15 @@
 		     				<div class="md-form">
 		     					<?= $this->Form->input('date', array('type' => 'text','class' => 'form-control date','placeholder' => 'Date','label' => false));?>
 		     				</div>
+		     				<!-- <div class="md-form">
+		     				 <?= $this->Form->input('todate', array('type' => 'text','class' => 'form-control date','placeholder' => 'To Date','label' => false));?>
+		     				</div> -->
 		     				<div class="md-form">
 		     					<?=$this->Form->input('time', array('type' => 'text','class' => 'form-control timepicker','label' => false,'placeholder' => 'Time'));?>
 		     				</div>
+		     				<!-- <div class="md-form">
+		     					<?=$this->Form->input('totime', array('type' => 'text','class' => 'form-control timepicker','label' => false,'placeholder' => 'To Time'));?>
+		     				</div> -->
 		     				<div class="md-form">
 		     					<?= $this->Form->input('address_1',array('div' => false,'label' => 'Address 1','class' => 'form-control', 'placeholder' => 'Enter address 1'));?>
 		     				</div>

@@ -6,16 +6,22 @@
         <h2>
           Event Managers List
         </h2>
+         <ul class="header-dropdown m-r--5 pull-right">
+            <?= $this->Form->create("",['type'=> 'get'])?>
+           <?= $this->Form->control('keyword',['default'=> $this->request->query('keyword')]); ?>
+           <button>Search</button>
+            <?= $this->Form->end()?>
+          </ul>
       </div>
       <div class="body table-responsive">
-        <table class="table table-bordered table-striped table-hover js-basic-example dataTable">
+        <table class="table table-bordered table-striped table-hover ">
           <thead>
             <tr> 
-              <th scope="col">
-                <?= $this->Paginator->sort('Select') ?>
+              <th scope="col"><?= __('Select') ?>
+                <!-- <?= $this->Paginator->sort('Select') ?> -->
               </th>
-              <th scope="col">
-                <?= $this->Paginator->sort('Serial No') ?>
+              <th scope="col"><?= __('Serial No') ?>
+               <!--  <?= $this->Paginator->sort('Serial No') ?> -->
               </th>
               <th scope="col">
                 <?= $this->Paginator->sort('email') ?>
@@ -42,7 +48,7 @@ foreach ($users as $user): $n++;?>
                   <input type="radio" name="userId" id="u<?= h($user->id) ?>" value ="<?=($user->id)?>" class="with-gap radio-select-list" 
                          edit-href-url="<?=$this->Url->build(array('controller' => 'Users', 'action' => 'edit', $user->id)); ?>"
                          view-href-url="<?=$this->Url->build(array('controller' => 'Users', 'action' => 'view', $user->id)); ?>"
-                         add-href-url="<?=$this->Url->build(array('controller' => 'Users', 'action' => 'add', $user->id)); ?>">
+                         add-href-url="<?=$this->Url->build(array('controller' => 'Users', 'action' => 'adminadd', $user->id)); ?>">
                   <label for="u<?= h($user->id) ?>">
                   </label>
                 </span>
@@ -79,7 +85,7 @@ foreach ($users as $user): $n++;?>
         </table> 
         <div class="pull-right"> 
          <?php
-echo $this->Html->link( $this->Html->tag('i', 'Add New', array('class' => 'btn btn-primary waves-effect', 'title'=>'Add New')), ['action' => 'add'], array('escape'=>false)); ?> 
+echo $this->Html->link( $this->Html->tag('i', 'Add New', array('class' => 'btn btn-primary waves-effect', 'title'=>'Add New')), ['action' => 'adminadd'], array('escape'=>false)); ?> 
          
           <!-- <a id="add" href="">
             <button class="btn btn-primary waves-effect">Add

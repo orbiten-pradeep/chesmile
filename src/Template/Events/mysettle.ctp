@@ -10,7 +10,7 @@
       <div class="header">
         <h2>
           Listing
-          <small>All Settlements Listing
+          <small>Events Settlements Listing
           </small>
         </h2>
         <ul class="header-dropdown m-r--5">
@@ -37,14 +37,14 @@
         </ul>
       </div>
       <div class="body table-responsive">
-        <table class="table table-bordered table-striped table-hover js-basic-example dataTable">
+        <table class="table table-bordered table-striped table-hover ">
           <thead>
             <tr> 
-              <th scope="col">
-                <?= $this->Paginator->sort('Select') ?>
+              <th scope="col"><?= __('Select') ?>
+               <!--  <?= $this->Paginator->sort('Select') ?> -->
               </th>
-              <th scope="col">
-                <?= $this->Paginator->sort('Serial No') ?>
+              <th scope="col"><?= __('Serial No') ?>
+               <!--  <?= $this->Paginator->sort('Serial No') ?> -->
               </th>
               <th scope="col">
                 <?= $this->Paginator->sort('title') ?>
@@ -52,8 +52,11 @@
               <th scope="col">
                 <?= $this->Paginator->sort('active') ?>
               </th>
-              <th scope="col">
+                 <th scope="col">
                 <?= $this->Paginator->sort('categories_id') ?>
+              </th>
+              <th scope="col">
+                <?= $this->Paginator->sort('Created By') ?>
               </th>
               <th scope="col">
                 <?= $this->Paginator->sort('Oranizers') ?>
@@ -94,7 +97,7 @@ foreach ($eventss as $event): $n++; ?>
                 <span class="input-group-addon">
                   <input type="radio" name="eventId" id="e<?= h($event->id) ?>" value ="<?=($event->id)?>" class="with-gap radio-select-list"
                      edit-href-url="<?=$this->Url->build(array('controller' => 'Events', 'action' => 'edit', $event->id)); ?>"
-                         view-href-url="<?=$this->Url->build(array('controller' => 'Events', 'action' => 'view', $event->id)); ?>"
+                         view-href-url="<?=$this->Url->build(array('controller' => 'Events', 'action' => 'settlementview', $event->id)); ?>"
                          add-href-url="<?=$this->Url->build(array('controller' => 'Events', 'action' => 'add', $event->id)); ?>"
                          activate-href-url="<?=$this->Url->build(array('controller' => 'Events', 'action' => 'activate', $event->id)); ?>"
                          deactivate-href-url="<?=$this->Url->build(array('controller' => 'Events', 'action' => 'deactivate', $event->id)); ?>">
@@ -120,8 +123,11 @@ echo "Deleted";
 //echo $event;
 ?>  
               </td>
-              <td>
+                <td>
                 <?= $event->has('category') ? $this->Html->link($event->category->name, ['controller' => 'Categories', 'action' => 'view', $event->category->id]) : '' ?>
+              </td>
+              <td>
+                <?= $event->has('user') ? $this->Html->link($event->user->fullname, ['controller' => 'Users', 'action' => 'view', $event->user->id]) : '' ?>
               </td>
                <td>
                 <?= h($event->OrganizersName) ?>

@@ -1,7 +1,7 @@
 <?php
 namespace App\Controller;
-
 use App\Controller\AppController;
+use Cake\Datasource\ConnectionManager;
 
 /**
  * AdminDashBoard Controller
@@ -16,18 +16,33 @@ class AdminDashBoardController extends AppController
      *
      * @return \Cake\Network\Response|null
      */
-    public function index()
+     public function index()
     {
       $this->viewBuilder()->layout('admin');
-        
-         $this->loadModel('Events');
+//         $this->Breadcrumb->push(['title' => 'Awesome title','url' => Router::url(['controller' => 'AdminDashBoard', 'action' => 'index']),
+// ]);
+         //$this->loadModel('Events');
          // $banner= $this->paginate['conditions'] = array('Events.date >'=>date("Y-m-d") , 'Banners.active' => '1');
+         $this->loadModel('Events');
+         $tcConn = ConnectionManager::get('default');
+         $topq = "SELECT DISTINCT e.user_id, u.fullname, COUNT(e.user_id) as CreatedEvents 
+FROM `events` e INNER JOIN `users` u 
+ON e.user_id = u.id
+where e.active = 1 and e.date >= CURDATE() 
+GROUP BY e.user_id, u.fullname
+order by CreatedEvents desc";
+        $tcStmt = $tcConn->execute($topq);
+        $top = $tcStmt->fetchAll('assoc');
+
         $numevent = $this->Events->find()->where(['active' =>1])->count();
          $delevent = $this->Events->find()->where(['active' => 2])->count();
-         $ticevent = $this->Events->find()->where(['register_online' => 1])->count();
+         $ticevent = $this->Events->find()->where(['register_online' => 1,'active' =>1,'date >'=>date("Y-m-d")])->count();
+          $freeevent = $this->Events->find()->where(['register_online' => 0,'active' =>1,'date >'=>date("Y-m-d")])->count();
+        
         $numbevent = $this->Events->find()->where(['active' => 0])->count();
          $toevent = $this->Events->find()->where([ 'created' =>date("Y-m-d") ])->count();
-        $upevent = $this->Events->find()->where([ 'date >'=>date("Y-m-d") ])->count();
+          $pastevent = $this->Events->find()->where([ 'date <'=>date("Y-m-d") ,'active' => 1])->count();
+        $upevent = $this->Events->find()->where([ 'date >'=>date("Y-m-d"),'active' => 1 ])->count();
          if(!empty($this->Auth->user('id')))
         {
             $users_id = $this->Auth->user('id');
@@ -35,9 +50,11 @@ class AdminDashBoardController extends AppController
              $orgevent = $this->Events->find()->where(["Events.user_id" => $users_id])->count();
              $orgactiveevent = $this->Events->find()->where(["Events.user_id" => $users_id,'active' => 1])->count();
             $orgwaitevent = $this->Events->find()->where(["Events.user_id" => $users_id,'active' => 0])->count();
+             $orgdelevent = $this->Events->find()->where(["Events.user_id" => $users_id,'active' => 2])->count();
              $orgpaidevent = $this->Events->find()->where(["Events.user_id" => $users_id,'register_online' => 1])->count();
               $orgfreeevent = $this->Events->find()->where(["Events.user_id" => $users_id,'register_online' => 0])->count();
-             $uporgevent = $this->Events->find()->where(["Events.user_id" => $users_id,'date >' => date("Y-m-d") ])->count();       
+             $uporgevent = $this->Events->find()->where(["Events.user_id" => $users_id,'date >' => date("Y-m-d") ])->count();  
+              $pastorgevent = $this->Events->find()->where(["Events.user_id" => $users_id,'date <' => date("Y-m-d") ])->count();       
         }
 
         $this->loadModel('Users');
@@ -47,10 +64,13 @@ class AdminDashBoardController extends AppController
         $yesuser = $this->Users->find()->where(['created'=> $yesterday])->count();
            $yesorg = $this->Users->find()->where(['created'=> $yesterday,'group_id' => 2])->count();
         $week = date("Y-m-d", mktime(0, 0, 0, date("m") , date("d")-7,date("Y")));
-        $weekuser = $this->Users->find()->where(['created'=> $week ])->count();
-         $weekorg = $this->Users->find()->where(['created'=> $week ,'group_id' => 2])->count();
+        $weekuser = $this->Users->find()->where(['created >'=> $week ])->count();
+  $month = date("Y-m-d", mktime(0, 0, 0, date("m")-1 , date("d"),date("Y")));
+          $monthuser = $this->Users->find()->where(['created >'=> $month ])->count();
+         $weekorg = $this->Users->find()->where(['created >'=> $week ,'group_id' => 2])->count();
         $number = $this->Users->find()->where(['group_id' => 1])->count();
          $numorg = $this->Users->find()->where(['group_id' => 2])->count();
+        $numman = $this->Users->find()->where(['group_id' => 6])->count();
 
         $users = $this->paginate($this->Users->find('all',['limit' => 200, 'conditions' => array('group_id' => 2 )]));
           $managers = $this->paginate($this->Users->find('all',['limit' => 200, 'conditions' => array('group_id' => 6 )]));
@@ -58,17 +78,17 @@ class AdminDashBoardController extends AppController
         $numcontact = $this->Contact->find()->where(['id' != 0])->count();
         $newcontact = $this->Contact->find()->where(['created >'=> date("Y-m-d")])->count();
         $yescontact = $this->Contact->find()->where(['created'=> $yesterday])->count();
-        $weekcontact = $this->Contact->find()->where(['created'=> $week ])->count();
+        $weekcontact = $this->Contact->find()->where(['created >'=> $week ])->count();
        
  $this->loadModel('Tickets');
         $numtic = $this->Tickets->find()->where(['status' => 'success'])->count();
         $tictoday = $this->Tickets->find()->where(['status' => 'success','created >'=> date("Y-m-d")])->count();
         $ticyes = $this->Tickets->find()->where(['status' => 'success','created'=> $yesterday])->count();
-        $ticweek = $this->Tickets->find()->where(['status' => 'success','created'=> $week ])->count();
+        $ticweek = $this->Tickets->find()->where(['status' => 'success','created >'=> $week ])->count();
         $month = date("Y-m-d", mktime(0, 0, 0, date("m")-1 , date("d"),date("Y")));
         $year = date("Y-m-d", mktime(0, 0, 0, date("m") , date("d"),date("Y")-1));
-        $ticmonth = $this->Tickets->find()->where(['status' => 'success','created'=> $week])->count();
-        $ticyr = $this->Tickets->find()->where(['status' => 'success','created'=> $week])->count();
+        $ticmonth = $this->Tickets->find()->where(['status' => 'success','created >'=> $month])->count();
+        $ticyr = $this->Tickets->find()->where(['status' => 'success','created >'=> $year])->count();
        
  $this->paginate = [
             'contain' => ['Events']
@@ -87,15 +107,14 @@ class AdminDashBoardController extends AppController
        $page = (isset($this->request->query['page'])) ? $this->request->query['page'] : 0;
           $this->set(compact('users'));
         $this->set('_serialize', ['users']);
-
-        $this->set(compact('number','numevent','numcontact','numtic','numbevent','upevent','newuser','yesuser','weekuser','tictoday','ticyes','ticweek','ticmonth','ticyr','numorg','managers','orgevent','orgwaitevent','uporgevent','orgactiveevent','neworg','yesorg','weekorg','newcontact','weekcontact','yescontact','ticevent','orgpaidevent','orgfreeevent','orgeventtic','toevent','delevent'));
+$this->set('top',$top);
+        $this->set(compact('number','numevent','numcontact','numtic','numbevent','upevent','newuser','yesuser','weekuser','tictoday','ticyes','ticweek','ticmonth','ticyr','numorg','managers','orgevent','orgwaitevent','uporgevent','orgactiveevent','neworg','yesorg','weekorg','newcontact','weekcontact','yescontact','ticevent','orgpaidevent','orgfreeevent','orgeventtic','toevent','delevent','pastevent','numman','monthuser','freeevent','pastorgevent','orgdelevent'));
         
         //$adminDashBoard = $this->paginate($this->AdminDashBoard);
 
         //$this->set(compact('adminDashBoard'));
         //$this->set('_serialize', ['adminDashBoard']);
     }
-
     /**
      * View method
      *

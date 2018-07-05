@@ -20,7 +20,7 @@
                 </h2>
             </div>
             <div class="body table-responsive">
-                <table class="table table-bordered table-striped table-hover js-basic-example dataTable vertical-table">
+                <table class="table table-bordered table-striped table-hover vertical-table">
                     <thead>
                         <tr>
                             <th scope="row"><?= __('Event') ?></th>
@@ -47,7 +47,6 @@
                                 <td><?= h($ticket->firstname) ?></td>
                                 <td><?= h($ticket->lastname) ?></td>
                                 <td><?= h($ticket->name) ?></td>
-                                <td><?= h($ticket->email) ?></td>
                                 <td><?= h($ticket->email) ?></td>
                                 <td><?= h($ticket->service_provider) ?></td>
                                 <td><?= h($ticket->productinfo) ?></td>

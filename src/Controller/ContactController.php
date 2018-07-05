@@ -32,6 +32,14 @@ class ContactController extends AppController
     public function index()
     {
         $this->viewBuilder()->layout('admin');
+ $keyword = $this->request->query('keyword');
+        if(!empty($keyword)){
+
+            $this->paginate = ['conditions'=> array("OR" => array(
+    'Name LiKE' => '%'.$keyword.'%',
+    'email LiKE' => '%'.$keyword.'%','comments LiKE' => '%'.$keyword.'%','reply LiKE' => '%'.$keyword.'%','created LiKE' => '%'.$keyword.'%' ))];
+        //$this->paginate = ['conditions'=>['date LiKE' => '%'.$keyword.'%']];
+        }
         $contact = $this->paginate($this->Contact);
         $page = (isset($this->request->query['page'])) ? $this->request->query['page'] : 0;
         $this->set(compact('page'));
@@ -47,7 +55,7 @@ class ContactController extends AppController
      * @throws \Cake\Datasource\Exception\RecordNotFoundException When record not found.
      */
     public function view($id = null)
-    {
+    {   $this->viewBuilder()->layout('admin');
         $contact = $this->Contact->get($id, [
             'contain' => []
         ]);
@@ -108,6 +116,7 @@ class ContactController extends AppController
      */
     public function edit($id = null)
     {
+  	$this->viewBuilder()->layout('admin');
         $contact = $this->Contact->get($id, [
             'contain' => []
         ]);

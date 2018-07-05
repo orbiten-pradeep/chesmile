@@ -5,8 +5,13 @@
             <div class="header">
                 <h2>
                     Event Organizers List
-                </h2>
-                <ul class="header-dropdown m-r--5">
+                </h2> <ul class="header-dropdown m-r--5 pull-right">
+            <?= $this->Form->create("",['type'=> 'get'])?>
+           <?= $this->Form->control('keyword',['default'=> $this->request->query('keyword')]); ?>
+           <button>Search</button>
+            <?= $this->Form->end()?>
+          </ul>
+               <!--  <ul class="header-dropdown m-r--5">
                     <li class="dropdown">
                         <a href="javascript:void(0);" class="dropdown-toggle" data-toggle="dropdown" role="button" aria-haspopup="true" aria-expanded="false">
                             <i class="material-icons">more_vert</i>
@@ -17,13 +22,13 @@
                             <li><a href="javascript:void(0);">Something else here</a></li>
                         </ul>
                     </li>
-                </ul>
+                </ul> -->
             </div>
             <div class="body table-responsive">
-                <table class="table table-bordered table-striped table-hover js-basic-example dataTable">
+                <table class="table table-bordered table-striped table-hover ">
                     <thead>
-                        <tr> <th scope="col"><?= $this->Paginator->sort('Select') ?></th>
-                            <th scope="col"><?= $this->Paginator->sort('Serial No') ?></th>
+                        <tr> <th scope="col"><?= __('Select') ?><!-- <?= $this->Paginator->sort('Select') ?> --></th>
+                            <th scope="col"><?= __('Serial No') ?><!-- <?= $this->Paginator->sort('Serial No') ?> --></th>
                             <th scope="col"><?= $this->Paginator->sort('email') ?></th>
                             <th scope="col"><?= $this->Paginator->sort('fullname') ?></th>
                             <th scope="col"><?= $this->Paginator->sort('group_id') ?></th>
@@ -73,7 +78,7 @@
                             <?php endforeach; ?>
                     </tbody>
                 </table> <div class="pull-right"> <!--  <a id="add" href=""><button class="btn btn-primary waves-effect">Add</button></a> --> <?php
-echo $this->Html->link( $this->Html->tag('i', 'Add New', array('class' => 'btn btn-primary waves-effect', 'title'=>'AddNew')), ['action' => 'add'], array('escape'=>false)); ?> 
+echo $this->Html->link( $this->Html->tag('i', 'Add New', array('class' => 'btn btn-primary waves-effect', 'title'=>'AddNew')), ['action' => 'adminadd'], array('escape'=>false)); ?> 
          
                 <a id ="edit" href=""><button class="btn btn-primary waves-effect">Edit</button></a>
                   <a id ="view" href=""><button class="btn btn-primary waves-effect">View</button></a>

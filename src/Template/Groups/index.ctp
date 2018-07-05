@@ -27,38 +27,22 @@
         <h2>
           Groups List
         </h2>
-        <!-- <ul class="header-dropdown m-r--5">
-          <li class="dropdown">
-            <a href="javascript:void(0);" class="dropdown-toggle" data-toggle="dropdown" role="button" aria-haspopup="true" aria-expanded="false">
-              <i class="material-icons">more_vert
-              </i>
-            </a>
-            <ul class="dropdown-menu pull-right">
-              <li>
-                <a href="javascript:void(0);">Action
-                </a>
-              </li>
-              <li>
-                <a href="javascript:void(0);">Another action
-                </a>
-              </li>
-              <li>
-                <a href="javascript:void(0);">Something else here
-                </a>
-              </li>
-            </ul>
-          </li>
-        </ul> -->
+        <ul class="header-dropdown m-r--5 pull-right">
+        <?= $this->Form->create("",['type'=> 'get'])?>
+      <?= $this->Form->control('keyword',['default'=> $this->request->query('keyword')]); ?>
+       <button>Search</button>
+        <?= $this->Form->end()?>
+        </ul>
       </div>
       <div class="body table-responsive">
-        <table class="table table-bordered table-striped table-hover js-basic-example dataTable">
+        <table class="table table-bordered table-striped table-hover ">
           <thead>
             <tr>
-              <th scope="col">
-                <?= $this->Paginator->sort('Select') ?>
+              <th scope="col"><?= __('Select') ?>
+               <!--  <?= $this->Paginator->sort('Select') ?> -->
               </th>
-              <th scope="col">
-                <?= $this->Paginator->sort('Serial No') ?>
+              <th scope="col"><?= __('Serial No') ?>
+                <!-- <?= $this->Paginator->sort('Serial No') ?> -->
               </th>
               <th scope="col">
                 <?= $this->Paginator->sort('name') ?>

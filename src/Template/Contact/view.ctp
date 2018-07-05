@@ -1,8 +1,51 @@
-<nav class="large-3 medium-4 columns" id="actions-sidebar">
+<div class="block-header">
+    <h2></h2>
+</div>
+<!-- Basic Table -->
+<div class="row clearfix">
+    <div class="col-lg-12 col-md-12 col-sm-12 col-xs-12">
+        <div class="card">
+            <div class="header">
+                <h2>
+                    Contact Query
+                </h2>
+            </div>
+            <div class="body table-responsive">
+                <table class="table table-bordered table-striped table-hover ">
+                    <thead>
+                        <tr> <th scope="col"><?= __('ID') ?></th>
+                            <th scope="col"><?= __('Name') ?>
+                            <th scope="col"><?= __('Email') ?></th>
+                            <th scope="col"><?= __('Comments') ?></th>
+                            <th scope="col"><?= __('Created') ?></th>
+                        </tr>
+                    </thead>
+                    <tbody>
+                            <tr> <td><?= $this->Number->format($contact->ID) ?></td>
+                                <td><?= h($contact->Name) ?></td>
+                                <td><?= h($contact->email) ?></td>
+                                <td><?= $this->Text->autoParagraph(h($contact->comments)); ?></td>
+                                <td><?= h($contact->created) ?></td>
+                            </tr>
+                    </tbody>
+                </table>
+                <!-- <div class="paginator">
+                    <ul class="pagination">
+                    <?= $this->Paginator->prev('< ' . __('previous')) ?>
+                    <?= $this->Paginator->numbers() ?>
+                    <?= $this->Paginator->next(__('next') . ' >') ?>
+                    </ul>
+                    <p><?= $this->Paginator->counter() ?></p>
+                </div> -->
+            </div>
+        </div>
+    </div>
+</div>
+<!-- <nav class="large-3 medium-4 columns" id="actions-sidebar">
     <ul class="side-nav">
         <li class="heading"><?= __('Actions') ?></li>
         <li><?= $this->Html->link(__('Edit Contact'), ['action' => 'edit', $contact->ID]) ?> </li>
-       <!--  <li><?= $this->Form->postLink(__('Delete Contact'), ['action' => 'delete', $contact->ID], ['confirm' => __('Are you sure you want to delete # {0}?', $contact->ID)]) ?> </li> -->
+        <li><?= $this->Form->postLink(__('Delete Contact'), ['action' => 'delete', $contact->ID], ['confirm' => __('Are you sure you want to delete # {0}?', $contact->ID)]) ?> </li>
         <li><?= $this->Html->link(__('List Contact'), ['action' => 'index']) ?> </li>
         <li><?= $this->Html->link(__('New Contact'), ['action' => 'add']) ?> </li>
     </ul>
@@ -32,3 +75,4 @@
         <?= $this->Text->autoParagraph(h($contact->comments)); ?>
     </div>
 </div>
+ -->

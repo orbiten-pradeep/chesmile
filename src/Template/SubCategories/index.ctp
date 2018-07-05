@@ -36,14 +36,14 @@
         </h2>
       </div>
       <div class="body table-responsive">
-        <table class="table table-bordered table-striped table-hover js-basic-example dataTable">
+        <table class="table table-bordered table-striped table-hover ">
           <thead>
             <tr> 
-              <th scope="col">
-                <?= $this->Paginator->sort('Select') ?>
+              <th scope="col"><?= __('Select') ?>
+               <!--  <?= $this->Paginator->sort('Select') ?> -->
               </th>
-              <th scope="col">
-                <?= $this->Paginator->sort('Serial No') ?>
+              <th scope="col"><?= __('Serial No') ?>
+<!--                 <?= $this->Paginator->sort('Serial No') ?> -->
               </th>
               <th scope="col">
                 <?= $this->Paginator->sort('categories_id') ?>
@@ -91,16 +91,13 @@ foreach ($subCategories as $subCategory):$n++; ?>
                 <?= h($subCategory->name) ?>
               </td>
                <td>
-                <?php 
-if($subCategory->active == 1)
-{ echo "Enabled"; } 
-else if($subCategory->active == 0)
-{ echo "Waiting for Admin Review.."; } 
-elseif ($subCategory->active == 2) {
-echo "Deactivated";
+                <?php if($subCategory->active == 0) {
+echo "Disabled";
+} else {
+echo "Enabled";
 }
-//echo $event;
-?>  </td>
+?>
+              </td>
               <!-- <td>
                 <?= h($subCategory->active) ?>
               </td> -->

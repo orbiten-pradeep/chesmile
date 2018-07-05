@@ -37,7 +37,7 @@
                             <?= $this->Form->create($subCategory) ?>
                                 <label for="">Category</label>
                                 <div class="form-group">
-                                     <?php echo $this->Form->input('Category',array('class' => 'form-control show-tick','label' => false,'empty' => '(Select Category)','div' => false,'options' => $categories));?>
+                                     <?php echo $this->Form->input('categories_id',array('class' => 'form-control show-tick','label' => false,'empty' => '(Select Category)','div' => false,'options' => $categories));?>
                                 </div>
 
                                 <label for="">Subcategory Name</label>
@@ -46,14 +46,14 @@
                                         <?php echo $this->Form->input('name',array('div' => false,'class' => 'form-control','label' => false,'placeholder' => 'Enter Subcategory Name'));?>
                                     </div>
                                 </div>
-                               <div class="form-group">
-                                    <div class="form-line">
-                                         <?php  echo $this->Form->input('active');?> 
-                                    </div>
-                                </div>
+                               
                                <!-- <div class="form-group">
                                     <?php  echo $this->Form->input('Active',['type' => 'checkbox','class' => 'form-control filled-in','id' => 'ig_checkbox']);?>
                                </div> -->
+                               <div class="form-group">
+                                    <input type="checkbox" name="active" id="basic_checkbox_2" value ="1" class="form-control filled-in">
+                                    <label for="basic_checkbox_2">Active</label>
+                               </div>
                                 <!-- <button type="button" class="btn btn-primary m-t-15 waves-effect">LOGIN</button> -->
                                 <?= $this->Form->button(__('Submit'),array('class' => 'btn btn-primary m-t-15 waves-effect')) ?>
                             <?= $this->Form->end() ?>

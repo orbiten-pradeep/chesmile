@@ -19,6 +19,16 @@ class CategoriesController extends AppController
     public function index()
     {
         $this->viewBuilder()->layout('admin');
+ $keyword = $this->request->query('keyword');
+        if(!empty($keyword)){
+
+            $this->paginate = ['conditions'=> array("OR" => array(
+    'name LiKE' => '%'.$keyword.'%',
+    'color LiKE' => '%'.$keyword.'%',
+'categorylitecolor LiKE' => '%'.$keyword.'%',
+'created LiKE' => '%'.$keyword.'%' ))];
+        //$this->paginate = ['conditions'=>['date LiKE' => '%'.$keyword.'%']];
+        }
         $categories = $this->paginate($this->Categories);
         $page = (isset($this->request->query['page'])) ? $this->request->query['page'] : 0;
         $this->set(compact('page'));

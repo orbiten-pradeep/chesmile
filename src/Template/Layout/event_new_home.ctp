@@ -33,6 +33,27 @@
     <link rel="stylesheet" href="//cdnjs.cloudflare.com/ajax/libs/timepicker/1.3.5/jquery.timepicker.min.css">
 
     <?php echo $this->Html->css(['daterangepicker']); ?>
+    <style type="text/css">
+     /* .btn-out {
+    border: 2px solid #967e83!important;
+    }*/
+    .btn-out {
+    border: 1px solid #50bac4!important;
+}
+    .navbar .cs-city {
+    
+    color: black !important;
+        font-size: .74rem;
+}
+.btnbtn{
+  line-height: 2.2 !important;
+}
+ .btn-bg {
+    background-color: #1e88e5!important;
+    line-height: 1 !important;
+    padding: .8rem 1.14rem !important;
+}
+    </style>
 </head>
 
 <body>
@@ -62,7 +83,23 @@
               <div class="dropdown ipad-user-profile">
                   <button class="btn btn-head btn-primary user-dropdown dropdown-toggle cs-dropbtn p-0" type="button" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
                       <div class="avatar">
-                        <?=  $this->Html->image('profile_thumbnail.jpg',array('alt' => 'Profile Picture','class' => 'img-fluid rounded-circle')); ?>
+                      <?php
+        $user = $this->request->session()->read('Auth.User');
+        
+        if(!empty($user['Photo'])) {
+        echo $this->Html->image('profile/'.$user['Photo'],array('alt' => 'Profile Picture','class' => 'img-fluid rounded-circle','width' => '60px', 'height' => '60px','onclick' => 'largedrop()'));
+        } else
+        {
+        echo $this->Html->image('profile_thumbnail.jpg',array('alt' => 'Profile Picture','class' => 'img-fluid rounded-circle','onclick' => 'largedrop()'));
+        }
+        ?> 
+                       <!--  <?php if($userProfile->Photo) {
+                echo $this->Html->image('profile/'.$userProfile->Photo, array('height' => '100px','width' => '100px','alt'=>'aswq','class' => 'img-style'));
+            }  else {
+                echo $this->Html->image('profile.png',array('alt' => '','class' => 'avatar img-style','height' => '100px', 'width' => '100px')); 
+            }
+            ?> -->
+                      <!--   <?=  $this->Html->image('profile_thumbnail.jpg',array('alt' => 'Profile Picture','class' => 'img-fluid rounded-circle')); ?> -->
                       </div>
                   </button>
                   <div class="dropdown-menu" aria-labelledby="dropdownMenu4">                        
@@ -76,16 +113,16 @@
               
               <?php if(!$this->request->session()->read('Auth.User')) { ?>
               <li class="nav-item">
-                <a href="#" class="btn btn-sm btn-primary cs_login_btn cs-city-btn p-2" data-toggle="modal" data-target="#cs-login-modal">Login/signup</a>
+                <a href="#" class="btn btn-sm btn-bg " data-toggle="modal" data-target="#cs-login-modal">Login/signup</a>
               </li>  
               <li class="nav-item">
-                <a href="#" class="btn btn-sm btn-primary cs_login_btn cs-city-btn p-2" data-toggle="modal" data-target="#cs-login-modal">Create Events</a>
+                <a href="#" class="btn btn-sm btn-bg " data-toggle="modal" data-target="#cs-login-modal">Create Events</a>
               </li>
               <?php } ?>
 
               <?php $user = $this->request->session()->read('Auth.User'); if($user && $user['group_id'] == 1) { ?>
               <li class="nav-item">                    
-                <a href="#" class="btn btn-sm btn-primary cs_login_btn cs-city-btn p-2" data-toggle="modal" data-target="#orgSignup">Create events</a>                    
+                <a href="#" class="btn btn-sm btn-bg" data-toggle="modal" data-target="#orgSignup">Create events</a>                    
               </li>
               <?php } ?>
 
@@ -102,7 +139,7 @@
                 <ul class="navbar-nav mr-auto search-box">
                   <li class="search-category">
                     <div class="search-menu">
-                      <button type="button" class="btn btn-head btn-primary btn-md cat-not-selected" type="button">
+                      <button type="button" class="btn btn-head btn-md btn-primary btn-go btn-category-search" type="button">
                         <label>Category</label>
                         <i class="fa fa-bars float-right"></i>
                       </button>
@@ -129,7 +166,7 @@
                       <button type="button" class="btn btn-head btn-md btn-primary btn-go btn-category-search"><i class="fa fa-search" aria-hidden="true"></i></button>
                   </li>
                   <li class="nav-item dropdown nav-city-link">
-                      <a class="nav-link btn btn-grey btn-sm dropdown-toggle cs-city-btn" id="navbarDropdownMenuLink" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">Look your city</a>
+                      <a class="nav-link btnbtn btn-sm dropdown-toggle cs-city btn btn-out btn-rounded waves-effect" id="navbarDropdownMenuLink" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">Look your city</a>
                       <div class="dropdown-menu dropdown-primary cs_city_drpdwn" aria-labelledby="navbarDropdownMenuLink">
                           <div class="row">
                       <div class="col-sm-4">
@@ -156,7 +193,23 @@
                   <div class="dropdown ml-4">
                       <button class="btn btn-primary btn-head user-dropdown dropdown-toggle cs-dropbtn p-0" type="button" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
                           <div class="avatar">
-                            <?=  $this->Html->image('profile_thumbnail.jpg',array('alt' => 'Profile Picture','class' => 'img-fluid rounded-circle')); ?>
+                        <?php
+        $user = $this->request->session()->read('Auth.User');
+        
+        if(!empty($user['Photo'])) {
+        echo $this->Html->image('profile/'.$user['Photo'],array('alt' => 'Profile Picture','class' => 'img-fluid rounded-circle','width' => '60px', 'height' => '60px','onclick' => 'largedrop()'));
+        } else
+        {
+        echo $this->Html->image('profile_thumbnail.jpg',array('alt' => 'Profile Picture','class' => 'img-fluid rounded-circle','onclick' => 'largedrop()'));
+        }
+        ?> 
+                      <!--       <?php if($userProfile->Photo) {
+                echo $this->Html->image('profile/'.$userProfile->Photo, array('height' => '100px','width' => '100px','alt'=>'aswq','class' => 'img-style'));
+            }  else {
+                echo $this->Html->image('profile.png',array('alt' => '','class' => 'avatar img-style','height' => '100px', 'width' => '100px')); 
+            }
+            ?> -->
+                           <!--  <?=  $this->Html->image('profile_thumbnail.jpg',array('alt' => 'Profile Picture','class' => 'img-fluid rounded-circle')); ?> -->
                           </div>
                       </button>
                       <div class="dropdown-menu" aria-labelledby="dropdownMenu4">                        
@@ -172,22 +225,22 @@
                 <ul class="navbar-nav nav-cs-action pull-right">
                   <?php if(!$this->request->session()->read('Auth.User')) { ?>
                   <li class="nav-item">
-                    <a href="#" class="btn btn-sm btn-primary cs_login_btn cs-city-btn p-2" data-toggle="modal" data-target="#cs-login-modal">Login/signup</a>
+                    <a href="#" class="btn btn-bg " data-toggle="modal" data-target="#cs-login-modal">Login/signup</a>
                   </li>
                   <li class="nav-item">
-                    <a href="#" class="btn btn-sm btn-primary cs_create_btn cs-city-btn p-2" data-toggle="modal" data-target="#cs-login-modal">Create Events</a>
+                    <a href="#" class="btn btn-bg " data-toggle="modal" data-target="#cs-login-modal">Create Events</a>
                   </li>
                   <?php } ?>
 
                   <?php $user = $this->request->session()->read('Auth.User'); if($user && $user['group_id'] == 1) { ?>
                   <li class="nav-item">                    
-                    <a href="#" class="btn btn-primary cs_create_btn cs-city-btn p-2" data-toggle="modal" data-target="#orgSignup">Create events</a>                   
+                    <a href="#" class="btn btn-bg " data-toggle="modal" data-target="#orgSignup">Create events</a>                   
                   </li>
                   <?php } ?>
 
                   <?php $user = $this->request->session()->read('Auth.User'); if($user && $user['group_id'] != 1) { ?>
                   <li class="nav-item">                    
-                    <?= $this->Html->link(__('Create Events'), ['controller' => 'events', 'action' => 'add'], array('class' => 'btn btn-sm btn-primary cs_create_btn cs-city-btn p-2')); ?>                 
+                    <?= $this->Html->link(__('Create Events'), ['controller' => 'events', 'action' => 'add'], array('class' => 'btn btn-sm btn-bg cs_create_btn cs-city-btn p-2')); ?>                 
                   </li>
                   <?php } ?>
                 </ul>
@@ -205,7 +258,7 @@
     <!-- /Start your project here-->
 
     <!--Footer-->
-    <footer class="page-footer font-small pt-4 cs-footer">
+    <footer class="page-footer font-small pt-4 mt-4 cs-footer">
       <div class="container">
         <div class="row">
           <div class="text-center cs-footer-social">
@@ -304,6 +357,9 @@
                         <li class="nav-item">
                             <a class="nav-link" data-toggle="tab" href="#panel8" role="tab"><i class="fa fa-user-plus mr-1"></i> Register</a>
                         </li>
+                        <li class="nav-item" style="display: none;">
+                            <a class="nav-link" data-toggle="tab" href="#forgPass" role="tab"></a>
+                        </li>
                     </ul>
 
                     <!-- Tab panels -->
@@ -314,10 +370,7 @@
                             <!--Body-->
                             <div class="modal-body mb-1">
                                 <?= $this->Form->create('',array('id' => 'loginForm2','class' => 'form-signin', 'url' => ['action' => 'login','controller' => 'users'])) ?>
-
                                     <div class="md-form form-sm mb-5">
-                                        <!-- <label data-error="wrong" data-success="right" for="email">Your email</label> -->
-                                        <!--  <i class="fa fa-envelope prefix"></i> -->
                                         <?= $this->Form->input('email', array('label' => 'Your Email','div' => false,'id' => 'email','class' => 'form-control form-control-sm validate','required' => true)) ?>   
                                     </div>
 
@@ -325,6 +378,7 @@
                                         <?= $this->Form->input('password',array('label' => 'Your Password','div' => false,'id' => 'password', 'class' => 'form-control form-control-sm validate','required' => true)) ?>
                                     </div>
                                         <?= $this->Form->submit(__('Log In'), array('id' => 'Login2', 'class' => 'btn btn-primary btn-lg cs-signup-button cs-signin-button')) ?>
+                                        <a class="nav-link" id="forgLink" href="#">Forgot password?</a>
                                   <?= $this->Form->end() ?>
                             </div>
                             <!--Footer-->
@@ -371,8 +425,19 @@
                             </div>
                         </div>
                         <!--/.Panel 8-->
+                        <div class="tab-pane fade" id="forgPass" role="tabpanel">
+                          <div class="modal-body">
+                            <?= $this->Form->create('', array('id' => 'forgotpassform', 'url' => ['action' => 'forgetpassword','controller' => 'users'])) ?>
+                              <div class="md-form form-sm mb-4">
+                                    <?= $this->Form->input('email', array('label' => 'Email','div' => false,'id' => 'email', 'class' => 'form-control form-control-sm','label' => false,'placeholder' => 'Enter your email address', 'required' => true)) ?>
+                              </div>
+                              <div class="md-form form-sm mb-4">
+                                  <?= $this->Form->submit(__('Recover'), array('id' => 'Login', 'class' => 'btn btn-primary btn-lg cs-signup-button')) ?>
+                              </div>
+                            <?= $this->Form->end() ?>
+                          </div>
+                        </div>
                     </div>
-
                 </div>
             </div>
             <!--/.Content-->
@@ -545,6 +610,12 @@
     <script type="text/javascript" src="<?php echo $this->Url->build('/newtheme/custom/js/event.add.js'); ?>"></script>
 
     <script src="http://maps.googleapis.com/maps/api/js?libraries=places&key=AIzaSyCx2hb4R1uhaMbmlUAu1_lFasvl3gVHtnw"></script>
+
+    <script type="text/javascript">
+      $('#forgLink').click(function(){
+      $('.nav-tabs > .nav-item').next('li.nav-item').next('li.nav-item').find('a').trigger('click');
+      });
+    </script>
 
 </body>
 </html>

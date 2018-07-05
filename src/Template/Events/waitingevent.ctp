@@ -18,37 +18,47 @@
         <table class="table table-bordered table-striped table-hover ">
           <thead>
             <tr> 
-              <th scope="col">
-                <?= $this->Paginator->sort('Select') ?>
+               <th scope="col"><?= __('Select') ?>
+               <!--  <?= $this->Paginator->sort('Select') ?> -->
               </th>
               <th scope="col">
-                <?= $this->Paginator->sort('Serial No') ?>
+                <?= $this->Paginator->sort('id') ?>
               </th>
               <th scope="col">
                 <?= $this->Paginator->sort('title') ?>
               </th>
               <th scope="col">
-                <?= $this->Paginator->sort('active') ?>
+                <?= $this->Paginator->sort('categories_id') ?>
               </th>
               <th scope="col">
-                <?= $this->Paginator->sort('categories_id') ?>
+                <?= $this->Paginator->sort('user_id') ?>
+              </th>
+              <th scope="col">
+                <?= $this->Paginator->sort('active') ?>
               </th>
               <th scope="col">
                 <?= $this->Paginator->sort('date') ?>
               </th>
               <th scope="col">
+                <?= $this->Paginator->sort('todate') ?>
+              </th>
+              <th scope="col">
                 <?= $this->Paginator->sort('time') ?>
               </th>
               <th scope="col">
-                <?= $this->Paginator->sort('register_online') ?>
+                <?= $this->Paginator->sort('totime') ?>
+              </th>
+              <th scope="col">
+                <?= $this->Paginator->sort('register_online')?>
               </th>
               <!--  <th scope="col" class="actions"><?= __('Actions') ?></th> -->
             </tr>
           </thead>
           <tbody>
             <?php  
-$n=0 + (10 * $page);
-foreach ($eventss as $event): $n++; ?>
+//$n=0 + (10 * $page);
+foreach ($eventss as $event): 
+  //$n++; ?>
             <tr>
               <td> 
                 <!-- <div class="form-check mb-4">
@@ -79,10 +89,18 @@ foreach ($eventss as $event): $n++; ?>
                 </span>
               </td>
               <td>
-                <?= $this->Number->format($n) ?>
+               <?= h($event->id) ?>
+                <!-- <?= $this->Number->format($n) ?> -->
               </td>
               <td>
                 <?= h($event->title) ?>
+              </td>
+             
+              <td>
+                <?= $event->has('category') ? $this->Html->link($event->category->name, ['controller' => 'Categories', 'action' => 'view', $event->category->id]) : '' ?>
+              </td>
+              <td>
+                <?= $event->has('user') ? $this->Html->link($event->user->fullname, ['controller' => 'Users', 'action' => 'view', $event->user->id]) : '' ?>
               </td>
               <td>
                 <?php 
@@ -97,13 +115,16 @@ echo "Deleted";
 ?>  
               </td>
               <td>
-                <?= $event->has('category') ? $this->Html->link($event->category->name, ['controller' => 'Categories', 'action' => 'view', $event->category->id]) : '' ?>
-              </td>
-              <td>
                 <?= h($event->date) ?>
+              </td>
+               <td>
+                <?= h($event->todate) ?>
               </td>
               <td>
                 <?= h($event->time) ?>
+              </td>
+              <td>
+                <?= h($event->totime) ?>
               </td>
               <td>
                 <?php if($event->register_online == 0) {

@@ -75,13 +75,25 @@ class EventsController extends AppController
 			]);
 
         $tcConn = ConnectionManager::get('default');
-        $topCategoriesQuery = "SELECT count(e.id) as event_counts, c.name, c.color, c.categorylitecolor, c.id as cid FROM `events` e LEFT JOIN categories c on c.id = e.categories_id WHERE c.id!='' AND e.active = 1 AND e.date >= CURDATE() GROUP BY c.id ORDER BY rand() limit 5";
+        $topCategoriesQuery = "SELECT count(e.id) as event_counts, c.name, c.color, c.categorylitecolor, c.id as cid FROM `events` e LEFT JOIN categories c on c.id = e.categories_id WHERE c.id!='' AND e.active = 1 AND e.date >= CURDATE() GROUP BY c.id ORDER BY rand() limit 6";
 
         $tcStmt = $tcConn->execute($topCategoriesQuery);
         $topCategories = $tcStmt->fetchAll('assoc');
 
         $users_id = $this->Auth->user('id');
+   $this->loadModel('UserProfile');
+       $userProfile = $this->UserProfile->find()->select(['UserProfile.userid', 'UserProfile.Photo','UserProfile.id']);
+        $this->paginate = [
+             'contain' => ['Events']
+         ];
+        $this->loadModel('Banners');
+        $banner= $this->paginate['conditions'] = array('Events.date >'=>date("Y-m-d") , 'Banners.active' => '1');
+        $banners = $this->paginate($this->Banners);
+       $this->set(compact('banners','banner'));
+       $this->set('_serialize', ['banners']);
+       $this->set('_serialize', ['banner']);
 
+        $this->set('userProfile', $userProfile);
         $this->set('categories', $categories_new);
         $this->set('usersId', $users_id);
         $this->set('topCategories', $topCategories);
@@ -236,6 +248,9 @@ class EventsController extends AppController
 
  public function mysettle()
     {
+        $this->paginate = [
+            'contain' => ['Users', 'Categories']
+        ];
         $this->viewBuilder()->layout('admin');
        if(!empty($this->Auth->user('id')))
         {
@@ -289,6 +304,14 @@ public function organizerevents()
         }
 
         $filter = false;
+         $keyword = $this->request->query('keyword');
+        if(!empty($keyword)){
+
+            $this->paginate = ['conditions'=> array("OR" => array(
+    'title LiKE' => '%'.$keyword.'%',
+    'date LiKE' => '%'.$keyword.'%','time LiKE' => '%'.$keyword.'%', 'todate LiKE' => '%'.$keyword.'%','totime LiKE' => '%'.$keyword.'%','OrganizersName LiKE' => '%'.$keyword.'%' ))];
+        //$this->paginate = ['conditions'=>['date LiKE' => '%'.$keyword.'%']];
+        }
         $this->paginate['order'] = array('Events.created' => 'desc');
         //debug($this->paginate);
         //exit(0);
@@ -443,6 +466,68 @@ public function organizerevents()
         $this->set(compact('address', 'mediapartners', 'sponsors', 'number', 'likes', 'u_id', 'galaries'));
     }
 
+/**
+     * View method
+     *
+     * @param string|null $id Event id.
+     * @return \Cake\Network\Response|null
+     * @throws \Cake\Datasource\Exception\RecordNotFoundException When record not found.
+     */
+    public function settlementview($id = null, $slug = null)
+    {
+        $this->viewBuilder()->layout('admin');
+
+        if($id == null)
+        {
+            $event_val = $this->Events->findBySlug($slug, [
+                'contain' => ['Users', 'Categories']
+            ]);
+            $event_val = $event_val->first();
+            $id = $event_val['id'];
+        }
+        $event = $this->Events->get($id, [
+            'contain' => ['Users', 'Categories']
+        ]);
+        $u_id = "";
+        if(!empty($this->Auth->user('id')))
+        {
+            $u_id = $this->Auth->user('id');
+            $fullname = $this->Auth->user('fullname');
+            $email = $this->Auth->user('email');
+        }
+
+        $this->loadModel('Address');
+        $address = $this->Address->find('all', ['conditions' => ['events_id' => $id]]);
+        $address = $address->first();
+        $this->loadModel('Mediapartners');
+        $mediapartners = $this->Mediapartners->find('all', ['conditions' => ['events_id' => $id]]);
+        $this->loadModel('Galaries');
+        $galaries = $this->Galaries->find('all', ['conditions' => ['events_id' => $id]]);
+
+        $this->loadModel('Sponsors');
+        $sponsors = $this->Sponsors->find('all', ['conditions' => ['events_id' => $id]]);
+        $this->loadModel('Likes');
+        $likes = $this->Likes->find('all', ['conditions' => ['events_id' => $id]]);
+        $query = $this->Likes->find('all', ['select' => 'id',
+                'conditions' => ['events_id' => $id]]);
+        $number = $query->count();
+
+        $this->set('event', $event);
+        $this->set('_serialize', ['event']);
+
+        $this->loadModel('Categories');
+        $categories_new = $this->Categories->find()->select(['Categories.name', 'Categories.id'])
+            ->where(['active' => 1]);
+
+        $this->loadModel('SubCategories');
+        $subCategories_new = $this->SubCategories->find('all', ['fields' => 'name',
+                'conditions' => ['active' => 1]
+                    ]);
+
+        $this->set('categories', $categories_new);
+        $this->set(compact('subCategories_new'));
+        $this->set(compact('address', 'mediapartners', 'sponsors', 'number', 'likes', 'u_id', 'galaries'));
+    }
 
     /**
      * View method
@@ -1042,7 +1127,7 @@ public function organizerevents()
 				    	$email->send($message);
 				    }
 	            	$this->Flash->success(__('The event has been updated.'));
-	                return $this->redirect(['action' => 'index']);
+	                return $this->redirect(['action' => 'adminindex']);
 	            } else {
 	                $this->Flash->error(__('The event could not be updated. Please, try again.'));
 	            }
@@ -1420,7 +1505,14 @@ public function organizerevents()
 		$this->paginate = [
             'contain' => ['Users', 'Categories',]
         ];
-        
+         $keyword = $this->request->query('keyword');
+        if(!empty($keyword)){
+
+            $this->paginate = ['conditions'=> array("OR" => array(
+    'title LiKE' => '%'.$keyword.'%',
+    'date LiKE' => '%'.$keyword.'%','time LiKE' => '%'.$keyword.'%','OrganizersName LiKE' => '%'.$keyword.'%' ))];
+        //$this->paginate = ['conditions'=>['date LiKE' => '%'.$keyword.'%']];
+        }
         $this->paginate['order'] = array('Events.created' => 'desc');
         $events = $this->paginate($this->Events);
         $this->loadModel('Categories');
@@ -1486,6 +1578,113 @@ public function organizerevents()
         $this->set('usersId', $users_id);
         $this->set(compact('subCategories_new'));
     }
+
+public function eventindex()
+    {
+      $this->viewBuilder()->layout('admin');
+        
+         $this->loadModel('Events');
+         $tcConn = ConnectionManager::get('default');
+        $topq = "SELECT DISTINCT e.user_id, u.fullname, COUNT(e.user_id) as CreatedEvents 
+FROM `events` e INNER JOIN `users` u 
+ON e.user_id = u.id
+where e.active =1 
+GROUP BY e.user_id, u.fullname
+order by CreatedEvents desc limit 5";
+        $tcStmt = $tcConn->execute($topq);
+        $top = $tcStmt->fetchAll('assoc');
+
+        $numevent = $this->Events->find()->where(['active' => 1])->count();
+         $delevent = $this->Events->find()->where(['active' => 2])->count();
+         $ticevent = $this->Events->find()->where(['register_online' => 1,[ 'date >'=>date("Y-m-d") ]])->count();
+	$freeevent = $this->Events->find()->where(['register_online' => 0,[ 'date >'=>date("Y-m-d") ]])->count();
+        $numbevent = $this->Events->find()->where(['active' => 0])->count();
+        $pastevent = $this->Events->find()->where([ 'date <' =>date("Y-m-d") ,'active' => 1])->count();
+         $toevent = $this->Events->find()->where(['created >' => date("Y-m-d") ])->count();
+	$toactiveevent = $this->Events->find()->where(['created >' =>date("Y-m-d") , 'active' => 1 ])->count();
+          $yesterday = date("Y-m-d", mktime(0, 0, 0, date("m") , date("d")-1,date("Y")));
+          $yesevent = $this->Events->find()->where([ 'created' => $yesterday ])->count();
+           $week = date("Y-m-d", mktime(0, 0, 0, date("m") , date("d")-7,date("Y")));
+           $weekevent = $this->Events->find()->where([ 'created >=' => $week ])->count();
+           $month = date("Y-m-d", mktime(0, 0, 0, date("m")-1 , date("d"),date("Y")));
+            $monthevent = $this->Events->find()->where([ 'created >=' => $month])->count();
+        $upevent = $this->Events->find()->where([ 'date >'=>date("Y-m-d") ])->count();
+         if(!empty($this->Auth->user('id')))
+        {
+            $users_id = $this->Auth->user('id');
+           // $this->paginate['conditions'] = array("Events.user_id" => $users_id);
+             $orgevent = $this->Events->find()->where(["Events.user_id" => $users_id])->count();
+            $orgactiveevent = $this->Events->find()->where(["Events.user_id" => $users_id,'active' => 1])->count();
+            $orgwaitevent = $this->Events->find()->where(["Events.user_id" => $users_id,'active' => 0])->count();
+             $orgpaidevent = $this->Events->find()->where(["Events.user_id" => $users_id,'register_online' => 1])->count();
+              $orgfreeevent = $this->Events->find()->where(["Events.user_id" => $users_id,'register_online' => 0])->count();
+        $uporgevent = $this->Events->find()->where(["Events.user_id" => $users_id,'date >' => date("Y-m-d") ])->count();       
+        }
+        $this->loadModel('Users');
+         $neworg = $this->Users->find()->where(['created >'=> date("Y-m-d"),'group_id' => 2])->count();
+        $newuser = $this->Users->find()->where(['created >'=> date("Y-m-d")])->count();
+        $yesterday = date("Y-m-d", mktime(0, 0, 0, date("m") , date("d")-1,date("Y")));
+        $yesuser = $this->Users->find()->where(['created'=> $yesterday])->count();
+        $yesorg = $this->Users->find()->where(['created'=> $yesterday,'group_id' => 2])->count();
+        $week = date("Y-m-d", mktime(0, 0, 0, date("m") , date("d")-7,date("Y")));
+        $weekuser = $this->Users->find()->where(['created'=> $week ])->count();
+         $weekorg = $this->Users->find()->where(['created'=> $week ,'group_id' => 2])->count();
+        $number = $this->Users->find()->where(['group_id' => 1])->count();
+         $numorg = $this->Users->find()->where(['group_id' => 2])->count();
+//$organizer = $this->Users->find()->where(['group_id' => 2])->count();
+ $this->loadModel('Events');
+    $users = $this->paginate($this->Users->find('all',['limit' => 200, 'conditions' => array('group_id' => 2 )])); 
+       $eve = $this->Events->find()->where(["Events.user_id" => "Users.id"])->count(); 
+    //$users = $this->paginate($this->Users->find('all',['limit' => 200, 'conditions' => array('group_id' => 2 )]));
+        $this->loadModel('Events');
+        foreach ($users as $user) {
+            //$users_id = $this->users('id');
+             $eventss = $this->Events->find()->where(["Events.user_id" => "Users.id"])->count();
+        }
+         
+          $managers = $this->paginate($this->Users->find('all',['limit' => 200, 'conditions' => array('group_id' => 6 )]));
+   $this->loadModel('Contact');
+        $numcontact = $this->Contact->find()->where(['id' != 0])->count();
+        $newcontact = $this->Contact->find()->where(['created >'=> date("Y-m-d")])->count();
+        $yescontact = $this->Contact->find()->where(['created'=> $yesterday])->count();
+        $weekcontact = $this->Contact->find()->where(['created'=> $week ])->count();
+  
+ $this->loadModel('Tickets');
+        $numtic = $this->Tickets->find()->where(['status' => 'success'])->count();
+        $tictoday = $this->Tickets->find()->where(['status' => 'success','created >'=> date("Y-m-d")])->count();
+        $ticyes = $this->Tickets->find()->where(['status' => 'success','created'=> $yesterday])->count();
+        $ticweek = $this->Tickets->find()->where(['status' => 'success','created'=> $week ])->count();
+        $month = date("Y-m-d", mktime(0, 0, 0, date("m")-1 , date("d"),date("Y")));
+        $year = date("Y-m-d", mktime(0, 0, 0, date("m") , date("d"),date("Y")-1));
+        $ticmonth = $this->Tickets->find()->where(['status' => 'success','created'=> $week])->count();
+        $ticyr = $this->Tickets->find()->where(['status' => 'success','created'=> $week])->count();
+       
+ $this->paginate = [
+            'contain' => ['Events']
+        ];
+        if(!empty($this->Auth->user('id')))
+        {
+            $users_id = $this->Auth->user('id');
+            $fullname = $this->Auth->user('fullname');
+            $email = $this->Auth->user('email');
+            $this->paginate['conditions'] = array("Events.user_id" => $users_id);
+        }
+        $filter = false;
+        $this->paginate['order'] = array('Tickets.created' => 'desc');
+        $orgeventtic = $this->paginate($this->Tickets)->count();
+
+       $page = (isset($this->request->query['page'])) ? $this->request->query['page'] : 0;
+          $this->set(compact('users'));
+        $this->set('_serialize', ['users']);
+ $this->set('top',$top);
+        $this->set(compact('number','numevent','numcontact','numtic','numbevent','upevent','newuser','yesuser','weekuser','tictoday','ticyes','ticweek','ticmonth','ticyr','numorg','managers','orgevent','orgwaitevent','uporgevent','orgactiveevent','neworg','yesorg','weekorg','newcontact','weekcontact','yescontact','ticevent','orgpaidevent','orgfreeevent','orgeventtic','toevent','delevent','pastevent','monthevent','weekevent','yesevent','eventss','eventsss','freeevent','toactiveevent','newcontact','weekcontact','yescontact','numcontact'));
+        
+        //$adminDashBoard = $this->paginate($this->AdminDashBoard);
+
+        //$this->set(compact('adminDashBoard'));
+        //$this->set('_serialize', ['adminDashBoard']);
+    }
+
 	/**
      * View method
      *
@@ -1597,6 +1796,51 @@ public function organizerevents()
         $this->set(compact('event', 'users', 'categories', 'categories_list', 'subCategories', 'address'));
         $this->set('_serialize', ['event']);
     }
+/**
+     * Edit method
+     *
+     * @param string|null $id Event id.
+     * @return \Cake\Network\Response|void Redirects on successful edit, renders view otherwise.
+     * @throws \Cake\Network\Exception\NotFoundException When record not found.
+     */
+    public function settlementedit($id = null)
+    {
+        $event = $this->Events->get($id, [
+            'contain' => ['Eventsubcategories']
+        ]);
+         $this->viewBuilder()->layout('admin');
+        //$this->viewBuilder()->layout('event_home');
+        $this->loadModel('Address');
+        $address = $this->Address->find('all', ['conditions' => ['events_id' => $id]]);
+        $address = $address->first();
+        if(!empty($this->Auth->user('id')))
+        {
+            $users_id = $this->Auth->user('id');
+            $fullname = $this->Auth->user('fullname');
+            $email = $this->Auth->user('email');
+        }
+
+
+        if ($this->request->is(['patch', 'post', 'put'])) {
+            $event = $this->Events->patchEntity($event, $this->request->data);
+
+            if ($this->Events->save($event)) {
+                return $this->redirect(['action' => 'adminindex']);
+            }
+        }
+        $event['Address'] =$address;
+
+        $this->loadModel('SubCategories');
+        $this->set(compact('selected', 'selected'));
+        $this->set(compact('userProfile', 'users_id'));
+        $users = $this->Events->Users->find('list', ['limit' => 200]);
+        $categories = $this->Events->Categories->find('list', ['limit' => 200]);
+        $subCategories = $this->SubCategories->find('list', ['limit' => 200]);
+        $categories_list = $this->Events->Categories->find('list', ['limit' => 200]);
+        $this->set(compact('event', 'users', 'categories', 'categories_list', 'subCategories', 'address'));
+        $this->set('_serialize', ['event']);
+    }
+
 
     public function demolist()
     {

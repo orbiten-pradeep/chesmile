@@ -120,7 +120,9 @@ class BannersController extends AppController
                 $this->Flash->error(__('The banner could not be saved. Please, try again.'));
             }
         }
-        $events = $this->Banners->Events->find('list', ['limit' => 200]);
+//$events = $this->Banners->Events->find()->select(['Events.title'])->where(['active' => 1,'date >'=>date("Y-m-d")]);
+        
+        $events = $this->Banners->Events->find('list')->where(['active' => 1,'date >'=>date("Y-m-d")]);
         $this->set(compact('banner', 'events'));
         $this->set('_serialize', ['banner']);
 

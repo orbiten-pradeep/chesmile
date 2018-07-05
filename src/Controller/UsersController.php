@@ -20,6 +20,7 @@ class UsersController extends AppController
 	    //$this->Auth->allow(['add','adminlogin']);
 	    $this->Auth->allow();
 	}
+
     /**
      * Index method
      *
@@ -90,6 +91,7 @@ class UsersController extends AppController
             'contain' => ['Groups']
         ];
        // $user = $this->Users->find('all',['limit' => 200, 'conditions' => array('group_id' => 2 )]);
+ $this->paginate['order'] = array('Users.created' => 'desc');
         $users = $this->paginate($this->Users->find('all',['limit' => 200, 'conditions' => array('group_id' => 1 )]));
          $page = (isset($this->request->query['page'])) ? $this->request->query['page'] : 0;
         $this->set(compact('page'));
@@ -126,7 +128,7 @@ class UsersController extends AppController
     public function add()
     {
     	$activation_key = Text::uuid();
-		$this->viewBuilder()->layout('signin');
+		$this->viewBuilder()->layout('admin_login');
         $user = $this->Users->newEntity();
         if ($this->request->is('post')) {
         	//$this->request->data['activation_key'] = $activation_key = String::uuid();
@@ -355,14 +357,16 @@ class UsersController extends AppController
         $this->viewBuilder()->layout('admin_login');
         if ($this->request->is('post')) {
             $user = $this->Auth->identify();
-            if ($user && $user['group_id'] != 1) {
+       if ($user && $user['group_id'] != 1 ) {
                 $this->Auth->setUser($user);
                 if($this->request->session()->read('Activate') == 1)
                 {
-                    return $this->redirect(array('controller' => 'events', 'action' => 'activate',$this->request->session()->read('eventid')));
+		return $this->redirect(array('controller' => 'AdminDashBoard', 'action' => 'index'));
+                  
                 }
                 else
                 {
+ 
                     return $this->redirect(array('controller' => 'AdminDashBoard', 'action' => 'index'));
                 }
             }
@@ -375,6 +379,11 @@ class UsersController extends AppController
 	    // $this->Flash->success(__('Good-Bye'));
 	    $this->redirect($this->Auth->logout());
 	}
+public function adminlogout() {
+        $this->Auth->logout();
+        // $this->Flash->success(__('Good-Bye'));
+        $this->redirect(array('controller' => 'Users', 'action' => 'adminlogin'));
+    }
 
 	function activate($activation_key) 
 	{
@@ -444,7 +453,7 @@ class UsersController extends AppController
 						$ms=wordwrap($ms,1000);
 						$fu['activation_key']= Text::uuid();
 						$user_id = $fu['id'];
-						$status = $this->Users->updateAll(['activation_key' => $key,'Active' => '0'], ['id' => $user_id]);
+			$status = $this->Users->updateAll(['activation_key' => $key,'Active' => '0'], ['id' => $user_id]);
 						if($status){
 							//============Email================//
 							$email = new Email();
@@ -565,21 +574,37 @@ class UsersController extends AppController
     public function adminadd()
     {
     	$activation_key = Text::uuid();
-		$this->viewBuilder()->layout('admin_login');
+        $this->viewBuilder()->layout('admin_login');
         $user = $this->Users->newEntity();
         if ($this->request->is('post')) {
-        	//$this->request->data['activation_key'] = $activation_key = String::uuid();
-        	//$this->request->data['group_id'] = 4;
-        	$this->request->data['activation_key'] = $activation_key;
-        	$this->request->data['Active'] = '1';
-        	$user = $this->Users->patchEntity($user, $this->request->data);
+            //$this->request->data['activation_key'] = $activation_key = String::uuid();
+            //$this->request->data['group_id'] = 4;
+            $this->request->data['activation_key'] = $activation_key;
+            $this->request->data['Active'] = '0';
+            $user = $this->Users->patchEntity($user, $this->request->data);
 
-        	$this->loadModel('UserProfile');
+            $this->loadModel('UserProfile');
             $userProfile = $this->UserProfile->newEntity();
 
             if ($this->Users->save($user)) {
-                $this->Flash->success(__('The user has been saved.'));
+                $email = new Email();
+                $email->transport('gmail');
+                $email->template('adminsignupinfo','cs-email');
+                $subject = "New Signup in Adminpanel";
+                $email->emailFormat('html');
+                $email->from('admin@chennaismile.com');
+                $email->to('roslin.albert@gmail.com');
+                //$to = $userData['email'];
+                //$email->to($to);
+                $email->subject($subject);
+                // $activationUrl = Router::url(['controller' => 'events', 'action' => 'activate/' . $new_id, '_full' => true ]);
+                //$email->viewVars(['name' => $userData['fullname']]);
+                $email->send();
+                $this->Flash->success(__('The User has been saved, kindly wait for an activate from the admin.'));
+
+               // $this->Flash->success(__('The user has been saved!..'));
                 return $this->redirect(['action' => 'adminlogin']);
+
             } else {
                 $this->Flash->error(__('The user could not be saved. Please, try again.'));
             }
@@ -599,16 +624,40 @@ class UsersController extends AppController
     {
        
         $this->request->allowMethod(['post', 'activate']);
-        $users = $this->Users->get($id);
+         $user = $this->Users->get($id, [
+            'contain' => []
+        ]);
+       // $users = $this->Users->get($id);
         if ($this->Users->updateAll(['active' => '1'], ['id' => $id])) {
-            $this->Flash->success(__('The User has been Activated.'));
-        } else {
-            $this->Flash->error(__('The User could not be Activated. Please, try again.'));
-        }
-
+            //Send eamil to user
+                    $email = new Email();
+                    $email->transport('gmail');
+                // Always try to write clean code, so that you can read it :) :
+                     $email->template('useractivated','cs-email');
+                        $name = $user['fullname'];
+                        $users_email = $user['email'];
+                        $email->emailFormat('html');
+                        $email->from('admin@chennaismile.com');
+                        $email->to($users_email);
+                        $email->cc('admin@chennaismile.com');
+                        $activationUrl = Router::url(['controller' => 'Users', 'action' => 'adminlogin', '_full' => true ]);
+                        $email->viewVars(['name' => $name, 'URL' => $activationUrl]);
+                        $subject = "User Activated";
+                        $email->subject($subject);
+                        $email->send();
+                        $this->Flash->success(__('The User has been Activated.'));
+                    }
+                    else
+                    {
+                        $this->Flash->error(__('The User could not be Activated. Please, try again.'));
+                    }
+        //     $this->Flash->success(__('The User has been Activated.'));
+        // } else {
+        //     $this->Flash->error(__('The User could not be Activated. Please, try again.'));
+        // }
         return $this->redirect(['action' => 'index']);
-
-    }
+    
+}
     /**
      * Deactivate method
      *

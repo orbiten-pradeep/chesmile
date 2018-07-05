@@ -43,17 +43,28 @@ else {
 <div class="container">
 	<div class="row">
 		<div class="col-md-8 mb-4">
-			<?php $bgImage = $event->banner;
-			if(!empty($bgImage)){
-	 			echo $this->Html->image('banner/'.$bgImage,array('alt' => 'Cs-Static','class' => 'img-fluid z-depth-1 rounded mb-4')); 
-			}
-			else {
-	 			echo $this->Html->image('cover_pic.jpg',array('alt' => 'Cs-Static','class' => 'img-fluid z-depth-1 rounded mb-4')); 
-			}	?>
+			<div class="cs_banner_container mb-5">
+				<?php $bgImage = $event->banner;
+				if(!empty($bgImage)){
+		 			echo $this->Html->image('banner/'.$bgImage,array('alt' => 'Cs-Static','class' => 'img-fluid z-depth-1 rounded cs_banner_bg')); 
+				}
+				else {
+		 			echo $this->Html->image('cover_pic.jpg',array('alt' => 'Cs-Static','class' => 'img-fluid z-depth-1 rounded cs_banner_bg')); 
+				}	?>
+				<div class="banner_image">
+					<?php $bgImage = $event->banner;
+					if(!empty($bgImage)){
+			 			echo $this->Html->image('banner/'.$bgImage,array('alt' => 'Cs-Static','class' => 'img-fluid z-depth-1 rounded cs_banner')); 
+					}
+					else {
+			 			echo $this->Html->image('/cover_pic.jpg',array('alt' => 'Cs-Static','class' => 'img-fluid z-depth-1 rounded cs_banner')); 
+					}	?>
+				</div>
+			</div>
 			<div class="row">
 				<div class="col-md-12">
 					<div class="d-flex flex-column cs_right_details_mob">
-					    <div class="p-4 mb-4 flex-cont rounded">
+					    <div class="p-4 mb-4 flex-cont rounded cs_details_block">
 					    	<!-- <div class="text-center">
 						    	<h5>₹ 699</h5>
 						    	<button type="button" class="btn buy-btn">Get Tickets</button>
@@ -69,11 +80,11 @@ else {
 					    </div>
 					</div>
 					<div class="d-flex flex-column">
-						<div class="p-4 mb-4 flex-cont cs-descr-box rounded">
+						<div class="p-4 mb-4 flex-cont cs-descr-box rounded cs_details_block">
 						    <h5 class="cs-title">Event Details</h5>
 						    <p><?=  $this->Text->autoParagraph(h($event->descriptioin));?></p>
 						</div>
-						<div class="p-4 mb-4 flex-cont rounded d-none">
+						<div class="p-4 mb-4 flex-cont rounded d-none cs_details_block">
 						    <h5 class="cs-title">Terms & Conditions</h5>
 						    <p>Lorem ipsum dolor sit amet, consectetuer adipiscing elit. Aenean commodo ligula eget dolor. Aenean massa. Cum sociis natoque penatibus et magnis dis parturient montes, nascetur ridiculus mus. Donec quam felis, ultricies nec, pellentesque eu, pretium quis, sem. Nulla consequat massa quis enim. Donec pede justo, fringilla vel, aliquet nec, vulputate eget, arcu. In enim justo, rhoncus ut, imperdiet a, venenatis vitae, justo. Nullam dictum felis eu pede mollis pretium. Integer tincidunt. Cras dapibus. Vivamus elementum semper nisi. Aenean vulputate eleifend tellus. Aenean leo ligula, porttitor eu, consequat vitae, eleifend ac, enim. Aliquam lorem ante, dapibus in, viverra quis, feugiat a</p>
 						</div>
@@ -83,7 +94,7 @@ else {
 		</div>
 		<div class="col-md-4 mb-4">
 			<div class="d-flex flex-column cs_right_details_desk">
-			    <div class="p-4 mb-4 flex-cont rounded">
+			    <div class="p-4 mb-4 flex-cont rounded cs_details_block">
 			    	<!-- <div class="text-center">
 				    	<h5>₹ 699</h5>
 				    	<button type="button" class="btn buy-btn">Get Tickets</button>
@@ -100,7 +111,7 @@ else {
 			</div>
 			<?php $geoCode = (!empty($event->google_map)) ? $event->google_map : '13.0595365,80.24247919999993';?>
 			<div class="d-flex flex-column">
-			    <div class="p-4 mb-4 flex-cont rounded">
+			    <div class="p-4 mb-4 flex-cont rounded cs_details_block">
 			    	<script src='https://maps.googleapis.com/maps/api/js?v=3.exp'></script>
 			    	<div style='overflow:hidden;height:330px;width:100%;'>
 			    		<div id='gmap_canvas' style='height:330px;width:700px;'>
@@ -154,7 +165,10 @@ if($u_id == $event->user_id){ ?>
 		google.maps.event.addDomListener(window, 'load', init_map);
 </script>
 <?php if($groups == 6 || $groups == 5 || $groups == 4 ){?>
-<?= $this->Form->create('',array('url' => ['controller' => 'Events', 'action' => 'activate',$event->id]));?>
+ <!-- <p>Ticket Price: Rs. <?= h($event->price) ?>/-
+Commission Amount: Rs. <?= h($event->commamount) ?>/- 
+ Settlement Amount: Rs.<?= h($event->settamount) ?>/-</p>
+ --><?= $this->Form->create('',array('url' => ['controller' => 'Events', 'action' => 'activate',$event->id]));?>
 <?= $this->Form->radio('active', ['DeActivate','Activate']);?>
 <?= $this->Form->button(__('Submit')); ?>
 <?= $this->Form->end() ?>

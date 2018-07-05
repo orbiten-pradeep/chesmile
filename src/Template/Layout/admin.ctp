@@ -63,12 +63,26 @@
     </div>
     <!-- Tasks -->
     <div class="collapse navbar-collapse" id="navbar-collapse">
-      <ul class="nav navbar-nav navbar-right">
+      <ul class="nav navbar-nav navbar-right" style="margin-top: 20px;">
+
+<!-- <div class="breadcrumb">
+    <div class="item"><a href="#home">Home / </a></div>
+</div> -->
         <!-- Call Search -->
         <li class="image">
-          <img src="
+         <?php
+        $user = $this->request->session()->read('Auth.User');
+        
+        if(!empty($user['Photo'])) {
+        echo $this->Html->image('profile/'.$user['Photo'],array('alt' => 'User','class' => 'img-fluid rounded-circle','width' => '48px', 'height' => '48px'));
+        } else
+        {
+        echo $this->Html->image('profile_thumbnail.jpg',array('alt' => 'User','class' => 'img-fluid rounded-circle','onclick' => 'largedrop()'));
+        }
+        ?> 
+          <!-- <img src="
             <?php
-                      echo $this->Url->build('/dashboard/images/user.png');?>" width="48" height="48" alt="User" />
+                      echo $this->Url->build('/dashboard/images/user.png');?>" width="48" height="48" alt="User" /> -->
           </li>
           <li class="dropdown name" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
             <?php
@@ -91,11 +105,12 @@ echo $user['fullname'];
                   </li>
                   <li role="seperator" class="divider"></li>
                   <li>
-                    <a href="javascript:void(0);">
+                   <?php echo $this->Html->link( $this->Html->tag('i', 'group', array('class' => 'material-icons')).$this->Html->tag('span', 'Create Events'), ['controller' => 'Events', 'action' => 'add'], array('escape'=>false)); ?>
+                    <!-- <a href="javascript:void(0);">
                       <i class="material-icons">group
                     </i>Followers
                   
-                    </a>
+                    </a> -->
                   </li>
                   <li>
                     <a href="javascript:void(0);">
@@ -113,7 +128,7 @@ echo $user['fullname'];
                   </li>
                   <li role="seperator" class="divider"></li>
                   <li>
-                    <?php echo $this->Html->link( $this->Html->tag('i', 'input', array('class' => 'material-icons')).$this->Html->tag('span', 'Logout'), ['controller' => 'Users', 'action' => 'logout'], array('escape'=>false)); ?>
+                    <?php echo $this->Html->link( $this->Html->tag('i', 'input', array('class' => 'material-icons')).$this->Html->tag('span', 'Logout'), ['controller' => 'Users', 'action' => 'adminlogout'], array('escape'=>false)); ?>
                   </li>
                 </ul>
               </div>
@@ -243,11 +258,18 @@ if($user && $user['group_id'] == 4) {
                 </span>
               </a>
               <ul class="ml-menu">
+               <li>
+                  <?php echo $this->Html->link($this->Html->tag('span', 'Events Stat'), ['controller' => 'events', 'action' => 'eventindex'], array('escape'=>false)); ?>
+                </li>
                 <li>
                   <?php echo $this->Html->link($this->Html->tag('span', 'List Events'), ['controller' => 'events', 'action' => 'adminindex'], array('escape'=>false)); ?>
                 </li>
                  <li>
                   <?php echo $this->Html->link($this->Html->tag('span', 'Waiting Admin Review'), ['controller' => 'events', 'action' => 'waitingevent'], array('escape'=>false)); ?>
+                </li>
+                
+                 <li>
+                  <?php echo $this->Html->link($this->Html->tag('span', 'Create Events'), ['controller' => 'events', 'action' => 'add'], array('escape'=>false)); ?>
                 </li>
               </ul>
             </li>
@@ -309,7 +331,7 @@ if($user && $user['group_id'] == 4) {
               <?php echo $this->Html->link( $this->Html->tag('i', 'layers', array('class' => 'material-icons')).$this->Html->tag('span', 'Contact Query'), ['controller' => 'Contact','action' => 'index'], array('escape'=>false)); ?>
             </li>
             <li>
-              <?php echo $this->Html->link( $this->Html->tag('i', 'exit_to_app', array('class' => 'material-icons')).$this->Html->tag('span', 'Logout'), ['controller' => 'Users', 'action' => 'logout'], array('escape'=>false)); ?>
+              <?php echo $this->Html->link( $this->Html->tag('i', 'exit_to_app', array('class' => 'material-icons')).$this->Html->tag('span', 'Logout'), ['controller' => 'Users', 'action' => 'adminlogout'], array('escape'=>false)); ?>
             </li>
           </ul>
         </div>
@@ -352,7 +374,7 @@ elseif($user['group_id'] == 2) {
               <?php echo $this->Html->link( $this->Html->tag('i', 'layers', array('class' => 'material-icons')).$this->Html->tag('span', 'Feedback'), ['controller' => 'events','action' => 'contact'], array('escape'=>false)); ?>
             </li>
             <li>
-              <?php echo $this->Html->link( $this->Html->tag('i', 'exit_to_app', array('class' => 'material-icons')).$this->Html->tag('span', 'Logout'), ['controller' => 'Users', 'action' => 'logout'], array('escape'=>false)); ?>
+              <?php echo $this->Html->link( $this->Html->tag('i', 'exit_to_app', array('class' => 'material-icons')).$this->Html->tag('span', 'Logout'), ['controller' => 'Users', 'action' => 'adminlogout'], array('escape'=>false)); ?>
             </li>
           </ul>
         </div>
@@ -395,8 +417,11 @@ elseif($user['group_id'] == 6) {
                 <li>
                   <?php echo $this->Html->link($this->Html->tag('span', 'List Events'), ['controller' => 'events', 'action' => 'adminindex'], array('escape'=>false)); ?>
                 </li>
-                 <li>
+                <li>
                   <?php echo $this->Html->link($this->Html->tag('span', 'Waiting Admin Review'), ['controller' => 'events', 'action' => 'waitingevent'], array('escape'=>false)); ?>
+                </li>
+                 <li>
+                  <?php echo $this->Html->link($this->Html->tag('span', 'Events Stat'), ['controller' => 'events', 'action' => 'eventindex'], array('escape'=>false)); ?>
                 </li>
               </ul>
             </li>
@@ -404,7 +429,7 @@ elseif($user['group_id'] == 6) {
               <?php echo $this->Html->link( $this->Html->tag('i', 'layers', array('class' => 'material-icons')).$this->Html->tag('span', 'Contact Query'), ['controller' => 'Contact','action' => 'index'], array('escape'=>false)); ?>
             </li>
             <li>
-              <?php echo $this->Html->link( $this->Html->tag('i', 'exit_to_app', array('class' => 'material-icons')).$this->Html->tag('span', 'Logout'), ['controller' => 'Users', 'action' => 'logout'], array('escape'=>false)); ?>
+              <?php echo $this->Html->link( $this->Html->tag('i', 'exit_to_app', array('class' => 'material-icons')).$this->Html->tag('span', 'Logout'), ['controller' => 'Users', 'action' => 'adminlogout'], array('escape'=>false)); ?>
             </li>
           </ul>
         </div>
@@ -419,7 +444,7 @@ elseif($user && $user['group_id'] == 5) {?>
             <li class="active">
               <?php echo $this->Html->link( $this->Html->tag('i', 'home', array('class' => 'material-icons')).$this->Html->tag('span', 'Home - Admin Manager'), ['controller' => 'AdminDashBoard', 'action' => 'index'], array('escape'=>false)); ?>
             </li>
-            <li>
+            <!-- <li>
               <a href="javascript:void(0);" class="menu-toggle">
                 <i class="material-icons">web
                 </i>
@@ -427,14 +452,14 @@ elseif($user && $user['group_id'] == 5) {?>
                 </span>
               </a>
               <ul class="ml-menu">
-                <!-- <li>
+                <li>
                   <?php echo $this->Html->link( $this->Html->tag('i', 'widgets', array('class' => 'material-icons')).$this->Html->tag('span', 'List Groups'), ['controller' => 'Groups', 'action' => 'index'], array('escape'=>false)); ?>
-                </li> -->
+                </li>
                 <!-- <li>
                   <?php echo $this->Html->link($this->Html->tag('span', 'List Users'), ['controller' => 'users', 'action' => 'index'], array('escape'=>false)); ?>
-                </li> -->
+                </li> 
               </ul>
-            </li>
+            </li> -->
             <li>
               <a href="javascript:void(0);" class="menu-toggle">
                 <i class="material-icons">supervisor_account
@@ -463,12 +488,16 @@ elseif($user && $user['group_id'] == 5) {?>
                 </span>
               </a>
               <ul class="ml-menu">
+               <li>
+                  <?php echo $this->Html->link($this->Html->tag('span', 'Events Stat'), ['controller' => 'events', 'action' => 'eventindex'], array('escape'=>false)); ?>
+                </li>
                 <li>
                   <?php echo $this->Html->link($this->Html->tag('span', 'List Events'), ['controller' => 'events', 'action' => 'adminindex'], array('escape'=>false)); ?>
                 </li>
-                 <li>
+                <li>
                   <?php echo $this->Html->link($this->Html->tag('span', 'Waiting Admin Review'), ['controller' => 'events', 'action' => 'waitingevent'], array('escape'=>false)); ?>
                 </li>
+                
               </ul>
             </li>
             <li>
@@ -529,7 +558,7 @@ elseif($user && $user['group_id'] == 5) {?>
               <?php echo $this->Html->link( $this->Html->tag('i', 'layers', array('class' => 'material-icons')).$this->Html->tag('span', 'Contact Query'), ['controller' => 'Contact','action' => 'index'], array('escape'=>false)); ?>
             </li>
             <li>
-              <?php echo $this->Html->link( $this->Html->tag('i', 'exit_to_app', array('class' => 'material-icons')).$this->Html->tag('span', 'Logout'), ['controller' => 'Users', 'action' => 'logout'], array('escape'=>false)); ?>
+              <?php echo $this->Html->link( $this->Html->tag('i', 'exit_to_app', array('class' => 'material-icons')).$this->Html->tag('span', 'Logout'), ['controller' => 'Users', 'action' => 'adminlogout'], array('escape'=>false)); ?>
             </li>
           </ul>
         </div>
@@ -593,6 +622,23 @@ elseif($user && $user['group_id'] == 5) {?>
     <script src="<?php echo $this->Url->build('/dashboard/plugins/bootstrap-colorpicker/js/bootstrap-colorpicker.js'); ?>">
     </script>
     <script src="<?php echo $this->Url->build('/dashboard/js/script.js'); ?>">
+    </script>
+    <script src="<?php echo $this->Url->build('/dashboard/js/pages/charts/morris.js'); ?>">
+    </script>
+    <script src="<?php echo $this->Url->build('/dashboard/plugins/raphael/raphael.min.js'); ?>">
+    </script>
+    <script src="<?php echo $this->Url->build('/dashboard/plugins/morrisjs/morris.js'); ?>">
+  $('.list a').on('click', function() {
+  var $this = $(this),
+      $bc = $('<div class="item"></div>');
+
+  $this.parents('li').each(function(n, li) {
+      var $a = $(li).children('a').clone();
+      $bc.prepend(' / ', $a);
+  });
+    $('.breadcrumb').html( $bc.prepend('<a href="#home">Home</a>') );
+    return false;
+}) 
     </script>
   </body>
 </html>

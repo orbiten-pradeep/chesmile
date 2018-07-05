@@ -275,10 +275,15 @@ use Cake\Routing\Router;
       <div class="header">
         <h2>
           Listing
-          <small>All Events Listing
+          <small>Organizer's Events Listing
           </small>
-        </h2>
-        <ul class="header-dropdown m-r--5">
+        </h2><ul class="header-dropdown m-r--5 pull-right">
+            <?= $this->Form->create("",['type'=> 'get'])?>
+           <?= $this->Form->control('keyword',['default'=> $this->request->query('keyword')]); ?>
+           <button>Search</button>
+            <?= $this->Form->end()?>
+          </ul>
+        <!-- <ul class="header-dropdown m-r--5">
           <li class="dropdown">
             <a href="javascript:void(0);" class="dropdown-toggle" data-toggle="dropdown" role="button" aria-haspopup="true" aria-expanded="false">
               <i class="material-icons">more_vert
@@ -299,32 +304,45 @@ use Cake\Routing\Router;
               </li>
             </ul>
           </li>
-        </ul>
+        </ul> -->
       </div>
       <div class="body table-responsive">
-        <table class="table table-bordered table-striped table-hover js-basic-example dataTable">
+        <table class="table table-bordered table-striped table-hover ">
           <thead>
             <tr> 
-              <th scope="col">
-                <?= $this->Paginator->sort('Select') ?>
+              <th scope="col"><?= __('Select') ?>
+               <!--  <?= $this->Paginator->sort('Select') ?> -->
               </th>
-              <th scope="col">
-                <?= $this->Paginator->sort('Serial No') ?>
+              <th scope="col"><?= __('Serial No') ?>
+               <!--  <?= $this->Paginator->sort('Serial No') ?> -->
               </th>
               <th scope="col">
                 <?= $this->Paginator->sort('title') ?>
+              </th>
+              
+            <!--   <th scope="col">
+                <?= $this->Paginator->sort('categories_id') ?>
+              </th>
+              <th scope="col">
+                <?= $this->Paginator->sort('Created By') ?>
+              </th> -->
+              <th scope="col">
+                <?= $this->Paginator->sort('Organizers') ?>
               </th>
               <th scope="col">
                 <?= $this->Paginator->sort('active') ?>
               </th>
               <th scope="col">
-                <?= $this->Paginator->sort('categories_id') ?>
-              </th>
-              <th scope="col">
                 <?= $this->Paginator->sort('date') ?>
               </th>
               <th scope="col">
+                <?= $this->Paginator->sort('todate') ?>
+              </th>
+              <th scope="col">
                 <?= $this->Paginator->sort('time') ?>
+              </th>
+              <th scope="col">
+                <?= $this->Paginator->sort('totime') ?>
               </th>
               <th scope="col">
                 <?= $this->Paginator->sort('register_online') ?>
@@ -343,10 +361,10 @@ use Cake\Routing\Router;
                   <input type="radio" name="eventId" id="e<?= h($event->id) ?>" value ="<?=($event->id)?>" class="with-gap radio-select-list"
                    admin-href-url="<?=$this->Url->build(array('controller' => 'Events', 'action' => 'adminedit', $event->id)); ?>"
                          edit-href-url="<?=$this->Url->build(array('controller' => 'Events', 'action' => 'edit', $event->id)); ?>"
-                         view-href-url="<?=$this->Url->build(array('controller' => 'Events', 'action' => 'view', $event->id)); ?>"
+                         view-href-url="<?=$this->Url->build(array('controller' => 'Events', 'action' => 'chennai', $event->id)); ?>"
                          add-href-url="<?=$this->Url->build(array('controller' => 'Events', 'action' => 'add', $event->id)); ?>"
                          activate-href-url="<?=$this->Url->build(array('controller' => 'Events', 'action' => 'activate', $event->id)); ?>"
-                         deactivate-href-url="<?=$this->Url->build(array('controller' => 'Events', 'action' => 'deactivate', $event->id)); ?>">
+                         deactivate-href-url="<?=$this->Url->build(array('controller' => 'Events', 'action' => 'chennai', $event->id)); ?>">
                   <label for="e<?= h($event->id) ?>">
                   </label>
                 </span>
@@ -354,8 +372,18 @@ use Cake\Routing\Router;
               <td>
                 <?= $this->Number->format($n) ?>
               </td>
-              <td>
+               <td>
                 <?= h($event->title) ?>
+              </td>
+              
+             <!--  <td>
+                <?= $event->has('category') ? $this->Html->link($event->category->name, ['controller' => 'Categories', 'action' => 'view', $event->category->id]) : '' ?>
+              </td>
+              <td>
+                <?= $event->has('user') ? $this->Html->link($event->user->fullname, ['controller' => 'Users', 'action' => 'view', $event->user->id]) : '' ?>
+              </td> -->
+               <td>
+                <?= h($event->OrganizersName) ?>
               </td>
               <td>
                 <?php 
@@ -370,14 +398,18 @@ echo "Deleted";
 ?>  
               </td>
               <td>
-                <?= $event->has('category') ? $this->Html->link($event->category->name, ['controller' => 'Categories', 'action' => 'view', $event->category->id]) : '' ?>
-              </td>
-              <td>
                 <?= h($event->date) ?>
+              </td>
+               <td>
+                <?= h($event->todate) ?>
               </td>
               <td>
                 <?= h($event->time) ?>
               </td>
+              <td>
+                <?= h($event->totime) ?>
+              </td>
+
               <td>
                 <?php if($event->register_online == 0) {
                   ?>
@@ -386,7 +418,6 @@ echo "Deleted";
             </button>
           </a>
           <?php
-// echo $this->Form->postLink($this->Html->tag('i', 'Add Ticketing', array('class' => 'btn btn-primary waves-effect', 'title'=>'Ticketing')), ['action' => 'adminedit', $event->id], ['escape'=>false, 'confirm' => __('Are you sure you want to Add Ticketing For Ur Event', $event->id)]) ;
 } else {
 echo "Ticketing Enabled";
 }
@@ -412,11 +443,11 @@ echo $this->Html->link( $this->Html->tag('i', 'Add Event', array('class' => 'btn
          <!--  <a id ="activate" href="">
             <button class="btn btn-primary waves-effect">Activate
             </button>
-          </a>
-          <a id ="deactivate" href="">
-            <button class="btn btn-primary waves-effect">Deactivate
-            </button>
           </a> -->
+          <a id ="deactivate" href="">
+            <button class="btn btn-primary waves-effect">Delete
+            </button>
+          </a>
         </div>
         <br>
         <div class="paginator">
