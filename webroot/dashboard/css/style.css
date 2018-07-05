@@ -3108,7 +3108,9 @@ section.content {
     .info-box .content .text {
       font-size: 13px;
       margin-top: 11px;
-      color: #555; }
+      color: #555; 
+      margin: 25px auto;
+    }
     .info-box .content .number {
       font-weight: normal;
       font-size: 26px;
@@ -6699,8 +6701,10 @@ fieldset[disabled] .form-control {
   font-family: 'Material Icons';
   font-size: 24px;
   position: absolute;
-  top: 18px;
-  left: 20px;
+  /*top: 18px;
+  left: 20px;*/
+  top: 10px;
+  left: 10px;
   margin-right: 10px;
   -moz-transform: scale(0);
   -ms-transform: scale(0);
@@ -8062,3 +8066,20 @@ html.ie11 .dropdown-menu ul.menu li a {
 html.ie11 .bs-searchbox .form-control {
   width: 90%; }
 
+  .tickt_info_row{
+    text-align: center;
+  }
+.ticket_info_card{
+  display: inline-block;
+  float: none;
+}
+
+@media (max-width: 600px){
+  .mobile-logo-img{
+    float: right;
+    width: 75%;
+  }
+  .sidebar{
+    top: 70px;
+  }
+}

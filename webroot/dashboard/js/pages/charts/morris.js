@@ -2,6 +2,7 @@ $(function () {
     getMorris('line', 'line_chart');
     getMorris('bar', 'bar_chart');
     getMorris('area', 'area_chart');
+    getMorris('bar_tick', 'bar_ticket');
     getMorris('donut', 'donut_chart');
 });
 
@@ -57,32 +58,50 @@ function getMorris(type, element) {
         Morris.Bar({
             element: element,
             data: [{
-                x: '2011 Q1',
-                y: 3,
-                z: 2,
-                a: 3
+                x: 'Last Month',
+                Users: lastmonth
             }, {
-                    x: '2011 Q2',
-                    y: 2,
-                    z: null,
-                    a: 1
+                    x: 'Last Week',
+                    Users: lastweek
                 }, {
-                    x: '2011 Q3',
-                    y: 0,
-                    z: 2,
-                    a: 4
+                    x: 'Yesterday',
+                    Users: yestuser
                 }, {
-                    x: '2011 Q4',
-                    y: 2,
-                    z: 4,
-                    a: 3
+                    x: 'Today',
+                    Users: newuser
                 }],
             xkey: 'x',
-            ykeys: ['y', 'z', 'a'],
-            labels: ['Y', 'Z', 'A'],
-            barColors: ['rgb(233, 30, 99)', 'rgb(0, 188, 212)', 'rgb(0, 150, 136)'],
+            xLabelAngle: 60,
+            ykeys: ['Users'],
+            labels: ['Users'],
+            barColors: ['rgb(233, 30, 99)'],
         });
-    } else if (type === 'area') {
+    } else if (type === 'bar_tick') {
+        Morris.Bar({
+            element: element,
+            data: [{
+                x: 'Last Year',
+                Tickets: lastyear_tickets
+            },{
+                x: 'Last Month',
+                Tickets: lastmonth_tickts
+            }, {
+                    x: 'Last Week',
+                    Tickets: lastweek_tickets
+                }, {
+                    x: 'Yesterday',
+                    Tickets: yesterday_tickets
+                }, {
+                    x: 'Today',
+                    Tickets: today_tickets
+                }],
+            xkey: 'x',
+            xLabelAngle: 60,
+            ykeys: ['Tickets'],
+            labels: ['Tickets'],
+            barColors: ['rgb(233, 30, 99)'],
+        });
+    }else if (type === 'area') {
         Morris.Area({
             element: element,
             data: [{
@@ -147,21 +166,25 @@ function getMorris(type, element) {
         Morris.Donut({
             element: element,
             data: [{
-                label: 'Jam',
-                value: 25
+                label: 'Active Events',
+                value: activeevents
             }, {
-                    label: 'Frosted',
-                    value: 40
+                    label: 'Waiting Approval',
+                    value: waitingapproval
                 }, {
-                    label: 'Custard',
-                    value: 25
+                    label: 'Paid Events',
+                    value: paidevents
                 }, {
-                    label: 'Sugar',
-                    value: 10
+                    label: 'Free Events',
+                    value: freeevents
+                }, {
+                    label: 'Total Events',
+                    value: totalevents,
+                    hideHover: 'auto'
                 }],
-            colors: ['rgb(233, 30, 99)', 'rgb(0, 188, 212)', 'rgb(255, 152, 0)', 'rgb(0, 150, 136)'],
+            colors: ['rgb(233, 30, 99)', 'rgb(0, 188, 212)', 'rgb(255, 152, 0)', 'rgb(0, 150, 136)','rgb(71, 71, 71)'],
             formatter: function (y) {
-                return y + '%'
+                return y + ' events'
             }
         });
     }

@@ -182,3 +182,11 @@
 #thumbnail-slider li a {
     height: 80% !important;
 }
+@media (max-width: 600px){
+    #thumbnail-slider li a {
+    height: 50% !important;
+}
+#thumbnail-slider li span{
+    bottom: 30%;
+}
+}

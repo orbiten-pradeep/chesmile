@@ -42,7 +42,6 @@ body{
     padding: 8px 10px !important;
     font-size: 14px;
 }
-
 .search-box .waves-input-wrapper {
 	border-radius: 0px;
 }
@@ -372,10 +371,6 @@ input:checked + .slider:before {
 .show > .btn-grey.dropdown-toggle.cs-city-btn{
     background-color: #f4f4f4 !important;
 }
-.search-menu .fa-close {
-    float: right;
-    margin-top: 4px;
-}
 @media (min-width: 1024px) and (max-width: 1365px) {
     /*.search-box .search-text-box input {
         width: 15rem !important;
@@ -506,10 +501,16 @@ input:checked + .slider:before {
     .event-filters .top-categories label {
         float: left;
         margin-top: 10px;
+        margin-left: 35%;
     }
     .event-filters .top-categories .btn {
         display: inline-block;
         margin-top: 10px;
+        text-overflow: ellipsis;
+        white-space: nowrap;
+        width: 45%;
+        clear: left;
+        float: right;
     }
     .event-filters .btn {
         padding: 0.5rem .7rem;
