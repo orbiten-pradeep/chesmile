@@ -206,7 +206,7 @@ chennaiSmile.generateEventGridList = function() {
 	    		var buybtn;
 	    		var eventprice
 	    		eventprice = '<span class="event-price pull-right">₹ '+response[k].price+'</span>';
-	    		buybtn = '<div class="btn buy-btn btn-warning pull-right" onClick="javascript:location.href='+eventUrl+'">Get Tickets</div>';
+	    		buybtn = '<div class="btn buy-btn btn-warning pull-left" onClick="javascript:location.href='+eventUrl+'">Get Tickets</div>';
 	    	}
 			html += '<div class="col-sm-6 col-lg-3 col-md-3 card-size">\
 				<div class="card" data-attrib-hcolor="#'+response[k].category_ltecolor+'" >\
@@ -222,8 +222,14 @@ chennaiSmile.generateEventGridList = function() {
 			        <div class="card-body">\
 			            <h4 class="card-title"><a href="'+eventUrl+'" class="event-title">'+response[k].title+'</a></h4>\
 			            <p class="card-text mb-0">'+response[k].areaname+'</p>\
-			            <p class="card-text mb-0">'+this.formatDate(response[k].date)+'</p>\
-			            '+buybtn+'\
+			            <p class="card-text card-event-date mb-0">'+this.formatDate(response[k].date)+'</p>\
+			            <div class="pull-right">\
+			            	<span eventId="'+response[k].id+'" userId="'+response[k].user_id+'" class="like-button">\
+			            		<i class="fa fa-heart-o" id="likeIconId'+response[k].id+'" aria-hidden="true"></i>\
+			            	</span>\
+			            	<span class="count_txt" id="likeId'+response[k].id+'">'+likes_count+'</span>\
+		                </div>\
+		                '+buybtn+'\
 			        </div>\
 		        </div>\
 		    </div>';
@@ -488,7 +494,7 @@ $(document).ready(function() {
 	$(window).scroll(function() {
 		var winHeight = Math.round($(window).scrollTop());
 		var docHeight = Math.round($(document).height() - $(window).height());
-		console.log(winHeight, docHeight);
+		//console.log(winHeight, docHeight);
 	    if (winHeight == docHeight) {
 	    	if(!self.eventScrollDisabled) {
 	    		self.filterParams.page++;
@@ -544,6 +550,33 @@ $(document).ready(function() {
 	        $(this).addClass('not-entered').removeClass('entered');
 	    }
 	}, ".card");
+
+	self.eventListContainer.on('click', '.like-button', function(){
+		var likeEventId = $(this).attr('eventId');
+		$.ajax({
+            type: "POST",
+            data: {
+                "eventid": likeEventId,
+                "userid": $(this).attr('userId')
+            },
+            ContentType: 'application/json',
+            dataType: 'json',
+            url: $("#event_likes_url").val(),
+            async: true,
+            success: function(data) {
+            	var element = document.getElementById("myDIV");
+
+                document.getElementById('likeId'+likeEventId).textContent = data;
+                document.getElementById('likeIconId'+likeEventId).classList.remove("fa-heart-o");
+                document.getElementById('likeIconId'+likeEventId).className = "fa fa-heart liked-event";
+            },
+            error: function(tab) {
+                //$select.html('<option id="-1">none available</option>');
+            }
+        });
+        return false;
+
+	});
 
 });
 

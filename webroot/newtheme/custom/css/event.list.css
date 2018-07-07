@@ -147,6 +147,7 @@
     padding: 7px 12px;
     box-shadow: none !important;
     border-radius: 0;
+    margin: 10px 0;
 }
 
 .event-list #loading {  
@@ -195,6 +196,13 @@
 }
 .event-list .card-body .card-text {
     font-size: 0.8rem !important;
+}
+.event-list .card-body .card-event-date {
+    width: 80%;
+    display: inline-block;
+}
+.event-list .card-body .like-button .liked-event {
+    color: #f44336 !important;
 }
 .filter-params .chip {
     display: inline-block;
