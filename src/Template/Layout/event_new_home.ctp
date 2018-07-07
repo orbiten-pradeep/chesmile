@@ -33,27 +33,6 @@
     <link rel="stylesheet" href="//cdnjs.cloudflare.com/ajax/libs/timepicker/1.3.5/jquery.timepicker.min.css">
 
     <?php echo $this->Html->css(['daterangepicker']); ?>
-    <style type="text/css">
-     /* .btn-out {
-    border: 2px solid #967e83!important;
-    }*/
-    .btn-out {
-    border: 1px solid #50bac4!important;
-}
-    .navbar .cs-city {
-    
-    color: black !important;
-        font-size: .74rem;
-}
-.btnbtn{
-  line-height: 2.2 !important;
-}
- .btn-bg {
-    background-color: #1e88e5!important;
-    line-height: 1 !important;
-    padding: .8rem 1.14rem !important;
-}
-    </style>
 </head>
 
 <body>
@@ -113,16 +92,16 @@
               
               <?php if(!$this->request->session()->read('Auth.User')) { ?>
               <li class="nav-item">
-                <a href="#" class="btn btn-sm btn-bg " data-toggle="modal" data-target="#cs-login-modal">Login/signup</a>
+                <a href="#" class="btn btn-sm btn-bg btn-primary cs_login_btn cs-city-btn p-2" data-toggle="modal" data-target="#cs-login-modal">Login/signup</a>
               </li>  
               <li class="nav-item">
-                <a href="#" class="btn btn-sm btn-bg " data-toggle="modal" data-target="#cs-login-modal">Create Events</a>
+                <a href="#" class="btn btn-sm btn-bg btn-primary cs_login_btn cs-city-btn p-2" data-toggle="modal" data-target="#cs-login-modal">Create Events</a>
               </li>
               <?php } ?>
 
               <?php $user = $this->request->session()->read('Auth.User'); if($user && $user['group_id'] == 1) { ?>
               <li class="nav-item">                    
-                <a href="#" class="btn btn-sm btn-bg" data-toggle="modal" data-target="#orgSignup">Create events</a>                    
+                <a href="#" class="btn btn-sm btn-bg btn-primary cs_login_btn cs-city-btn p-2" data-toggle="modal" data-target="#orgSignup">Create events</a>                    
               </li>
               <?php } ?>
 
@@ -139,7 +118,7 @@
                 <ul class="navbar-nav mr-auto search-box">
                   <li class="search-category">
                     <div class="search-menu">
-                      <button type="button" class="btn btn-head btn-md btn-primary btn-go btn-category-search" type="button">
+                      <button type="button" class="btn btn-head btn-md btn-primary btn-go cat-not-selected" type="button">
                         <label>Category</label>
                         <i class="fa fa-bars float-right"></i>
                       </button>
@@ -193,23 +172,17 @@
                   <div class="dropdown ml-4">
                       <button class="btn btn-primary btn-head user-dropdown dropdown-toggle cs-dropbtn p-0" type="button" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
                           <div class="avatar">
-                        <?php
-        $user = $this->request->session()->read('Auth.User');
-        
-        if(!empty($user['Photo'])) {
-        echo $this->Html->image('profile/'.$user['Photo'],array('alt' => 'Profile Picture','class' => 'img-fluid rounded-circle','width' => '60px', 'height' => '60px','onclick' => 'largedrop()'));
-        } else
-        {
-        echo $this->Html->image('profile_thumbnail.jpg',array('alt' => 'Profile Picture','class' => 'img-fluid rounded-circle','onclick' => 'largedrop()'));
-        }
-        ?> 
-                      <!--       <?php if($userProfile->Photo) {
-                echo $this->Html->image('profile/'.$userProfile->Photo, array('height' => '100px','width' => '100px','alt'=>'aswq','class' => 'img-style'));
-            }  else {
-                echo $this->Html->image('profile.png',array('alt' => '','class' => 'avatar img-style','height' => '100px', 'width' => '100px')); 
-            }
-            ?> -->
-                           <!--  <?=  $this->Html->image('profile_thumbnail.jpg',array('alt' => 'Profile Picture','class' => 'img-fluid rounded-circle')); ?> -->
+                            <?php
+                              $user = $this->request->session()->read('Auth.User');
+
+                              if(!empty($user['Photo'])) {
+                                echo $this->Html->image('profile/'.$user['Photo'],array('alt' => 'Profile Picture','class' => 'img-fluid rounded-circle','width' => '60px', 'height' => '60px','onclick' => 'largedrop()'));
+                              }
+                              else {
+                                echo $this->Html->image('profile_thumbnail.jpg',array('alt' => 'Profile Picture','class' => 'img-fluid rounded-circle','onclick' => 'largedrop()'));
+                              }
+                            ?>
+                            <!--  <?=  $this->Html->image('profile_thumbnail.jpg',array('alt' => 'Profile Picture','class' => 'img-fluid rounded-circle')); ?> -->
                           </div>
                       </button>
                       <div class="dropdown-menu" aria-labelledby="dropdownMenu4">                        
@@ -225,16 +198,16 @@
                 <ul class="navbar-nav nav-cs-action pull-right">
                   <?php if(!$this->request->session()->read('Auth.User')) { ?>
                   <li class="nav-item">
-                    <a href="#" class="btn btn-bg " data-toggle="modal" data-target="#cs-login-modal">Login/signup</a>
+                    <a href="#" class="btn btn-sm btn-primary cs_login_btn cs-city-btn p-2" data-toggle="modal" data-target="#cs-login-modal">Login/signup</a>
                   </li>
                   <li class="nav-item">
-                    <a href="#" class="btn btn-bg " data-toggle="modal" data-target="#cs-login-modal">Create Events</a>
+                    <a href="#" class="btn btn-sm btn-primary cs_create_btn cs-city-btn p-2" data-toggle="modal" data-target="#cs-login-modal">Create Events</a>
                   </li>
                   <?php } ?>
 
                   <?php $user = $this->request->session()->read('Auth.User'); if($user && $user['group_id'] == 1) { ?>
                   <li class="nav-item">                    
-                    <a href="#" class="btn btn-bg " data-toggle="modal" data-target="#orgSignup">Create events</a>                   
+                    <a href="#" class="btn btn-sm primary cs_create_btn cs-city-btn p-2" data-toggle="modal" data-target="#orgSignup">Create events</a>                   
                   </li>
                   <?php } ?>
 
@@ -258,7 +231,7 @@
     <!-- /Start your project here-->
 
     <!--Footer-->
-    <footer class="page-footer font-small pt-4 mt-4 cs-footer">
+    <footer class="page-footer font-small pt-4 cs-footer">
       <div class="container">
         <div class="row">
           <div class="text-center cs-footer-social">
@@ -610,12 +583,6 @@
     <script type="text/javascript" src="<?php echo $this->Url->build('/newtheme/custom/js/event.add.js'); ?>"></script>
 
     <script src="http://maps.googleapis.com/maps/api/js?libraries=places&key=AIzaSyCx2hb4R1uhaMbmlUAu1_lFasvl3gVHtnw"></script>
-
-    <script type="text/javascript">
-      $('#forgLink').click(function(){
-      $('.nav-tabs > .nav-item').next('li.nav-item').next('li.nav-item').find('a').trigger('click');
-      });
-    </script>
 
 </body>
 </html>

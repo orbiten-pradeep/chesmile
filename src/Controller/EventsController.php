@@ -81,17 +81,25 @@ class EventsController extends AppController
         $topCategories = $tcStmt->fetchAll('assoc');
 
         $users_id = $this->Auth->user('id');
-   $this->loadModel('UserProfile');
-       $userProfile = $this->UserProfile->find()->select(['UserProfile.userid', 'UserProfile.Photo','UserProfile.id']);
-        $this->paginate = [
+        $this->loadModel('UserProfile');
+        $userProfile = $this->UserProfile->find()->select(['UserProfile.userid', 'UserProfile.Photo','UserProfile.id']);
+
+        /*$this->paginate = [
              'contain' => ['Events']
          ];
         $this->loadModel('Banners');
         $banner= $this->paginate['conditions'] = array('Events.date >'=>date("Y-m-d") , 'Banners.active' => '1');
         $banners = $this->paginate($this->Banners);
-       $this->set(compact('banners','banner'));
-       $this->set('_serialize', ['banners']);
-       $this->set('_serialize', ['banner']);
+        $this->set(compact('banners','banner'));
+        $this->set('_serialize', ['banners']);
+        $this->set('_serialize', ['banner']);*/
+
+        $bannersQry = "SELECT b.* FROM banners b LEFT JOIN events e on b.events_id = e.id WHERE b.active = 1 AND e.date >= CURDATE() ORDER BY b.created DESC";
+        $bannersStmt = $tcConn->execute($bannersQry);
+        $bannersList = $bannersStmt->fetchAll('assoc');
+        $this->set('banners', $bannersList);
+        //echo "<pre>";print_r($bannersList);echo "</pre>";exit;
+
 
         $this->set('userProfile', $userProfile);
         $this->set('categories', $categories_new);

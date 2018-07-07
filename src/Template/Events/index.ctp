@@ -24,34 +24,19 @@
 <div id="ce-1z" class="carousel slide main-carousel carousel-fade" data-ride="carousel">
    <!--Indicators-->
    <ol class="carousel-indicators">
-       <li data-target="#ce-1z" data-slide-to="0" class="active"></li>
-       <li data-target="#ce-1z" data-slide-to="1"></li>
+        <?php  foreach ($banners as $key => $value) { ?>
+        <li data-target="#ce-1z" data-slide-to="<?php echo $key; ?>" class="<?php echo ($key==0)?'active':'';?>"></li>
+        <?php } ?>
    </ol>
    <!--/.Indicators-->
    <!--Slides-->
    <div class="carousel-inner" role="listbox">
-
-    <?php 
-$flag=0;
-foreach ($banners as $banner): ?>
-<?php if($flag==0){ ?>
-       <div class="carousel-item active">
-          
-               <img class="d-block w-100" src="webroot/img/banners_hme/<?php echo $banner->image; ?>" alt="<?php echo $banner->image; ?>">
-          
-       </div>
-<?php
-$flag=1;
-}else{ ?>
-
-       <!--First slide-->
-       <div class="carousel-item">
-           <img class="d-block w-100" src="webroot/img/banners_hme/<?php echo $banner->image; ?>" alt="<?php echo $banner->image; ?>">
-       </div>
-<?php } ?>
-<!--/First slide-->
- <?php endforeach; ?>
-</div>
+        <?php  foreach ($banners as $key => $value) { ?>
+        <div class="carousel-item <?php echo ($key==0)?'active':'';?>">
+            <img class="d-block w-100" src="webroot/img/banners_hme/<?php echo $value['image']; ?>" alt="<?php echo $value['image']; ?>">
+        </div>
+        <?php } ?>
+    </div>
 </div>
 
 
