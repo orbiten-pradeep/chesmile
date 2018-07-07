@@ -25,12 +25,12 @@
 }
 .form-check [type=checkbox]:checked+label:before{
     top:-4px;
-    left:-3px;
+    left:-5px;
     width:12px;
     height:22px;
     border-style:solid;
     border-width:2px;
-    border-color:transparent #4285f4 #4285f4 transparent;
+    border-color:transparent #474747 #474747 transparent;
     -webkit-transform:rotate(40deg);
     -ms-transform:rotate(40deg);
     transform:rotate(40deg);

@@ -73,6 +73,23 @@ body{
 .navbar .mobile-menu {
     display: none;
 }
+
+.navbar .nav-city-link .btn-out {
+    border: 1px solid #50bac4!important;
+}
+.navbar .cs-city {
+    color: black !important;
+    font-size: .74rem;
+}
+.navbar .nav-city-link .btnbtn{
+    line-height: 2.2 !important;
+}
+.nav-cs-action .btn-bg {
+    background-color: #1e88e5!important;
+    line-height: 1 !important;
+    padding: .8rem 1.14rem !important;
+}
+
 .navbar .user-dropdown::after {
     display: none !important;
 }
@@ -370,6 +387,11 @@ input:checked + .slider:before {
 .nav-city-link .btn-grey:not([disabled]):not(.disabled).active, .btn-grey:not([disabled]):not(.disabled):active, .show > .btn-grey.dropdown-toggle.cs-city-btn:active,
 .show > .btn-grey.dropdown-toggle.cs-city-btn{
     background-color: #f4f4f4 !important;
+}
+
+.search-menu .fa-close {
+    float: right;
+    margin-top: 4px;
 }
 @media (min-width: 1024px) and (max-width: 1365px) {
     /*.search-box .search-text-box input {

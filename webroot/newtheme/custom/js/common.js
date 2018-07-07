@@ -39,6 +39,10 @@ $(document).ready(function() {
         minLength: 1
     });
 
+    $('#forgLink').click(function(){
+      $('.nav-tabs > .nav-item').next('li.nav-item').next('li.nav-item').find('a').trigger('click');
+    });
+
 
     /*var thumbs1 = document.getElementById("thumbnail-slider");
     var slides = thumbs1.getElementsByTagName("li");
