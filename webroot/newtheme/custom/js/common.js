@@ -1,37 +1,49 @@
-$( function() {
-  $('#date').datepicker({
-      changeMonth: true,
-      changeYear: true,
-      minDate: new Date()
-      });
-} );
+function init_map() {
+    var geoCode = $("#geoCode").val();
+    var myOptions = {
+        zoom:15,
+        center:new google.maps.LatLng(geoCode),
+        mapTypeId: google.maps.MapTypeId.ROADMAP
+    };
+    map = new google.maps.Map(document.getElementById('gmap_canvas'), myOptions);
+    marker = new google.maps.Marker({
+        map: map,
+        position: new google.maps.LatLng(geoCode)
+    });
+}
 
 $(document).ready(function() {
+    $('#date').datepicker({
+        changeMonth: true,
+        changeYear: true,
+        minDate: new Date()
+    });
+
     $('#time').timepicker({ timeFormat: 'h:mm p' });
     var e = document.getElementById("categories-id");
-    if(e){
-      var strUser = e.options[e.selectedIndex].value;
-      $select = $('#eventsubcategories-sub-categories');
-      $.ajax({
-          type:"POST",
-          data:strUser,
-          data:{"id":strUser},
-          ContentType : 'application/json',
-          dataType: 'json',
-          url: $("#sub_category_api_url").val(),
-          async:true,
-          success: function(data) {
-              $select.html('');
-              //iterate over the data and append a select option
-              $.each(data, function(key, val){
-                  //alert(val);
-                  $select.append('<option value="' + key + '">' + val + '</option>');
-              })
-          },
-          error: function (tab) {
-              $select.html('<option id="-1">none available</option>');
-          }
-      });
+    if(e) {
+        var strUser = e.options[e.selectedIndex].value;
+        $select = $('#eventsubcategories-sub-categories');
+        $.ajax({
+            type:"POST",
+            data:strUser,
+            data:{"id":strUser},
+            ContentType : 'application/json',
+            dataType: 'json',
+            url: $("#sub_category_api_url").val(),
+            async:true,
+            success: function(data) {
+                $select.html('');
+                //iterate over the data and append a select option
+                $.each(data, function(key, val){
+                    //alert(val);
+                    $select.append('<option value="' + key + '">' + val + '</option>');
+                })
+            },
+            error: function (tab) {
+                $select.html('<option id="-1">none available</option>');
+            }
+        });
     }
 
     $('#Autocomplete').autocomplete({
@@ -40,8 +52,12 @@ $(document).ready(function() {
     });
 
     $('#forgLink').click(function(){
-      $('.nav-tabs > .nav-item').next('li.nav-item').next('li.nav-item').find('a').trigger('click');
+        $('.nav-tabs > .nav-item').next('li.nav-item').next('li.nav-item').find('a').trigger('click');
     });
+
+    if($("#geoCode")) {
+        google.maps.event.addDomListener(window, 'load', init_map);
+    }
 
 
     /*var thumbs1 = document.getElementById("thumbnail-slider");
