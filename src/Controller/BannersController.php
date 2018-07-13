@@ -123,6 +123,8 @@ class BannersController extends AppController
 //$events = $this->Banners->Events->find()->select(['Events.title'])->where(['active' => 1,'date >'=>date("Y-m-d")]);
         
         $events = $this->Banners->Events->find('list')->where(['active' => 1,'date >'=>date("Y-m-d")]);
+         $categories = $this->Banners->Categories->find('list')->where(['active' => 1]);
+        $this->set(compact('banner', 'categories'));
         $this->set(compact('banner', 'events'));
         $this->set('_serialize', ['banner']);
 

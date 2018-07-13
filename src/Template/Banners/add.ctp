@@ -51,13 +51,32 @@ use Cake\Routing\Router;
                 <div class="col-lg-6 col-md-6 col-sm-6 col-xs-12">
                     <div class="card">
                         <div class="body">
+
                           <?= $this->Form->create($banner, array('type' => 'file')) ?>
     <legend><?= __('Add Banner') ?></legend>
                    <div class="form-group">
                                     <div class="form-line">
-                                    <?php
+                                    <!-- <?php
+                                     $options = [
+                'home' => 'Home',
+                'category' =>  'Category'
+            ];
+
+            echo $this->Form->input('bannerstype',  ['options' => $options]);?> -->
+            <select onchange="Check(this);" id ="bannerstype">
+    <option id ="home" value="home">Home Banner</option>
+    <option id = "category" value="category">Category</option>
+    
+    </select>
+
+            <?php
             echo $this->Form->input('events_id', ['options' => $events]);
+            //echo $this->Form->input('categories_id', ['options' => $categories]);
         ?>   
+         <div id="cat" style="display: none;">
+           <?php  echo $this->Form->input('categories_id', ['options' => $categories]);
+        ?>   
+         </div>
                                     </div>
                                 </div>
 
@@ -67,7 +86,7 @@ use Cake\Routing\Router;
                                         <?php   echo $this->Form->input('url',array('div' => false,'class' => 'form-control','label' => false,'placeholder' => 'Event Url')); ?>
                                     </div>
                                 </div>
-
+ <label for="">Event Caption</label>
                                 <div class="form-group">
                                         <div class="form-line">
                                           <?php echo $this->Form->input('caption',array('div' => false,'class' => 'form-control','label' => false,'placeholder' => 'Caption'));?>
@@ -83,7 +102,7 @@ use Cake\Routing\Router;
                                     <?= $this->Form->radio('active', ['DeActivate','Activate'],array('class' => 'with-gap radio-select-list'));?>
                                     </span>
                                </div> -->
-                               <span class="input-group-addon">
+                             <!--   <span class="input-group-addon">
                   <input type="radio" name="active" id="active" value ="activate" class="with-gap radio-select-list">
                   <label for="active">
                   Activate
@@ -93,7 +112,7 @@ use Cake\Routing\Router;
                     <label for="deactive">
                   Deactivate
                   </label>
-                </span>
+                </span> -->
                                 <!-- <button type="button" class="btn btn-primary m-t-15 waves-effect">LOGIN</button> -->
                                 <?= $this->Form->button(__('Submit'),array('class' => 'btn btn-primary m-t-15 waves-effect')) ?>
                             <?= $this->Form->end() ?>
@@ -103,4 +122,13 @@ use Cake\Routing\Router;
             </div>
         </div>
     </section>
-          
+          <script>
+    function Check(that) {
+        if (that.value == "category") {
+         // alert("check");
+            document.getElementById("cat").style.display = "block";
+        } else {
+            document.getElementById("cat").style.display = "none";
+        }
+    }
+</script>

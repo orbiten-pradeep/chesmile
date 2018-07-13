@@ -20,7 +20,7 @@ class EventsController extends AppController
 	public function beforeFilter(Event $event)
 	{
 		parent::beforeFilter($event);
-    	$this->Auth->allow(['Invitation','about','terms','privacy','partnerwith','contact','thebigbeachmarathon', 'index', 'eventlist','View','viewresult','searchbyeventtitle','search','chennai','findslug', 'demolist']);
+    	$this->Auth->allow(['Invitation','about','terms','privacy','partnerwith','contact','thebigbeachmarathon', 'index', 'eventlist','View','viewresult','searchbyeventtitle','search','chennai','findslug', 'demolist','category']);
     	$this->set('Photo',$this->Auth->user('Photo'));
 	}
 
@@ -105,6 +105,37 @@ class EventsController extends AppController
         $this->set('categories', $categories_new);
         $this->set('usersId', $users_id);
         $this->set('topCategories', $topCategories);
+        $this->set(compact('subCategories_new'));
+    }
+/**
+     * CategoryView method
+     *
+     * @param string|null $id Event id.
+     * @return \Cake\Network\Response|null
+     * @throws \Cake\Datasource\Exception\RecordNotFoundException When record not found.
+     */
+    public function category($id = null)
+    {
+         $this->viewBuilder()->layout('event_new_home');
+        //To fetch the event details by Category wise.
+        $event = $this->Events->find()->contain(['Categories'])->where(['Events.categories_id'=>$id]);
+         $this->loadModel('Banners');
+          $banners = $this->Banners->find()->contain(['Categories','Events'])->where(['Banners.categories_id'=>$id,'Events.date >'=>date("Y-m-d") , 'Banners.active' => '1']);
+           $this->loadModel('SubCategories');
+        $subCategories_new = $this->SubCategories->find('all', ['fields' => 'name',
+                'conditions' => ['active' => 1]
+            ]);
+          //echo $id;
+//        $banner = $this->paginate['conditions'] = array('Events.date >'=>date("Y-m-d") , 'Banners.active' => '1','Events.categories_id' => $id);
+       //  $banners = $this->paginate($this->Banners);
+       // $this->set(compact('banners','banner'));
+       // $this->set('_serialize', ['banners']);
+       // $this->set('_serialize', ['banner']);
+ $this->set('banners', $banners);
+        $this->set(compact('banners'));
+            
+        $this->set('event', $event);
+        $this->set(compact('event'));
         $this->set(compact('subCategories_new'));
     }
 
