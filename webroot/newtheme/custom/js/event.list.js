@@ -49,7 +49,7 @@ chennaiSmile.subCategoryRespDivElem = $('#subCategoriesResp');
 chennaiSmile.eventListContainer = $('#eventResponse');
 chennaiSmile.noEventsMsg = $('#noEventsMsg');
 chennaiSmile.eventListLoading = $(".loadingDiv");
-chennaiSmile.eventListResponse = ''; 
+chennaiSmile.eventListResponse = []; 
 chennaiSmile.eventsMasonryInstance = '';
 
 chennaiSmile.eventScrollDisabled = false;
@@ -101,14 +101,18 @@ chennaiSmile.getEventList = function() {
 	    		self.previousFilterParams = this.filterParams;
 
 		        if(self.filterParams.page > 0)
-		        	self.updateEventGridList(); 
+		        	self.updateEventGridList();
 		        else
 		        	self.addEventGridList();
 	    	}
 	    	else {
 	    		self.eventScrollDisabled = true;
 	    		self.eventListLoading.hide();
-		    	self.eventListContainer.html("<h2 class='no-events'>No events found!!!</h2>");
+	    		if(self.eventListResponse.length > 0) {
+	    			self.eventListContainer.append("<span class='no-more-events'>No more events found!!!</span>");
+	    		} else {
+		    		self.eventListContainer.html("<span class='no-events'>No events found!!!</span>");
+		    	}
 		    	self.eventListContainer.fadeIn('slow');
 	    		return false;
 	    	}
@@ -124,7 +128,7 @@ chennaiSmile.addEventGridList = function() {
 	if(this.eventListResponse.length > 0){
         var grid = this.generateEventGridList();
 		this.eventListContainer.html(grid);
-        this.masonryInitialize();        
+        this.masonryInitialize();
     }
 }
 
@@ -202,7 +206,7 @@ chennaiSmile.generateEventGridList = function() {
 	    		dispImgHmtl = '<a href="'+eventUrl+'"><img src="'+imgSrc+'" alt="" onerror="this.src=\'img/photos/1.jpg\'" style="height:auto;" class="img-fluid cs_dispimg"></a>';
 	    	}
 
-	    	if(response[k].register_online  == 1){
+	    	if(response[k].register_online == 1){
 	    		var buybtn;
 	    		var eventprice
 	    		eventprice = '<span class="event-price pull-right">₹ '+response[k].price+'</span>';

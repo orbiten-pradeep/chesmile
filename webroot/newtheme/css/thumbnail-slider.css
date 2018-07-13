@@ -8,6 +8,7 @@
     position:relative;
     -webkit-user-select: none;
     user-select:none;
+    margin-top: 20px;
 }
 
 #thumbnail-slider div.inner {
@@ -86,15 +87,13 @@
 
 
 #thumbnail-slider .thumb {
-      /* background-color: #efe3e3; */
     width: 80%;
-    /* height: 100%;*/
     background-size:contain;
     background-repeat:no-repeat;
     background-position:center center;
     display:block;
-    position:absolute;
     font-size:0;
+    margin: 0 auto;
 }
 
 /* --------- navigation controls ------- */

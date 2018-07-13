@@ -1,26 +1,3 @@
-<style type="text/css">
-    /*.event-list .card-size .card:hover{
-        background-color:#"'+response[k].category_color+'";
-    }*/
-    .cat_icon {
-    display: inline-block;
-    width: 85px !important;
-    height: 85px !important;
-    z-index: 0;
-}
-.btn-oceanblue {
-    background-color: #424242!important;
-    box-shadow: 10px;
-    outline-color: #f38599 !important;
-    font-size: .70rem !important;
-}
-.btnfont {
-   font-size: .88rem;
-    font-weight: bold; 
-}
-
-</style>
-
 <div id="ce-1z" class="carousel slide main-carousel carousel-fade" data-ride="carousel">
    <!--Indicators-->
    <ol class="carousel-indicators">
@@ -45,12 +22,12 @@
     <!--Dropdown primary-->
     
     <div class="pull-right filter-buttons">
-        <button type="button" class="btn btn-sm btn btn-oceanblue btnfont" data="freeEvents" data-text="Free Events" >Free Events</button>
-        <button type="button" class="btn btn-sm btn btn-oceanblue btnfont waves-effect " data="register" data-text="Booking Events">Booking Events</button>
+        <button type="button" class="btn btn-sm btn btn-oceanblue btnfont filter-type" data="freeEvents" data-text="Free Events" >Free Events</button>
+        <button type="button" class="btn btn-sm btn btn-oceanblue btnfont filter-type waves-effect " data="register" data-text="Booking Events">Booking Events</button>
     </div>
     <div class="dropdown d-inline-block filter-dropdowns">
         <!--Trigger-->
-        <button class="btn btn-sm dropdown-toggle btn btn-oceanblue  filter-type" type="button" id="dropdownMenu1" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">Filter By</button>        
+        <button class="btn btn-sm dropdown-toggle btn btn-oceanblue" type="button" id="dropdownMenu1" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">Filter By</button>        
 
         <!--Menu-->
         <div class="dropdown-menu dropdown-primary">
@@ -83,31 +60,19 @@
             <div class="well">
                 <div id="thumbnail-slider">
                     <div class="inner">
-                        <ul>
-                           <!--  <?php 
-                            foreach ($categories as $key=> $category) {
-                                $card = $category['card'];
-                                if($card!="") {
-                                    echo "<li class='cat_icon'>";
-                                    $imagePath = "/img/card/".$card;
-                                    $imageUrl = $this->Url->build($imagePath);
-                                    echo "<a class='thumb filter-tc-button' href='".$imageUrl."' data-text='".$category['name']."' data='".$category['id']."'></a><span>".$category['name']."</span>";
-                                    echo "<\li>";
-                                }
-                            }
-                            ?>    -->
-                             <?php 
+                        <ul> 
+                            <?php 
                             foreach ($categories as $key=> $category) {
                                 $card = $category['card'];
                                  $catid = $category['id'];
                                 $catname = $category['name'];
                                 if($card!="") {
-                                    echo "<li class='cat_icon'>";
+                                    echo "<li>";
                                     $imagePath = "/img/card/".$card;
-                                     $imageLink = $this->Url->build('/events/category/'.$catid);
+                                    $imageLink = $this->Url->build('/events/category/'.$catid);
                                     $imageUrl = $this->Url->build($imagePath);
-                                    echo "<a  href='".$imageLink."' ><img class='thumb' src='".$imageUrl."'  data-text='".$category['name']."' data='".$category['id']."' > </a><span>".$category['name']."</span>";
-                                    echo "<\li>";
+                                    echo "<a href2='".$imageLink."' class='filter-tc-button' data-text='".$category['name']."' data='".$category['id']."'><img class='thumb' src='".$imageUrl."'> </a><span>".$category['name']."</span>";
+                                    echo "</li>";
                                 }
                             }
                             ?>                
@@ -139,13 +104,11 @@
             </div>
         </div>
     </div>
-    <div class="container-fluid">
-        <div class="row">
-            <div class="col-lg-12 col-md-12">
-                <div id="eventResponse"></div>
-                <div class="loadingDiv"><div id="loading"></div></div>
-            </div>
+    <div class="row">
+        <div class="col-lg-12 col-md-12 pb-4">
+            <div id="eventResponse"></div>
+            <div class="loadingDiv"><div id="loading"></div></div>
         </div>
-    </div> 
+    </div>
 </div>
                 

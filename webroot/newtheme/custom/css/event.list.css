@@ -9,6 +9,17 @@
     padding-left: 12px;
     padding-right: 12px;
 }
+span.no-events, span.no-more-events {
+    display: block;
+    position: absolute;
+    bottom: -43px;
+    text-align: center;
+    width: 100%;
+    margin-top: 10px !important;
+    font-weight: bold;
+    padding-bottom: 25px;
+    font-size: 18px;
+}
 @media (min-width: 1024px) and (max-width: 1366px){
     .event-list .card-size {
         max-width: 25%;
@@ -179,8 +190,8 @@
     border: 1px solid #eee;
     margin-bottom: 20px;
     padding: 0px;
-    margin-left: 28px;
-    margin-right: 28px;
+    margin-left: 14px;
+    margin-right: 14px;
 }
 .event-list .filter-params .filter-clear-all {
     box-shadow: none;

@@ -134,6 +134,23 @@ body{
 .navbar-brand img {
     width: 280px;
 }
+.cat-icon {
+    display: inline-block;
+    width: 85px !important;
+    height: 85px !important;
+    z-index: 0;
+}
+.btn-oceanblue {
+    background-color: #424242!important;
+    box-shadow: 10px;
+    outline-color: #f38599 !important;
+    font-size: .70rem !important;
+}
+.btnfont {
+    font-size: .88rem;
+    font-weight: bold; 
+}
+
 .btn.btn-primary.dropdown-toggle.cs-dropbtn.waves-effect.waves-light {
     background: none !important;
     box-shadow: none !important;
@@ -361,6 +378,7 @@ input:checked + .slider:before {
     /*background-color: #fafafa;*/
     padding: 20px 20px 30px;
     margin-bottom: 25px;
+    margin-top: 25px;
 }
 .top-categories .btn {
     border-radius: 0;
