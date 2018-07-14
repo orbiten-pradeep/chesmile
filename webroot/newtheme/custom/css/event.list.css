@@ -11,13 +11,13 @@
 }
 span.no-events, span.no-more-events {
     display: block;
-    position: absolute;
-    bottom: -43px;
+    /* position: fixed; */
+    /* bottom: -28px; */
     text-align: center;
     width: 100%;
-    margin-top: 10px !important;
+    /* margin-top: 32px !important; */
     font-weight: bold;
-    padding-bottom: 25px;
+    /* padding-bottom: 25px; */
     font-size: 18px;
 }
 @media (min-width: 1024px) and (max-width: 1366px){

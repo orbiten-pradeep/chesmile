@@ -54,6 +54,9 @@
     list-style:none;
     backface-visibility:hidden;
     padding-bottom: 30px;
+
+    width: 80px;
+    height: 90px;
 }
 
 #thumbnail-slider ul li.active {
@@ -87,7 +90,7 @@
 
 
 #thumbnail-slider .thumb {
-    width: 80%;
+    width:100%; 
     background-size:contain;
     background-repeat:no-repeat;
     background-position:center center;

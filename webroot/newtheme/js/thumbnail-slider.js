@@ -3,14 +3,14 @@ var thumbnailSliderOptions =
 {
     sliderId: "thumbnail-slider",
     orientation: "horizontal",
-    thumbWidth: "110px",
-    thumbHeight: "100px",
-    showMode: 3,
+    thumbWidth: "80px",
+    thumbHeight: "90px",
+    showMode: 5,
     autoAdvance: false,
     selectable: true,
     slideInterval: 3000,
     transitionSpeed: 1000,
-    shuffle: false,
+    shuffle: true,
     startSlideIndex: 0, //0-based
     pauseOnHover: true,
     initSliderByCallingInitFunc: false,

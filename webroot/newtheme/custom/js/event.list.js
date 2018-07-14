@@ -1,6 +1,6 @@
 var chennaiSmile = {};
 chennaiSmile.eventPage = $("#eventPage");
-
+chennaiSmile.baseUrl = $("#base_url").val();
 chennaiSmile.filterElem = {};
 chennaiSmile.filterElem.date = $('.filter-date');
 chennaiSmile.filterElem.category = $('.filter-tc-button');
@@ -109,9 +109,9 @@ chennaiSmile.getEventList = function() {
 	    		self.eventScrollDisabled = true;
 	    		self.eventListLoading.hide();
 	    		if(self.eventListResponse.length > 0) {
-	    			self.eventListContainer.append("<span class='no-more-events'>No more events found!!!</span>");
+	    			self.eventListContainer.parent().append("<span class='no-more-events'>No more events found!!!</span>");
 	    		} else {
-		    		self.eventListContainer.html("<span class='no-events'>No events found!!!</span>");
+		    		self.eventListContainer.parent().html("<span class='no-events'>No events found!!!</span>");
 		    	}
 		    	self.eventListContainer.fadeIn('slow');
 	    		return false;
@@ -202,7 +202,8 @@ chennaiSmile.generateEventGridList = function() {
 	    		dispImgHmtl = '<a href="'+eventUrl+'"><img src="img/photos/1.jpg" alt="" style="height:auto;" class="img-fluid cs_dispimg"></a>';
 	    	}
 	    	else {
-	    		var imgSrc = "img/display/"+dispImg;
+	    		var imgSrc = this.baseUrl+"/img/display/"+dispImg;
+	    		console.log(this.baseUrl);
 	    		dispImgHmtl = '<a href="'+eventUrl+'"><img src="'+imgSrc+'" alt="" onerror="this.src=\'img/photos/1.jpg\'" style="height:auto;" class="img-fluid cs_dispimg"></a>';
 	    	}
 
@@ -308,8 +309,7 @@ chennaiSmile.getSubCategoryList = function() {
 	            })
 
 	            self.subCategoryRespDivElem.html(html);
-	            self.parentCategoryDivElem.hide();
-	            self.subCategoryDivElem.show();
+	            self.parentCategoryDivElem.hide();	            
 	            self.searchMenuButtonElem.html('<button type="button" class="btn btn-head btn-primary category-selected" type="button"><label>'+pCcategoryText+'</label><i class="fa fa-close" aria-hidden="true"></i></button>');
         	}
         	else {
@@ -329,14 +329,54 @@ chennaiSmile.getSubCategoryList = function() {
     });
 }
 
+chennaiSmile.changeUrl = function(title, url) {
+    if (typeof (history.pushState) != "undefined") {
+        var obj = { Title: title, Url: url };
+        history.pushState(obj, obj.Title, obj.Url);
+    } else {
+        console.log("Browser does not support HTML5.");
+    }
+}
+
 $(document).ready(function() {
 	var self = chennaiSmile;
-	self.getHashValues();
-	self.getEventList();
+	self.getHashValues();		
 
 	if(self.eventPage.val() != "index") {
 		$("#mobFooter").hide();
 	}
+
+	self.searchTagsInputElem.slimScroll({
+	    axis: 'x',
+	    height: '45px',
+	    size: '7px',
+	    position: 'left',
+	    color: '#286090',
+	    allowPageScroll: false
+	});
+
+	if(self.eventPage.val() == "category") {
+		self.searchTextBoxElem.tagsinput('removeAll');
+		self.parentCategory = {};
+		self.parentCategory.id = $("#categoryPageCId").val();
+		self.parentCategory.text = $("#categoryPageCName").val();
+		self.searchTextBoxElem.tagsinput('add', self.parentCategory);
+		self.searchTagsInputElem.find('input').attr('placeholder', '');
+		self.getSubCategoryList();
+
+		var categoryItems = self.searchTextBoxElem.tagsinput('items');
+		categoryItems.forEach(function(item){
+			self.filterParams.category.push(item.id);
+			self.filterTextArr.push({'type':'category', 'text': item.text, 'value': item.id });
+		});
+
+		self.filterParams.page = 0;
+		self.masonryDestory();
+		self.generateFilterText();
+		self.getEventList();
+	}
+
+	self.getEventList();
 
 	self.filterElem.action.click(function() {
 		var action = $(this).attr('data');
@@ -408,17 +448,46 @@ $(document).ready(function() {
 
 	self.filterElem.category.click(function() {
 		var catValue = $(this).attr('data');
+		var catText = $(this).attr('data-text');
 
-		var index = self.filterParams.category.indexOf(catValue);
-		if (index !== -1) return false;
+		if(self.eventPage.val() == "category") {
+			self.filterParams.category = [];
+			self.filterTextArr = [];
+			self.filterParams.date = '';
+			self.filterParams.type = '';
 
-		self.filterParams.category.push(catValue);
-		self.filterTextArr.push({'type':'category', 'text': $(this).attr('data-text'), 'value': catValue });
-		self.filterParams.page = 0;
-		self.masonryDestory();
-		self.generateFilterText();
-		self.getEventList();
-		self.favCategoryDivElem.hide();
+			self.searchTextBoxElem.tagsinput('removeAll');
+			self.parentCategory = {};
+			self.parentCategory.id = catValue;
+			self.parentCategory.text = catText;
+			self.searchTextBoxElem.tagsinput('add', self.parentCategory);
+			self.searchTagsInputElem.find('input').attr('placeholder', '');
+			self.getSubCategoryList();
+
+			self.filterParams.category.push(catValue);
+			self.filterTextArr.push({'type':'category', 'text': catText, 'value': catValue });
+			self.filterParams.page = 0;
+			self.masonryDestory();
+			self.generateFilterText();
+			self.getEventList();
+
+			var categoryUrl = self.baseUrl + "events/category/"+catValue;
+			var categoryPageTitle = 'ChennaiSmile: Category - '+catText;
+			self.changeUrl(categoryPageTitle, categoryUrl);
+		}
+		else {
+			var index = self.filterParams.category.indexOf(catValue);
+			if (index !== -1) return false;
+
+			self.filterParams.category.push(catValue);
+			self.filterTextArr.push({'type':'category', 'text': $(this).attr('data-text'), 'value': catValue });
+			self.filterParams.page = 0;
+			self.masonryDestory();
+			self.generateFilterText();
+			self.getEventList();
+			self.favCategoryDivElem.hide();
+
+		}
 	});
 
 	self.filterTextParentContainer.on('click', '.filter-close', function() {
@@ -469,6 +538,7 @@ $(document).ready(function() {
 		self.searchTextBoxElem.tagsinput('add', self.parentCategory);
 		self.searchTagsInputElem.find('input').attr('placeholder', '');
 		self.getSubCategoryList();
+		self.subCategoryDivElem.show();
 	});
 
 	self.subCategoryRespDivElem.on('click','.sub-category input', function(event){
@@ -507,15 +577,6 @@ $(document).ready(function() {
 	    }
 	});
 
-	self.searchTagsInputElem.slimScroll({
-	    axis: 'x',
-	    height: '45px',
-	    size: '7px',
-	    position: 'left',
-	    color: '#286090',
-	    allowPageScroll: false
-	});
-
 	self.searchMenuButtonElem.on('click', '.cat-not-selected', function(event){
 		event.stopPropagation();
 		self.parentCategoryDivElem.toggle();
@@ -530,6 +591,9 @@ $(document).ready(function() {
 		var categoryItems = self.searchTextBoxElem.tagsinput('items');
 
 		categoryItems.forEach(function(item){
+			var index = self.filterParams.category.indexOf(item.id);
+			if (index !== -1) return false;
+
 			self.filterParams.category.push(item.id);
 			self.filterTextArr.push({'type':'category', 'text': item.text, 'value': item.id });
 		});
@@ -581,7 +645,6 @@ $(document).ready(function() {
         return false;
 
 	});
-
 });
 
 

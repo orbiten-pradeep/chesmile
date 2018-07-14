@@ -374,7 +374,7 @@ input:checked + .slider:before {
     transform: translate3d(0, 125%, 0);
 } 
 
-.favourite-category {
+.favourite-category, .favourite-category-2 {
     /*background-color: #fafafa;*/
     padding: 20px 20px 30px;
     margin-bottom: 25px;
