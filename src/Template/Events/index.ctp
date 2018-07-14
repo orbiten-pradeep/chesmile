@@ -10,7 +10,7 @@
    <div class="carousel-inner" role="listbox">
         <?php  foreach ($banners as $key => $value) { ?>
         <div class="carousel-item <?php echo ($key==0)?'active':'';?>">
-            <img class="d-block w-100" src="webroot/img/banners_hme/<?php echo $value['image']; ?>" alt="<?php echo $value['image']; ?>">
+            <img class="d-block w-100" src="<?php echo $this->Url->build('/', true); ?>/img/banners_hme/<?php echo $value['image']; ?>" alt="<?php echo $value['image']; ?>">
         </div>
         <?php } ?>
     </div>
@@ -71,7 +71,7 @@
                                     $imagePath = "/img/card/".$card;
                                     $imageLink = $this->Url->build('/events/category/'.$catid);
                                     $imageUrl = $this->Url->build($imagePath);
-                                    echo "<a href2='".$imageLink."' class='filter-tc-button' data-text='".$category['name']."' data='".$category['id']."'><img class='thumb' src='".$imageUrl."'> </a><span>".$category['name']."</span>";
+                                    echo "<a href='".$imageLink."'><img class='thumb' src='".$imageUrl."'> </a><span>".$category['name']."</span>";
                                     echo "</li>";
                                 }
                             }

@@ -107,35 +107,54 @@ class EventsController extends AppController
         $this->set('topCategories', $topCategories);
         $this->set(compact('subCategories_new'));
     }
-/**
+    /**
      * CategoryView method
      *
      * @param string|null $id Event id.
      * @return \Cake\Network\Response|null
      * @throws \Cake\Datasource\Exception\RecordNotFoundException When record not found.
      */
-    public function category($id = null)
-    {
-         $this->viewBuilder()->layout('event_new_home');
-        //To fetch the event details by Category wise.
-        $event = $this->Events->find()->contain(['Categories'])->where(['Events.categories_id'=>$id]);
-         $this->loadModel('Banners');
-          $banners = $this->Banners->find()->contain(['Categories','Events'])->where(['Banners.categories_id'=>$id,'Events.date >'=>date("Y-m-d") , 'Banners.active' => '1']);
-           $this->loadModel('SubCategories');
-        $subCategories_new = $this->SubCategories->find('all', ['fields' => 'name',
-                'conditions' => ['active' => 1]
-            ]);
-          //echo $id;
-//        $banner = $this->paginate['conditions'] = array('Events.date >'=>date("Y-m-d") , 'Banners.active' => '1','Events.categories_id' => $id);
-       //  $banners = $this->paginate($this->Banners);
-       // $this->set(compact('banners','banner'));
-       // $this->set('_serialize', ['banners']);
-       // $this->set('_serialize', ['banner']);
- $this->set('banners', $banners);
-        $this->set(compact('banners'));
-            
-        $this->set('event', $event);
-        $this->set(compact('event'));
+    public function category($id = null) {
+        $this->viewBuilder()->layout('event_new_home');
+
+        $users_id = $this->Auth->user('id');
+        $this->loadModel('UserProfile');
+        $userProfile = $this->UserProfile->find()->select(['UserProfile.userid', 'UserProfile.Photo','UserProfile.id']);
+
+        $this->loadModel('Categories');
+        $categoriesList = $this->Categories->find()->select(['Categories.name', 'Categories.id', 'Categories.card'])
+            ->where(['active' => 1]);
+
+        $this->loadModel('SubCategories');
+        $subCategories_new = $this->SubCategories->find('all', ['fields' => 'name', 'conditions' => ['active' => 1] ]);
+
+        $tcConn = ConnectionManager::get('default');
+        $topCategoriesQuery = "SELECT count(e.id) as event_counts, c.name, c.color, c.categorylitecolor, c.id as cid FROM `events` e LEFT JOIN categories c on c.id = e.categories_id WHERE c.id!='' AND e.active = 1 AND e.date >= CURDATE() GROUP BY c.id ORDER BY rand() limit 6";
+
+        $tcStmt = $tcConn->execute($topCategoriesQuery);
+        $topCategories = $tcStmt->fetchAll('assoc');
+        
+
+        $bannersQry = "SELECT b.* FROM banners b LEFT JOIN events e on b.events_id = e.id WHERE b.active = 1 AND e.date >= CURDATE() ORDER BY b.created DESC";
+        $bannersStmt = $tcConn->execute($bannersQry);
+        $bannersList = $bannersStmt->fetchAll('assoc');
+
+        $categoryDetailQry = "SELECT c.* FROM categories c WHERE c.id = ".$id;
+        $categoryDetailStmt = $tcConn->execute($categoryDetailQry);
+        $categoryDetail = $categoryDetailStmt->fetch('assoc');
+
+        $subCategoriesQry = "SELECT sc.* FROM sub_categories sc WHERE sc.categories_id = ".$id;
+        $subCategoriesStmt = $tcConn->execute($subCategoriesQry);
+        $subCategories = $subCategoriesStmt->fetchAll('assoc');
+
+        $this->set('banners', $bannersList);
+        $this->set('userProfile', $userProfile);
+        $this->set('categories', $categoriesList);
+        $this->set('categoryDetail', $categoryDetail);
+        $this->set('subCategories', $subCategories);
+
+        $this->set('usersId', $users_id);
+        $this->set('topCategories', $topCategories);
         $this->set(compact('subCategories_new'));
     }
 
@@ -186,7 +205,8 @@ class EventsController extends AppController
         $this->set(compact('likes'));
         $this->set('_serialize', ['events', 'likes']);
     }
-      public function settleindex()
+
+    public function settleindex()
     {
         $this->viewBuilder()->layout('admin');
         //$this->viewBuilder()->layout('event_home');
@@ -223,7 +243,8 @@ class EventsController extends AppController
         $this->set('usersId', $users_id);
         $this->set(compact('subCategories_new'));
     }
-   public function addticketing($id = null)
+
+    public function addticketing($id = null)
     {
        
         $this->request->allowMethod(['post', 'addticketing']);
@@ -237,7 +258,8 @@ class EventsController extends AppController
         return $this->redirect(['action' => 'index']);
 
     }
-  public function organizermyevents()
+
+    public function organizermyevents()
     {
         $this->paginate = [
             'contain' => ['Users', 'Categories']
@@ -285,13 +307,13 @@ class EventsController extends AppController
         $this->set('_serialize', ['events', 'likes']);
     }
 
- public function mysettle()
+    public function mysettle()
     {
         $this->paginate = [
             'contain' => ['Users', 'Categories']
         ];
         $this->viewBuilder()->layout('admin');
-       if(!empty($this->Auth->user('id')))
+        if(!empty($this->Auth->user('id')))
         {
             $users_id = $this->Auth->user('id');
             $fullname = $this->Auth->user('fullname');
