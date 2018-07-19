@@ -19,7 +19,9 @@
 
     <link href="<?php echo $this->Url->build('/newtheme/css/thumbnail-slider.css'); ?>" rel="stylesheet">
 
-    <link href="<?php echo $this->Url->build('/newtheme/css/thumbs2.css'); ?>" rel="stylesheet">
+    <!-- <link href="<?php echo $this->Url->build('/newtheme/css/thumbs2.css'); ?>" rel="stylesheet"> -->
+
+    <link href="<?php echo $this->Url->build('/newtheme/css/select2.min.css'); ?>" rel="stylesheet">
     
     <!-- Your custom styles (optional) -->
     <link href="<?php echo $this->Url->build('/newtheme/css/style.css'); ?>" rel="stylesheet">
@@ -569,6 +571,8 @@
     <script type="text/javascript" src="<?php echo $this->Url->build('/newtheme/js/jquery.slimscroll.min.js'); ?>"></script>
 
     <script type="text/javascript" src="<?php echo $this->Url->build('/newtheme/js/thumbnail-slider.js'); ?>"></script>
+
+    <script type="text/javascript" src="<?php echo $this->Url->build('/newtheme/js/select2.min.js'); ?>"></script>
 
     <script src="//cdnjs.cloudflare.com/ajax/libs/timepicker/1.3.5/jquery.timepicker.min.js"></script>
 

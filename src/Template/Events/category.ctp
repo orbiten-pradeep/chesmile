@@ -1,41 +1,9 @@
 <input type="hidden" name="categoryPage" id="categoryPage" value="true">
 <input type="hidden" name="categoryPageCId" id="categoryPageCId" value="<?php echo $categoryDetail['id']; ?>">
 <input type="hidden" name="categoryPageCName" id="categoryPageCName" value="<?php echo $categoryDetail['name']; ?>">
-<div class="container favourite-category">
-    <div class="row">
-        <div class="col-lg-12 col-md-12">
-            <div class="cs-category-title text-center">
-                <h2>Your Favourite Category</h2>
-                <?php //foreach ($categories as $key=> $category) { echo "<pre>";print_r($category); echo "</pre>"; } ?>
-            </div>
-            <!--Carousel Wrapper-->
-
-            <div class="well">
-                <div id="thumbnail-slider">
-                    <div class="inner">
-                        <ul> 
-                            <?php 
-                            foreach ($categories as $key=> $category) {
-                                $card = $category['card'];
-                                 $catid = $category['id'];
-                                $catname = $category['name'];
-                                if($card!="") {
-                                    echo "<li>";
-                                    $imagePath = "/img/card/".$card;
-                                    $imageLink = $this->Url->build('/events/category/'.$catid);
-                                    $imageUrl = $this->Url->build($imagePath);
-                                    echo "<a href2='".$imageLink."' class='filter-tc-button' data-text='".$category['name']."' data='".$category['id']."'><img class='thumb' src='".$imageUrl."'> </a><span>".$category['name']."</span>";
-                                    echo "</li>";
-                                }
-                            }
-                            ?>                
-                        </ul>
-                    </div>
-                </div> 
-
-            </div>            
-            <!--/.Carousel Wrapper-->  
-        </div>
+<div class="container-fluid pr-0 pl-0">
+    <div class="col-md-12 col-xs-12 pr-0 pl-0">
+        <?php echo $this->Html->image('cs-static-banner.jpg',array('alt' => 'Cs-Static','class' => 'img-fluid static-banner z-depth-1')); ?>
     </div>
 </div>
 
@@ -60,12 +28,17 @@
         </div>
     </div>
     <div class="btn-group top-categories" data-toggle="buttons">
-        <label>Top categories: </label>
-        <?php 
-            foreach ($topCategories as $key => $value) {
-                echo "<button class='btn btn-unique btn-sm filter-tc-button' style='background-color:#".$value['color']." !important' data-text='".$value['name']."' data=".$value['cid']."> ".$value['name']." (".$value['event_counts'].")"."</button>";
+        <label>Other categories: </label>
+        <select class="other-category">
+            <option value="" selected>Choose your category</option>
+            <?php
+            foreach ($categories as $key=> $category) {
+                ?>
+                <option value="<?php echo $category['id']; ?>" <?php echo ($category['id'] == $categoryDetail['id']) ? "selected": "" ?> ><?php echo $category['name']; ?></option>
+                <?php
             }
-        ?>
+            ?>
+        </select>       
     </div>
     
     <!--/Dropdown primary-->
@@ -74,7 +47,7 @@
 <div class="container-fluid event-list">
     <div class="row epage-title">
         <div class="col-lg-12 col-md-12">
-            <div><h2 class="epage-title-text text-center mx-auto">Events</h2></div>
+            <div><h2 class="epage-title-text text-center mx-auto"><?php echo $categoryDetail['name']; ?> Events</h2></div>
         </div>
     </div>
     <div class="row filter-parent-container d-none">
