@@ -59,6 +59,14 @@ $(document).ready(function() {
         google.maps.event.addDomListener(window, 'load', init_map);
     }
 
+    if($('.other-category')) {
+        $('.other-category').select2();
+    }
+
+    $('.other-category').change(function(){
+        window.location.href = $("#base_url").val() +"events/category/"+ $(this).val();
+    });
+
 
     /*var thumbs1 = document.getElementById("thumbnail-slider");
     var slides = thumbs1.getElementsByTagName("li");

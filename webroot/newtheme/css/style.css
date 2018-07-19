@@ -624,3 +624,12 @@ input:checked + .slider:before {
         font-size: 12px;
     }
 }
+
+
+/*** Category Page **/
+select.other-category {
+    height: auto;
+}
+.select2-container .select2-selection--single {
+    height: 32px;
+}

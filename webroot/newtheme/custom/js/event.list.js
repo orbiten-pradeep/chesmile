@@ -364,15 +364,15 @@ $(document).ready(function() {
 		self.searchTagsInputElem.find('input').attr('placeholder', '');
 		self.getSubCategoryList();
 
-		var categoryItems = self.searchTextBoxElem.tagsinput('items');
+		/*var categoryItems = self.searchTextBoxElem.tagsinput('items');
 		categoryItems.forEach(function(item){
 			self.filterParams.category.push(item.id);
 			self.filterTextArr.push({'type':'category', 'text': item.text, 'value': item.id });
-		});
+		});*/
 
 		self.filterParams.page = 0;
 		self.masonryDestory();
-		self.generateFilterText();
+		//self.generateFilterText();
 		self.getEventList();
 	}
 
