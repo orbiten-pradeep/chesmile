@@ -93,7 +93,7 @@
         </div>
     </div>
     <div class="row filter-parent-container d-none">
-        <div class="col-lg-12 col-md-12">
+        <div class="gridCentered">
             <div class="filter-params card animated bounceInDown bounceInUp">
                 <div class="card-body"">
                     <a href="javascript:;" class="pull-right btn btn-sm btn-grey filter-clear-all">Clear All</a>
@@ -105,7 +105,7 @@
         </div>
     </div>
     <div class="row">
-        <div class="col-lg-12 col-md-12 pb-4">
+        <div class="gridCentered pb-4">
             <div id="eventResponse"></div>
             <div class="loadingDiv"><div id="loading"></div></div>
         </div>

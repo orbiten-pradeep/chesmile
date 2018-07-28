@@ -75,7 +75,7 @@ class EventsController extends AppController
 			]);
 
         $tcConn = ConnectionManager::get('default');
-        $topCategoriesQuery = "SELECT count(e.id) as event_counts, c.name, c.color, c.categorylitecolor, c.id as cid FROM `events` e LEFT JOIN categories c on c.id = e.categories_id WHERE c.id!='' AND e.active = 1 AND e.date >= CURDATE() GROUP BY c.id ORDER BY rand() limit 6";
+        $topCategoriesQuery = "SELECT count(e.categories_id) as event_counts, c.name, c.color, c.categorylitecolor, c.id as cid FROM `events` e LEFT JOIN categories c on c.id = e.categories_id WHERE c.id!='' AND e.active = 1 AND e.date >= CURDATE() GROUP BY e.categories_id ORDER BY event_counts desc limit 6";
 
         $tcStmt = $tcConn->execute($topCategoriesQuery);
         $topCategories = $tcStmt->fetchAll('assoc');
@@ -129,12 +129,6 @@ class EventsController extends AppController
         $subCategories_new = $this->SubCategories->find('all', ['fields' => 'name', 'conditions' => ['active' => 1] ]);
 
         $tcConn = ConnectionManager::get('default');
-        $topCategoriesQuery = "SELECT count(e.id) as event_counts, c.name, c.color, c.categorylitecolor, c.id as cid FROM `events` e LEFT JOIN categories c on c.id = e.categories_id WHERE c.id!='' AND e.active = 1 AND e.date >= CURDATE() GROUP BY c.id ORDER BY rand() limit 6";
-
-        $tcStmt = $tcConn->execute($topCategoriesQuery);
-        $topCategories = $tcStmt->fetchAll('assoc');
-        
-
         $bannersQry = "SELECT b.* FROM banners b LEFT JOIN events e on b.events_id = e.id WHERE b.active = 1 AND e.date >= CURDATE() ORDER BY b.created DESC";
         $bannersStmt = $tcConn->execute($bannersQry);
         $bannersList = $bannersStmt->fetchAll('assoc');
@@ -154,7 +148,6 @@ class EventsController extends AppController
         $this->set('subCategories', $subCategories);
 
         $this->set('usersId', $users_id);
-        $this->set('topCategories', $topCategories);
         $this->set(compact('subCategories_new'));
     }
 

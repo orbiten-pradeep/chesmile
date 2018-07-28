@@ -28,6 +28,8 @@
 
     <link href="<?php echo $this->Url->build('/newtheme/custom/css/event.list.css'); ?>" rel="stylesheet">
 
+    <link href="<?php echo $this->Url->build('/newtheme/custom/css/event.grid.css'); ?>" rel="stylesheet">
+
     <link href="<?php echo $this->Url->build('/newtheme/custom/css/event.details.css'); ?>" rel="stylesheet">    
 
     <link rel="stylesheet" href="//code.jquery.com/ui/1.12.1/themes/base/jquery-ui.css">
@@ -565,6 +567,8 @@
     <script type="text/javascript" src="<?php echo $this->Url->build('/newtheme/lib/masonry.pkgd.min.js'); ?>"></script>
 
     <script type="text/javascript" src="<?php echo $this->Url->build('/newtheme/lib/imagesloaded.pkgd.min.js'); ?>"></script>
+
+    <script type="text/javascript" src="<?php echo $this->Url->build('/newtheme/lib/jquery.redirect.js'); ?>"></script>
 
     <script type="text/javascript" src="<?php echo $this->Url->build('/newtheme/js/bootstrap-tagsinput.js'); ?>"></script>
 
