@@ -187,7 +187,7 @@ chennaiSmile.generateEventGridList = function() {
 	    	var dtimeHtml = '';
 	    	var buybtn = '';
 	    	var eventprice = '';
-	    	var iconsrc = "img/card/"+response[k].category_card;
+	    	var iconsrc = this.baseUrl+"img/card/"+response[k].category_card;
 	    	var catgoryicon = '<span class="ctxt">'+response[k].category_name+'</span><img src="'+iconsrc+'" style="height:auto;" class="img-fluid cs_card_icon">';
 
 	    	var dtimeHtmlArr = moment(response[k].date).fromNow().split(" ");
@@ -203,7 +203,6 @@ chennaiSmile.generateEventGridList = function() {
 	    	}
 	    	else {
 	    		var imgSrc = this.baseUrl+"/img/display/"+dispImg;
-	    		console.log(this.baseUrl);
 	    		dispImgHmtl = '<a href="'+eventUrl+'"><img src="'+imgSrc+'" alt="" onerror="this.src=\'img/photos/1.jpg\'" style="height:auto;" class="img-fluid cs_dispimg"></a>';
 	    	}
 
@@ -213,11 +212,12 @@ chennaiSmile.generateEventGridList = function() {
 	    		eventprice = '<span class="event-price pull-right">₹ '+response[k].price+'</span>';
 	    		buybtn = '<div class="btn buy-btn btn-warning pull-left" onClick="javascript:location.href='+eventUrl+'">Get Tickets</div>';
 	    	}
-			html += '<div class="col-sm-6 col-lg-3 col-md-3 card-size">\
+			html += '<div class="card-size">\
 				<div class="card" data-attrib-hcolor="#'+response[k].category_ltecolor+'" >\
 			        <div class="view">\
 			        	<span class="category-icon tag">'+catgoryicon+'</span>\
 			        	<span class="days-ago">'+dtimeHtml+'</span>\
+			        	<a class="back" href="'+eventUrl+'">&nbsp;</a>\
 			        	'+eventprice+'\
 						'+dispImgHmtl+'\
 			            <a href="'+eventUrl+'">\
@@ -363,6 +363,19 @@ $(document).ready(function() {
 		self.searchTextBoxElem.tagsinput('add', self.parentCategory);
 		self.searchTagsInputElem.find('input').attr('placeholder', '');
 		self.getSubCategoryList();
+
+		var subCategoryString = sessionStorage.subCategoryItems;
+		if(typeof(subCategoryString) !="undefined" || subCategoryString === "") {
+			var subCategoryItems = JSON.parse(subCategoryString);
+
+			subCategoryItems.forEach(function(item) {
+				self.searchTextBoxElem.tagsinput('add', item);
+				self.filterParams.category.push(item.id);
+				self.filterTextArr.push({'type':'category', 'text': item.text, 'value': item.id });
+			});
+			self.generateFilterText();	
+			sessionStorage.subCategoryItems = '';
+		}
 
 		/*var categoryItems = self.searchTextBoxElem.tagsinput('items');
 		categoryItems.forEach(function(item){
@@ -589,6 +602,11 @@ $(document).ready(function() {
 
 	self.searchCategoryBtnElem.click(function(){
 		var categoryItems = self.searchTextBoxElem.tagsinput('items');
+		var parentCategory = categoryItems.shift();
+		var categoryUrl = self.baseUrl + "events/category/"+parentCategory['id'];
+		sessionStorage.subCategoryItems =  JSON.stringify(categoryItems);
+		$.redirect(categoryUrl, categoryItems);
+		return;
 
 		categoryItems.forEach(function(item){
 			var index = self.filterParams.category.indexOf(item.id);
