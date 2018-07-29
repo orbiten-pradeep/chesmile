@@ -329,6 +329,41 @@ chennaiSmile.getSubCategoryList = function() {
     });
 }
 
+chennaiSmile.getCategoryPageInfo = function() {
+	var self = this;
+	if(self.eventPage.val() == "category") {
+		self.searchTextBoxElem.tagsinput('removeAll');
+		self.parentCategory = {};
+		self.parentCategory.id = $("#categoryPageCId").val();
+		self.parentCategory.text = $("#categoryPageCName").val();
+		self.searchTextBoxElem.tagsinput('add', self.parentCategory);
+		self.searchTagsInputElem.find('input').attr('placeholder', '');
+		self.getSubCategoryList();
+
+		self.filterParams.category.push(self.parentCategory.id);
+		var subCategoryString = sessionStorage.subCategoryItems;
+		if(typeof(subCategoryString) !="undefined" && subCategoryString != "") {
+			var subCategoryItems = JSON.parse(subCategoryString);
+
+			subCategoryItems.forEach(function(item) {
+				self.searchTextBoxElem.tagsinput('add', item);
+				self.filterParams.category.push(item.id);
+				self.filterTextArr.push({'type':'category', 'text': item.text, 'value': item.id });
+			});
+			self.generateFilterText();	
+			sessionStorage.subCategoryItems = '';
+		}
+
+		/*var categoryItems = self.searchTextBoxElem.tagsinput('items');
+		categoryItems.forEach(function(item){
+			self.filterParams.category.push(item.id);
+			self.filterTextArr.push({'type':'category', 'text': item.text, 'value': item.id });
+		});*/
+
+		self.filterParams.page = 0;
+	}
+}
+
 chennaiSmile.changeUrl = function(title, url) {
     if (typeof (history.pushState) != "undefined") {
         var obj = { Title: title, Url: url };
@@ -355,40 +390,7 @@ $(document).ready(function() {
 	    allowPageScroll: false
 	});
 
-	if(self.eventPage.val() == "category") {
-		self.searchTextBoxElem.tagsinput('removeAll');
-		self.parentCategory = {};
-		self.parentCategory.id = $("#categoryPageCId").val();
-		self.parentCategory.text = $("#categoryPageCName").val();
-		self.searchTextBoxElem.tagsinput('add', self.parentCategory);
-		self.searchTagsInputElem.find('input').attr('placeholder', '');
-		self.getSubCategoryList();
-
-		var subCategoryString = sessionStorage.subCategoryItems;
-		if(typeof(subCategoryString) !="undefined" || subCategoryString === "") {
-			var subCategoryItems = JSON.parse(subCategoryString);
-
-			subCategoryItems.forEach(function(item) {
-				self.searchTextBoxElem.tagsinput('add', item);
-				self.filterParams.category.push(item.id);
-				self.filterTextArr.push({'type':'category', 'text': item.text, 'value': item.id });
-			});
-			self.generateFilterText();	
-			sessionStorage.subCategoryItems = '';
-		}
-
-		/*var categoryItems = self.searchTextBoxElem.tagsinput('items');
-		categoryItems.forEach(function(item){
-			self.filterParams.category.push(item.id);
-			self.filterTextArr.push({'type':'category', 'text': item.text, 'value': item.id });
-		});*/
-
-		self.filterParams.page = 0;
-		self.masonryDestory();
-		//self.generateFilterText();
-		self.getEventList();
-	}
-
+	self.getCategoryPageInfo();
 	self.getEventList();
 
 	self.filterElem.action.click(function() {
@@ -539,6 +541,7 @@ $(document).ready(function() {
 		self.searchMenuButtonElem.find('.fa-close').trigger('click');
 		self.favCategoryDivElem.show();
 
+		self.getCategoryPageInfo();
 		self.masonryDestory();
 		self.getEventList();
 	});	
@@ -604,7 +607,9 @@ $(document).ready(function() {
 		var categoryItems = self.searchTextBoxElem.tagsinput('items');
 		var parentCategory = categoryItems.shift();
 		var categoryUrl = self.baseUrl + "events/category/"+parentCategory['id'];
-		sessionStorage.subCategoryItems =  JSON.stringify(categoryItems);
+		if(categoryItems.length > 0) {
+			sessionStorage.subCategoryItems =  JSON.stringify(categoryItems);
+		}				
 		$.redirect(categoryUrl, categoryItems);
 		return;
 
