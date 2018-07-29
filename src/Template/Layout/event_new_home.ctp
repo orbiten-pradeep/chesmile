@@ -54,14 +54,6 @@
             
             <a class="navbar-brand" href="<?php echo $this->Url->build(array('controller' => 'events', 'action' => 'index'));?>"><?php echo $this->Html->image('chennaismile-logo.png',array('alt' => 'Logo Chennai Smile')); ?></a>
 
-            <div class="mobile-menu pull-right" id="mobileMenuBtn" data-direction='bottom'>
-                <button type="button" class="btn btn-mdb-color btn-md">
-                    <i class="fa fa-bars" aria-hidden="true"></i>
-                </button>
-            </div>
-
-            
-
             <!-- IPAD navbar links -->
             <ul class="navbar-nav pull-right ipad-nav-links">
               <?php if($this->request->session()->read('Auth.User')) { ?>
@@ -69,22 +61,14 @@
                   <button class="btn btn-head btn-primary user-dropdown dropdown-toggle cs-dropbtn p-0" type="button" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
                       <div class="avatar">
                       <?php
-        $user = $this->request->session()->read('Auth.User');
-        
-        if(!empty($user['Photo'])) {
-        echo $this->Html->image('profile/'.$user['Photo'],array('alt' => 'Profile Picture','class' => 'img-fluid rounded-circle','width' => '60px', 'height' => '60px','onclick' => 'largedrop()'));
-        } else
-        {
-        echo $this->Html->image('profile_thumbnail.jpg',array('alt' => 'Profile Picture','class' => 'img-fluid rounded-circle','onclick' => 'largedrop()'));
-        }
-        ?> 
-                       <!--  <?php if($userProfile->Photo) {
-                echo $this->Html->image('profile/'.$userProfile->Photo, array('height' => '100px','width' => '100px','alt'=>'aswq','class' => 'img-style'));
-            }  else {
-                echo $this->Html->image('profile.png',array('alt' => '','class' => 'avatar img-style','height' => '100px', 'width' => '100px')); 
-            }
-            ?> -->
-                      <!--   <?=  $this->Html->image('profile_thumbnail.jpg',array('alt' => 'Profile Picture','class' => 'img-fluid rounded-circle')); ?> -->
+                      $user = $this->request->session()->read('Auth.User');
+                      
+                      if(!empty($user['Photo'])) {
+                        echo $this->Html->image('profile/'.$user['Photo'],array('alt' => 'Profile Picture','class' => 'img-fluid rounded-circle','width' => '60px', 'height' => '60px','onclick' => 'largedrop()'));
+                      } else {
+                        echo $this->Html->image('profile_thumbnail.jpg',array('alt' => 'Profile Picture','class' => 'img-fluid rounded-circle','onclick' => 'largedrop()'));
+                      }
+                      ?>
                       </div>
                   </button>
                   <div class="dropdown-menu" aria-labelledby="dropdownMenu4">                        
@@ -150,26 +134,8 @@
                   <li class="search-button">
                       <button type="button" class="btn btn-head btn-md btn-primary btn-go btn-category-search"><i class="fa fa-search" aria-hidden="true"></i></button>
                   </li>
-                  <li class="nav-item dropdown nav-city-link">
-                      <a class="nav-link btnbtn btn-sm dropdown-toggle cs-city btn btn-out btn-rounded waves-effect" id="navbarDropdownMenuLink" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">Look your city</a>
-                      <div class="dropdown-menu dropdown-primary cs_city_drpdwn" aria-labelledby="navbarDropdownMenuLink">
-                          <div class="row">
-                      <div class="col-sm-4">
-                        <a class="dropdown-item" href="http://www.bangaloresmile.com">BangaloreSmile</a>
-                        <a class="dropdown-item" href="http://www.mumbaismile.com">MumbaiSmile</a>
-                        <a class="dropdown-item" href="http://www.punesmile.com">PuneSmile</a>
-                      </div>
-                      <div class="col-sm-4">
-                        <a class="dropdown-item" href="http://www.hyderabadsmile.com">HyderabadSmile</a>
-                        <a class="dropdown-item" href="http://www.goasmile.com">GoaSmile</a>
-                        <a class="dropdown-item" href="http://www.pondicherrysmile.com">PondicherrySmile</a>
-                      </div>
-                      <div class="col-sm-4">
-                        <a class="dropdown-item" href="http://www.mangaloresmile.com">MangaloreSmile</a>
-                        <a class="dropdown-item" href="http://www.mysoresmile.com">MysoreSmile</a>
-                      </div>
-                    </div>
-                      </div>
+                  <li class="">
+                      <span class="btn-look-city waves-effect waves-effect" id="navbarDropdownMenuLink" data-direction='bottom' href="javascript:;">Look your city</span>
                   </li>
                 </ul>
 
@@ -223,6 +189,12 @@
                   </li>
                   <?php } ?>
                 </ul>
+            </div>
+
+            <div class="mobile-menu pull-right" id="mobileMenuBtn" data-direction='bottom'>
+                <button type="button" class="btn btn-mdb-color btn-md">
+                    <i class="fa fa-bars" aria-hidden="true"></i>
+                </button>
             </div>
         </nav>
 
@@ -465,10 +437,8 @@
     <!-- /.modal -->
     <div class="mobile-footer" id="mobFooter">
         <div class="container">
-            <div class="left"><a href="javascript:;" id="mobileFilterCategoryBtn">Search Events</a>
-            </div>
-            <div class="right"><a href="javascript:;" id="mobileFilterBtn" data-direction='bottom'>Filter</a>
-            </div>
+            <div class="left"><a href="javascript:;" id="mobileFilterCategoryBtn">Search Events</a></div>
+            <div class="right"><a href="javascript:;" id="mobileFilterBtn" data-direction='bottom'>Filter</a></div>
         </div>
     </div>
     <!-- Modal: Mobile Categories Menus -->
@@ -543,6 +513,39 @@
                     <div class="btn-group pull-right btn-group-sm" role="group">
                         <button type="button" class="btn btn-blue-grey" data-dismiss="modal">Close</button>
                     </div>
+                </div>
+            </div>
+            <!-- /.modal-content -->
+        </div>
+        <!-- /.modal-dialog -->
+    </div>
+    <!-- /.modal -->
+
+    <!-- Modal: Mobile Filter Menus -->
+    <div class="modal mobile-modal modal-other-cities fade">
+        <div class="modal-dialog">
+            <div class="modal-content">
+                <div class="modal-header">
+                    
+                    <h4 class="modal-title">Other Cities</h4>
+                    <button type="button" class="close" data-dismiss="modal"><span aria-hidden="true">&times;</span><span class="sr-only">Close</span></button>
+                </div>
+                <div class="modal-body">
+
+                    <a class="dropdown-item list-group-item" href="http://www.bangaloresmile.com">BangaloreSmile</a>
+                    <a class="dropdown-item list-group-item" href="http://www.mumbaismile.com">MumbaiSmile</a>
+                    <a class="dropdown-item list-group-item" href="http://www.punesmile.com">PuneSmile</a>
+                    <br>
+
+                    <a class="dropdown-item list-group-item" href="http://www.hyderabadsmile.com">HyderabadSmile</a>
+                    <a class="dropdown-item list-group-item" href="http://www.goasmile.com">GoaSmile</a>
+                    <a class="dropdown-item list-group-item" href="http://www.pondicherrysmile.com">PondicherrySmile</a>
+
+                    <br>
+
+                    <a class="dropdown-item list-group-item" href="http://www.mangaloresmile.com">MangaloreSmile</a>
+                    <a class="dropdown-item list-group-item" href="http://www.mysoresmile.com">MysoreSmile</a>
+
                 </div>
             </div>
             <!-- /.modal-content -->
