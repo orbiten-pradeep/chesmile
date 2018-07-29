@@ -67,6 +67,10 @@ $(document).ready(function() {
         window.location.href = $("#base_url").val() +"events/category/"+ $(this).val();
     });
 
+    $('#navbarDropdownMenuLink').click(function(){
+        $(".modal-other-cities").modal('show');
+    });
+
 
     /*var thumbs1 = document.getElementById("thumbnail-slider");
     var slides = thumbs1.getElementsByTagName("li");

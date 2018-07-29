@@ -420,7 +420,7 @@ input:checked + .slider:before {
         font-size: 15px;
     }
     .nav-cs-action .btn {
-        padding: .5rem .5rem !important;
+        padding: 5px 5px !important;
     }
     .nav-cs-action .btn.user-dropdown {
         padding: 0 !important;
@@ -498,10 +498,7 @@ input:checked + .slider:before {
     }
     .navbar .cs-city-btn{
         display: none;
-    }
-    .event-list .card-size{
-        max-width: 30%;
-    }
+    } 
     .filter-buttons {
         display: none !important;
     }
@@ -632,4 +629,15 @@ select.other-category {
 }
 .select2-container .select2-selection--single {
     height: 32px;
+}
+.btn-look-city {
+    color: #333 !important;
+    border: 1px solid #50bac4!important;
+    padding: 8px 10px !important;
+    text-transform: capitalize;
+    font-size: 12px !important;
+    box-shadow: none;
+    margin: 0;
+    line-height: 45px;
+    margin-left: 15px;
 }

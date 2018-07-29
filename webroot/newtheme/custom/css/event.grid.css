@@ -1,4 +1,41 @@
-@media (min-width: 0px) and (max-width: 1039px) {
+@media (min-width: 0px) and (max-width: 429px) {
+  .gridCentered .static:nth-child(-n+3) {
+    float: left;
+    position: static;
+    display: block;
+    visibility: visible;
+  }
+  .gridCentered {
+    width: 260px;
+  }
+}
+
+@media (min-width: 430px) and (max-width: 739px) {
+  .gridCentered .static:nth-child(-n+3) {
+    float: left;
+    position: static;
+    display: block;
+    visibility: visible;
+  }
+  .gridCentered {
+    width: 520px;
+  }
+}
+
+@media (min-width: 740px) and (max-width: 839px) {
+  .gridCentered .static:nth-child(-n+3) {
+    float: left;
+    position: static;
+    display: block;
+    visibility: visible;
+  }
+  .gridCentered {
+    width: 540px;
+  }
+}
+
+
+@media (min-width: 840px) and (max-width: 1039px) {
   .gridCentered .static:nth-child(-n+3) {
     float: left;
     position: static;
@@ -9,6 +46,7 @@
     width: 780px;
   }
 }
+
 
 @media (min-width: 1040px) and (max-width: 1299px) {
   .gridCentered .static:nth-child(-n+4) {
