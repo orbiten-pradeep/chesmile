@@ -73,7 +73,8 @@ chennaiSmile.formatDate = function (date){
     if (month.length < 2) month = '0' + month;
     if (day.length < 2) day = '0' + day;
 
-   return [day, month, year].join('-');
+	//return [day, month, year].join('-');
+	return moment([d.getFullYear(), d.getMonth(), d.getDate()]).format('ddd, DD MMM');
 };
 
 chennaiSmile.getEventList = function() {
@@ -210,7 +211,7 @@ chennaiSmile.generateEventGridList = function() {
 	    		var buybtn;
 	    		var eventprice
 	    		eventprice = '<span class="event-price pull-right">₹ '+response[k].price+'</span>';
-	    		buybtn = '<div class="btn buy-btn btn-warning pull-left" onClick="javascript:location.href='+eventUrl+'">Get Tickets</div>';
+	    		buybtn = '<div class="btn buy-btn btn-warning pull-right" onClick="javascript:location.href='+eventUrl+'">Get Tickets</div>';
 	    	}
 			html += '<div class="card-size">\
 				<div class="card" data-attrib-hcolor="#'+response[k].category_ltecolor+'" >\
@@ -227,15 +228,15 @@ chennaiSmile.generateEventGridList = function() {
 			        <div class="card-body">\
 			            <h4 class="card-title"><a href="'+eventUrl+'" class="event-title">'+response[k].title+'</a></h4>\
 			            <p class="card-text mb-0">'+response[k].areaname+'</p>\
-			            <p class="card-text card-event-date mb-0">'+this.formatDate(response[k].date)+'</p>\
-			            <div class="pull-right">\
+			            <p class="card-text card-event-date mb-0">'+this.formatDate(response[k].date)+' - '+response[k].time+'</p>\
+			            '+buybtn+'\
+			            <div class="pull-left social-icons">\
 			            	<span eventId="'+response[k].id+'" userId="'+response[k].user_id+'" class="like-button">\
 			            		<i class="fa fa-heart-o" id="likeIconId'+response[k].id+'" aria-hidden="true"></i>\
 			            	</span>\
 			            	<span class="count_txt" id="likeId'+response[k].id+'">'+likes_count+'</span>\
 		                </div>\
-		                '+buybtn+'\
-			        </div>\
+		            </div>\
 		        </div>\
 		    </div>';
 
@@ -637,7 +638,7 @@ $(document).ready(function() {
 	        //$(this).find('.days-ago').css('backgroundColor', hColor+" !important");
 	    },
 	    mouseleave: function () {
-	    	$(this).css('backgroundColor', '#fff !important');
+	    	$(this).css('backgroundColor', '#f4f4f4 !important');
 	        $(this).addClass('not-entered').removeClass('entered');
 	    }
 	}, ".card");
