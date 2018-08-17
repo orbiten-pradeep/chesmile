@@ -1,5 +1,5 @@
 /* Your custom styles */
-@font-face {
+/*@font-face {
     font-family: PTsans;
     src: url("../font/ptsans/PTSans-Regular-01.ttf");
 }
@@ -10,6 +10,15 @@
 body{
     font-family:  'PTsans';
 }
+*/
+@font-face {
+    font-family: Avenir;
+    src: url("../font/Helvetica/HV__.PFB");
+}
+body{
+    font-family:  'Helvetica';
+}
+
 .search-box {
 
 }
