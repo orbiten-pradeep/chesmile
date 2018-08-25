@@ -1,11 +1,11 @@
 .event-list {
-	min-height: 250px;
+    min-height: 250px;
     background-color: #fff;
     padding-top: 20px;
     padding-bottom: 20px;
 }
 .event-list .card-size {
-	margin-bottom: 20px;
+    margin-bottom: 20px;
     padding-left: 10px;
     padding-right: 10px;
     width: 260px;
@@ -77,8 +77,8 @@ span.no-events, span.no-more-events {
     color: #fff;
     font-size: 1rem !important;
     width: auto;
-    bottom: 6px;
-    margin: 10px;
+    bottom: 7px;
+    margin: 4px;
     position: absolute;
     z-index: 1000;
     padding: 2px 7px;
@@ -86,14 +86,16 @@ span.no-events, span.no-more-events {
     border-radius: 0;
     right: 6px;
 
-    background: #696969;
+background: rgb(38, 38, 38);
+opacity:0.8 !important;
+    /*background: #696969;
     background: -moz-linear-gradient(left, #696969 0%, #474747 39%, #2b2b2b 73%, #131313 100%);
     background: -webkit-gradient(left top, right top, color-stop(0%, #696969), color-stop(39%, #474747), color-stop(73%, #2b2b2b), color-stop(100%, #131313));
     background: -webkit-linear-gradient(left, #696969 0%, #474747 39%, #2b2b2b 73%, #131313 100%);
     background: -o-linear-gradient(left, #696969 0%, #474747 39%, #2b2b2b 73%, #131313 100%);
     background: -ms-linear-gradient(left, #696969 0%, #474747 39%, #2b2b2b 73%, #131313 100%);
     background: linear-gradient(to right, #696969 0%, #474747 39%, #2b2b2b 73%, #131313 100%);
-    filter: progid:DXImageTransform.Microsoft.gradient( startColorstr='#696969', endColorstr='#131313', GradientType=1 );
+    filter: progid:DXImageTransform.Microsoft.gradient( startColorstr='#696969', endColorstr='#131313', GradientType=1 );*/
 }
 .event-list .card-size .card .days-ago {
     color: #212529;
@@ -142,7 +144,7 @@ span.no-events, span.no-more-events {
     text-transform: uppercase;
 }
 .event-list .card-size .card .social-icons {
-    margin-top: 7px;
+    margin-top: 8px;
 }
 .event-list .card-size .card.entered .days-ago {
     display: block;
@@ -151,8 +153,9 @@ span.no-events, span.no-more-events {
     display: block;
 }
 .event-list .card-size .card.entered .category-icon img {
-    width: 18px !important;
+    width: 22px !important;
     min-width: 18px;
+   /* height: 23px !important;*/
 }
 .event-list .card-size .card.entered .category-icon .ctxt {
     float: right;
@@ -194,7 +197,8 @@ span.no-events, span.no-more-events {
     padding: 7px 12px;
     box-shadow: none !important;
     border-radius: 0;
-    margin: 0;
+    margin: -5px;
+    margin-top: 7px;
 }
 
 .event-list #loading {  
@@ -234,20 +238,34 @@ span.no-events, span.no-more-events {
     padding: 4px 7px;
     text-transform: capitalize;
 }
+/* number of lines to show event title -Roslin Edit */
 .event-list .card-title {
-    line-height: 1 !important;
-    margin-bottom: 10px;
+    line-height: .7 !important;
+    margin-bottom: 7px;
+     overflow: hidden !important;
+   text-overflow: ellipsis !important;
+   display: -webkit-box !important;
+-webkit-line-clamp: 2 !important; /* number of lines to show */
+   -webkit-box-orient: vertical !important;
+
 }
 .event-list .card-title a, .event-list .card-title a:hover {
     color: #0d0d0d;
-    font-size: 14px;
-    font-weight: normal;
+    font-size: 13px;
+    font-weight: bold;
     text-transform: capitalize !important;
 }
+
 .event-list .card-body .card-text {
+    font-weight: normal;
     font-size: 12px !important;
     color: #474747;
-    margin-bottom: 6px !important;
+    margin-bottom: 2px !important;
+     overflow: hidden !important;
+   text-overflow: ellipsis !important;
+ display: -webkit-box !important;
+-webkit-line-clamp: 1 !important; /* number of lines to show */
+   -webkit-box-orient: vertical !important;
 }
 .event-list .card-body .card-event-date {
     /*width: 80%;*/
@@ -372,5 +390,12 @@ span.no-events, span.no-more-events {
     padding: 10px;
 }
 .img-fluid.cs_card_icon {
-    width: 35%;
+    width: 40%;
+}
+/*Event Title limit*/
+.event-title{
+    line-height: 14px !important;
+}
+.social-icons{
+    font-size: 15px;
 }
