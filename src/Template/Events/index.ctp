@@ -71,7 +71,7 @@
                                     $imagePath = "/img/card/".$card;
                                     $imageLink = $this->Url->build('/events/category/'.$catid);
                                     $imageUrl = $this->Url->build($imagePath);
-                                    echo "<a href='".$imageLink."'><img class='thumb' src='".$imageUrl."'> </a><span>".$category['name']."</span>";
+                                    echo "<a href='".$imageLink."' title='".$category['name']."'><img class='thumb' src='".$imageUrl."'> </a><span title='".$category['name']."'>".$category['name']."</span>";
                                     echo "</li>";
                                 }
                             }
