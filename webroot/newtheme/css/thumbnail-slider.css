@@ -181,6 +181,8 @@
     text-align: center;
     width: 100%;
     left: 0; 
+    overflow: hidden;
+    text-overflow: ellipsis;
 }
 #thumbnail-slider li a {
     height: 80% !important;
