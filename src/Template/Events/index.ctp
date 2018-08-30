@@ -42,6 +42,8 @@
         <?php 
             foreach ($topCategories as $key => $value) {
                 echo "<button class='btn btn-unique btn-sm filter-tc-button' style='background-color:#".$value['color']." !important' data-text='".$value['name']."' data=".$value['cid']."> ".$value['name']." (".$value['event_counts'].")"."</button>";
+
+
             }
         ?>
     </div>
@@ -52,7 +54,7 @@
     <div class="row">
         <div class="col-lg-12 col-md-12">
             <div class="cs-category-title text-center">
-                <h2>Your Favourite Category</h2>
+                <h5>Your Favourite Category</h5>
                 <?php //foreach ($categories as $key=> $category) { echo "<pre>";print_r($category); echo "</pre>"; } ?>
             </div>
             <!--Carousel Wrapper-->
@@ -89,7 +91,7 @@
 <div class="container-fluid event-list">
     <div class="row epage-title">
         <div class="col-lg-12 col-md-12">
-            <div><h2 class="epage-title-text text-center mx-auto">Upcoming Events</h2></div>
+            <div><h5 class="epage-title-text text-center mx-auto">Upcoming Events</h5></div>
         </div>
     </div>
     <div class="row filter-parent-container d-none">
@@ -108,6 +110,7 @@
         <div class="gridCentered pb-4">
             <div id="eventResponse"></div>
             <div class="loadingDiv"><div id="loading"></div></div>
+            <div id="noEventsMsg"></div>
         </div>
     </div>
 </div>

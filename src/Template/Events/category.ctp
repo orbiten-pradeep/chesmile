@@ -47,7 +47,7 @@
 <div class="container-fluid event-list">
     <div class="row epage-title">
         <div class="col-lg-12 col-md-12">
-            <div><h2 class="epage-title-text text-center mx-auto"><?php echo $categoryDetail['name']; ?> Events</h2></div>
+            <div><h5 class="epage-title-text text-center mx-auto"><?php echo $categoryDetail['name']; ?> Events</h5></div>
         </div>
     </div>
     <div class="row filter-parent-container d-none">
@@ -66,6 +66,7 @@
         <div class="gridCentered pb-4">
             <div id="eventResponse"></div>
             <div class="loadingDiv"><div id="loading"></div></div>
+            <div id="noEventsMsg"></div>
         </div>
     </div>
 </div>

@@ -62,8 +62,8 @@
                       <div class="avatar">
                       <?php
                       $user = $this->request->session()->read('Auth.User');
-                      
-                      if(!empty($user['Photo'])) {
+
+                      if(!empty($user['Photo']) && file_exists(WWW_ROOT . 'img\profile\/'.$user['Photo'])) {
                         echo $this->Html->image('profile/'.$user['Photo'],array('alt' => 'Profile Picture','class' => 'img-fluid rounded-circle','width' => '60px', 'height' => '60px','onclick' => 'largedrop()'));
                       } else {
                         echo $this->Html->image('profile_thumbnail.jpg',array('alt' => 'Profile Picture','class' => 'img-fluid rounded-circle','onclick' => 'largedrop()'));
@@ -147,11 +147,11 @@
                             <?php
                               $user = $this->request->session()->read('Auth.User');
 
-                              if(!empty($user['Photo'])) {
-                                echo $this->Html->image('profile/'.$user['Photo'],array('alt' => 'Profile Picture','class' => 'img-fluid rounded-circle','width' => '60px', 'height' => '60px','onclick' => 'largedrop()'));
+                              if(!empty($user['Photo']) && file_exists(WWW_ROOT . 'img\profile\/'.$user['Photo'])) {
+                                  echo $this->Html->image('profile/'.$user['Photo'],array('alt' => 'Profile Picture','class' => 'img-fluid rounded-circle','width' => '60px', 'height' => '60px','onclick' => 'largedrop()'));
                               }
                               else {
-                                echo $this->Html->image('profile_thumbnail.jpg',array('alt' => 'Profile Picture','class' => 'img-fluid rounded-circle','onclick' => 'largedrop()'));
+                                  echo $this->Html->image('profile_thumbnail.jpg',array('alt' => 'Profile Picture','class' => 'img-fluid rounded-circle','onclick' => 'largedrop()'));
                               }
                             ?>
                             <!--  <?=  $this->Html->image('profile_thumbnail.jpg',array('alt' => 'Profile Picture','class' => 'img-fluid rounded-circle')); ?> -->
