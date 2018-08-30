@@ -175,7 +175,7 @@
      float: none;
      clear: both;
      background-color: #50bac4 !important;
-     width: 575px !important;
+     width: 523.5px !important;
      font-size: 13px;
      font-weight: bolder;
 }
@@ -604,9 +604,9 @@
  .btn-look-city {
      color: #333 !important;
      border: 1px solid #50bac4!important;
-     padding: 8px 10px !important;
+     padding: 13px 15px !important;
      text-transform: capitalize;
-     font-size: 12px !important;
+     font-size: 13px !important;
      box-shadow: none;
      margin: 0;
      line-height: 45px;

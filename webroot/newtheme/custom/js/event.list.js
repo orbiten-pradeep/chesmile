@@ -110,9 +110,11 @@ chennaiSmile.getEventList = function() {
 	    		self.eventScrollDisabled = true;
 	    		self.eventListLoading.hide();
 	    		if(self.eventListResponse.length > 0) {
-	    			self.eventListContainer.parent().append("<span class='no-more-events'>No more events found!!!</span>");
+	    			self.noEventsMsg.html("<span class='no-more-events'>No more events found!!!</span>");
+	    			self.noEventsMsg.fadeIn('slow');
 	    		} else {
-		    		self.eventListContainer.parent().html("<span class='no-events'>No events found!!!</span>");
+		    		self.noEventsMsg.html("<span class='no-events'>No events found!!!</span>");
+		    		self.noEventsMsg.fadeIn('slow');
 		    	}
 		    	self.eventListContainer.fadeIn('slow');
 	    		return false;
@@ -252,7 +254,7 @@ chennaiSmile.generateFilterText = function() {
 	var textArr = this.filterTextArr;
 	var innerTextHtml = '';
 	textArr.forEach(function(item){
-		innerTextHtml += '<div class="chip" data-value="'+item.value+'" data-type="'+item.type+'">'+item.text+'<i class="close filter-close fa fa-times"></i></div>';
+		innerTextHtml += '<div class="chip" data-value="'+item.value+'" data-type="'+item.type+'" data-text="'+item.text+'">'+item.text+'<i class="close filter-close fa fa-times"></i></div>';
 	});
 	this.filterTextContainer.html(innerTextHtml);
 	this.filterTextParentContainer.removeClass('d-none').show();
@@ -296,7 +298,7 @@ chennaiSmile.getSubCategoryList = function() {
         ContentType : 'application/json',
         dataType: 'json',
         url: subCategoryApiUrl,
-        async:true,
+        async:false,
         success: function(data) {
         	if(data != '') {
         		var html ="";
@@ -492,7 +494,9 @@ $(document).ready(function() {
 			self.changeUrl(categoryPageTitle, categoryUrl);
 		}
 		else {
-			var index = self.filterParams.category.indexOf(catValue);
+			var categoryUrl = self.baseUrl + "events/category/"+catValue;		
+			$.redirect(categoryUrl);
+			/*var index = self.filterParams.category.indexOf(catValue);
 			if (index !== -1) return false;
 
 			self.filterParams.category.push(catValue);
@@ -501,8 +505,7 @@ $(document).ready(function() {
 			self.masonryDestory();
 			self.generateFilterText();
 			self.getEventList();
-			self.favCategoryDivElem.hide();
-
+			self.favCategoryDivElem.hide();*/
 		}
 	});
 
@@ -510,10 +513,17 @@ $(document).ready(function() {
 		var parent = $(this).parent();
 		var type = parent.attr('data-type');
 		var value = parent.attr('data-value');
+		var vText = parent.attr('data-text');
 
 		if(type == "category") {
 			var index = self.filterParams.category.indexOf(value);
-			if (index !== -1) self.filterParams.category.splice(index, 1);			
+			if (index !== -1) self.filterParams.category.splice(index, 1);
+
+			var tempObj = {};
+			tempObj.id = value;
+			tempObj.text = vText;
+			self.searchTextBoxElem.tagsinput('remove', tempObj);
+			//self.searchTextBoxElem.tagsinput('refresh');
 		}
 
 		if(type == "date") {
@@ -541,6 +551,7 @@ $(document).ready(function() {
 		self.filterTextParentContainer.hide();
 		self.searchMenuButtonElem.find('.fa-close').trigger('click');
 		self.favCategoryDivElem.show();
+		self.noEventsMsg.html('').hide();
 
 		self.getCategoryPageInfo();
 		self.masonryDestory();
@@ -570,6 +581,22 @@ $(document).ready(function() {
 			self.searchTextBoxElem.tagsinput('remove', self.subCategory);
 		}
 		//console.log(elt.tagsinput('items'));
+	});
+
+	self.searchTextBoxElem.on('itemRemoved', function(event) {
+		self.subCategoryDivElem.find('input:checked').each(function() {
+			if($(this).val() == event.item.id){
+				$(this).prop('checked', false);
+			}
+		});
+
+		self.filterTextContainer.find('.chip').each(function() {
+			if(event.item){
+				if($(this).attr('data-value') == event.item.id){
+					$($(this)).find('.filter-close').trigger('click');
+				}
+			}
+		});
 	});
 
 	self.searchMenuButtonElem.on('click', '.fa-close', function(event) {
@@ -675,11 +702,9 @@ $(document).ready(function() {
 $(document).click(function (e) {
     var self = chennaiSmile;
 
-    if(self.parentCategoryDivElem.has(e.target).length === 0) {
-        self.parentCategoryDivElem.hide();
-    }
-
-    if(self.subCategoryDivElem.has(e.target).length === 0) {
+    if(self.parentCategoryDivElem.has(e.target).length === 0 && 
+    	self.subCategoryDivElem.has(e.target).length === 0 ) {
+    	self.parentCategoryDivElem.hide();
         self.subCategoryDivElem.hide();
     }  
 })

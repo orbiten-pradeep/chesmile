@@ -192,6 +192,6 @@
     height: 50% !important;
 }
 #thumbnail-slider li span{
-    bottom: 30%;
+    bottom: 0%;
 }
 }

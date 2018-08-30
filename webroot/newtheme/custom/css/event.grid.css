@@ -6,7 +6,11 @@
     visibility: visible;
   }
   .gridCentered {
-    width: 260px;
+    width: 340px;
+  }
+
+  .event-list .card-size { 
+    width: 340px !important;
   }
 }
 
@@ -30,7 +34,7 @@
     visibility: visible;
   }
   .gridCentered {
-    width: 540px;
+    width: 785px;
   }
 }
 
