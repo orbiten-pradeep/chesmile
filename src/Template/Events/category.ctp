@@ -27,8 +27,8 @@
             <a class="dropdown-item filter-date cs_filter_dropdown" href="javascript:;" data="month">This Month Events</a>
         </div>
     </div>
-    <div class="btn-group top-categories" data-toggle="buttons">
-        <label>Other categories: </label>
+    <div class="btn-group other-categories" data-toggle="buttons">
+        <label>Other categories : </label>
         <select class="other-category">
             <option value="" selected>Choose your category</option>
             <?php

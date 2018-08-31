@@ -54,56 +54,6 @@
             
             <a class="navbar-brand" href="<?php echo $this->Url->build(array('controller' => 'events', 'action' => 'index'));?>"><?php echo $this->Html->image('chennaismile-logo.png',array('alt' => 'Logo Chennai Smile')); ?></a>
 
-            <!-- IPAD navbar links -->
-            <ul class="navbar-nav pull-right ipad-nav-links">
-              <?php if($this->request->session()->read('Auth.User')) { ?>
-              <div class="dropdown ipad-user-profile">
-                  <button class="btn btn-primary user-dropdown dropdown-toggle cs-dropbtn p-0" type="button" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
-                      <div class="avatar">
-                      <?php
-                      $user = $this->request->session()->read('Auth.User');
-
-                      if(!empty($user['Photo']) && file_exists(WWW_ROOT . 'img\profile\/'.$user['Photo'])) {
-                        echo $this->Html->image('profile/'.$user['Photo'],array('alt' => 'Profile Picture','class' => 'img-fluid rounded-circle','width' => '60px', 'height' => '60px','onclick' => 'largedrop()'));
-                      } else {
-                        echo $this->Html->image('profile_thumbnail.jpg',array('alt' => 'Profile Picture','class' => 'img-fluid rounded-circle','onclick' => 'largedrop()'));
-                      }
-                      ?>
-                      </div>
-                  </button>
-                  <div class="dropdown-menu" aria-labelledby="dropdownMenu4">                        
-                      <li><?= $this->Html->link($this->Html->tag('i', '', array('class' => 'fa fa-user fa-fw')).'My Account', array('controller' => 'UserProfile', 'action' => 'add','class' => 'dropdown-item'), array('escape' => false)) ?></li>
-                      <li> <a href="#my-events" class="my-events dropdown-item filter-action" data="myevents"><i class="fa fa-calendar-o fa-fw"></i>My Events</a></li>
-                      <li><a href="#liked-events" class="liked-events dropdown-item filter-action" data="likedevents"><i class="fa fa-thumbs-up fa-fw"></i>Liked Events</a></li>
-                      <li><?= $this->Html->link($this->Html->tag('i', '', array('class' => 'fa fa-sign-out')).'Logout', array('controller' => 'Users', 'action' => 'logout','class' => 'dropdown-item'),array('escape' => false))?></li>
-                  </div>
-              </div>                
-              <?php } ?>
-              
-              <?php if(!$this->request->session()->read('Auth.User')) { ?>
-              <li class="nav-item">
-                <a href="#" class="btn btn-sm btn-bg btn-primary cs_login_btn cs-city-btn p-2" data-toggle="modal" data-target="#cs-login-modal">Login/signup</a>
-              </li>  
-              <li class="nav-item">
-                <a href="#" class="btn btn-sm btn-bg btn-primary cs_login_btn cs-city-btn p-2" data-toggle="modal" data-target="#cs-login-modal">Create Events</a>
-              </li>
-              <?php } ?>
-
-              <?php $user = $this->request->session()->read('Auth.User'); if($user && $user['group_id'] == 1) { ?>
-              <li class="nav-item">                    
-                <a href="#" class="btn btn-sm btn-bg btn-primary cs_login_btn cs-city-btn p-2" data-toggle="modal" data-target="#orgSignup">Create events</a>                    
-              </li>
-              <?php } ?>
-
-              <?php $user = $this->request->session()->read('Auth.User'); if($user && $user['group_id'] != 1) { ?>
-              <li class="nav-item">                    
-                <?= $this->Html->link(__('Create Events'), ['controller' => 'events', 'action' => 'add'], array('class' => 'btn btn-sm btn-primary cs_login_btn cs-city-btn p-2')); ?>                    
-              </li>
-              <?php } ?>
-              
-            </ul>
-            <!-- IPAD navbar links ends -->
-
             <div class="collapse navbar-collapse" id="navbarSupportedContent">
                 <ul class="navbar-nav mr-auto search-box">
                   <li class="search-category">
@@ -135,7 +85,7 @@
                       <button type="button" class="btn btn-head btn-md btn-primary btn-go btn-category-search"><i class="fa fa-search" aria-hidden="true"></i></button>
                   </li>
                   <li class="">
-                      <span class="btn-look-city waves-effect waves-effect" id="navbarDropdownMenuLink" data-direction='bottom' href="javascript:;">Look your city</span>
+                      <span class="btn-look-city btn btn-sm btn-primary cs-city-btn p-2 waves-effect waves-light" id="navbarDropdownMenuLink" data-direction='bottom' href="javascript:;">Look your city</span>
                   </li>
                 </ul>
 
@@ -173,23 +123,52 @@
                     <a href="#" class="btn btn-sm btn-primary cs_login_btn cs-city-btn p-2" data-toggle="modal" data-target="#cs-login-modal">Login/signup</a>
                   </li>
                   <li class="nav-item">
-                    <a href="#" class="btn btn-sm btn-primary cs_create_btn cs-city-btn p-2" data-toggle="modal" data-target="#cs-login-modal">Create Events</a>
+                    <a href="#" class="cs_create_btn btn-look-city btn btn-sm btn-primary cs-city-btn p-2 waves-effect waves-light" data-toggle="modal" data-target="#cs-login-modal">Create Events</a>
                   </li>
                   <?php } ?>
 
                   <?php $user = $this->request->session()->read('Auth.User'); if($user && $user['group_id'] == 1) { ?>
                   <li class="nav-item">                    
-                    <a href="#" class="btn btn-sm primary cs_create_btn cs-city-btn p-2" data-toggle="modal" data-target="#orgSignup">Create events</a>                   
+                    <a href="#" class="cs_create_btn btn-look-city btn btn-sm btn-primary cs-city-btn p-2 waves-effect waves-light" data-toggle="modal" data-target="#orgSignup">Create events</a>                   
                   </li>
                   <?php } ?>
 
                   <?php $user = $this->request->session()->read('Auth.User'); if($user && $user['group_id'] != 1) { ?>
                   <li class="nav-item">                    
-                    <?= $this->Html->link(__('Create Events'), ['controller' => 'events', 'action' => 'add'], array('class' => 'btn btn-sm btn-bg cs_create_btn cs-city-btn p-2')); ?>                 
+                    <?= $this->Html->link(__('Create Events'), ['controller' => 'events', 'action' => 'add'], array('class' => 'cs_create_btn btn-look-city btn btn-sm btn-primary cs-city-btn p-2 waves-effect waves-light')); ?>                 
                   </li>
                   <?php } ?>
                 </ul>
             </div>
+
+            <!-- IPAD navbar links -->
+            <ul class="navbar-nav pull-right ipad-nav-links">
+              <?php if($this->request->session()->read('Auth.User')) { ?>
+              <div class="dropdown ipad-user-profile">
+                  <button class="btn btn-primary user-dropdown dropdown-toggle cs-dropbtn p-0" type="button" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
+                      <div class="avatar">
+                      <?php
+                      $user = $this->request->session()->read('Auth.User');
+
+                      if(!empty($user['Photo']) && file_exists(WWW_ROOT . 'img\profile\/'.$user['Photo'])) {
+                        echo $this->Html->image('profile/'.$user['Photo'],array('alt' => 'Profile Picture','class' => 'img-fluid rounded-circle','width' => '60px', 'height' => '60px','onclick' => 'largedrop()'));
+                      } else {
+                        echo $this->Html->image('profile_thumbnail.jpg',array('alt' => 'Profile Picture','class' => 'img-fluid rounded-circle','onclick' => 'largedrop()'));
+                      }
+                      ?>
+                      </div>
+                  </button>
+                  <div class="dropdown-menu" aria-labelledby="dropdownMenu4">                        
+                      <li><?= $this->Html->link($this->Html->tag('i', '', array('class' => 'fa fa-user fa-fw')).'My Account', array('controller' => 'UserProfile', 'action' => 'add','class' => 'dropdown-item'), array('escape' => false)) ?></li>
+                      <li> <a href="#my-events" class="my-events dropdown-item filter-action" data="myevents"><i class="fa fa-calendar-o fa-fw"></i>My Events</a></li>
+                      <li><a href="#liked-events" class="liked-events dropdown-item filter-action" data="likedevents"><i class="fa fa-thumbs-up fa-fw"></i>Liked Events</a></li>
+                      <li><?= $this->Html->link($this->Html->tag('i', '', array('class' => 'fa fa-sign-out')).'Logout', array('controller' => 'Users', 'action' => 'logout','class' => 'dropdown-item'),array('escape' => false))?></li>
+                  </div>
+              </div>                
+              <?php } ?>
+              
+            </ul>
+            <!-- IPAD navbar links ends -->
 
             <div class="mobile-menu pull-right" id="mobileMenuBtn" data-direction='bottom'>
                 <button type="button" class="btn btn-mdb-color btn-md">
