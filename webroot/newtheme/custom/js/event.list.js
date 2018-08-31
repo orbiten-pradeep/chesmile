@@ -141,13 +141,14 @@ chennaiSmile.updateEventGridList = function() {
 		this.eventListLoading.show();
 		var content = this.generateEventGridList();
 		var $grid = $(content).css({ opacity: 0 });
-		setTimeout(() => {
-			this.eventListContainer.append($grid).imagesLoaded(() => {
+
+		this.eventListContainer.append($grid).imagesLoaded(() => {
+			setTimeout(() => {
 				this.eventsMasonryInstance.masonry('appended', $grid);
 				this.eventListLoading.hide();
 				this.eventListLoading.find('#loading').removeClass('append');
-			});
-		}, 1);		
+			}, 10);
+		});
     }
     else {
     	this.eventListLoading.hide();
@@ -157,16 +158,16 @@ chennaiSmile.updateEventGridList = function() {
 }
 
 chennaiSmile.masonryInitialize = function() {
-	setTimeout(() => {
-    	this.eventListContainer.imagesLoaded(() => {
+	this.eventListContainer.imagesLoaded(() => {
+		setTimeout(() => {
     		this.eventListContainer.fadeIn('slow');
     		this.eventListLoading.hide();
     		this.eventsMasonryInstance = this.eventListContainer.masonry({
     			itemSelector: '.card-size'
 			});
 			this.eventListContainer.fadeIn('slow');
-		});	        		
-	}, 1);
+		}, 10);
+	});
 }
 
 chennaiSmile.masonryDestory = function() {
@@ -194,7 +195,14 @@ chennaiSmile.generateEventGridList = function() {
 	    	var catgoryicon = '<span class="ctxt">'+response[k].category_name+'</span><img src="'+iconsrc+'" style="height:auto;" class="img-fluid cs_card_icon">';
 
 	    	var dtimeHtmlArr = moment(response[k].date).fromNow().split(" ");
-	    	dtimeHtml = '<ul><li>'+dtimeHtmlArr[0]+'</li><li>'+dtimeHtmlArr[1]+'</li><li>'+dtimeHtmlArr[2]+'</li></ul>';
+
+	    	if(dtimeHtmlArr[2] == "ago") {
+	    		dtimeHtml = '<ul><li>'+dtimeHtmlArr[2]+'</li><li>'+dtimeHtmlArr[0]+'</li><li>'+dtimeHtmlArr[1]+'</li></ul>';
+	    	} else {
+	    		if(dtimeHtmlArr[1] == "a") dtimeHtmlArr[1] = dtimeHtmlArr[1].replace("a", "1");
+	    		dtimeHtml = '<ul><li>'+dtimeHtmlArr[0]+'</li><li>'+dtimeHtmlArr[1]+'</li><li>'+dtimeHtmlArr[2]+'</li></ul>';
+	    	}
+	    	
 	    	if(response[k].slug == null)
 	    		eventUrl = eventDetailsUrl + '/' + response[k].id;
 
@@ -380,13 +388,13 @@ $(document).ready(function() {
 	var self = chennaiSmile;
 	self.getHashValues();		
 
-	if(self.eventPage.val() != "index") {
+	if(self.eventPage.val() != "index" && self.eventPage.val() != "category") {
 		$("#mobFooter").hide();
 	}
 
 	self.searchTagsInputElem.slimScroll({
 	    axis: 'x',
-	    height: '45px',
+	    height: '37px',
 	    size: '7px',
 	    position: 'left',
 	    color: '#286090',

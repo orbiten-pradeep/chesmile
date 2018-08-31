@@ -141,6 +141,14 @@ $(document).ready(function() {
 	self.categoryApplyBtn.click(function(){
 		var categoryItems = self.categoryTagInputElem.tagsinput('items');
 
+		var parentCategory = categoryItems.shift();
+		var categoryUrl = self.parent.baseUrl + "events/category/"+parentCategory['id'];
+		if(categoryItems.length > 0) {
+			sessionStorage.subCategoryItems =  JSON.stringify(categoryItems);
+		}				
+		$.redirect(categoryUrl, categoryItems);
+		return;
+
 		categoryItems.forEach(function(item){
 			self.parent.filterParams.category.push(item.id);
 			self.parent.filterTextArr.push({'type':'category', 'text': item.text, 'value': item.id });

@@ -26,16 +26,17 @@
      overflow: hidden;
      text-overflow: ellipsis;
      white-space: nowrap;
-     text-transform: uppercase;
+     text-transform: capitalize;
+     font-size: 13px;
 }
  .search-box .search-text-box input {
      border-radius: 0;
-     height: 45px;
+     height: 37px;
      border-width: 1px 0 1px 0;
      border-spacing: 0;
      width: 22rem;
      padding: 8px 10px !important;
-     font-size: 14px;
+     font-size: 13px;
 }
  .search-box .waves-input-wrapper {
      border-radius: 0px;
@@ -90,7 +91,7 @@
      display: inline-block;
 }
  .navbar .btn-head {
-     padding: 12px 14px !important;
+     padding: 8px 14px !important;
      box-shadow: none;
      border-radius: 0;
      text-shadow: none;
@@ -105,12 +106,16 @@
      color: #474747 !important;
      box-shadow: none;
      text-transform: capitalize;
-     border: 1px solid #d4d4d4;
-     font-size: 14px;
+     /*border: 1px solid #d4d4d4;*/
+     font-size: 13px;
      border-radius: 0;
+     margin-top: 0 !important;
+     margin-bottom: 0 !important;
+     padding: 9px 10px !important;
 }
- .navbar .nav-cs-action .nav-item .cs-city-btn:not([disabled]):not(.disabled):active{
+ .navbar .nav-item .cs-city-btn:not([disabled]):not(.disabled):active{
      background-color: #e7e7e7 !important;
+     color: #333 !important;
 }
  .nav-tabs .nav-item.open .nav-link, .nav-tabs .nav-link.active {
      background-color: rgba(255,255,255,.2);
@@ -348,9 +353,12 @@
  .favourite-category, .favourite-category-2 {
     /*background-color: #fafafa;
     */
-     padding: 20px 20px 30px;
-     margin-bottom: 25px;
-     margin-top: 25px;
+     padding: 20px 20px 0px;
+     margin-bottom: 0px;
+     margin-top: 5px;
+}
+.favourite-category h5 {
+    font-weight: bold !important;
 }
  .top-categories .btn {
      border-radius: 0;
@@ -391,7 +399,7 @@
          font-size: 15px;
     }
      .nav-cs-action .btn {
-         padding: 5px 5px !important;
+         /*padding: 5px 5px !important;*/
     }
      .nav-cs-action .btn.user-dropdown {
          padding: 0 !important;
@@ -408,7 +416,7 @@
 }
  .search-box .search-menu button{
      padding: 0.58rem ;
-     height: 2.80rem;
+     height: 37px;
 }
  .navbar-brand img {
      width: 250px;
@@ -554,12 +562,12 @@
 }
  .navbar .cs_create_btn{
      background-color: #377bb5 !important;
-     border: 1px solid #35638a;
+     /*border: 1px solid #35638a;*/
      color: #f4f4f4 !important;
 }
  .navbar .cs_login_btn{
      background-color: #4abac5 !important;
-     border: 1px solid #52a0a8;
+     /*border: 1px solid #52a0a8;*/
      color: #f4f4f4 !important;
 }
  @media (min-width: 1900px){
@@ -577,7 +585,7 @@
 }
  @media (min-width: 768px) and (max-width: 1024px){
      .search-box .search-menu button {
-         padding: 0.76rem 0.5rem !important;
+         padding: 7px 10px !important;
     }
     /*.search-text-box{
          width: 50%;
@@ -588,10 +596,10 @@
          width: 15rem;
     }
      .navbar .btn-head{
-         font-size: 13px;
+         font-size: 14px;
     }
      .navbar .cs-city-btn{
-         font-size: 12px;
+        /* font-size: 12px;*/
     }
 }
 /*** Category Page **/
@@ -602,7 +610,7 @@
      height: 32px;
 }
  .btn-look-city {
-     color: #333 !important;
+     /*color: #333 !important;
      border: 1px solid #50bac4!important;
      padding: 13px 15px !important;
      text-transform: capitalize;
@@ -610,8 +618,61 @@
      box-shadow: none;
      margin: 0;
      line-height: 45px;
-     margin-left: 15px;
+     margin-left: 15px;*/
 }
 .nav-cs-action .user-dropdown .avatar img{
-    width: 45px
+    width: 40px;
+}
+div#noEventsMsg {
+    height: 400px;
+    background: #fff url(../../img/no-events.png) no-repeat scroll center;
+    display: none;
+    position: relative;
+    background-size: contain;
+}
+.filter-buttons .btn, .filter-dropdowns .btn {
+    box-shadow: none !important;
+    font-weight: normal;
+}
+.filter-dropdowns .dropdown-menu {
+    border-radius: 0;
+    margin-top: -1px;
+    text-shadow: none;
+}
+.filter-dropdowns .dropdown-menu a {
+}
+.filter-dropdowns .dropdown-menu a:hover {
+}
+.filter-dropdowns .dropdown-menu a:active {
+    color: #fff !important;
+}
+.user-dropdown+.dropdown-menu {
+    border-radius: 0;
+    margin-top: -1px;
+    text-shadow: none;
+    line-height: 0;
+    padding: 5px
+}
+.user-dropdown+.dropdown-menu li a {
+    width: 100%;
+}
+.user-dropdown+.dropdown-menu li a i {
+    padding-right: 5px;
+}
+.navbar .ipad-nav-links {
+    position: absolute;
+    right: 100px;
+}
+.navbar .ipad-nav-links img {
+    width: 40px;
+}
+.other-categories label {
+    margin-bottom: 0 !important;
+    line-height: 30px;
+    padding-right: 5px;
+}
+.btn-go:not([disabled]):not(.disabled):active,
+.btn-look-city:not([disabled]):not(.disabled):active{
+     background-color: #377bb5 !important;
+     color: #f4f4f4 !important;
 }
