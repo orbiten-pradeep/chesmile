@@ -37,6 +37,8 @@
 
     <link rel="stylesheet" href="//cdnjs.cloudflare.com/ajax/libs/timepicker/1.3.5/jquery.timepicker.min.css">
 
+<link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/4.7.0/css/font-awesome.min.css">
+
     <?php echo $this->Html->css(['daterangepicker']); ?>
 </head>
 
@@ -187,64 +189,6 @@
         <?php echo $this->Flash->render(); ?>
     </div>
     <!-- /Start your project here-->
-
-    <!--Footer-->
-   <!--  <footer class="page-footer font-small pt-4 cs-footer">
-      <div class="container">
-        <div class="row">
-          <div class="text-center cs-footer-social">
-            <ul class="list-unstyled list-inline">
-                <li class="list-inline-item">
-                    <a class="btn-floating btn-sm btn-fb mx-1">
-                        <i class="fa fa-facebook"> </i>
-                    </a>
-                </li>
-                <li class="list-inline-item">
-                    <a class="btn-floating btn-sm btn-tw mx-1">
-                        <i class="fa fa-twitter"> </i>
-                    </a>
-                </li>
-                <li class="list-inline-item">
-                    <a class="btn-floating btn-sm btn-gplus mx-1">
-                        <i class="fa fa-google-plus"> </i>
-                    </a>
-                </li>
-                <li class="list-inline-item">
-                    <a class="btn-floating btn-sm btn-li mx-1">
-                        <i class="fa fa-linkedin"> </i>
-                    </a>
-                </li>
-                <li class="list-inline-item">
-                    <a class="btn-floating btn-sm btn-dribbble mx-1">
-                        <i class="fa fa-dribbble"> </i>
-                    </a>
-                </li>
-            </ul>
-          </div>
-        </div>
-        <div class="row">
-          <div class="text-center cs-footer-social">
-            <ul class="list-unstyled list-inline">
-                <li class="list-inline-item"><?= $this->Html->link(__('About us'), ['controller' => 'events', 'action' => 'about'], array('class' => 'btn-floating btn-sm btn-tw mx-1')); ?></li>
-                <li class="list-inline-item"><?= $this->Html->link(__('Terms of service'), ['controller' => 'events', 'action' => 'terms'], array('class' => 'btn-floating btn-sm btn-tw mx-1')); ?></li>
-                <li class="list-inline-item"><?= $this->Html->link(__('Privacy Policy'), ['controller' => 'events', 'action' => 'privacy'], array('class' => 'btn-floating btn-sm btn-tw mx-1')); ?></li>
-                <li class="list-inline-item"><?= $this->Html->link(__('Disclaimer'), ['controller' => 'events', 'action' => 'partnerwith'], array('class' => 'btn-floating btn-sm btn-tw mx-1')); ?></li>
-                <li class="list-inline-item"><?= $this->Html->link(__('Contact us'), ['controller' => 'events', 'action' => 'contact'], array('class' => 'btn-floating btn-sm btn-tw mx-1')); ?></li>
-            </ul>
-          </div>
-        </div>
-      </div>
-      /.Footer Links
-
-      Copyright
-      <div class="footer-copyright py-3 text-center">
-          <div class="container-fluid">
-              © 2017 Copyright: <a href="https://chennaismile.com/"> ChennaiSmile.com </a>
-          </div>
-      </div>
-      /.Copyright
-
-    </footer> -->
 <footer class="page-footer font-small" style = "background-color: #4abac5;">
 
     <!-- Footer Links -->
@@ -257,7 +201,7 @@
         <div class="col-md-3 mx-auto">
 
           <!-- Links -->
-          <h5 class="font-weight-normal text-uppercase mt-3 mb-4">Cities</h5>
+          <h5 class="font-weight-normal text-normal mt-3 mb-4">Cities</h5>
 
           <ul class="list-unstyled">
             <li>
@@ -283,7 +227,7 @@
         <div class="col-md-3 mx-auto">
 
           <!-- Links -->
-          <h5 class="font-weight-normal text-uppercase mt-3 mb-4">Popular Categories</h5>
+          <h5 class="font-weight-normal text-normal mt-3 mb-4">Popular Categories</h5>
 
           <ul class="list-unstyled">
             <li>
@@ -309,7 +253,7 @@
         <div class="col-md-3 mx-auto">
 
           <!-- Links -->
-          <h5 class="font-weight-normal text-uppercase mt-3 mb-4">Others</h5>
+          <h5 class="font-weight-normal text-normal mt-3 mb-4">Others</h5>
 
           <ul class="list-unstyled">
             <li><?= $this->Html->link(__('About us'), ['controller' => 'events', 'action' => 'about']); ?>
@@ -335,25 +279,20 @@
         <div class="col-md-3 mx-auto">
 
           <!-- Links -->
-          <h5 class="font-weight-normal text-uppercase mt-3 mb-4">Follow Us</h5>
+          <h5 class="font-weight-normal text-normal mt-3 mb-4">Follow Us</h5>
 
           <ul class="list-unstyled">
             <li>
-               <a class="btn-floating btn-sm btn-fb mx-1">
+               <a class="btn-floating btn-sm btn-fb mx-1 icon-align">
                          <i class="fa fa-facebook fa-sm white-text mr-md-5 mr-3 fa-1x"> </i>
-                    </a>
+                    </a>  <a class="btn-floating btn-sm btn-tw mx-1 icon-align"><i class="fa fa-twitter fa-sm white-text mr-md-5 mr-3 fa-1x"> </i></a>
+                    <a class="btn-floating btn-sm btn-gplus mx-1 icon-align">
+              <i class="fa fa-google-plus fa-sm white-text mr-md-5 mr-3 fa-1x"> </i></a>
             <!--   <a href="#!">Link 1</a> -->
             </li>
-            <li>
-             <a class="btn-floating btn-sm btn-tw mx-1"><i class="fa fa-twitter fa-sm white-text mr-md-5 mr-3 fa-1x"> </i></a>
-            </li>
-            <li> <a class="btn-floating btn-sm btn-gplus mx-1">
-              <i class="fa fa-google-plus fa-sm white-text mr-md-5 mr-3 fa-1x"> </i></a>
-            </li>
-             <li> <a class="btn-floating btn-sm btn-gplus mx-1">
+             <li> <a class="btn-floating btn-sm btn-gplus mx-1 icon-align">
               <i class="fa fa-instagram fa-sm white-text mr-md-5 mr-3 fa-1x"> </i></a>
-            </li>
-             <li> <a class="btn-floating btn-sm btn-gplus mx-1">
+               <a class="btn-floating btn-sm btn-gplus mx-1 icon-align">
               <i class="fa fa-linkedin fa-sm white-text mr-md-5 mr-3 fa-1x"> </i></a>
             </li>
           </ul>
@@ -707,6 +646,10 @@
     <script type="text/javascript" src="<?php echo $this->Url->build('/newtheme/custom/js/mobile.event.list.js'); ?>"></script>
 
     <script type="text/javascript" src="<?php echo $this->Url->build('/newtheme/custom/js/event.add.js'); ?>"></script>
+
+<script src="https://ajax.googleapis.com/ajax/libs/jquery/3.3.1/jquery.min.js"></script>
+  <script src="https://cdnjs.cloudflare.com/ajax/libs/popper.js/1.14.3/umd/popper.min.js"></script>
+  <script src="https://maxcdn.bootstrapcdn.com/bootstrap/4.1.3/js/bootstrap.min.js"></script>
 
 </body>
 </html>

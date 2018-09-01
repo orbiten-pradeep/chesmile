@@ -15,11 +15,11 @@ else {
 ?>
 
 <div class="col-md-12 col-xs-12 mb-4 pr-0 pl-0">
-	<?php echo $this->Html->image('cs-static-banner.jpg',array('alt' => 'Cs-Static','class' => 'img-fluid static-banner z-depth-1')); ?>
+	<?php echo $this->Html->image('cs-static-banner.jpg',array('alt' => 'Cs-Static','class' => 'img-fluid static-banner')); ?>
 	<div class="desk-container">
 		<div class="container">
 			<div class="cs-tag-title">
-				<div class="d-inline-flex rounded pt-0 pr-2 pl-2 pb-2 tag border z-depth-1">
+				<div class="d-inline-flex rounded pt-0 pr-2 pl-2 pb-2 tag tag-border z-depth-1">
 					<?php echo $this->Html->image('card/'.$event->category->card, array('class' => 'marg-card')); ?>
 					<span class="cname-span"><?= h($event->category->name) ?></span>
 				</div>
@@ -43,7 +43,14 @@ else {
 <div class="container">
 	<div class="row">
 		<div class="col-md-8 mb-4">
-			<div class="col-md-12 cs_banner_container mb-5">
+		  <ul class="breadcrumb" style="background-color: transparent; margin-bottom: -1rem;">
+    <li class="breadcrumb-item"><a href="http://www.chennaismile.com/events">Home</a></li>
+    <li class="breadcrumb-item"><a href="#">Category</a></li>
+    <li class="breadcrumb-item"><a href="#">Events</a></li>
+    <li class="breadcrumb-item active">Current</li>
+  </ul>
+
+			<div class="col-md-14 cs_banner_container mb-5">
 				<?php $bgImage = $event->banner;
 				if(!empty($bgImage)){
 		 			echo $this->Html->image('banner/'.$bgImage,array('alt' => 'Cs-Static','class' => 'img-fluid z-depth-1 rounded cs_banner_bg')); 
@@ -51,7 +58,7 @@ else {
 				else {
 		 			echo $this->Html->image('cover_pic.jpg',array('alt' => 'Cs-Static','class' => 'img-fluid z-depth-1 rounded cs_banner_bg')); 
 				}	?>
-				<div class="banner_image">
+				<!-- <div class="banner_image">
 					<?php $bgImage = $event->banner;
 					if(!empty($bgImage)){
 			 			echo $this->Html->image('banner/'.$bgImage,array('alt' => 'Cs-Static','class' => 'img-fluid z-depth-1 rounded cs_banner')); 
@@ -59,36 +66,36 @@ else {
 					else {
 			 			echo $this->Html->image('/cover_pic.jpg',array('alt' => 'Cs-Static','class' => 'img-fluid z-depth-1 rounded cs_banner')); 
 					}	?>
-				</div>
+				</div> -->
 			</div>
 			<div class="col-md-12 pr-0 pl-0">
 				<div class="d-flex flex-column cs_right_details_mob">
-				    <div class="p-4 mb-4 flex-cont rounded cs_details_block">
-				    	<!-- <div class="text-center">
+				    <div class="p-4 mb-4 flex-cont rounded ">
+				    	<div class="text-center">
 					    	<h5>₹ 699</h5>
 					    	<button type="button" class="btn buy-btn">Get Tickets</button>
-				    	</div> -->
+				    	</div>
 				    	<div class="cs-details">
 				    		<?php if(!empty($address) && isset($address->areaname)) { ?>
 				    		<p>
 				    			<i class="fa fa-map-marker"></i>
-				    			<span class="rs-details">
+				    			<span class="rs-details-bold">
 				    				<?php echo $address->areaname; ?>
 				    			</span>
 				    		</p>
 				    		<?php } ?>
 				    		<?php if(isset($event->date) && !empty($event->date)) { ?>
-				    		<p>
-				    			<?php echo $this->Html->image('cal.png')?>
-				    			<span class="rs-details">
+				    		<p><i class="fa fa-calendar" style="font-size:16px"></i>
+				    		<!-- 	<?php echo $this->Html->image('cal.png')?> -->
+				    			<span class="rs-details-bold">
 				    				<?php echo date_format($event->date, "j M Y"); ?>
 				    			</span>
 				    		</p>
 				    		<?php } ?>
 				    		<?php if(isset($event->time) && !empty($event->time)) { ?>
-				    		<p>
-				    			<?php echo $this->Html->image('clock-chennaismile.png')?>
-				    			<span class="rs-details">
+				    		<p><i class="fa fa-clock-o" style="font-size:16px"></i>
+				    			<!-- <?php echo $this->Html->image('clock-chennaismile.png')?> -->
+				    			<span class="rs-details-bold">
 				    				<?php echo h($event->time); ?>
 				    			</span>
 				    		</p>
@@ -103,39 +110,43 @@ else {
 					<?php if(isset($event->descriptioin) && !empty($event->descriptioin)) { ?>
 					<div class="p-4 mb-4 flex-cont rounded cs_details_block">
 					    <h5 class="cs-title">Event Details</h5>
-					    <p><?php echo $this->Text->autoParagraph(h($event->descriptioin));?></p>
+					    <p ><?php echo $this->Text->autoParagraph(h($event->descriptioin),array('class' => 'event-details'));?></p>
 					</div>
 					<?php } ?>
-					<!-- <div class="p-4 mb-4 flex-cont rounded d-none cs_details_block">
+					<div class="p-4 mb-4 flex-cont rounded cs_details_block">
 					    <h5 class="cs-title">Terms & Conditions</h5>
-					    <p>Lorem ipsum dolor sit amet, consectetuer adipiscing elit. Aenean commodo ligula eget dolor. Aenean massa. Cum sociis natoque penatibus et magnis dis parturient montes, nascetur ridiculus mus. Donec quam felis, ultricies nec, pellentesque eu, pretium quis, sem. Nulla consequat massa quis enim. Donec pede justo, fringilla vel, aliquet nec, vulputate eget, arcu. In enim justo, rhoncus ut, imperdiet a, venenatis vitae, justo. Nullam dictum felis eu pede mollis pretium. Integer tincidunt. Cras dapibus. Vivamus elementum semper nisi. Aenean vulputate eleifend tellus. Aenean leo ligula, porttitor eu, consequat vitae, eleifend ac, enim. Aliquam lorem ante, dapibus in, viverra quis, feugiat a</p>
-					</div> -->
+					    <p class="event-details">Lorem ipsum dolor sit amet, consectetuer adipiscing elit. Aenean commodo ligula eget dolor. Aenean massa. Cum sociis natoque penatibus et magnis dis parturient montes, nascetur ridiculus mus. Donec quam felis, ultricies nec, pellentesque eu, pretium quis, sem. Nulla consequat massa quis enim. Donec pede justo, fringilla vel, aliquet nec, vulputate eget, arcu. In enim justo, rhoncus ut, imperdiet a, venenatis vitae, justo. Nullam dictum felis eu pede mollis pretium. Integer tincidunt. Cras dapibus. Vivamus elementum semper nisi. Aenean vulputate eleifend tellus. Aenean leo ligula, porttitor eu, consequat vitae, eleifend ac, enim. Aliquam lorem ante, dapibus in, viverra quis, feugiat a</p>
+					</div>
 				</div>
 			</div>
 		</div>
-		<div class="col-md-4 mb-4">
+		<div class="col-md-3 mb-4">
 			<div class="d-flex flex-column cs_right_details_desk">
-			    <div class="p-4 mb-4 flex-cont rounded cs_details_block">
+			    <div class="p-4 mb-4 flex-cont rounded cs_details_rightblock">
+			    <div class="text-center">
+					    	<h5>₹ 699</h5>
+					    	<button type="button" class="btn buy-btn">Get Tickets</button>
+				    	</div>
 		    		<?php if(!empty($address) && isset($address->areaname)) { ?>
 		    		<p>
 		    			<i class="fa fa-map-marker"></i>
-		    			<span class="rs-details">
+		    			<span class="rs-details-bold">
 		    				<?php echo $address->areaname; ?>
 		    			</span>
 		    		</p>
 		    		<?php } ?>
 		    		<?php if(isset($event->date) && !empty($event->date)) { ?>
-		    		<p>
-		    			<?php echo $this->Html->image('cal.png')?>
-		    			<span class="rs-details">
+		    		<p><i class="fa fa-calendar" style="font-size:16px"></i>
+		    			<!-- <?php echo $this->Html->image('cal.png')?> -->
+		    			<span class="rs-details-bold">
 		    				<?php echo date_format($event->date, "j M Y"); ?>
 		    			</span>
 		    		</p>
 		    		<?php } ?>
 		    		<?php if(isset($event->time) && !empty($event->time)) { ?>
-		    		<p>
-		    			<?php echo $this->Html->image('clock-chennaismile.png')?>
-		    			<span class="rs-details">
+		    		<p> <i class="fa fa-clock-o" style="font-size:16px"></i>
+		    			<!-- <?php echo $this->Html->image('clock-chennaismile.png')?> -->
+		    			<span class="rs-details-bold">
 		    				<?php echo h($event->time); ?>
 		    			</span>
 		    		</p>
@@ -147,9 +158,9 @@ else {
 			</div>
 			<?php if(isset($event->google_map) && !empty($event->google_map)) { $geoCode = $event->google_map; ?>
 			<div class="d-flex flex-column">
-			    <div class="p-4 mb-4 flex-cont rounded cs_details_block">
-			    	<div style='overflow:hidden;height:330px;width:100%;'>
-			    		<div id='gmap_canvas' style='height:330px;width:700px;'> </div>
+			    <div class="p-4 mb-4 flex-cont rounded cs_details_mapblock">
+			    	<div style='overflow:hidden;height:220px;width:100%;'>
+			    		<div id='gmap_canvas' style='height:220px;width:700px;'> </div>
 			    	</div>
 			    	<p>
 						<?php echo (isset($address->address_1) && empty(!$address->address_1)) ? $address->address_1. ", " : ''; ?>
@@ -161,6 +172,20 @@ else {
 			</div>
 			<?php } else { $geoCode = '13.0595365, 80.24247919999993'; } ?>
 			<input type="hidden" name="geoCode" id="geoCode" value="<?php echo $geoCode; ?>">
+
+
+			<div class="d-flex flex-column">
+			    <div class="p-4 mb-4 flex-cont rounded cs_details_advertblock">
+			    	<div style='overflow:hidden;height:330px;width:100%;'>
+			    		<div  style='height:330px;width:700px;'> </div>
+			    	</div>
+			    	<p>
+						
+					</p>
+				</div>
+			</div>
+
+
 		</div>
 	</div>
 </div>

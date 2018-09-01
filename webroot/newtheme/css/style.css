@@ -113,10 +113,10 @@
      border-radius: 0;
      margin-top: 0 !important;
      margin-bottom: 0 !important;
-     padding: 9px 10px !important;
+     padding: 8px 10px !important;
 }
 .navbar .cs-city-btn:hover{
-     background-color: #50bac4 !important;
+     background-color: #2bbbad !important;
      color: #fff !important;  
 }
  .navbar .nav-item .cs-city-btn:not([disabled]):not(.disabled):active{
@@ -186,7 +186,7 @@
      float: none;
      clear: both;
      background-color: #50bac4 !important;
-     width: 523.5px !important;
+     width: 522.5px !important;
      font-size: 13px;
      font-weight: bolder;
 }
@@ -736,4 +736,8 @@ div#noEventsMsg {
 .login-popup .mob-register-btn {
     margin: 0;
     background-color: #2bbbad !important;
+}
+/*roslin edit*/
+.icon-align{
+    display: contents !important;
 }
