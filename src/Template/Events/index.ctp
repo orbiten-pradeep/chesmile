@@ -38,7 +38,7 @@
         </div>
     </div>
     <div class="btn-group top-categories" data-toggle="buttons">
-        <label>Top categories: </label>
+        <label>Top Categories: </label>
         <?php 
             foreach ($topCategories as $key => $value) {
                 echo "<button class='btn btn-unique btn-sm filter-tc-button' style='background-color:#".$value['color']." !important' data-text='".$value['name']."' data=".$value['cid']."> ".$value['name']." (".$value['event_counts'].")"."</button>";
