@@ -188,7 +188,7 @@
     <!-- /Start your project here-->
 
     <!--Footer-->
-    <footer class="page-footer font-small pt-4 cs-footer">
+   <!--  <footer class="page-footer font-small pt-4 cs-footer">
       <div class="container">
         <div class="row">
           <div class="text-center cs-footer-social">
@@ -233,18 +233,149 @@
           </div>
         </div>
       </div>
-      <!--/.Footer Links-->
+      /.Footer Links
 
-      <!--Copyright-->
+      Copyright
       <div class="footer-copyright py-3 text-center">
           <div class="container-fluid">
               © 2017 Copyright: <a href="https://chennaismile.com/"> ChennaiSmile.com </a>
           </div>
       </div>
-      <!--/.Copyright-->
+      /.Copyright
 
-    </footer>
-    <!--/.Footer-->
+    </footer> -->
+<footer class="page-footer font-small" style = "background-color: #4abac5;">
+
+    <!-- Footer Links -->
+    <div class="container text-center text-md-left">
+
+      <!-- Grid row -->
+      <div class="row">
+
+        <!-- Grid column -->
+        <div class="col-md-3 mx-auto">
+
+          <!-- Links -->
+          <h5 class="font-weight-normal text-uppercase mt-3 mb-4">Cities</h5>
+
+          <ul class="list-unstyled">
+            <li>
+              <a href="http://www.chennaismile.com">ChennaiSmile</a>
+            </li>
+            <li>
+              <a href="http://www.bangaloresmile.com/">BangaloreSmile</a>
+            </li>
+            <li>
+              <a href="http://www.mumbaismile.com/">MumbaiSmile</a>
+            </li>
+            <li>
+              <a href="http://www.punesmile.com/">PuneSmile</a>
+            </li>
+          </ul>
+
+        </div>
+        <!-- Grid column -->
+
+        <hr class="clearfix w-100 d-md-none">
+
+        <!-- Grid column -->
+        <div class="col-md-3 mx-auto">
+
+          <!-- Links -->
+          <h5 class="font-weight-normal text-uppercase mt-3 mb-4">Popular Categories</h5>
+
+          <ul class="list-unstyled">
+            <li>
+              <a href="http://www.chennaismile.com/events/category/6">Music</a>
+            </li>
+            <li>
+              <a href="http://www.chennaismile.com/events/category/23">Kinds</a>
+            </li>
+            <li>
+              <a href="http://www.chennaismile.com/events/category/24">Party & Nightlife</a>
+            </li>
+            <li>
+              <a href="http://www.chennaismile.com/events/category/18">Beauty & Fashion</a>
+            </li>
+          </ul>
+
+        </div>
+        <!-- Grid column -->
+
+        <hr class="clearfix w-100 d-md-none">
+
+        <!-- Grid column -->
+        <div class="col-md-3 mx-auto">
+
+          <!-- Links -->
+          <h5 class="font-weight-normal text-uppercase mt-3 mb-4">Others</h5>
+
+          <ul class="list-unstyled">
+            <li><?= $this->Html->link(__('About us'), ['controller' => 'events', 'action' => 'about']); ?>
+             <!--  <a href="#!">Link 1</a> -->
+            </li>
+            <li><?= $this->Html->link(__('Terms of service'), ['controller' => 'events', 'action' => 'terms']); ?>
+            <!--   <a href="#!">Link 2</a> -->
+            </li>
+            <li><?= $this->Html->link(__('Privacy Policy'), ['controller' => 'events', 'action' => 'privacy']); ?>
+             <!--  <a href="#!">Link 3</a> -->
+            </li>
+            <li><?= $this->Html->link(__('Disclaimer'), ['controller' => 'events', 'action' => 'partnerwith']); ?>
+            <!--   <a href="#!">Link 4</a> -->
+            </li><li><?= $this->Html->link(__('Contact us'), ['controller' => 'events', 'action' => 'contact']); ?></li>
+          </ul>
+
+        </div>
+        <!-- Grid column -->
+
+        <hr class="clearfix w-100 d-md-none">
+
+        <!-- Grid column -->
+        <div class="col-md-3 mx-auto">
+
+          <!-- Links -->
+          <h5 class="font-weight-normal text-uppercase mt-3 mb-4">Follow Us</h5>
+
+          <ul class="list-unstyled">
+            <li>
+               <a class="btn-floating btn-sm btn-fb mx-1">
+                         <i class="fa fa-facebook fa-sm white-text mr-md-5 mr-3 fa-1x"> </i>
+                    </a>
+            <!--   <a href="#!">Link 1</a> -->
+            </li>
+            <li>
+             <a class="btn-floating btn-sm btn-tw mx-1"><i class="fa fa-twitter fa-sm white-text mr-md-5 mr-3 fa-1x"> </i></a>
+            </li>
+            <li> <a class="btn-floating btn-sm btn-gplus mx-1">
+              <i class="fa fa-google-plus fa-sm white-text mr-md-5 mr-3 fa-1x"> </i></a>
+            </li>
+             <li> <a class="btn-floating btn-sm btn-gplus mx-1">
+              <i class="fa fa-instagram fa-sm white-text mr-md-5 mr-3 fa-1x"> </i></a>
+            </li>
+             <li> <a class="btn-floating btn-sm btn-gplus mx-1">
+              <i class="fa fa-linkedin fa-sm white-text mr-md-5 mr-3 fa-1x"> </i></a>
+            </li>
+          </ul>
+
+        </div>
+        <!-- Grid column -->
+
+      </div>
+      <!-- Grid row -->
+
+    </div>
+    <!-- Footer Links -->
+
+    <!-- Copyright -->
+    <div class="footer-copyright text-center py-3 foot-height"> © 2018 Copyright: <a href="https://chennaismile.com/"> ChennaiSmile.com. All rights reserved.</a>
+     
+    </div>
+    <!-- Copyright -->
+
+  </footer>
+  <!-- Footer -->
+   
+   <!--/.Footer-->
 
 
      <!-- Modal -->
