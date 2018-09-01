@@ -1,11 +1,11 @@
 /* Your custom styles */
- @font-face {
+/* @font-face {
      font-family: Helvetica;
      src: url("../font/Helvetica/HELR45W.ttf");
 }
  body {
      font-family: 'Helvetica';
-}
+}*/
  .search-box {
 }
  .search-box button {
@@ -13,7 +13,7 @@
      border-radius: 0;
      margin: 0;
      padding: .84rem 1.14rem;
-     background-color: #50bac4 !important;
+     background-color: #2bbbad !important;
 }
  .search-box button i.fa-bars {
      margin-top: 4px;
@@ -220,7 +220,7 @@
      height:20px;
 }
  .btn.btn-primary.cat-not-selected, .btn.btn-primary.category-selected {
-     background-color: #50bac4 !important;
+     background-color: #2bbbad !important;
 }
  .bootstrap-tagsinput .tag [data-role="remove"]::after {
      content: "x";
@@ -228,7 +228,7 @@
      color: #4a4a4a !important;
 }
  .cs-footer{
-     background-color: #4abac5;
+     background-color: #2bbbad;
 }
  .cs-footer-social{
      margin: 0 auto;
@@ -358,7 +358,7 @@
      margin-top: 5px;
 }
 .favourite-category h5 {
-    font-weight: bold !important;
+    font-weight: 500 !important;
 }
  .top-categories .btn {
      border-radius: 0;
@@ -515,7 +515,7 @@
     }
      .event-filters .top-categories label {
          float: left;
-         margin-top: 10px;
+         margin-top: 0;
          margin-left: 35%;
     }
      .event-filters .top-categories .btn {
@@ -566,7 +566,7 @@
      color: #f4f4f4 !important;
 }
  .navbar .cs_login_btn{
-     background-color: #4abac5 !important;
+     background-color: #2bbbad !important;
      /*border: 1px solid #52a0a8;*/
      color: #f4f4f4 !important;
 }

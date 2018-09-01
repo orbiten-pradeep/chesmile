@@ -223,6 +223,7 @@ chennaiSmile.generateEventGridList = function() {
 	    		eventprice = '<span class="event-price pull-right">₹ '+response[k].price+'</span>';
 	    		buybtn = '<div class="btn buy-btn btn-warning pull-right" onClick="javascript:location.href='+eventUrl+'">Get Tickets</div>';
 	    	}
+	    	var areaname = (response[k].areaname == "null") ? response[k].areaname : 'Chennai';
 			html += '<div class="card-size">\
 				<div class="card" data-attrib-hcolor="#'+response[k].category_ltecolor+'" >\
 			        <div class="view">\
@@ -237,7 +238,7 @@ chennaiSmile.generateEventGridList = function() {
 			        </div>\
 			        <div class="card-body">\
 			            <h4 class="card-title"><a href="'+eventUrl+'" class="event-title">'+response[k].title+'</a></h4>\
-			            <p class="card-text mb-0">'+response[k].areaname+'</p>\
+			            <p class="card-text mb-0">'+areaname+'</p>\
 			            <p class="card-text card-event-date mb-0">'+this.formatDate(response[k].date)+' - '+response[k].time+'</p>\
 			            '+buybtn+'\
 			            <div class="pull-left social-icons">\
