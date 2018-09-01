@@ -101,17 +101,22 @@
  .show>.btn-head.dropdown-toggle {
      color: #fff !important;
 }
- .navbar .cs-city-btn{
-     background-color: #e7e7e7 !important;
+.navbar .cs-city-btn{
+     background-color: #ffffff !important;
      color: #474747 !important;
      box-shadow: none;
      text-transform: capitalize;
+         border: 1px solid #50bac4 !important;
      /*border: 1px solid #d4d4d4;*/
      font-size: 13px;
      border-radius: 0;
      margin-top: 0 !important;
      margin-bottom: 0 !important;
      padding: 9px 10px !important;
+}
+.navbar .cs-city-btn:hover{
+     background-color: #50bac4 !important;
+     color: #fff !important;  
 }
  .navbar .nav-item .cs-city-btn:not([disabled]):not(.disabled):active{
      background-color: #e7e7e7 !important;
@@ -377,10 +382,20 @@
      margin-right: 10px;
 }
  .cs_login_btn{
-     background-color: #50bac4;
+    /* background-color: #50bac4;*/
+    background-color:  #1b8fca;
+}
+ .cs_login_btn: hover{
+    /* background-color: #50bac4;*/
+    background-color:  #107db4;
 }
  .cs_create_btn{
-     background-color: #337ab7;
+     background-color:  #1b8fca;
+    /* background-color: #337ab7;*/
+}
+ .cs_create_btn: hover{
+     background-color:  #107db4;
+    /* background-color: #337ab7;*/
 }
  .nav-city-link .btn-grey:not([disabled]):not(.disabled).active, .btn-grey:not([disabled]):not(.disabled):active, .show > .btn-grey.dropdown-toggle.cs-city-btn:active, .show > .btn-grey.dropdown-toggle.cs-city-btn{
      background-color: #f4f4f4 !important;
@@ -561,12 +576,26 @@
     }
 }
  .navbar .cs_create_btn{
-     background-color: #377bb5 !important;
+    /* background-color: #377bb5 !important;*/
+    background-color: #1b8fca!important;
+     /*border: 1px solid #35638a;*/
+     color: #f4f4f4 !important;
+}
+.navbar .cs_create_btn:hover{
+    /* background-color: #377bb5 !important;*/
+    background-color: #107db4!important;
      /*border: 1px solid #35638a;*/
      color: #f4f4f4 !important;
 }
  .navbar .cs_login_btn{
-     background-color: #2bbbad !important;
+   /*  background-color: #4abac5 !important;*/
+      background-color: #1b8fca!important;
+     /*border: 1px solid #52a0a8;*/
+     color: #f4f4f4 !important;
+}
+.navbar .cs_login_btn:hover{
+   /*  background-color: #4abac5 !important;*/
+      background-color: #107db4!important;
      /*border: 1px solid #52a0a8;*/
      color: #f4f4f4 !important;
 }
@@ -675,4 +704,7 @@ div#noEventsMsg {
 .btn-look-city:not([disabled]):not(.disabled):active{
      background-color: #377bb5 !important;
      color: #f4f4f4 !important;
+}
+.foot-height{
+    line-height: 0.5;
 }
