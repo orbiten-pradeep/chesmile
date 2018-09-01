@@ -36,7 +36,7 @@ class UserProfileController extends AppController
      */
     public function view($id = null)
     {
-         $this->viewBuilder()->layout('event_home_profile');
+         $this->viewBuilder()->layout('event_new_home');
         $userProfile = $this->UserProfile->get($id, [
             'contain' => ['Users']
         ]);
@@ -117,7 +117,7 @@ public function adminview($id = null)
      */
     public function add()
     {
-        $this->viewBuilder()->layout('event_home_profile');
+        $this->viewBuilder()->layout('event_new_home');
         $userProfile = $this->UserProfile->newEntity();
       $users_id = "";
         $usersInfo = "";
@@ -269,7 +269,7 @@ public function adminadd()
      */
     public function edit($id = null)
     {
-        $this->viewBuilder()->layout('event_home_profile');
+        $this->viewBuilder()->layout('event_new_home');
         $userProfile = $this->UserProfile->get($id, [
             'contain' => []
         ]);
