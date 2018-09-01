@@ -5,7 +5,8 @@
     <meta charset="utf-8">
     <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">
     <meta http-equiv="x-ua-compatible" content="ie=edge">
-    <title>Chennaismile.com</title>
+    <title>Chennaismile - Events, Things To Do, Tech Workshops And Classes And Workshops</title>
+    <link rel="shortcut icon" type="image/png" href="<?php echo $this->Url->build('/img/smile.png'); ?>"/>
     <!-- Font Awesome -->
     <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/font-awesome/4.7.0/css/font-awesome.min.css">
     <!-- Bootstrap core CSS -->
@@ -411,7 +412,7 @@
                 <div class="modal-c-tabs">
 
                     <!-- Nav tabs -->
-                    <ul class="nav nav-tabs tabs-2 light-blue darken-3 cs-login-modal-head" role="tablist">
+                    <ul class="nav nav-tabs tabs-2 cs-login-modal-head" role="tablist">
                         <li class="nav-item">
                             <a class="nav-link active" data-toggle="tab" href="#panel7" role="tab"><i class="fa fa-user mr-1"></i> Login</a>
                         </li>
@@ -438,13 +439,13 @@
                                     <div class="md-form form-sm mb-5">
                                         <?= $this->Form->input('password',array('label' => 'Your Password','div' => false,'id' => 'password', 'class' => 'form-control form-control-sm validate','required' => true)) ?>
                                     </div>
-                                        <?= $this->Form->submit(__('Log In'), array('id' => 'Login2', 'class' => 'btn btn-primary btn-lg cs-signup-button cs-signin-button')) ?>
+                                        <?= $this->Form->submit(__('Log In'), array('id' => 'Login2', 'class' => 'btn btn-primary btn-md cs-signin-button')) ?>
                                         <a class="nav-link" id="forgLink" href="#">Forgot password?</a>
                                   <?= $this->Form->end() ?>
                             </div>
                             <!--Footer-->
                             <div class="modal-footer">
-                                <button type="button" class="btn btn-outline-info waves-effect ml-auto" data-dismiss="modal">Close</button>
+                                <button type="button" class="btn btn-sm cs-close-btn waves-effect ml-auto" data-dismiss="modal">Close</button>
                             </div>
                         </div>
                         <!--/.Panel 7-->
@@ -477,12 +478,12 @@
                                 <?= $this->Form->hidden('group_id', array('controller' => 'users', 'action' => 'add'), ['options' => $groups], ['default' => '1']); ?>
                                   <p style="color:#333333;font-size: 11px;"  align="left">*By clicking Create Account means you're okay with ChennaiSmile Terms and Privacy Policy and Cookie Policy.</p>
 
-                                <?= $this->Form->button(__('Create Account'), array('id' => 'signup', 'class' => 'btn btn-primary btn-lg cs-signup-button')) ?>
+                                <?= $this->Form->button(__('Create Account'), array('id' => 'signup', 'class' => 'btn btn-primary mob-register-btn cs-signup-button')) ?>
                                 <?= $this->Form->end() ?>
                             </div>
                             <!--Footer-->
                             <div class="modal-footer">
-                              <button type="button" class="btn btn-outline-info waves-effect ml-auto" data-dismiss="modal">Close</button>
+                              <button type="button" class="btn btn-sm cs-close-btn waves-effect ml-auto" data-dismiss="modal">Close</button>
                             </div>
                         </div>
                         <!--/.Panel 8-->
@@ -513,8 +514,8 @@
                 <div class="modal-body">
                     <ul class="list-group">
                         <?php if(!$this->request->session()->read('Auth.User')) { ?>
-                        <li class="list-group-item"><span class="mob-open-login">Create Event</span></li>
-                        <li class="list-group-item"><span class="mob-open-login">Login/Signup</span></li>
+                        <li class="list-group-item mob-login-btn"><span class="mob-open-login">Create Event</span></li>
+                        <li class="list-group-item mob-create-btn"><span class="mob-open-login">Login/Signup</span></li>
                         <?php }?>
 
                         <?php if($this->request->session()->read('Auth.User')) { ?>

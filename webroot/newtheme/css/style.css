@@ -54,11 +54,12 @@
 }
  .cs-login-modal-head{
      border: 0;
-     padding: .7rem;
+     padding: 7px 7px;
      margin-left: 1rem;
      margin-right: 1rem;
      margin-bottom: -20px;
-     background-color: #2bbbad;
+     color: #f2f2f2;
+     background-color: #474747;
      z-index: 2;
      position: relative;
      border-radius: 2px;
@@ -707,4 +708,32 @@ div#noEventsMsg {
 }
 .foot-height{
     line-height: 0.5;
+}
+.mob-login-btn {
+    background-color: #50bac4;
+    color: #fff !important;
+}
+.mob-create-btn {
+    background-color: #337ab7;
+    color: #fff !important;
+}
+.login-popup  .modal-dialog.cascading-modal .modal-c-tabs .tab-content {
+    padding: 0 !important;
+}
+.login-popup #Login2 {
+    margin: 0;
+    background-color: #2bbbad !important;
+}
+.login-popup #forgLink {
+    padding-left: 0;
+    color: #78909c;
+    font-weight: 500;
+    font-size: 12px;
+}
+.login-popup .cs-close-btn {
+    background-color: #78909c;
+}
+.login-popup .mob-register-btn {
+    margin: 0;
+    background-color: #2bbbad !important;
 }
