@@ -72,8 +72,8 @@ else {
 				<div class="d-flex flex-column cs_right_details_mob">
 				    <div class="p-4 mb-4 flex-cont rounded ">
 				    	<div class="text-center">
-					    	<h5>₹ 699</h5>
-					    	<button type="button" class="btn buy-btn">Get Tickets</button>
+					    	<h5>₹ 700</h5>
+					    	<a href="javascript:;" class="btn buy-btn" data-toggle="modal" data-target="#get-ticket-modal">Get Tickets</a>
 				    	</div>
 				    	<div class="cs-details">
 				    		<?php if(!empty($address) && isset($address->areaname)) { ?>
@@ -125,8 +125,8 @@ else {
 			<div class="d-flex flex-column cs_right_details_desk">
 			    <div class="p-4 mb-4 flex-cont rounded cs_details_rightblock">
 			    <div class="text-center">
-					    	<h5>₹ 699</h5>
-					    	<button type="button" class="btn buy-btn">Get Tickets</button>
+					    	<h5>₹ 700</h5>
+					    	<a href="javascript:;" class="btn buy-btn" data-toggle="modal" data-target="#get-ticket-modal">Get Tickets</a>
 				    	</div>
 		    		<?php if(!empty($address) && isset($address->areaname)) { ?>
 		    		<p>
@@ -188,6 +188,206 @@ else {
 		</div>
 	</div>
 </div>
+
+
+<!-- Modal: Get Ticket Forms -->
+<div class="modal modal-get-ticket fade" id="get-ticket-modal">
+    <div class="modal-dialog">
+        <div class="modal-content">
+            <div class="modal-body">
+            	<div class="e-full">
+            		<div class="e-parent">
+	            	<p class="e-title"><span><?= h($event->title) ?></span></p>
+	            	<p class="e-details"><?php echo date_format($event->date, "j M Y"); ?> | <?php echo h($event->time); ?></p>
+	            	</div>
+            	</div>
+
+            	<!-- Stepper -->
+				<div class="steps-form-2">
+				    <div class="steps-row-2 setup-panel-2 d-flex justify-content-between">
+				        <div class="steps-step-2">
+				            <a href="#step-1" class="btn btn-active btn-circle-2 waves-effect ml-0" data-toggle="tooltip" data-placement="top" title="Basic Information">Tickets</i></a>
+				        </div>
+				        <div class="steps-step-2">
+				            <a href="#step-2" class="btn btn-circle-2 waves-effect" data-toggle="tooltip" data-placement="top" title="Personal Data">Participants</a>
+				        </div> 
+				        <div class="steps-step-2">
+				            <a href="#step-3" class="btn btn-circle-2 waves-effect mr-0" data-toggle="tooltip" data-placement="top" title="Finish">Payment</a>
+				        </div>
+				    </div>
+				</div>
+
+			    <div class="setup-content-2" id="step-1">
+			    	<div class="ticket-head">
+			    		<div class="row">
+				    		<div class="col col-9 col-sm-6">Ticket Type</div>
+						    <div class="col col-6 col-sm-4">Quantity</div>
+						    <div class="col col-3 col-sm-2">Total</div>
+				    	</div>
+			    	</div>			    	
+			    	<div class="ticket-body">
+			    		<div class="row">
+				    		<div class="col col-9 col-sm-6 type-box">
+				    			<div class="info">For Single Person</div>
+				    			<div class="rate-info">Rs <amount>1,000</amount><span>(15 tickets remaining)</span></div>
+				    		</div>
+						    <div class="col col-6 col-sm-4 quantity-box">
+						    	<div class="inner-box">
+						    		<span class="plus">+</span>
+							    	<span class="qValue-txt">5</span>
+							    	<span class="minus">-</span>
+						    	</div>						    	
+						    </div>
+						    <div class="col col-3 col-sm-2 amt-box">15,000</div>
+				    	</div>
+				    	<div class="row">
+				    		<div class="col col-9 col-sm-6 type-box">
+				    			<div class="info">For Couples</div>
+				    			<div class="rate-info">Rs <amount>10,000</amount><span>(10 tickets remaining)</span></div>
+				    		</div>
+						    <div class="col col-6 col-sm-4 quantity-box">
+						    	<div class="inner-box">
+						    		<span class="plus">+</span>
+							    	<span class="qValue-txt">10</span>
+							    	<span class="minus">-</span>
+						    	</div>
+						    </div>
+						    <div class="col col-3 col-sm-2 amt-box">10,000</div>
+				    	</div>
+			    	</div>
+			    	<div class="ticket-total">
+			    		<div class="row">
+				    		<div class="col col-9 col-sm-8 text-right">Quantity <span class="tot-qty-txt">15</span></div>
+						    <div class="col col-6 col-sm-4 text-right">Grand Total <span class="tot-amt-txt">25,000</span></div>
+				    	</div>
+			    	</div>	
+			    	<div class="ticket-footer">			    	
+				    	<div class="row">  
+					        <div class="steps-form-footer">
+					        	<button class="btn nextBtn-2 float-right" type="button">Checkout</button>
+					        	<a href="javascript:;" class="tic-close-btn" data-dismiss="modal">Cancel</a>
+					    	</div>
+				    	</div>
+			    	</div>
+			    </div>
+
+			<!-- Second Step -->
+			    <div class="setup-content-2" id="step-2">		    	
+			    	<div class="participants-body">
+			    		<div class="col-md-12">
+				            <!-- <h5 class="font-weight-bold pl-0 my-4"><strong>Basic Information</strong></h5> -->
+				            <div class="form-group md-form">
+				                <label for="yourName" data-error="wrong" data-success="right">Name</label>
+				                <input id="yourName" type="text" required="required" class="form-control validate">
+				            </div>
+				            <div class="form-group md-form">
+				                <label for="yourEmail" data-error="wrong" data-success="right">Email</label>
+				                <input id="yourEmail" type="email" required="required" class="form-control validate">
+				            </div>				            
+				            <div class="form-group md-form">
+				                <label for="yourMobile" data-error="wrong" data-success="right">Mobile Number</label>
+				                <input id="yourMobile" type="number" required="required" class="form-control validate">
+				            </div>
+				        </div>
+			    	</div>
+
+			    	<div class="ticket-total">
+			    		<div class="row">
+				    		<div class="col col-9 col-sm-8 text-right">Quantity: <span class="tot-qty-txt">15</span></div>
+						    <div class="col col-6 col-sm-4 text-right">Grand Total <span class="tot-amt-txt">25,000</span></div>
+				    	</div>
+			    	</div>	
+			    	<div class="ticket-footer">			    	
+				    	<div class="row">  
+					        <div class="steps-form-footer">
+					        	<button class="btn btn-sm btn-back prevBtn-2 float-left" type="button">Back</button>
+					        	<button class="btn nextBtn-2 float-right" type="button">Checkout</button>
+					        	<a href="javascript:;" class="tic-close-btn" data-dismiss="modal">Cancel</a>
+					    	</div>
+				    	</div>
+			    	</div>			        
+			    </div> 
+
+			    <!-- Third Step -->
+			    <div class="setup-content-2" id="step-3">
+			        <div class="payments-body">
+			        	<div class="row">
+				    		<div class="col col-6 col-sm-6 payment-left">
+				    			<h5 class="pay-title"><strong>Choose your payment method</strong></h5>
+				    			<span class="title-info">(Click one of the option below)</span>
+				    			<ul class="payment-methods">
+				    				<li class="active">Debit Card</li>
+				    				<li class="selected">Credit Card</li>
+				    				<li>Net Banking</li>
+				    				<li>Wallet</li>
+				    			</ul>
+				    		</div>
+						    <div class="col col-6 col-sm-6 payment-right order-summary">
+							    <div class="row os-title">
+							     	<div class="col col-6 col-sm-7">
+							    		<h5 class="pay-title"><strong>Order Summary</strong></h5>
+							    	</div>
+								    <div class="col col-6 col-sm-5">
+								    	<div class="order-number">Order No: XXXXXXX</div>
+								    </div>
+							    </div>		
+							    <div class="row os-sub-title">
+							     	<div class="col col-6 col-sm-7">
+							    		Ticket Type
+							    	</div>
+								    <div class="col col-6 col-sm-5 text-center">
+								    	Qty
+								    </div>
+							    </div>
+							    <div class="ticket-details-final">
+							    	<div class="row t-item">
+								     	<div class="col col-6 col-sm-7 t-type">
+								    		Single Person (1500)
+								    	</div>
+									    <div class="col col-6 col-sm-5 t-qty text-center">
+									    	15
+									    </div>
+								    </div>
+								    <div class="row t-item">
+								     	<div class="col col-6 col-sm-7 t-type">
+								    		Couples (1000)
+								    	</div>
+									    <div class="col col-6 col-sm-5 t-qty text-center">
+									    	10
+									    </div>
+								    </div>
+							    </div>
+							    <div class="row coupon-box">
+							     	<div class="col col-12">
+							    		Have a Coupon Code?
+							    	</div>
+							    </div>
+							    <div class="row total-final-box">
+							     	<div class="col col-12 text-right">
+							    		Total <span class="final-amt-txt">25,000</span>
+							    	</div>
+							    </div>
+						    </div>
+				    	</div>			    		
+			    	</div>
+			    	<div class="ticket-footer">			    	
+				    	<div class="row">  
+					        <div class="steps-form-footer">
+					        	<button class="btn btn-sm btn-back prevBtn-2 float-left" type="button">Back</button>
+					        	<button class="btn nextBtn-2 float-right" type="button">Checkout</button>
+					        	<a href="javascript:;" class="tic-close-btn" data-dismiss="modal">Cancel</a>
+					    	</div>
+				    	</div>
+			    	</div>	
+			    </div>
+
+            </div>
+        </div>
+        <!-- /.modal-content -->
+    </div>
+    <!-- /.modal-dialog -->
+</div>
+<!-- /.modal -->
 
 <nav class="large-3 medium-4 columns" id="actions-sidebar">
 	<ul class="side-nav">
