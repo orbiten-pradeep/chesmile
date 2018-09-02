@@ -118,6 +118,7 @@ else {
 					    <p class="event-details">Lorem ipsum dolor sit amet, consectetuer adipiscing elit. Aenean commodo ligula eget dolor. Aenean massa. Cum sociis natoque penatibus et magnis dis parturient montes, nascetur ridiculus mus. Donec quam felis, ultricies nec, pellentesque eu, pretium quis, sem. Nulla consequat massa quis enim. Donec pede justo, fringilla vel, aliquet nec, vulputate eget, arcu. In enim justo, rhoncus ut, imperdiet a, venenatis vitae, justo. Nullam dictum felis eu pede mollis pretium. Integer tincidunt. Cras dapibus. Vivamus elementum semper nisi. Aenean vulputate eleifend tellus. Aenean leo ligula, porttitor eu, consequat vitae, eleifend ac, enim. Aliquam lorem ante, dapibus in, viverra quis, feugiat a</p>
 					</div>
 				</div>
+
 			</div>
 		</div>
 		<div class="col-md-3 mb-4">
@@ -156,12 +157,13 @@ else {
 		    		<p><i class="fa fa-eye" aria-hidden="true"></i><span class="rs-details">1k People Viewed</span></p>
 		    	</div>
 			</div>
-			<?php if(isset($event->google_map) && !empty($event->google_map)) { $geoCode = $event->google_map; ?>
+			<?php if(isset($event->google_map) && !empty($event->google_map)) { $geoCode = $event->google_map; } else { $geoCode = '13.0595365, 80.24247919999993'; } ?>
+
 			<div class="d-flex flex-column">
 			    <div class="p-4 mb-4 flex-cont rounded cs_details_mapblock">
-			    	<div style='overflow:hidden;height:220px;width:100%;'>
-			    		<div id='gmap_canvas' style='height:220px;width:700px;'> </div>
-			    	</div>
+			    	<address>
+						<script src='https://maps.googleapis.com/maps/api/js?v=3.exp'></script><div style='overflow:hidden;height:330px;width:100%;'><div id='gmap_canvas2' style='height:330px;width:100%;'></div><div><small><a href="http://embedgooglemaps.com">embed google maps</a></small></div><div><small><a href="https:/disclaimergenerator.net">disclaimer example</a></small></div><style>#gmap_canvas2 img{max-width:none!important;background:none!important}</style></div><script type='text/javascript'>function init_map2(){var myOptions = {zoom:10,center:new google.maps.LatLng(<?=$geoCode;?>),mapTypeId: google.maps.MapTypeId.ROADMAP};map = new google.maps.Map(document.getElementById('gmap_canvas2'), myOptions);marker = new google.maps.Marker({map: map,position: new google.maps.LatLng(<?=$geoCode;?>)});}google.maps.event.addDomListener(window, 'load', init_map2);</script>
+					</address>
 			    	<p>
 						<?php echo (isset($address->address_1) && empty(!$address->address_1)) ? $address->address_1. ", " : ''; ?>
 						<?php echo (isset($address->address_2) && empty(!$address->address_2)) ? $address->address_2. ", " : ''; ?>
@@ -170,9 +172,6 @@ else {
 					</p>
 				</div>
 			</div>
-			<?php } else { $geoCode = '13.0595365, 80.24247919999993'; } ?>
-			<input type="hidden" name="geoCode" id="geoCode" value="<?php echo $geoCode; ?>">
-
 
 			<div class="d-flex flex-column">
 			    <div class="p-4 mb-4 flex-cont rounded cs_details_advertblock">

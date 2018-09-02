@@ -1,18 +1,5 @@
-function init_map() {
-    var geoCode = $("#geoCode").val();
-    var myOptions = {
-        zoom:15,
-        center:new google.maps.LatLng(geoCode),
-        mapTypeId: google.maps.MapTypeId.ROADMAP
-    };
-    map = new google.maps.Map(document.getElementById('gmap_canvas'), myOptions);
-    marker = new google.maps.Marker({
-        map: map,
-        position: new google.maps.LatLng(geoCode)
-    });
-}
-
 $(document).ready(function() {
+
     $('#date').datepicker({
         changeMonth: true,
         changeYear: true,
@@ -55,9 +42,6 @@ $(document).ready(function() {
         $('.nav-tabs > .nav-item').next('li.nav-item').next('li.nav-item').find('a').trigger('click');
     });
 
-    if($("#geoCode")) {
-        google.maps.event.addDomListener(window, 'load', init_map);
-    }
 
     if($('.other-category')) {
         $('.other-category').select2();
