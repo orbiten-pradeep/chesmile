@@ -99,8 +99,9 @@
                           <div class="avatar">
                             <?php
                               $user = $this->request->session()->read('Auth.User');
+                              $imgPath  = WWW_ROOT . "img/profile/".$user['Photo'];
 
-                              if(!empty($user['Photo']) && file_exists(WWW_ROOT . 'img\profile\/'.$user['Photo'])) {
+                              if(!empty($user['Photo']) && file_exists($imgPath)) {
                                   echo $this->Html->image('profile/'.$user['Photo'],array('alt' => 'Profile Picture','class' => 'img-fluid rounded-circle','width' => '60px', 'height' => '60px','onclick' => 'largedrop()'));
                               }
                               else {
@@ -152,8 +153,8 @@
                       <div class="avatar">
                       <?php
                       $user = $this->request->session()->read('Auth.User');
-
-                      if(!empty($user['Photo']) && file_exists(WWW_ROOT . 'img\profile\/'.$user['Photo'])) {
+                      $imgPath  = WWW_ROOT . "img/profile/".$user['Photo'];
+                      if(!empty($user['Photo']) && file_exists($imgPath)) {
                         echo $this->Html->image('profile/'.$user['Photo'],array('alt' => 'Profile Picture','class' => 'img-fluid rounded-circle','width' => '60px', 'height' => '60px','onclick' => 'largedrop()'));
                       } else {
                         echo $this->Html->image('profile_thumbnail.jpg',array('alt' => 'Profile Picture','class' => 'img-fluid rounded-circle','onclick' => 'largedrop()'));
