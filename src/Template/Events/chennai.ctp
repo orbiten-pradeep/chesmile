@@ -43,7 +43,7 @@ else {
 <div class="container">
 	<div class="row">
 		<div class="col-md-8 mb-4">
-		  <ul class="breadcrumb" style="background-color: transparent; margin-bottom: -1rem;">
+		  <ul class="breadcrumb" style="background-color: transparent;">
     <li class="breadcrumb-item"><a href="http://www.chennaismile.com/events">Home</a></li>
     <li class="breadcrumb-item"><a href="#">Category</a></li>
     <li class="breadcrumb-item"><a href="#">Events</a></li>
@@ -110,13 +110,27 @@ else {
 					<?php if(isset($event->descriptioin) && !empty($event->descriptioin)) { ?>
 					<div class="p-4 mb-4 flex-cont rounded cs_details_block">
 					    <h5 class="cs-title">Event Details</h5>
-					    <p ><?php echo $this->Text->autoParagraph(h($event->descriptioin),array('class' => 'event-details'));?></p>
+					    <h6 class="event-details" "><?php echo $this->Text->autoParagraph(h($event->descriptioin),array('class' => 'event-details'));?></h6>
 					</div>
 					<?php } ?>
 					<div class="p-4 mb-4 flex-cont rounded cs_details_block">
 					    <h5 class="cs-title">Terms & Conditions</h5>
 					    <p class="event-details">Lorem ipsum dolor sit amet, consectetuer adipiscing elit. Aenean commodo ligula eget dolor. Aenean massa. Cum sociis natoque penatibus et magnis dis parturient montes, nascetur ridiculus mus. Donec quam felis, ultricies nec, pellentesque eu, pretium quis, sem. Nulla consequat massa quis enim. Donec pede justo, fringilla vel, aliquet nec, vulputate eget, arcu. In enim justo, rhoncus ut, imperdiet a, venenatis vitae, justo. Nullam dictum felis eu pede mollis pretium. Integer tincidunt. Cras dapibus. Vivamus elementum semper nisi. Aenean vulputate eleifend tellus. Aenean leo ligula, porttitor eu, consequat vitae, eleifend ac, enim. Aliquam lorem ante, dapibus in, viverra quis, feugiat a</p>
 					</div>
+
+
+						<div class="p-4 mb-4 flex-cont rounded z-depth-1">
+						    <h5 class="cs-title">Mediapartner Logo</h5>
+							<?php echo $this->Html->image('cover_pic.jpg',array('alt' => 'Cs-Static','class' => 'thumb' )); ?>
+							 <!-- <?= $this->Form->input('Mediapartners[]',['type' => 'file','name' =>'image_file_arr[]', 'label' => false,'multiple' => 'true','id'=>'files','accept' => 'image/*']);?><output id="list"></output> -->
+						</div>
+
+						<div class="p-4 mb-4 flex-cont rounded z-depth-1">
+						    <h5 class="cs-title">Sponsors Logo</h5>
+						    <?php echo $this->Html->image('cover_pic.jpg',array('alt' => 'Cs-Static','class' => 'thumb' )); ?>
+						    <!-- <?=$this->Form->input('Sponsors[]',['type' => 'file','label' => false, 'multiple' => 'true','id'=>'files1','accept' => 'image/*']);?> -->
+						</div>
+
 				</div>
 
 			</div>
@@ -157,11 +171,22 @@ else {
 		    		<p><i class="fa fa-eye" aria-hidden="true"></i><span class="rs-details">1k People Viewed</span></p>
 		    	</div>
 			</div>
+
+	<div class="d-flex flex-column">
+			    <div class="org-padd mb-4 flex-cont rounded cs_details_orgblock">
+			    	
+ <p style="font-weight: bold">Organizer Details</p>
+ 	<p class="event-details"><?php echo $this->Html->image('cover_pic.jpg',array('alt' => 'Cs-Static','class' => 'org-img','id' => 'orgtarget' )); ?><br> Conducted By: <?php echo h($event->OrganizersName); ?></p>
+			    	
+				</div>
+			</div>
+
 			<?php if(isset($event->google_map) && !empty($event->google_map)) { $geoCode = $event->google_map; } else { $geoCode = '13.0595365, 80.24247919999993'; } ?>
 
 			<div class="d-flex flex-column">
-			    <div class="p-4 mb-4 flex-cont rounded cs_details_mapblock">
-			    	<address>
+			   <!--  <div class="p-4 mb-4 flex-cont rounded cs_details_mapblock">-->
+			      <div class="mb-4 flex-cont rounded cs_details_mapblock">
+			   	<address>
 						<script src='https://maps.googleapis.com/maps/api/js?v=3.exp'></script><div style='overflow:hidden;height:330px;width:100%;'><div id='gmap_canvas2' style='height:330px;width:100%;'></div><div><small><a href="http://embedgooglemaps.com">embed google maps</a></small></div><div><small><a href="https:/disclaimergenerator.net">disclaimer example</a></small></div><style>#gmap_canvas2 img{max-width:none!important;background:none!important}</style></div><script type='text/javascript'>function init_map2(){var myOptions = {zoom:10,center:new google.maps.LatLng(<?=$geoCode;?>),mapTypeId: google.maps.MapTypeId.ROADMAP};map = new google.maps.Map(document.getElementById('gmap_canvas2'), myOptions);marker = new google.maps.Marker({map: map,position: new google.maps.LatLng(<?=$geoCode;?>)});}google.maps.event.addDomListener(window, 'load', init_map2);</script>
 					</address>
 			    	<p>
@@ -169,6 +194,8 @@ else {
 						<?php echo (isset($address->address_2) && empty(!$address->address_2)) ? $address->address_2. ", " : ''; ?>
 						<?php echo (isset($address->landmark) && empty(!$address->landmark)) ? $address->landmark. ", " : ''; ?>
 						<?php echo (isset($address->areaname) && empty(!$address->areaname)) ? $address->areaname : ''; ?>
+						<?php echo h($event->contact_number); ?>
+						<?php echo h($event->mobile_number); ?>
 					</p>
 				</div>
 			</div>
