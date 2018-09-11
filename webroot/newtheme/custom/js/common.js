@@ -78,6 +78,54 @@ $(function () {
   $('[data-toggle="tooltip"]').tooltip()
 })
 
+//Ticket Functioning
+$(document).ready(function () {
+  var ticket = {};
+  ticket.adultCnt = 1;
+  ticket.childCnt = 0;
+  ticket.totalCnt = 1;
+  ticket.adultAmount = $("#tAmtAd").val();
+  ticket.childAmount = $("#tAmtCh").val();
+  ticket.totalAmount = $("#tAmtAd").val();
+
+  $(".ticPlus").click(function() {
+      var actValue = $(this).parent().parent().parent().attr('data-attr');
+      if(actValue == "adult") {
+        ticket.adultCnt = ticket.adultCnt + 1;
+        ticket.totalCnt = ticket.adultCnt + ticket.childCnt;
+        $(this).parent().find('.qValue-txt').html(ticket.adultCnt);
+        $('.tot-qty-txt').html(ticket.totalCnt);
+      } 
+      else {
+        ticket.childCnt = ticket.childCnt + 1;
+        ticket.totalCnt = ticket.adultCnt + ticket.childCnt;
+        $(this).parent().find('.qValue-txt').html(ticket.childCnt);
+        $('.tot-qty-txt').html(ticket.totalCnt);
+      }
+  });
+
+  $(".ticMinus").click(function() {
+      var actValue = $(this).parent().parent().parent().attr('data-attr');
+      if(actValue == "adult") {
+        if(ticket.adultCnt > 1) {
+          ticket.adultCnt = ticket.adultCnt - 1;
+          ticket.totalCnt = ticket.adultCnt + ticket.childCnt;
+          $(this).parent().find('.qValue-txt').html(ticket.adultCnt);
+          $('.tot-qty-txt').html(ticket.totalCnt);
+        }        
+      } 
+      else {
+        if(ticket.childCnt > 0) {
+          ticket.childCnt = ticket.childCnt - 1;
+          ticket.totalCnt = ticket.adultCnt + ticket.childCnt;
+          $(this).parent().find('.qValue-txt').html(ticket.childCnt);
+          $('.tot-qty-txt').html(ticket.totalCnt);
+        }
+      }
+  });
+
+});
+
 // Steppers
 $(document).ready(function () {
   var navListItems = $('div.setup-panel-2 div a'),

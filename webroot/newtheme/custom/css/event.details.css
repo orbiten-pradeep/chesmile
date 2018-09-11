@@ -315,6 +315,11 @@ font-size: 18px;
     border: 1px solid #615e5e;
     padding: 0px 6px;
 }
+.ticket-body .quantity-box .plus:hover, .ticket-body .quantity-box .plus:active {
+    cursor: pointer;
+    background-color: #615e5e;
+    color: #fff;
+}
 .ticket-body .quantity-box .qValue-txt {
     border: 1px solid #615e5e;
     padding: 2px 6px;
@@ -329,6 +334,11 @@ font-size: 18px;
 .ticket-body .quantity-box .minus {
     border: 1px solid #615e5e;
     padding: 0px 8px;
+}
+.ticket-body .quantity-box .minus:hover, .ticket-body .quantity-box .minus:active {
+    cursor: pointer;
+    background-color: #615e5e;
+    color: #fff;
 }
 .ticket-body .amt-box {
     color: #FD7809;

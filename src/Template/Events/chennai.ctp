@@ -12,6 +12,14 @@ if(!empty($bgImage)){
 else {
 	$bgCoverImg = $this->Url->image('cover_pic.jpg');
 }
+
+
+function asRupees($value) {
+  return '₹ '.number_format($value);
+}
+
+$eventPriceFormatted = (!empty($event->price)) ? asRupees($event->price) : 0; 
+
 ?>
 
 <div class="col-md-12 col-xs-12 mb-4 pr-0 pl-0">
@@ -44,11 +52,11 @@ else {
 	<div class="row">
 		<div class="col-md-8 mb-4">
 		  <ul class="breadcrumb" style="background-color: transparent;">
-    <li class="breadcrumb-item"><a href="http://www.chennaismile.com/events">Home</a></li>
-    <li class="breadcrumb-item"><a href="#">Category</a></li>
-    <li class="breadcrumb-item"><a href="#">Events</a></li>
-    <li class="breadcrumb-item active">Current</li>
-  </ul>
+		    <li class="breadcrumb-item"><a href="http://www.chennaismile.com/events">Home</a></li>
+		    <li class="breadcrumb-item"><a href="#">Category</a></li>
+		    <li class="breadcrumb-item"><a href="#">Events</a></li>
+		    <li class="breadcrumb-item active">Current</li>
+		  </ul>
 
 			<div class="col-md-14 cs_banner_container mb-5">
 				<?php $bgImage = $event->banner;
@@ -71,10 +79,12 @@ else {
 			<div class="col-md-12 pr-0 pl-0">
 				<div class="d-flex flex-column cs_right_details_mob">
 				    <div class="p-4 mb-4 flex-cont rounded ">
+				    	<?php if($event->register_online == 1) { ?>
 				    	<div class="text-center">
-					    	<h5>₹ 700</h5>
+					    	<h5><?php echo $eventPriceFormatted; ?></h5>
 					    	<a href="javascript:;" class="btn buy-btn" data-toggle="modal" data-target="#get-ticket-modal">Get Tickets</a>
 				    	</div>
+				    	<?php } ?>
 				    	<div class="cs-details">
 				    		<?php if(!empty($address) && isset($address->areaname)) { ?>
 				    		<p>
@@ -138,10 +148,13 @@ else {
 		<div class="col-md-3 mb-4">
 			<div class="d-flex flex-column cs_right_details_desk">
 			    <div class="p-4 mb-4 flex-cont rounded cs_details_rightblock">
-			    <div class="text-center">
-					    	<h5>₹ 700</h5>
-					    	<a href="javascript:;" class="btn buy-btn" data-toggle="modal" data-target="#get-ticket-modal">Get Tickets</a>
-				    	</div>
+			    	<?php if($event->register_online == 1) { ?>
+			    	<div class="text-center">
+				    	<h5><?php echo $eventPriceFormatted; ?></h5>
+				    	<a href="javascript:;" class="btn buy-btn" data-toggle="modal" data-target="#get-ticket-modal">Get Tickets</a>
+			    	</div>
+			    	<?php } ?>
+
 		    		<?php if(!empty($address) && isset($address->areaname)) { ?>
 		    		<p>
 		    			<i class="fa fa-map-marker"></i>
@@ -222,6 +235,9 @@ else {
     <div class="modal-dialog">
         <div class="modal-content">
             <div class="modal-body">
+            	<input type="hidden" id="tAmt" name="tAmt" value="<?php echo $event->price; ?>">
+            	<input type="hidden" id="tAmtAd" name="tAmtAd" value="<?php echo $event->price; ?>">
+            	<input type="hidden" id="tAmtCh" name="tAmtCh" value="<?php echo $event->price; ?>">
             	<div class="e-full">
             		<div class="e-parent">
 	            	<p class="e-title"><span><?= h($event->title) ?></span></p>
@@ -253,39 +269,39 @@ else {
 				    	</div>
 			    	</div>			    	
 			    	<div class="ticket-body">
-			    		<div class="row">
+			    		<div class="row" data-attr="adult">
 				    		<div class="col col-9 col-sm-6 type-box">
-				    			<div class="info">For Single Person</div>
-				    			<div class="rate-info">Rs <amount>1,000</amount><span>(15 tickets remaining)</span></div>
+				    			<div class="info">For Adult</div>
+				    			<div class="rate-info"><amount><?php echo $eventPriceFormatted; ?></amount><span>(15 tickets remaining)</span></div>
 				    		</div>
 						    <div class="col col-6 col-sm-4 quantity-box">
-						    	<div class="inner-box">
-						    		<span class="plus">+</span>
-							    	<span class="qValue-txt">5</span>
-							    	<span class="minus">-</span>
+						    	<div class="inner-box adult">
+						    		<span class="plus ticPlus">+</span>
+							    	<span class="qValue-txt">1</span>
+							    	<span class="minus ticMinus">-</span>
 						    	</div>						    	
 						    </div>
-						    <div class="col col-3 col-sm-2 amt-box">15,000</div>
+						    <div class="col col-3 col-sm-2 amt-box"><?php echo $eventPriceFormatted; ?></div>
 				    	</div>
-				    	<div class="row">
+				    	<div class="row" data-attr="child">
 				    		<div class="col col-9 col-sm-6 type-box">
-				    			<div class="info">For Couples</div>
-				    			<div class="rate-info">Rs <amount>10,000</amount><span>(10 tickets remaining)</span></div>
+				    			<div class="info">For Children</div>
+				    			<div class="rate-info"><amount><?php echo $eventPriceFormatted; ?></amount><span>(10 tickets remaining)</span></div>
 				    		</div>
 						    <div class="col col-6 col-sm-4 quantity-box">
-						    	<div class="inner-box">
-						    		<span class="plus">+</span>
-							    	<span class="qValue-txt">10</span>
-							    	<span class="minus">-</span>
+						    	<div class="inner-box child">
+						    		<span class="plus ticPlus">+</span>
+							    	<span class="qValue-txt">0</span>
+							    	<span class="minus ticMinus">-</span>
 						    	</div>
 						    </div>
-						    <div class="col col-3 col-sm-2 amt-box">10,000</div>
+						    <div class="col col-3 col-sm-2 amt-box"><?php echo asRupees(0); ?></div>
 				    	</div>
 			    	</div>
 			    	<div class="ticket-total">
 			    		<div class="row">
-				    		<div class="col col-9 col-sm-8 text-right">Quantity <span class="tot-qty-txt">15</span></div>
-						    <div class="col col-6 col-sm-4 text-right">Grand Total <span class="tot-amt-txt">25,000</span></div>
+				    		<div class="col col-9 col-sm-8 text-right">Quantity <span class="tot-qty-txt">1</span></div>
+						    <div class="col col-6 col-sm-4 text-right">Grand Total <span class="tot-amt-txt"><?php echo $eventPriceFormatted; ?></span></div>
 				    	</div>
 			    	</div>	
 			    	<div class="ticket-footer">			    	
@@ -298,7 +314,7 @@ else {
 			    	</div>
 			    </div>
 
-			<!-- Second Step -->
+				<!-- Second Step -->
 			    <div class="setup-content-2" id="step-2">		    	
 			    	<div class="participants-body">
 			    		<div class="col-md-12">
