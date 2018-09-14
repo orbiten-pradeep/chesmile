@@ -1,0 +1,126 @@
+/*.input-wid{
+    width:90% !important;
+}*/
+.date-input{
+    width: 90px !important;
+}
+.btn{
+    box-shadow: none !important;
+}
+.sub-but{
+ /*margin-left: 120px !important;*/
+    margin-top: -28px !important;
+}
+.modal-foot{
+    background-color: #4abac5;
+}
+.cs_details_rightblock-add {
+    margin-top: 21px;
+    height: 390px;
+}
+.cs_banner_bg-add {
+    margin-top: -25px !important;
+    }
+ .cs-tag-title-add {
+    position: absolute;
+    bottom: 53px;
+    color: white !important;
+    margin-left: -98px;
+}
+ .cs-tag-titlemob-add{
+    position: absolute;
+    bottom: 180px;
+    color: white !important;
+}
+.imgeff{
+    width: 100%;
+    height: 400px;
+    opacity: 1;
+  display: block;
+  transition: .5s ease;
+  backface-visibility: hidden;
+}
+.title-form{
+    margin-bottom: 40px!important;
+    width: 1000px;
+    border-bottom: 1px solid #ffffff !important;
+    color: #ffffff !important;
+}
+.title-formmob{
+width: 300px;
+}
+.middle {
+    font-weight: bold;
+    color: white;
+  transition: .5s ease;
+  opacity: 0;
+  position: absolute;
+  top: 20%;
+  left: 50%;
+  transform: translate(-50%, -50%);
+  -ms-transform: translate(-50%, -50%);
+  text-align: center;
+}
+.dispmiddle {
+    font-weight: bold;
+    color: white;
+  transition: .5s ease;
+  opacity: 0;
+  position: absolute;
+  top: 20%;
+  left: 50%;
+  transform: translate(-50%, -50%);
+  -ms-transform: translate(-50%, -50%);
+  text-align: center;
+}
+.contain:hover .image {
+  opacity: 0.3;
+}
+
+.contain:hover .middle {
+  opacity: 1;
+}
+.contain:hover .dispmiddle {
+  opacity: 1;
+}
+.org-img{
+    width: 160px;
+    height: 120px;
+}
+.thumb {
+    border-radius: 5px;
+    border: 1px solid #fff;
+    width:80px;
+    height: 80px;
+    margin: 0.2em -0.7em 0 0;
+}
+.remove_img_preview {
+    position:relative;
+    top:-25px;
+    right:5px;
+    background:black;
+    color:white;
+    border-radius:50px;
+    font-size:0.9em;
+    padding: 0 0.3em 0;
+    text-align:center;
+    cursor:pointer;
+}
+.remove_img_preview:before {
+    content: "×";}
+/*.event-details-add{
+    font-size: 14px!important;
+}*/
+/*.tagline-add{
+    margin-top: 20px;
+}*/
+ .cs-tag-title-add{
+     position: absolute;
+     bottom: 20px;
+}
+.cs_details_orgblock{
+    padding: 14px;
+  /*   width:300px;*/
+     /*height: 200px;*/
+   /*  border: 1px solid #d4d4d4;*/
+}

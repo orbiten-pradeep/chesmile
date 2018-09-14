@@ -1,153 +1,112 @@
-<style type="text/css">
-	.cs-add-form{
-		background-color: #4ABAC6;
-	}
-	.cs_add_form_col{
-		margin: 0 auto;
-	}
-	.cs_add_form_col input.form-control{
-		color: white !important;
-	}
-	/*.cs_add_form_col select.form-control{
-		color: white !important;
-	}*/
-
-	.cs_add_form_col input::-webkit-input-placeholder {
-	color: white !important;
-	}
-	 
-	.cs_add_form_col input:-moz-placeholder { /* Firefox 18- */
-	color: white !important;  
-	}
-	 
-	.cs_add_form_col input::-moz-placeholder {  /* Firefox 19+ */
-	color: white !important;  
-	}
-	 
-	.cs_add_form_col input:-ms-input-placeholder {  
-	color: white !important;  
-	}
-
-	.cs_add_form_col textarea::-webkit-input-placeholder {
-	color: white !important;
-	}
-	 
-	.cs_add_form_col textarea:-moz-placeholder { /* Firefox 18- */
-	color: white !important;  
-	}
-	 
-	.cs_add_form_col textarea::-moz-placeholder {  /* Firefox 19+ */
-	color: white !important;  
-	}
-	 
-	.cs_add_form_col textarea:-ms-input-placeholder {  
-	color: white !important;  
-	}
-	.cs_add_form_col label{
-		color: white;
-	}
-	.imgeff{
-		width:1600px !important;
-		height: 400px !important;
-	}
-	.imgdisp{
-		width:500px !important;
-		height: 300px !important;
-	}
-	.text-block {
-    position: absolute;
-    bottom: 20px;
-    left: 20px;
-    background-color: #80808005;
-    color: white;
-    padding-left: 20px;
-    padding-right: 20px;
-
-}
-</style>
-
-
-<script type="text/javascript">
-	$('.launch-map').on('click', function () {
-		var loc = $("#landmark").val() + $("#areaname").val();
-		$("#city_country").val(loc);
-	    $('#myModal').modal({
-	        backdrop: 'static',
-	        keyboard: false
-	    }).on('shown.bs.modal', function () {
-	        codeAddress();
-	    });
-	});
-</script>
- <?php 
+<?php 
 use Cake\Routing\Router;
+use Cake\I18n\Time;
 ?>
-<?= $this->Form->create($event,array('id' => 'createEvent','type' => 'file','novalidate' => true)) ?>
+
+<?= $this->Form->create($event,array('id' => 'createEvent','name' => 'createEvent','type' => 'file','onsubmit'=>'return validateForm()', 'method' =>'post','novalidate' => true)) ?>
 <?= $this->Form->hidden('user_id', ['options' => $users,'default'=> $users_id]);?>
 <?= $this->Form->hidden('active');?>
-<!-- <?= $this->Form->create($event,array('id' => 'createEvent','type' => 'file','novalidate' => true)) ?>
-<?= $this->Form->hidden('user_id', ['options' => $users,'default'=> $users_id]);?>-->
- <div class="col-md-12 col-xs-12 mb-4 pr-0 pl-0">
-	 <?php echo $this->Html->image('cs-static-banner.jpg',array('alt' => 'Cs-Static','class' => 'imgeff img-fluid z-depth-1','id' => 'target')); ?>
+
+<div class="col-md-12 col-xs-12 mb-4 pr-0 pl-0 contain">
+	<?php echo $this->Html->image('cs-static-banner.jpg',array('alt' => 'Cs-Static','class' => 'imgeff img-fluid static-banner','id' => 'target')); ?>
 	<div class="text-block">
-    <?=$this->Form->input('banner',['type' => 'file','label' => false,'accept' => 'image/*','onchange' => 'putImage()', 'class' => 'cropit-image-input']);?>
+    <?=$this->Form->input('banner',['type' => 'file','label' => false,'accept' => 'image/*','onchange' => 'putImage()', 'class' => 'img-fluid static-banner', 'required']);?>
+	
+	<div class="middle">
 	<p>Banner Image</p>
+  <!--  <?=$this->Form->input('banner',['type' => 'file','label' => false,'accept' => 'image/*','onchange' => 'putImage()', 'class' => 'img-fluid static-banner']);?> -->
   </div>
+  </div>
+	<div class="desk-container">
+		<div class="container">
+			<div class="cs-tag-title-add">
+			
+					<div class="md-form">
+         		<?php echo $this->Form->input('title',array('label' => 'Event Title','div' => false,'id' => 'title', 'class' => 'form-control title-form', 'placeholder' => 'Please enter your event title')); ?>
+     		</div>
+			</div>
+		</div>
+	</div>
+	<!-- <div class="mob-container">
+		<div class="container">
+			<div class="cs-tag-titlemob-add">
+				<div class="md-form">
+         		<?php echo $this->Form->input('title',array('label' => 'Event Title','div' => false, 'class' => 'form-control title-formmob', 'placeholder' => 'Please enter your event title')); ?>
+     		</div>
+			</div>
+		</div>
+	</div>  -->
 </div>
+
 <div class="container">
 	<div class="row">
 		<div class="col-md-8 mb-4">
-			<div class="md-form">
-         		<?php echo $this->Form->input('title',array('label' => 'Event Title','div' => false,'id' => 'title', 'class' => 'form-control', 'placeholder' => 'Please enter your event title')); ?>
-     		</div>
-     		<div class="md-form">
-		         				<?=  $this->Form->input('OrganizersName',array('label' => 'Organizers name','div' => false,'class' => 'form-control','placeholder' => 'Please enter Organizer Name'));?>
-		     				</div>	
-		     				<div class="md-form">
-		         				<?=  $this->Form->input('categories_id',array('div' => false,'class' => 'form-control','options' => $categories_list, 'onChange' => 'checkForOther(this);', 'empty' => '(Select Categories)','label' => false));?>
+		<div class="col-md-14 cs_banner_container mb-5 contain">
+		<?php echo $this->Html->image('cover_pic.jpg',array('alt' => 'Cs-Static','class' => 'img-fluid z-depth-1 rounded cs_banner_bg','id' => 'disptarget' )); ?>
+		<div class="dispmiddle btn btn-secondary">
+		<?=$this->Form->input('display',['type' => 'file','label' => false,'accept' => 'image/*','id' =>'display','onchange' => 'putDispImage()', 'class' => '', 'required']);?>
+   <p>Display Image</p>
+</div>
+			</div>
+		<div class="col-md-12 pr-0 pl-0">
+				<div class="d-flex flex-column cs_right_details_mob">
+				    <div class="p-4 mb-4 flex-cont rounded ">
+				    	<div class="text-center">
+					    	<!-- <h5>₹ 700</h5> -->
+					    	<a href="javascript:;" class="btn buy-btn" data-toggle="modal" data-target="#modalSubscriptionForm">Get Tickets</a>
+				    	</div>
+
+<!--Grid row-->
+                <div class="row">
+                <div class="md-form rs-details-bold "> <i class="fa fa-map-marker prefix" style="font-size:23px;"></i><?php echo $this->Form->input('areaname', array('id' => 'Autocomplete', 'required','class' => 'form-control','placeholder' => 'Areaname','style'=>'margin-left:15px;'));?></div>
+
+                    <!--Grid column-->
+                    <div class="col-md-6">
+                        <div class="md-form mb-0 rs-details-bold"><span><i class="fa fa-calendar prefix" style="font-size:20px; margin-left: -20px; top:15px;"></i></span>
+                         
+                        <?= $this->Form->input('date', array('type' => 'text','id' => 'date','class' => 'form-control datepicker date-input','placeholder' => 'From Date'));?>
+                        </div>
+                    </div>
+                    <!--Grid column-->
+
+                    <!--Grid column-->
+                    <div class="col-md-6">
+                        <div class="md-form mb-0 rs-details-bold ">
+                      <!--   <?= $this->Form->input('todate', array('type' => 'text','class' => 'form-control datepicker date-input','placeholder' => 'To Date'));?> -->
+                            <input type="text" id="email" name="email" class="form-control" placeholder="To Date">
+                            <label for="email" class="">To Date</label>
+                        </div>
+                    </div>
+
+                     <!--Grid column-->
+                    <div class="col-md-6">
+                        <div class="md-form mb-0 rs-details-bold">
+                        <i class="fa fa-clock-o prefix" style="font-size:20px; margin-left: -20px; top:15px;"></i>
+                        <?= $this->Form->input('time', array('type' => 'text','class' => 'form-control datepicker date-input','placeholder' => 'From Time'));?>
+                        </div>
+                    </div>
+                    <!--Grid column-->
+
+                    <!--Grid column-->
+                    <div class="col-md-6">
+                        <div class="md-form mb-0 rs-details-bold ">
+                       <!--  <?= $this->Form->input('totime', array('type' => 'text','class' => 'form-control datepicker date-input','placeholder' => 'To Time'));?> -->
+                            <input type="text" id="email" name="email" class="form-control" placeholder="To Time">
+                            <label for="email" class="">To Time</label>
+                        </div>
+                    </div>
+</div></div>
+				    </div>
+				<div class="md-form">
+		         				<?=  $this->Form->input('categories_id',array('div' => false,'class' => 'form-control','options' => $categories_list, 'onChange' => 'checkForOther(this);', 'empty' => '(Select Categories)','label' => false, 'required'));?>
 		     				</div>
 		     				<div class="md-form">
 		     					<div id="subdiv" class="form-group" style="display: none;">
 		         					<?=$this->Form->input('Eventsubcategories.sub_categories',array( 'subcategory_id'=>'', 'class' => 'form-control','options' => $subCategories, 'multiple' => 'true', 'empty' => '(choose one)','label' => false,'empty' => false));?>
 		         				</div>
 		     				</div>
-<div class="md-form">
-     		
-<?php echo $this->Html->image('cs-static-banner.jpg',array('alt' => 'Cs-Static','class' => 'imgdisp img-fluid z-depth-1 rounded mb-4','id' => 'disptarget' )); ?>
-	<div class="text-block">
-		<?=$this->Form->input('display',['type' => 'file','label' => false,'accept' => 'image/*','id' =>'display','onchange' => 'putDispImage()', 'class' => 'cropit-image-input']);?>
-   <p>Display Image</p>
-</div>
-</div>
-			<!-- <?php $bgImage = $event->banner;
-			if(!empty($bgImage)){
-	 			echo $this->Html->image('banner/'.$bgImage,array('alt' => 'Cs-Static','class' => 'img-fluid z-depth-1 rounded mb-4')); 
-			}
-			else {
-	 			echo $this->Html->image('cover_pic.jpg',array('alt' => 'Cs-Static','class' => 'img-fluid z-depth-1 rounded mb-4')); 
-			}	?> -->
-			<div class="md-form">
-		     					<?= $this->Form->input('contact_number',array('div' => false, 'label' => 'Contact Number','class' => 'form-control','placeholder' => 'Enter Contact Number'));?>
-		     				</div>
-		     				<div class="md-form">
-		     					<?= $this->Form->input('mobile_number',array('id' => 'mobile_number', 'div' => false,'label' => 'Mobile Number','class' => 'form-control','placeholder' => 'Enter Mobile Number'));?>
-		     				</div>
-		     				<div class="md-form">
-				     			<span>Organizer Logo</span>
-				     			<?=$this->Form->input('OrganizersLogo',['type' => 'file','label' => false,'id' => 'org','accept' => 'image/*','class' => 'cropit-image-input']);?>
-				     		</div>
-				     		<div class="md-form">
-				     			<span>Mediapartner Logo</span>
-				     			<?= $this->Form->input('Mediapartners[]',['type' => 'file', 'label' => false,'multiple' => 'true','id'=>'files','accept' => 'image/*']);?>
-				     		</div>
-				     		<div class="md-form">
-				     			<span>Sponsors Logo</span>
-				     			<?=$this->Form->input('Sponsors[]',['type' => 'file','label' => false, 'multiple' => 'true','id'=>'files1','accept' => 'image/*']);?>
-				     		</div></br>
-			<div class="row">
-				<div class="col-md-12">
-					<div class="d-flex flex-column">
-						<div class="p-4 mb-4 flex-cont cs-descr-box rounded z-depth-1">
+				<div class="d-flex flex-column">
+				<div class="p-4 mb-4 flex-cont cs-descr-box rounded z-depth-1">
 						    <h5 class="cs-title">Event Details</h5>
 						    <?= $this->Form->input('descriptioin',array('div' => false, 'label' => false,'class' => 'form-control md-textarea','placeholder' => 'Description about your event','rows' => '4', 'cols' => '50', 'resize'=> 'none','required' => true));?>
 						</div>
@@ -155,77 +114,306 @@ use Cake\Routing\Router;
 						    <h5 class="cs-title">Terms & Conditions</h5>
 						    <?= $this->Form->input('descriptioin',array('div' => false, 'label' => false,'class' => 'form-control md-textarea','placeholder' => 'Terms and conditions if any','rows' => '4', 'cols' => '50', 'resize'=> 'none' ));?>
 						</div>
-					</div>
-				</div>
+
+						<div class="p-4 mb-4 flex-cont rounded z-depth-1">
+						    <h5 class="cs-title">Mediapartner Logo</h5>
+							<!-- <?php echo $this->Html->image('cover_pic.jpg',array('alt' => 'Cs-Static','class' => 'thumb' )); ?> --><output id="list"></output>
+							 <?= $this->Form->input('Mediapartners[]',['type' => 'file','label' => false,'multiple' => 'true','id'=>'files','accept' => 'image/*']);?>
+						</div>
+
+						<div class="p-4 mb-4 flex-cont rounded z-depth-1">
+						    <h5 class="cs-title">Sponsors Logo</h5>
+						   <!--  <?php echo $this->Html->image('cover_pic.jpg',array('alt' => 'Cs-Static','class' => 'thumb' )); ?> --><output id="list1"></output>
+						    <?=$this->Form->input('Sponsors[]',['type' => 'file','label' => false, 'multiple' => 'true','id'=>'files1','accept' => 'image/*']);?>
+						</div>
+				</div><!-- <div class="md-form">
+				     			<span>Mediapartner Logo</span>
+				     			<?= $this->Form->input('Mediapartners[]',['type' => 'file','name' =>'image_file_arr[]', 'label' => false,'multiple' => 'true','id'=>'files','accept' => 'image/*']);?><output id="list"></output>
+				     		</div>
+				     		<div class="md-form">
+				     			<span>Sponsors Logo</span>
+				     			<?=$this->Form->input('Sponsors[]',['type' => 'file','label' => false, 'multiple' => 'true','id'=>'files1','accept' => 'image/*']);?><output id="list1"></output>
+				     		</div> -->
 			</div>
 		</div>
-		<div class="col-md-4 mb-4">
-			<div class="d-flex flex-column">
-			    <div class="p-4 mb-4 flex-cont rounded z-depth-1">
-			    	<div class="text-center">
+			<div class="col-md-4 mb-4">
+			<div class="d-flex flex-column cs_right_details_desk">
+			    <div class="p-4 mb-4 flex-cont rounded cs_details_rightblock-add">
+			   	<div class="text-center">
 				    	<!-- <h5>₹ 699</h5> -->
-				    	<button type="button" class="btn buy-btn">Get Tickets</button>
-			    	</div>
-			    	<div class="cs-details">
-			    		<div class="md-form">
-				    		<p><i class="fa fa-map-marker"></i><span class="rs-details"><?php echo $this->Form->input('areaname', array('id' => 'Autocomplete', 'required','class' => 'form-control','label' => false,'placeholder' => 'Areaname'));?></span></p>
-				    		<p><?php echo $this->Html->image('cal.png')?><span class="rs-details"><?= $this->Form->input('date', array('type' => 'text','class' => 'form-control datepicker','placeholder' => 'Date','label' => false));?></span></p>
-				    		<p><?php echo $this->Html->image('clock-chennaismile.png')?><span class="rs-details"><?=$this->Form->input('time', array('type' => 'text','class' => 'form-control timepicker time-bg','label' => false,'placeholder' => 'Time'));?></span></p>
+						<a href="" class="btn buy-btn btn-rounded mb-4" data-toggle="modal" data-target="#modalSubscriptionForm">Start Ticketing</a> 	</div>
+			    	
+<!--Grid row-->
+                <div class="row">
+                <div class="md-form rs-details-bold "> <i class="fa fa-map-marker prefix" style="font-size:23px;"></i><?php echo $this->Form->input('areaname', array('id' => 'Autocomplete', 'required','class' => 'form-control','placeholder' => 'Areaname','style'=>'margin-left:15px;'));?></div>
+
+                    <!--Grid column-->
+                    <div class="col-md-6">
+                        <div class="md-form mb-0 rs-details-bold"><span><i class="fa fa-calendar prefix" style="font-size:20px; margin-left: -20px; top:15px;"></i></span>
+                        <?= $this->Form->input('date', array('type' => 'text','id' => 'date','name' => 'date','class' => 'form-control datepicker date-input','placeholder' => 'MM/DD/YYYY'));?>
+                        </div>
+                    </div>
+                    <!--Grid column-->
+
+                    <!--Grid column-->
+                    <div class="col-md-6">
+                        <div class="md-form mb-0 rs-details-bold ">
+                      <!--   <?= $this->Form->input('todate', array('type' => 'text','class' => 'form-control datepicker date-input','placeholder' => 'To Date'));?> -->
+                            <input type="text" id="email" name="email" class="form-control date-input" placeholder="To Date">
+                            <label for="email" class="">To Date</label>
+                        </div>
+                    </div>
+
+                     <!--Grid column-->
+                    <div class="col-md-6">
+                        <div class="md-form mb-0 rs-details-bold">
+                        <i class="fa fa-clock-o prefix" style="font-size:20px; margin-left: -20px; top:15px;"></i>
+                        <?= $this->Form->input('time', array('type' => 'text','class' => 'form-control datepicker date-input','placeholder' => '00:00 AM'));?>
+                           </div>
+                    </div>
+                    <!--Grid column-->
+
+                    <!--Grid column-->
+                    <div class="col-md-6">
+                        <div class="md-form mb-0 rs-details-bold ">
+                       <!--  <?= $this->Form->input('totime', array('type' => 'text','class' => 'form-control datepicker date-input','placeholder' => 'To Time'));?> -->
+                            <input type="text" id="email" name="email" class="form-control date-input" placeholder="To Time">
+                            <label for="email" class="">To Time</label>
+                        </div>
+                    </div>
+</div>
 				    	</div>
-			    	</div>
-			    </div>
 			</div>
+
+				
+	<div class="d-flex flex-column">
+			    <div class=" mb-4 flex-cont rounded cs_details_orgblock">
+			    	<p style=" margin-left: 100px;  font-weight: bold;">Organizer Details</p>
+			<!--Modal: Login with Avatar Form-->
+  <div class="modal-dialog cascading-modal modal-avatar modal-sm" role="document">
+        <!--Content-->
+       
+            <!--Header-->
+            <div class="modal-header">
+                <?php echo $this->Html->image('org-logo.png',array('alt' => 'avatar','class' => 'rounded-circle img-responsive','id' => 'orgtarget', 'style'=>'height:130px;' )); ?>
+			
+            </div>
+        </div>
+            <!--Body-->
+          
+              	<div class="md-form">
+              		<?=$this->Form->input('OrganizersLogo',['type' => 'file','label' => false,'onchange' => 'putorgImage()','id' => 'org','accept' => 'image/*']);?> 
+				     			<?=  $this->Form->input('OrganizersName',array('label' => 'Organizers name','div' => false,'class' => 'form-control','placeholder' => 'Please enter Organizer Name', 'required'));?></div>
+			    
+  </div>
+        <!--/.Content-->
+    </div>
+
+<!--Modal: Login with Avatar Form-->
+
 
 			<div class="d-flex flex-column">
 			    <div class="p-4 mb-4 flex-cont rounded z-depth-1">
+			   
                 	<div class="md-form">
-		            	<?= $this->Form->input('address_1',array('div' => false,'label' => 'Address 1','class' => 'form-control', 'placeholder' => 'Enter address 1'));?>
+		            	<?= $this->Form->input('address_1',array('div' => false,'label' => 'Address 1','class' => 'form-control', 'placeholder' => 'Enter address 1', 'required'));?>
      				</div>
 
      				<div class="md-form">
-		            	<?= $this->Form->input('address_2',array('div' => false,'label' => 'Address 2','class' => 'form-control', 'placeholder' => 'Enter address 2'));?>
+		            	<?= $this->Form->input('address_2',array('div' => false,'label' => 'Address 2','class' => 'form-control', 'placeholder' => 'Enter address 2', 'required'));?>
      				</div>
 
      				<div class="md-form">
                			<?= $this->Form->input('landmark',array('div' => false,'label' => 'Landmark','class' => 'form-control', 'placeholder' => 'Any Specific Landmark?'));?>	
      				</div>
+
+     				<div class="md-form">
+		     					<?= $this->Form->input('contact_number',array('div' => false, 'label' => 'Contact Number','class' => 'form-control','placeholder' => 'Enter Contact Number'));?>
+		     				</div>
+		     				<div class="md-form">
+		     					<?= $this->Form->input('mobile_number',array('id' => 'mobile_number', 'div' => false,'label' => 'Mobile Number','class' => 'form-control','placeholder' => 'Enter Mobile Number'));?>
+		     				</div>
+
      				<input type="text" class="form-control map" id="googleMapID" name="google_map" placeholder="" readonly="" style="color: black !important; display: none;">
                 	<input type="button" data-toggle="modal" data-target="#myModal" class="btn launch-map" value="Launch Map" style="background-color: #337AB7;"/>
+				</div>
+			</div>
+			<div class="d-flex flex-column">
+			    <div class="p-4 mb-4 flex-cont rounded cs_details_advertblock">
+			    	<div style='overflow:hidden;height:330px;width:100%;'>
+			    		<div  style='height:330px;width:700px;'> <h4>
+						Advertisement
+					</h4></div>
+			    	</div>
+			    	
 				</div>
 			</div>
 		</div>
 	</div>
 </div>
+
+<div class="modal fade" id="myModal">
+  <div class="modal-dialog" role="document">
+    <div class="modal-content">
+      <div class="modal-header">
+        <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+          <span aria-hidden="true" style="color: #4ABAC6;">&times;</span>
+        </button>
+        <h5 class="modal-title" id="exampleModalLabel">Map</h5>        
+      </div>
+      <div class="modal-body">
+        <div id="mapPanel">            
+            <input class="form-control text plac" id="city_country" type="textbox" value="Mylapore, Chennai" placeholder="Search your area..." style="color: black !important;">
+            <input class="btn btn-md btn-primary botton" type="button" value="search" onclick="codeAddress()">            
+        </div>  
+        <div id="mapCanvas" style="width: 100%; height: 350px;"></div>
+        <div id="infoPanel">
+            <!--<b>Marker status:</b>
+            <div id="markerStatus"><i>Click and drag the marker.</i></div>
+            <b>Current position:</b>
+            <div id="info"></div>-->
+            <!-- <b>Closest matching address:</b>
+            <div id="address"></div> -->
+        </div>
+      </div>
+      <div class="modal-footer">
+        <button type="button" class="btn btn-secondary" data-dismiss="modal" style="background: #337AB7;color: white;">Close</button>
+       <!--  <button type="button" class="btn btn-primary" data-dismiss="modal">Save changes</button> -->
+      </div>
+    </div>
+  </div>
+</div>
+
+<div class="modal fade" id="modalSubscriptionForm" tabindex="-1" role="dialog" aria-labelledby="myModalLabel" aria-hidden="true">
+    <div class="modal-dialog" role="document">
+        <div class="modal-content">
+            <div class="modal-header text-center">
+                <h4 class="modal-title w-100 font-weight-bold">Ticketing Service</h4>
+                <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+                    <span aria-hidden="true">&times;</span>
+                </button>
+            </div>
+            <div class="modal-body mx-3">
+<div class="md-form input-group">
+  <div class="input-group-prepend">
+   <!-- 	<?= $this->Form->input('tickettype_1',array( 'label'=> false,'class' => 'form-control validate ','placeholder' => 'Ticket Type' ,'style' => 'width: 90%;'));?> -->
+
+    <input type="text" id="tickettype_1" name="tickettype_1" class="form-control validate" placeholder="Ticket Type" >
+
+  </div>&nbsp;&nbsp;&nbsp;&nbsp;
+
+ <!--  <?= $this->Form->input('ticketprice_1',array('label'=> false,'class' => 'form-control validate ','placeholder' => 'Ticket Price', 'style' => 'width: 90%;'));?>
+  -->  
+    <input type="text" id="ticketprice_1" name="ticketprice_1" class="form-control validate" placeholder="Ticket Price" >
+</div>
+<div class="md-form input-group">
+  <div class="input-group-prepend">
+   <!-- 	<?= $this->Form->input('tickettype_2',array( 'label'=> false,'class' => 'form-control validate ','placeholder' => 'Ticket Type' ,'style' => 'width: 90%;'));?> -->
+
+   	   <input type="text" id="tickettype_2" name="tickettype_2" class="form-control validate" placeholder="Ticket Type" >
+  </div>&nbsp;&nbsp;&nbsp;&nbsp;
+
+  <!-- <?= $this->Form->input('ticketprice_2',array('label'=> false,'class' => 'form-control validate ','placeholder' => 'Ticket Price', 'style' => 'width: 90%;'));?> -->
+     <input type="text" id="ticketprice_2" name="ticketprice_2" class="form-control validate" placeholder="Ticket Price" >
+</div>
+<div class="md-form input-group">
+  <div class="input-group-prepend">
+  <!--  	<?= $this->Form->input('tickettype_3',array( 'label'=> false,'class' => 'form-control validate ','placeholder' => 'Ticket Type' ,'style' => 'width: 90%;'));?> -->
+   	  <input type="text" id="tickettype_3" name="tickettype_3" class="form-control validate" placeholder="Ticket Type" >
+  </div>&nbsp;&nbsp;&nbsp;&nbsp;
+ <!-- <?= $this->Form->input('ticketprice_3',array('label'=> false,'class' => 'form-control validate ','placeholder' => 'Ticket Price', 'style' => 'width: 90%;'));?> -->
+    <input type="text" id="ticketprice_3" name="ticketprice_3" class="form-control validate" placeholder="Ticket Price" >
+</div>
+
+            </div>
+            <div class="modal-footer d-flex justify-content-center modal-foot">
+                <button class="btn btn-deep-orange">Submit <i class="fa fa-paper-plane-o ml-1"></i></button>
+            </div>
+        </div>
+    </div>
+</div>
 <div class="form-group">
-    <?= $this->Form->button('Submit',array('id' => 'subbutton','class'=>'btn btn-secondary pull-centre')) ?>
+    <?= $this->Form->button('Submit',array('id' => 'subbutton','class'=>'btn btn-secondary pull-centre sub-but')) ?>
 </div>
 <?= $this->Form->end() ?>
-<div class="modal fade" id="myModal">
- 	<div class="modal-dialog" role="document">
-    	<div class="modal-content">
-      		<div class="modal-header">
-        		<button type="button" class="close" data-dismiss="modal" aria-label="Close">
-          			<span aria-hidden="true" style="color: #4ABAC6;">&times;</span>
-        		</button>
-        		<h5 class="modal-title" id="exampleModalLabel">Map</h5>        
-      		</div>
-		    <div class="modal-body">
-		        <div id="mapPanel">            
-		            <input class="form-control text plac" id="city_country" type="textbox" value="Mylapore, Chennai" placeholder="Search your area..." style="color: black !important;">
-		            <input class="btn btn-md btn-primary botton" type="button" value="search" onclick="codeAddress()">            
-		        </div>  
-		        <div id="mapCanvas" style="width: 100%; height: 350px;"></div>
-		        <div id="infoPanel">
-		        </div>
-		    </div>
-      		<div class="modal-footer">
-        		<button type="button" class="btn btn-secondary" data-dismiss="modal" style="background: #337AB7;color: white;">Close</button>
-      		</div>
-    	</div>
-  	</div>
-</div> 
 
 <script type="text/javascript">
+//mediapartners
+	 function handleFileSelect(evt) {
+	 var files = evt.target.files;
+	 for (var i = 0, f; f = files[i]; i++) {
+
+	 if (!f.type.match('image.*')) {
+	 continue;
+	 }
+	 var reader = new FileReader();
+
+	 reader.onload = (function(theFile) {
+	 return function(e) {
+	 var span = document.createElement('span');
+	 span.innerHTML = ['<img class="thumb" src="', e.target.result, '" title="', escape(theFile.name), '"/><span class="remove_img_preview"></span>'].join('');
+	document.getElementById('list').insertBefore(span, null);
+				 };
+			 })(f);
+
+			 reader.readAsDataURL(f);
+		 }
+	 }
+	 document.getElementById('files').addEventListener('change', handleFileSelect, false);
+
+
+	  $('#Mediapartners[]').on('click', '.remove_img_preview',function () {
+    $(this).parent('span').remove();
+        
+        //this is not working...
+        var i = array.indexOf($(this));
+        if(i != -1) {
+            array.splice(i, 1);
+        }
+        //tried this too:
+        //$(this).parent('span').splice( 1, 1 );
+        
+       count--;
+  });
+
+	  //sponsor image
+	   function handleFileSelect1(evt) {
+	 var files = evt.target1.files;
+	 for (var i = 0, f; f = files[i]; i++) {
+
+	 if (!fo1.type.match('image.*')) {
+	 continue;
+	 }
+	 var reader = new FileReader();
+
+	 reader.onload = (function(theFile) {
+	 return function(e1) {
+	 var span = document.createElement('span');
+	 span.innerHTML = ['<img class="thumb" src="', e1.target1.result, '" title="', escape(theFile.name), '"/><span class="remove_img_preview"></span>'].join('');
+	document.getElementById('list1').insertBefore(span, null);
+				 };
+			 })(fo1);
+
+			 reader.readAsDataURL(fo1);
+		 }
+	 }
+	 document.getElementById('files1').addEventListener('change', handleFileSelect1, false);
+
+
+	  $('#list1').on('click', '.remove_img_preview',function () {
+    $(this).parent('span').remove();
+        
+        //this is not working...
+        var i = array.indexOf($(this));
+        if(i != -1) {
+            array.splice(i, 1);
+        }
+        //tried this too:
+        //$(this).parent('span').splice( 1, 1 );
+        
+       count--;
+  });
+	//banner image
 function showImage(src, target) {
             var fr = new FileReader();
 
@@ -240,7 +428,7 @@ function showImage(src, target) {
             var target = document.getElementById("target");
             showImage(src, target);
         }
-
+//display image
     function showDispImage(src1, target1) {
             var fro = new FileReader();
 
@@ -255,4 +443,100 @@ function showImage(src, target) {
             var target1 = document.getElementById("disptarget");
             showImage(src1, target1);
         }
+
+        //organizer logo
+          function showorgImage(src2, target2) {
+            var f = new FileReader();
+
+             f.onload = function(){
+      target2.src = f.result;
+    }
+           f.readAsDataURL(src2.files[0]);
+
+        }
+        function putorgImage() {
+            var src2 = document.getElementById("org");
+            var target2 = document.getElementById("orgtarget");
+            showImage(src2, target2);
+        }
+
+        $('.launch-map').on('click', function () {
+		var loc = $("#landmark").val() + $("#areaname").val();
+		$("#city_country").val(loc);
+	    $('#myModal').modal({
+	        backdrop: 'static',
+	        keyboard: false
+	    }).on('shown.bs.modal', function () {
+	        codeAddress();
+	    });
+	});
+
+        $(document).ready(function(){
+		var date_input=$('input[name="date"]'); //our date input has the name "date"
+		var container=$('.bootstrap-iso form').length>0 ? $('.bootstrap-iso form').parent() : "body";
+		date_input.datepicker({
+			format: 'mm/dd/yyyy',
+			container: container,
+			todayHighlight: true,
+			autoclose: true,
+		})
+	})
+        function validateForm() {
+    var x = document.forms["createEvent"]["title"].value;
+    if (x == "") {
+    	//toastr.success('Have fun storming the castle!', 'Miracle Max Says')
+        alert("Title must be filled out");
+        return false;
+    }
+    var y = document.forms["createEvent"]["banner"].value;
+    if (y == "") {
+    	alert("Banner image Needed");
+        return false;
+    }
+    var z = document.forms["createEvent"]["display"].value;
+    if (z == "") {
+    	alert("Display image Needed");
+        return false;
+    }
+    // var a = document.forms["createEvent"]["date"].value;
+    // if (a == "") {
+    // 	alert("Date must be filled out");
+    //     return false;
+    // }
+    // var b = document.forms["createEvent"]["time"].value;
+    // if (b == "") {
+    // 	alert("Time must be filled out");
+    //     return false;
+    // }
+    var c = document.forms["createEvent"]["categories_id"].value;
+    if (c == "") {
+    	alert("Categories must be filled out");
+        return false;
+    }
+     var d = document.forms["createEvent"]["address_1"].value;
+    if (d == "") {
+    	alert("Address must be filled out");
+        return false;
+    }
+    var e = document.forms["createEvent"]["address_2"].value;
+    if (e == "") {
+    	alert("Address must be filled out");
+        return false;
+    }
+     var f = document.forms["createEvent"]["OrganizersName "].value;
+    if (f == "") {
+    	alert("Organizer must be filled out");
+        return false;
+    }
+     var g = document.forms["createEvent"]["descriptioin"].value;
+    if (g == "") {
+    	alert("Event Details must be filled out");
+        return false;
+    }
+     var h = document.forms["createEvent"]["areaname"].value;
+    if (h == "") {
+    	alert("Areaname must be filled out");
+        return false;
+    }
+}
     </script>
