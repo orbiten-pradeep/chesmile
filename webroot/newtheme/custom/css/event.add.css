@@ -2,7 +2,7 @@
     width:90% !important;
 }*/
 .date-input{
-    width: 90px !important;
+    width: 140px !important;
 }
 .btn{
     box-shadow: none !important;
@@ -44,7 +44,7 @@
     margin-bottom: 40px!important;
     width: 1000px;
     border-bottom: 1px solid #ffffff !important;
-    color: #ffffff !important;
+   /* color: #ffffff !important;*/
 }
 .title-formmob{
 width: 300px;
@@ -52,25 +52,25 @@ width: 300px;
 .middle {
     font-weight: bold;
     color: white;
-  transition: .5s ease;
-  opacity: 0;
+  /*transition: .5s ease;
+  opacity: 0;*/
   position: absolute;
   top: 20%;
   left: 50%;
-  transform: translate(-50%, -50%);
-  -ms-transform: translate(-50%, -50%);
+ /* transform: translate(-50%, -50%);
+  -ms-transform: translate(-50%, -50%);*/
   text-align: center;
 }
 .dispmiddle {
     font-weight: bold;
     color: white;
-  transition: .5s ease;
-  opacity: 0;
+ /* transition: .5s ease;
+  opacity: 0;*/
   position: absolute;
-  top: 20%;
-  left: 50%;
-  transform: translate(-50%, -50%);
-  -ms-transform: translate(-50%, -50%);
+  top: 14%;
+  left: 35%;
+  /*transform: translate(-50%, -50%);
+  -ms-transform: translate(-50%, -50%);*/
   text-align: center;
 }
 .contain:hover .image {
@@ -86,6 +86,37 @@ width: 300px;
 .org-img{
     width: 160px;
     height: 120px;
+    border-radius: 5px;
+    border: 1px solid #fff; 
+}
+ input[type="file"] {
+  display: block;
+}
+.imageThumb {
+  border-radius: 5px;
+    border: 1px solid #fff;
+    width:80px;
+    height: 80px;
+    margin: 0.2em -0.7em 0 0;
+}
+.pip {
+  display: inline-block;
+  margin: 10px 10px 0 0;
+}
+.remove {
+ position:relative;
+    top:-85px;
+    left:75px;
+    background:black;
+    color:white !important;
+    border-radius:50px;
+    font-size:0.9em;
+    padding: 0 0.3em 0;
+    text-align:center;
+    cursor:pointer;
+}
+.remove:before {
+    content: "X";
 }
 .thumb {
     border-radius: 5px;
@@ -107,7 +138,7 @@ width: 300px;
     cursor:pointer;
 }
 .remove_img_preview:before {
-    content: "×";}
+    content: "X";}
 /*.event-details-add{
     font-size: 14px!important;
 }*/

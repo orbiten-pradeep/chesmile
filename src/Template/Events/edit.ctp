@@ -1,867 +1,4 @@
-<?php echo $this->Html->css(['form-basic']); ?>
-<?php 
-use Cake\Routing\Router;
-?>
-
-
-<style type="text/css">
-body, .modal-open .page-container, .modal-open .page-container .navbar-fixed-top, .modal-open .modal-container {
-    overflow-y: scroll;
-}
-@media (max-width: 979px) {
-    .modal-open .page-container .navbar-fixed-top {
-        overflow-y: visible;
-    }
-}
-#map-canvas {
-    height: 400px;
-}
-</style>
-
-<style type="text/css">
-    textarea {
-       resize: none;
-    }
-    .float-label-control { position: relative; margin-bottom: 1.5em; }
-    /*.float-label-control ::-webkit-input-placeholder { color: transparent; }
-    .float-label-control :-moz-placeholder { color: transparent; }
-    .float-label-control ::-moz-placeholder { color: transparent; }
-    .float-label-control :-ms-input-placeholder { color: transparent; }*/
-    .float-label-control input:-webkit-autofill,
-    .float-label-control textarea:-webkit-autofill { background-color: transparent !important; -webkit-box-shadow: 0 0 0 1000px white inset !important; -moz-box-shadow: 0 0 0 1000px white inset !important; box-shadow: 0 0 0 1000px white inset !important; }
-    .float-label-control input, .float-label-control textarea, .float-label-control label { font-size: 1.3em; box-shadow: none; -webkit-box-shadow: none; }
-        .float-label-control input:focus,
-        .float-label-control textarea:focus { box-shadow: none; -webkit-box-shadow: none; border-bottom-width: 2px; padding-bottom: 0; background: none; }
-        .float-label-control textarea:focus { padding-bottom: 4px; }
-    .float-label-control input, .float-label-control textarea { display: block; width: 100%; padding: 0.1em 0em 1px 0em; border: none; border-radius: 0px; border-bottom: 1px solid black; outline: none; margin: 0px; background: none; }
-    .float-label-control textarea { padding: 0.1em 0em 5px 0em; }
-    .float-label-control label { position: absolute; font-weight: normal; top: -1.0em; left: 0.08em; color: white; z-index: -1; font-size: 0.85em; -moz-animation: float-labels 300ms none ease-out; -webkit-animation: float-labels 300ms none ease-out; -o-animation: float-labels 300ms none ease-out; -ms-animation: float-labels 300ms none ease-out; -khtml-animation: float-labels 300ms none ease-out; animation: float-labels 300ms none ease-out; /* There is a bug sometimes pausing the animation. This avoids that.*/ animation-play-state: running !important; -webkit-animation-play-state: running !important; }
-    .float-label-control input.empty + label,
-    .float-label-control textarea.empty + label { top: 0.1em; font-size: 1.5em; animation: none; -webkit-animation: none; }
-    .float-label-control input:not(.empty) + label,
-    .float-label-control textarea:not(.empty) + label { z-index: 1; }
-    .float-label-control input:not(.empty):focus + label,
-    .float-label-control textarea:not(.empty):focus + label { color: white; }
-    .float-label-control.label-bottom label { -moz-animation: float-labels-bottom 300ms none ease-out; -webkit-animation: float-labels-bottom 300ms none ease-out; -o-animation: float-labels-bottom 300ms none ease-out; -ms-animation: float-labels-bottom 300ms none ease-out; -khtml-animation: float-labels-bottom 300ms none ease-out; animation: float-labels-bottom 300ms none ease-out; }
-    .float-label-control.label-bottom input:not(.empty) + label,
-    .float-label-control.label-bottom textarea:not(.empty) + label { top: 3em; }
-
-
-@keyframes float-labels {
-    0% { opacity: 1; color: white; top: 0.1em; font-size: 1.5em; }
-    20% { font-size: 1.5em; opacity: 0; }
-    30% { top: 0.1em; }
-    50% { opacity: 0; font-size: 0.85em; }
-    100% { top: -1em; opacity: 1; }
-}
-
-@-webkit-keyframes float-labels {
-    0% { opacity: 1; color: white; top: 0.1em; font-size: 1.5em; }
-    20% { font-size: 1.5em; opacity: 0; }
-    30% { top: 0.1em; }
-    50% { opacity: 0; font-size: 0.85em; }
-    100% { top: -1em; opacity: 1; }
-}
-
-@keyframes float-labels-bottom {
-    0% { opacity: 1; color: white; top: 0.1em; font-size: 1.5em; }
-    20% { font-size: 1.5em; opacity: 0; }
-    30% { top: 0.1em; }
-    50% { opacity: 0; font-size: 0.85em; }
-    100% { top: 3em; opacity: 1; }
-}
-
-@-webkit-keyframes float-labels-bottom {
-    0% { opacity: 1; color: white; top: 0.1em; font-size: 1.5em; }
-    20% { font-size: 1.5em; opacity: 0; }
-    30% { top: 0.1em; }
-    50% { opacity: 0; font-size: 0.85em; }
-    100% { top: 3em; opacity: 1; }
-}
-.wrapp{
-    max-width: 640px;
-    /*margin: 0 auto;*/
-    padding: 55px;
-    box-sizing: border-box;
-    background-color:  #ffffff;
-    box-shadow: 0 1px 3px 0 rgba(0, 0, 0, 0.1);
-    margin-bottom: 35px;
-   /* font: bold 14px sans-serif;
-    text-align: center;*/
-}
-.heigh{
-    height: 35px !important;
-}
-
-label {
-    font-weight: inherit !important;
-}
-.height{
-    background-color: #474747;
-    height:100px;
-}
-.card-container.card {
-    max-width: 650px;
-    padding: 40px 40px;
-}
-
-.formheigh{
-  margin-top: -35px;
-}
-
-.card {
-    background-color: #4ABAC6;
-    color: white;
-    /* just in case there no content*/
-    padding: 20px 25px 30px;
-    /*margin: 30px auto 25px;*/
-   /* margin: 30px 190px 25px;*/
-    margin-top: 0px;
-    /* shadows and rounded borders */
-    -moz-border-radius: 2px;
-    -webkit-border-radius: 2px;
-    border-radius: 2px;
-    /*-moz-box-shadow: 10px 10px 10px rgba(0, 0, 0, 0.3);
-    -webkit-box-shadow: 10px 10px 10px rgba(0, 0, 0, 0.3);
-    box-shadow: 0px 0px 7px 7px rgba(0, 0, 0, 0.1);*/
-}
-::-webkit-input-placeholder { /* Chrome/Opera/Safari */
-  color: white !important;
-}
-::-moz-placeholder { /* Firefox 19+ */
-  color: white !important;
-}
-:-ms-input-placeholder { /* IE 10+ */
-  color: white !important;
-}
-:-moz-placeholder { /* Firefox 18- */
-  color: white !important;
-}
-
-
-input{
-    color:white !important;
-}
-
-.form-control:focus{
-    border-color: white !important;
-}
-
-.error-message{
-    color: red !important;
-    font-size: 11px;
-    font-style: normal;
-}
-.help-block{
-    color: red !important;
-    font-size: 11px;
-    font-style: normal;
-}
-.error{
-    color: red !important;
-    font-size: 11px;
-    font-style: normal;
-
-}
-  .card-prof {
-    background-color: #4ABAC6;
-    /* just in case there no content*/
-    padding: 20px 25px 30px;
-    /*margin: 30px auto 25px;*/
-    margin-top: 60px;
-    -moz-border-radius: 2px;
-    -webkit-border-radius: 2px;
-    border-radius: 2px;
-    -moz-box-shadow: 10px 10px 10px rgba(0, 0, 0, 0.3);
-    -webkit-box-shadow: 10px 10px 10px rgba(0, 0, 0, 0.3);
-    box-shadow: 0px 0px 7px 7px rgba(0, 0, 0, 0.1);
-}
-
-.card-container-prof.card-prof {
-    max-width: 90px;
-    padding: 40px 40px;
-
-}
-.date{
-    background-color: #4ABAC6;
-}
-.date:focus{
-    background-color: #4ABAC6;
-}
-.time-bg{
-    background-color: #4ABAC6;
-}
-.time-bg:focus{
-    background-color: #4ABAC6;
-}
-.map{
-    background-color: #4ABAC6 !important;
-}
-.map:focus{
-    background-color: #4ABAC6;
-}
-.city{
-     background-color: #4ABAC6 !important;
-}
-.city:focus{
-     background-color: #4ABAC6;
-}
-.state{
-     background-color: #4ABAC6 !important;
-}
-.state:focus{
-     background-color: #4ABAC6;
-}
-.country{
-     background-color: #4ABAC6 !important;
-}
-.country:focus{
-     background-color: #4ABAC6;
-}
-.subclass{
-    overflow: overlay;
-}
- .cropit-preview {
-        background-color: #f8f8f8;
-        background-size: cover;
-        border: 1px solid #ccc;
-        border-radius: 3px;
-        margin-top: 7px;
-      }
-
-      #display-preview{
-        width: 280px;
-        height: 185px;
-
-      }
-
-      #banner-preview{
-        width: 285px;
-        height: 185px;
-
-      }
-
-      #organizer-preview{
-        width: 75px;
-        height: 75px;
-      }
-
-      .cropit-preview-image-container {
-        cursor: move;
-      }
-#display{
-    display: none;
-}
-.nav-tabs > li.active > a{
-  background-color: #337ab7 !important;
-  color: white !important;
-}
-.nav-tabs{
-    border-bottom: 0px;
-}
-
-.search-nav{
-    display: none;
-}
-</style>
-<div class="container-fluid height">
-    <div class="col-md-offset-2">
-        <div class="card-prof card-container-prof">
-
-        </div>
-    </div>
-</div>
-
-<div class="container content">
-    <div class="row">
- <ul class="nav nav-tabs col-md-offset-2" style="margin-top:50px;" id="myTab">
-                    <div class="liner"></div>
-                     <li class="active">
-                     <a href="#home" data-toggle="tab" title="welcome">
-                   Event Information
-                  </a></li>
-
-                 <!--  <li><a href="#profile" data-toggle="tab" title="profile">
-                     <span class="round-tabs two">
-                       Additional Details
-                     </span> 
-                    </a>
-                 </li> -->
-                     
-                     </ul>
-
-    <div class="card card-container col-md-offset-2">
-    <!-- <div class="col-sm-8"> -->
-    <div class="tab-content">
-    <div class="tab-pane fade in active" id="home">
-                 <?= $this->Form->create($event,array('id' => 'createEvent','type' => 'file','novalidate' => true)) ?>
-                  <?= $this->Form->hidden('user_id', ['options' => $users,'default'=> $users_id]);?>
-                <!-- <form role="form"> -->  <!-- <input type="text" class="form-control" placeholder="Event Title"> -->
-                 
-                    <div class="form-group float-label-control">
-                        <label for="">Event Title</label>
-         <?php echo $this->Form->input('title',array('div' => false,'id' => 'title', 'label' => false, 'class' => 'form-control form-element', 'placeholder' => 'Event Title')); ?>
-            <span id="title_error" style="color: #FF0000;font-size: 11px;"></span>
-                      
-                    </div>
-
-                    <div class="form-group float-label-control">
-                        <label for="">Organizers Name</label>
-                         <?=  $this->Form->input('OrganizersName',array('div' => false, 'label' => false, 'class' => 'form-control form-element','placeholder' => 'Organizer Name'));?>
-                        <!-- <input type="text" class="form-control" placeholder="Organizers Name"> -->
-                    </div>
-
-            <?= $this->Form->hidden('active');?>
-
-                    <div class="form-group">
-                <label>
-<?= $this->Form->input('categories_id',array('class' => 'form-control heigh','options' => $categories_list, 'onChange' => 'checkForOther(this);', 'empty' => '(Select Categories)','label' => false));?>
-            </label>
-            <span id="cate_error" style="color: #FF0000; font-size: 11px;"></span>
-            </div>
-
-            <div id="subdiv" class="form-group" style="display: none;">
-                <label>
-            <?=$this->Form->input('Eventsubcategories.sub_categories',array( 'subcategory_id'=>'', 'class' => 'form-control subclass','options' => $subCategories, 'multiple' => 'true', 'empty' => '(choose one)','label' => false,'empty' => false));?>
-            </label>
-            <span id="subcate_error" style="color: #FF0000; font-size: 11px;"></span>
-            </div>
-
-            <div class="form-group">
-                   <label for="">Description</label>
-                  <?= $this->Form->input('descriptioin',array('div' => false, 'label' => false,'class' => 'form-control form-element','placeholder' => 'Description about your event','rows' => '4', 'cols' => '50', 'resize'=> 'none' ));?>
-                  <span id="description_error" style="color: #FF0000; font-size: 11px;"></span>
-                  <br/>
-                  <!--  <textarea class="form-control" placeholder="Some Words about your event" rows="1"></textarea> -->
-                  <input type="button" id="id_typemore" name="id_typemore" class="btn" style="float: right;background-color: #337AB7;" value="Type More Here..." />
-            </div>
-
-            <div class="form-group" style="display: none;" id="id_moredes">
-                   <label for="">Description More..</label>
-                  <?= $this->Form->input('descriptioin_more',array('div' => false, 'label' => false,'class' => 'form-control form-element','placeholder' => 'Type more description.','style' => 'color:black !important;', 'type' => 'textarea' ));?>
-            </div>
-
-
-            <div class="form-group float-label-control">
-                    <label for="">Contact Number</label>
-                  <?= $this->Form->input('contact_number',array('div' => false,'id' =>'contact_number', 'label' => false,'class' => 'form-control form-element','placeholder' => 'Enter Contact Number'));?>
-                  <span id="contact_error" style="color: #FF0000; font-size: 11px;"></span>
-                  <!--  <textarea class="form-control" placeholder="Some Words about your event" rows="1"></textarea> -->
-            </div>
-
-            <div class="form-group float-label-control">
-                   <label for="">Mobile Number</label>
-                  <?= $this->Form->input('mobile_number',array('id' => 'mobile_number', 'div' => false,'label' => false,'class' => 'form-control form-element','placeholder' => 'Enter Mobile Number'));?>
-                  <span id="mobile_error" style="color: #FF0000; font-size: 11px;"></span>
-                  <!--  <textarea class="form-control" placeholder="Some Words about your event" rows="1"></textarea> -->
-            </div>
-
-             <div class="form-group">
-                <label>
-           <?= $this->Form->input('date', array('type' => 'text','class' => 'form-control date','placeholder' => 'Date','label' => false));?>
-           </label>
-           <span id="date_error" style="color: #FF0000; font-size: 11px;"></span>
-           </div>
-
-             <!-- <div class="form-group float-label-control">
-                  <label for="datepicker">date</label>
-                 <input type="text" class="form-control" placeholder="Event Date">
-             </div> -->
-
-           <div class="form-group">
-            <label>
-           <?=$this->Form->input('time', array('type' => 'text','class' => 'form-control timepicker time-bg','label' => false,'placeholder' => 'Time'));?>
-           </label>
-           <span id="time_error" style="color: #FF0000; font-size: 11px;"></span>
-           </div>
-                     <!-- <div class="form-group float-label-control">
-                        <label for="">Venue</label>
-                        <?=  $this->Form->input('venue',array('div' => false, 'label' => false, 'class' => 'form-control form-element','placeholder' => 'Enter Venue'));?>
-                    </div> -->
-
-            <div class="form-group float-label-control">
-                <label for="">Address 1</label>
-            <?= $this->Form->input('Address.address_1',array('div' => false,'label' => false,'class' => 'form-control form-element', 'placeholder' => 'Enter address 1'), ['value' => $address['address_1']]);?>
-                      <!--   <input type="text" class="form-control" placeholder="Enter Address 1"> -->
-            </div>
-
-            <div class="form-group float-label-control">
-                        <label for="">Address 2</label>
-            <?= $this->Form->input('Address.address_2',array('div' => false,'label' => false,'class' => 'form-control form-element', 'placeholder' => 'Enter address 2'), ['value' => $address['address']]);?>
-                        <!-- <input type="text" class="form-control" placeholder="Enter Address 2"> -->
-            </div>
-
-            <div class="form-group float-label-control">
-                        <label for="">Landmark</label>
-               <?= $this->Form->input('Address.landmark',array('div' => false,'label' => false,'class' => 'form-control form-element', 'placeholder' => 'Any Specific Landmark?'), ['value' => $address['landmark']]);?>
-               <span id="landmark_error" style="color: #FF0000; font-size: 11px;"></span>
-                       <!--  <input type="text" class="form-control" placeholder="Any Specific Landmarks?"> -->
-            </div>
-
-            <div class="form-group float-label-control">
-                <div class="ui-widget">
-                  <label for="Autocomplete"> Area Name</label>
-                <?php echo $this->Form->input('Address.areaname', array('id' => 'Autocomplete', 'required','class' => 'form-control form-element','label' => false,'placeholder' => 'Areaname'));?>
-                  <span id="area_error" style="color: #FF0000; font-size: 11px;"></span>
-                </div>
-            </div>
-
-            <div class="form-group">
-                <label for="">Add Map Location</label><br>              
-            <input type="text" class="form-control map" id="googleMapID" name="google_map" placeholder="" readonly="" style="color: black !important; display: none;">
-                <input type="button" class="btn launch-map" value="Launch Map" style="background-color: #337AB7;"/>
-            </div>
-
-            <!-- <div class="form-group float-label-control">
-                    <div class="ui-widget">
-                        <label for="">Areaname</label>
-                        <input for="Autocomplete" type="text" class="form-control">
-                    </div>
-            </div> -->
-
-           <!--   <div class="form-group">
-                <label>
-            <div class="ui-widget">
-            <label for="Autocomplete"></label>
-            <?php //echo $this->Form->input('areaname', array('id' => 'Autocomplete', 'required','class' => 'form-control'));?>
-            </div>
-            </label>
-            </div> -->
-
-                <div class="form-group">
-                <label>
-            <?=$this->Form->input('city', array('default' => 'CHENNAI', 'readonly','class' => 'form-control city'));?>
-            </label>
-            </div>
-
-             <div class="form-group">
-                <label>
-            <?=$this->Form->input('state', array('default' => 'TAMILNADU', 'readonly','class' => 'form-control state'));?>
-            </label>
-            </div>
-
-            <div class="form-group">
-                <label>
-            <?= $this->Form->input('country', array('default' => 'INDIA', 'readonly','class' => 'form-control country'));?>
-            </label>
-            </div>
-
-            <div class="pull-right">
-                <!-- <i class="fa fa-long-arrow-right" aria-hidden="true"></i> -->
-                 <!-- <?= $this->Html->link($this->Html->tag('i', '', array('class' => 'fa fa-long-arrow-right','escape' => false))) ?> -->
-                 <a href="#profile" data-toggle="tab" title="profile" style="color:white !important;"><i class="fa fa-long-arrow-right" aria-hidden="true"></i></a>
-
-            </div>
-            
-            </div>
-            
-
-            
-
-            <div class="form-group">
-            <?= $this->Form->button('Submit',array('id' => 'subbutton')) ?>
-             <?= $this->Form->end() ?>
-            </div>
-
-
-
-            <!-- </div> -->
-
-
-</div>
-</div>
-    </div>
-</div>
-
-<div class="modal fade" id="myModal">
-  <div class="modal-dialog" role="document">
-    <div class="modal-content">
-      <div class="modal-header">
-        <button type="button" class="close" data-dismiss="modal" aria-label="Close">
-          <span aria-hidden="true">&times;</span>
-        </button>
-        <h5 class="modal-title" id="exampleModalLabel">Map</h5>        
-      </div>
-      <div class="modal-body">
-        <div id="mapPanel">            
-            <input class="form-control text" id="city_country" type="textbox" value="Mylapore, Chennai" style="color: black !important;">
-            <input class="btn btn-md btn-primary botton" type="button" value="search" onclick="codeAddress()">            
-        </div>  
-        <div id="mapCanvas" style="width: 100%; height: 350px;"></div>
-        <div id="infoPanel">
-            <!--<b>Marker status:</b>
-            <div id="markerStatus"><i>Click and drag the marker.</i></div>
-            <b>Current position:</b>
-            <div id="info"></div>-->
-            <!-- <b>Closest matching address:</b>
-            <div id="address"></div> -->
-        </div>
-      </div>
-      <div class="modal-footer">
-        <button type="button" class="btn btn-secondary" data-dismiss="modal">Close</button>
-       <!--  <button type="button" class="btn btn-primary" data-dismiss="modal">Save changes</button> -->
-      </div>
-    </div>
-  </div>
-</div>
-
-
-
-        <script src="//code.jquery.com/jquery-1.9.1.js"></script>
-
- <script src="//ajax.aspnetcdn.com/ajax/jquery.validate/1.9/jquery.validate.min.js"></script>
-<!-- <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.1.1/jquery.min.js"></script> -->
-  <script src="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/js/bootstrap.min.js"></script>
-
-
-<script type="text/javascript">
-function autoHeight() {
-            $('.content').css('min-height', 0);
-            $('.content').css('min-height', ($(document).height() - $('#header').height() - $('.footer').height()));
-        }
-        </script>
-
-<!--   <script type="text/javascript">
-$("#banner").change(function () {
-       if ($(this).val() !== "") {
-        var file = $('#banner')[0].files[0];
-        console.log(file.size);
-        //console.log(file.width);
-        var reader = new FileReader();
-        var img = new Image();
-        
-        reader.readAsDataURL(file);
-        reader.onload = function(_file) {
-            img.src= _file.target.result;
-            console.log(img.width,img.height);
-        } 
-       }
-});
-  </script>
- -->
-
-
-
-<script type="text/javascript">
-    /* Float Label Pattern Plugin for Bootstrap 3.1.0 by Travis Wilson
-**************************************************/
-
-(function ($) {
-    $.fn.floatLabels = function (options) {
-
-        // Settings
-        var self = this;
-        var settings = $.extend({}, options);
-
-
-        // Event Handlers
-        function registerEventHandlers() {
-            self.on('input keyup change', 'input, textarea', function () {
-                actions.swapLabels(this);
-            });
-        }
-
-
-        // Actions
-        var actions = {
-            initialize: function() {
-                self.each(function () {
-                    var $this = $(this);
-                    var $label = $this.children('label');
-                    var $field = $this.find('input,textarea').first();
-
-                    if ($this.children().first().is('label')) {
-                        $this.children().first().remove();
-                        $this.append($label);
-                    }
-
-                    var placeholderText = ($field.attr('placeholder') && $field.attr('placeholder') != $label.text()) ? $field.attr('placeholder') : $label.text();
-
-                    $label.data('placeholder-text', placeholderText);
-                    $label.data('original-text', $label.text());
-
-                    if ($field.val() == '') {
-                        $field.addClass('empty')
-                    }
-                });
-            },
-            swapLabels: function (field) {
-                var $field = $(field);
-                var $label = $(field).siblings('label').first();
-                var isEmpty = Boolean($field.val());
-
-                if (isEmpty) {
-                    $field.removeClass('empty');
-                    $label.text($label.data('original-text'));
-                }
-                else {
-                    $field.addClass('empty');
-                    $label.text($label.data('placeholder-text'));
-                }
-            }
-        }
-
-
-        // Initialization
-        function init() {
-            registerEventHandlers();
-
-            actions.initialize();
-            self.each(function () {
-                actions.swapLabels($(this).find('input,textarea').first());
-            });
-        }
-        init();
-
-
-        return this;
-    };
-
-    $(function () {
-        jQuery('.form-element').each(function(){
-          if($(this).parent().hasClass('required')){
-             jQuery('.form-element').unwrap();
-          }
-        });
-
-        setTimeout(function(){
-            $('.float-label-control').floatLabels();
-        },1000);
-    });
-})(jQuery);
-</script>
-
-<script type="text/javascript">
-$(document ).ready( function () {
-
-  /*$.validator.setDefaults({
-      submitHandler: function (form) {
-
-         if ($(form).valid()) {
-             form.submit();
-         }
-      }
-  });*/
-
-
-  // $("#createEvent" ).validate( {
-  //   rules: {
-  //     title: "required",
-  //     contact_number: {
-  //                   required: true,
-  //                   minlength: 7,
-  //                   maxlength: 10,
-  //                   number: true
-  //               },
-  //   mobile_number:  {
-  //                   required: true,
-  //                   minlength: 10,
-  //                   number: true
-  //           }
-  //           },
-  //   messages: {
-  //     title: "Please enter your Event's Title",
-  //    contact_number:"Please enter a number with at least 7 and max 10 characters!",
-  //     mobile_number:"Please enter a number with at least 10 characters!"
-  //   },
-  //   errorElement: "em",
-  //   errorPlacement: function ( error, element ) {
-  //     // Add the `help-block` class to the error element
-  //     error.addClass( "help-block" );
-
-  //     if ( element.prop( "type" ) === "checkbox" ) {
-  //       error.insertAfter( element.parent( "label" ) );
-  //     } else {
-  //       error.insertAfter( element );
-  //     }
-  //   },
-  //   highlight: function ( element, errorClass, validClass ) {
-  //     $( element ).parents( ".input" ).addClass( "has-error" ).removeClass( "has-success" );
-  //   },
-  //   unhighlight: function (element, errorClass, validClass) {
-  //     $( element ).parents( ".input" ).addClass( "has-success" ).removeClass( "has-error" );
-  //   }
-  // });
-
-});
-</script>
-<script type="text/javascript">
-
-// $(document).ready(function() {
-//         $(".imagevalid").validate();
-//     });
-
-
-$("#display").click(function(){
-      $("#display-preview").css('display','block');
-      $("#display-zoom").css('display', 'block');
-    });
-
-$("#banner").click(function(){
-      $("#container-size").css('display','block');
-      $("#banner-preview").css('display','block');
-      $("#banner-zoom").css('display', 'block');
-    });
-
-$("#org").click(function(){
-    console.log("1211");
-      $("#organizer-preview").css('display','block');
-      $("#organizers-zoom").css('display', 'block');
-    });
-
-      $(function() {
-        $('.image-editor').cropit({
-        });
-
-      });
-
-      // $("#id_typemore").click(function(){
-      //   alert("asfd");
-      //   console.log("asdfasdf");
-      //   $("#id_moredes").show();
-      // });
-
-$('#id_typemore').on('click', function () {
-        $("#id_moredes").show();
-    });
-
-
-      // function typemore(){
-      //   alert("asfd");
-      //   $("#id_moredes").show();
-      // }
-
-    $("#createEvent").submit(function(event){
-        var status =true ;
-        if ($('#title').val() == '') {
-            status = false;
-           $("#title_error").text("please enter your title");
-        }else{
-            $("#title_error").text("");
-        }
-
-        // if ($('#contact_number').val() == '') {
-        //     status = false;
-        //    $("#contact_error").text("please enter your Contact Number");
-        // }else{
-        //     $("#contact_error").text("");
-        // } 
-
-        if($("#descriptioin").val().length<=250){
-            status = false;
-            $("#description_error").text("please enter a description with minimum 120 characters");
-        }else{
-            $("#description_error").text("");
-        }
-
-        if($("#landmark").val() == ''){
-            status = false;
-            $("#landmark_error").text("please type landmark");
-        }else{
-            $("#landmark_error").text("");
-        }
-
-        if($("#date").val() == ''){
-            status = false;
-            $("#date_error").text("please Select event date");
-        }else{
-            $("#date_error").text("");
-        }
-
-        if($("#time").val() == ''){
-            status = false;
-            $("#time_error").text("please Select event time");
-        }else{
-            $("#time_error").text("");
-        }
-
-        if($("#categories_id option:selected").val() == ''){
-            status = false;
-            $("#cate_error").text("please Select event category");
-        }else{
-            $("#cate_error").text("");
-        }
-
-        if($("#Autocomplete").val() == ''){
-            status = false;
-            $("#area_error").text("please Select event Areaname");
-        }else{
-            $("#area_error").text("");
-        }
-        
-        return status;
-    });
-</script>
-
-
-<!-- <script type="text/javascript">
-function checkForOther(id)
-{
-	var e = document.getElementById("categories-id");
-	var strUser = e.options[e.selectedIndex].value;
-	$select = $('#eventsubcategories-sub-categories');
-	$.ajax({
-        type:"POST",
-        data:strUser,
-        data:{"id":strUser},
-        ContentType : 'application/json',
-        dataType: 'json',
-        url:"<?php echo $this->Url->build(['action' =>'viewresult']);?>",
-        async:true,
-        success: function(data) {
-        	$select.html('');
-            //iterate over the data and append a select option
-            $.each(data, function(key, val){
-				//alert(val);
-                $select.append('<option value="' + key + '">' + val + '</option>');
-            })
-        },
-        error: function (tab) {
-            $select.html('<option id="-1">none available</option>');
-        }
-    });	
-}
-
-$( function() {
-    $('#date').datepicker({
-    	changeMonth: true,
-        changeYear: true,
-        minDate: new Date()
-        });
-  } );
-$(document).ready(function(){
-    $('#time').timepicker({ timeFormat: 'H:mm' });
-});
-
-$(document).ready(function(){
-	var e = document.getElementById("categories-id");
-	var strUser = e.options[e.selectedIndex].value;
-	$select = $('#eventsubcategories-sub-categories');
-	$.ajax({
-        type:"POST",
-        data:strUser,
-        data:{"id":strUser},
-        ContentType : 'application/json',
-        dataType: 'json',
-        url:"<?php echo $this->Url->build(['action' =>'viewresult']);?>",
-        async:true,
-        success: function(data) {
-        	$select.html('');
-            //iterate over the data and append a select option
-            $.each(data, function(key, val){
-				//alert(val);
-                $select.append('<option value="' + key + '">' + val + '</option>');
-            })
-        },
-        error: function (tab) {
-            $select.html('<option id="-1">none available</option>');
-        }
-    });	
-});
-
-</script>
-
-<nav class="large-3 medium-4 columns" id="actions-sidebar">
+<!-- <nav class="large-3 medium-4 columns" id="actions-sidebar">
     <ul class="side-nav">
         <li class="heading"><?= __('Actions') ?></li>
         <li><?= $this->Form->postLink(
@@ -875,8 +12,8 @@ $(document).ready(function(){
         <li><?= $this->Html->link(__('New User'), ['controller' => 'Users', 'action' => 'add']) ?></li>
         <li><?= $this->Html->link(__('List Categories'), ['controller' => 'Categories', 'action' => 'index']) ?></li>
         <li><?= $this->Html->link(__('New Category'), ['controller' => 'Categories', 'action' => 'add']) ?></li>
-        <li><?= $this->Html->link(__('List Sub Categories'), ['controller' => 'SubCategories', 'action' => 'index']) ?></li>
-        <li><?= $this->Html->link(__('New Sub Category'), ['controller' => 'SubCategories', 'action' => 'add']) ?></li>
+        <li><?= $this->Html->link(__('List Eventsubcategories'), ['controller' => 'Eventsubcategories', 'action' => 'index']) ?></li>
+        <li><?= $this->Html->link(__('New Eventsubcategory'), ['controller' => 'Eventsubcategories', 'action' => 'add']) ?></li>
     </ul>
 </nav>
 <div class="events form large-9 medium-8 columns content">
@@ -884,41 +21,562 @@ $(document).ready(function(){
     <fieldset>
         <legend><?= __('Edit Event') ?></legend>
         <?php
-        //echo $selected;
-            echo $this->Form->hidden('user_id', ['options' => $users,'default'=> $users_id]);
+            echo $this->Form->input('user_id', ['options' => $users]);
             echo $this->Form->input('title');
-            echo $this->Form->input('OrganizersName');
-            echo $this->Form->hidden('active');
-            echo $this->Form->input('categories_id', ['options' => $categories, 'onChange' => 'checkForOther(this);', 'empty' => '(choose one)']);
-            echo $this->Form->input('Eventsubcategories.sub_categories', ['options' => $subCategories, 'multiple' => 'true', 'empty' => '(choose one)','selected' => $selected]);
+            echo $this->Form->input('slug');
+            echo $this->Form->input('slug_status');
+            echo $this->Form->input('active');
+            echo $this->Form->input('price');
+            echo $this->Form->input('categories_id', ['options' => $categories]);
             echo $this->Form->input('descriptioin');
-            echo $this->Form->input('date', array('type' => 'text'));
-            echo $this->Form->input('time', array('type' => 'text'), array('class' => 'timepicker'));
-            echo $this->Form->input('Venue');
-            
-            ////////////////////////////////////////////////////////////////////////////////////////////////////////
-            if($event->banner) 
-            {
-            	echo $this->Html->image('banner/'.$event->banner, array('width' => '200px','alt'=>'aswq'));
-            } 
-            echo $this->Form->input('banner', ['type' => 'file']);
-            if($event->display) 
-            {
-            	echo $this->Html->image('display/'.$event->display, array('width' => '200px','alt'=>'aswq'));
-            } 
-            echo $this->Form->input('display', ['type' => 'file']);
-            
-            if($event->OrganizersLogo) 
-            {
-            	echo $this->Html->image('OrganizersLogo/'.$event->OrganizersLogo, array('width' => '200px','alt'=>'aswq'));
-            } 
-            echo $this->Form->input('OrganizersLogo', ['type' => 'file']);
-            echo $this->Form->hidden('active');
-            ////////////////////////////////////////////////////////////////////////////////////////////////////////////
-            
+            echo $this->Form->input('descriptioin_more');
+            echo $this->Form->input('register_online');
+            echo $this->Form->input('booking_online');
+            echo $this->Form->input('commamount');
+            echo $this->Form->input('settamount');
+            echo $this->Form->input('todate');
+            echo $this->Form->input('totime');
+            echo $this->Form->input('date');
+            echo $this->Form->input('time');
+            echo $this->Form->input('note');
+            echo $this->Form->input('google_map');
+            echo $this->Form->input('contact_number');
+            echo $this->Form->input('mobile_number');
+            echo $this->Form->input('banner');
+            echo $this->Form->input('display');
+            echo $this->Form->input('OrganizersName');
+            echo $this->Form->input('OrganizersLogo');
         ?>
     </fieldset>
     <?= $this->Form->button(__('Submit')) ?>
     <?= $this->Form->end() ?>
+</div> -->
+
+<?php 
+use Cake\Routing\Router;
+use Cake\I18n\Time;
+?>
+  <?= $this->Form->create($event,array('enctype' => 'multipart/form-data', 'method' =>'post','novalidate' => true))?>
+<!-- <?= $this->Form->create($event,array('id' => 'createEvent','name' => 'createEvent','type' => 'file','onsubmit'=>'return validateForm()', 'method' =>'post','novalidate' => true)) ?> -->
+<?= $this->Form->hidden('user_id', ['options' => $users,'default'=> $users_id]);?>
+<?= $this->Form->hidden('active');?>
+
+<div class="col-md-12 col-xs-12 mb-4 pr-0 pl-0 contain">
+   <?php if($event->banner) {
+                echo $this->Html->image('banner/'.$event->banner, array('alt' => 'Cs-Static','class' => 'imgeff img-fluid static-banner' ,'id' => 'target'));
+            }  else {
+                echo $this->Html->image('cs-static-banner.jpg',array('alt' => 'Cs-Static','class' => 'imgeff img-fluid static-banner' ,'id' => 'target'));
+            }
+            ?>
+
+        <div class="text-block">
+         <!--   <?=$this->Form->input('banner',['type' => 'file','label' => false,'accept' => 'image/*','onchange' => 'putImage()', 'class' => 'cs_browse_btn', 'required']);?> -->
+  <div class="middle">
+  <p>Banner Image</p>
+ <?=$this->Form->input('banner',['type' => 'file','label' => false,'accept' => 'image/*','onchange' => 'putImage()', 'class' => 'img-fluid static-banner','default'=> $event->banner]);?>
+ <?php $this->Form->input('banner');?> 
+  </div>
+  </div>
+  <div class="desk-container">
+    <div class="container">
+      <div class="cs-tag-title-add">
+      
+          <div class="md-form">
+            <?php echo $this->Form->input('title',array('label' => 'Event Title','div' => false,'id' => 'title', 'class' => 'form-control title-form', 'placeholder' => 'Please enter your event title')); ?>
+        </div>
+      </div>
+    </div>
+  </div>
+  <!-- <div class="mob-container">
+    <div class="container">
+      <div class="cs-tag-titlemob-add">
+        <div class="md-form">
+            <?php echo $this->Form->input('title',array('label' => 'Event Title','div' => false, 'class' => 'form-control title-formmob', 'placeholder' => 'Please enter your event title')); ?>
+        </div>
+      </div>
+    </div>
+  </div>  -->
 </div>
- -->
+
+<div class="container">
+  <div class="row">
+    <div class="col-md-8 mb-4">
+    <div class="col-md-14 cs_banner_container mb-5 contain">
+         <?php if($event->display) {
+                echo $this->Html->image('display/'.$event->display, array('alt' => 'Cs-Static','class' => 'img-fluid z-depth-1 rounded cs_banner_bg' ,'id' => 'disptarget'));
+            }  else {
+                echo $this->Html->image('cover_pic.jpg',array('alt' => 'Cs-Static','class' => 'img-fluid z-depth-1 rounded cs_banner_bg' ,'id' => 'disptarget'));
+            }
+            ?>
+  <!--   <?php echo $this->Html->image('cover_pic.jpg',array('alt' => 'Cs-Static','class' => 'img-fluid z-depth-1 rounded cs_banner_bg','id' => 'disptarget' )); ?> -->
+    <div class="dispmiddle btn btn-secondary">
+    <?=$this->Form->input('display',['type' => 'file','label' => false,'accept' => 'image/*','id' =>'display','onchange' => 'putDispImage()', 'class' => '', 'required']);?><?php $this->Form->input('display');?> 
+   <p>Display Image</p>
+</div>
+      </div>
+    <div class="col-md-12 pr-0 pl-0">
+        <div class="d-flex flex-column cs_right_details_mob">
+            <div class="p-4 mb-4 flex-cont rounded ">
+              <div class="text-center">
+                <!-- <h5>₹ 700</h5> -->
+                <a href="javascript:;" class="btn buy-btn" data-toggle="modal" data-target="#modalSubscriptionForm">Get Tickets</a>
+              </div>
+
+<!--Grid row-->
+                <div class="row">
+                <div class="md-form rs-details-bold "> <i class="fa fa-map-marker prefix" style="font-size:23px;"></i>
+                 <?php echo $this->Form->input('Address.areaname', array('id' => 'Autocomplete', 'required','class' => 'form-control form-element','label' => false,'placeholder' => 'Areaname' ,'style'=>'margin-left:15px;'));?>
+                <!--   <?php echo $this->Form->input('areaname', array('id' => 'Autocomplete', 'required','class' => 'form-control','placeholder' => 'Areaname','style'=>'margin-left:15px;'));?> --></div>
+
+                    <!--Grid column-->
+                    <div class="col-md-6">
+                        <div class="md-form mb-0 rs-details-bold"><span><i class="fa fa-calendar prefix" style="font-size:20px; margin-left: -20px; top:15px;"></i></span>
+                         
+                        <?= $this->Form->input('date', array('type' => 'text','id' => 'date','class' => 'form-control datepicker date-input','placeholder' => 'From Date'));?>
+                        </div>
+                    </div>
+                    <!--Grid column-->
+
+                    <!--Grid column-->
+                    <div class="col-md-6">
+                        <div class="md-form mb-0 rs-details-bold ">
+                       <?= $this->Form->input('todate', array('type' => 'text','id' => 'todate','class' => 'form-control datepicker date-input','placeholder' => 'To Date'));?> 
+                          <!--   <input type="text" id="email" name="email" class="form-control" placeholder="To Date">
+                            <label for="email" class="">To Date</label> -->
+                        </div>
+                    </div>
+
+                     <!--Grid column-->
+                    <div class="col-md-6">
+                        <div class="md-form mb-0 rs-details-bold">
+                        <i class="fa fa-clock-o prefix" style="font-size:20px; margin-left: -20px; top:15px;"></i>
+                        <?= $this->Form->input('time', array('type' => 'text','class' => 'form-control datepicker date-input','placeholder' => 'From Time'));?>
+                        </div>
+                    </div>
+                    <!--Grid column-->
+
+                    <!--Grid column-->
+                    <div class="col-md-6">
+                        <div class="md-form mb-0 rs-details-bold ">
+                        <?= $this->Form->input('totime', array('type' => 'text','class' => 'form-control datepicker date-input','placeholder' => 'To Time'));?> 
+                           <!--  <input type="text" id="email" name="email" class="form-control" placeholder="To Time">
+                            <label for="email" class="">To Time</label> -->
+                        </div>
+                    </div>
+</div></div>
+            </div>
+        <div class="md-form">
+                    <?=  $this->Form->input('categories_id',array('div' => false,'class' => 'form-control','options' => $categories_list, 'onChange' => 'checkForOther(this);', 'empty' => '(Select Categories)','label' => false, 'required'));?>
+                </div>
+                <div class="md-form">
+                  <div id="subdiv" class="form-group" style="display: none;">
+                      <?=$this->Form->input('Eventsubcategories.sub_categories',array( 'subcategory_id'=>'', 'class' => 'form-control','options' => $subCategories, 'multiple' => 'true', 'empty' => '(choose one)','label' => false,'empty' => false));?>
+                    </div>
+                </div>
+        <div class="d-flex flex-column">
+        <div class="p-4 mb-4 flex-cont cs-descr-box rounded">
+                <h5 class="cs-title">Event Details</h5>
+                <?= $this->Form->input('descriptioin',array('div' => false, 'label' => false,'class' => 'form-control md-textarea','placeholder' => 'Description about your event','rows' => '4', 'cols' => '50', 'resize'=> 'none','required' => true));?>
+            </div>
+            <div class="p-4 mb-4 flex-cont rounded ">
+                <h5 class="cs-title">Terms & Conditions</h5>
+                <?= $this->Form->input('descriptioin_more',array('div' => false, 'label' => false,'class' => 'form-control md-textarea','placeholder' => 'Terms and conditions if any','rows' => '4', 'cols' => '50', 'resize'=> 'none' ));?>
+            </div>
+
+            <div class="p-4 mb-4 flex-cont rounded ">
+                <h5 class="cs-title">Mediapartner Logo</h5>  
+<?= $this->Form->input('Mediapartners[]',['type' => 'file','label' => false,'multiple' => 'false','id'=>'filesmedia','accept' => 'image/*']);?>
+<?php foreach ($medialists as $medialist): 
+  $id = $medialist['id'];
+  //echo"$medid";?> 
+      <?php echo $this->Html->image('Mediapartners/'. $medialist->MediaPartners ,array('alt' => 'Mediapartners','class' => 'thumb'));  ?><a id ="delete"  class="remove_img_preview"  delete-href-url="<?=$this->Url->build(array('controller' => 'Mediapartners', 'action' => 'delete', $id)); ?>" confirm="Are you sure you want to delete # {0}?,$id"></a>
+     
+               <?php endforeach; ?>
+            </div>
+ <!-- <?= $this->Form->postLink(
+                __(''),
+                ['controller' => 'Mediapartners','action' => 'delete', $id],
+                ['confirm' => __('Are you sure you want to delete # {0}?', $id)
+                ,'class' => 'remove_img_preview']
+            );
+        ?> -->
+            <div class="p-4 mb-4 flex-cont rounded">
+                <h5 class="cs-title">Sponsors Logo</h5>
+                <?=$this->Form->input('Sponsors[]',['type' => 'file','label' => false, 'multiple' => 'false','id'=>'filessponser','accept' => 'image/*']);?>
+                <?php foreach ($sponserlists as $sponserlist): 
+  $id = $sponserlist['id'];
+  //echo"$medid";?>
+      <?php echo $this->Html->image('Sponsors/'. $sponserlist->Sponsors ,array('alt' => 'Sponsors','class' => 'thumb'));  ?> <a id ="delete"  class="remove_img_preview"  delete-href-url="<?=$this->Url->build(array('controller' => 'Sponsors', 'action' => 'delete', $id)); ?>" confirm="Are you sure you want to delete # {0}?,$id"></a>
+     
+               <?php endforeach; ?>
+            </div>
+        </div>
+      </div>
+    </div>
+      <div class="col-md-4 mb-4">
+      <div class="d-flex flex-column cs_right_details_desk">
+          <div class="p-4 mb-4 flex-cont rounded cs_details_rightblock-add">
+          <div class="text-center">
+              <!-- <h5>₹ 699</h5> -->
+            <a href="" class="btn buy-btn btn-rounded mb-4" data-toggle="modal" data-target="#modalSubscriptionForm">Start Ticketing</a>  </div>
+            
+<!--Grid row-->
+                <div class="row">
+                <div class="md-form rs-details-bold "> <i class="fa fa-map-marker prefix" style="font-size:23px;"></i><?php echo $this->Form->input('areaname', array('id' => 'Autocomplete', 'required','class' => 'form-control','placeholder' => 'Areaname','style'=>'margin-left:15px;'));?></div>
+
+                    <!--Grid column-->
+                    <div class="col-md-6">
+                        <div class="md-form mb-0 rs-details-bold"><span><i class="fa fa-calendar prefix" style="font-size:20px; margin-left: -20px; top:15px;"></i></span>
+                        <?= $this->Form->input('date', array('type' => 'text','id' => 'date','name' => 'date','class' => 'form-control datepicker date-input','placeholder' => 'MM/DD/YYYY'));?>
+                        </div>
+                    </div>
+                    <!--Grid column-->
+
+                    <!--Grid column-->
+                    <div class="col-md-6">
+                        <div class="md-form mb-0 rs-details-bold ">
+                      <!--   <?= $this->Form->input('todate', array('type' => 'text','class' => 'form-control datepicker date-input','placeholder' => 'To Date'));?> -->
+                            <input type="text" id="email" name="email" class="form-control date-input" placeholder="To Date">
+                            <label for="email" class="">To Date</label>
+                        </div>
+                    </div>
+
+                     <!--Grid column-->
+                    <div class="col-md-6">
+                        <div class="md-form mb-0 rs-details-bold">
+                        <i class="fa fa-clock-o prefix" style="font-size:20px; margin-left: -20px; top:15px;"></i>
+                        <?= $this->Form->input('time', array('type' => 'text','class' => 'form-control datepicker date-input','placeholder' => '00:00 AM'));?>
+                           </div>
+                    </div>
+                    <!--Grid column-->
+
+                    <!--Grid column-->
+                    <div class="col-md-6">
+                        <div class="md-form mb-0 rs-details-bold ">
+                       <!--  <?= $this->Form->input('totime', array('type' => 'text','class' => 'form-control datepicker date-input','placeholder' => 'To Time'));?> -->
+                            <input type="text" id="email" name="email" class="form-control date-input" placeholder="To Time">
+                            <label for="email" class="">To Time</label>
+                        </div>
+                    </div>
+</div>
+              </div>
+      </div>
+
+        
+  <div class="d-flex flex-column">
+          <div class=" mb-4 flex-cont rounded cs_details_orgblock">
+            <p style=" margin-left: 100px;  font-weight: bold;">Organizer Details</p>
+      <!--Modal: Login with Avatar Form-->
+  <div class="modal-dialog cascading-modal modal-avatar modal-sm" role="document">
+        <!--Content-->
+       
+            <!--Header-->
+            <div class="modal-header">
+              <!--   <?php echo $this->Html->image('org-logo.png',array('alt' => 'avatar','class' => 'rounded-circle img-responsive','id' => 'orgtarget', 'style'=>'height:130px;' )); ?> -->
+      <?php if($event->OrganizersLogo) {
+                echo $this->Html->image('OrganizersLogo/'.$event->OrganizersLogo, array('alt' => 'avatar','class' => 'rounded-circle img-responsive org-img','id' => 'orgtarget'));
+            }  else {
+                echo $this->Html->image('org-logo.png',array('alt' => 'avatar','class' => 'rounded-circle img-responsive org-img','id' => 'orgtarget'));
+            }
+            ?><?php $this->Form->input('OrganizersLogo');?> 
+            </div>
+        </div>
+            <!--Body-->
+          <div class="md-form">
+                  <?=$this->Form->input('OrganizersLogo',['type' => 'file','label' => false,'onchange' => 'putorgImage()','id' => 'org','accept' => 'image/*']);?> 
+                  <?=  $this->Form->input('OrganizersName',array('label' => 'Organizers name','div' => false,'class' => 'form-control','placeholder' => 'Please enter Organizer Name', 'required'));?></div>        
+  </div>
+        <!--/.Content-->
+    </div>
+
+<!--Modal: Login with Avatar Form-->
+
+
+      <div class="d-flex flex-column">
+          <div class="p-4 mb-4 flex-cont rounded ">
+         
+                  <div class="md-form">
+                     <?= $this->Form->input('Address.address_1',array('div' => false,'label' => false,'class' => 'form-control form-element', 'placeholder' => 'Enter address 1'), ['value' => $address['address_1']]);?>
+                 <!--  <?= $this->Form->input('address_1',array('div' => false,'label' => 'Address 1','class' => 'form-control', 'placeholder' => 'Enter address 1', 'required'));?> -->
+            </div>
+
+            <div class="md-form">
+               <?= $this->Form->input('Address.address_2',array('div' => false,'label' => false,'class' => 'form-control form-element', 'placeholder' => 'Enter address 2'), ['value' => $address['address']]);?>
+                 <!--  <?= $this->Form->input('address_2',array('div' => false,'label' => 'Address 2','class' => 'form-control', 'placeholder' => 'Enter address 2', 'required'));?> -->
+            </div>
+
+            <div class="md-form">
+                <?= $this->Form->input('Address.landmark',array('div' => false,'label' => false,'class' => 'form-control form-element', 'placeholder' => 'Any Specific Landmark?'), ['value' => $address['landmark']]);?> <span id="area_error" style="color: #FF0000; font-size: 11px;"></span>
+                   <!--  <?= $this->Form->input('landmark',array('div' => false,'label' => 'Landmark','class' => 'form-control', 'placeholder' => 'Any Specific Landmark?'));?>   -->
+            </div>
+
+            <div class="md-form">
+                  <?= $this->Form->input('contact_number',array('div' => false, 'label' => 'Contact Number','class' => 'form-control','placeholder' => 'Enter Contact Number'));?>
+                </div>
+                <div class="md-form">
+                  <?= $this->Form->input('mobile_number',array('id' => 'mobile_number', 'div' => false,'label' => 'Mobile Number','class' => 'form-control','placeholder' => 'Enter Mobile Number'));?>
+                </div>
+
+            <input type="text" class="form-control map" id="googleMapID" name="google_map" placeholder="" readonly="" style="color: black !important; display: none;">
+                  <input type="button" data-toggle="modal" data-target="#myModal" class="btn launch-map" value="Launch Map" style="background-color: #337AB7;"/>
+        </div>
+      </div>
+      <div class="d-flex flex-column">
+          <div class="p-4 mb-4 flex-cont rounded cs_details_advertblock">
+            <div style='overflow:hidden;height:330px;width:100%;'>
+              <div  style='height:330px;width:700px;'> <h4>
+            Advertisement
+          </h4></div>
+            </div>
+            
+        </div>
+      </div>
+    </div>
+  </div>
+</div>
+
+<div class="modal fade" id="myModal">
+  <div class="modal-dialog" role="document">
+    <div class="modal-content">
+      <div class="modal-header">
+        <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+          <span aria-hidden="true" style="color: #4ABAC6;">&times;</span>
+        </button>
+        <h5 class="modal-title" id="exampleModalLabel">Map</h5>        
+      </div>
+      <div class="modal-body">
+        <div id="mapPanel">            
+            <input class="form-control text plac" id="city_country" type="textbox" value="Mylapore, Chennai" placeholder="Search your area..." style="color: black !important;">
+            <input class="btn btn-md btn-primary botton" type="button" value="search" onclick="codeAddress()">            
+        </div>  
+        <div id="mapCanvas" style="width: 100%; height: 350px;"></div>
+        <div id="infoPanel">
+            <!--<b>Marker status:</b>
+            <div id="markerStatus"><i>Click and drag the marker.</i></div>
+            <b>Current position:</b>
+            <div id="info"></div>-->
+            <!-- <b>Closest matching address:</b>
+            <div id="address"></div> -->
+        </div>
+      </div>
+      <div class="modal-footer">
+        <button type="button" class="btn btn-secondary" data-dismiss="modal" style="background: #337AB7;color: white;">Close</button>
+       <!--  <button type="button" class="btn btn-primary" data-dismiss="modal">Save changes</button> -->
+      </div>
+    </div>
+  </div>
+</div>
+
+<div class="modal fade" id="modalSubscriptionForm" tabindex="-1" role="dialog" aria-labelledby="myModalLabel" aria-hidden="true">
+    <div class="modal-dialog" role="document">
+        <div class="modal-content">
+            <div class="modal-header text-center">
+                <h4 class="modal-title w-100 font-weight-bold">Ticketing Service</h4>
+                <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+                    <span aria-hidden="true">&times;</span>
+                </button>
+            </div>
+            <div class="modal-body mx-3">
+<div class="md-form input-group">
+  <div class="input-group-prepend">
+   <!--   <?= $this->Form->input('tickettype_1',array( 'label'=> false,'class' => 'form-control validate ','placeholder' => 'Ticket Type' ,'style' => 'width: 90%;'));?> -->
+
+    <input type="text" id="tickettype_1" name="tickettype_1" class="form-control validate" placeholder="Ticket Type" >
+
+  </div>&nbsp;&nbsp;&nbsp;&nbsp;
+
+ <!--  <?= $this->Form->input('ticketprice_1',array('label'=> false,'class' => 'form-control validate ','placeholder' => 'Ticket Price', 'style' => 'width: 90%;'));?>
+  -->  
+    <input type="text" id="ticketprice_1" name="ticketprice_1" class="form-control validate" placeholder="Ticket Price" >
+</div>
+<div class="md-form input-group">
+  <div class="input-group-prepend">
+   <!--   <?= $this->Form->input('tickettype_2',array( 'label'=> false,'class' => 'form-control validate ','placeholder' => 'Ticket Type' ,'style' => 'width: 90%;'));?> -->
+
+       <input type="text" id="tickettype_2" name="tickettype_2" class="form-control validate" placeholder="Ticket Type" >
+  </div>&nbsp;&nbsp;&nbsp;&nbsp;
+
+  <!-- <?= $this->Form->input('ticketprice_2',array('label'=> false,'class' => 'form-control validate ','placeholder' => 'Ticket Price', 'style' => 'width: 90%;'));?> -->
+     <input type="text" id="ticketprice_2" name="ticketprice_2" class="form-control validate" placeholder="Ticket Price" >
+</div>
+<div class="md-form input-group">
+  <div class="input-group-prepend">
+  <!--    <?= $this->Form->input('tickettype_3',array( 'label'=> false,'class' => 'form-control validate ','placeholder' => 'Ticket Type' ,'style' => 'width: 90%;'));?> -->
+      <input type="text" id="tickettype_3" name="tickettype_3" class="form-control validate" placeholder="Ticket Type" >
+  </div>&nbsp;&nbsp;&nbsp;&nbsp;
+ <!-- <?= $this->Form->input('ticketprice_3',array('label'=> false,'class' => 'form-control validate ','placeholder' => 'Ticket Price', 'style' => 'width: 90%;'));?> -->
+    <input type="text" id="ticketprice_3" name="ticketprice_3" class="form-control validate" placeholder="Ticket Price" >
+</div>
+
+            </div>
+            <div class="modal-footer d-flex justify-content-center modal-foot">
+                <button class="btn btn-deep-orange">Submit <i class="fa fa-paper-plane-o ml-1"></i></button>
+            </div>
+        </div>
+    </div>
+</div>
+<div class="form-group">
+    <?= $this->Form->button('Submit',array('id' => 'subbutton','class'=>'btn btn-secondary pull-centre sub-but')) ?>
+</div>
+<?= $this->Form->end() ?>
+
+<script src="https://ajax.googleapis.com/ajax/libs/jquery/2.1.1/jquery.min.js"></script>
+<script type="text/javascript">
+//mediapartners
+$(document).ready(function() {
+  if (window.File && window.FileList && window.FileReader) {
+    $("#filesmedia").on("change", function(e) {
+      var files = e.target.files,
+        filesLength = files.length;
+      for (var i = 0; i < filesLength; i++) {
+        var f = files[i]
+        var fileReader = new FileReader();
+        fileReader.onload = (function(e) {
+          var file = e.target;
+          $("<span class=\"pip\"> &nbsp;&nbsp;" +
+            "<img class=\"imageThumb\" src=\"" + e.target.result + "\" title=\"" + file.name + "\"/>" +
+            "<br/><span class=\"remove\"></span>" +
+            "</span>").insertAfter("#filesmedia");
+          // $(".remove").click(function(){
+          //   $(this).parent(".pip").remove();
+          // });
+          $(".remove").click(function(){
+        $(this).parent(".pip").remove();
+       $('#filesmedia').val(); 
+       // $('input:file#upload')[1].files
+      });
+          // Old code here
+          /*$("<img></img>", {
+            class: "imageThumb",
+            src: e.target.result,
+            title: file.name + " | Click to remove"
+          }).insertAfter("#files").click(function(){$(this).remove();});*/          
+        });
+        fileReader.readAsDataURL(f);
+      }
+    });
+  } else {
+    alert("Your browser doesn't support to File API")
+  }
+});
+//Sponser
+var count=0;
+  $(document).ready(function() {
+  if (window.File && window.FileList && window.FileReader) {
+    $("#filessponser").on("change", function(e) {
+      var files = e.target.files,
+        filesLength = files.length;
+      for (var i = 0; i < filesLength; i++) {
+        var f = files[i]
+        var fileReader = new FileReader();
+        fileReader.onload = (function(e) {
+          var file = e.target;
+         count++; 
+ $("<span class=\"pip\"> &nbsp;&nbsp;" +
+            "<img class=\"imageThumb\" src=\"" + e.target.result + "\" title=\"" + file.name + "\"/>" +
+            "<br/><span class=\"remove\"></span>" +
+            "</span>").insertAfter("#filessponser");
+          $(".remove").click(function(){
+            // var inval = count--;
+            // alert(inval)
+        $(this).parent(".pip").remove();
+        $('#filessponser').val(); 
+ //$('input:file#filessponser')[1].files
+       // $('input:file#upload')[1].files
+      });
+         });
+        fileReader.readAsDataURL(f);
+      }
+    });
+  } else {
+    alert("Your browser doesn't support to File API")
+  }
+});    
+  //banner image
+function showImage(src, target) {
+            var fr = new FileReader();
+
+             fr.onload = function(){
+      target.src = fr.result;
+    }
+           fr.readAsDataURL(src.files[0]);
+
+        }
+        function putImage() {
+            var src = document.getElementById("banner");
+            var target = document.getElementById("target");
+            showImage(src, target);
+        }
+//display image
+    function showDispImage(src1, target1) {
+            var fro = new FileReader();
+
+             fro.onload = function(){
+      target1.src = fro.result;
+    }
+           fro.readAsDataURL(src1.files[0]);
+
+        }
+        function putDispImage() {
+            var src1 = document.getElementById("display");
+            var target1 = document.getElementById("disptarget");
+            showImage(src1, target1);
+        }
+
+        //organizer logo
+          function showorgImage(src2, target2) {
+            var f = new FileReader();
+
+             f.onload = function(){
+      target2.src = f.result;
+    }
+           f.readAsDataURL(src2.files[0]);
+
+        }
+        function putorgImage() {
+            var src2 = document.getElementById("org");
+            var target2 = document.getElementById("orgtarget");
+            showImage(src2, target2);
+        }
+
+        $('.launch-map').on('click', function () {
+    var loc = $("#landmark").val() + $("#areaname").val();
+    $("#city_country").val(loc);
+      $('#myModal').modal({
+          backdrop: 'static',
+          keyboard: false
+      }).on('shown.bs.modal', function () {
+          codeAddress();
+      });
+  });
+
+        $(document).ready(function(){
+    var date_input=$('input[name="date"]'); //our date input has the name "date"
+    var container=$('.bootstrap-iso form').length>0 ? $('.bootstrap-iso form').parent() : "body";
+    date_input.datepicker({
+      format: 'mm/dd/yyyy',
+      container: container,
+      todayHighlight: true,
+      autoclose: true,
+    })
+  })
+          $(document).ready(function(){
+    var date_input=$('input[name="todate"]'); //our date input has the name "date"
+    var container=$('.bootstrap-iso form').length>0 ? $('.bootstrap-iso form').parent() : "body";
+    date_input.datepicker({
+      format: 'mm/dd/yyyy',
+      container: container,
+      todayHighlight: true,
+      autoclose: true,
+    })
+  })
+    </script>
+     <script type="text/javascript">
+                        $(document).ready(function() {
+  //alert(1);
+  $('.remove_img_preview').click(function(){
+    //alert(2);
+    $('a#delete').attr('href', $(this).attr('delete-href-url')); // better if you add an id to anchor & then
+    // $('a#add').attr('href',  $(this).attr('add-href-url')); // better if you add an id to anchor & then $('a#idofAnchor')
+  });
+});</script>

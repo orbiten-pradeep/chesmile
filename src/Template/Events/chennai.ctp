@@ -5,13 +5,13 @@ use Cake\I18n\Time;
 
 
 <?php
-$bgImage = $event->banner;
-if(!empty($bgImage)){
-	$bgCoverImg = $this->Url->image('banner/'.$bgImage);
-}
-else {
-	$bgCoverImg = $this->Url->image('cover_pic.jpg');
-}
+// $bgImage = $event->banner;
+// if(!empty($bgImage)){
+// 	$bgCoverImg = $this->Url->image('banner/'.$bgImage);
+// }
+// else {
+// 	$bgCoverImg = $this->Url->image('cover_pic.jpg');
+// }
 
 
 function asRupees($value) {
@@ -23,7 +23,13 @@ $eventPriceFormatted = (!empty($event->price)) ? asRupees($event->price) : 0;
 ?>
 
 <div class="col-md-12 col-xs-12 mb-4 pr-0 pl-0">
-	<?php echo $this->Html->image('cs-static-banner.jpg',array('alt' => 'Cs-Static','class' => 'img-fluid static-banner')); ?>
+	<!-- <?php echo $this->Html->image('cs-static-banner.jpg',array('alt' => 'Cs-Static','class' => 'img-fluid static-banner')); ?> -->
+	<?php if($event->banner) {
+                echo $this->Html->image('banner/'.$event->banner, array('alt' => 'Cs-Static','class' => 'imgeff img-fluid static-banner'));
+            }  else {
+                echo $this->Html->image('cs-static-banner.jpg',array('alt' => 'Cs-Static','class' => 'imgeff img-fluid static-banner'));
+            }
+            ?>
 	<div class="desk-container">
 		<div class="container">
 			<div class="cs-tag-title">
@@ -59,14 +65,13 @@ $eventPriceFormatted = (!empty($event->price)) ? asRupees($event->price) : 0;
 		  </ul>
 
 			<div class="col-md-14 cs_banner_container mb-5">
-				<?php $bgImage = $event->banner;
-				if(!empty($bgImage)){
-		 			echo $this->Html->image('banner/'.$bgImage,array('alt' => 'Cs-Static','class' => 'img-fluid z-depth-1 rounded cs_banner_bg')); 
-				}
-				else {
-		 			echo $this->Html->image('cover_pic.jpg',array('alt' => 'Cs-Static','class' => 'img-fluid z-depth-1 rounded cs_banner_bg')); 
-				}	?>
-				<!-- <div class="banner_image">
+
+				<?php if($event->display) {
+                echo $this->Html->image('display/'.$event->display, array('alt' => 'Cs-Static','class' => 'img-fluid z-depth-1 rounded cs_banner_bg'));
+            }  else {
+                echo $this->Html->image('cover_pic.jpg',array('alt' => 'Cs-Static','class' => 'img-fluid z-depth-1 rounded cs_banner_bg'));
+            }
+            ?><!-- <div class="banner_image">
 					<?php $bgImage = $event->banner;
 					if(!empty($bgImage)){
 			 			echo $this->Html->image('banner/'.$bgImage,array('alt' => 'Cs-Static','class' => 'img-fluid z-depth-1 rounded cs_banner')); 
@@ -94,22 +99,22 @@ $eventPriceFormatted = (!empty($event->price)) ? asRupees($event->price) : 0;
 				    			</span>
 				    		</p>
 				    		<?php } ?>
-				    		<?php if(isset($event->date) && !empty($event->date)) { ?>
+				    		<?php if(isset($event->date) && !empty($event->date)) { ?><?php if(isset($event->todate) && !empty($event->todate)) { ?>
 				    		<p><i class="fa fa-calendar" style="font-size:16px"></i>
 				    		<!-- 	<?php echo $this->Html->image('cal.png')?> -->
 				    			<span class="rs-details-bold">
-				    				<?php echo date_format($event->date, "j M Y"); ?>
+				    				<?php echo date_format($event->date, "j M Y"); ?> To <?php echo date_format($event->todate, "j M Y"); ?>
 				    			</span>
 				    		</p>
-				    		<?php } ?>
-				    		<?php if(isset($event->time) && !empty($event->time)) { ?>
+				    		<?php } }?>
+				    		<?php if(isset($event->time) && !empty($event->time)) { ?> <?php if(isset($event->totime) && !empty($event->totime)) { ?>
 				    		<p><i class="fa fa-clock-o" style="font-size:16px"></i>
 				    			<!-- <?php echo $this->Html->image('clock-chennaismile.png')?> -->
 				    			<span class="rs-details-bold">
-				    				<?php echo h($event->time); ?>
+				    				<?php echo h($event->time); ?> To <?php echo h($event->totime); ?>
 				    			</span>
 				    		</p>
-				    		<?php } ?>
+				    		<?php } }?>
 				    		<p><i class="fa fa-share-alt" aria-hidden="true"></i><span class="rs-details">0 Shared</span></p>
 				    		<p><i class="fa fa-heart-o" aria-hidden="true"></i><span class="rs-details">0 Liked</span></p>
 				    		<p><i class="fa fa-eye" aria-hidden="true"></i><span class="rs-details">0 People Viewed</span></p>
@@ -125,20 +130,40 @@ $eventPriceFormatted = (!empty($event->price)) ? asRupees($event->price) : 0;
 					<?php } ?>
 					<div class="p-4 mb-4 flex-cont rounded cs_details_block">
 					    <h5 class="cs-title">Terms & Conditions</h5>
-					    <p class="event-details">Lorem ipsum dolor sit amet, consectetuer adipiscing elit. Aenean commodo ligula eget dolor. Aenean massa. Cum sociis natoque penatibus et magnis dis parturient montes, nascetur ridiculus mus. Donec quam felis, ultricies nec, pellentesque eu, pretium quis, sem. Nulla consequat massa quis enim. Donec pede justo, fringilla vel, aliquet nec, vulputate eget, arcu. In enim justo, rhoncus ut, imperdiet a, venenatis vitae, justo. Nullam dictum felis eu pede mollis pretium. Integer tincidunt. Cras dapibus. Vivamus elementum semper nisi. Aenean vulputate eleifend tellus. Aenean leo ligula, porttitor eu, consequat vitae, eleifend ac, enim. Aliquam lorem ante, dapibus in, viverra quis, feugiat a</p>
+					       <h6 class="event-details" "><?php echo $this->Text->autoParagraph(h($event->descriptioin_more),array('class' => 'event-details'));?></h6>
+					   <!--  <p class="event-details">Lorem ipsum dolor sit amet, consectetuer adipiscing elit. Aenean commodo ligula eget dolor. Aenean massa. Cum sociis natoque penatibus et magnis dis parturient montes, nascetur ridiculus mus. Donec quam felis, ultricies nec, pellentesque eu, pretium quis, sem. Nulla consequat massa quis enim. Donec pede justo, fringilla vel, aliquet nec, vulputate eget, arcu. In enim justo, rhoncus ut, imperdiet a, venenatis vitae, justo. Nullam dictum felis eu pede mollis pretium. Integer tincidunt. Cras dapibus. Vivamus elementum semper nisi. Aenean vulputate eleifend tellus. Aenean leo ligula, porttitor eu, consequat vitae, eleifend ac, enim. Aliquam lorem ante, dapibus in, viverra quis, feugiat a</p> -->
 					</div>
 
 
 						<div class="p-4 mb-4 flex-cont rounded z-depth-1">
 						    <h5 class="cs-title">Mediapartner Logo</h5>
-							<?php echo $this->Html->image('cover_pic.jpg',array('alt' => 'Cs-Static','class' => 'thumb' )); ?>
-							 <!-- <?= $this->Form->input('Mediapartners[]',['type' => 'file','name' =>'image_file_arr[]', 'label' => false,'multiple' => 'true','id'=>'files','accept' => 'image/*']);?><output id="list"></output> -->
+						    <?php  if(!empty($medialists))
+						    {foreach ($medialists as $medialist): 
+  // $id = $medialist['id'];
+  // $image = $medialist['MediaPartners'];
+  // echo"$image";
+  ?>
+      <?php echo $this->Html->image('Mediapartners/'.$medialist->MediaPartners ,array('alt' => 'Mediapartners','class' => 'thumb'));  ?>&nbsp;&nbsp;&nbsp;
+     
+               <?php endforeach;
+           } else{?>
+							<?php echo $this->Html->image('cover_pic.jpg',array('alt' => 'Cs-Static','class' => 'thumb' )); }?>
+							
 						</div>
 
 						<div class="p-4 mb-4 flex-cont rounded z-depth-1">
 						    <h5 class="cs-title">Sponsors Logo</h5>
-						    <?php echo $this->Html->image('cover_pic.jpg',array('alt' => 'Cs-Static','class' => 'thumb' )); ?>
-						    <!-- <?=$this->Form->input('Sponsors[]',['type' => 'file','label' => false, 'multiple' => 'true','id'=>'files1','accept' => 'image/*']);?> -->
+						    <?php  if(!empty($sponsorlists))
+						    { 
+						     foreach ($sponsorlists as $sponsorlist): 
+  $id = $sponsorlist['id'];
+ ?>
+      <?php echo $this->Html->image('Sponsors/'.$sponsorlist->Sponsors ,array('alt' => 'Sponsors','class' => 'thumb'));  ?>&nbsp;&nbsp;&nbsp;
+     
+               <?php endforeach;
+               } else{?>
+						    <?php echo $this->Html->image('cover_pic.jpg',array('alt' => 'Cs-Static','class' => 'thumb' )); }?>
+						  
 						</div>
 
 				</div>
@@ -163,37 +188,61 @@ $eventPriceFormatted = (!empty($event->price)) ? asRupees($event->price) : 0;
 		    			</span>
 		    		</p>
 		    		<?php } ?>
-		    		<?php if(isset($event->date) && !empty($event->date)) { ?>
+		    		<?php if(isset($event->date) && !empty($event->date)) { ?><?php if(isset($event->todate) && !empty($event->todate)) { ?>
 		    		<p><i class="fa fa-calendar" style="font-size:16px"></i>
 		    			<!-- <?php echo $this->Html->image('cal.png')?> -->
 		    			<span class="rs-details-bold">
-		    				<?php echo date_format($event->date, "j M Y"); ?>
+		    				<?php echo date_format($event->date, "j M Y"); ?> To <?php echo date_format($event->todate, "j M Y"); ?>
 		    			</span>
 		    		</p>
-		    		<?php } ?>
-		    		<?php if(isset($event->time) && !empty($event->time)) { ?>
+		    		<?php } }?>
+		    		<?php if(isset($event->time) && !empty($event->time)) { ?><?php if(isset($event->totime) && !empty($event->totime)) { ?>
 		    		<p> <i class="fa fa-clock-o" style="font-size:16px"></i>
 		    			<!-- <?php echo $this->Html->image('clock-chennaismile.png')?> -->
 		    			<span class="rs-details-bold">
-		    				<?php echo h($event->time); ?>
+		    				<?php echo h($event->time); ?> To <?php echo h($event->totime); ?>
 		    			</span>
 		    		</p>
-		    		<?php } ?>
+		    		<?php } }?>
 		    		<p><i class="fa fa-share-alt" aria-hidden="true"></i><span class="rs-details">1k shared</span></p>
 		    		<p><i class="fa fa-heart-o" aria-hidden="true"></i><span class="rs-details">1k Liked</span></p>
 		    		<p><i class="fa fa-eye" aria-hidden="true"></i><span class="rs-details">1k People Viewed</span></p>
 		    	</div>
 			</div>
 
-	<div class="d-flex flex-column">
+	<!-- <div class="d-flex flex-column">
 			    <div class="org-padd mb-4 flex-cont rounded cs_details_orgblock">
 			    	
  <p style="font-weight: bold">Organizer Details</p>
- 	<p class="event-details"><?php echo $this->Html->image('cover_pic.jpg',array('alt' => 'Cs-Static','class' => 'org-img','id' => 'orgtarget' )); ?><br> Conducted By: <?php echo h($event->OrganizersName); ?></p>
+ 	<p class="event-details">
+ 		<?php if($event->OrganizersLogo) {
+                echo $this->Html->image('OrganizersLogo/'.$event->OrganizersLogo, array('alt' => 'Cs-Static','class' => 'org-img','id' => 'orgtarget'));
+            }  else {
+                echo $this->Html->image('cover_pic.jpg',array('alt' => 'Cs-Static','class' => 'org-img','id' => 'orgtarget'));
+            }
+            ?><!-- <?php echo $this->Html->image('cover_pic.jpg',array('alt' => 'Cs-Static','class' => 'org-img','id' => 'orgtarget' )); ?> 
+ 	<br> Conducted By: <?php echo h($event->OrganizersName); ?></p>
 			    	
 				</div>
-			</div>
+			</div> -->
 
+<div class="d-flex flex-column">
+			    <div class="org-padd mb-4 flex-cont rounded cs_details_orgblock">
+			    	<p style=" margin-left: 50px;  font-weight: bold;">Organizer Details</p>
+ <div class="modal-dialog cascading-modal modal-avatar modal-sm" role="document">
+        <!--Content-->
+        <div class="modal-header">
+<?php if($event->OrganizersLogo) {
+                echo $this->Html->image('OrganizersLogo/'.$event->OrganizersLogo, array('alt' => 'avatar','class' => 'rounded-circle img-responsive org-img','id' => 'orgtarget'));
+            }  else {
+                echo $this->Html->image('nologo.png',array('alt' => 'avatar','class' => 'rounded-circle img-responsive org-img','id' => 'orgtarget'));
+            }
+            ?>
+        </div>
+            <!--Body-->
+                <!-- <p>Conducted By:  --><h5 style=" margin-left: 50px;" ><?php echo h($event->OrganizersName); ?></h5><!-- </p> -->
+ </div>
+</div></div>
 			<?php if(isset($event->google_map) && !empty($event->google_map)) { $geoCode = $event->google_map; } else { $geoCode = '13.0595365, 80.24247919999993'; } ?>
 
 			<div class="d-flex flex-column">

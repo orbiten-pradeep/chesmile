@@ -1212,7 +1212,7 @@ public function organizerevents()
 
 			$event_val = $this->Events->find('all', ['conditions' => array('slug'=>$slug,'active' => '1')],[
 
-	            'contain' => ['Users', 'Categories'],
+	            'contain' => ['Users', 'Categories','Mediapartners','Sponsors'],
 
 	        ]);
 
@@ -1244,7 +1244,7 @@ public function organizerevents()
 
 		}
 
-		
+		 $eventsdet = $this->Events->find('all', ['conditions' => ['id' => $id]]);
 
         $this->loadModel('Address');
 
@@ -1252,19 +1252,26 @@ public function organizerevents()
 
         $address = $address->first();
 
+       // $mediapartners = $this->Mediapartners->find('all', ['conditions' => ['events_id' => $id]]);
+       // $mediapartners = $mediapartners->first();
+        //$medialist= $this->paginate['conditions'] = array('Mediapartners.events_id' => $id);
         $this->loadModel('Mediapartners');
+        $medialist= $this->paginate['conditions'] = array('Mediapartners.events_id' => $id);
+        $medialists = $this->paginate($this->Mediapartners);
+        $this->set(compact('medialists','medialist'));
+        $this->set('_serialize', ['medialists']);
+        $this->set('_serialize', ['medialist']);
 
-        $mediapartners = $this->Mediapartners->find('all', ['conditions' => ['events_id' => $id]]);
+        $this->loadModel('Sponsors');
+        $sponsorlist= $this->paginate['conditions'] = array('Sponsors.events_id' => $id);
+        $sponsorlists = $this->paginate($this->Sponsors);
+        $this->set(compact('sponsorlists','sponsorlist'));
+        $this->set('_serialize', ['sponsorlists']);
+        $this->set('_serialize', ['sponsorlist']);
 
         $this->loadModel('Galaries');
 
         $galaries = $this->Galaries->find('all', ['conditions' => ['events_id' => $id]]);
-
-
-
-        $this->loadModel('Sponsors');
-
-        $sponsors = $this->Sponsors->find('all', ['conditions' => ['events_id' => $id]]);
 
         $this->loadModel('Likes');
 
@@ -1306,7 +1313,7 @@ public function organizerevents()
 
         $this->set(compact('subCategories_new'));
 
-        $this->set(compact('address', 'mediapartners', 'sponsors', 'number', 'likes', 'u_id', 'galaries'));
+        $this->set(compact('address', 'mediapartners', 'sponsors', 'number', 'likes', 'u_id', 'galaries','event'));
 
         
 
@@ -1511,12 +1518,7 @@ public function organizerevents()
 					        mkdir($uploadFolder);
 
 					    }
-
-
-
-
-
-					    $filename = str_replace(" ", "-", rand(1, 3000) . $file_name);
+ $filename = str_replace(" ", "-", rand(1, 3000) . $file_name);
 
 	                	//move_uploaded_file($file_tmp=$this->request->data['Mediapartners'][$key]["tmp_name"], WWW_ROOT . 'img/Mediapartners' . DS . $filename);
 
@@ -2054,124 +2056,471 @@ public function organizerevents()
 
     {
 
-        $event = $this->Events->get($id, [
-
+      $event = $this->Events->get($id, [
             'contain' => ['Eventsubcategories']
-
         ]);
-
         $this->viewBuilder()->layout('event_new_home');
+$this->paginate = [
+             'contain' => ['Events']
+         ];
+        
+       $this->loadModel('Address');
 
-        $this->loadModel('Address');
+        $this->loadModel('Mediapartners');
+        $medialist= $this->paginate['conditions'] = array('Mediapartners.events_id' => $id);
+        $medialists = $this->paginate($this->Mediapartners);
+        $this->set(compact('medialists','medialist'));
+        $this->set('_serialize', ['medialists']);
+        $this->set('_serialize', ['medialist']);
+
+        $this->loadModel('Sponsors');
+        $sponserlist= $this->paginate['conditions'] = array('Sponsors.events_id' => $id);
+        $sponserlists = $this->paginate($this->Sponsors);
+        $this->set(compact('sponserlists','sponserlist'));
+        $this->set('_serialize', ['sponserlists']);
+        $this->set('_serialize', ['sponserlist']);
 
         $address = $this->Address->find('all', ['conditions' => ['events_id' => $id]]);
-
         $address = $address->first();
+           $mediapartner = $this->Mediapartners->find('all', ['conditions' => ['events_id' => $id]]);
 
-    	if(!empty($this->Auth->user('id')))
+        $mediapartner = $mediapartner->first();
 
-		{
+         $sponsor = $this->Sponsors->find('all', ['conditions' => ['events_id' => $id]]);
 
-			$users_id = $this->Auth->user('id');
+        $sponsor = $sponsor->first();
 
-			$fullname = $this->Auth->user('fullname');
-
-			$email = $this->Auth->user('email');
-
-		}
-
-
-
+        if(!empty($this->Auth->user('id')))
+        {
+            $users_id = $this->Auth->user('id');
+            $fullname = $this->Auth->user('fullname');
+            $email = $this->Auth->user('email');
+        }
 
 
         if ($this->request->is(['patch', 'post', 'put'])) {
-
-        	$address = $this->Address->patchEntity($address, $this->request->data['Address']);
-
-	        $address->events_id = $id;
-
-	        $this->Address->save($address);
-
-	        $this->request->data['date'] = new Time($this->request->data['date']);
-
-        	/////////////////////////////////////////////////////////////////
-
-
-
-	        $name_to_slug = Inflector::slug($this->request->data['title'], $replacement = '-');
-
-        	$this->request->data['slug'] = strtolower($name_to_slug);
-
-
-
-            $results = $this->Events->find('all', array('conditions' => array('slug' => $this->request->data['title'], 'id !=' => $id)));
-
-            $cnt = $results->count();
-
-
-
-            if($cnt > 0)
+            //Media Partners
+            if(!empty($this->request->data['Mediapartners']))
 
             {
 
-                $this->request->data['slug_status'] = ($cnt+1);
+                $error=array();
 
-            } else
+                $extension=array("jpeg","jpg","png","gif");
 
-            {
+                foreach($this->request->data['Mediapartners'] as $key=>$tmp_name)
 
-                $this->request->data['slug_status'] = 0;
+                {
+
+                    $file_name=$this->request->data['Mediapartners'][$key]["name"];
+
+                    $file_tmp=$this->request->data['Mediapartners'][$key]["tmp_name"];
+
+                    $ext=pathinfo($file_name,PATHINFO_EXTENSION);
+
+                    if(in_array($ext,$extension))
+
+                    {
+
+                        $uploadFolder = WWW_ROOT . 'img/Mediapartners';
+
+                        if( !file_exists($uploadFolder) ){
+
+                            mkdir($uploadFolder);
+
+                        }
+
+                        $filename = str_replace(" ", "-", rand(1, 3000) . $file_name);
+                      if(!file_exists(WWW_ROOT . 'img/Mediapartners' . DS . $filename))
+
+                        {
+
+                            move_uploaded_file($file_tmp=$this->request->data['Mediapartners'][$key]["tmp_name"], WWW_ROOT . 'img/Mediapartners' . DS . $filename);
+
+                            $this->request->data['Mediapartners'][$key]["name"] = $filename;
+
+                        }
+
+                        else
+
+                        {
+
+                            $filename=basename($file_name,$ext);
+
+                            $newFileName=$filename.time().".".$ext;
+
+                            move_uploaded_file($file_tmp=$this->request->data['Mediapartners'][$key]["tmp_name"], WWW_ROOT . 'img/Mediapartners' . DS . $newFileName);
+
+                            $this->request->data['Mediapartners'][$key]["name"] = $newFileName;
+
+                        }
+
+                    }
+
+                    else
+
+                    {
+
+                        array_push($error,"$file_name, ");
+
+                    }
+
+                }
 
             }
 
 
 
+            //Sponsors
+
+            if(!empty($this->request->data['Sponsors']))
+
+            {
+
+                $error=array();
+
+                $extension=array("jpeg","jpg","png","gif");
+
+                foreach($this->request->data['Sponsors'] as $key=>$tmp_name)
+
+                {
+
+                    $file_name=$this->request->data['Sponsors'][$key]["name"];
+
+                    $file_tmp=$this->request->data['Sponsors'][$key]["tmp_name"];
+
+                    $ext=pathinfo($file_name,PATHINFO_EXTENSION);
+
+                    if(in_array($ext,$extension))
+
+                    {
+
+                        $uploadFolder = WWW_ROOT . 'img/Sponsors';
+
+                        if( !file_exists($uploadFolder) ){
+
+                            mkdir($uploadFolder);
+
+                        }
+                         $filename = str_replace(" ", "-", rand(1, 3000) . $file_name);
+
+                        if(!file_exists(WWW_ROOT . 'img/Sponsors' . DS . $filename))
+
+                        {
+
+                            move_uploaded_file($file_tmp=$this->request->data['Sponsors'][$key]["tmp_name"], WWW_ROOT . 'img/Sponsors' . DS . $filename);
+
+                            $this->request->data['Sponsors'][$key]["name"] = $filename;
+
+                        }
+
+                        else
+
+                        {
+
+                            $filename=basename($file_name,$ext);
+
+                            $newFileName=$filename.time().".".$ext;
+
+                            move_uploaded_file($file_tmp=$this->request->data['Sponsors'][$key]["tmp_name"], WWW_ROOT . 'img/Sponsors' . DS . $newFileName);
+
+                            $this->request->data['Sponsors'][$key]["name"] = $newFileName;
+
+                        }
+
+                    }
+
+                    else
+
+                    {
+
+                        array_push($error,"$file_name, ");
+
+                    }
+
+                }
+
+            }
+
+            // $display = null;
+
+            // $banner = null;
+
+            // $OrganizersLogo = null;
+
+
+//banner Image
+
+            if(!empty($this->request->data['banner']))
+
+            {
+
+                $banner = $this->request->data['banner'];
+
+                $ext = substr(strtolower(strrchr($banner['name'], '.')), 1); //get the extension
+
+                $arr_ext = array('jpg', 'jpeg', 'png'); //set allowed extensions
+
+
+
+                if($banner['size']/1024 > '2048')
+
+                {
+
+                    $this->Flash->error(__('"imageLogs", __METHOD__." The uploaded file exceeds the MAX_FILE_SIZE(2MB) '));
+
+                    $errCheck = true;
+
+                }
+
+                else if(in_array($ext, $arr_ext))
+
+                {
+
+                    //do the actual uploading of the file. First arg is the tmp name, second arg is
+
+                    //where we are putting it
+
+                    $uploadFolder = WWW_ROOT . 'img/banner';
+
+                    if( !file_exists($uploadFolder) ){
+
+                        mkdir($uploadFolder);
+
+                    }
+
+                    $filename = str_replace(" ", "-", rand(1, 3000) . $banner['name']);
+
+                    move_uploaded_file($banner['tmp_name'], WWW_ROOT . 'img/banner' . DS . $filename);
+
+                     //prepare the filename for database entry
+
+                    $this->request->data['banner']['name'] = $filename;
+
+                    $banner = $filename;
+
+                }
+
+            }
+
+
+
+
+
+            if(!empty($this->request->data['display']))
+
+            {
+
+                $display = $this->request->data['display'];
+
+                $ext = substr(strtolower(strrchr($display['name'], '.')), 1); //get the extension
+
+                $arr_ext = array('jpg', 'jpeg', 'png'); //set allowed extensions
+
+
+
+                if($display['size']/1024 > '2048')
+
+                {
+
+                    $this->Flash->error(__('"imageLogs", __METHOD__." The uploaded file exceeds the MAX_FILE_SIZE(2MB) '));
+
+                    $errCheck = true;
+
+                }
+
+                else if(in_array($ext, $arr_ext))
+
+                {
+
+                    //do the actual uploading of the file. First arg is the tmp name, second arg is
+
+                    //where we are putting it
+
+                    $uploadFolder = WWW_ROOT . 'img/display';
+
+                    if( !file_exists($uploadFolder) ){
+
+                        mkdir($uploadFolder);
+
+                    }
+
+                    $filename = str_replace(" ", "-", rand(1, 3000) . $display['name']);
+
+                    move_uploaded_file($display['tmp_name'], WWW_ROOT . 'img/display' . DS . $filename);
+
+                     //prepare the filename for database entry
+
+                    $this->request->data['display']['name'] = $filename;
+
+                    $display = $filename;
+
+                }
+
+            }
+
+
+
+            if(!empty($this->request->data['OrganizersLogo']))
+
+            {
+
+                $OrganizersLogo = $this->request->data['OrganizersLogo'];
+
+                $ext = substr(strtolower(strrchr($OrganizersLogo['name'], '.')), 1); //get the extension
+
+                $arr_ext = array('jpg', 'jpeg', 'png'); //set allowed extensions
+
+
+
+                if($OrganizersLogo['size']/1024 > '2048')
+
+                {
+
+                    $this->Flash->error(__('"imageLogs", __METHOD__." The uploaded file exceeds the MAX_FILE_SIZE(2MB) '));
+
+                    $errCheck = true;
+
+                }
+
+                else if(in_array($ext, $arr_ext))
+
+                {
+
+                    //do the actual uploading of the file. First arg is the tmp name, second arg is
+
+                    //where we are putting it
+
+                    $uploadFolder = WWW_ROOT . 'img/OrganizersLogo';
+
+                    if( !file_exists($uploadFolder) ){
+
+                        mkdir($uploadFolder);
+
+                    }
+
+                    $filename = str_replace(" ", "-", rand(1, 3000) . $OrganizersLogo['name']);
+
+                    move_uploaded_file($OrganizersLogo['tmp_name'], WWW_ROOT . 'img/OrganizersLogo' . DS . $filename);
+
+                     //prepare the filename for database entry
+
+                    $this->request->data['OrganizersLogo']['name'] = $filename;
+
+                    $OrganizersLogo = $filename;
+
+                }
+
+            }
+
+                foreach($this->request->data['Mediapartners'] as $key=>$tmp_name)
+
+                {
+
+                    // $mediapartner = $this->Mediapartners->patchEntity($mediapartner, $this->request->data);
+
+                    // $mediapartner->events_id = $new_id;
+
+                    // $mediapartner->MediaPartners = $this->request->data['Mediapartners'][$key]["name"];
+
+                   $mediapartner = $this->Mediapartners->patchEntity($mediapartner,$this->request->data);
+
+                    $mediapartner['events_id'] = $id;
+
+                    $mediapartner['MediaPartners'] = $this->request->data['Mediapartners'][$key]["name"];
+
+                    $this->Mediapartners->save($mediapartner);
+
+                }
+
+
+
+                foreach($this->request->data['Sponsors'] as $key=>$tmp_name)
+
+                {
+
+                    // $sponsor = $this->Sponsors->patchEntity($sponsor, $this->request->data);
+
+                    // $sponsor->events_id = $new_id;
+
+                    // $sponsor->Sponsors = $this->request->data['Sponsors'][$key]["name"];
+
+                   $sponsor = $this->Sponsors->patchEntity($sponsor, $this->request->data);
+                    $sponsor['events_id'] = $id;
+
+                    $sponsor['Sponsors'] = $this->request->data['Sponsors'][$key]["name"];
+
+                    $this->Sponsors->save($sponsor);
+
+                }
+
+            if(!is_null($banner))
+
+            {
+
+                $this->request->data['banner'] = $banner;
+
+            }
+
+            if(!is_null($display))
+
+            {
+
+                $this->request->data['display'] = $display;
+
+            }
+
+            if(!is_null($OrganizersLogo))
+
+            {
+
+                $this->request->data['OrganizersLogo'] = $OrganizersLogo;
+
+            }
+
+            $address = $this->Address->patchEntity($address, $this->request->data['Address']);
+            $address->events_id = $id;
+            $this->Address->save($address);
+            $this->request->data['date'] = new Time($this->request->data['date']);
+            /////////////////////////////////////////////////////////////////
+
+            $name_to_slug = Inflector::slug($this->request->data['title'], $replacement = '-');
+            $this->request->data['slug'] = strtolower($name_to_slug);
+
+            $results = $this->Events->find('all', array('conditions' => array('slug' => $this->request->data['title'], 'id !=' => $id)));
+            $cnt = $results->count();
+
+            if($cnt > 0)
+            {
+                $this->request->data['slug_status'] = ($cnt+1);
+            } else
+            {
+                $this->request->data['slug_status'] = 0;
+            }
+
             $event = $this->Events->patchEntity($event, $this->request->data);
-
             //print_r($this->request->data); exit(0);
-
-
 
             if ($this->Events->save($event)) {
 
-
-
                 $this->Flash->success(__('The event has been saved.'));
 
-
-
                 return $this->redirect(['action' => 'index']);
-
             } else {
-
                 $this->Flash->error(__('The event could not be saved. Please, try again.'));
-
             }
-
         }
-
         $event['Address'] =$address;
 
-
-
         $this->loadModel('SubCategories');
-
         $this->set(compact('selected', 'selected'));
-
         $this->set(compact('userProfile', 'users_id'));
-
         $users = $this->Events->Users->find('list', ['limit' => 200]);
-
         $categories = $this->Events->Categories->find('list', ['limit' => 200]);
-
         $subCategories = $this->SubCategories->find('list', ['limit' => 200]);
-
         $categories_list = $this->Events->Categories->find('list', ['limit' => 200]);
-
         $this->set(compact('event', 'users', 'categories', 'categories_list', 'subCategories', 'address'));
-
         $this->set('_serialize', ['event']);
-
     }
 
 

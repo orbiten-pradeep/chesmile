@@ -129,14 +129,14 @@ class MediapartnersController extends AppController
      */
     public function delete($id = null)
     {
-        $this->request->allowMethod(['post', 'delete']);
+       // $this->request->allowMethod(['post', 'delete','put','patch']);
         $mediapartner = $this->Mediapartners->get($id);
+
         if ($this->Mediapartners->delete($mediapartner)) {
             $this->Flash->success(__('The mediapartner has been deleted.'));
         } else {
             $this->Flash->error(__('The mediapartner could not be deleted. Please, try again.'));
         }
-
-        return $this->redirect(['action' => 'index']);
+           return $this->redirect(['controller'=>'events','action' => 'index']);
     }
 }

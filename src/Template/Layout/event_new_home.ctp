@@ -32,6 +32,8 @@
     <link href="<?php echo $this->Url->build('/newtheme/custom/css/event.grid.css'); ?>" rel="stylesheet">
 
     <link href="<?php echo $this->Url->build('/newtheme/custom/css/event.details.css'); ?>" rel="stylesheet">    
+ 	
+ 	<link href="<?php echo $this->Url->build('/newtheme/custom/css/event.add.css'); ?>" rel="stylesheet">    
 
     <link rel="stylesheet" href="//code.jquery.com/ui/1.12.1/themes/base/jquery-ui.css">
 
@@ -40,6 +42,7 @@
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/4.7.0/css/font-awesome.min.css">
 
     <?php echo $this->Html->css(['daterangepicker']); ?>
+    
 </head>
 
 <body>
@@ -61,7 +64,7 @@
                 <ul class="navbar-nav mr-auto search-box">
                   <li class="search-category">
                     <div class="search-menu">
-                      <button type="button" class="btn btn-head btn-md btn-primary btn-go cat-not-selected" type="button">
+                      <button type="button" class="btn btn-head btn-md btn-go cat-not-selected" type="button">
                         <label>Category</label>
                         <i class="fa fa-bars float-right"></i>
                       </button>
@@ -85,7 +88,7 @@
                     <input id="eventCategorySearch" type="text" class="form-control search-input" placeholder="Search for events, parties, concerts and more">
                   </li>
                   <li class="search-button">
-                      <button type="button" class="btn btn-head btn-md btn-primary btn-go btn-category-search"><i class="fa fa-search" aria-hidden="true"></i></button>
+                      <button type="button" class="btn btn-head btn-md btn-go btn-category-search"><i class="fa fa-search" aria-hidden="true"></i></button>
                   </li>
                   <li class="">
                       <span class="btn-look-city btn btn-sm btn-primary cs-city-btn p-2 waves-effect waves-light" id="navbarDropdownMenuLink" data-direction='bottom' href="javascript:;">Look your city</span>
@@ -202,7 +205,7 @@
         <div class="col-md-3 mx-auto">
 
           <!-- Links -->
-          <h5 class="font-weight-normal text-normal mt-3 mb-4">Cities</h5>
+          <h6 class="font-weight-normal text-normal mt-3 mb-4">Cities</h6>
 
           <ul class="list-unstyled">
             <li>
@@ -228,7 +231,7 @@
         <div class="col-md-3 mx-auto">
 
           <!-- Links -->
-          <h5 class="font-weight-normal text-normal mt-3 mb-4">Popular Categories</h5>
+          <h6 class="font-weight-normal text-normal mt-3 mb-4">Popular Categories</h6>
 
           <ul class="list-unstyled">
             <li>
@@ -254,7 +257,7 @@
         <div class="col-md-3 mx-auto">
 
           <!-- Links -->
-          <h5 class="font-weight-normal text-normal mt-3 mb-4">Others</h5>
+          <h6 class="font-weight-normal text-normal mt-3 mb-4">Others</h6>
 
           <ul class="list-unstyled">
             <li><?= $this->Html->link(__('About us'), ['controller' => 'events', 'action' => 'about']); ?>
@@ -280,24 +283,50 @@
         <div class="col-md-3 mx-auto">
 
           <!-- Links -->
-          <h5 class="font-weight-normal text-normal mt-3 mb-4">Follow Us</h5>
+          <h6 class="font-weight-normal text-normal mt-3 mb-4">Follow Us</h6>
 
-          <ul class="list-unstyled">
+          <!-- <ul class="list-unstyled">
             <li>
                <a class="btn-floating btn-sm btn-fb mx-1 icon-align">
                          <i class="fa fa-facebook fa-sm white-text mr-md-5 mr-3 fa-1x"> </i>
                     </a>  <a class="btn-floating btn-sm btn-tw mx-1 icon-align"><i class="fa fa-twitter fa-sm white-text mr-md-5 mr-3 fa-1x"> </i></a>
                     <a class="btn-floating btn-sm btn-gplus mx-1 icon-align">
               <i class="fa fa-google-plus fa-sm white-text mr-md-5 mr-3 fa-1x"> </i></a>
-            <!--   <a href="#!">Link 1</a> -->
-            </li>
-             <li> <a class="btn-floating btn-sm btn-gplus mx-1 icon-align">
+            <a class="btn-floating btn-sm btn-gplus mx-1 icon-align">
               <i class="fa fa-instagram fa-sm white-text mr-md-5 mr-3 fa-1x"> </i></a>
                <a class="btn-floating btn-sm btn-gplus mx-1 icon-align">
               <i class="fa fa-linkedin fa-sm white-text mr-md-5 mr-3 fa-1x"> </i></a>
             </li>
-          </ul>
-
+          </ul> -->
+ <!-- Social buttons -->
+      <ul class="list-unstyled list-inline foot-align ">
+        <li class="list-inline-item">
+          <a class="btn-floating btn-fb mx-1" href="#">
+            <i class="fa fa-facebook"> </i>
+          </a>
+        </li>
+        <li class="list-inline-item">
+          <a class="btn-floating btn-tw mx-1" href="#">
+            <i class="fa fa-twitter"> </i>
+          </a>
+        </li>
+        <li class="list-inline-item">
+          <a class="btn-floating btn-gplus mx-1" href="#">
+            <i class="fa fa-google-plus"> </i>
+          </a>
+        </li>
+        <li class="list-inline-item">
+          <a class="btn-floating btn-li mx-1" href="#">
+            <i class="fa fa-linkedin"> </i>
+          </a>
+        </li>
+        <li class="list-inline-item">
+          <a class="btn-floating btn-dribbble mx-1" href="#">
+            <i class="fa fa-dribbble"> </i>
+          </a>
+        </li>
+      </ul>
+      <!-- Social buttons -->
         </div>
         <!-- Grid column -->
 
