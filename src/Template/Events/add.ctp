@@ -3,7 +3,7 @@ use Cake\Routing\Router;
 use Cake\I18n\Time;
 ?>
 
-<?= $this->Form->create($event,array('id' => 'createEvent','name' => 'createEvent','type' => 'file','onsubmit'=>'return validateForm()', 'method' =>'post','novalidate' => true)) ?>
+<?= $this->Form->create($event,array('id' => 'createEvent','name' => 'createEvent','type' => 'file', 'method' =>'post','novalidate' => true)) ?>
 <?= $this->Form->hidden('user_id', ['options' => $users,'default'=> $users_id]);?>
 <?= $this->Form->hidden('active');?>
 
@@ -216,6 +216,7 @@ use Cake\I18n\Time;
                
                     <div class="md-form">
                         <?= $this->Form->input('address_1',array('div' => false,'label' => 'Address 1','class' => 'form-control', 'placeholder' => 'Enter address 1', 'required'));?>
+                         
                     </div>
 
                     <div class="md-form">
@@ -286,58 +287,155 @@ use Cake\I18n\Time;
 <div class="modal fade" id="modalSubscriptionForm" tabindex="-1" role="dialog" aria-labelledby="myModalLabel" aria-hidden="true">
     <div class="modal-dialog" role="document">
         <div class="modal-content">
+
             <div class="modal-header text-center">
                 <h4 class="modal-title w-100 font-weight-bold">Ticketing Service</h4>
                 <button type="button" class="close" data-dismiss="modal" aria-label="Close">
                     <span aria-hidden="true">&times;</span>
                 </button>
             </div>
+
             <div class="modal-body mx-3">
-<div class="md-form input-group">
-  <div class="input-group-prepend">
-   <!--     <?= $this->Form->input('tickettype_1',array( 'label'=> false,'class' => 'form-control validate ','placeholder' => 'Ticket Type' ,'style' => 'width: 90%;'));?> -->
-
-    <input type="text" id="tickettype_1" name="tickettype_1" class="form-control validate" placeholder="Ticket Type" >
-
-  </div>&nbsp;&nbsp;&nbsp;&nbsp;
-
- <!--  <?= $this->Form->input('ticketprice_1',array('label'=> false,'class' => 'form-control validate ','placeholder' => 'Ticket Price', 'style' => 'width: 90%;'));?>
-  -->  
-    <input type="text" id="ticketprice_1" name="ticketprice_1" class="form-control validate" placeholder="Ticket Price" >
-</div>
-<div class="md-form input-group">
-  <div class="input-group-prepend">
-   <!--     <?= $this->Form->input('tickettype_2',array( 'label'=> false,'class' => 'form-control validate ','placeholder' => 'Ticket Type' ,'style' => 'width: 90%;'));?> -->
-
-       <input type="text" id="tickettype_2" name="tickettype_2" class="form-control validate" placeholder="Ticket Type" >
-  </div>&nbsp;&nbsp;&nbsp;&nbsp;
-
-  <!-- <?= $this->Form->input('ticketprice_2',array('label'=> false,'class' => 'form-control validate ','placeholder' => 'Ticket Price', 'style' => 'width: 90%;'));?> -->
-     <input type="text" id="ticketprice_2" name="ticketprice_2" class="form-control validate" placeholder="Ticket Price" >
-</div>
-<div class="md-form input-group">
-  <div class="input-group-prepend">
-  <!--      <?= $this->Form->input('tickettype_3',array( 'label'=> false,'class' => 'form-control validate ','placeholder' => 'Ticket Type' ,'style' => 'width: 90%;'));?> -->
-      <input type="text" id="tickettype_3" name="tickettype_3" class="form-control validate" placeholder="Ticket Type" >
-  </div>&nbsp;&nbsp;&nbsp;&nbsp;
- <!-- <?= $this->Form->input('ticketprice_3',array('label'=> false,'class' => 'form-control validate ','placeholder' => 'Ticket Price', 'style' => 'width: 90%;'));?> -->
-    <input type="text" id="ticketprice_3" name="ticketprice_3" class="form-control validate" placeholder="Ticket Price" >
+                <h6>Do You Want to start Online Booking?</h6>
+<div class="custom-control custom-radio custom-control-inline" style="margin-left: 40px;">
+  <input type="radio" class="custom-control-input" onclick="javascript:yesnoCheck();" id="defaultInline1" name="inlineDefaultRadiosExample">
+  <label class="custom-control-label" for="defaultInline1">Yes</label>
 </div>
 
-            </div>
+<!-- Default inline 2-->
+<div class="custom-control custom-radio custom-control-inline">
+  <input type="radio" class="custom-control-input" onclick="javascript:yesnoCheck();" id="defaultInline2" name="inlineDefaultRadiosExample">
+  <label class="custom-control-label" for="defaultInline2">No</label>
+</div>
+<br>
+<div id="ifYes" style="visibility:hidden">
+<div class="form-group dynamic-element" style="display:none">
+  <div class="row">
+  <!-- Replace these fields -->
+  <div class="md-form col-md-10">
+    <input type="text" id="tickettype"  name="tickettype[]" class="form-control">
+    <label for="tickettype" >Ticket Type</label><span></span>
+</div>
+ <div class="md-form col-md-10">
+    <input type="text" id="name"  name="name[]" class="form-control">
+    <label for="name" >Ticket Name</label><span></span>
+</div>
+<div class="md-form col-md-10">
+    <input type="text" id="price" name="price[]" class="form-control">
+    <label for="price" >Ticket Price</label>
+</div>
+ <div class="col-md-6">
+     <select id="commission_per" name="commission_per[]" onchange = "myprice()" class="form-control">
+  <option>Select percentage</option>
+  <option value="5">5</option>
+  <option value="10">10</option>  
+  <option value="15">15</option>
+  <option value="20">20</option>
+  <option value="25">25</option>
+  <option value="30">30</option>
+  <option value="35">35</option>  
+  <option value="40">40</option>
+  <option value="45">45</option>
+  <option value="50">50</option>
+  <option value="55">55</option>
+  <option value="60">60</option>  
+  <option value="65">65</option>
+  <option value="70">70</option>
+  <option value="75">75</option>
+</select>
+</div>
+<div class="md-form col-md-10">
+    <input type="text" id="commission_amt" name="commission_amt[]" class="form-control" readonly>
+    <label for="commission_amt" >Commission Amount</label>
+</div>
+<div class="md-form col-md-10">
+    <input type="text" id="noofseats" name="noofseats[]" class="form-control">
+    <label for="noofseats" >No.Of.Seats</label>
+</div>
+<div class="md-form col-md-6">
+     <input type="text" id="startdate" name="startdate[]" class="form-control">
+    <label for="startdate" >Start Date</label>
+</div>
+<div class="md-form col-md-6">
+    <input type="text" id="enddate" name="enddate[]" class="form-control">
+   <label for="'enddate" >End Date</label>
+</div>
+
+    <!-- End of fields-->
+      <a href="#" class="btn btn-red pull-right delete" >Remove Ticket</a>      
+  </div>
+</div>
+<!-- END OF HIDDEN ELEMENT -->
+<div class="form-horizontal">
+  <!-- Form Name -->
+  <div class="dynamic-stuff">
+    <!-- Dynamic element will be cloned here -->
+    <!-- You can call clone function once if you want it to show it a first element-->
+  </div>
+  <!-- Button -->
+     <a href="#" class="btn btn-green pull-right add-one" >Add Ticket</a> 
+</div>
+ </div></div>
             <div class="modal-footer d-flex justify-content-center modal-foot">
-                <button class="btn btn-deep-orange">Submit <i class="fa fa-paper-plane-o ml-1"></i></button>
+              <button type="button" class=" btn btn-deep-orange" data-dismiss="modal"> Start<i class="fa fa-paper-plane-o ml-1"></i></button>
             </div>
+
         </div>
     </div>
 </div>
+ 
 <div class="form-group">
     <?= $this->Form->button('Submit',array('id' => 'subbutton','class'=>'btn btn-secondary pull-centre sub-but')) ?>
 </div>
 <?= $this->Form->end() ?>
+<script>
 
+function myFunction() {
+    var commission_per = document.getElementById("commission_per");
+    var ticprice = document.getElementById("price").value;
+     var x =commission_per.options[commission_per.selectedIndex].text/100 * (ticprice);
+     var y = (ticprice) - (x);
+    
+    document.getElementById("commission_amt").value = x;
+    document.getElementById("settamount").value = y;
+}
+function myprice() {
+    var commission_per = document.getElementById("commission_per");
+    var ticprice = document.getElementById("price").value;
+     var x = commission_per.options[commission_per.selectedIndex].text/100 * (ticprice);
+     var y = (ticprice) - (x);
+    
+    document.getElementById("commission_amt").value = x;
+    document.getElementById("settamount").value = y;
+    
+}
+
+</script>
+<script>
+function yesnoCheck() {
+    if (document.getElementById('defaultInline1').checked) {
+        document.getElementById('ifYes').style.visibility = 'visible';
+    }
+    else document.getElementById('ifYes').style.visibility = 'hidden';
+
+}</script>
+<!------ Include the above in your HEAD tag ---------->
+     
 <script src="https://ajax.googleapis.com/ajax/libs/jquery/2.1.1/jquery.min.js"></script>
 <script type="text/javascript">
+  //Clone the hidden element and shows it
+$('.add-one').click(function(){
+  $('.dynamic-element').first().clone().appendTo('.dynamic-stuff').show();
+  attach_delete();
+});
+//Attach functionality to delete buttons
+function attach_delete(){
+  $('.delete').off();
+  $('.delete').click(function(){
+    console.log("click");
+    $(this).closest('.form-group').remove();
+  });
+}
 //mediapartners
 $(document).ready(function() {
   if (window.File && window.FileList && window.FileReader) {

@@ -36,21 +36,21 @@ class EventsController extends AppController
 
 {
 
-	public function beforeFilter(Event $event)
+    public function beforeFilter(Event $event)
 
-	{
+    {
 
-		parent::beforeFilter($event);
+        parent::beforeFilter($event);
 
-    	$this->Auth->allow(['Invitation','about','terms','privacy','partnerwith','contact','thebigbeachmarathon', 'index', 'eventlist','View','viewresult','searchbyeventtitle','search','chennai','findslug', 'demolist','category']);
+        $this->Auth->allow(['Invitation','about','terms','privacy','partnerwith','contact','thebigbeachmarathon', 'index', 'eventlist','View','viewresult','searchbyeventtitle','search','chennai','findslug', 'demolist','category']);
 
-    	$this->set('Photo',$this->Auth->user('Photo'));
+        $this->set('Photo',$this->Auth->user('Photo'));
 
-	}
+    }
 
 
 
-	public $components = array('RequestHandler');
+    public $components = array('RequestHandler');
 
     /**
 
@@ -64,7 +64,7 @@ class EventsController extends AppController
 
     public function about(){
 
-    	$this->viewBuilder()->layout('event_new_home');
+        $this->viewBuilder()->layout('event_new_home');
 
 
 
@@ -74,7 +74,7 @@ class EventsController extends AppController
 
     public function terms(){
 
-    	$this->viewBuilder()->layout('event_new_home');
+        $this->viewBuilder()->layout('event_new_home');
 
     }
 
@@ -82,7 +82,7 @@ class EventsController extends AppController
 
     public function privacy(){
 
-    	$this->viewBuilder()->layout('event_new_home');
+        $this->viewBuilder()->layout('event_new_home');
 
     }
 
@@ -90,7 +90,7 @@ class EventsController extends AppController
 
     public function partnerwith(){
 
-    	$this->viewBuilder()->layout('event_new_home');
+        $this->viewBuilder()->layout('event_new_home');
 
     }
 
@@ -98,7 +98,7 @@ class EventsController extends AppController
 
     public function contact(){
 
-    	$this->viewBuilder()->layout('event_new_home');
+        $this->viewBuilder()->layout('event_new_home');
 
     }
 
@@ -110,9 +110,9 @@ class EventsController extends AppController
 
     {
 
-    	$this->loadModel('Groups');
+        $this->loadModel('Groups');
 
-    	$groups = $this->Groups->find('list', ['limit' => 200,'conditions' => array('role' => 'Users')]);
+        $groups = $this->Groups->find('list', ['limit' => 200,'conditions' => array('role' => 'Users')]);
 
         $this->set(compact('user', 'groups'));
 
@@ -120,13 +120,13 @@ class EventsController extends AppController
 
         if($this->Auth->user())
 
-        	$logged = true;
+            $logged = true;
 
         else
 
-        	$logged = false;
+            $logged = false;
 
-		//$this->viewBuilder()->layout('event_home');
+        //$this->viewBuilder()->layout('event_home');
 
         $this->viewBuilder()->layout('event_new_home');
 
@@ -136,7 +136,7 @@ class EventsController extends AppController
 
         $categories_new = $this->Categories->find()->select(['Categories.name', 'Categories.id', 'Categories.card'])
 
-        	->where(['active' => 1]);
+            ->where(['active' => 1]);
 
 
 
@@ -144,9 +144,9 @@ class EventsController extends AppController
 
         $subCategories_new = $this->SubCategories->find('all', ['fields' => 'name',
 
-			    'conditions' => ['active' => 1]
+                'conditions' => ['active' => 1]
 
-			]);
+            ]);
 
 
 
@@ -308,25 +308,25 @@ class EventsController extends AppController
 
     {
 
-    	$this->paginate = [
+        $this->paginate = [
 
             'contain' => ['Users', 'Categories']
 
         ];
 
-    	if(!empty($this->Auth->user('id')))
+        if(!empty($this->Auth->user('id')))
 
-		{
+        {
 
-			$users_id = $this->Auth->user('id');
+            $users_id = $this->Auth->user('id');
 
-			$fullname = $this->Auth->user('fullname');
+            $fullname = $this->Auth->user('fullname');
 
-			$email = $this->Auth->user('email');
+            $email = $this->Auth->user('email');
 
-			$this->paginate['conditions'] = array("Events.user_id" => $users_id);
+            $this->paginate['conditions'] = array("Events.user_id" => $users_id);
 
-		}
+        }
 
 
 
@@ -338,7 +338,7 @@ class EventsController extends AppController
 
         //exit(0);
 
-		//$this->paginate['conditions'] = array('Events.active' => '1');
+        //$this->paginate['conditions'] = array('Events.active' => '1');
 
         $events = $this->paginate($this->Events);
 
@@ -346,25 +346,25 @@ class EventsController extends AppController
 
 
 
-		$this->viewBuilder()->layout('event_home');
+        $this->viewBuilder()->layout('event_home');
 
-		$this->loadModel('Likes');
+        $this->loadModel('Likes');
 
         $likes = '';
 
         foreach ($events as $key => $value) {
 
-        	$query_count = $this->Likes->find('all', [
+            $query_count = $this->Likes->find('all', [
 
-			    'conditions' => ['events_id' => $value['id'], 'likes' => 1]
+                'conditions' => ['events_id' => $value['id'], 'likes' => 1]
 
-			]);
+            ]);
 
-			$number_cnt = $query_count->count();
+            $number_cnt = $query_count->count();
 
-			$likes[$key]['events'] = $value['id'];
+            $likes[$key]['events'] = $value['id'];
 
-			$likes[$key]['likes'] = $number_cnt;
+            $likes[$key]['likes'] = $number_cnt;
 
         }
 
@@ -372,7 +372,7 @@ class EventsController extends AppController
 
         $categories_new = $this->Categories->find()->select(['Categories.name'])
 
-        	->where(['active' => 1]);
+            ->where(['active' => 1]);
 
 
 
@@ -380,9 +380,9 @@ class EventsController extends AppController
 
         $subCategories_new = $this->SubCategories->find('all', ['fields' => 'name',
 
-			    'conditions' => ['active' => 1]
+                'conditions' => ['active' => 1]
 
-			]);
+            ]);
 
 
 
@@ -806,11 +806,11 @@ public function organizerevents()
 
 
 
-	public function likedevents()
+    public function likedevents()
 
     {
 
-    	$this->paginate = [
+        $this->paginate = [
 
             'contain' => ['Users', 'Categories']
 
@@ -820,35 +820,35 @@ public function organizerevents()
 
 
 
-    	if(!empty($this->Auth->user('id')))
+        if(!empty($this->Auth->user('id')))
 
-		{
+        {
 
-			$users_id = $this->Auth->user('id');
+            $users_id = $this->Auth->user('id');
 
-			$fullname = $this->Auth->user('fullname');
+            $fullname = $this->Auth->user('fullname');
 
-			$email = $this->Auth->user('email');
+            $email = $this->Auth->user('email');
 
-			$likes = $this->Likes->find('all', ['conditions' => ['user_id' => $users_id]])->select(['events_id']);
+            $likes = $this->Likes->find('all', ['conditions' => ['user_id' => $users_id]])->select(['events_id']);
 
-		}
+        }
 
-		if(!empty($likes))
+        if(!empty($likes))
 
-		{
+        {
 
-			foreach ($likes as $key => $value) {
+            foreach ($likes as $key => $value) {
 
 
 
-				$eventids[$key] = $value['events_id'];
+                $eventids[$key] = $value['events_id'];
 
-			}
+            }
 
-			$this->paginate['conditions'] = array('Events.id IN' => $eventids);
+            $this->paginate['conditions'] = array('Events.id IN' => $eventids);
 
-		}
+        }
 
 
 
@@ -862,25 +862,25 @@ public function organizerevents()
 
 
 
-		$this->viewBuilder()->layout('event_home');
+        $this->viewBuilder()->layout('event_home');
 
-		$this->loadModel('Likes');
+        $this->loadModel('Likes');
 
         $likes = '';
 
         foreach ($events as $key => $value) {
 
-        	$query_count = $this->Likes->find('all', [
+            $query_count = $this->Likes->find('all', [
 
-			    'conditions' => ['events_id' => $value['id'], 'likes' => 1]
+                'conditions' => ['events_id' => $value['id'], 'likes' => 1]
 
-			]);
+            ]);
 
-			$number_cnt = $query_count->count();
+            $number_cnt = $query_count->count();
 
-			$likes[$key]['events'] = $value['id'];
+            $likes[$key]['events'] = $value['id'];
 
-			$likes[$key]['likes'] = $number_cnt;
+            $likes[$key]['likes'] = $number_cnt;
 
         }
 
@@ -888,7 +888,7 @@ public function organizerevents()
 
         $categories_new = $this->Categories->find()->select(['Categories.name'])
 
-        	->where(['active' => 1]);
+            ->where(['active' => 1]);
 
 
 
@@ -896,9 +896,9 @@ public function organizerevents()
 
         $subCategories_new = $this->SubCategories->find('all', ['fields' => 'name',
 
-			    'conditions' => ['active' => 1]
+                'conditions' => ['active' => 1]
 
-			]);
+            ]);
 
 
 
@@ -934,25 +934,25 @@ public function organizerevents()
 
     {
 
-		$this->viewBuilder()->layout('event_home');
+        $this->viewBuilder()->layout('event_home');
 
 
 
-		if($id == null)
+        if($id == null)
 
-		{
+        {
 
-			$event_val = $this->Events->findBySlug($slug, [
+            $event_val = $this->Events->findBySlug($slug, [
 
-	            'contain' => ['Users', 'Categories']
+                'contain' => ['Users', 'Categories']
 
-	        ]);
+            ]);
 
-			$event_val = $event_val->first();
+            $event_val = $event_val->first();
 
-			$id = $event_val['id'];
+            $id = $event_val['id'];
 
-		}
+        }
 
         $event = $this->Events->get($id, [
 
@@ -964,15 +964,15 @@ public function organizerevents()
 
         if(!empty($this->Auth->user('id')))
 
-		{
+        {
 
-			$u_id = $this->Auth->user('id');
+            $u_id = $this->Auth->user('id');
 
-			$fullname = $this->Auth->user('fullname');
+            $fullname = $this->Auth->user('fullname');
 
-			$email = $this->Auth->user('email');
+            $email = $this->Auth->user('email');
 
-		}
+        }
 
 
 
@@ -1002,9 +1002,9 @@ public function organizerevents()
 
         $query = $this->Likes->find('all', ['select' => 'id',
 
-		    	'conditions' => ['events_id' => $id]]);
+                'conditions' => ['events_id' => $id]]);
 
-		$number = $query->count();
+        $number = $query->count();
 
 
 
@@ -1018,7 +1018,7 @@ public function organizerevents()
 
         $categories_new = $this->Categories->find()->select(['Categories.name', 'Categories.id'])
 
-        	->where(['active' => 1]);
+            ->where(['active' => 1]);
 
 
 
@@ -1026,9 +1026,9 @@ public function organizerevents()
 
         $subCategories_new = $this->SubCategories->find('all', ['fields' => 'name',
 
-			    'conditions' => ['active' => 1]
+                'conditions' => ['active' => 1]
 
-			    	]);
+                    ]);
 
 
 
@@ -1192,7 +1192,7 @@ public function organizerevents()
 
         //$grp =$this->Auth->user('group_id');
 
-		//$this->viewBuilder()->layout('event_home');
+        //$this->viewBuilder()->layout('event_home');
 
         $this->viewBuilder()->layout('event_new_home');
 
@@ -1206,21 +1206,21 @@ public function organizerevents()
 
         }
 
-		if($id == null)
+        if($id == null)
 
-		{
+        {
 
-			$event_val = $this->Events->find('all', ['conditions' => array('slug'=>$slug,'active' => '1')],[
+            $event_val = $this->Events->find('all', ['conditions' => array('slug'=>$slug,'active' => '1')],[
 
-	            'contain' => ['Users', 'Categories','Mediapartners','Sponsors'],
+                'contain' => ['Users', 'Categories','Mediapartners','Sponsors'],
 
-	        ]);
+            ]);
 
-			$event_val = $event_val->first();
+            $event_val = $event_val->first();
 
-			$id = $event_val['id'];
+            $id = $event_val['id'];
 
-		}
+        }
 
         $event = $this->Events->get($id, [
 
@@ -1234,17 +1234,17 @@ public function organizerevents()
 
         if(!empty($this->Auth->user('id')))
 
-		{
+        {
 
-			$u_id = $this->Auth->user('id');
+            $u_id = $this->Auth->user('id');
 
-			$fullname = $this->Auth->user('fullname');
+            $fullname = $this->Auth->user('fullname');
 
-			$email = $this->Auth->user('email');
+            $email = $this->Auth->user('email');
 
-		}
+        }
 
-		 $eventsdet = $this->Events->find('all', ['conditions' => ['id' => $id]]);
+         $eventsdet = $this->Events->find('all', ['conditions' => ['id' => $id]]);
 
         $this->loadModel('Address');
 
@@ -1279,9 +1279,9 @@ public function organizerevents()
 
         $query = $this->Likes->find('all', ['select' => 'id',
 
-		    	'conditions' => ['events_id' => $id]]);
+                'conditions' => ['events_id' => $id]]);
 
-		$number = $query->count();
+        $number = $query->count();
 
         //debug($sponsors->first()); exit(0);
 
@@ -1295,7 +1295,7 @@ public function organizerevents()
 
         $categories_new = $this->Categories->find()->select(['Categories.name', 'Categories.id'])
 
-        	->where(['active' => 1]);
+            ->where(['active' => 1]);
 
 
 
@@ -1303,9 +1303,9 @@ public function organizerevents()
 
         $subCategories_new = $this->SubCategories->find('all', ['fields' => 'name',
 
-			    'conditions' => ['active' => 1]
+                'conditions' => ['active' => 1]
 
-			    	]);
+                    ]);
 
 
 
@@ -1347,6 +1347,7 @@ public function organizerevents()
 
     {
 
+
           if($this->Auth->user('group_id') == 1)
 
         {
@@ -1363,424 +1364,433 @@ public function organizerevents()
 
          
 
-    	if(!empty($this->Auth->user('id')))
+        if(!empty($this->Auth->user('id')))
 
-		{
+        {
 
-			$users_id = $this->Auth->user('id');
+            $users_id = $this->Auth->user('id');
 
-			$fullname = $this->Auth->user('fullname');
+            $fullname = $this->Auth->user('fullname');
 
-			$email = $this->Auth->user('email');
+            $email = $this->Auth->user('email');
 
-		//$this->viewBuilder()->layout('event_home');
+        //$this->viewBuilder()->layout('event_home');
 
             $this->viewBuilder()->layout('event_new_home');
 
-		}
+        }
 
         $event = $this->Events->newEntity();
 
         if ($this->request->is('post')) {
 
+                  /*pr($this->request->data);
+        exit;*/
 
+            $this->loadModel('Address');
 
-        	$this->loadModel('Address');
+            $this->loadModel('Mediapartners');
 
-        	$this->loadModel('Mediapartners');
+            $this->loadModel('Sponsors');
 
-        	$this->loadModel('Sponsors');
+            $this->loadModel('Bookingonline');
 
+            $addres = $this->Address->newEntity();
 
+            $mediapartner = $this->Mediapartners->newEntity();
 
-        	$addres = $this->Address->newEntity();
+            $sponsor = $this->Sponsors->newEntity();
 
-        	$mediapartner = $this->Mediapartners->newEntity();
+            $bookingonline = $this->Bookingonline->newEntity();
 
-        	$sponsor = $this->Sponsors->newEntity();
+            $data = $this->request->data;
 
-        	$data = $this->request->data;
 
+            //debug($this->request->data['Mediapartners'][0]);
 
 
-        	//debug($this->request->data['Mediapartners'][0]);
 
+            /////////////////////////////////////////////////////////////////////////
 
+            if(!empty($this->request->data['Mediapartners']))
 
-        	/////////////////////////////////////////////////////////////////////////
+            {
 
-        	if(!empty($this->request->data['Mediapartners']))
+                $error=array();
 
-        	{
+                $extension=array("jpeg","jpg","png","gif");
 
-        		$error=array();
+                foreach($this->request->data['Mediapartners'] as $key=>$tmp_name)
 
-	        	$extension=array("jpeg","jpg","png","gif");
+                {
 
-	    		foreach($this->request->data['Mediapartners'] as $key=>$tmp_name)
+                    $file_name=$this->request->data['Mediapartners'][$key]["name"];
 
-	            {
+                    $file_tmp=$this->request->data['Mediapartners'][$key]["tmp_name"];
 
-	                $file_name=$this->request->data['Mediapartners'][$key]["name"];
+                    $ext=pathinfo($file_name,PATHINFO_EXTENSION);
 
-	                $file_tmp=$this->request->data['Mediapartners'][$key]["tmp_name"];
+                    if(in_array($ext,$extension))
 
-	                $ext=pathinfo($file_name,PATHINFO_EXTENSION);
+                    {
 
-	                if(in_array($ext,$extension))
+                        $uploadFolder = WWW_ROOT . 'img/Mediapartners';
 
-	                {
+                        if( !file_exists($uploadFolder) ){
 
-                		$uploadFolder = WWW_ROOT . 'img/Mediapartners';
+                            mkdir($uploadFolder);
 
-			        	if( !file_exists($uploadFolder) ){
+                        }
 
-					        mkdir($uploadFolder);
 
-					    }
 
 
 
+                        $filename = str_replace(" ", "-", rand(1, 3000) . $file_name);
 
+                        //move_uploaded_file($file_tmp=$this->request->data['Mediapartners'][$key]["tmp_name"], WWW_ROOT . 'img/Mediapartners' . DS . $filename);
 
-					    $filename = str_replace(" ", "-", rand(1, 3000) . $file_name);
+                        if(!file_exists(WWW_ROOT . 'img/Mediapartners' . DS . $filename))
 
-	                	//move_uploaded_file($file_tmp=$this->request->data['Mediapartners'][$key]["tmp_name"], WWW_ROOT . 'img/Mediapartners' . DS . $filename);
+                        {
 
-	                	if(!file_exists(WWW_ROOT . 'img/Mediapartners' . DS . $filename))
+                            move_uploaded_file($file_tmp=$this->request->data['Mediapartners'][$key]["tmp_name"], WWW_ROOT . 'img/Mediapartners' . DS . $filename);
 
-	                    {
+                            $this->request->data['Mediapartners'][$key]["name"] = $filename;
 
-	                        move_uploaded_file($file_tmp=$this->request->data['Mediapartners'][$key]["tmp_name"], WWW_ROOT . 'img/Mediapartners' . DS . $filename);
+                        }
 
-	                        $this->request->data['Mediapartners'][$key]["name"] = $filename;
+                        else
 
-	                    }
+                        {
 
-	                    else
+                            $filename=basename($file_name,$ext);
 
-	                    {
+                            $newFileName=$filename.time().".".$ext;
 
-	                        $filename=basename($file_name,$ext);
+                            move_uploaded_file($file_tmp=$this->request->data['Mediapartners'][$key]["tmp_name"], WWW_ROOT . 'img/Mediapartners' . DS . $newFileName);
 
-	                        $newFileName=$filename.time().".".$ext;
+                            $this->request->data['Mediapartners'][$key]["name"] = $newFileName;
 
-	                        move_uploaded_file($file_tmp=$this->request->data['Mediapartners'][$key]["tmp_name"], WWW_ROOT . 'img/Mediapartners' . DS . $newFileName);
+                        }
 
-	                        $this->request->data['Mediapartners'][$key]["name"] = $newFileName;
+                    }
 
-	                    }
+                    else
 
-	                }
+                    {
 
-	                else
+                        array_push($error,"$file_name, ");
 
-	                {
+                    }
 
-	                    array_push($error,"$file_name, ");
+                }
 
-	                }
+            }
 
-	            }
 
-        	}
 
+            //////////////////////////////////////////////////////////////////////////////////////////////////
 
+            if(!empty($this->request->data['Sponsors']))
 
-        	//////////////////////////////////////////////////////////////////////////////////////////////////
+            {
 
-        	if(!empty($this->request->data['Sponsors']))
+                $error=array();
 
-        	{
+                $extension=array("jpeg","jpg","png","gif");
 
-        		$error=array();
+                foreach($this->request->data['Sponsors'] as $key=>$tmp_name)
 
-	        	$extension=array("jpeg","jpg","png","gif");
+                {
 
-	    		foreach($this->request->data['Sponsors'] as $key=>$tmp_name)
+                    $file_name=$this->request->data['Sponsors'][$key]["name"];
 
-	            {
+                    $file_tmp=$this->request->data['Sponsors'][$key]["tmp_name"];
 
-	                $file_name=$this->request->data['Sponsors'][$key]["name"];
+                    $ext=pathinfo($file_name,PATHINFO_EXTENSION);
 
-	                $file_tmp=$this->request->data['Sponsors'][$key]["tmp_name"];
+                    if(in_array($ext,$extension))
 
-	                $ext=pathinfo($file_name,PATHINFO_EXTENSION);
+                    {
 
-	                if(in_array($ext,$extension))
+                        $uploadFolder = WWW_ROOT . 'img/Sponsors';
 
-	                {
+                        if( !file_exists($uploadFolder) ){
 
-                		$uploadFolder = WWW_ROOT . 'img/Sponsors';
+                            mkdir($uploadFolder);
 
-			        	if( !file_exists($uploadFolder) ){
-
-					        mkdir($uploadFolder);
-
-					    }
+                        }
  $filename = str_replace(" ", "-", rand(1, 3000) . $file_name);
 
-	                	//move_uploaded_file($file_tmp=$this->request->data['Mediapartners'][$key]["tmp_name"], WWW_ROOT . 'img/Mediapartners' . DS . $filename);
+                        //move_uploaded_file($file_tmp=$this->request->data['Mediapartners'][$key]["tmp_name"], WWW_ROOT . 'img/Mediapartners' . DS . $filename);
 
-	                	if(!file_exists(WWW_ROOT . 'img/Sponsors' . DS . $filename))
+                        if(!file_exists(WWW_ROOT . 'img/Sponsors' . DS . $filename))
 
-	                    {
+                        {
 
-	                        move_uploaded_file($file_tmp=$this->request->data['Sponsors'][$key]["tmp_name"], WWW_ROOT . 'img/Sponsors' . DS . $filename);
+                            move_uploaded_file($file_tmp=$this->request->data['Sponsors'][$key]["tmp_name"], WWW_ROOT . 'img/Sponsors' . DS . $filename);
 
-	                        $this->request->data['Sponsors'][$key]["name"] = $filename;
+                            $this->request->data['Sponsors'][$key]["name"] = $filename;
 
-	                    }
+                        }
 
-	                    else
+                        else
 
-	                    {
+                        {
 
-	                        $filename=basename($file_name,$ext);
+                            $filename=basename($file_name,$ext);
 
-	                        $newFileName=$filename.time().".".$ext;
+                            $newFileName=$filename.time().".".$ext;
 
-	                        move_uploaded_file($file_tmp=$this->request->data['Sponsors'][$key]["tmp_name"], WWW_ROOT . 'img/Sponsors' . DS . $newFileName);
+                            move_uploaded_file($file_tmp=$this->request->data['Sponsors'][$key]["tmp_name"], WWW_ROOT . 'img/Sponsors' . DS . $newFileName);
 
-	                        $this->request->data['Sponsors'][$key]["name"] = $newFileName;
+                            $this->request->data['Sponsors'][$key]["name"] = $newFileName;
 
-	                    }
+                        }
 
-	                }
+                    }
 
-	                else
+                    else
 
-	                {
+                    {
 
-	                    array_push($error,"$file_name, ");
+                        array_push($error,"$file_name, ");
 
-	                }
+                    }
 
-	            }
+                }
 
-        	}
+            }
 
-        	$display = null;
+            $display = null;
 
-        	$banner = null;
+            $banner = null;
 
-        	$OrganizersLogo = null;
+            $OrganizersLogo = null;
 
 
 
-        	//banner Image
+            //banner Image
 
-        	if(!empty($this->request->data['banner']))
+            if(!empty($this->request->data['banner']))
 
-	        {
+            {
 
-	        	$banner = $this->request->data['banner'];
+                $banner = $this->request->data['banner'];
 
-		        $ext = substr(strtolower(strrchr($banner['name'], '.')), 1); //get the extension
+                $ext = substr(strtolower(strrchr($banner['name'], '.')), 1); //get the extension
 
-		        $arr_ext = array('jpg', 'jpeg', 'png'); //set allowed extensions
+                $arr_ext = array('jpg', 'jpeg', 'png'); //set allowed extensions
 
 
 
-		        if($banner['size']/1024 > '2048')
+                if($banner['size']/1024 > '2048')
 
-		        {
+                {
 
-		        	$this->Flash->error(__('"imageLogs", __METHOD__." The uploaded file exceeds the MAX_FILE_SIZE(2MB) '));
+                    $this->Flash->error(__('"imageLogs", __METHOD__." The uploaded file exceeds the MAX_FILE_SIZE(2MB) '));
 
-		        	$errCheck = true;
+                    $errCheck = true;
 
-		        }
+                }
 
-		        else if(in_array($ext, $arr_ext))
+                else if(in_array($ext, $arr_ext))
 
-		        {
+                {
 
-		            //do the actual uploading of the file. First arg is the tmp name, second arg is
+                    //do the actual uploading of the file. First arg is the tmp name, second arg is
 
-		            //where we are putting it
+                    //where we are putting it
 
-		            $uploadFolder = WWW_ROOT . 'img/banner';
+                    $uploadFolder = WWW_ROOT . 'img/banner';
 
-		        	if( !file_exists($uploadFolder) ){
+                    if( !file_exists($uploadFolder) ){
 
-				        mkdir($uploadFolder);
+                        mkdir($uploadFolder);
 
-				    }
+                    }
 
-		            $filename = str_replace(" ", "-", rand(1, 3000) . $banner['name']);
+                    $filename = str_replace(" ", "-", rand(1, 3000) . $banner['name']);
 
-		            move_uploaded_file($banner['tmp_name'], WWW_ROOT . 'img/banner' . DS . $filename);
+                    move_uploaded_file($banner['tmp_name'], WWW_ROOT . 'img/banner' . DS . $filename);
 
-		             //prepare the filename for database entry
+                     //prepare the filename for database entry
 
-	                $this->request->data['banner']['name'] = $filename;
+                    $this->request->data['banner']['name'] = $filename;
 
-	                $banner = $filename;
+                    $banner = $filename;
 
-		        }
+                }
 
-        	}
+            }
 
 
 
 
 
-        	if(!empty($this->request->data['display']))
+            if(!empty($this->request->data['display']))
 
-        	{
+            {
 
-	        	$display = $this->request->data['display'];
+                $display = $this->request->data['display'];
 
-		        $ext = substr(strtolower(strrchr($display['name'], '.')), 1); //get the extension
+                $ext = substr(strtolower(strrchr($display['name'], '.')), 1); //get the extension
 
-		        $arr_ext = array('jpg', 'jpeg', 'png'); //set allowed extensions
+                $arr_ext = array('jpg', 'jpeg', 'png'); //set allowed extensions
 
 
 
-		        if($display['size']/1024 > '2048')
+                if($display['size']/1024 > '2048')
 
-		        {
+                {
 
-		        	$this->Flash->error(__('"imageLogs", __METHOD__." The uploaded file exceeds the MAX_FILE_SIZE(2MB) '));
+                    $this->Flash->error(__('"imageLogs", __METHOD__." The uploaded file exceeds the MAX_FILE_SIZE(2MB) '));
 
-		        	$errCheck = true;
+                    $errCheck = true;
 
-		        }
+                }
 
-		        else if(in_array($ext, $arr_ext))
+                else if(in_array($ext, $arr_ext))
 
-		        {
+                {
 
-		            //do the actual uploading of the file. First arg is the tmp name, second arg is
+                    //do the actual uploading of the file. First arg is the tmp name, second arg is
 
-		            //where we are putting it
+                    //where we are putting it
 
-		            $uploadFolder = WWW_ROOT . 'img/display';
+                    $uploadFolder = WWW_ROOT . 'img/display';
 
-		        	if( !file_exists($uploadFolder) ){
+                    if( !file_exists($uploadFolder) ){
 
-				        mkdir($uploadFolder);
+                        mkdir($uploadFolder);
 
-				    }
+                    }
 
-		            $filename = str_replace(" ", "-", rand(1, 3000) . $display['name']);
+                    $filename = str_replace(" ", "-", rand(1, 3000) . $display['name']);
 
-		            move_uploaded_file($display['tmp_name'], WWW_ROOT . 'img/display' . DS . $filename);
+                    move_uploaded_file($display['tmp_name'], WWW_ROOT . 'img/display' . DS . $filename);
 
-		             //prepare the filename for database entry
+                     //prepare the filename for database entry
 
-	                $this->request->data['display']['name'] = $filename;
+                    $this->request->data['display']['name'] = $filename;
 
-	                $display = $filename;
+                    $display = $filename;
 
-		        }
+                }
 
-        	}
+            }
 
 
 
-        	if(!empty($this->request->data['OrganizersLogo']))
+            if(!empty($this->request->data['OrganizersLogo']))
 
-        	{
+            {
 
-	        	$OrganizersLogo = $this->request->data['OrganizersLogo'];
+                $OrganizersLogo = $this->request->data['OrganizersLogo'];
 
-		        $ext = substr(strtolower(strrchr($OrganizersLogo['name'], '.')), 1); //get the extension
+                $ext = substr(strtolower(strrchr($OrganizersLogo['name'], '.')), 1); //get the extension
 
-		        $arr_ext = array('jpg', 'jpeg', 'png'); //set allowed extensions
+                $arr_ext = array('jpg', 'jpeg', 'png'); //set allowed extensions
 
 
 
-		        if($OrganizersLogo['size']/1024 > '2048')
+                if($OrganizersLogo['size']/1024 > '2048')
 
-		        {
+                {
 
-		        	$this->Flash->error(__('"imageLogs", __METHOD__." The uploaded file exceeds the MAX_FILE_SIZE(2MB) '));
+                    $this->Flash->error(__('"imageLogs", __METHOD__." The uploaded file exceeds the MAX_FILE_SIZE(2MB) '));
 
-		        	$errCheck = true;
+                    $errCheck = true;
 
-		        }
+                }
 
-		        else if(in_array($ext, $arr_ext))
+                else if(in_array($ext, $arr_ext))
 
-		        {
+                {
 
-		            //do the actual uploading of the file. First arg is the tmp name, second arg is
+                    //do the actual uploading of the file. First arg is the tmp name, second arg is
 
-		            //where we are putting it
+                    //where we are putting it
 
-		            $uploadFolder = WWW_ROOT . 'img/OrganizersLogo';
+                    $uploadFolder = WWW_ROOT . 'img/OrganizersLogo';
 
-		        	if( !file_exists($uploadFolder) ){
+                    if( !file_exists($uploadFolder) ){
 
-				        mkdir($uploadFolder);
+                        mkdir($uploadFolder);
 
-				    }
+                    }
 
-		            $filename = str_replace(" ", "-", rand(1, 3000) . $OrganizersLogo['name']);
+                    $filename = str_replace(" ", "-", rand(1, 3000) . $OrganizersLogo['name']);
 
-		            move_uploaded_file($OrganizersLogo['tmp_name'], WWW_ROOT . 'img/OrganizersLogo' . DS . $filename);
+                    move_uploaded_file($OrganizersLogo['tmp_name'], WWW_ROOT . 'img/OrganizersLogo' . DS . $filename);
 
-		             //prepare the filename for database entry
+                     //prepare the filename for database entry
 
-	                $this->request->data['OrganizersLogo']['name'] = $filename;
+                    $this->request->data['OrganizersLogo']['name'] = $filename;
 
-	                $OrganizersLogo = $filename;
+                    $OrganizersLogo = $filename;
 
-		        }
+                }
 
-        	}
+            }
 
 
 
-        	if(!is_null($banner))
+            if(!is_null($banner))
 
-        	{
+            {
 
-        		$this->request->data['banner'] = $banner;
+                $this->request->data['banner'] = $banner;
 
-        	}
+            }
 
-        	if(!is_null($display))
+            if(!is_null($display))
 
-        	{
+            {
 
-        		$this->request->data['display'] = $display;
+                $this->request->data['display'] = $display;
 
-        	}
+            }
 
-        	if(!is_null($display))
+            if(!is_null($display))
 
-        	{
+            {
 
-        		$this->request->data['OrganizersLogo'] = $OrganizersLogo;
+                $this->request->data['OrganizersLogo'] = $OrganizersLogo;
 
-        	}
+            }
 
 
 
 
 
-			if(!empty($this->request->data['date']))
+            if(!empty($this->request->data['date']))
 
-			{
+            {
 
-	        	$this->request->data['date'] = new Time($this->request->data['date']);
+                $this->request->data['date'] = new Time($this->request->data['date']);
 
-			}
+            }
+            if(!empty($this->request->data['todate']))
 
+            {
 
+                $this->request->data['todate'] = new Time($this->request->data['todate']);
 
-			if(empty($this->request->data['slug']))
+            }
 
-			{
 
-				$name_to_slug = Inflector::slug($this->request->data['title'], $replacement = '-');
 
-        		$this->request->data['slug'] = strtolower($name_to_slug);
+            if(empty($this->request->data['slug']))
 
-        	}
+            {
+
+                $name_to_slug = Inflector::slug($this->request->data['title'], $replacement = '-');
+
+                $this->request->data['slug'] = strtolower($name_to_slug);
+
+            }
 
 
 
@@ -1804,115 +1814,141 @@ public function organizerevents()
 
 
 
-	        $event = $this->Events->patchEntity($event, $this->request->data);
+            $event = $this->Events->patchEntity($event, $this->request->data);
 
             $activation_key = Text::uuid();
 
             if ($this->Events->save($event)) {
 
-            	////////////////////////////////////////////////////////////////////
+                ////////////////////////////////////////////////////////////////////
 
-            	$new_id = $event->id;
+                $new_id = $event->id;
 
-            	foreach ($this->request->data['Eventsubcategories']['sub_categories'] as $key => $value)
+                foreach ($this->request->data['Eventsubcategories']['sub_categories'] as $key => $value)
 
-	            {
+                {
 
-	            	$subcategories = $this->Events->Eventsubcategories->newEntity();
+                    $subcategories = $this->Events->Eventsubcategories->newEntity();
 
-	            	$subcategories->events_id = $new_id;
+                    $subcategories->events_id = $new_id;
 
-	            	$subcategories->sub_categories = $value;
+                    $subcategories->sub_categories = $value;
 
-	            	$this->Events->Eventsubcategories->save($subcategories);
+                    $this->Events->Eventsubcategories->save($subcategories);
 
-	            }
-
-
-
-	            //$mediapartner = $this->Mediapartners->newEntity();
-
-        		//$sponsor = $this->Sponsors->newEntity();
-
-	            foreach($this->request->data['Mediapartners'] as $key=>$tmp_name)
-
-	            {
-
-	            	// $mediapartner = $this->Mediapartners->patchEntity($mediapartner, $this->request->data);
-
-	            	// $mediapartner->events_id = $new_id;
-
-	            	// $mediapartner->MediaPartners = $this->request->data['Mediapartners'][$key]["name"];
-
-	            	$mediapartner = $this->Mediapartners->newEntity();
-
-	            	$mediapartner['events_id'] = $new_id;
-
-	            	$mediapartner['MediaPartners'] = $this->request->data['Mediapartners'][$key]["name"];
-
-	            	$this->Mediapartners->save($mediapartner);
-
-	            }
+                }
 
 
 
-	            foreach($this->request->data['Sponsors'] as $key=>$tmp_name)
+                //$mediapartner = $this->Mediapartners->newEntity();
 
-	            {
+                //$sponsor = $this->Sponsors->newEntity();
 
-	            	// $sponsor = $this->Sponsors->patchEntity($sponsor, $this->request->data);
+                foreach($this->request->data['Mediapartners'] as $key=>$tmp_name)
 
-	            	// $sponsor->events_id = $new_id;
+                {
 
-	            	// $sponsor->Sponsors = $this->request->data['Sponsors'][$key]["name"];
+                    // $mediapartner = $this->Mediapartners->patchEntity($mediapartner, $this->request->data);
 
-	            	$sponsor = $this->Sponsors->newEntity();
+                    // $mediapartner->events_id = $new_id;
 
-	            	$sponsor['events_id'] = $new_id;
+                    // $mediapartner->MediaPartners = $this->request->data['Mediapartners'][$key]["name"];
 
-	            	$sponsor['Sponsors'] = $this->request->data['Sponsors'][$key]["name"];
+                    $mediapartner = $this->Mediapartners->newEntity();
 
-	            	$this->Sponsors->save($sponsor);
+                    $mediapartner['events_id'] = $new_id;
 
-	            }
+                    $mediapartner['MediaPartners'] = $this->request->data['Mediapartners'][$key]["name"];
 
+                    $this->Mediapartners->save($mediapartner);
 
-
-	            $addres = $this->Address->patchEntity($addres, $this->request->data);
-
-	            $addres->events_id = $new_id;
-
-	            $this->Address->save($addres);
-
-            	////////////////////////////////////////////////////////////////////
+                }
 
 
 
-            	//Send email to admin to active
+                foreach($this->request->data['Sponsors'] as $key=>$tmp_name)
 
-            	$email = new Email();
+                {
 
-        		$email->transport('gmail');
+                    // $sponsor = $this->Sponsors->patchEntity($sponsor, $this->request->data);
 
-        		$email->template('eventactivationadmin','cs-email');
+                    // $sponsor->events_id = $new_id;
 
-        		$subject = "New event has arrived!";
+                    // $sponsor->Sponsors = $this->request->data['Sponsors'][$key]["name"];
 
-            	$email->emailFormat('html');
+                    $sponsor = $this->Sponsors->newEntity();
 
-			    $email->from('admin@chennaismile.com');
+                    $sponsor['events_id'] = $new_id;
 
-			    $email->to('admin@chennaismile.com');
+                    $sponsor['Sponsors'] = $this->request->data['Sponsors'][$key]["name"];
+                    $this->Sponsors->save($sponsor);
 
-			    $email->subject($subject);
+                } 
+         $data = array();
+        // pr($this->request->data['name']);
+                 for($i=0;$i<count($this->request->data['name']);$i++){
+                   // pr($i);
+                $data['events_id'] = $new_id;
+                $data['name'] = $this->request->data['name'][$i];
+                 $data['tickettype'] = $this->request->data['tickettype'][$i];
+                $data['price'] = $this->request->data['price'][$i];
+                $data['noofseats'] = $this->request->data['noofseats'][$i];
+                $data['commission_per'] = $this->request->data['commission_per'][$i];
+                $data['commission_amt'] = $this->request->data['commission_amt'][$i];
+                 $data['status'] = 0;
+                $data['startdate'] = $this->request->data['startdate'][$i];
+                $data['enddate'] = $this->request->data['enddate'][$i];
+         $bookingonline = $this->Bookingonline->newEntity();
 
-				$activationUrl = Router::url(['controller' => 'events', 'action' => 'activate/' . $new_id, '_full' => true ]);
+ $bookingonline = $this->Bookingonline->patchEntity($bookingonline,$data );
+                //$bookingonline->events_id = $new_id;
 
-			    $email->viewVars(['URL' => $activationUrl]);
+                if($this->Bookingonline->save($bookingonline)){
+                 //   echo "success";
+                     //  pr($data); if i print this it will returns all the datas
+                    //exit;
+                }else{
+                   // pr($bookingonline->errors());
+                     
+                    exit;
+                }
 
-			    $email->send();
+}
+                $addres = $this->Address->patchEntity($addres, $this->request->data);
 
-			    //Send email to admin to active
+                $addres->events_id = $new_id;
+
+                $this->Address->save($addres);
+
+                ////////////////////////////////////////////////////////////////////
+
+
+
+                //Send email to admin to active
+
+                $email = new Email();
+
+                $email->transport('gmail');
+
+                $email->template('eventactivationadmin','cs-email');
+
+                $subject = "New event has arrived!";
+
+                $email->emailFormat('html');
+
+                $email->from('admin@chennaismile.com');
+
+                $email->to('admin@chennaismile.com');
+
+                $email->subject($subject);
+
+                $activationUrl = Router::url(['controller' => 'events', 'action' => 'activate/' . $new_id, '_full' => true ]);
+
+                $email->viewVars(['URL' => $activationUrl]);
+
+                $email->send();
+
+                //Send email to admin to active
 
                 $email->transport('gmail');
 
@@ -1922,55 +1958,55 @@ public function organizerevents()
 
                 // Always try to write clean code, so that you can read it :) :
 
-    			$email->template('awaitingapproval','cs-email');
+                $email->template('awaitingapproval','cs-email');
 
                 $email->emailFormat('html');
 
-    			$email->to($this->Auth->user('email'));
+                $email->to($this->Auth->user('email'));
 
-    			$email->cc('admin@chennaismile.com');
+                $email->cc('admin@chennaismile.com');
 
-    			$email->subject($subject);
+                $email->subject($subject);
 
-    			$email->from('admin@chennaismile.com');
+                $email->from('admin@chennaismile.com');
 
-    			$email->viewVars(['name' => $name]);
+                $email->viewVars(['name' => $name]);
 
-    			$email->send();
-
-
-
-    //         	//Email to customer, who created the events
-
-    //         	$email->transport('gmail');
-
-    //     		$email->template('default');
-
-    //     		$subject = "Event Activation is waiting for Admin review..";
-
-    //         	$name = $this->Auth->user('fullname');
-
-			 //    $email->emailFormat('html');
-
-			 //    $email->from('admin@chennaismile.com');
-
-			 //    $email->to($this->Auth->user('email'));
-
-			 //    $email->subject($subject);
-
-			 //    $message = "Dear <span style='color:#666666'>".$name."</span>,<br/><br/>";
-
-			 //    $message .= "Event has been created successfully by " .$this->Auth->user('fullname'). ".<br/>";
-
-    //         	$message .= "<b>Event Activation is waiting for Admin review.. Will let you know, once its activated.</b> <br/>";
-
-			 //    $message .= "<br/>Thanks, <br/>Support Team";
-
-			 //    $email->send($message);
+                $email->send();
 
 
 
-            	////////////////////////////////////////////////////////////////////
+    //          //Email to customer, who created the events
+
+    //          $email->transport('gmail');
+
+    //          $email->template('default');
+
+    //          $subject = "Event Activation is waiting for Admin review..";
+
+    //          $name = $this->Auth->user('fullname');
+
+             //    $email->emailFormat('html');
+
+             //    $email->from('admin@chennaismile.com');
+
+             //    $email->to($this->Auth->user('email'));
+
+             //    $email->subject($subject);
+
+             //    $message = "Dear <span style='color:#666666'>".$name."</span>,<br/><br/>";
+
+             //    $message .= "Event has been created successfully by " .$this->Auth->user('fullname'). ".<br/>";
+
+    //          $message .= "<b>Event Activation is waiting for Admin review.. Will let you know, once its activated.</b> <br/>";
+
+             //    $message .= "<br/>Thanks, <br/>Support Team";
+
+             //    $email->send($message);
+
+
+
+                ////////////////////////////////////////////////////////////////////
 
                 $this->Flash->success(__('The event has been saved, kindly wait for an approval mail from the admin.'));
 
@@ -1996,7 +2032,7 @@ public function organizerevents()
 
         $categories_new = $this->Categories->find()->select(['Categories.name', 'Categories.id'])
 
-        	->where(['active' => 1]);
+            ->where(['active' => 1]);
 
 
 
@@ -2004,9 +2040,9 @@ public function organizerevents()
 
         $subCategories_new = $this->SubCategories->find('all', ['fields' => 'name',
 
-			    'conditions' => ['active' => 1]
+                'conditions' => ['active' => 1]
 
-			]);
+            ]);
 
 
 
@@ -2565,31 +2601,31 @@ $this->paginate = [
 
 
 
-	public function viewresult($id = null)
+    public function viewresult($id = null)
 
-	{
+    {
 
-		if ($this->request->is('ajax')) {
+        if ($this->request->is('ajax')) {
 
-			$id = $this->request->data['id'];
+            $id = $this->request->data['id'];
 
-			$this->loadModel('SubCategories');
+            $this->loadModel('SubCategories');
 
-			$subCategories = $this->SubCategories->find('list', ['limit' => 200, 'conditions' => array('categories_id' => $id)]);
+            $subCategories = $this->SubCategories->find('list', ['limit' => 200, 'conditions' => array('categories_id' => $id)]);
 
-        	echo json_encode($subCategories);
+            echo json_encode($subCategories);
 
-		}
+        }
 
-		$this->autoRender = false;
+        $this->autoRender = false;
 
-		exit;
+        exit;
 
-	}
+    }
 
 
 
-	/**
+    /**
 
      * Activate method
 
@@ -2607,7 +2643,7 @@ $this->paginate = [
 
     {
 
-    	$event = $this->Events->get($id, [
+        $event = $this->Events->get($id, [
 
             'contain' => ['Users', 'Categories']
 
@@ -2619,189 +2655,189 @@ $this->paginate = [
 
 
 
-       	if($this->Auth->user('group_id') == 4)
+        if($this->Auth->user('group_id') == 4)
 
-       	{
+        {
 
-	        $users_email = $event['user']['email'];
+            $users_email = $event['user']['email'];
 
-	        //$users_email['email']
+            //$users_email['email']
 
-	        if ($this->request->is(['patch', 'post', 'put']))
+            if ($this->request->is(['patch', 'post', 'put']))
 
-	        {
+            {
 
-	            //$event = $this->Events->patchEntity($event, $this->request->data['active']);
+                //$event = $this->Events->patchEntity($event, $this->request->data['active']);
 
-	            if ($this->Events->updateAll(['active' => $this->request->data['active']], ['id' => $id]))
+                if ($this->Events->updateAll(['active' => $this->request->data['active']], ['id' => $id]))
 
-	            {
+                {
 
-	            	//Send eamil to user
+                    //Send eamil to user
 
-	            	$email = new Email();
+                    $email = new Email();
 
-	        		$email->transport('gmail');
+                    $email->transport('gmail');
 
 
 
-				    // Always try to write clean code, so that you can read it :) :
+                    // Always try to write clean code, so that you can read it :) :
 
-				    if($this->request->data['active'] == '1')
+                    if($this->request->data['active'] == '1')
 
-				    {
+                    {
 
-					    $email->template('eventactivated','cs-email');
+                        $email->template('eventactivated','cs-email');
 
-		            	$name = $event['user']['fullname'];
+                        $name = $event['user']['fullname'];
 
-					    $email->emailFormat('html');
+                        $email->emailFormat('html');
 
-					    $email->from('admin@chennaismile.com');
+                        $email->from('admin@chennaismile.com');
 
-					    $email->to($users_email);
+                        $email->to($users_email);
 
-					    $email->cc('admin@chennaismile.com');
+                        $email->cc('admin@chennaismile.com');
 
-					    $activationUrl = Router::url(['controller' => 'events', 'action' => 'view/' . $id, '_full' => true ]);
+                        $activationUrl = Router::url(['controller' => 'events', 'action' => 'view/' . $id, '_full' => true ]);
 
-					    $email->viewVars(['name' => $name, 'URL' => $activationUrl]);
+                        $email->viewVars(['name' => $name, 'URL' => $activationUrl]);
 
-				    	$subject = "Event Activated";
+                        $subject = "Event Activated";
 
-				    	$email->subject($subject);
+                        $email->subject($subject);
 
-				    	$email->send();
+                        $email->send();
 
-				    }
+                    }
 
-				    else
+                    else
 
-				    {
+                    {
 
-				    	$email->template('default');
+                        $email->template('default');
 
-		            	$name = $event['user']['fullname'];
+                        $name = $event['user']['fullname'];
 
-					    $email->emailFormat('html');
+                        $email->emailFormat('html');
 
-					    $email->from('admin@chennaismile.com');
+                        $email->from('admin@chennaismile.com');
 
-					    $email->to($users_email);
+                        $email->to($users_email);
 
-					    $email->cc('admin@chennaismile.com');
+                        $email->cc('admin@chennaismile.com');
 
-					    $activationUrl = Router::url(['controller' => 'events', 'action' => 'view/' . $id, '_full' => true ]);
+                        $activationUrl = Router::url(['controller' => 'events', 'action' => 'view/' . $id, '_full' => true ]);
 
-					    //$email->viewVars(['name' => $name, 'URL' => $activationUrl]);
+                        //$email->viewVars(['name' => $name, 'URL' => $activationUrl]);
 
-				    	$subject = "Event De-Activated";
+                        $subject = "Event De-Activated";
 
-					    $message = "Dear <span style='color:#666666'>".$name."</span>,<br/><br/>";
+                        $message = "Dear <span style='color:#666666'>".$name."</span>,<br/><br/>";
 
-					    $message .= "Event has been de-activated by Admin.<br/>";
+                        $message .= "Event has been de-activated by Admin.<br/>";
 
-					    $message .= "<br/>";
+                        $message .= "<br/>";
 
-					    $message .= "<br/>Thanks, <br/>Support Team";
+                        $message .= "<br/>Thanks, <br/>Support Team";
 
-					    $email->subject($subject);
+                        $email->subject($subject);
 
-				    	$email->send($message);
+                        $email->send($message);
 
-				    }
+                    }
 
-	            	$this->Flash->success(__('The event has been updated.'));
+                    $this->Flash->success(__('The event has been updated.'));
 
-	                return $this->redirect(['action' => 'adminindex']);
+                    return $this->redirect(['action' => 'adminindex']);
 
-	            } else {
+                } else {
 
-	                $this->Flash->error(__('The event could not be updated. Please, try again.'));
+                    $this->Flash->error(__('The event could not be updated. Please, try again.'));
 
-	            }
+                }
 
-	        }
+            }
 
-	        $this->viewBuilder()->layout('event_new_home');
+            $this->viewBuilder()->layout('event_new_home');
 
-	        $u_id = "";
+            $u_id = "";
 
-	        if(!empty($this->Auth->user('id')))
+            if(!empty($this->Auth->user('id')))
 
-			{
+            {
 
-				$u_id = $this->Auth->user('id');
+                $u_id = $this->Auth->user('id');
 
-				$fullname = $this->Auth->user('fullname');
+                $fullname = $this->Auth->user('fullname');
 
-				$email = $this->Auth->user('email');
+                $email = $this->Auth->user('email');
 
-			}
+            }
 
-	        $this->loadModel('Address');
+            $this->loadModel('Address');
 
-	        $address = $this->Address->find('all', ['conditions' => ['events_id' => $id]]);
+            $address = $this->Address->find('all', ['conditions' => ['events_id' => $id]]);
 
-	        $address = $address->first();
+            $address = $address->first();
 
-	        $this->loadModel('Mediapartners');
+            $this->loadModel('Mediapartners');
 
-	        $mediapartners = $this->Mediapartners->find('all', ['conditions' => ['events_id' => $id]]);
+            $mediapartners = $this->Mediapartners->find('all', ['conditions' => ['events_id' => $id]]);
 
-	        $this->loadModel('Galaries');
+            $this->loadModel('Galaries');
 
-	        $galaries = $this->Galaries->find('all', ['conditions' => ['events_id' => $id]]);
+            $galaries = $this->Galaries->find('all', ['conditions' => ['events_id' => $id]]);
 
-	        $this->loadModel('Sponsors');
+            $this->loadModel('Sponsors');
 
-	        $sponsors = $this->Sponsors->find('all', ['conditions' => ['events_id' => $id]]);
+            $sponsors = $this->Sponsors->find('all', ['conditions' => ['events_id' => $id]]);
 
-	        $this->loadModel('Likes');
+            $this->loadModel('Likes');
 
-	        $likes = $this->Likes->find('all', ['conditions' => ['events_id' => $id]]);
+            $likes = $this->Likes->find('all', ['conditions' => ['events_id' => $id]]);
 
-	        $query = $this->Likes->find('all', ['select' => 'id',
+            $query = $this->Likes->find('all', ['select' => 'id',
 
-			    	'conditions' => ['events_id' => $id]]);
+                    'conditions' => ['events_id' => $id]]);
 
-			$number = $query->count();
+            $number = $query->count();
 
-	        $this->loadModel('Categories');
+            $this->loadModel('Categories');
 
-	        $categories_new = $this->Categories->find()->select(['Categories.name', 'Categories.id'])
+            $categories_new = $this->Categories->find()->select(['Categories.name', 'Categories.id'])
 
-	        	->where(['active' => 1]);
+                ->where(['active' => 1]);
 
 
 
-	        $this->loadModel('SubCategories');
+            $this->loadModel('SubCategories');
 
-	        $subCategories_new = $this->SubCategories->find('all', ['fields' => 'name',
+            $subCategories_new = $this->SubCategories->find('all', ['fields' => 'name',
 
-				    'conditions' => ['active' => 1]
+                    'conditions' => ['active' => 1]
 
-				    	]);
+                        ]);
 
-	        $this->set('event', $event);
+            $this->set('event', $event);
 
-	        $this->set('_serialize', ['event']);
+            $this->set('_serialize', ['event']);
 
-	        $this->set('categories', $categories_new);
+            $this->set('categories', $categories_new);
 
-	        $this->set(compact('subCategories_new'));
+            $this->set(compact('subCategories_new'));
 
-	        $this->set(compact('address', 'mediapartners', 'sponsors', 'number', 'likes', 'u_id', 'galaries'));
+            $this->set(compact('address', 'mediapartners', 'sponsors', 'number', 'likes', 'u_id', 'galaries'));
 
-	    }
+        }
 
-	    else
+        else
 
-	    {
+        {
 
-	    	return $this->redirect(['controller' => 'Users', 'action' => 'adminlogin']);
+            return $this->redirect(['controller' => 'Users', 'action' => 'adminlogin']);
 
-	    }
+        }
 
 
 
@@ -2811,9 +2847,9 @@ $this->paginate = [
 
     //Search AreaName
 
-	public function search()
+    public function search()
 
-	{
+    {
 
         if ($this->request->is('ajax')) {
 
@@ -2843,15 +2879,15 @@ $this->paginate = [
 
             echo json_encode($resultArr);
 
-		}
+        }
 
-	}
+    }
 
 
 
-	public function searchbyeventtitle()
+    public function searchbyeventtitle()
 
-	{
+    {
 
         if ($this->request->is('ajax')) {
 
@@ -2873,25 +2909,25 @@ $this->paginate = [
 
             echo json_encode($resultArr);
 
-		}
+        }
 
-	}
+    }
 
 
 
-	public function eventlist()
+    public function eventlist()
 
-	{
+    {
 
-		if ($this->request->is('ajax')) {
+        if ($this->request->is('ajax')) {
 
-			$userId = $this->Auth->user('id');
+            $userId = $this->Auth->user('id');
 
-			$filter = false;
+            $filter = false;
 
-	        $cond = '';
+            $cond = '';
 
-	        $joins = '';
+            $joins = '';
 
             $page = 0;
 
@@ -2901,45 +2937,45 @@ $this->paginate = [
 
 
 
-	        if (!empty($this->request->data)){
+            if (!empty($this->request->data)){
 
-	        	//echo "<pre>";print_r($this->request->query);echo "</pre>";
+                //echo "<pre>";print_r($this->request->query);echo "</pre>";
 
-	        	if(isset($this->request->data['category']) && $this->request->data['category'] !='') {
+                if(isset($this->request->data['category']) && $this->request->data['category'] !='') {
 
-	        		$category = implode(',', $this->request->data['category']);
+                    $category = implode(',', $this->request->data['category']);
 
-	        		$cond .= " AND e.categories_id IN ($category) AND e.date >= CURDATE()";
+                    $cond .= " AND e.categories_id IN ($category) AND e.date >= CURDATE()";
 
-	        		$filter = true;
+                    $filter = true;
 
-	        	}
-
-
-
-	        	if(isset($this->request->data['area']) && $this->request->data['area'] !='') {
-
-	        		$area = $this->request->data['area'];
-
-	        		$joins .= " LEFT JOIN address ad ON ad.events_id = e.id";
-
-		        	$cond .= " AND ad.areaname = '".$area."' AND e.date >= CURDATE()";
-
-		        	$filter = true;
-
-	        	}
+                }
 
 
 
-	        	if(isset($this->request->data['eTitle']) && $this->request->data['eTitle'] !='') {
+                if(isset($this->request->data['area']) && $this->request->data['area'] !='') {
 
-	        		$eTitle = $this->request->data['eTitle'];
+                    $area = $this->request->data['area'];
 
-		        	$cond .= " AND e.title like '%".$eTitle."%' AND e.date >= CURDATE()";
+                    $joins .= " LEFT JOIN address ad ON ad.events_id = e.id";
 
-		        	$filter = true;
+                    $cond .= " AND ad.areaname = '".$area."' AND e.date >= CURDATE()";
 
-	        	}
+                    $filter = true;
+
+                }
+
+
+
+                if(isset($this->request->data['eTitle']) && $this->request->data['eTitle'] !='') {
+
+                    $eTitle = $this->request->data['eTitle'];
+
+                    $cond .= " AND e.title like '%".$eTitle."%' AND e.date >= CURDATE()";
+
+                    $filter = true;
+
+                }
 
 
 
@@ -2959,37 +2995,37 @@ $this->paginate = [
 
 
 
-	        	if(isset($this->request->data['action']) && $this->request->data['action'] !='') {
+                if(isset($this->request->data['action']) && $this->request->data['action'] !='') {
 
-	        		$action = $this->request->data['action'];
+                    $action = $this->request->data['action'];
 
-	        		if($action == "pastevents"){
+                    if($action == "pastevents"){
 
-	        			$filter = true;
+                        $filter = true;
 
-		        		$cond .= " AND e.date < CURDATE()";
+                        $cond .= " AND e.date < CURDATE()";
 
-	        		}
+                    }
 
-	        		if($action == "likedevents"){
+                    if($action == "likedevents"){
 
-	        			$joins .= " LEFT JOIN likes l ON l.events_id = e.id";
+                        $joins .= " LEFT JOIN likes l ON l.events_id = e.id";
 
-		        		$cond .= " AND l.user_id = ".$userId;
+                        $cond .= " AND l.user_id = ".$userId;
 
-		        		$filter = true;
+                        $filter = true;
 
-	        		}
+                    }
 
-	        		if($action == "myevents"){
+                    if($action == "myevents"){
 
-	        			$cond .= " AND e.user_id = ".$userId;
+                        $cond .= " AND e.user_id = ".$userId;
 
-	        			$filter = true;
+                        $filter = true;
 
-	        		}
+                    }
 
-	        	}
+                }
 
 
 
@@ -3017,65 +3053,65 @@ $this->paginate = [
 
 
 
-	        	if(isset($this->request->data['date']) && !empty($this->request->data['date'])){					
+                if(isset($this->request->data['date']) && !empty($this->request->data['date'])){                    
 
 
 
-		        	if($this->request->data['date'] == "today") {
+                    if($this->request->data['date'] == "today") {
 
-		        		$filter = true;
+                        $filter = true;
 
-		        		$cond .= " AND e.date = CURDATE()";
+                        $cond .= " AND e.date = CURDATE()";
 
-		        	}
+                    }
 
-		        	elseif($this->request->data['date'] == "tomorrow") {
+                    elseif($this->request->data['date'] == "tomorrow") {
 
-		        		$filter = true;
+                        $filter = true;
 
-		        		$cond .= " AND e.date = DATE_ADD(CURDATE(),INTERVAL 1 DAY)";
+                        $cond .= " AND e.date = DATE_ADD(CURDATE(),INTERVAL 1 DAY)";
 
-		        	}
+                    }
 
-		        	elseif ($this->request->data['date'] == "weekend") {
+                    elseif ($this->request->data['date'] == "weekend") {
 
-		        		$filter = true;
+                        $filter = true;
 
-		        		$cond .= " AND e.date between DATE_ADD(CURDATE(), interval(7 - DAYOFWEEK(CURDATE()) ) DAY) AND DATE_ADD(CURDATE(), interval(7-DAYOFWEEK(CURDATE())+1) DAY)";
+                        $cond .= " AND e.date between DATE_ADD(CURDATE(), interval(7 - DAYOFWEEK(CURDATE()) ) DAY) AND DATE_ADD(CURDATE(), interval(7-DAYOFWEEK(CURDATE())+1) DAY)";
 
-		        	}
+                    }
 
-		        	elseif ($this->request->data['date'] == "month") {
+                    elseif ($this->request->data['date'] == "month") {
 
-		        		$filter = true;
+                        $filter = true;
 
-		        		$cond .= " AND e.date between DATE_FORMAT(NOW() ,'%Y-%m-01') AND LAST_DAY(CURDATE())";
+                        $cond .= " AND e.date between DATE_FORMAT(NOW() ,'%Y-%m-01') AND LAST_DAY(CURDATE())";
 
-		        	}
+                    }
 
-	        	}
+                }
 
 
 
-	        	if(isset($this->request->data['customDate']) && !empty($this->request->data['customDate'])){
+                if(isset($this->request->data['customDate']) && !empty($this->request->data['customDate'])){
 
-	        		$customDate = $this->request->data['customDate'];
+                    $customDate = $this->request->data['customDate'];
 
-	        		$exp = explode('|', $customDate);
+                    $exp = explode('|', $customDate);
 
-	        		$filter = true;
+                    $filter = true;
 
-	        		$cond .= " AND e.date between '".$exp[0]."' AND '".$exp[1]."'";
+                    $cond .= " AND e.date between '".$exp[0]."' AND '".$exp[1]."'";
 
-		        }
+                }
 
-	        }
+            }
 
-	        if(!$filter) {
+            if(!$filter) {
 
-		        $cond .= " AND e.date > DATE_ADD(CURDATE(),INTERVAL -1 DAY)";
+                $cond .= " AND e.date > DATE_ADD(CURDATE(),INTERVAL -1 DAY)";
 
-	        }
+            }
 
 
 
@@ -3095,183 +3131,183 @@ $this->paginate = [
 
 
 
-        	echo json_encode($results);
+            echo json_encode($results);
 
-		}
+        }
 
-		$this->autoRender = false;
+        $this->autoRender = false;
 
-		exit;
+        exit;
 
-	}
+    }
 
 
 
-	public function likes($id = null)
-
-	{
-
-		if ($this->request->is('ajax'))
-
-        {
-
-			$this->loadModel('Likes');
-
-	        $this->autoRender = false;
-
-	        $events_id = $this->request->data('eventid');
-
-	        $user_id = $this->Auth->user('id');
-
-	        $likes = $this->Likes->newEntity();
-
-	        $likes = $this->Likes->patchEntity($likes, $this->request->data);
-
-	        $likes->events_id = $events_id;
-
-	        $likes->user_id = $user_id;
-
-
-
-	        $query = $this->Likes->find('all', ['select' => 'id',
-
-		    	'conditions' => ['events_id' => $events_id, 'user_id' => $user_id]]);
-
-			$number = $query->count();
-
-
-
-			if($number < 1)
-
-			{
-
-	        	$likes->likes = '1';
-
-			}
-
-	        else if($number > 0)
-
-	        {
-
-	        	$likes->likes = '0';
-
-	        	$query_1 = $this->Likes->find('all', ['select' => 'id',
-
-		    	'conditions' => ['events_id' => $events_id, 'user_id' => $user_id, 'likes' => '1']]);
-
-				$number_1 = $query_1->count();
-
-				if($number_1>0)
-
-				{
-
-	        		$this->Likes->delete($query_1->first());
-
-	        		$likes->likes = '0';
-
-				}
-
-
-
-				$query_2 = $this->Likes->find('all', ['select' => 'id',
-
-		    	'conditions' => ['events_id' => $events_id, 'user_id' => $user_id, 'likes' => '0']]);
-
-				$number_2 = $query_2->count();
-
-
-
-				if($number_2 > 0)
-
-				{
-
-					$this->Likes->delete($query_2->first());
-
-	        		$likes->likes = '1';
-
-				}
-
-
-
-	        }
-
-
-
-	        $this->Likes->save($likes);
-
-	        $query_count = $this->Likes->find('all', [
-
-			    'conditions' => ['events_id' => $events_id, 'likes' => 1]
-
-			]);
-
-			$number_cnt = $query_count->count();
-
-			if ($number_cnt < 1)
-
-				$cnt = '0';
-
-			else
-
-				$cnt = $number_cnt;
-
-	        echo $cnt;
-
-    	}
-
-
-
-	}
-
-	public function sendemail()
+    public function likes($id = null)
 
     {
 
-		if ($this->request->is('ajax'))
+        if ($this->request->is('ajax'))
 
         {
 
-        	$this->autoRender = false;
+            $this->loadModel('Likes');
+
+            $this->autoRender = false;
+
+            $events_id = $this->request->data('eventid');
+
+            $user_id = $this->Auth->user('id');
+
+            $likes = $this->Likes->newEntity();
+
+            $likes = $this->Likes->patchEntity($likes, $this->request->data);
+
+            $likes->events_id = $events_id;
+
+            $likes->user_id = $user_id;
 
 
 
-        	$events_id = $this->request->data('eventid');
+            $query = $this->Likes->find('all', ['select' => 'id',
 
-        	$email_req = $this->request->data('email');
+                'conditions' => ['events_id' => $events_id, 'user_id' => $user_id]]);
 
-	        $event = $this->Events->get($events_id, [
-
-	            'contain' => ['Users', 'Categories']
-
-	        ]);
+            $number = $query->count();
 
 
 
-	        $this->loadModel('Invitefriends');
+            if($number < 1)
 
-	        $invitefriends = $this->Invitefriends->find('all',array('conditions'=>array('email'=>$email_req, 'events_id' => $events_id)));
+            {
 
-    		$invitefriends = $invitefriends->first();
+                $likes->likes = '1';
+
+            }
+
+            else if($number > 0)
+
+            {
+
+                $likes->likes = '0';
+
+                $query_1 = $this->Likes->find('all', ['select' => 'id',
+
+                'conditions' => ['events_id' => $events_id, 'user_id' => $user_id, 'likes' => '1']]);
+
+                $number_1 = $query_1->count();
+
+                if($number_1>0)
+
+                {
+
+                    $this->Likes->delete($query_1->first());
+
+                    $likes->likes = '0';
+
+                }
 
 
 
-    		if(isset($invitefriends))
+                $query_2 = $this->Likes->find('all', ['select' => 'id',
 
-    		{
+                'conditions' => ['events_id' => $events_id, 'user_id' => $user_id, 'likes' => '0']]);
 
-    			$invitefriend = $this->Invitefriends->get($invitefriends['ID']);
-
-    			$this->Invitefriends->delete($invitefriend);
-
-    		}
+                $number_2 = $query_2->count();
 
 
 
-	        $activation_key = Text::uuid();
+                if($number_2 > 0)
 
-	        $invitefriend = $this->Invitefriends->newEntity();
+                {
 
-	        $invitefriend['events_id'] = $events_id;
+                    $this->Likes->delete($query_2->first());
+
+                    $likes->likes = '1';
+
+                }
+
+
+
+            }
+
+
+
+            $this->Likes->save($likes);
+
+            $query_count = $this->Likes->find('all', [
+
+                'conditions' => ['events_id' => $events_id, 'likes' => 1]
+
+            ]);
+
+            $number_cnt = $query_count->count();
+
+            if ($number_cnt < 1)
+
+                $cnt = '0';
+
+            else
+
+                $cnt = $number_cnt;
+
+            echo $cnt;
+
+        }
+
+
+
+    }
+
+    public function sendemail()
+
+    {
+
+        if ($this->request->is('ajax'))
+
+        {
+
+            $this->autoRender = false;
+
+
+
+            $events_id = $this->request->data('eventid');
+
+            $email_req = $this->request->data('email');
+
+            $event = $this->Events->get($events_id, [
+
+                'contain' => ['Users', 'Categories']
+
+            ]);
+
+
+
+            $this->loadModel('Invitefriends');
+
+            $invitefriends = $this->Invitefriends->find('all',array('conditions'=>array('email'=>$email_req, 'events_id' => $events_id)));
+
+            $invitefriends = $invitefriends->first();
+
+
+
+            if(isset($invitefriends))
+
+            {
+
+                $invitefriend = $this->Invitefriends->get($invitefriends['ID']);
+
+                $this->Invitefriends->delete($invitefriend);
+
+            }
+
+
+
+            $activation_key = Text::uuid();
+
+            $invitefriend = $this->Invitefriends->newEntity();
+
+            $invitefriend['events_id'] = $events_id;
 
             $invitefriend['email'] = $email_req;
 
@@ -3289,49 +3325,49 @@ $this->paginate = [
 
 
 
-	        $this->loadModel('Address');
+            $this->loadModel('Address');
 
-	        $address = $this->Address->find('all', ['conditions' => ['events_id' => $events_id]]);
+            $address = $this->Address->find('all', ['conditions' => ['events_id' => $events_id]]);
 
-	        $address = $address->first();
+            $address = $address->first();
 
-	        $activationUrl = Router::url(['controller' => 'events', 'action' => 'invitation/' . $activation_key, '_full' => true ]);
+            $activationUrl = Router::url(['controller' => 'events', 'action' => 'invitation/' . $activation_key, '_full' => true ]);
 
 
 
-	        $email = new Email();
+            $email = new Email();
 
-    		$email->transport('gmail');
+            $email->transport('gmail');
 
-    		$email->template('inviteemail','csinvite');
+            $email->template('inviteemail','csinvite');
 
-    		$subject = "Invitation from chennaismile";
+            $subject = "Invitation from chennaismile";
 
-        	$email->emailFormat('html');
+            $email->emailFormat('html');
 
-		    $email->from('admin@chennaismile.com');
+            $email->from('admin@chennaismile.com');
 
-		    $email->to($email_req);
+            $email->to($email_req);
 
-		    $email->cc('admin@chennaismile.com');
+            $email->cc('admin@chennaismile.com');
 
-		    $email->subject($subject);
+            $email->subject($subject);
 
-		    $email->viewVars(['title' => $event['title'], 'descriptioin' => $event['descriptioin'], 'URL' => $activationUrl, 'date' => $event['date'], 'time' => $event['time'], 'contact' => $event['contact_number'], 'mobile' => $event['mobile_number'],  'address_1' => $address['address_1'],  'address_2' => $address['address_2'],  'landmark' => $address['landmark'],
+            $email->viewVars(['title' => $event['title'], 'descriptioin' => $event['descriptioin'], 'URL' => $activationUrl, 'date' => $event['date'], 'time' => $event['time'], 'contact' => $event['contact_number'], 'mobile' => $event['mobile_number'],  'address_1' => $address['address_1'],  'address_2' => $address['address_2'],  'landmark' => $address['landmark'],
 
-		    	'city' => $address['city'], 'state' => $address['state'], 'country' => $address['country'], 'google_map' => $event['google_map']]);
+                'city' => $address['city'], 'state' => $address['state'], 'country' => $address['country'], 'google_map' => $event['google_map']]);
 
-		    $email->send();
+            $email->send();
 
-		    $return = 'Success';
+            $return = 'Success';
 
-		    echo json_encode(compact('return'));
+            echo json_encode(compact('return'));
 
-		    //return "Success";
+            //return "Success";
 
-		    exit(0);
+            exit(0);
 
-	    }
+        }
 
     }
 
@@ -3355,31 +3391,31 @@ $this->paginate = [
 
     {
 
-    	$this->loadModel('Invitefriends');
+        $this->loadModel('Invitefriends');
 
-    	$invitefriends = $this->Invitefriends->find('all',array('conditions'=>array('activation_key'=>$activation_key)));
+        $invitefriends = $this->Invitefriends->find('all',array('conditions'=>array('activation_key'=>$activation_key)));
 
-    	$invitefriends = $invitefriends->first();
-
-
-
-    	if(isset($invitefriends['events_id']))
-
-    	{
-
-    		$id = $invitefriends['events_id'];
-
-    	} else
-
-    	{
-
-    		return $this->redirect(['controller' => 'Users', 'action' => 'login']);
-
-    	}
+        $invitefriends = $invitefriends->first();
 
 
 
-		$this->viewBuilder()->layout('event_home');
+        if(isset($invitefriends['events_id']))
+
+        {
+
+            $id = $invitefriends['events_id'];
+
+        } else
+
+        {
+
+            return $this->redirect(['controller' => 'Users', 'action' => 'login']);
+
+        }
+
+
+
+        $this->viewBuilder()->layout('event_home');
 
         $event = $this->Events->get($id, [
 
@@ -3415,9 +3451,9 @@ $this->paginate = [
 
         $query = $this->Likes->find('all', ['select' => 'id',
 
-		    	'conditions' => ['events_id' => $id]]);
+                'conditions' => ['events_id' => $id]]);
 
-		$number = $query->count();
+        $number = $query->count();
 
 
 
@@ -3431,7 +3467,7 @@ $this->paginate = [
 
         $categories_new = $this->Categories->find()->select(['Categories.name', 'Categories.id'])
 
-        	->where(['active' => 1]);
+            ->where(['active' => 1]);
 
 
 
@@ -3439,9 +3475,9 @@ $this->paginate = [
 
         $subCategories_new = $this->SubCategories->find('all', ['fields' => 'name',
 
-			    'conditions' => ['active' => 1]
+                'conditions' => ['active' => 1]
 
-			    	]);
+                    ]);
 
 
 
@@ -3461,9 +3497,9 @@ $this->paginate = [
 
         $this->viewBuilder()->layout('admin');
 
-		//$this->viewBuilder()->layout('event_home');
+        //$this->viewBuilder()->layout('event_home');
 
-		$this->paginate = [
+        $this->paginate = [
 
             'contain' => ['Users', 'Categories',]
 
@@ -3493,7 +3529,7 @@ $this->paginate = [
 
         $categories_new = $this->Categories->find()->select(['Categories.name', 'Categories.id'])
 
-        	->where(['active' => 1]);
+            ->where(['active' => 1]);
 
 
 
@@ -3501,9 +3537,9 @@ $this->paginate = [
 
         $subCategories_new = $this->SubCategories->find('all', ['fields' => 'name',
 
-			    'conditions' => ['active' => 1]
+                'conditions' => ['active' => 1]
 
-			]);
+            ]);
 
         $this->loadModel('Address');
 
@@ -3513,13 +3549,13 @@ $this->paginate = [
 
         foreach ($events as $event) {
 
-        	 $address= $this->Address->find('all', array('conditions' => array('events_id'=> $event['id'])));
+             $address= $this->Address->find('all', array('conditions' => array('events_id'=> $event['id'])));
 
-        	 $event['Address'] = $address->first();
+             $event['Address'] = $address->first();
 
-        	 $eventss[$i] =$event;
+             $eventss[$i] =$event;
 
-        	 $i++;
+             $i++;
 
         }
 
@@ -3653,7 +3689,7 @@ order by CreatedEvents desc limit 5";
 
          $ticevent = $this->Events->find()->where(['register_online' => 1,[ 'date >'=>date("Y-m-d") ]])->count();
 
-	$freeevent = $this->Events->find()->where(['register_online' => 0,[ 'date >'=>date("Y-m-d") ]])->count();
+    $freeevent = $this->Events->find()->where(['register_online' => 0,[ 'date >'=>date("Y-m-d") ]])->count();
 
         $numbevent = $this->Events->find()->where(['active' => 0])->count();
 
@@ -3661,7 +3697,7 @@ order by CreatedEvents desc limit 5";
 
          $toevent = $this->Events->find()->where(['created >' => date("Y-m-d") ])->count();
 
-	$toactiveevent = $this->Events->find()->where(['created >' =>date("Y-m-d") , 'active' => 1 ])->count();
+    $toactiveevent = $this->Events->find()->where(['created >' =>date("Y-m-d") , 'active' => 1 ])->count();
 
           $yesterday = date("Y-m-d", mktime(0, 0, 0, date("m") , date("d")-1,date("Y")));
 
@@ -3829,7 +3865,7 @@ order by CreatedEvents desc limit 5";
 
 
 
-	/**
+    /**
 
      * View method
 
@@ -3847,31 +3883,31 @@ order by CreatedEvents desc limit 5";
 
     {
 
-    	$this->loadModel('Invitefriends');
+        $this->loadModel('Invitefriends');
 
-    	$invitefriends = $this->Invitefriends->find('all',array('conditions'=>array('activation_key'=>$activation_key)));
+        $invitefriends = $this->Invitefriends->find('all',array('conditions'=>array('activation_key'=>$activation_key)));
 
-    	$invitefriends = $invitefriends->first();
-
-
-
-    	if(isset($invitefriends['events_id']))
-
-    	{
-
-    		$id = $invitefriends['events_id'];
-
-    	} else
-
-    	{
-
-    		return $this->redirect(['controller' => 'Users', 'action' => 'login']);
-
-    	}
+        $invitefriends = $invitefriends->first();
 
 
 
-		$this->viewBuilder()->layout('event_home');
+        if(isset($invitefriends['events_id']))
+
+        {
+
+            $id = $invitefriends['events_id'];
+
+        } else
+
+        {
+
+            return $this->redirect(['controller' => 'Users', 'action' => 'login']);
+
+        }
+
+
+
+        $this->viewBuilder()->layout('event_home');
 
         $event = $this->Events->get($id, [
 
@@ -3907,9 +3943,9 @@ order by CreatedEvents desc limit 5";
 
         $query = $this->Likes->find('all', ['select' => 'id',
 
-		    	'conditions' => ['events_id' => $id]]);
+                'conditions' => ['events_id' => $id]]);
 
-		$number = $query->count();
+        $number = $query->count();
 
 
 
@@ -3923,7 +3959,7 @@ order by CreatedEvents desc limit 5";
 
         $categories_new = $this->Categories->find()->select(['Categories.name', 'Categories.id'])
 
-        	->where(['active' => 1]);
+            ->where(['active' => 1]);
 
 
 
@@ -3931,9 +3967,9 @@ order by CreatedEvents desc limit 5";
 
         $subCategories_new = $this->SubCategories->find('all', ['fields' => 'name',
 
-			    'conditions' => ['active' => 1]
+                'conditions' => ['active' => 1]
 
-			    	]);
+                    ]);
 
 
 
