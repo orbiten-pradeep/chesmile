@@ -1886,7 +1886,7 @@ public function organizerevents()
                 } 
          $data = array();
         // pr($this->request->data['name']);
-                 for($i=0;$i<count($this->request->data['name']);$i++){
+                 for($i=1;$i<count($this->request->data['name']);$i++){
                    // pr($i);
                 $data['events_id'] = $new_id;
                 $data['name'] = $this->request->data['name'][$i];
@@ -2101,6 +2101,13 @@ $this->paginate = [
          ];
         
        $this->loadModel('Address');
+
+    $this->loadModel('Bookingonline');
+        $bookinglist= $this->paginate['conditions'] = array('Bookingonline.events_id' => $id);
+        $bookinglists = $this->paginate($this->Bookingonline);
+        $this->set(compact('bookinglists','bookinglist'));
+        $this->set('_serialize', ['bookinglists']);
+        $this->set('_serialize', ['bookinglist']);
 
         $this->loadModel('Mediapartners');
         $medialist= $this->paginate['conditions'] = array('Mediapartners.events_id' => $id);

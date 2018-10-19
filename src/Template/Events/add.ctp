@@ -10,11 +10,17 @@ use Cake\I18n\Time;
 <div class="col-md-12 col-xs-12 mb-4 pr-0 pl-0 contain">
     <?php echo $this->Html->image('cs-static-banner.jpg',array('alt' => 'Cs-Static','class' => 'imgeff img-fluid static-banner','id' => 'target')); ?>
     <div class="text-block">
-   <!--  <?=$this->Form->input('banner',['type' => 'file','label' => false,'accept' => 'image/*','onchange' => 'putImage()', 'class' => 'img-fluid static-banner', 'required']);?> -->
-    
+   
     <div class="middle">
     <p>Banner Image</p>
- <?=$this->Form->input('banner',['type' => 'file','label' => false,'accept' => 'image/*','onchange' => 'putImage()', 'class' => 'img-fluid static-banner', 'required']);?>
+    <!-- <style>
+        input[type="file"]{
+            display:none;
+        }
+    </style> -->
+    <label class="btn btn-outline-info waves-effect btn-lg ">Upload Banner Image<i class="fa fa-upload ml-3" aria-hidden="true"></i>
+      
+ <?=$this->Form->input('banner',['type' => 'file','style'=>'display:none;','label' => false,'accept' => 'image/*','onchange' => 'putImage()', 'class' => 'img-fluid static-banner', 'required']);?></label>
   </div>
   </div>
     <div class="desk-container">
@@ -43,9 +49,9 @@ use Cake\I18n\Time;
         <div class="col-md-8 mb-4">
         <div class="col-md-14 cs_banner_container mb-5 contain">
         <?php echo $this->Html->image('cover_pic.jpg',array('alt' => 'Cs-Static','class' => 'img-fluid  rounded cs_banner_bg','id' => 'disptarget' )); ?>
-        <div class="dispmiddle">
-        <?=$this->Form->input('display',['type' => 'file','label' => false,'accept' => 'image/*','id' =>'display','onchange' => 'putDispImage()', 'class' => '', 'required']);?>
-   <p>Display Image</p>
+        <div class="dispmiddle"> <p>Display Image</p>
+            <label class="btn btn-outline-info waves-effect btn-lg ">Upload Display Image<i class="fa fa-upload ml-3" aria-hidden="true"></i>
+        <?=$this->Form->input('display',['type' => 'file','style'=>'display:none;','label' => false,'accept' => 'image/*','id' =>'display','onchange' => 'putDispImage()', 'class' => '', 'required']);?></label>
 </div>
             </div>
         <div class="col-md-12 pr-0 pl-0">
@@ -118,6 +124,7 @@ use Cake\I18n\Time;
                         <div class="p-4 mb-4 flex-cont rounded ">
                             <h5 class="cs-title">Mediapartner Logo</h5>
                             <!-- <?php echo $this->Html->image('cover_pic.jpg',array('alt' => 'Cs-Static','class' => 'thumb' )); ?><output id="list"></output>-->
+
                              <?= $this->Form->input('Mediapartners[]',['type' => 'file','label' => false,'multiple' => 'true','id'=>'filesmedia','accept' => 'image/*']);?>
                         </div>
 
@@ -198,14 +205,15 @@ use Cake\I18n\Time;
             <!--Header-->
             <div class="modal-header">
                 <?php echo $this->Html->image('org-logo.png',array('alt' => 'avatar','class' => 'rounded-circle img-responsive','id' => 'orgtarget', 'style'=>'height:130px;' )); ?>
-            
             </div>
+            <label class="btn btn-outline-info waves-effect btn-sm pull-right ">Organizer Logo<i class="fa fa-upload ml-3" aria-hidden="true"></i>
+                    <?=$this->Form->input('OrganizersLogo',['type' => 'file','style'=>'display:none;','label' => false,'onchange' => 'putorgImage()','id' => 'org','accept' => 'image/*']);?> 
+                </label> 
         </div>
             <!--Body-->
           
                 <div class="md-form">
-                    <?=$this->Form->input('OrganizersLogo',['type' => 'file','label' => false,'onchange' => 'putorgImage()','id' => 'org','accept' => 'image/*']);?> 
-                                <?=  $this->Form->input('OrganizersName',array('label' => 'Organizers name','div' => false,'class' => 'form-control','placeholder' => 'Please enter Organizer Name', 'required'));?></div>
+                     <?=  $this->Form->input('OrganizersName',array('label' => 'Organizers name','div' => false,'class' => 'form-control','placeholder' => 'Please enter Organizer Name', 'required'));?></div>
                 
   </div>
         <!--/.Content-->
@@ -314,11 +322,11 @@ use Cake\I18n\Time;
   <!-- Replace these fields -->
   <div class="md-form col-md-10">
     <input type="text" id="tickettype"  name="tickettype[]" class="form-control">
-    <label for="tickettype" >Ticket Type</label><span></span>
+    <label for="tickettype" >Ticket Type</label><span>Eg: Adult,children,above 60</span>
 </div>
  <div class="md-form col-md-10">
     <input type="text" id="name"  name="name[]" class="form-control">
-    <label for="name" >Ticket Name</label><span></span>
+    <label for="name" >Ticket Name</label><span>Eg: earlybird,vip,couple entry</span>
 </div>
 <div class="md-form col-md-10">
     <input type="text" id="price" name="price[]" class="form-control">

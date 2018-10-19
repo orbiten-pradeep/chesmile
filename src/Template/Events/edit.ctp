@@ -73,7 +73,8 @@ use Cake\I18n\Time;
          <!--   <?=$this->Form->input('banner',['type' => 'file','label' => false,'accept' => 'image/*','onchange' => 'putImage()', 'class' => 'cs_browse_btn', 'required']);?> -->
   <div class="middle">
   <p>Banner Image</p>
- <?=$this->Form->input('banner',['type' => 'file','label' => false,'accept' => 'image/*','onchange' => 'putImage()', 'class' => 'img-fluid static-banner','default'=> $event->banner]);?>
+   <label class="btn btn-outline-info waves-effect btn-lg ">Change Banner Image<i class="fa fa-upload ml-3" aria-hidden="true"></i>
+ <?=$this->Form->input('banner',['type' => 'file','style'=>'display:none;','label' => false,'accept' => 'image/*','onchange' => 'putImage()', 'class' => 'img-fluid static-banner','default'=> $event->banner]);?></label>
  <?php $this->Form->input('banner');?> 
   </div>
   </div>
@@ -109,8 +110,8 @@ use Cake\I18n\Time;
             }
             ?>
   <!--   <?php echo $this->Html->image('cover_pic.jpg',array('alt' => 'Cs-Static','class' => 'img-fluid z-depth-1 rounded cs_banner_bg','id' => 'disptarget' )); ?> -->
-    <div class="dispmiddle btn btn-secondary">
-    <?=$this->Form->input('display',['type' => 'file','label' => false,'accept' => 'image/*','id' =>'display','onchange' => 'putDispImage()', 'class' => '', 'required']);?><?php $this->Form->input('display');?> 
+    <div class="dispmiddle "><label class="btn btn-outline-info waves-effect btn-lg ">Upload Display Image<i class="fa fa-upload ml-3" aria-hidden="true"></i>
+    <?=$this->Form->input('display',['type' => 'file','style'=>'display:none;','label' => false,'accept' => 'image/*','id' =>'display','onchange' => 'putDispImage()', 'class' => '', 'required']);?></label><?php $this->Form->input('display');?> 
    <p>Display Image</p>
 </div>
       </div>
@@ -218,7 +219,7 @@ use Cake\I18n\Time;
           <div class="p-4 mb-4 flex-cont rounded cs_details_rightblock-add">
           <div class="text-center">
               <!-- <h5>₹ 699</h5> -->
-            <a href="" class="btn buy-btn btn-rounded mb-4" data-toggle="modal" data-target="#modalSubscriptionForm">Start Ticketing</a>  </div>
+            <a href="" class="btn buy-btn btn-rounded mb-4" data-toggle="modal" data-target="#modalSubscriptionForm">Edit Ticketing</a>  </div>
             
 <!--Grid row-->
                 <div class="row">
@@ -280,10 +281,12 @@ use Cake\I18n\Time;
             }
             ?><?php $this->Form->input('OrganizersLogo');?> 
             </div>
+             
         </div>
             <!--Body-->
-          <div class="md-form">
-                  <?=$this->Form->input('OrganizersLogo',['type' => 'file','label' => false,'onchange' => 'putorgImage()','id' => 'org','accept' => 'image/*']);?> 
+          <div class="md-form">  
+              <?=$this->Form->input('OrganizersLogo',['type' => 'file','label' => false,'onchange' => 'putorgImage()','id' => 'org','accept' => 'image/*']);?>
+            </div><div class="md-form">
                   <?=  $this->Form->input('OrganizersName',array('label' => 'Organizers name','div' => false,'class' => 'form-control','placeholder' => 'Please enter Organizer Name', 'required'));?></div>        
   </div>
         <!--/.Content-->
@@ -399,14 +402,7 @@ use Cake\I18n\Time;
   <!-- <?= $this->Form->input('ticketprice_2',array('label'=> false,'class' => 'form-control validate ','placeholder' => 'Ticket Price', 'style' => 'width: 90%;'));?> -->
      <input type="text" id="ticketprice_2" name="ticketprice_2" class="form-control validate" placeholder="Ticket Price" >
 </div>
-<div class="md-form input-group">
-  <div class="input-group-prepend">
-  <!--    <?= $this->Form->input('tickettype_3',array( 'label'=> false,'class' => 'form-control validate ','placeholder' => 'Ticket Type' ,'style' => 'width: 90%;'));?> -->
-      <input type="text" id="tickettype_3" name="tickettype_3" class="form-control validate" placeholder="Ticket Type" >
-  </div>&nbsp;&nbsp;&nbsp;&nbsp;
- <!-- <?= $this->Form->input('ticketprice_3',array('label'=> false,'class' => 'form-control validate ','placeholder' => 'Ticket Price', 'style' => 'width: 90%;'));?> -->
-    <input type="text" id="ticketprice_3" name="ticketprice_3" class="form-control validate" placeholder="Ticket Price" >
-</div>
+
 
             </div>
             <div class="modal-footer d-flex justify-content-center modal-foot">
