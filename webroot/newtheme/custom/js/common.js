@@ -1,12 +1,29 @@
 $(document).ready(function() {
 
-    $('#date').datepicker({
+    /*$('.date-input-class').datepicker({
         changeMonth: true,
         changeYear: true,
         minDate: new Date()
+    });*/
+
+    $('.date-input-class').daterangepicker({
+      opens: 'left'
+    }, function(start, end, label) {
+      console.log("A new date selection was made: " + start.format('YYYY-MM-DD') + ' to ' + end.format('YYYY-MM-DD'));
     });
 
-    $('#time').timepicker({ timeFormat: 'h:mm p' });
+    $('.time-input').timepicker({
+      timeFormat: 'h:mm p',
+      interval: 60,
+      minTime: '10',
+      maxTime: '6:00pm',
+      defaultTime: '11',
+      startTime: '10:00',
+      dynamic: false,
+      dropdown: true,
+      scrollbar: true
+  });
+
     var e = document.getElementById("categories-id");
     if(e) {
         var strUser = e.options[e.selectedIndex].value;
@@ -33,7 +50,12 @@ $(document).ready(function() {
         });
     }
 
-    $('#Autocomplete').autocomplete({
+    $('#Autocomplete2').autocomplete({
+        source:$("#search_area_url").val(),
+        minLength: 1
+    });
+
+     $('#Autocomplete').autocomplete({
         source:$("#search_area_url").val(),
         minLength: 1
     });

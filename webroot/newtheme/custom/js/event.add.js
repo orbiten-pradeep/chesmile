@@ -85,7 +85,14 @@
 	}
 
 	$('.launch-map').on('click', function () {
-		var loc = $("#landmark").val();
+		var loc = $("#Autocomplete2").val();
+		if(loc == '') {
+			loc = $("#Autocomplete").val();
+			if(loc == '') {				
+				loc = "Chennai";
+			}
+		}
+
 		$("#city_country").val(loc);
 	    $('#myModal').modal({
 	        backdrop: 'static',

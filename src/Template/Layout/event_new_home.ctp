@@ -33,15 +33,13 @@
 
     <link href="<?php echo $this->Url->build('/newtheme/custom/css/event.details.css'); ?>" rel="stylesheet">    
  	
- 	<link href="<?php echo $this->Url->build('/newtheme/custom/css/event.add.css'); ?>" rel="stylesheet">    
+ 	  <link href="<?php echo $this->Url->build('/newtheme/custom/css/event.add.css'); ?>" rel="stylesheet">    
 
-    <link rel="stylesheet" href="//code.jquery.com/ui/1.12.1/themes/base/jquery-ui.css">
+    <link rel="stylesheet" href="https://code.jquery.com/ui/1.12.1/themes/base/jquery-ui.css">
 
     <link rel="stylesheet" href="//cdnjs.cloudflare.com/ajax/libs/timepicker/1.3.5/jquery.timepicker.min.css">
 
-    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/4.7.0/css/font-awesome.min.css">
-
-    <?php echo $this->Html->css(['daterangepicker']); ?>
+    <link rel="stylesheet" type="text/css" href="https://cdn.jsdelivr.net/npm/daterangepicker/daterangepicker.css" />
     
 </head>
 
@@ -661,11 +659,11 @@
 
     <script type="text/javascript" src="<?php echo $this->Url->build('/newtheme/js/select2.min.js'); ?>"></script>
 
+    <script src="https://code.jquery.com/ui/1.12.1/jquery-ui.min.js" crossorigin="anonymous"></script>
+
+    <script type="text/javascript" src="https://cdn.jsdelivr.net/npm/daterangepicker/daterangepicker.min.js"></script>
+
     <script src="//cdnjs.cloudflare.com/ajax/libs/timepicker/1.3.5/jquery.timepicker.min.js"></script>
-
-    <script src="http://code.jquery.com/ui/1.11.0/jquery-ui.js"></script>
-
-    <?php  echo $this->Html->script(['daterangepicker']);?>
 
     <script src="http://maps.googleapis.com/maps/api/js?libraries=places&key=AIzaSyCx2hb4R1uhaMbmlUAu1_lFasvl3gVHtnw"></script>
 

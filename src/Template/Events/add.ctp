@@ -64,31 +64,33 @@ use Cake\I18n\Time;
 
 <!--Grid row-->
                 <div class="row">
-                <div class="md-form rs-details-bold "> <i class="fa fa-map-marker prefix" style="font-size:23px;"></i><?php echo $this->Form->input('areaname', array('id' => 'Autocomplete', 'required','class' => 'form-control','placeholder' => 'Areaname','style'=>'margin-left:15px;'));?></div>
+                    <div class="col-md-12 ui-widget">
+                        <div class="md-form rs-details-bold"> <i class="fa fa-map-marker prefix" style="font-size:23px;margin-left: -17px;top:15px;"></i>
+                            <?php echo $this->Form->input('areaname', array('id' => 'Autocomplete', 'required','class' => 'form-control area-name-class','placeholder' => 'Areaname','style'=>'margin-left:0;'));?>
+                        </div>
+                    </div>
 
                     <!--Grid column-->
                     <div class="col-md-6">
                         <div class="md-form mb-0 rs-details-bold"><span><i class="fa fa-calendar prefix" style="font-size:20px; margin-left: -20px; top:15px;"></i></span>
                          
-                        <?= $this->Form->input('date', array('type' => 'text','id' => 'date','class' => 'form-control datepicker date-input','placeholder' => 'From Date'));?>
+                        <?= $this->Form->input('date', array('type' => 'text','id' => 'date','class' => 'form-control datepicker date-input date-input-class','placeholder' => 'From Date', 'label' => 'From Date - To Date'));?>
                         </div>
                     </div>
                     <!--Grid column-->
 
-                    <!--Grid column-->
+                    <!--Grid column 
                     <div class="col-md-6">
                         <div class="md-form mb-0 rs-details-bold ">
-                        <?= $this->Form->input('todate', array('type' => 'text','class' => 'form-control datepicker date-input','placeholder' => 'To Date'));?>
-                        <!--     <input type="text" id="email" name="email" class="form-control" placeholder="To Date">
-                            <label for="email" class="">To Date</label> -->
+                        <?= $this->Form->input('todate', array('type' => 'text','class' => 'form-control datepicker date-input date-input-class','placeholder' => 'To Date'));?>
                         </div>
-                    </div>
+                    </div>-->
 
                      <!--Grid column-->
                     <div class="col-md-6">
                         <div class="md-form mb-0 rs-details-bold">
                         <i class="fa fa-clock-o prefix" style="font-size:20px; margin-left: -20px; top:15px;"></i>
-                        <?= $this->Form->input('time', array('type' => 'text','class' => 'form-control datepicker date-input','placeholder' => 'From Time'));?>
+                        <?= $this->Form->input('time', array('type' => 'text','class' => 'form-control datepicker date-input time-input','placeholder' => 'From Time', 'label' => 'From Time'));?>
                         </div>
                     </div>
                     <!--Grid column-->
@@ -96,7 +98,7 @@ use Cake\I18n\Time;
                     <!--Grid column-->
                     <div class="col-md-6">
                         <div class="md-form mb-0 rs-details-bold ">
-                       <!--  <?= $this->Form->input('totime', array('type' => 'text','class' => 'form-control datepicker date-input','placeholder' => 'To Time'));?> -->
+                       <!--  <?= $this->Form->input('totime', array('type' => 'text','class' => 'form-control datepicker date-input time-input','placeholder' => 'To Time'));?> -->
                             <input type="text" id="email" name="email" class="form-control" placeholder="To Time">
                             <label for="email" class="">To Time</label>
                         </div>
@@ -126,6 +128,7 @@ use Cake\I18n\Time;
                             <!-- <?php echo $this->Html->image('cover_pic.jpg',array('alt' => 'Cs-Static','class' => 'thumb' )); ?><output id="list"></output>-->
 
                              <?= $this->Form->input('Mediapartners[]',['type' => 'file','label' => false,'multiple' => 'true','id'=>'filesmedia','accept' => 'image/*']);?>
+                             <div id="filesMediaDisplay"></div>
                         </div>
 
                         <div class="p-4 mb-4 flex-cont rounded ">
@@ -145,30 +148,30 @@ use Cake\I18n\Time;
                     
 <!--Grid row-->
                 <div class="row">
-                <div class="md-form rs-details-bold "> <i class="fa fa-map-marker prefix" style="font-size:23px;"></i><?php echo $this->Form->input('areaname', array('id' => 'Autocomplete', 'required','class' => 'form-control','placeholder' => 'Areaname','style'=>'margin-left:15px;'));?></div>
+                    <div class="col-md-12  ui-widget">
+                        <div class="md-form rs-details-bold"> <i class="fa fa-map-marker prefix" style="font-size:23px;margin-left: -17px;top:15px;"></i><?php echo $this->Form->input('areaname', array('id' => 'Autocomplete2', 'required','class' => 'form-control area-name-class','placeholder' => 'Areaname','style'=>'margin-left:0;'));?></div>
+                    </div>
 
                     <!--Grid column-->
-                    <div class="col-md-6">
+                    <div class="col-md-12">
                         <div class="md-form mb-0 rs-details-bold"><span><i class="fa fa-calendar prefix" style="font-size:20px; margin-left: -20px; top:15px;"></i></span>
-                        <?= $this->Form->input('date', array('type' => 'text','id' => 'date','name' => 'date','class' => 'form-control datepicker date-input','placeholder' => 'YYYY/MM/DD'));?>
+                        <?= $this->Form->input('date', array('type' => 'text','id' => 'date2','name' => 'date','class' => 'form-control datepicker date-input date-input-class  ','placeholder' => 'YYYY/MM/DD', 'label' => 'From Date - To Date'));?>
                         </div>
                     </div>
                     <!--Grid column-->
 
-                    <!--Grid column-->
+                    <!--Grid column 
                     <div class="col-md-6">
                         <div class="md-form mb-0 rs-details-bold ">
-                        <?= $this->Form->input('todate', array('type' => 'text','class' => 'form-control datepicker date-input','name'=> 'todate','placeholder' => 'YYYY/MM/DD'));?> 
-                            <!-- <input type="text" id="email" name="email" class="form-control date-input" placeholder="To Date">
-                            <label for="email" class="">To Date</label> -->
+                        <?= $this->Form->input('todate', array('type' => 'text','class' => 'form-control datepicker date-input','name'=> 'todate','placeholder' => 'YYYY/MM/DD'));?>  
                         </div>
-                    </div>
+                    </div>-->
 
                      <!--Grid column-->
                     <div class="col-md-6">
                         <div class="md-form mb-0 rs-details-bold">
                         <i class="fa fa-clock-o prefix" style="font-size:20px; margin-left: -20px; top:15px;"></i>
-                        <?= $this->Form->input('time', array('type' => 'text','class' => 'form-control datepicker date-input','placeholder' => '0:00 AM'));?>
+                        <?= $this->Form->input('time', array('type' => 'text','class' => 'form-control datepicker date-input time-input','placeholder' => '0:00 AM', 'label' => 'From Time'));?>
                            </div>
                     </div>
                     <!--Grid column-->
@@ -176,7 +179,7 @@ use Cake\I18n\Time;
                     <!--Grid column-->
                     <div class="col-md-6">
                         <div class="md-form mb-0 rs-details-bold ">
-                         <?= $this->Form->input('totime', array('type' => 'text','class' => 'form-control datepicker date-input','placeholder' => '0:00 AM'));?> 
+                         <?= $this->Form->input('totime', array('type' => 'text','class' => 'form-control datepicker date-input time-input','placeholder' => '0:00 AM', 'label' => 'To Time'));?> 
                            <!--  <input type="text" id="email" name="email" class="form-control date-input" placeholder="To Time">
                             <label for="email" class="">To Time</label> -->
                         </div>
@@ -206,13 +209,16 @@ use Cake\I18n\Time;
             <div class="modal-header">
                 <?php echo $this->Html->image('org-logo.png',array('alt' => 'avatar','class' => 'rounded-circle img-responsive','id' => 'orgtarget', 'style'=>'height:130px;' )); ?>
             </div>
-            <label class="btn btn-outline-info waves-effect btn-sm pull-right ">Organizer Logo<i class="fa fa-upload ml-3" aria-hidden="true"></i>
-                    <?=$this->Form->input('OrganizersLogo',['type' => 'file','style'=>'display:none;','label' => false,'onchange' => 'putorgImage()','id' => 'org','accept' => 'image/*']);?> 
-                </label> 
+            
         </div>
             <!--Body-->
           
                 <div class="md-form">
+                    <label class="btn btn-outline-info waves-effect btn-sm pull-right ">Organizer Logo<i class="fa fa-upload ml-3" aria-hidden="true"></i>
+                    <?=$this->Form->input('OrganizersLogo',['type' => 'file','style'=>'display:none;','label' => false,'onchange' => 'putorgImage()','id' => 'org','accept' => 'image/*']);?> 
+                </label> 
+                </div>
+                <br><br><div class="md-form">
                      <?=  $this->Form->input('OrganizersName',array('label' => 'Organizers name','div' => false,'class' => 'form-control','placeholder' => 'Please enter Organizer Name', 'required'));?></div>
                 
   </div>
@@ -264,10 +270,11 @@ use Cake\I18n\Time;
   <div class="modal-dialog" role="document">
     <div class="modal-content">
       <div class="modal-header">
+        <h5 class="modal-title" id="exampleModalLabel">Map</h5>        
         <button type="button" class="close" data-dismiss="modal" aria-label="Close">
           <span aria-hidden="true" style="color: #4ABAC6;">&times;</span>
         </button>
-        <h5 class="modal-title" id="exampleModalLabel">Map</h5>        
+        
       </div>
       <div class="modal-body">
         <div id="mapPanel">            
@@ -333,7 +340,7 @@ use Cake\I18n\Time;
     <label for="price" >Ticket Price</label>
 </div>
  <div class="col-md-6">
-     <select id="commission_per" name="commission_per[]" onchange = "myprice()" class="form-control">
+     <select id="commission_per" name="commission_per[]" class="form-control my-price">
   <option>Select percentage</option>
   <option value="5">5</option>
   <option value="10">10</option>  
@@ -391,34 +398,13 @@ use Cake\I18n\Time;
         </div>
     </div>
 </div>
- 
-<div class="form-group">
-    <?= $this->Form->button('Submit',array('id' => 'subbutton','class'=>'btn btn-secondary pull-centre sub-but')) ?>
+<div class="container ">
+    <div class="form-group">
+        <?= $this->Form->button('Submit',array('id' => 'subbutton','class'=>'btn btn-secondary pull-centre sub-but')) ?>
+    </div>
 </div>
-<?= $this->Form->end() ?>
-<script>
+<?= $this->Form->end() ?> 
 
-function myFunction() {
-    var commission_per = document.getElementById("commission_per");
-    var ticprice = document.getElementById("price").value;
-     var x =commission_per.options[commission_per.selectedIndex].text/100 * (ticprice);
-     var y = (ticprice) - (x);
-    
-    document.getElementById("commission_amt").value = x;
-    document.getElementById("settamount").value = y;
-}
-function myprice() {
-    var commission_per = document.getElementById("commission_per");
-    var ticprice = document.getElementById("price").value;
-     var x = commission_per.options[commission_per.selectedIndex].text/100 * (ticprice);
-     var y = (ticprice) - (x);
-    
-    document.getElementById("commission_amt").value = x;
-    document.getElementById("settamount").value = y;
-    
-}
-
-</script>
 <script>
 function yesnoCheck() {
     if (document.getElementById('defaultInline1').checked) {
@@ -446,33 +432,37 @@ function attach_delete(){
 }
 //mediapartners
 $(document).ready(function() {
+
+    $("#modalSubscriptionForm").on("change", ".my-price", function(e) {
+        var commission_per = $(this).val(); 
+        var ticPrice = $(this).parent().parent().find('#price').val();
+        var x = commission_per/100 * (ticPrice);
+        $(this).parent().parent().find("#commission_amt").val(x);
+        $(this).parent().parent().find("#commission_amt").focus();
+    });
+
+    
+
+
   if (window.File && window.FileList && window.FileReader) {
     $("#filesmedia").on("change", function(e) {
-      var files = e.target.files,
-        filesLength = files.length;
+      var files = Array.from(e.target.files), filesLength = files.length;
+      $("#filesMediaDisplay").html('');
       for (var i = 0; i < filesLength; i++) {
         var f = files[i]
         var fileReader = new FileReader();
         fileReader.onload = (function(e) {
+
           var file = e.target;
           $("<span class=\"pip\"> &nbsp;&nbsp;" +
             "<img class=\"imageThumb\" src=\"" + e.target.result + "\" title=\"" + file.name + "\"/>" +
-            "<br/><span class=\"remove\"></span>" +
-            "</span>").insertAfter("#filesmedia");
-          // $(".remove").click(function(){
-          //   $(this).parent(".pip").remove();
-          // });
-          $(".remove").click(function(){
-        $(this).parent(".pip").remove();
-       $('#filesmedia').val(); 
-       // $('input:file#upload')[1].files
-      });
-          // Old code here
-          /*$("<img></img>", {
-            class: "imageThumb",
-            src: e.target.result,
-            title: file.name + " | Click to remove"
-          }).insertAfter("#files").click(function(){$(this).remove();});*/          
+            "<br/><span class=\"remove\" value=\""+i+"\"></span>" +
+            "</span>").appendTo("#filesMediaDisplay"); 
+
+          $(".remove").click(function() {
+            $(this).parent(".pip").remove();  
+            files.splice($(this).attr('value'),1);
+          });          
         });
         fileReader.readAsDataURL(f);
       }
