@@ -2,8 +2,6 @@
 use Cake\Routing\Router;
 use Cake\I18n\Time;
 ?>
-
-
 <?php
 // $bgImage = $event->banner;
 // if(!empty($bgImage)){
@@ -48,7 +46,7 @@ $eventPriceFormatted = (!empty($event->price)) ? asRupees($event->price) : 0;
 					<?php echo $this->Html->image('card/'.$event->category->card, array('class' => 'marg-card')); ?>
 					<span class="cname-span"><?= h($event->category->name) ?></span>
 				</div>
-				<h1 class="tagline" style="color: #FFFFFF; font-size: 13px;"><?= h($event->title) ?></h1>
+				<h1 class="tagline" style="color: #FFFFFF; font-size: 16px;"><?= h($event->title) ?></h1>
 			</div>
 		</div>
 	</div>
@@ -59,9 +57,11 @@ $eventPriceFormatted = (!empty($event->price)) ? asRupees($event->price) : 0;
 		<div class="col-md-8 mb-4">
 		  <ul class="breadcrumb" style="background-color: transparent;">
 		    <li class="breadcrumb-item"><a href="http://www.chennaismile.com/events">Home</a></li>
-		    <li class="breadcrumb-item"><a href="#">Category</a></li>
-		    <li class="breadcrumb-item"><a href="#">Events</a></li>
-		    <li class="breadcrumb-item active">Current</li>
+		    <?php $catid = $event->category->id; 
+		     $catpath = "http://www.chennaismile.com/events/category/".$catid;?>
+		    <li class="breadcrumb-item"> <?php  echo "<a  href='".$catpath."' </a>";?><?= h($event->category->name) ?>  /  </li>
+		    <li class="breadcrumb-item active"><a href="#"><?= h($event->title) ?></a></li>
+		   <!--  <li class="breadcrumb-item active">Current</li> -->
 		  </ul>
 
 			<div class="col-md-14 cs_banner_container mb-5">
@@ -115,7 +115,7 @@ $eventPriceFormatted = (!empty($event->price)) ? asRupees($event->price) : 0;
 				    			</span>
 				    		</p>
 				    		<?php } }?>
-				    		<p><i class="fa fa-share-alt" aria-hidden="true"></i><span class="rs-details">0 Shared</span></p>
+				    		<p><i class="fa fa-share-alt" aria-hidden="true"></i><a class="rs-details whatsapp"data-text="ChennaiSmile Events" data-link="window.location.href">Share</a></p>
 				    		<p><i class="fa fa-heart-o" aria-hidden="true"></i><span class="rs-details">0 Liked</span></p>
 				    		<p><i class="fa fa-eye" aria-hidden="true"></i><span class="rs-details">0 People Viewed</span></p>
 				    	</div>
@@ -128,33 +128,29 @@ $eventPriceFormatted = (!empty($event->price)) ? asRupees($event->price) : 0;
 					    <h6 class="event-details" "><?php echo $this->Text->autoParagraph(h($event->descriptioin),array('class' => 'event-details'));?></h6>
 					</div>
 					<?php } ?>
+						<?php if(isset($event->descriptioin_more) && !empty($event->descriptioin_more)) { ?>
 					<div class="p-4 mb-4 flex-cont rounded cs_details_block">
 					    <h5 class="cs-title">Terms & Conditions</h5>
 					       <h6 class="event-details" "><?php echo $this->Text->autoParagraph(h($event->descriptioin_more),array('class' => 'event-details'));?></h6>
-					   <!--  <p class="event-details">Lorem ipsum dolor sit amet, consectetuer adipiscing elit. Aenean commodo ligula eget dolor. Aenean massa. Cum sociis natoque penatibus et magnis dis parturient montes, nascetur ridiculus mus. Donec quam felis, ultricies nec, pellentesque eu, pretium quis, sem. Nulla consequat massa quis enim. Donec pede justo, fringilla vel, aliquet nec, vulputate eget, arcu. In enim justo, rhoncus ut, imperdiet a, venenatis vitae, justo. Nullam dictum felis eu pede mollis pretium. Integer tincidunt. Cras dapibus. Vivamus elementum semper nisi. Aenean vulputate eleifend tellus. Aenean leo ligula, porttitor eu, consequat vitae, eleifend ac, enim. Aliquam lorem ante, dapibus in, viverra quis, feugiat a</p> -->
-					</div>
+					</div><?php } ?>
 
-
+<?php  if(isset($medialists) && !empty($medialists))   {?>
 						<div class="p-4 mb-4 flex-cont rounded z-depth-1">
 						    <h5 class="cs-title">Mediapartner Logo</h5>
-						    <?php  if(!empty($medialists))
-						    {foreach ($medialists as $medialist): 
+						 <?php   foreach ($medialists as $medialist): 
   // $id = $medialist['id'];
   // $image = $medialist['MediaPartners'];
-  // echo"$image";
+  //  echo"$image";
   ?>
       <?php echo $this->Html->image('Mediapartners/'.$medialist->MediaPartners ,array('alt' => 'Mediapartners','class' => 'thumb'));  ?>&nbsp;&nbsp;&nbsp;
      
-               <?php endforeach;
-           } else{?>
-							<?php echo $this->Html->image('cover_pic.jpg',array('alt' => 'Cs-Static','class' => 'thumb' )); }?>
-							
+               <?php endforeach;?>
 						</div>
-
-						<div class="p-4 mb-4 flex-cont rounded z-depth-1">
+						  <?php } ?>
+						  <?php  if(isset($sponsorlists) && !empty($sponsorlists))   {?>
+<div class="p-4 mb-4 flex-cont rounded z-depth-1">
 						    <h5 class="cs-title">Sponsors Logo</h5>
-						    <?php  if(!empty($sponsorlists))
-						    { 
+						    <?php  
 						     foreach ($sponsorlists as $sponsorlist): 
   $id = $sponsorlist['id'];
  ?>
@@ -204,7 +200,7 @@ $eventPriceFormatted = (!empty($event->price)) ? asRupees($event->price) : 0;
 		    			</span>
 		    		</p>
 		    		<?php } }?>
-		    		<p><i class="fa fa-share-alt" aria-hidden="true"></i><span class="rs-details">1k shared</span></p>
+		    		<p><i class="fa fa-share-alt" aria-hidden="true"></i><a class="rs-details whatsapp"data-text="ChennaiSmile Events" data-link="window.location.href" >Share</a></p>
 		    		<p><i class="fa fa-heart-o" aria-hidden="true"></i><span class="rs-details">1k Liked</span></p>
 		    		<p><i class="fa fa-eye" aria-hidden="true"></i><span class="rs-details">1k People Viewed</span></p>
 		    	</div>
@@ -262,7 +258,7 @@ $eventPriceFormatted = (!empty($event->price)) ? asRupees($event->price) : 0;
 				</div>
 			</div>
 
-			<div class="d-flex flex-column">
+			<!-- <div class="d-flex flex-column">
 			    <div class="p-4 mb-4 flex-cont rounded cs_details_advertblock">
 			    	<div style='overflow:hidden;height:330px;width:100%;'>
 			    		<div  style='height:330px;width:700px;'> </div>
@@ -271,7 +267,7 @@ $eventPriceFormatted = (!empty($event->price)) ? asRupees($event->price) : 0;
 						
 					</p>
 				</div>
-			</div>
+			</div> -->
 
 
 		</div>
