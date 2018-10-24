@@ -59,8 +59,8 @@ $eventPriceFormatted = (!empty($event->price)) ? asRupees($event->price) : 0;
 		    <li class="breadcrumb-item"><a href="http://www.chennaismile.com/events">Home</a></li>
 		    <?php $catid = $event->category->id; 
 		     $catpath = "http://www.chennaismile.com/events/category/".$catid;?>
-		    <li class="breadcrumb-item"> <?php  echo "<a  href='".$catpath."' </a>";?><?= h($event->category->name) ?>  /  </li>
-		    <li class="breadcrumb-item active"><a href="#"><?= h($event->title) ?></a></li>
+		    <li class="breadcrumb-item"> <?php  echo "<a  href='".$catpath."' </a>";?><?= h($event->category->name) ?>&nbsp;  /&nbsp;  </li>
+		    <li class="breadcrumb-item active"><a href="#">&nbsp;<?= h($event->title) ?></a></li>
 		   <!--  <li class="breadcrumb-item active">Current</li> -->
 		  </ul>
 
@@ -71,15 +71,7 @@ $eventPriceFormatted = (!empty($event->price)) ? asRupees($event->price) : 0;
             }  else {
                 echo $this->Html->image('cover_pic.jpg',array('alt' => 'Cs-Static','class' => 'img-fluid z-depth-1 rounded cs_banner_bg'));
             }
-            ?><!-- <div class="banner_image">
-					<?php $bgImage = $event->banner;
-					if(!empty($bgImage)){
-			 			echo $this->Html->image('banner/'.$bgImage,array('alt' => 'Cs-Static','class' => 'img-fluid z-depth-1 rounded cs_banner')); 
-					}
-					else {
-			 			echo $this->Html->image('/cover_pic.jpg',array('alt' => 'Cs-Static','class' => 'img-fluid z-depth-1 rounded cs_banner')); 
-					}	?>
-				</div> -->
+            ?>
 			</div>
 			<div class="col-md-12 pr-0 pl-0">
 				<div class="d-flex flex-column cs_right_details_mob">
@@ -115,7 +107,15 @@ $eventPriceFormatted = (!empty($event->price)) ? asRupees($event->price) : 0;
 				    			</span>
 				    		</p>
 				    		<?php } }?>
-				    		<p><i class="fa fa-share-alt" aria-hidden="true"></i><a class="rs-details whatsapp"data-text="ChennaiSmile Events" data-link="window.location.href">Share</a></p>
+				    		<p><i class="fa fa-share-alt" aria-hidden="true"></i>	
+				    		<a class="rs-details whatsapp"data-text="ChennaiSmile Events" data-link="window.location.href" ><?php echo $this->Html->image('logo-whatsapp.png',array('alt' => 'Cs-Static','style'=>'width:23px;height:23px;')); ?></a>
+		    				<a class="rs-details facebook" data-text="ChennaiSmile Events" data-link="window.location.href" data-js="facebook-share"><?php echo $this->Html->image('logo-facebook.png',array('alt' => 'Cs-Static','style'=>'width:25px;height:27px;')); ?></a>
+				    		<a class="rs-details twitter" data-text="ChennaiSmile Events" data-link="window.location.href" data-js="twitter-share"><?php echo $this->Html->image('logo-twitter.png',array('alt' => 'Cs-Static','style'=>'width:23px;height:23px;')); ?></a>
+				    		<a class="rs-details instagram" data-text="ChennaiSmile Events" data-link="window.location.href"  data-js="instagram-share"><?php echo $this->Html->image('logo-instagram.png',array('alt' => 'Cs-Static','style'=>'width:23px;height:23px;')); ?></a>
+				    		<a class="rs-details linkedin" data-text="ChennaiSmile Events" data-link="window.location.href"  data-js="linkedin-share"><?php echo $this->Html->image('logo-linkedin.png',array('alt' => 'Cs-Static','style'=>'width:23px;height:23px;')); ?></a>
+				    		<a class="rs-details googleplus" data-text="ChennaiSmile Events" data-link="window.location.href"  data-js="googleplus-share"><?php echo $this->Html->image('logo-googleplus.png',array('alt' => 'googleplus','style'=>'width:30px;height:23px;')); ?></a></p>
+				    		<!-- <a class="twitter-share" data-js="twitter-share">Twitter</a>
+							<a class="facebook-share" data-js="facebook-share">Facebook</a> --></p>
 				    		<p><i class="fa fa-heart-o" aria-hidden="true"></i><span class="rs-details">0 Liked</span></p>
 				    		<p><i class="fa fa-eye" aria-hidden="true"></i><span class="rs-details">0 People Viewed</span></p>
 				    	</div>
@@ -200,7 +200,14 @@ $eventPriceFormatted = (!empty($event->price)) ? asRupees($event->price) : 0;
 		    			</span>
 		    		</p>
 		    		<?php } }?>
-		    		<p><i class="fa fa-share-alt" aria-hidden="true"></i><a class="rs-details whatsapp"data-text="ChennaiSmile Events" data-link="window.location.href" >Share</a></p>
+		    		<p><i class="fa fa-share-alt" aria-hidden="true"></i>
+		    				<!-- <a class="rs-details whatsapp"data-text="ChennaiSmile Events" data-link="window.location.href" ><?php echo $this->Html->image('logo-whatsapp.png',array('alt' => 'Cs-Static','style'=>'width:23px;height:23px;')); ?></a> -->
+		    				<a class="rs-details facebook" data-text="ChennaiSmile Events" data-link="window.location.href" data-js="facebook-share"><?php echo $this->Html->image('logo-facebook.png',array('alt' => 'Facebook','style'=>'width:24px;height:27px;')); ?></a>
+				    		<a class="rs-details twitter" data-text="ChennaiSmile Events" data-link="window.location.href" data-js="twitter-share"><?php echo $this->Html->image('logo-twitter.png',array('alt' => 'Twitter','style'=>'width:23px;height:23px;')); ?></a>
+				    		<a class="rs-details instagram" data-text="ChennaiSmile Events" data-link="window.location.href" data-js="instagram-share"><?php echo $this->Html->image('logo-instagram.png',array('alt' => 'Instagram','style'=>'width:23px;height:23px;')); ?></a>
+				    		<a class="rs-details linkedin" data-text="ChennaiSmile Events" data-link="window.location.href" data-js="linkedin-share"><?php echo $this->Html->image('logo-linkedin.png',array('alt' => 'Linkedin','style'=>'width:23px;height:23px;')); ?></a>
+				    		<a class="rs-details googleplus" data-text="ChennaiSmile Events" data-link="window.location.href" data-js="googleplus-share"><?php echo $this->Html->image('logo-googleplus.png',array('alt' => 'googleplus','style'=>'width:30px;height:23px;')); ?></a></p>
+				    	
 		    		<p><i class="fa fa-heart-o" aria-hidden="true"></i><span class="rs-details">1k Liked</span></p>
 		    		<p><i class="fa fa-eye" aria-hidden="true"></i><span class="rs-details">1k People Viewed</span></p>
 		    	</div>

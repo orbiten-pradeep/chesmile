@@ -165,4 +165,47 @@ var isMobile = {
         }
 
     });
+ $(document).on("click", '.facebook', function() {
+    
+    var facebookShare = document.querySelector('[data-js="facebook-share"]');
+          var facebookWindow = window.open('https://www.facebook.com/sharer/sharer.php?u=' + document.URL, 'facebook-popup', 'height=350,width=600');
+  if(facebookWindow.focus) { facebookWindow.focus(); }
+    return false;
+
+    });
+
+  $(document).on("click", '.twitter', function() {
+    
+    var twitterShare = document.querySelector('[data-js="twitter-share"]');
+          var twitterWindow = window.open('https://twitter.com/share?url=' + document.URL, 'twitter-popup', 'height=350,width=600');
+  if(twitterWindow.focus) { twitterWindow.focus(); }
+    return false;
+
+    });
+   $(document).on("click", '.instagram', function() {
+    
+    var instagramShare = document.querySelector('[data-js="instagram-share"]');
+          var instagramWindow = window.open('https://instagram.com/share?url=' + document.URL, 'instagram-popup', 'height=350,width=600');
+  if(instagramWindow.focus) { instagramWindow.focus(); }
+    return false;
+
+    });
+    $(document).on("click", '.linkedin', function() {
+    
+    var linkedinShare = document.querySelector('[data-js="linkedin-share"]');
+          var linkedinWindow = window.open('http://www.linkedin.com/shareArticle?url=' + document.URL, 'linkedin-popup', 'height=350,width=600');
+  if(linkedinWindow.focus) { linkedinWindow.focus(); }
+    return false;
+
+    });
+   $(document).on("click", '.googleplus', function() {
+    
+    var googleplusShare = document.querySelector('[data-js="googleplus-share"]');
+          var googleplusWindow = window.open('https://plus.google.com/share?url=' + document.URL, 'googleplus-popup', 'height=350,width=600');
+  if(googleplusWindow.focus) { googleplusWindow.focus(); }
+    return false;
+
+    });
+
+
 });

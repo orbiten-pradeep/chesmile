@@ -499,35 +499,3 @@ font-size: 18px;
     padding-left: .5rem;
     width: 98.5% !important;
 }
-
-#box{
-    background-color:#6FF;
-    padding:10px;
-    margin-bottom:5px;
-    border-bottom: 2px dashed #000000;
-}
-
-.whatsapp{
-    background-image: url('/chesmile/img/whatsapp.png')!important; 
-    border: 1px solid #5cbe4a !important; 
-    display: inline-block !important; 
-    position: relative !important; 
-    cursor: pointer !important; 
-    text-transform: none !important;
-    color: #fff !important; 
-    border-radius: 5px; 
-    background-color: #28A619; 
-    background-repeat: no-repeat; 
-    background-position: 5px; 
-    line-height: 1.2; 
-    text-decoration: none; 
-    text-align: left;
-    padding: 6px 6px 6px 30px;
-    letter-spacing: .6px;
-    font-size:16px;
-    font-weight:bold;
-}
-.whatsapp:hover{
-    text-decoration:none;
-    color:#FFF;
-}
