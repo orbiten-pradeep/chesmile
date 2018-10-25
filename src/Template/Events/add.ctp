@@ -368,13 +368,14 @@ use Cake\I18n\Time;
     <label for="noofseats" >No.Of.Seats</label>
 </div>
 <div class="md-form col-md-6">
-     <input type="text" id="startdate" name="startdate[]" class="form-control">
-    <label for="startdate" >Start Date</label>
+     
+     <input type="text" id="startdate" name="startdate[]" class="form-control date-input-class">
+    <label for="startdate" >Booking Start&End Date</label>
 </div>
-<div class="md-form col-md-6">
+<!-- <div class="md-form col-md-6">
     <input type="text" id="enddate" name="enddate[]" class="form-control">
    <label for="'enddate" >End Date</label>
-</div>
+</div> -->
 
     <!-- End of fields-->
       <a href="#" class="btn btn-red pull-right delete" >Remove Ticket</a>      

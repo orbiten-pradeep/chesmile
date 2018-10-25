@@ -1764,21 +1764,26 @@ public function organizerevents()
 
 
 
-
-            if(!empty($this->request->data['date']))
-
-            {
-
-                $this->request->data['date'] = new Time($this->request->data['date']);
-
-            }
-            if(!empty($this->request->data['todate']))
+        if(!empty($this->request->data['date']))
 
             {
-
-                $this->request->data['todate'] = new Time($this->request->data['todate']);
-
+                $str = $this->request->data['date']; 
+           $date =  str_replace(' ','',$str);
+           $date = explode("-",$date);
+           $date1 = $date[0];
+           $todate = $date[1];
+           $date1 = new Time($date1);
+           $todate = new Time($todate);
+           $this->request->data['date'] =  $date1;
+           $this->request->data['todate'] = $todate;
             }
+            // if(!empty($this->request->data['todate']))
+
+            // {
+
+            //     $this->request->data['todate'] = new Time($this->request->data['todate']);
+
+            // }
 
 
 
