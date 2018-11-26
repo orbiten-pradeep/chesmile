@@ -221,7 +221,7 @@ chennaiSmile.generateEventGridList = function() {
 	    		var buybtn;
 	    		var eventprice
 	    		eventprice = '<span class="event-price pull-right">₹ '+response[k].price+'</span>';
-	    		buybtn = '<div class="btn buy-btn btn-warning pull-right" onClick="javascript:location.href='+eventUrl+'">Get Tickets</div>';
+	    		buybtn = '<div class="btn buy-btn btn-warning pull-right" onClick="javascript:location.href='+eventUrl+'">Book Now</div>';
 	    	}
 	    	var areaname = (response[k].areaname == "null") ? response[k].areaname : 'Chennai';
 			html += '<div class="card-size">\
@@ -242,11 +242,18 @@ chennaiSmile.generateEventGridList = function() {
 			            <p class="card-text card-event-date mb-0">'+this.formatDate(response[k].date)+' - '+response[k].time+'</p>\
 			            '+buybtn+'\
 			            <div class="pull-left social-icons">\
+			           <table><tr><td> <a class="facebook" data-text="ChennaiSmile Events" data-link="'+eventUrl+'"  data-js="facebook-share"><img src="img/logo-facebook.png" style="width:23px;height:23px;" alt="Facebook"></a></td>\
+				    		<td><a class="twitter" data-text="ChennaiSmile Events" data-link='+eventUrl+' data-js="twitter-share"><img src="img/logo-twitter.png" style="width:20px;height:20px;" alt="Twitter"></a></td>\
+				    		<td><a class="linkedin" data-text="ChennaiSmile Events" data-link="'+eventUrl+'"  data-js="linkedin-share"><img src="img/logo-linkedin.png" style="width:20px;height:20px;" alt="Linkedin"></a></td>\
+				    		<td><a class="googleplus" data-text="ChennaiSmile Events" data-link="'+eventUrl+'"  data-js="googleplus-share"><img src="img/logo-googleplus.png" style="width:25px;height:19px;" alt="googleplus"></a></td></tr></table>\
 			            	<span eventId="'+response[k].id+'" userId="'+response[k].user_id+'" class="like-button">\
 			            		<i class="fa fa-heart-o" id="likeIconId'+response[k].id+'" aria-hidden="true"></i>\
 			            	</span>\
 			            	<span class="count_txt" id="likeId'+response[k].id+'">'+likes_count+'</span>\
-		                </div>\
+		            &nbsp;&nbsp;<span id="CounterVisitor" class="view-button" ><i class="fa fa-eye" aria-hidden="true" style="color:424242;"></i>&nbsp;1k</span>\
+			            	&nbsp;&nbsp;<span  class="share-button"><img src="img/shareicon.png" style="width:15px;height:15px;">&nbsp;1k\
+				    		</span>\
+		            </div>\
 		            </div>\
 		        </div>\
 		    </div>';
@@ -332,7 +339,7 @@ chennaiSmile.getSubCategoryList = function() {
 				self.searchTextBoxElem.tagsinput('add', self.parentCategory);				
 				self.searchMenuButtonElem.html('<button type="button" class="btn btn-head btn-primary cat-not-selected" type="button"><label>Category</label><i class="fa fa-bars float-right"></i></button>');
 				self.parentCategoryDivElem.hide();
-				self.searchTextBoxElem.tagsinput('items')
+				self.searchTextBoxElem.tagsinput('input')
         	}
         },
         error: function (tab) {

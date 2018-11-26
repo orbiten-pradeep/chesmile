@@ -19,15 +19,34 @@ function asRupees($value) {
 $eventPriceFormatted = (!empty($event->price)) ? asRupees($event->price) : 0; 
 
 ?>
+<style>
+.overlay {
+  /*position: absolute;*/
+  top: 0;
+  left: 0;
+  width: 100%;
+  height: 300px;
+  /*background: rgba(0, 0, 0, 0);
+  transition: background 0.5s ease;*/
+display: block;
+  background: rgba(0, 0, 0, .3);
+  /*  display: block;
+    transition: .5s ease;
+    backface-visibility: hidden;*/
+}
 
+.breadcrumb-item+.breadcrumb-item::before {
+    content: "|"!important;
+}
+</style>
 <div class="col-md-12 col-xs-12 mb-4 pr-0 pl-0">
 	<!-- <?php echo $this->Html->image('cs-static-banner.jpg',array('alt' => 'Cs-Static','class' => 'img-fluid static-banner')); ?> -->
-	<?php if($event->banner) {
+	<div class="imgeff z-depth-2"><?php if($event->banner) {
                 echo $this->Html->image('banner/'.$event->banner, array('alt' => 'Cs-Static','class' => 'imgeff img-fluid static-banner'));
             }  else {
                 echo $this->Html->image('cs-static-banner.jpg',array('alt' => 'Cs-Static','class' => 'imgeff img-fluid static-banner'));
             }
-            ?>
+            ?></div>
 	<div class="desk-container">
 		<div class="container">
 			<div class="cs-tag-title">
@@ -55,12 +74,12 @@ $eventPriceFormatted = (!empty($event->price)) ? asRupees($event->price) : 0;
 <div class="container">
 	<div class="row">
 		<div class="col-md-8 mb-4">
-		  <ul class="breadcrumb" style="background-color: transparent;">
-		    <li class="breadcrumb-item"><a href="http://www.chennaismile.com/events">Home</a></li>
+		 <ul class="breadcrumb" style="background-color: transparent;">
+		    <li class="breadcrumb-item"><a href="http://www.chennaismile.com/events" style="color: #a7a7a7;">Home</a></li>
 		    <?php $catid = $event->category->id; 
 		     $catpath = "http://www.chennaismile.com/events/category/".$catid;?>
-		    <li class="breadcrumb-item"> <?php  echo "<a  href='".$catpath."' </a>";?><?= h($event->category->name) ?>&nbsp;  /&nbsp;  </li>
-		    <li class="breadcrumb-item active"><a href="#">&nbsp;<?= h($event->title) ?></a></li>
+		    <li class="breadcrumb-item" > <?php  echo "<a style='color: #a7a7a7;'  href='".$catpath."' </a>";?><?= h($event->category->name) ?>&nbsp;  |&nbsp;  </li>
+		    <li class="breadcrumb-item active"><a href="#" style="color: #a7a7a7;">&nbsp;<?= h($event->title) ?></a></li>
 		   <!--  <li class="breadcrumb-item active">Current</li> -->
 		  </ul>
 
@@ -71,7 +90,15 @@ $eventPriceFormatted = (!empty($event->price)) ? asRupees($event->price) : 0;
             }  else {
                 echo $this->Html->image('cover_pic.jpg',array('alt' => 'Cs-Static','class' => 'img-fluid z-depth-1 rounded cs_banner_bg'));
             }
-            ?>
+            ?><!-- <div class="banner_image">
+					<?php $bgImage = $event->banner;
+					if(!empty($bgImage)){
+			 			echo $this->Html->image('banner/'.$bgImage,array('alt' => 'Cs-Static','class' => 'img-fluid z-depth-1 rounded cs_banner')); 
+					}
+					else {
+			 			echo $this->Html->image('/cover_pic.jpg',array('alt' => 'Cs-Static','class' => 'img-fluid z-depth-1 rounded cs_banner')); 
+					}	?>
+				</div> -->
 			</div>
 			<div class="col-md-12 pr-0 pl-0">
 				<div class="d-flex flex-column cs_right_details_mob">
@@ -81,7 +108,10 @@ $eventPriceFormatted = (!empty($event->price)) ? asRupees($event->price) : 0;
 					    	<h5><?php echo $eventPriceFormatted; ?></h5>
 					    	<a href="javascript:;" class="btn buy-btn" data-toggle="modal" data-target="#get-ticket-modal">Get Tickets</a>
 				    	</div>
-				    	<?php } ?>
+				    	<?php } else{?><div class="text-center">
+					    	<a href="javascript:;" class="btn buy-btn" style="cursor: not-allowed;" >Get Tickets</a>
+				    	</div>
+				    		<?php }?>
 				    	<div class="cs-details">
 				    		<?php if(!empty($address) && isset($address->areaname)) { ?>
 				    		<p>
@@ -107,15 +137,13 @@ $eventPriceFormatted = (!empty($event->price)) ? asRupees($event->price) : 0;
 				    			</span>
 				    		</p>
 				    		<?php } }?>
-				    		<p><i class="fa fa-share-alt" aria-hidden="true"></i>	
+				    		<p><!-- <i class="fa fa-share-alt" aria-hidden="true"></i>	 --><?php echo $this->Html->image('shareicon.png',array('alt' => 'Share','style'=>'width:18px;height:18px;'));?>
 				    		<a class="rs-details whatsapp"data-text="ChennaiSmile Events" data-link="window.location.href" ><?php echo $this->Html->image('logo-whatsapp.png',array('alt' => 'Cs-Static','style'=>'width:23px;height:23px;')); ?></a>
 		    				<a class="rs-details facebook" data-text="ChennaiSmile Events" data-link="window.location.href" data-js="facebook-share"><?php echo $this->Html->image('logo-facebook.png',array('alt' => 'Cs-Static','style'=>'width:25px;height:27px;')); ?></a>
 				    		<a class="rs-details twitter" data-text="ChennaiSmile Events" data-link="window.location.href" data-js="twitter-share"><?php echo $this->Html->image('logo-twitter.png',array('alt' => 'Cs-Static','style'=>'width:23px;height:23px;')); ?></a>
-				    		<a class="rs-details instagram" data-text="ChennaiSmile Events" data-link="window.location.href"  data-js="instagram-share"><?php echo $this->Html->image('logo-instagram.png',array('alt' => 'Cs-Static','style'=>'width:23px;height:23px;')); ?></a>
+				    		<!-- <a class="rs-details instagram" data-text="ChennaiSmile Events" data-link="window.location.href"  data-js="instagram-share"><?php echo $this->Html->image('logo-instagram.png',array('alt' => 'Cs-Static','style'=>'width:23px;height:23px;')); ?></a> -->
 				    		<a class="rs-details linkedin" data-text="ChennaiSmile Events" data-link="window.location.href"  data-js="linkedin-share"><?php echo $this->Html->image('logo-linkedin.png',array('alt' => 'Cs-Static','style'=>'width:23px;height:23px;')); ?></a>
 				    		<a class="rs-details googleplus" data-text="ChennaiSmile Events" data-link="window.location.href"  data-js="googleplus-share"><?php echo $this->Html->image('logo-googleplus.png',array('alt' => 'googleplus','style'=>'width:30px;height:23px;')); ?></a></p>
-				    		<!-- <a class="twitter-share" data-js="twitter-share">Twitter</a>
-							<a class="facebook-share" data-js="facebook-share">Facebook</a> --></p>
 				    		<p><i class="fa fa-heart-o" aria-hidden="true"></i><span class="rs-details">0 Liked</span></p>
 				    		<p><i class="fa fa-eye" aria-hidden="true"></i><span class="rs-details">0 People Viewed</span></p>
 				    	</div>
@@ -134,8 +162,8 @@ $eventPriceFormatted = (!empty($event->price)) ? asRupees($event->price) : 0;
 					       <h6 class="event-details" "><?php echo $this->Text->autoParagraph(h($event->descriptioin_more),array('class' => 'event-details'));?></h6>
 					</div><?php } ?>
 
-<?php  if(isset($medialists) && !empty($medialists))   {?>
-						<div class="p-4 mb-4 flex-cont rounded z-depth-1">
+<?php  if(isset($medialists->MediaPartners) && !empty($medialists->MediaPartners))   {?>
+						<div class="p-4 mb-4 flex-cont rounded ">
 						    <h5 class="cs-title">Mediapartner Logo</h5>
 						 <?php   foreach ($medialists as $medialist): 
   // $id = $medialist['id'];
@@ -143,25 +171,21 @@ $eventPriceFormatted = (!empty($event->price)) ? asRupees($event->price) : 0;
   //  echo"$image";
   ?>
       <?php echo $this->Html->image('Mediapartners/'.$medialist->MediaPartners ,array('alt' => 'Mediapartners','class' => 'thumb'));  ?>&nbsp;&nbsp;&nbsp;
-     
+     </div>
                <?php endforeach;?>
-						</div>
 						  <?php } ?>
-						  <?php  if(isset($sponsorlists) && !empty($sponsorlists))   {?>
-<div class="p-4 mb-4 flex-cont rounded z-depth-1">
+						  <?php  if(isset($sponsorlists->Sponsors) && !empty($sponsorlists->Sponsors))   {?>
+<div class="p-4 mb-4 flex-cont rounded ">
 						    <h5 class="cs-title">Sponsors Logo</h5>
 						    <?php  
 						     foreach ($sponsorlists as $sponsorlist): 
   $id = $sponsorlist['id'];
  ?>
       <?php echo $this->Html->image('Sponsors/'.$sponsorlist->Sponsors ,array('alt' => 'Sponsors','class' => 'thumb'));  ?>&nbsp;&nbsp;&nbsp;
-     
+     </div>
                <?php endforeach;
-               } else{?>
-						    <?php echo $this->Html->image('cover_pic.jpg',array('alt' => 'Cs-Static','class' => 'thumb' )); }?>
-						  
-						</div>
-
+               } ?>
+						
 				</div>
 
 			</div>
@@ -174,8 +198,11 @@ $eventPriceFormatted = (!empty($event->price)) ? asRupees($event->price) : 0;
 				    	<h5><?php echo $eventPriceFormatted; ?></h5>
 				    	<a href="javascript:;" class="btn buy-btn" data-toggle="modal" data-target="#get-ticket-modal">Get Tickets</a>
 			    	</div>
-			    	<?php } ?>
-
+			    	<?php } else{?><div class="text-center">
+					    	<a href="javascript:;" class="btn buy-btn" style="cursor: not-allowed;" >Get Tickets</a>
+				    	</div>
+				    		<?php }?>
+<div class="cs-details">
 		    		<?php if(!empty($address) && isset($address->areaname)) { ?>
 		    		<p>
 		    			<i class="fa fa-map-marker"></i>
@@ -188,7 +215,8 @@ $eventPriceFormatted = (!empty($event->price)) ? asRupees($event->price) : 0;
 		    		<p><i class="fa fa-calendar" style="font-size:16px"></i>
 		    			<!-- <?php echo $this->Html->image('cal.png')?> -->
 		    			<span class="rs-details-bold">
-		    				<?php echo date_format($event->date, "j M Y"); ?> To <?php echo date_format($event->todate, "j M Y"); ?>
+		    			From:	<?php echo date_format($event->date, "j M Y"); ?> 
+		    			To:  <?php echo date_format($event->todate, "j M Y"); ?>
 		    			</span>
 		    		</p>
 		    		<?php } }?>
@@ -200,14 +228,13 @@ $eventPriceFormatted = (!empty($event->price)) ? asRupees($event->price) : 0;
 		    			</span>
 		    		</p>
 		    		<?php } }?>
-		    		<p><i class="fa fa-share-alt" aria-hidden="true"></i>
+		    		<p><?php echo $this->Html->image('shareicon.png',array('alt' => 'Share','style'=>'width:18px;height:18px;'));?><!-- <i class="fa fa-share-alt" aria-hidden="true"></i> -->
 		    				<!-- <a class="rs-details whatsapp"data-text="ChennaiSmile Events" data-link="window.location.href" ><?php echo $this->Html->image('logo-whatsapp.png',array('alt' => 'Cs-Static','style'=>'width:23px;height:23px;')); ?></a> -->
 		    				<a class="rs-details facebook" data-text="ChennaiSmile Events" data-link="window.location.href" data-js="facebook-share"><?php echo $this->Html->image('logo-facebook.png',array('alt' => 'Facebook','style'=>'width:24px;height:27px;')); ?></a>
 				    		<a class="rs-details twitter" data-text="ChennaiSmile Events" data-link="window.location.href" data-js="twitter-share"><?php echo $this->Html->image('logo-twitter.png',array('alt' => 'Twitter','style'=>'width:23px;height:23px;')); ?></a>
-				    		<a class="rs-details instagram" data-text="ChennaiSmile Events" data-link="window.location.href" data-js="instagram-share"><?php echo $this->Html->image('logo-instagram.png',array('alt' => 'Instagram','style'=>'width:23px;height:23px;')); ?></a>
+				    		<!-- <a class="rs-details instagram" data-text="ChennaiSmile Events" data-link="window.location.href" data-js="instagram-share"><?php echo $this->Html->image('logo-instagram.png',array('alt' => 'Instagram','style'=>'width:23px;height:23px;')); ?></a> -->
 				    		<a class="rs-details linkedin" data-text="ChennaiSmile Events" data-link="window.location.href" data-js="linkedin-share"><?php echo $this->Html->image('logo-linkedin.png',array('alt' => 'Linkedin','style'=>'width:23px;height:23px;')); ?></a>
 				    		<a class="rs-details googleplus" data-text="ChennaiSmile Events" data-link="window.location.href" data-js="googleplus-share"><?php echo $this->Html->image('logo-googleplus.png',array('alt' => 'googleplus','style'=>'width:30px;height:23px;')); ?></a></p>
-				    	
 		    		<p><i class="fa fa-heart-o" aria-hidden="true"></i><span class="rs-details">1k Liked</span></p>
 		    		<p><i class="fa fa-eye" aria-hidden="true"></i><span class="rs-details">1k People Viewed</span></p>
 		    	</div>
@@ -511,3 +538,6 @@ $eventPriceFormatted = (!empty($event->price)) ? asRupees($event->price) : 0;
 	<?= $this->Form->button(__('Submit')); ?>
 	<?= $this->Form->end() ?>
 <?php } ?>
+<div>
+    <p>The number of visitors is : <span id="cntr">0</span></p>
+  </div>

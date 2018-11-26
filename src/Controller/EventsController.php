@@ -1212,7 +1212,7 @@ public function organizerevents()
 
             $event_val = $this->Events->find('all', ['conditions' => array('slug'=>$slug,'active' => '1')],[
 
-                'contain' => ['Users', 'Categories','Mediapartners','Sponsors'],
+                'contain' => ['Users', 'Categories'],
 
             ]);
 
@@ -1244,7 +1244,7 @@ public function organizerevents()
 
         }
 
-         $eventsdet = $this->Events->find('all', ['conditions' => ['id' => $id]]);
+        
 
         $this->loadModel('Address');
 
@@ -1252,10 +1252,15 @@ public function organizerevents()
 
         $address = $address->first();
 
-       // $mediapartners = $this->Mediapartners->find('all', ['conditions' => ['events_id' => $id]]);
-       // $mediapartners = $mediapartners->first();
-        //$medialist= $this->paginate['conditions'] = array('Mediapartners.events_id' => $id);
-        $this->loadModel('Mediapartners');
+        // $this->loadModel('Mediapartners');
+
+        // $mediapartners = $this->Mediapartners->find('all', ['conditions' => ['events_id' => $id]]);
+        // $medialist= $this->paginate['conditions'] = array('Mediapartners.events_id' => $id);
+        // $medialists = $this->paginate($this->Mediapartners);
+        // $this->set(compact('medialists','medialist'));
+        // $this->set('_serialize', ['medialists']);
+        // $this->set('_serialize', ['medialist']);
+         $this->loadModel('Mediapartners');
         $medialist= $this->paginate['conditions'] = array('Mediapartners.events_id' => $id);
         $medialists = $this->paginate($this->Mediapartners);
         $this->set(compact('medialists','medialist'));
@@ -1272,6 +1277,16 @@ public function organizerevents()
         $this->loadModel('Galaries');
 
         $galaries = $this->Galaries->find('all', ['conditions' => ['events_id' => $id]]);
+
+
+
+        // $this->loadModel('Sponsors');
+
+        // $sponsors = $this->Sponsors->find('all', ['conditions' => ['events_id' => $id]]);
+        // $sponsorlist = $this->paginate($this->Sponsors);
+        //  $this->set(compact('sponsorlist','sponsors'));
+        //  $this->set('_serialize', ['sponsorlist']);
+        // $this->set('_serialize', ['sponsors']);
 
         $this->loadModel('Likes');
 
@@ -1313,7 +1328,7 @@ public function organizerevents()
 
         $this->set(compact('subCategories_new'));
 
-        $this->set(compact('address', 'mediapartners', 'sponsors', 'number', 'likes', 'u_id', 'galaries','event'));
+        $this->set(compact('address', 'mediapartners', 'sponsors', 'number', 'likes', 'u_id', 'galaries'));
 
         
 
@@ -1397,9 +1412,9 @@ public function organizerevents()
 
             $addres = $this->Address->newEntity();
 
-            $mediapartner = $this->Mediapartners->newEntity();
+           // $mediapartner = $this->Mediapartners->newEntity();
 
-            $sponsor = $this->Sponsors->newEntity();
+           //$sponsor = $this->Sponsors->newEntity();
 
             $bookingonline = $this->Bookingonline->newEntity();
 
@@ -1521,8 +1536,7 @@ public function organizerevents()
                             mkdir($uploadFolder);
 
                         }
- $filename = str_replace(" ", "-", rand(1, 3000) . $file_name);
-
+                         $filename = str_replace(" ", "-", rand(1, 3000) . $file_name);
                         //move_uploaded_file($file_tmp=$this->request->data['Mediapartners'][$key]["tmp_name"], WWW_ROOT . 'img/Mediapartners' . DS . $filename);
 
                         if(!file_exists(WWW_ROOT . 'img/Sponsors' . DS . $filename))
@@ -1786,7 +1800,6 @@ public function organizerevents()
             // }
 
 
-
             if(empty($this->request->data['slug']))
 
             {
@@ -1848,7 +1861,9 @@ public function organizerevents()
                 //$mediapartner = $this->Mediapartners->newEntity();
 
                 //$sponsor = $this->Sponsors->newEntity();
+ if(!empty($this->request->data['Mediapartners']))
 
+            {
                 foreach($this->request->data['Mediapartners'] as $key=>$tmp_name)
 
                 {
@@ -1869,7 +1884,10 @@ public function organizerevents()
 
                 }
 
+}
+ if(!empty($this->request->data['Sponsors']))
 
+            {
 
                 foreach($this->request->data['Sponsors'] as $key=>$tmp_name)
 
@@ -1888,6 +1906,7 @@ public function organizerevents()
                     $sponsor['Sponsors'] = $this->request->data['Sponsors'][$key]["name"];
                     $this->Sponsors->save($sponsor);
 
+}
                 } 
          $data = array();
         // pr($this->request->data['name']);
@@ -1901,21 +1920,31 @@ public function organizerevents()
                 $data['commission_per'] = $this->request->data['commission_per'][$i];
                 $data['commission_amt'] = $this->request->data['commission_amt'][$i];
                  $data['status'] = 0;
-                $data['startdate'] = $this->request->data['startdate'][$i];
-                $data['enddate'] = $this->request->data['enddate'][$i];
-         $bookingonline = $this->Bookingonline->newEntity();
+               // $data['startdate'] = $this->request->data['startdate'][$i];
+                 $start = $this->request->data['startdate']; 
+           $newdate =  str_replace(' ','',$start);
+           $newdate = explode("-",$newdate);
+           $startdate = $newdate[0];
+           $enddate = $newdate[1];
+           $startdate = new Time($startdate);
+           $enddate = new Time($enddate);
+          $this->request->data['startdate'][$i] =  $startdate;
+          $this->request->data['enddate'][$i] = $enddate;
+                // $data['enddate'] = $this->request->data['enddate'][$i];
+                 $bookingonline = $this->Bookingonline->newEntity();
 
- $bookingonline = $this->Bookingonline->patchEntity($bookingonline,$data );
+                $bookingonline = $this->Bookingonline->patchEntity($bookingonline,$data );
                 //$bookingonline->events_id = $new_id;
 
                 if($this->Bookingonline->save($bookingonline)){
+                     $this->Events->updateAll(['register_online' => '1'], ['id' => $new_id]);
                  //   echo "success";
                      //  pr($data); if i print this it will returns all the datas
                     //exit;
                 }else{
                    // pr($bookingonline->errors());
                      
-                    exit;
+                    //exit;
                 }
 
 }
@@ -2032,7 +2061,6 @@ public function organizerevents()
         }
 
 
-
         $this->loadModel('Categories');
 
         $categories_new = $this->Categories->find()->select(['Categories.name', 'Categories.id'])
@@ -2079,7 +2107,9 @@ public function organizerevents()
 
 
 
-    /**
+
+
+   /**
 
      * Edit method
 
@@ -2107,13 +2137,6 @@ $this->paginate = [
         
        $this->loadModel('Address');
 
-    $this->loadModel('Bookingonline');
-        $bookinglist= $this->paginate['conditions'] = array('Bookingonline.events_id' => $id);
-        $bookinglists = $this->paginate($this->Bookingonline);
-        $this->set(compact('bookinglists','bookinglist'));
-        $this->set('_serialize', ['bookinglists']);
-        $this->set('_serialize', ['bookinglist']);
-
         $this->loadModel('Mediapartners');
         $medialist= $this->paginate['conditions'] = array('Mediapartners.events_id' => $id);
         $medialists = $this->paginate($this->Mediapartners);
@@ -2127,6 +2150,13 @@ $this->paginate = [
         $this->set(compact('sponserlists','sponserlist'));
         $this->set('_serialize', ['sponserlists']);
         $this->set('_serialize', ['sponserlist']);
+
+		$this->loadModel('Bookingonline');
+        $bookinglist = $this->paginate['conditions'] = array('Bookingonline.events_id' => $id);
+        $bookinglists = $this->paginate($this->Bookingonline);
+        $this->set(compact('bookinglists','bookinglist'));
+        $this->set('_serialize', ['bookinglists']);
+        $this->set('_serialize', ['bookinglist']);
 
         $address = $this->Address->find('all', ['conditions' => ['events_id' => $id]]);
         $address = $address->first();
@@ -2526,12 +2556,63 @@ $this->paginate = [
 
             }
 
-            $address = $this->Address->patchEntity($address, $this->request->data['Address']);
-            $address->events_id = $id;
-            $this->Address->save($address);
+            // $address = $this->Address->patchEntity($address, $this->request->data['Address']);
+            // $address->events_id = $id;
+            // $this->Address->save($address);
+             if(!empty($this->request->data['date']))
+
+            {
+                $str = $this->request->data['date']; 
+           $date =  str_replace(' ','',$str);
+           $date = explode("-",$date);
+           $date1 = $date[0];
+           $todate = $date[1];
+           $date1 = new Time($date1);
+           $todate = new Time($todate);
+           $this->request->data['date'] =  $date1;
+           $this->request->data['todate'] = $todate;
+            }
+             $data = array();
+        		// pr($this->request->data['name']);
+                 for($i=1;$i<count($this->request->data['name']);$i++){
+                   // pr($i);
+                $data['events_id'] = $new_id;
+                $data['name'] = $this->request->data['name'][$i];
+                 $data['tickettype'] = $this->request->data['tickettype'][$i];
+                $data['price'] = $this->request->data['price'][$i];
+                $data['noofseats'] = $this->request->data['noofseats'][$i];
+                $data['commission_per'] = $this->request->data['commission_per'][$i];
+                $data['commission_amt'] = $this->request->data['commission_amt'][$i];
+                 $data['status'] = 0;
+                   $start = $this->request->data['startdate']; 
+           $newdate =  str_replace(' ','',$start);
+           $newdate = explode("-",$newdate);
+           $startdate = $newdate[0];
+           $enddate = $newdate[1];
+           $startdate = new Time($startdate);
+           $enddate = new Time($enddate);
+          $this->request->data['startdate'][$i] =  $startdate;
+          $this->request->data['enddate'][$i] = $enddate;
+                // $data['startdate'] = $this->request->data['startdate'][$i];
+                // $data['enddate'] = $this->request->data['enddate'][$i];
+                 $bookingonline = $this->Bookingonline->newEntity();
+
+                $bookingonline = $this->Bookingonline->patchEntity($bookingonline,$data );
+                //$bookingonline->events_id = $new_id;
+
+                if($this->Bookingonline->save($bookingonline)){
+                     $this->Events->updateAll(['register_online' => '1'], ['id' => $new_id]);
+                  echo "success";
+                     //  pr($data); if i print this it will returns all the datas
+                    //exit;
+                }else{
+                  //  pr($bookingonline->errors());
+                    //exit;
+                }
+
+}
             $this->request->data['date'] = new Time($this->request->data['date']);
             /////////////////////////////////////////////////////////////////
-
             $name_to_slug = Inflector::slug($this->request->data['title'], $replacement = '-');
             $this->request->data['slug'] = strtolower($name_to_slug);
 
@@ -2552,6 +2633,55 @@ $this->paginate = [
             if ($this->Events->save($event)) {
 
                 $this->Flash->success(__('The event has been saved.'));
+                 //Send email to admin to active
+
+                $email = new Email();
+
+                $email->transport('gmail');
+
+                $email->template('eventactivationadmin','cs-email');
+
+                $subject = "Event has Edited!";
+
+                $email->emailFormat('html');
+
+                $email->from('admin@chennaismile.com');
+
+                $email->to('roslin.albert@gmail.com');
+
+                $email->subject($subject);
+
+                $activationUrl = Router::url(['controller' => 'events', 'action' => 'chennai/' . $id, '_full' => true ]);
+
+                $email->viewVars(['URL' => $activationUrl]);
+
+                $email->send();
+
+                //Send email to admin about event edit
+
+                $email->transport('gmail');
+
+                $subject = "Event has Edited..";
+
+                $name = $this->Auth->user('fullname');
+
+                // Always try to write clean code, so that you can read it :) :
+
+                $email->template('awaitingapproval','cs-email');
+
+                $email->emailFormat('html');
+
+                $email->to($this->Auth->user('email'));
+
+                $email->cc('roslin.albert@gmail.com');
+
+                $email->subject($subject);
+
+                $email->from('admin@chennaismile.com');
+
+                $email->viewVars(['name' => $name]);
+
+                $email->send();
 
                 return $this->redirect(['action' => 'index']);
             } else {
@@ -2796,6 +2926,13 @@ $this->paginate = [
             $this->loadModel('Mediapartners');
 
             $mediapartners = $this->Mediapartners->find('all', ['conditions' => ['events_id' => $id]]);
+            
+            $this->loadModel('Mediapartners');
+        $medialist= $this->paginate['conditions'] = array('Mediapartners.events_id' => $id);
+        $medialists = $this->paginate($this->Mediapartners);
+        $this->set(compact('medialists','medialist'));
+        $this->set('_serialize', ['medialists']);
+        $this->set('_serialize', ['medialist']);
 
             $this->loadModel('Galaries');
 

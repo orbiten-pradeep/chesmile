@@ -80,9 +80,9 @@
 	  ].join(', ');
 	}
 
-	function updateMarkerAddress(str) {
-	  document.getElementById('address').innerHTML = str;
-	}
+	// function updateMarkerAddress(str) {
+	//   document.getElementById('address').innerHTML = str;
+	// }
 
 	$('.launch-map').on('click', function () {
 		var loc = $("#Autocomplete2").val();
@@ -156,7 +156,8 @@ var isMobile = {
         if( isMobile.any() ) {
 
             var text = $(this).attr("data-text");
-            var url = window.location.href;
+            // var url = window.location.href;
+             var url = $(this).attr("data-link");
             var message = encodeURIComponent(text) + " - " + encodeURIComponent(url);
             var whatsapp_url = "whatsapp://send?text=" + message;
             window.location.href = whatsapp_url;
@@ -165,6 +166,7 @@ var isMobile = {
         }
 
     });
+ var socialurl = $(this).attr("data-link");
  $(document).on("click", '.facebook', function() {
     
     var facebookShare = document.querySelector('[data-js="facebook-share"]');
@@ -177,7 +179,7 @@ var isMobile = {
   $(document).on("click", '.twitter', function() {
     
     var twitterShare = document.querySelector('[data-js="twitter-share"]');
-          var twitterWindow = window.open('https://twitter.com/share?url=' + document.URL, 'twitter-popup', 'height=350,width=600');
+          var twitterWindow = window.open('https://twitter.com/share?url=' + encodeURIComponent(socialurl), 'twitter-popup', 'height=350,width=600');
   if(twitterWindow.focus) { twitterWindow.focus(); }
     return false;
 

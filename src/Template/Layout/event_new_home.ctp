@@ -40,7 +40,7 @@
     <link rel="stylesheet" href="//cdnjs.cloudflare.com/ajax/libs/timepicker/1.3.5/jquery.timepicker.min.css">
 
     <link rel="stylesheet" type="text/css" href="https://cdn.jsdelivr.net/npm/daterangepicker/daterangepicker.css" />
-    
+ <link href="https://fonts.googleapis.com/css?family=PT+Sans:400,400i,700,700i|Roboto:100,100i,300,300i,400,400i,500,500i,700,700i,900,900i" rel="stylesheet">
 </head>
 
 <body>
@@ -400,7 +400,7 @@
                             <div class="modal-body mb-1">
                                 <?= $this->Form->create('',array('id' => 'loginForm2','class' => 'form-signin', 'url' => ['action' => 'login','controller' => 'users'])) ?>
                                     <div class="md-form form-sm mb-5">
-                                        <?= $this->Form->input('email', array('label' => 'Your Email','div' => false,'id' => 'email','class' => 'form-control form-control-sm validate','required' => true)) ?>   
+                                        <?= $this->Form->input('email', array('label' => 'Your Email','div' => false,'id' => 'email1','class' => 'form-control form-control-sm validate','required' => true)) ?>   
                                     </div>
 
                                     <div class="md-form form-sm mb-5">
@@ -458,7 +458,7 @@
                           <div class="modal-body">
                             <?= $this->Form->create('', array('id' => 'forgotpassform', 'url' => ['action' => 'forgetpassword','controller' => 'users'])) ?>
                               <div class="md-form form-sm mb-4">
-                                    <?= $this->Form->input('email', array('label' => 'Email','div' => false,'id' => 'email', 'class' => 'form-control form-control-sm','label' => false,'placeholder' => 'Enter your email address', 'required' => true)) ?>
+                                    <?= $this->Form->input('email', array('label' => 'Email','div' => false,'id' => 'email2', 'class' => 'form-control form-control-sm','label' => false,'placeholder' => 'Enter your email address', 'required' => true)) ?>
                               </div>
                               <div class="md-form form-sm mb-4">
                                   <?= $this->Form->submit(__('Recover'), array('id' => 'Login', 'class' => 'btn btn-primary btn-lg cs-signup-button')) ?>

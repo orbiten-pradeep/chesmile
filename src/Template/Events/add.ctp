@@ -1,3 +1,4 @@
+
 <?php 
 use Cake\Routing\Router;
 use Cake\I18n\Time;
@@ -12,7 +13,7 @@ use Cake\I18n\Time;
     <div class="text-block">
    
     <div class="middle">
-    <p>Banner Image</p>
+    <p>Banner Image *</p>
     <!-- <style>
         input[type="file"]{
             display:none;
@@ -20,24 +21,24 @@ use Cake\I18n\Time;
     </style> -->
     <label class="btn btn-outline-info waves-effect btn-lg ">Upload Banner Image<i class="fa fa-upload ml-3" aria-hidden="true"></i>
       
- <?=$this->Form->input('banner',['type' => 'file','style'=>'display:none;','label' => false,'accept' => 'image/*','onchange' => 'putImage()', 'class' => 'img-fluid static-banner', 'required']);?></label>
+ <?=$this->Form->input('banner',['type' => 'file','style'=>'display:none;','label' => false,'accept' => 'image/*','onchange' => 'putImage()', 'required']);?></label><p id="p3" style="color: #FF0000; font-size: 11px;"></p>
   </div>
   </div>
-    <div class="desk-container">
+   
         <div class="container">
             <div class="cs-tag-title-add">
-            
                     <div class="md-form">
-                <?php echo $this->Form->input('title',array('label' => 'Event Title','div' => false,'id' => 'title', 'class' => 'form-control title-form', 'placeholder' => 'Please enter your event title')); ?>
+ <?php echo $this->Form->input('title',array('label' => 'Event Title *','div' => false,'id' => 'title', 'class' => 'title-form', 'style'=>'color: #FFF;','placeholder' => 'Please enter your event title')); ?><p id="p1" style="color: #FF0000; font-size: 11px;"></p>
             </div>
             </div>
         </div>
-    </div>
-    <!-- <div class="mob-container">
+   
+  <!--   <div class="mob-container">
         <div class="container">
             <div class="cs-tag-titlemob-add">
                 <div class="md-form">
-                <?php echo $this->Form->input('title',array('label' => 'Event Title','div' => false, 'class' => 'form-control title-formmob', 'placeholder' => 'Please enter your event title')); ?>
+                     <input type="text" id="title1" name="title" class="form-control" placeholder="Please enter your event title" style=" margin-bottom:-64px!important; margin-left: 0px;">
+                        <label for="title" class="">Title</label> <p id="p2" style="color: #FF0000; font-size: 11px;"></p>
             </div>
             </div>
         </div>
@@ -49,9 +50,9 @@ use Cake\I18n\Time;
         <div class="col-md-8 mb-4">
         <div class="col-md-14 cs_banner_container mb-5 contain">
         <?php echo $this->Html->image('cover_pic.jpg',array('alt' => 'Cs-Static','class' => 'img-fluid  rounded cs_banner_bg','id' => 'disptarget' )); ?>
-        <div class="dispmiddle"> <p>Display Image</p>
+        <div class="dispmiddle"> <p>Display Image *</p>
             <label class="btn btn-outline-info waves-effect btn-lg ">Upload Display Image<i class="fa fa-upload ml-3" aria-hidden="true"></i>
-        <?=$this->Form->input('display',['type' => 'file','style'=>'display:none;','label' => false,'accept' => 'image/*','id' =>'display','onchange' => 'putDispImage()', 'class' => '', 'required']);?></label>
+        <?=$this->Form->input('display',['type' => 'file','style'=>'display:none;','label' => false,'accept' => 'image/*','id' =>'display','onchange' => 'putDispImage()', 'class' => '', 'required']);?></label><p id="p4" style="color: #FF0000; font-size: 11px;"></p>
 </div>
             </div>
         <div class="col-md-12 pr-0 pl-0">
@@ -66,7 +67,7 @@ use Cake\I18n\Time;
                 <div class="row">
                     <div class="col-md-12 ui-widget">
                         <div class="md-form rs-details-bold"> <i class="fa fa-map-marker prefix" style="font-size:23px;margin-left: -17px;top:15px;"></i>
-                            <?php echo $this->Form->input('areaname', array('id' => 'Autocomplete', 'required','class' => 'form-control area-name-class','placeholder' => 'Areaname','style'=>'margin-left:0;'));?>
+                            <?php echo $this->Form->input('areaname', array('id' => 'Autocomplete', 'required','class' => 'form-control area-name-class','placeholder' => 'Areaname *','style'=>'margin-left:0;'));?><p id="p9" style="color: #FF0000; font-size: 11px;"></p>
                         </div>
                     </div>
 
@@ -74,23 +75,16 @@ use Cake\I18n\Time;
                     <div class="col-md-6">
                         <div class="md-form mb-0 rs-details-bold"><span><i class="fa fa-calendar prefix" style="font-size:20px; margin-left: -20px; top:15px;"></i></span>
                          
-                        <?= $this->Form->input('date', array('type' => 'text','id' => 'date','class' => 'form-control datepicker date-input date-input-class','placeholder' => 'From Date', 'label' => 'From Date - To Date'));?>
+                        <?= $this->Form->input('date', array('type' => 'text','id' => 'date','class' => 'form-control datepicker date-input date-input-class', 'label' => 'From Date - To Date *'));?>
                         </div>
                     </div>
                     <!--Grid column-->
-
-                    <!--Grid column 
-                    <div class="col-md-6">
-                        <div class="md-form mb-0 rs-details-bold ">
-                        <?= $this->Form->input('todate', array('type' => 'text','class' => 'form-control datepicker date-input date-input-class','placeholder' => 'To Date'));?>
-                        </div>
-                    </div>-->
-
                      <!--Grid column-->
                     <div class="col-md-6">
                         <div class="md-form mb-0 rs-details-bold">
                         <i class="fa fa-clock-o prefix" style="font-size:20px; margin-left: -20px; top:15px;"></i>
-                        <?= $this->Form->input('time', array('type' => 'text','class' => 'form-control datepicker date-input time-input','placeholder' => 'From Time', 'label' => 'From Time'));?>
+                    <input type="text" id="time1" name="time" class="form-control datepicker date-input time-input" placeholder="From Time" style="margin-left:0px;">
+                            <label for="fromtime" class="">From Time*</label>
                         </div>
                     </div>
                     <!--Grid column-->
@@ -98,15 +92,14 @@ use Cake\I18n\Time;
                     <!--Grid column-->
                     <div class="col-md-6">
                         <div class="md-form mb-0 rs-details-bold ">
-                       <!--  <?= $this->Form->input('totime', array('type' => 'text','class' => 'form-control datepicker date-input time-input','placeholder' => 'To Time'));?> -->
-                            <input type="text" id="email" name="email" class="form-control" placeholder="To Time">
-                            <label for="email" class="">To Time</label>
+                            <input type="text" id="totime1" name="totime" class="form-control datepicker date-input time-input" placeholder="To Time">
+                            <label for="totime" class="">To Time *</label>
                         </div>
                     </div>
 </div></div>
                     </div>
                 <div class="md-form">
-                                <?=  $this->Form->input('categories_id',array('div' => false,'class' => 'form-control','options' => $categories_list, 'onChange' => 'checkForOther(this);', 'empty' => '(Select Categories)','label' => false, 'required'));?>
+                                <?=  $this->Form->input('categories_id',array('div' => false,'class' => 'form-control','options' => $categories_list, 'onChange' => 'checkForOther(this);', 'empty' => '(Select Categories)','label' => false, 'required'));?><p id="p5" style="color: #FF0000; font-size: 11px;"></p>
                             </div>
                             <div class="md-form">
                                 <div id="subdiv" class="form-group" style="display: none;">
@@ -115,8 +108,8 @@ use Cake\I18n\Time;
                             </div>
                 <div class="d-flex flex-column">
                 <div class="p-4 mb-4 flex-cont cs-descr-box rounded ">
-                            <h5 class="cs-title">Event Details</h5>
-                            <?= $this->Form->input('descriptioin',array('div' => false, 'label' => false,'class' => 'form-control md-textarea','placeholder' => 'Description about your event','rows' => '4', 'cols' => '50', 'resize'=> 'none','required' => true));?>
+                            <h5 class="cs-title">Event Details *</h5>
+                            <?= $this->Form->input('descriptioin',array('div' => false, 'label' => false,'class' => 'form-control md-textarea','placeholder' => 'Description about your event','rows' => '4', 'cols' => '50', 'resize'=> 'none','required' => true));?><p id="p8" style="color: #FF0000; font-size: 11px;"></p>
                         </div>
                         <div class="p-4 mb-4 flex-cont rounded ">
                             <h5 class="cs-title">Terms & Conditions</h5>
@@ -149,29 +142,23 @@ use Cake\I18n\Time;
 <!--Grid row-->
                 <div class="row">
                     <div class="col-md-12  ui-widget">
-                        <div class="md-form rs-details-bold"> <i class="fa fa-map-marker prefix" style="font-size:23px;margin-left: -17px;top:15px;"></i><?php echo $this->Form->input('areaname', array('id' => 'Autocomplete2', 'required','class' => 'form-control area-name-class','placeholder' => 'Areaname','style'=>'margin-left:0;'));?></div>
+                        <div class="md-form rs-details-bold"> <i class="fa fa-map-marker prefix" style="font-size:23px;margin-left: -17px;top:15px;"></i><?php echo $this->Form->input('areaname', array('id' => 'Autocomplete2', 'required','class' => 'form-control area-name-class','placeholder' => 'Areaname *','style'=>'margin-left:0;'));?><p id="p10" style="color: #FF0000; font-size: 11px;"></p></div>
                     </div>
 
                     <!--Grid column-->
                     <div class="col-md-12">
                         <div class="md-form mb-0 rs-details-bold"><span><i class="fa fa-calendar prefix" style="font-size:20px; margin-left: -20px; top:15px;"></i></span>
-                        <?= $this->Form->input('date', array('type' => 'text','id' => 'date2','name' => 'date','class' => 'form-control datepicker date-input date-input-class  ','placeholder' => 'YYYY/MM/DD', 'label' => 'From Date - To Date'));?>
+                        <?= $this->Form->input('date', array('type' => 'text','id' => 'date2','name' => 'date','class' => 'form-control datepicker date-input date-input-class  ', 'label' => 'From Date - To Date *'));?>
                         </div>
                     </div>
                     <!--Grid column-->
-
-                    <!--Grid column 
-                    <div class="col-md-6">
-                        <div class="md-form mb-0 rs-details-bold ">
-                        <?= $this->Form->input('todate', array('type' => 'text','class' => 'form-control datepicker date-input','name'=> 'todate','placeholder' => 'YYYY/MM/DD'));?>  
-                        </div>
-                    </div>-->
-
-                     <!--Grid column-->
-                    <div class="col-md-6">
+    <!--Grid column-->
+                     <div class="col-md-6">
                         <div class="md-form mb-0 rs-details-bold">
                         <i class="fa fa-clock-o prefix" style="font-size:20px; margin-left: -20px; top:15px;"></i>
-                        <?= $this->Form->input('time', array('type' => 'text','class' => 'form-control datepicker date-input time-input','placeholder' => '0:00 AM', 'label' => 'From Time'));?>
+                        <!-- <?= $this->Form->input('time', array('type' => 'text','class' => 'form-control datepicker date-input time-input','placeholder' => '0:00 AM', 'label' => 'From Time'));?> -->
+                         <input type="text" id="time" name="time" class="form-control datepicker date-input time-input" style="margin-left:0px;">
+                            <label for="fromtime" class="">From Time*</label>
                            </div>
                     </div>
                     <!--Grid column-->
@@ -179,25 +166,15 @@ use Cake\I18n\Time;
                     <!--Grid column-->
                     <div class="col-md-6">
                         <div class="md-form mb-0 rs-details-bold ">
-                         <?= $this->Form->input('totime', array('type' => 'text','class' => 'form-control datepicker date-input time-input','placeholder' => '0:00 AM', 'label' => 'To Time'));?> 
-                           <!--  <input type="text" id="email" name="email" class="form-control date-input" placeholder="To Time">
-                            <label for="email" class="">To Time</label> -->
+                        <!--  <?= $this->Form->input('totime', array('type' => 'text','class' => 'form-control datepicker date-input time-input','placeholder' => '0:00 AM', 'label' => 'To Time'));?>  -->
+                           <input type="text" id="totime" name="totime" class="form-control datepicker date-input time-input">
+                            <label for="totime" class="">To Time *</label>
                         </div>
                     </div>
 </div>
                         </div>
             </div>
 
-               <!--  <div class="d-flex flex-column">
-                <div class=" mb-4 flex-cont rounded cs_details_orgblock">
-                    
- <p style="font-weight: bold">Organizer Details</p>
-    <?php echo $this->Html->image('cover_pic.jpg',array('alt' => 'Cs-Static','class' => 'org-img','id' => 'orgtarget' )); ?>
-            <?=$this->Form->input('OrganizersLogo',['type' => 'file','label' => false,'onchange' => 'putorgImage()','id' => 'org','accept' => 'image/*']);?> 
-                            <div class="md-form">
-                                <?=  $this->Form->input('OrganizersName',array('label' => 'Organizers name','div' => false,'class' => 'form-control','placeholder' => 'Please enter Organizer Name', 'required'));?></div>
-                </div>
-            </div> -->
             <div class="d-flex flex-column">
                 <div class=" mb-4 flex-cont rounded cs_details_orgblock">
                     <p style=" margin-left: 100px;  font-weight: bold;">Organizer Details</p>
@@ -219,7 +196,7 @@ use Cake\I18n\Time;
                 </label> 
                 </div>
                 <br><br><div class="md-form">
-                     <?=  $this->Form->input('OrganizersName',array('label' => 'Organizers name','div' => false,'class' => 'form-control','placeholder' => 'Please enter Organizer Name', 'required'));?></div>
+                     <?=  $this->Form->input('OrganizersName',array('label' => 'Organizers name','id'=>'OrganizersName','div' => false,'class' => 'form-control','placeholder' => 'Organizer Name *', 'required'));?><p id="p7" style="color: #FF0000; font-size: 11px;"></p></div>
                 
   </div>
         <!--/.Content-->
@@ -229,8 +206,8 @@ use Cake\I18n\Time;
                 <div class="p-4 mb-4 flex-cont rounded ">
                
                     <div class="md-form">
-                        <?= $this->Form->input('address_1',array('div' => false,'label' => 'Address 1','class' => 'form-control', 'placeholder' => 'Enter address 1', 'required'));?>
-                         
+                        <?= $this->Form->input('address_1',array('div' => false,'id'=>'address_1','label' => 'Address 1 *','class' => 'form-control', 'placeholder' => 'Enter address 1', 'required'));?>
+                         <p id="p6" style="color: #FF0000; font-size: 11px;"></p>
                     </div>
 
                     <div class="md-form">
@@ -238,11 +215,11 @@ use Cake\I18n\Time;
                     </div>
 
                     <div class="md-form">
-                        <?= $this->Form->input('landmark',array('div' => false,'label' => 'Landmark','class' => 'form-control', 'placeholder' => 'Any Specific Landmark?'));?>  
+                        <?= $this->Form->input('landmark',array('div' => false,'label' => 'Landmark *','class' => 'form-control', 'placeholder' => 'Any Specific Landmark?'));?>  <p id="p11" style="color: #FF0000; font-size: 11px;"></p>
                     </div>
 
                     <div class="md-form">
-                                <?= $this->Form->input('contact_number',array('div' => false, 'label' => 'Contact Number','class' => 'form-control','placeholder' => 'Enter Contact Number'));?>
+                                <?= $this->Form->input('contact_number',array('div' => false, 'id'=>'contact_number','label' => 'Contact Number *','class' => 'form-control','placeholder' => 'Enter Contact Number'));?> <p id="p12" style="color: #FF0000; font-size: 11px;"></p>
                             </div>
                             <div class="md-form">
                                 <?= $this->Form->input('mobile_number',array('id' => 'mobile_number', 'div' => false,'label' => 'Mobile Number','class' => 'form-control','placeholder' => 'Enter Mobile Number'));?>
@@ -329,15 +306,15 @@ use Cake\I18n\Time;
   <!-- Replace these fields -->
   <div class="md-form col-md-10">
     <input type="text" id="tickettype"  name="tickettype[]" class="form-control">
-    <label for="tickettype" >Ticket Type</label><span>Eg: Adult,children,above 60</span>
+    <label for="tickettype" >Ticket Type *</label><span>Eg: Adult,children,above 60</span>
 </div>
  <div class="md-form col-md-10">
     <input type="text" id="name"  name="name[]" class="form-control">
-    <label for="name" >Ticket Name</label><span>Eg: earlybird,vip,couple entry</span>
+    <label for="name" >Ticket Name *</label><span>Eg: earlybird,vip,couple entry</span>
 </div>
 <div class="md-form col-md-10">
     <input type="text" id="price" name="price[]" class="form-control">
-    <label for="price" >Ticket Price</label>
+    <label for="price" >Ticket Price *</label>
 </div>
  <div class="col-md-6">
      <select id="commission_per" name="commission_per[]" class="form-control my-price">
@@ -365,12 +342,12 @@ use Cake\I18n\Time;
 </div>
 <div class="md-form col-md-10">
     <input type="text" id="noofseats" name="noofseats[]" class="form-control">
-    <label for="noofseats" >No.Of.Seats</label>
+    <label for="noofseats" >No.Of.Seats *</label>
 </div>
 <div class="md-form col-md-6">
      
      <input type="text" id="startdate" name="startdate[]" class="form-control date-input-class">
-    <label for="startdate" >Booking Start&End Date</label>
+    <label for="startdate" >Booking Start&End Date *</label>
 </div>
 <!-- <div class="md-form col-md-6">
     <input type="text" id="enddate" name="enddate[]" class="form-control">
@@ -405,7 +382,7 @@ use Cake\I18n\Time;
     </div>
 </div>
 <?= $this->Form->end() ?> 
-
+<div id="snackbar" >Please fill all the Required field....</div>
 <script>
 function yesnoCheck() {
     if (document.getElementById('defaultInline1').checked) {
@@ -415,7 +392,7 @@ function yesnoCheck() {
 
 }</script>
 <!------ Include the above in your HEAD tag ---------->
-     
+     <script src="//ajax.aspnetcdn.com/ajax/jquery.validate/1.9/jquery.validate.min.js"></script>
 <script src="https://ajax.googleapis.com/ajax/libs/jquery/2.1.1/jquery.min.js"></script>
 <script type="text/javascript">
   //Clone the hidden element and shows it
@@ -441,9 +418,6 @@ $(document).ready(function() {
         $(this).parent().parent().find("#commission_amt").val(x);
         $(this).parent().parent().find("#commission_amt").focus();
     });
-
-    
-
 
   if (window.File && window.FileList && window.FileReader) {
     $("#filesmedia").on("change", function(e) {
@@ -552,73 +526,93 @@ function showImage(src, target) {
             showImage(src2, target2);
         }
 
-        $('.launch-map').on('click', function () {
-        var loc = $("#landmark").val() + $("#areaname").val();
-        $("#city_country").val(loc);
-        $('#myModal').modal({
-            backdrop: 'static',
-            keyboard: false
-        }).on('shown.bs.modal', function () {
-            codeAddress();
-        });
+      $("#createEvent").submit(function(event){
+        var status =true ;
+          var x1 = document.getElementById("snackbar");
+        if ($('#title').val() == '') {
+            status = false;
+             $("#title").focus();
+             $('#p1').text("* Please Enter Your Event Title *"); 
+             x1.className = "show";
+     setTimeout(function(){ x1.className = x1.className.replace("show", ""); }, 3000);
+        }
+     //    else if ($('#title1').val() == '') {
+     //        status = false;
+     //         $("#title1").focus();
+     //         $('#p2').text("* Please Enter Your Event Title *"); 
+     //         x1.className = "show";
+     // setTimeout(function(){ x1.className = x1.className.replace("show", ""); }, 3000);
+     //    }
+         if ($('#banner').val() == '') {
+            status = false;
+             $("#banner").focus();
+             $('#p3').text("* Please Select Your Banner Image   [Image Size: 1311px * 985px] *"); 
+             x1.className = "show";
+     setTimeout(function(){ x1.className = x1.className.replace("show", ""); }, 3000);
+        }
+         if ($('#display').val() == '') {
+            status = false;
+             $("#display").focus();
+             $('#p4').text("* Please Select Your Display Image [Size: 280px * 185px] *"); 
+             x1.className = "show";
+     setTimeout(function(){ x1.className = x1.className.replace("show", ""); }, 3000);
+        }
+        if($("#categories_id option:selected").val() == ''){
+            status = false;
+             $("#categories_id").focus();
+             $('#p5').text("* please Select event category *"); 
+             x1.className = "show";
+     setTimeout(function(){ x1.className = x1.className.replace("show", ""); }, 3000);
+        }
+         if ($('#address_1').val() == '') {
+            status = false;
+             $("#address_1").focus();
+             $('#p6').text("* Please Enter Address *"); 
+             x1.className = "show";
+     setTimeout(function(){ x1.className = x1.className.replace("show", ""); }, 3000);
+        }
+     //     if ($('#address_2').val() == '') {
+     //        status = false;
+     //         $("#address_2").focus();
+     //         $('#p1').text("* Please Enter Address *"); 
+     //         x1.className = "show";
+     // setTimeout(function(){ x1.className = x1.className.replace("show", ""); }, 3000);
+     //    }
+         if ($('#OrganizersName').val() == '') {
+            status = false;
+             $("#OrganizersName").focus();
+             $('#p7').text("* Please Enter Organizer Name *"); 
+             x1.className = "show";
+     setTimeout(function(){ x1.className = x1.className.replace("show", ""); }, 3000);
+        }
+         if($("#descriptioin").val().length <=250){
+            status = false;
+             $("#descriptioin").focus();
+             $('#p8').text("* please enter a description with minimum 120 characters *"); 
+             x1.className = "show";
+     setTimeout(function(){ x1.className = x1.className.replace("show", ""); }, 3000);
+        }
+         if ($('#contact_number').val() == '') {
+            status = false;       
+             $("#contact_number").focus();
+             $('#p12').text("* please Enter Contact Number *"); 
+             x1.className = "show";
+     setTimeout(function(){ x1.className = x1.className.replace("show", ""); }, 3000);
+        }
+         if ($('#Autocomplete2').val() == '') {
+            status = false;
+             $("#Autocomplete2").focus();
+             $('#p10').text("* please Select event Areaname *"); 
+             x1.className = "show";
+     setTimeout(function(){ x1.className = x1.className.replace("show", ""); }, 3000);
+        }
+         if ($('#landmark').val() == '') {
+            status = false;
+             $("#landmark").focus();
+             $('#p11').text("* please type landmark *"); 
+             x1.className = "show";
+     setTimeout(function(){ x1.className = x1.className.replace("show", ""); }, 3000);
+        }
+        return status;
     });
-
-        function validateForm() {
-    var x = document.forms["createEvent"]["title"].value;
-    if (x == "") {
-        //toastr.error('Have fun storming the castle!', 'Miracle Max Says')
-        alert("Title must be filled out");
-        return false;
-    }
-    var y = document.forms["createEvent"]["banner"].value;
-    if (y == "") {
-        alert("Banner image Needed");
-        return false;
-    }
-    var z = document.forms["createEvent"]["display"].value;
-    if (z == "") {
-        alert("Display image Needed");
-        return false;
-    }
-    // var a = document.forms["createEvent"]["date"].value;
-    // if (a == "") {
-    //     alert("Date must be filled out");
-    //     return false;
-    // }
-    // var b = document.forms["createEvent"]["time"].value;
-    // if (b == "") {
-    //     alert("Time must be filled out");
-    //     return false;
-    // }
-    var c = document.forms["createEvent"]["categories_id"].value;
-    if (c == "") {
-        alert("Categories must be filled out");
-        return false;
-    }
-     var d = document.forms["createEvent"]["address_1"].value;
-    if (d == "") {
-        alert("Address must be filled out");
-        return false;
-    }
-    var e = document.forms["createEvent"]["address_2"].value;
-    if (e == "") {
-        alert("Address must be filled out");
-        return false;
-    }
-     var f = document.forms["createEvent"]["OrganizersName "].value;
-    if (f == "") {
-        alert("Organizer must be filled out");
-        return false;
-    }
-     var g = document.forms["createEvent"]["descriptioin"].value;
-    if (g == "") {
-        alert("Event Details must be filled out");
-        return false;
-    }
-     var h = document.forms["createEvent"]["areaname"].value;
-    if (h == "") {
-        alert("Areaname must be filled out");
-        return false;
-    }
-}
     </script>
