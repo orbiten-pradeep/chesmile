@@ -166,6 +166,14 @@ var isMobile = {
         }
 
     });
+ $(document).on("click", '.whatsappweb', function() {
+    
+    var whatsappShare = document.querySelector('[data-js="whatsapp-share"]');
+          var whatsappWindow = window.open(' https://web.whatsapp.com://send?text=' + document.URL, 'whatsapp-popup', 'height=350,width=600');
+  if(whatsappWindow.focus) { whatsappWindow.focus(); }
+    return false;
+
+    });
  var socialurl = $(this).attr("data-link");
  $(document).on("click", '.facebook', function() {
     

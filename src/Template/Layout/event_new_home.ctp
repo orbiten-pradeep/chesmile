@@ -32,15 +32,17 @@
     <link href="<?php echo $this->Url->build('/newtheme/custom/css/event.grid.css'); ?>" rel="stylesheet">
 
     <link href="<?php echo $this->Url->build('/newtheme/custom/css/event.details.css'); ?>" rel="stylesheet">    
- 	
- 	  <link href="<?php echo $this->Url->build('/newtheme/custom/css/event.add.css'); ?>" rel="stylesheet">    
+ 
+ <link href="<?php echo $this->Url->build('/newtheme/custom/css/event.add.css'); ?>" rel="stylesheet">    
 
-    <link rel="stylesheet" href="https://code.jquery.com/ui/1.12.1/themes/base/jquery-ui.css">
+    <link rel="stylesheet" href="//code.jquery.com/ui/1.12.1/themes/base/jquery-ui.css">
 
     <link rel="stylesheet" href="//cdnjs.cloudflare.com/ajax/libs/timepicker/1.3.5/jquery.timepicker.min.css">
 
-    <link rel="stylesheet" type="text/css" href="https://cdn.jsdelivr.net/npm/daterangepicker/daterangepicker.css" />
- <link href="https://fonts.googleapis.com/css?family=PT+Sans:400,400i,700,700i|Roboto:100,100i,300,300i,400,400i,500,500i,700,700i,900,900i" rel="stylesheet">
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/4.7.0/css/font-awesome.min.css">
+
+    <?php echo $this->Html->css(['daterangepicker']); ?>
+    <link href="https://fonts.googleapis.com/css?family=PT+Sans:400,400i,700,700i|Roboto:100,100i,300,300i,400,400i,500,500i,700,700i,900,900i" rel="stylesheet">
 </head>
 
 <body>
@@ -114,6 +116,7 @@
                       </button>
                       <div class="dropdown-menu" aria-labelledby="dropdownMenu4">                        
                           <li><?= $this->Html->link($this->Html->tag('i', '', array('class' => 'fa fa-user fa-fw')).'My Account', array('controller' => 'UserProfile', 'action' => 'add','class' => 'dropdown-item'), array('escape' => false)) ?></li>
+                           <li><a href="#ordered-history" class="liked-events dropdown-item filter-action" ><i class="fa fa-history fa-fw"></i>Orderd History</a></li>
                           <li> <a href="#my-events" class="my-events dropdown-item filter-action" data="myevents"><i class="fa fa-calendar-o fa-fw"></i>My Events</a></li>
                           <li><a href="#liked-events" class="liked-events dropdown-item filter-action" data="likedevents"><i class="fa fa-thumbs-up fa-fw"></i>Liked Events</a></li>
                           <li><?= $this->Html->link($this->Html->tag('i', '', array('class' => 'fa fa-sign-out')).'Logout', array('controller' => 'Users', 'action' => 'logout','class' => 'dropdown-item'),array('escape' => false))?></li>
@@ -128,19 +131,22 @@
                     <a href="#" class="btn btn-sm btn-primary cs_login_btn cs-city-btn p-2" data-toggle="modal" data-target="#cs-login-modal">Login/signup</a>
                   </li>
                   <li class="nav-item">
-                    <a href="#" class="cs_create_btn btn-look-city btn btn-sm btn-primary cs-city-btn p-2 waves-effect waves-light" data-toggle="modal" data-target="#cs-login-modal">Create Events</a>
+                    <a href="#" class="cs_create_btn btn btn-sm btn-primary cs-city-btn p-2 waves-effect waves-light" data-toggle="modal" data-target="#cs-login-modal">Create Events</a>
                   </li>
                   <?php } ?>
 
                   <?php $user = $this->request->session()->read('Auth.User'); if($user && $user['group_id'] == 1) { ?>
                   <li class="nav-item">                    
-                    <a href="#" class="cs_create_btn btn-look-city btn btn-sm btn-primary cs-city-btn p-2 waves-effect waves-light" data-toggle="modal" data-target="#orgSignup">Create events</a>                   
+                    <a href="#" class="cs_create_btn btn btn-sm btn-primary cs-city-btn p-2 waves-effect waves-light" data-toggle="modal" data-target="#orgSignup">Create events</a>                   
                   </li>
                   <?php } ?>
 
                   <?php $user = $this->request->session()->read('Auth.User'); if($user && $user['group_id'] != 1) { ?>
                   <li class="nav-item">                    
-                    <?= $this->Html->link(__('Create Events'), ['controller' => 'events', 'action' => 'add'], array('class' => 'cs_create_btn btn-look-city btn btn-sm btn-primary cs-city-btn p-2 waves-effect waves-light')); ?>                 
+                    <?= $this->Html->link(__('Create Events'), ['controller' => 'events', 'action' => 'add'], array('class' => 'cs_create_btn  btn btn-sm btn-primary cs-city-btn p-2 waves-effect waves-light')); ?>                 
+                  </li>
+                   <li class="nav-item">                    
+                    <a href="http://www.chennaismile.com/admin-dash-board" class="cs_create_btn  btn btn-sm btn-primary cs-city-btn p-2 waves-effect waves-light">Dashboard</a>                   
                   </li>
                   <?php } ?>
                 </ul>
@@ -165,6 +171,7 @@
                   </button>
                   <div class="dropdown-menu" aria-labelledby="dropdownMenu4">                        
                       <li><?= $this->Html->link($this->Html->tag('i', '', array('class' => 'fa fa-user fa-fw')).'My Account', array('controller' => 'UserProfile', 'action' => 'add','class' => 'dropdown-item'), array('escape' => false)) ?></li>
+                       <li><a href="#ordered-history" class="liked-events dropdown-item filter-action" ><i class="fa fa-history fa-fw"></i>Orderd History</a></li>
                       <li> <a href="#my-events" class="my-events dropdown-item filter-action" data="myevents"><i class="fa fa-calendar-o fa-fw"></i>My Events</a></li>
                       <li><a href="#liked-events" class="liked-events dropdown-item filter-action" data="likedevents"><i class="fa fa-thumbs-up fa-fw"></i>Liked Events</a></li>
                       <li><?= $this->Html->link($this->Html->tag('i', '', array('class' => 'fa fa-sign-out')).'Logout', array('controller' => 'Users', 'action' => 'logout','class' => 'dropdown-item'),array('escape' => false))?></li>
@@ -203,7 +210,7 @@
         <div class="col-md-3 mx-auto">
 
           <!-- Links -->
-          <h6 class="font-weight-normal text-normal mt-3 mb-4">Cities</h6>
+          <h5 class="font-weight-normal text-normal mt-3 mb-4">Cities</h5>
 
           <ul class="list-unstyled">
             <li>
@@ -229,7 +236,7 @@
         <div class="col-md-3 mx-auto">
 
           <!-- Links -->
-          <h6 class="font-weight-normal text-normal mt-3 mb-4">Popular Categories</h6>
+          <h5 class="font-weight-normal text-normal mt-3 mb-4">Popular Categories</h5>
 
           <ul class="list-unstyled">
             <li>
@@ -255,7 +262,7 @@
         <div class="col-md-3 mx-auto">
 
           <!-- Links -->
-          <h6 class="font-weight-normal text-normal mt-3 mb-4">Others</h6>
+          <h5 class="font-weight-normal text-normal mt-3 mb-4">Others</h5>
 
           <ul class="list-unstyled">
             <li><?= $this->Html->link(__('About us'), ['controller' => 'events', 'action' => 'about']); ?>
@@ -281,7 +288,7 @@
         <div class="col-md-3 mx-auto">
 
           <!-- Links -->
-          <h6 class="font-weight-normal text-normal mt-3 mb-4">Follow Us</h6>
+          <h5 class="font-weight-normal text-normal mt-3 mb-4">Follow Us</h5>
 
           <!-- <ul class="list-unstyled">
             <li>
@@ -290,14 +297,15 @@
                     </a>  <a class="btn-floating btn-sm btn-tw mx-1 icon-align"><i class="fa fa-twitter fa-sm white-text mr-md-5 mr-3 fa-1x"> </i></a>
                     <a class="btn-floating btn-sm btn-gplus mx-1 icon-align">
               <i class="fa fa-google-plus fa-sm white-text mr-md-5 mr-3 fa-1x"> </i></a>
-            <a class="btn-floating btn-sm btn-gplus mx-1 icon-align">
+            <!--   <a href="#!">Link 1</a> 
+            </li>
+             <li> <a class="btn-floating btn-sm btn-gplus mx-1 icon-align">
               <i class="fa fa-instagram fa-sm white-text mr-md-5 mr-3 fa-1x"> </i></a>
                <a class="btn-floating btn-sm btn-gplus mx-1 icon-align">
               <i class="fa fa-linkedin fa-sm white-text mr-md-5 mr-3 fa-1x"> </i></a>
             </li>
           </ul> -->
- <!-- Social buttons -->
-      <ul class="list-unstyled list-inline foot-align ">
+ <ul class="list-unstyled list-inline foot-align ">
         <li class="list-inline-item">
           <a class="btn-floating btn-fb mx-1" href="#">
             <i class="fa fa-facebook"> </i>
@@ -324,7 +332,6 @@
           </a>
         </li>
       </ul>
-      <!-- Social buttons -->
         </div>
         <!-- Grid column -->
 
@@ -400,7 +407,7 @@
                             <div class="modal-body mb-1">
                                 <?= $this->Form->create('',array('id' => 'loginForm2','class' => 'form-signin', 'url' => ['action' => 'login','controller' => 'users'])) ?>
                                     <div class="md-form form-sm mb-5">
-                                        <?= $this->Form->input('email', array('label' => 'Your Email','div' => false,'id' => 'email1','class' => 'form-control form-control-sm validate','required' => true)) ?>   
+                                        <?= $this->Form->input('email', array('label' => 'Your Email','div' => false,'id' => 'email','class' => 'form-control form-control-sm validate','required' => true)) ?>   
                                     </div>
 
                                     <div class="md-form form-sm mb-5">
@@ -458,7 +465,7 @@
                           <div class="modal-body">
                             <?= $this->Form->create('', array('id' => 'forgotpassform', 'url' => ['action' => 'forgetpassword','controller' => 'users'])) ?>
                               <div class="md-form form-sm mb-4">
-                                    <?= $this->Form->input('email', array('label' => 'Email','div' => false,'id' => 'email2', 'class' => 'form-control form-control-sm','label' => false,'placeholder' => 'Enter your email address', 'required' => true)) ?>
+                                    <?= $this->Form->input('email', array('label' => 'Email','div' => false,'id' => 'email', 'class' => 'form-control form-control-sm','label' => false,'placeholder' => 'Enter your email address', 'required' => true)) ?>
                               </div>
                               <div class="md-form form-sm mb-4">
                                   <?= $this->Form->submit(__('Recover'), array('id' => 'Login', 'class' => 'btn btn-primary btn-lg cs-signup-button')) ?>
@@ -488,6 +495,9 @@
                         <?php if($this->request->session()->read('Auth.User')) { ?>
                         <li class="list-group-item">
                           <a href="<?php echo $this->Url->build(array('controller' => 'events', 'action' => 'add'));?>">Create Event</a>
+                        </li>
+                        <li class="list-group-item">
+                          <a href="#ordered-history" class="my-events filter-action" >Ordered History</a>
                         </li>
                         <li class="list-group-item">
                           <a href="#my-events" class="my-events filter-action" data="myevents">My Events</a>
@@ -659,11 +669,11 @@
 
     <script type="text/javascript" src="<?php echo $this->Url->build('/newtheme/js/select2.min.js'); ?>"></script>
 
-    <script src="https://code.jquery.com/ui/1.12.1/jquery-ui.min.js" crossorigin="anonymous"></script>
-
-    <script type="text/javascript" src="https://cdn.jsdelivr.net/npm/daterangepicker/daterangepicker.min.js"></script>
-
     <script src="//cdnjs.cloudflare.com/ajax/libs/timepicker/1.3.5/jquery.timepicker.min.js"></script>
+
+    <script src="http://code.jquery.com/ui/1.11.0/jquery-ui.js"></script>
+
+    <?php  echo $this->Html->script(['daterangepicker']);?>
 
     <script src="http://maps.googleapis.com/maps/api/js?libraries=places&key=AIzaSyCx2hb4R1uhaMbmlUAu1_lFasvl3gVHtnw"></script>
 
@@ -676,8 +686,8 @@
     <script type="text/javascript" src="<?php echo $this->Url->build('/newtheme/custom/js/event.add.js'); ?>"></script>
 
     <script src="https://cdnjs.cloudflare.com/ajax/libs/popper.js/1.14.3/umd/popper.min.js"></script>
-
-<!--     <script src="//ajax.googleapis.com/ajax/libs/jquery/1.11.2/jquery.min.js"></script>
+    
+   <!--  <script src="//ajax.googleapis.com/ajax/libs/jquery/1.11.2/jquery.min.js"></script>
  -->
 </body>
 </html>

@@ -276,7 +276,7 @@ opacity:0.8 !important;
 
 .event-list .card-size .card .days-ago li:nth-child(2) {
 
-    font-size: 22px;
+    font-size: 20px;
 
     color: #474747;
 
@@ -803,13 +803,6 @@ opacity:0.8 !important;
     margin-top: 12px;
 
 }
-/*.edit_hover_class
-{
-    width:100px;
-    height:100px;
-    background-color:red;
-}
-*/
 .social-icons a{
 display:none;
 }

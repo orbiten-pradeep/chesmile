@@ -20,21 +20,6 @@ $eventPriceFormatted = (!empty($event->price)) ? asRupees($event->price) : 0;
 
 ?>
 <style>
-.overlay {
-  /*position: absolute;*/
-  top: 0;
-  left: 0;
-  width: 100%;
-  height: 300px;
-  /*background: rgba(0, 0, 0, 0);
-  transition: background 0.5s ease;*/
-display: block;
-  background: rgba(0, 0, 0, .3);
-  /*  display: block;
-    transition: .5s ease;
-    backface-visibility: hidden;*/
-}
-
 .breadcrumb-item+.breadcrumb-item::before {
     content: "|"!important;
 }
@@ -42,7 +27,7 @@ display: block;
 <div class="col-md-12 col-xs-12 mb-4 pr-0 pl-0">
 	<!-- <?php echo $this->Html->image('cs-static-banner.jpg',array('alt' => 'Cs-Static','class' => 'img-fluid static-banner')); ?> -->
 	<div class="imgeff z-depth-2"><?php if($event->banner) {
-                echo $this->Html->image('banner/'.$event->banner, array('alt' => 'Cs-Static','class' => 'imgeff img-fluid static-banner'));
+                echo $this->Html->image('banner/'.$event->banner, array('alt' => 'Cs-Static','class' => 'imgeff img-fluid static-banner '));
             }  else {
                 echo $this->Html->image('cs-static-banner.jpg',array('alt' => 'Cs-Static','class' => 'imgeff img-fluid static-banner'));
             }
@@ -54,7 +39,7 @@ display: block;
 					<?php echo $this->Html->image('card/'.$event->category->card, array('class' => 'marg-card')); ?>
 					<span class="cname-span"><?= h($event->category->name) ?></span>
 				</div>
-				<h1 class="tagline" style="color: #FFFFFF;"><?= h($event->title) ?></h1>
+				<h2 class="tagline" style="color: #FFFFFF;"><?= h($event->title) ?></h2>
 			</div>
 		</div>
 	</div>
@@ -74,7 +59,7 @@ display: block;
 <div class="container">
 	<div class="row">
 		<div class="col-md-8 mb-4">
-		 <ul class="breadcrumb" style="background-color: transparent;">
+		 <ul class="breadcrumb" style="font-size: 14px;background-color: transparent;">
 		    <li class="breadcrumb-item"><a href="http://www.chennaismile.com/events" style="color: #a7a7a7;">Home</a></li>
 		    <?php $catid = $event->category->id; 
 		     $catpath = "http://www.chennaismile.com/events/category/".$catid;?>
@@ -120,12 +105,20 @@ display: block;
 				    				<?php echo $address->areaname; ?>
 				    			</span>
 				    		</p>
-				    		<?php } ?>
-				    		<?php if(isset($event->date) && !empty($event->date)) { ?><?php if(isset($event->todate) && !empty($event->todate)) { ?>
+				    		<?php } else{?>
+				    			<p>
+				    			<i class="fa fa-map-marker"></i>
+				    			<span class="rs-details-bold">
+				    			Chennai
+				    			</span>
+				    		</p>
+				    		<?php }if(isset($event->date) && !empty($event->date)) { ?><?php if(isset($event->todate) && !empty($event->todate)) { ?>
 				    		<p><i class="fa fa-calendar" style="font-size:16px"></i>
 				    		<!-- 	<?php echo $this->Html->image('cal.png')?> -->
 				    			<span class="rs-details-bold">
-				    				<?php echo date_format($event->date, "j M Y"); ?> To <?php echo date_format($event->todate, "j M Y"); ?>
+				    					From: &nbsp;<?php echo date_format($event->date, "j M Y"); ?><br>
+		    				&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp; To: &nbsp;<?php echo date_format($event->todate, "j M Y"); ?>
+				    				<!-- <?php echo date_format($event->date, "j M Y"); ?> To <?php echo date_format($event->todate, "j M Y"); ?> -->
 				    			</span>
 				    		</p>
 				    		<?php } }?>
@@ -133,17 +126,17 @@ display: block;
 				    		<p><i class="fa fa-clock-o" style="font-size:16px"></i>
 				    			<!-- <?php echo $this->Html->image('clock-chennaismile.png')?> -->
 				    			<span class="rs-details-bold">
-				    				<?php echo h($event->time); ?> To <?php echo h($event->totime); ?>
+				    				<?php echo h($event->time); ?>&nbsp;&nbsp; To &nbsp;&nbsp;<?php echo h($event->totime); ?>
 				    			</span>
 				    		</p>
 				    		<?php } }?>
-				    		<p><!-- <i class="fa fa-share-alt" aria-hidden="true"></i>	 --><?php echo $this->Html->image('shareicon.png',array('alt' => 'Share','style'=>'width:18px;height:18px;'));?>
+				    		<p><?php echo $this->Html->image('shareicon.png',array('alt' => 'Share','style'=>'width:18px;height:18px;'));?><!-- <i class="fa fa-share-alt" aria-hidden="true"></i>	 -->
 				    		<a class="rs-details whatsapp"data-text="ChennaiSmile Events" data-link="window.location.href" ><?php echo $this->Html->image('logo-whatsapp.png',array('alt' => 'Cs-Static','style'=>'width:23px;height:23px;')); ?></a>
-		    				<a class="rs-details facebook" data-text="ChennaiSmile Events" data-link="window.location.href" data-js="facebook-share"><?php echo $this->Html->image('logo-facebook.png',array('alt' => 'Cs-Static','style'=>'width:25px;height:27px;')); ?></a>
-				    		<a class="rs-details twitter" data-text="ChennaiSmile Events" data-link="window.location.href" data-js="twitter-share"><?php echo $this->Html->image('logo-twitter.png',array('alt' => 'Cs-Static','style'=>'width:23px;height:23px;')); ?></a>
+		    				<a class="rs-details facebook" data-text="ChennaiSmile Events" data-link="window.location.href" data-js="facebook-share"><?php echo $this->Html->image('logo-facebook.png',array('alt' => 'Cs-Static')); ?></a>
+				    		<a class="rs-details twitter" data-text="ChennaiSmile Events" data-link="window.location.href" data-js="twitter-share"><?php echo $this->Html->image('logo-twitter.png',array('alt' => 'Cs-Static')); ?></a>
 				    		<!-- <a class="rs-details instagram" data-text="ChennaiSmile Events" data-link="window.location.href"  data-js="instagram-share"><?php echo $this->Html->image('logo-instagram.png',array('alt' => 'Cs-Static','style'=>'width:23px;height:23px;')); ?></a> -->
-				    		<a class="rs-details linkedin" data-text="ChennaiSmile Events" data-link="window.location.href"  data-js="linkedin-share"><?php echo $this->Html->image('logo-linkedin.png',array('alt' => 'Cs-Static','style'=>'width:23px;height:23px;')); ?></a>
-				    		<a class="rs-details googleplus" data-text="ChennaiSmile Events" data-link="window.location.href"  data-js="googleplus-share"><?php echo $this->Html->image('logo-googleplus.png',array('alt' => 'googleplus','style'=>'width:30px;height:23px;')); ?></a></p>
+				    		<a class="rs-details linkedin" data-text="ChennaiSmile Events" data-link="window.location.href"  data-js="linkedin-share"><?php echo $this->Html->image('logo-linkedin.png',array('alt' => 'Cs-Static')); ?></a>
+				    		<a class="rs-details googleplus" data-text="ChennaiSmile Events" data-link="window.location.href"  data-js="googleplus-share"><?php echo $this->Html->image('logo-googleplus.png',array('alt' => 'googleplus')); ?></a></p>
 				    		<p><i class="fa fa-heart-o" aria-hidden="true"></i><span class="rs-details">0 Liked</span></p>
 				    		<p><i class="fa fa-eye" aria-hidden="true"></i><span class="rs-details">0 People Viewed</span></p>
 				    	</div>
@@ -153,13 +146,13 @@ display: block;
 					<?php if(isset($event->descriptioin) && !empty($event->descriptioin)) { ?>
 					<div class="p-4 mb-4 flex-cont rounded cs_details_block">
 					    <h5 class="cs-title">Event Details</h5>
-					    <h6 class="event-details" "><?php echo $this->Text->autoParagraph(h($event->descriptioin),array('class' => 'event-details'));?></h6>
+					    <h6 class="event-details" style="line-height: 19px;"><?php echo $this->Text->autoParagraph(h($event->descriptioin),array('class' => 'event-details'));?></h6>
 					</div>
 					<?php } ?>
 						<?php if(isset($event->descriptioin_more) && !empty($event->descriptioin_more)) { ?>
 					<div class="p-4 mb-4 flex-cont rounded cs_details_block">
 					    <h5 class="cs-title">Terms & Conditions</h5>
-					       <h6 class="event-details" "><?php echo $this->Text->autoParagraph(h($event->descriptioin_more),array('class' => 'event-details'));?></h6>
+					       <h6 class="event-details" style="line-height: 19px;"><?php echo $this->Text->autoParagraph(h($event->descriptioin_more),array('class' => 'event-details'));?></h6>
 					</div><?php } ?>
 
 <?php  if(isset($medialists->MediaPartners) && !empty($medialists->MediaPartners))   {?>
@@ -201,8 +194,8 @@ display: block;
 			    	<?php } else{?><div class="text-center">
 					    	<a href="javascript:;" class="btn buy-btn" style="cursor: not-allowed;" >Get Tickets</a>
 				    	</div>
-				    		<?php }?>
-<div class="cs-details">
+				    		<?php }?><br>
+				    		<div class="cs-details">
 		    		<?php if(!empty($address) && isset($address->areaname)) { ?>
 		    		<p>
 		    			<i class="fa fa-map-marker"></i>
@@ -210,13 +203,19 @@ display: block;
 		    				<?php echo $address->areaname; ?>
 		    			</span>
 		    		</p>
-		    		<?php } ?>
-		    		<?php if(isset($event->date) && !empty($event->date)) { ?><?php if(isset($event->todate) && !empty($event->todate)) { ?>
+		    		<?php } else {?>
+		    			<p>
+				    			<i class="fa fa-map-marker"></i>
+				    			<span class="rs-details-bold">
+				    			Chennai
+				    			</span>
+				    		</p>
+		    		<?php }if(isset($event->date) && !empty($event->date)) { ?><?php if(isset($event->todate) && !empty($event->todate)) { ?>
 		    		<p><i class="fa fa-calendar" style="font-size:16px"></i>
 		    			<!-- <?php echo $this->Html->image('cal.png')?> -->
 		    			<span class="rs-details-bold">
-		    			From:	<?php echo date_format($event->date, "j M Y"); ?> 
-		    			To:  <?php echo date_format($event->todate, "j M Y"); ?>
+		    				From: &nbsp;<?php echo date_format($event->date, "j M Y"); ?><br>
+		    				&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp; To: &nbsp;&nbsp;<?php echo date_format($event->todate, "j M Y"); ?>
 		    			</span>
 		    		</p>
 		    		<?php } }?>
@@ -224,17 +223,18 @@ display: block;
 		    		<p> <i class="fa fa-clock-o" style="font-size:16px"></i>
 		    			<!-- <?php echo $this->Html->image('clock-chennaismile.png')?> -->
 		    			<span class="rs-details-bold">
-		    				<?php echo h($event->time); ?> To <?php echo h($event->totime); ?>
+		    				<?php echo h($event->time); ?> &nbsp;To&nbsp; <?php echo h($event->totime); ?>
 		    			</span>
 		    		</p>
 		    		<?php } }?>
 		    		<p><?php echo $this->Html->image('shareicon.png',array('alt' => 'Share','style'=>'width:18px;height:18px;'));?><!-- <i class="fa fa-share-alt" aria-hidden="true"></i> -->
 		    				<!-- <a class="rs-details whatsapp"data-text="ChennaiSmile Events" data-link="window.location.href" ><?php echo $this->Html->image('logo-whatsapp.png',array('alt' => 'Cs-Static','style'=>'width:23px;height:23px;')); ?></a> -->
-		    				<a class="rs-details facebook" data-text="ChennaiSmile Events" data-link="window.location.href" data-js="facebook-share"><?php echo $this->Html->image('logo-facebook.png',array('alt' => 'Facebook','style'=>'width:24px;height:27px;')); ?></a>
-				    		<a class="rs-details twitter" data-text="ChennaiSmile Events" data-link="window.location.href" data-js="twitter-share"><?php echo $this->Html->image('logo-twitter.png',array('alt' => 'Twitter','style'=>'width:23px;height:23px;')); ?></a>
+		    				<a class="rs-details" href="https://web.whatsapp.com/send?text=" title="Share On Whatsapp" onclick="window.open('https://web.whatsapp.com/send?text=%20Chennai%20Smile%20Events%20-%20' + encodeURIComponent(document.URL)); return false;"><?php echo $this->Html->image('logo-whatsapp.png',array('alt' => 'Cs-Static','style'=>'width:28px;height:28px;')); ?></a>
+		    				<a class="rs-details facebook" data-text="ChennaiSmile Events" data-link="window.location.href" data-js="facebook-share"><?php echo $this->Html->image('logo-facebook.png',array('alt' => 'Facebook')); ?></a>
+				    		<a class="rs-details twitter" data-text="ChennaiSmile Events" data-link="window.location.href" data-js="twitter-share"><?php echo $this->Html->image('logo-twitter.png',array('alt' => 'Twitter')); ?></a>
 				    		<!-- <a class="rs-details instagram" data-text="ChennaiSmile Events" data-link="window.location.href" data-js="instagram-share"><?php echo $this->Html->image('logo-instagram.png',array('alt' => 'Instagram','style'=>'width:23px;height:23px;')); ?></a> -->
-				    		<a class="rs-details linkedin" data-text="ChennaiSmile Events" data-link="window.location.href" data-js="linkedin-share"><?php echo $this->Html->image('logo-linkedin.png',array('alt' => 'Linkedin','style'=>'width:23px;height:23px;')); ?></a>
-				    		<a class="rs-details googleplus" data-text="ChennaiSmile Events" data-link="window.location.href" data-js="googleplus-share"><?php echo $this->Html->image('logo-googleplus.png',array('alt' => 'googleplus','style'=>'width:30px;height:23px;')); ?></a></p>
+				    		<a class="rs-details linkedin" data-text="ChennaiSmile Events" data-link="window.location.href" data-js="linkedin-share"><?php echo $this->Html->image('logo-linkedin.png',array('alt' => 'Linkedin')); ?></a>
+				    		<a class="rs-details googleplus" data-text="ChennaiSmile Events" data-link="window.location.href" data-js="googleplus-share"><?php echo $this->Html->image('logo-googleplus.png',array('alt' => 'googleplus')); ?></a></p>
 		    		<p><i class="fa fa-heart-o" aria-hidden="true"></i><span class="rs-details">1k Liked</span></p>
 		    		<p><i class="fa fa-eye" aria-hidden="true"></i><span class="rs-details">1k People Viewed</span></p>
 		    	</div>
@@ -258,7 +258,7 @@ display: block;
 
 <div class="d-flex flex-column">
 			    <div class="org-padd mb-4 flex-cont rounded cs_details_orgblock">
-			    	<p style=" margin-left: 50px;  font-weight: bold;">Organizer Details</p>
+			    	<p class="cs-title" style=" margin-left: 50px;">Organizer Details</p>
  <div class="modal-dialog cascading-modal modal-avatar modal-sm" role="document">
         <!--Content-->
         <div class="modal-header">
@@ -270,7 +270,7 @@ display: block;
             ?>
         </div>
             <!--Body-->
-                <!-- <p>Conducted By:  --><h5 style=" margin-left: 50px;" ><?php echo h($event->OrganizersName); ?></h5><!-- </p> -->
+                <!-- <p>Conducted By:  --><h5 style=" margin-left: 50px; font-size: 15px; font-weight: 400;" ><?php echo h($event->OrganizersName); ?></h5><!-- </p> -->
  </div>
 </div></div>
 			<?php if(isset($event->google_map) && !empty($event->google_map)) { $geoCode = $event->google_map; } else { $geoCode = '13.0595365, 80.24247919999993'; } ?>
@@ -538,6 +538,3 @@ display: block;
 	<?= $this->Form->button(__('Submit')); ?>
 	<?= $this->Form->end() ?>
 <?php } ?>
-<div>
-    <p>The number of visitors is : <span id="cntr">0</span></p>
-  </div>
