@@ -303,7 +303,6 @@ $eventPriceFormatted = (!empty($event->price)) ? asRupees($event->price) : 0;
 				</div>
 			</div> -->
 
-
 		</div>
 	</div>
 </div>
@@ -314,203 +313,208 @@ $eventPriceFormatted = (!empty($event->price)) ? asRupees($event->price) : 0;
     <div class="modal-dialog">
         <div class="modal-content">
             <div class="modal-body">
-            	<input type="hidden" id="tAmt" name="tAmt" value="<?php echo $event->price; ?>">
-            	<input type="hidden" id="tAmtAd" name="tAmtAd" value="<?php echo $event->price; ?>">
-            	<input type="hidden" id="tAmtCh" name="tAmtCh" value="<?php echo $event->price; ?>">
-            	<div class="e-full">
-            		<div class="e-parent">
-	            	<p class="e-title"><span><?= h($event->title) ?></span></p>
-	            	<p class="e-details"><?php echo date_format($event->date, "j M Y"); ?> | <?php echo h($event->time); ?></p>
+            	<form name="ticketForm" id="ticketFormId" method="post">
+	            	<div class="e-full">
+	            		<div class="e-parent">
+		            	<p class="e-title"><span><?= h($event->title) ?></span></p>
+		            	<p class="e-details">
+		            		<?php echo date_format($event->date, "j M Y"); ?> | <?php echo h($event->time); ?>
+		            		<span id="ticketAlertMsg"></span>	
+		            	</p>
+		            	</div>
 	            	</div>
-            	</div>
 
-            	<!-- Stepper -->
-				<div class="steps-form-2">
-				    <div class="steps-row-2 setup-panel-2 d-flex justify-content-between">
-				        <div class="steps-step-2">
-				            <a href="#step-1" class="btn btn-active btn-circle-2 waves-effect ml-0" data-toggle="tooltip" data-placement="top" title="Basic Information">Tickets</i></a>
-				        </div>
-				        <div class="steps-step-2">
-				            <a href="#step-2" class="btn btn-circle-2 waves-effect" data-toggle="tooltip" data-placement="top" title="Personal Data">Participants</a>
-				        </div> 
-				        <div class="steps-step-2">
-				            <a href="#step-3" class="btn btn-circle-2 waves-effect mr-0" data-toggle="tooltip" data-placement="top" title="Finish">Payment</a>
-				        </div>
-				    </div>
-				</div>
+	            	<!-- Stepper -->
+					<div class="steps-form-2">
+					    <div class="steps-row-2 setup-panel-2 d-flex justify-content-between">
+					        <div class="steps-step-2">
+					            <a href="#step-1" class="btn btn-active btn-circle-2 first-li waves-effect ml-0" data-toggle="tooltip" data-placement="top" title="Basic Information">Tickets</i></a>
+					        </div>
+					        <div class="steps-step-2">
+					            <a href="#step-2" class="btn btn-circle-2 waves-effect" data-toggle="tooltip" data-placement="top" title="Personal Data">Participants</a>
+					        </div> 
+					        <div class="steps-step-2">
+					            <a href="#step-3" class="btn btn-circle-2 waves-effect mr-0" data-toggle="tooltip" data-placement="top" title="Finish">Payment</a>
+					        </div>
+					    </div>
+					</div>
 
-			    <div class="setup-content-2" id="step-1">
-			    	<div class="ticket-head">
-			    		<div class="row">
-				    		<div class="col col-9 col-sm-6">Ticket Type</div>
-						    <div class="col col-6 col-sm-4">Quantity</div>
-						    <div class="col col-3 col-sm-2">Total</div>
+				    <div class="setup-content-2" id="step-1">
+				    	<div class="ticket-head">
+				    		<div class="row">
+					    		<div class="col col-9 col-sm-6">Ticket Type</div>
+							    <div class="col col-6 col-sm-4">Quantity</div>
+							    <div class="col col-3 col-sm-2">Total</div>
+					    	</div>
 				    	</div>
-			    	</div>	<?php  
-						     foreach ($booklists as $booklist): 
-  $tictype = $booklist['tickettype'];
-  $ticprice = $booklist['price'];
-  $ticname = $booklist['name'];
-  $ticseats = $booklist['noofseats'];
-  // echo"$tictype";
- ?>		    	
-			    	<div class="ticket-body">
-			    		<div class="row" data-attr="adult">   
-				    		<div class="col col-9 col-sm-6 type-box"> 
-				    			<div class="info"><?php echo $tictype; ?>(<?php echo $ticname; ?>)</div>
-				    			<div class="rate-info"><amount><?php echo $ticprice;//echo $eventPriceFormatted; ?></amount><span>(<?php echo $ticseats; ?> tickets remaining)</span></div>
-				    		</div>
-						    <div class="col col-6 col-sm-4 quantity-box">
-						    	<div class="inner-box adult">
-						    		<span class="plus ticPlus">+</span>
-							    	<span class="qValue-txt">1</span>
-							    	<span class="minus ticMinus">-</span>
-						    	</div>						    	
-						    </div>
-						    <div class="col col-3 col-sm-2 amt-box"><?php echo $ticprice;//echo $eventPriceFormatted; ?></div>
+				    	<div class="ticket-body">
+				    		<input type="hidden" name="totalAllTicketCnt" value="0" id="totalAllTicketCnt">
+				    		<input type="hidden" name="ticketAllTotalAmount" value="0" id="ticketAllTotalAmount">
+					    	<?php
+					    	foreach ($booklists as $booklist): 
+					    	  $ticId = $booklist['id'];
+							  $ticType = $booklist['tickettype'];
+							  $ticPrice = $booklist['price'];
+							  $ticName = $booklist['name'];
+							  $ticNoOfSeats = $booklist['noofseats'];
+							  $ticketEventId = $booklist['events_id'];
+							?>		    	
+				    		<div class="row" id="ticketDiv_<?php echo $ticId; ?>">
+				    			<input type="hidden" name="ticketIds[]" value="<?php echo $ticId; ?>">
+				    			<input type="hidden" name="ticketEventId_<?php echo $ticId; ?>" id="ticketEventId_<?php echo $ticId; ?>" value="<?php echo $ticketEventId; ?>">
+				    			<input type="hidden" name="ticketName_<?php echo $ticId; ?>" id="ticketName_<?php echo $ticId; ?>" value="<?php echo $ticName; ?>">
+				    			<input type="hidden" name="ticketType_<?php echo $ticId; ?>" id="ticketType_<?php echo $ticId; ?>"value="<?php echo $ticType; ?>">
+				    			<input type="hidden" name="ticketPrice_<?php echo $ticId; ?>" id="ticketPrice_<?php echo $ticId; ?>" value="<?php echo $ticPrice; ?>">
+				    			<input type="hidden" name="totalTicketCnt_<?php echo $ticId; ?>" id="totalTicketCnt_<?php echo $ticId; ?>" value="0">
+				    			<input type="hidden" name="totalTicketPrice_<?php echo $ticId; ?>" id="totalTicketPrice_<?php echo $ticId; ?>" value="0">
+
+					    		<div class="col col-9 col-sm-6 type-box"> 
+					    			<div class="info"><?php echo $ticType; ?>(<?php echo $ticName; ?>)</div>
+					    			<div class="rate-info">
+					    				<amount><?php echo asRupees($ticPrice); ?></amount>
+					    				<span>(<?php echo $ticNoOfSeats; ?> tickets remaining)</span>
+					    			</div>
+					    		</div>
+							    <div class="col col-6 col-sm-4 quantity-box">
+							    	<div class="inner-box">
+							    		<span class="plus ticPlus" ticket-id="<?php echo $ticId; ?>">+</span>
+								    	<span class="qValue-txt">0</span>
+								    	<span class="minus ticMinus" ticket-id="<?php echo $ticId; ?>">-</span>
+							    	</div>						    	
+							    </div>
+							    <div class="col col-3 col-sm-2 amt-box">0</div>
+					    	</div>			    	
+				    		<?php endforeach; ?>
 				    	</div>
-				    <!-- 	<div class="row" data-attr="child">
-				    		<div class="col col-9 col-sm-6 type-box">
-				    			<div class="info">For Children</div>
-				    			<div class="rate-info"><amount><?php echo $eventPriceFormatted; ?></amount><span>(10 tickets remaining)</span></div>
-				    		</div>
-						    <div class="col col-6 col-sm-4 quantity-box">
-						    	<div class="inner-box child">
-						    		<span class="plus ticPlus">+</span>
-							    	<span class="qValue-txt">0</span>
-							    	<span class="minus ticMinus">-</span>
+
+				    	<div class="ticket-total">
+				    		<div class="row">
+					    		<div class="col col-9 col-sm-8 text-right">Quantity <span class="tot-qty-txt">0</span></div>
+							    <div class="col col-6 col-sm-4 text-right">Grand Total 
+							    	<span class="tot-amt-txt">0</span>
+							    </div>
+					    	</div>
+				    	</div>	
+				    	<div class="ticket-footer">			    	
+					    	<div class="row">  
+						        <div class="steps-form-footer">
+						        	<button class="btn nextBtn-2 float-right" type="button">Checkout</button>
+						        	<a href="javascript:;" class="tic-close-btn" data-dismiss="modal">Cancel</a>
 						    	</div>
-						    </div>
-						    <div class="col col-3 col-sm-2 amt-box"><?php echo asRupees(0); ?></div>
-				    	</div> -->
-			    	</div> <?php endforeach;
-                ?>
-			    	<div class="ticket-total">
-			    		<div class="row">
-				    		<div class="col col-9 col-sm-8 text-right">Quantity <span class="tot-qty-txt">1</span></div>
-						    <div class="col col-6 col-sm-4 text-right">Grand Total <span class="tot-amt-txt"><?php echo $eventPriceFormatted; ?></span></div>
-				    	</div>
-			    	</div>	
-			    	<div class="ticket-footer">			    	
-				    	<div class="row">  
-					        <div class="steps-form-footer">
-					        	<button class="btn nextBtn-2 float-right" type="button">Checkout</button>
-					        	<a href="javascript:;" class="tic-close-btn" data-dismiss="modal">Cancel</a>
 					    	</div>
 				    	</div>
-			    	</div>
-			    </div>
+				    </div>
 
-				<!-- Second Step -->
-			    <div class="setup-content-2" id="step-2">		    	
-			    	<div class="participants-body">
-			    		<div class="col-md-12">
-				            <!-- <h5 class="font-weight-bold pl-0 my-4"><strong>Basic Information</strong></h5> -->
-				            <div class="form-group md-form">
-				                <label for="yourName" data-error="wrong" data-success="right">Name</label>
-				                <input id="yourName" type="text" required="required" class="form-control validate">
-				            </div>
-				            <div class="form-group md-form">
-				                <label for="yourEmail" data-error="wrong" data-success="right">Email</label>
-				                <input id="yourEmail" type="email" required="required" class="form-control validate">
-				            </div>				            
-				            <div class="form-group md-form">
-				                <label for="yourMobile" data-error="wrong" data-success="right">Mobile Number</label>
-				                <input id="yourMobile" type="number" required="required" class="form-control validate">
-				            </div>
-				        </div>
-			    	</div>
-
-			    	<div class="ticket-total">
-			    		<div class="row">
-				    		<div class="col col-9 col-sm-8 text-right">Quantity: <span class="tot-qty-txt">15</span></div>
-						    <div class="col col-6 col-sm-4 text-right">Grand Total <span class="tot-amt-txt">25,000</span></div>
+					<!-- Second Step -->
+				    <div class="setup-content-2" id="step-2">		    	
+				    	<div class="participants-body">
+							<div class="form-row">
+								<div class="col-md-6">
+									<div class="md-form form-group">
+										<input type="text" name="ticketFirstName" class="form-control" id="ticketFirstName" placeholder="First Name" required>
+										<label for="ticketFirstName">First Name</label>
+									</div>
+								</div>
+								<div class="col-md-6">
+									<div class="md-form form-group">
+										<input type="text" name="ticketLastName" class="form-control" id="ticketLastName" placeholder="Last Name" required>
+										<label for="ticketLastName">Last Name</label>
+									</div>
+								</div>
+							</div>
+							<div class="form-row">
+								<div class="col-md-12">
+									<div class="md-form form-group">
+										<input type="email" name="ticketEmailAddress" class="form-control" id="ticketEmailAddress" placeholder="Email Address" required>
+										<label for="ticketEmailAddress">Email</label>
+									</div>
+								</div>
+							</div>
+							<div class="form-row">
+								<div class="col-md-12">
+									<div class="md-form form-group">
+										<input type="text" name="ticketMobileNumber" class="form-control" id="ticketMobileNumber" placeholder="Mobile Number" required>
+										<label for="ticketMobileNumber">Mobile Number</label>
+									</div>
+								</div>
+							</div>
 				    	</div>
-			    	</div>	
-			    	<div class="ticket-footer">			    	
-				    	<div class="row">  
-					        <div class="steps-form-footer">
-					        	<button class="btn btn-sm btn-back prevBtn-2 float-left" type="button">Back</button>
-					        	<button class="btn nextBtn-2 float-right" type="button">Checkout</button>
-					        	<a href="javascript:;" class="tic-close-btn" data-dismiss="modal">Cancel</a>
+
+				    	<div class="ticket-total">
+				    		<div class="row">
+					    		<div class="col col-9 col-sm-8 text-right">Quantity: <span class="tot-qty-txt">0</span></div>
+							    <div class="col col-6 col-sm-4 text-right">Grand Total <span class="tot-amt-txt">0</span></div>
 					    	</div>
-				    	</div>
-			    	</div>			        
-			    </div> 
+				    	</div>	
+				    	<div class="ticket-footer">			    	
+					    	<div class="row">  
+						        <div class="steps-form-footer">
+						        	<button class="btn btn-sm btn-back prevBtn-2 float-left" type="button">Back</button>
+						        	<button class="btn nextBtn-2 float-right" type="button">Checkout</button>
+						        	<a href="javascript:;" class="tic-close-btn" data-dismiss="modal">Cancel</a>
+						    	</div>
+					    	</div>
+				    	</div>			        
+				    </div> 
 
-			    <!-- Third Step -->
-			    <div class="setup-content-2" id="step-3">
-			        <div class="payments-body">
-			        	<div class="row">
-				    		<div class="col col-6 col-sm-6 payment-left">
-				    			<h5 class="pay-title"><strong>Choose your payment method</strong></h5>
-				    			<span class="title-info">(Click one of the option below)</span>
-				    			<ul class="payment-methods">
-				    				<li class="active">Debit Card</li>
-				    				<li class="selected">Credit Card</li>
-				    				<li>Net Banking</li>
-				    				<li>Wallet</li>
-				    			</ul>
-				    		</div>
-						    <div class="col col-6 col-sm-6 payment-right order-summary">
-							    <div class="row os-title">
-							     	<div class="col col-6 col-sm-7">
-							    		<h5 class="pay-title"><strong>Order Summary</strong></h5>
-							    	</div>
-								    <div class="col col-6 col-sm-5">
-								    	<div class="order-number">Order No: XXXXXXX</div>
-								    </div>
-							    </div>		
-							    <div class="row os-sub-title">
-							     	<div class="col col-6 col-sm-7">
-							    		Ticket Type
-							    	</div>
-								    <div class="col col-6 col-sm-5 text-center">
-								    	Qty
-								    </div>
-							    </div>
-							    <div class="ticket-details-final">
-							    	<div class="row t-item">
-								     	<div class="col col-6 col-sm-7 t-type">
-								    		Single Person (1500)
+				    <!-- Third Step -->
+				    <div class="setup-content-2" id="step-3">
+				        <div class="payments-body">
+				        	<div class="row">
+					    		<div class="col col-6 col-sm-6 payment-left">
+					    			<h5 class="pay-title"><strong>Choose your payment method</strong></h5>
+					    			<span class="title-info">(Click one of the option below)</span>
+					    			<ul class="payment-methods">
+					    				<li class="selected">Payu Money</li>
+					    				<!--<li class="active">Credit Card</li>
+					    				<li>Net Banking</li>
+					    				<li>Wallet</li>-->
+					    			</ul>
+					    		</div>
+							    <div class="col col-6 col-sm-6 payment-right order-summary">
+								    <div class="row os-title">
+								     	<div class="col col-6 col-sm-7">
+								    		<h5 class="pay-title"><strong>Order Summary</strong></h5>
 								    	</div>
-									    <div class="col col-6 col-sm-5 t-qty text-center">
-									    	15
+									    <!--<div class="col col-6 col-sm-5">
+									    	<div class="order-number">Order No: XXXXXXX</div>
+									    </div>-->
+								    </div>		
+								    <div class="row os-sub-title">
+								     	<div class="col col-6 col-sm-7">
+								    		Ticket Type
+								    	</div>
+									    <div class="col col-6 col-sm-5 text-center">
+									    	Qty
 									    </div>
 								    </div>
-								    <div class="row t-item">
-								     	<div class="col col-6 col-sm-7 t-type">
-								    		Couples (1000)
+								    <div class="ticket-details-final">
+								    	
+								    </div>
+								    <!--<div class="row coupon-box">
+								     	<div class="col col-12">
+								    		Have a Coupon Code?
 								    	</div>
-									    <div class="col col-6 col-sm-5 t-qty text-center">
-									    	10
-									    </div>
+								    </div>-->
+								    <div class="row total-final-box">
+								     	<div class="col col-12 text-right">
+								    		Total <span class="final-amt-txt">0</span>
+								    	</div>
 								    </div>
 							    </div>
-							    <div class="row coupon-box">
-							     	<div class="col col-12">
-							    		Have a Coupon Code?
-							    	</div>
-							    </div>
-							    <div class="row total-final-box">
-							     	<div class="col col-12 text-right">
-							    		Total <span class="final-amt-txt">25,000</span>
-							    	</div>
-							    </div>
-						    </div>
-				    	</div>			    		
-			    	</div>
-			    	<div class="ticket-footer">			    	
-				    	<div class="row">  
-					        <div class="steps-form-footer">
-					        	<button class="btn btn-sm btn-back prevBtn-2 float-left" type="button">Back</button>
-					        	<button class="btn nextBtn-2 float-right" type="button">Checkout</button>
-					        	<a href="javascript:;" class="tic-close-btn" data-dismiss="modal">Cancel</a>
-					    	</div>
+					    	</div>			    		
 				    	</div>
-			    	</div>	
-			    </div>
-
+				    	<div class="ticket-footer">			    	
+					    	<div class="row">  
+						        <div class="steps-form-footer">
+						        	<button class="btn btn-sm btn-back prevBtn-2 float-left" type="button">Back</button>
+						        	<button class="btn nextBtn-2 float-right" type="button">Checkout</button>
+						        	<a href="javascript:;" class="tic-close-btn" data-dismiss="modal">Cancel</a>
+						    	</div>
+					    	</div>
+				    	</div>	
+				    </div>
+				</form>
             </div>
         </div>
         <!-- /.modal-content -->
