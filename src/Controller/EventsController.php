@@ -1266,7 +1266,6 @@ public function organizerevents()
         $this->set(compact('medialists','medialist'));
         $this->set('_serialize', ['medialists']);
         $this->set('_serialize', ['medialist']);
-
         $this->loadModel('Sponsors');
         $sponsorlist= $this->paginate['conditions'] = array('Sponsors.events_id' => $id);
         $sponsorlists = $this->paginate($this->Sponsors);
@@ -1274,19 +1273,21 @@ public function organizerevents()
         $this->set('_serialize', ['sponsorlists']);
         $this->set('_serialize', ['sponsorlist']);
 
+        $this->loadModel('Bookingonline');
+        $booklist= $this->paginate['conditions'] = array('Bookingonline.events_id' => $id,'Bookingonline.status' => 1,'Bookingonline.enddate >'=>date("Y-m-d"));
+        $booklists = $this->paginate($this->Bookingonline);
+        $this->set(compact('booklists','booklist'));
+        $this->set('_serialize', ['booklists']);
+        $this->set('_serialize', ['booklist']);
+        $Bookingonline = $this->loadModel('Bookingonline');
+$query = $Bookingonline->query();
+            $result = $query->update()
+                    ->set(['status' => '2'])
+                    ->where(['enddate <' => date("Y-m-d")])
+                    ->execute();
         $this->loadModel('Galaries');
 
         $galaries = $this->Galaries->find('all', ['conditions' => ['events_id' => $id]]);
-
-
-
-        // $this->loadModel('Sponsors');
-
-        // $sponsors = $this->Sponsors->find('all', ['conditions' => ['events_id' => $id]]);
-        // $sponsorlist = $this->paginate($this->Sponsors);
-        //  $this->set(compact('sponsorlist','sponsors'));
-        //  $this->set('_serialize', ['sponsorlist']);
-        // $this->set('_serialize', ['sponsors']);
 
         $this->loadModel('Likes');
 

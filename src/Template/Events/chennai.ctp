@@ -346,12 +346,19 @@ $eventPriceFormatted = (!empty($event->price)) ? asRupees($event->price) : 0;
 						    <div class="col col-6 col-sm-4">Quantity</div>
 						    <div class="col col-3 col-sm-2">Total</div>
 				    	</div>
-			    	</div>			    	
+			    	</div>	<?php  
+						     foreach ($booklists as $booklist): 
+  $tictype = $booklist['tickettype'];
+  $ticprice = $booklist['price'];
+  $ticname = $booklist['name'];
+  $ticseats = $booklist['noofseats'];
+  // echo"$tictype";
+ ?>		    	
 			    	<div class="ticket-body">
-			    		<div class="row" data-attr="adult">
-				    		<div class="col col-9 col-sm-6 type-box">
-				    			<div class="info">For Adult</div>
-				    			<div class="rate-info"><amount><?php echo $eventPriceFormatted; ?></amount><span>(15 tickets remaining)</span></div>
+			    		<div class="row" data-attr="adult">   
+				    		<div class="col col-9 col-sm-6 type-box"> 
+				    			<div class="info"><?php echo $tictype; ?>(<?php echo $ticname; ?>)</div>
+				    			<div class="rate-info"><amount><?php echo $ticprice;//echo $eventPriceFormatted; ?></amount><span>(<?php echo $ticseats; ?> tickets remaining)</span></div>
 				    		</div>
 						    <div class="col col-6 col-sm-4 quantity-box">
 						    	<div class="inner-box adult">
@@ -360,9 +367,9 @@ $eventPriceFormatted = (!empty($event->price)) ? asRupees($event->price) : 0;
 							    	<span class="minus ticMinus">-</span>
 						    	</div>						    	
 						    </div>
-						    <div class="col col-3 col-sm-2 amt-box"><?php echo $eventPriceFormatted; ?></div>
+						    <div class="col col-3 col-sm-2 amt-box"><?php echo $ticprice;//echo $eventPriceFormatted; ?></div>
 				    	</div>
-				    	<div class="row" data-attr="child">
+				    <!-- 	<div class="row" data-attr="child">
 				    		<div class="col col-9 col-sm-6 type-box">
 				    			<div class="info">For Children</div>
 				    			<div class="rate-info"><amount><?php echo $eventPriceFormatted; ?></amount><span>(10 tickets remaining)</span></div>
@@ -375,8 +382,9 @@ $eventPriceFormatted = (!empty($event->price)) ? asRupees($event->price) : 0;
 						    	</div>
 						    </div>
 						    <div class="col col-3 col-sm-2 amt-box"><?php echo asRupees(0); ?></div>
-				    	</div>
-			    	</div>
+				    	</div> -->
+			    	</div> <?php endforeach;
+                ?>
 			    	<div class="ticket-total">
 			    		<div class="row">
 				    		<div class="col col-9 col-sm-8 text-right">Quantity <span class="tot-qty-txt">1</span></div>
