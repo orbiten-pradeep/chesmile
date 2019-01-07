@@ -9,6 +9,7 @@ use Cake\Validation\Validator;
 /**
  * Tickets Model
  *
+ * @property \Cake\ORM\Association\BelongsTo $Orders
  * @property \Cake\ORM\Association\BelongsTo $Events
  *
  * @method \App\Model\Entity\Ticket get($primaryKey, $options = [])
@@ -40,6 +41,10 @@ class TicketsTable extends Table
 
         $this->addBehavior('Timestamp');
 
+        $this->belongsTo('Orders', [
+            'foreignKey' => 'orders_id',
+            'joinType' => 'INNER'
+        ]);
         $this->belongsTo('Events', [
             'foreignKey' => 'events_id',
             'joinType' => 'INNER'
@@ -55,8 +60,8 @@ class TicketsTable extends Table
     public function validationDefault(Validator $validator)
     {
         $validator
-            ->integer('ID')
-            ->allowEmpty('ID', 'create');
+            ->integer('id')
+            ->allowEmpty('id', 'create');
 
         $validator
             ->allowEmpty('firstname');
@@ -72,19 +77,59 @@ class TicketsTable extends Table
             ->allowEmpty('email');
 
         $validator
+            ->allowEmpty('service_provider');
+
+        $validator
+            ->allowEmpty('productinfo');
+
+        $validator
             ->allowEmpty('phone');
+
+        $validator
+            ->requirePresence('ticketName', 'create')
+            ->notEmpty('ticketName');
+
+        $validator
+            ->requirePresence('ticketType', 'create')
+            ->notEmpty('ticketType');
+
+        $validator
+            ->requirePresence('commissionPer', 'create')
+            ->notEmpty('commissionPer');
+
+        $validator
+            ->requirePresence('commissionAmt', 'create')
+            ->notEmpty('commissionAmt');
 
         $validator
             ->allowEmpty('tickets');
 
         $validator
+            ->allowEmpty('eachPrice');
+
+        $validator
+            ->allowEmpty('commissionTotal');
+
+        $validator
             ->allowEmpty('txnid');
+
+        $validator
+            ->allowEmpty('hash');
 
         $validator
             ->allowEmpty('amount');
 
         $validator
-            ->allowEmpty('Status');
+            ->allowEmpty('status');
+
+        $validator
+            ->allowEmpty('unmappedstatus');
+
+        $validator
+            ->allowEmpty('field9');
+
+        $validator
+            ->allowEmpty('bank_ref_num');
 
         return $validator;
     }
@@ -98,6 +143,8 @@ class TicketsTable extends Table
      */
     public function buildRules(RulesChecker $rules)
     {
+        //$rules->add($rules->isUnique(['email']));
+        $rules->add($rules->existsIn(['orders_id'], 'Orders'));
         $rules->add($rules->existsIn(['events_id'], 'Events'));
 
         return $rules;

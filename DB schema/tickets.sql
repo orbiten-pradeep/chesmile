@@ -1,5 +1,7 @@
+DROP TABLE IF EXISTS `tickets`;
 CREATE TABLE IF NOT EXISTS `tickets` (
   `id` int(11) NOT NULL AUTO_INCREMENT,
+  `orders_id` int(11) NOT NULL,
   `events_id` int(11) NOT NULL,
   `firstname` varchar(255) DEFAULT NULL,
   `lastname` varchar(255) DEFAULT NULL,
@@ -8,7 +10,13 @@ CREATE TABLE IF NOT EXISTS `tickets` (
   `service_provider` varchar(255) DEFAULT NULL,
   `productinfo` varchar(255) DEFAULT NULL,
   `phone` varchar(255) DEFAULT NULL,
+  `ticketName` varchar(255) NOT NULL,
+  `ticketType` varchar(255) NOT NULL,
+  `commissionPer` varchar(255) NOT NULL,
+  `commissionAmt` varchar(255) NOT NULL,
   `tickets` varchar(255) DEFAULT NULL,
+  `eachPrice` varchar(255) DEFAULT NULL,
+  `commissionTotal` varchar(255) DEFAULT NULL,
   `txnid` varchar(255) DEFAULT NULL,
   `hash` varchar(255) DEFAULT NULL,
   `amount` varchar(255) DEFAULT NULL,
@@ -18,4 +26,4 @@ CREATE TABLE IF NOT EXISTS `tickets` (
   `field9` varchar(255) DEFAULT NULL,
   `bank_ref_num` varchar(255) DEFAULT NULL,
   PRIMARY KEY (`id`)
-) ENGINE=InnoDB AUTO_INCREMENT=26 DEFAULT CHARSET=utf8;
+) ENGINE=InnoDB AUTO_INCREMENT=67 DEFAULT CHARSET=utf8;

@@ -19,7 +19,7 @@ class BookingonlineController extends AppController
     public function index()
     {
         $this->paginate = [
-            'contain' => ['Events', 'Categories']
+            'contain' => ['Events']
         ];
         $bookingonline = $this->paginate($this->Bookingonline);
 
@@ -37,7 +37,7 @@ class BookingonlineController extends AppController
     public function view($id = null)
     {
         $bookingonline = $this->Bookingonline->get($id, [
-            'contain' => ['Events', 'Categories']
+            'contain' => ['Events']
         ]);
 
         $this->set('bookingonline', $bookingonline);
@@ -63,8 +63,7 @@ class BookingonlineController extends AppController
             }
         }
         $events = $this->Bookingonline->Events->find('list', ['limit' => 200]);
-        $categories = $this->Bookingonline->Categories->find('list', ['limit' => 200]);
-        $this->set(compact('bookingonline', 'events', 'categories'));
+        $this->set(compact('bookingonline', 'events'));
         $this->set('_serialize', ['bookingonline']);
     }
 
@@ -91,8 +90,7 @@ class BookingonlineController extends AppController
             }
         }
         $events = $this->Bookingonline->Events->find('list', ['limit' => 200]);
-        $categories = $this->Bookingonline->Categories->find('list', ['limit' => 200]);
-        $this->set(compact('bookingonline', 'events', 'categories'));
+        $this->set(compact('bookingonline', 'events'));
         $this->set('_serialize', ['bookingonline']);
     }
 

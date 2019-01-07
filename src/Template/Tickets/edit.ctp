@@ -8,6 +8,8 @@
             )
         ?></li>
         <li><?= $this->Html->link(__('List Tickets'), ['action' => 'index']) ?></li>
+        <li><?= $this->Html->link(__('List Orders'), ['controller' => 'Orders', 'action' => 'index']) ?></li>
+        <li><?= $this->Html->link(__('New Order'), ['controller' => 'Orders', 'action' => 'add']) ?></li>
         <li><?= $this->Html->link(__('List Events'), ['controller' => 'Events', 'action' => 'index']) ?></li>
         <li><?= $this->Html->link(__('New Event'), ['controller' => 'Events', 'action' => 'add']) ?></li>
     </ul>
@@ -17,6 +19,7 @@
     <fieldset>
         <legend><?= __('Edit Ticket') ?></legend>
         <?php
+            echo $this->Form->input('orders_id', ['options' => $orders]);
             echo $this->Form->input('events_id', ['options' => $events]);
             echo $this->Form->input('firstname');
             echo $this->Form->input('lastname');
@@ -25,7 +28,13 @@
             echo $this->Form->input('service_provider');
             echo $this->Form->input('productinfo');
             echo $this->Form->input('phone');
+            echo $this->Form->input('ticketName');
+            echo $this->Form->input('ticketType');
+            echo $this->Form->input('commissionPer');
+            echo $this->Form->input('commissionAmt');
             echo $this->Form->input('tickets');
+            echo $this->Form->input('eachPrice');
+            echo $this->Form->input('commissionTotal');
             echo $this->Form->input('txnid');
             echo $this->Form->input('hash');
             echo $this->Form->input('amount');

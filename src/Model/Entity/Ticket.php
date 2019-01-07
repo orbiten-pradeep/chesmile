@@ -6,19 +6,33 @@ use Cake\ORM\Entity;
 /**
  * Ticket Entity
  *
- * @property int $ID
+ * @property int $id
+ * @property int $orders_id
  * @property int $events_id
  * @property string $firstname
  * @property string $lastname
  * @property string $name
  * @property string $email
+ * @property string $service_provider
+ * @property string $productinfo
  * @property string $phone
+ * @property string $ticketName
+ * @property string $ticketType
+ * @property string $commissionPer
+ * @property string $commissionAmt
  * @property string $tickets
+ * @property string $eachPrice
+ * @property string $commissionTotal
  * @property string $txnid
+ * @property string $hash
  * @property string $amount
  * @property \Cake\I18n\Time $created
- * @property string $Status
+ * @property string $status
+ * @property string $unmappedstatus
+ * @property string $field9
+ * @property string $bank_ref_num
  *
+ * @property \App\Model\Entity\Order $order
  * @property \App\Model\Entity\Event $event
  */
 class Ticket extends Entity
@@ -35,6 +49,6 @@ class Ticket extends Entity
      */
     protected $_accessible = [
         '*' => true,
-        'ID' => false
+        'id' => false
     ];
 }

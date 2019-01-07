@@ -63,33 +63,34 @@ class BookingonlineTable extends Table
 
         $validator
             ->requirePresence('tickettype', 'create')
-            ->allowEmpty('tickettype');
+            ->notEmpty('tickettype');
 
         $validator
             ->requirePresence('price', 'create')
-            ->allowEmpty('price');
+            ->notEmpty('price');
 
         $validator
             ->requirePresence('noofseats', 'create')
-            ->allowEmpty('noofseats');
+            ->notEmpty('noofseats');
 
         $validator
             ->requirePresence('commission_per', 'create')
-            ->allowEmpty('commission_per');
+            ->notEmpty('commission_per');
 
         $validator
             ->requirePresence('commission_amt', 'create')
-            ->allowEmpty('commission_amt');
+            ->notEmpty('commission_amt');
 
         $validator
-            ->requirePresence('startdate', 'create')
-            ->allowEmpty('startdate');
-
-        $validator
-            ->requirePresence('enddate', 'create')
+            ->date('enddate')
             ->allowEmpty('enddate');
 
         $validator
+            ->date('startdate')
+            ->allowEmpty('startdate');
+
+        $validator
+            ->integer('status')
             ->allowEmpty('status');
 
         return $validator;

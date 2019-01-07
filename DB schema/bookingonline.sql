@@ -28,8 +28,9 @@ SET time_zone = "+00:00";
 -- Table structure for table `bookingonline`
 --
 
-CREATE TABLE `bookingonline` (
-  `id` int(11) NOT NULL,
+DROP TABLE IF EXISTS `bookingonline`;
+CREATE TABLE IF NOT EXISTS `bookingonline` (
+  `id` int(11) NOT NULL AUTO_INCREMENT,
   `events_id` varchar(200) NOT NULL,
   `name` varchar(200) DEFAULT NULL,
   `tickettype` varchar(200) NOT NULL,
@@ -37,21 +38,16 @@ CREATE TABLE `bookingonline` (
   `noofseats` varchar(100) NOT NULL,
   `commission_per` varchar(100) NOT NULL,
   `commission_amt` varchar(100) NOT NULL,
-  `startdate` varchar(100) NOT NULL,
-  `enddate` varchar(100) NOT NULL,
-  `status` varchar(100) DEFAULT NULL,
-  `created` datetime NOT NULL DEFAULT CURRENT_TIMESTAMP
-) ENGINE=InnoDB DEFAULT CHARSET=latin1;
+  `enddate` date DEFAULT NULL,
+  `startdate` date DEFAULT NULL,
+  `status` int(11) DEFAULT '1',
+  `created` datetime NOT NULL DEFAULT CURRENT_TIMESTAMP,
+  PRIMARY KEY (`id`)
+) ENGINE=InnoDB AUTO_INCREMENT=13 DEFAULT CHARSET=latin1;
 
 --
 -- Dumping data for table `bookingonline`
 --
-
-INSERT INTO `bookingonline` (`id`, `events_id`, `name`, `tickettype`, `price`, `noofseats`, `commission_per`, `commission_amt`, `startdate`, `enddate`, `status`, `created`) VALUES
-(1, '1198', '', '', '', '', 'Select percentage', 'NaN', '', '', '0', '2018-10-17 12:52:15'),
-(2, '1198', 'jihugwydf', 'ewhgdywkegdu', '8976', '988778', '25', 'NaN', '2018/09/11', '2018/09/11', '0', '2018-10-17 12:52:15'),
-(3, '1198', 'lejdiwehueh', 'kl;wdj;whdwhu', '2292', 'hiuhuid', '45', 'NaN', '2018/09/11', '2018/09/11', '0', '2018-10-17 12:52:15');
-
 --
 -- Indexes for dumped tables
 --

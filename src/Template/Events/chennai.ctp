@@ -313,6 +313,9 @@ $eventPriceFormatted = (!empty($event->price)) ? asRupees($event->price) : 0;
     <div class="modal-dialog">
         <div class="modal-content">
             <div class="modal-body">
+				<?php
+					echo $this->Form->create("orders", array('type' => 'post', 'url' => '/Orders/add'));
+				?>
             	<form name="ticketForm" id="ticketFormId" method="post">
 	            	<div class="e-full">
 	            		<div class="e-parent">
@@ -348,6 +351,7 @@ $eventPriceFormatted = (!empty($event->price)) ? asRupees($event->price) : 0;
 					    	</div>
 				    	</div>
 				    	<div class="ticket-body">
+							<input type="hidden" name="events_id" value="<?php echo $events_id; ?>" id="events_id">
 				    		<input type="hidden" name="totalAllTicketCnt" value="0" id="totalAllTicketCnt">
 				    		<input type="hidden" name="ticketAllTotalAmount" value="0" id="ticketAllTotalAmount">
 					    	<?php
@@ -358,6 +362,8 @@ $eventPriceFormatted = (!empty($event->price)) ? asRupees($event->price) : 0;
 							  $ticName = $booklist['name'];
 							  $ticNoOfSeats = $booklist['noofseats'];
 							  $ticketEventId = $booklist['events_id'];
+							  $ticketCommissionAmt = $booklist['commission_amt'];
+							  $ticketCommissionPer = $booklist['commission_per'];
 							?>		    	
 				    		<div class="row" id="ticketDiv_<?php echo $ticId; ?>">
 				    			<input type="hidden" name="ticketIds[]" value="<?php echo $ticId; ?>">
@@ -365,9 +371,10 @@ $eventPriceFormatted = (!empty($event->price)) ? asRupees($event->price) : 0;
 				    			<input type="hidden" name="ticketName_<?php echo $ticId; ?>" id="ticketName_<?php echo $ticId; ?>" value="<?php echo $ticName; ?>">
 				    			<input type="hidden" name="ticketType_<?php echo $ticId; ?>" id="ticketType_<?php echo $ticId; ?>"value="<?php echo $ticType; ?>">
 				    			<input type="hidden" name="ticketPrice_<?php echo $ticId; ?>" id="ticketPrice_<?php echo $ticId; ?>" value="<?php echo $ticPrice; ?>">
-				    			<input type="hidden" name="totalTicketCnt_<?php echo $ticId; ?>" id="totalTicketCnt_<?php echo $ticId; ?>" value="0">
+				    			<input type="hidden" name="ticketCommissionPrice_<?php echo $ticId; ?>" id="commission_amt<?php echo $ticId; ?>" value="<?php echo $ticketCommissionAmt; ?>">
+								<input type="hidden" name="ticketCommissionPerce_<?php echo $ticId; ?>" id="commission_per<?php echo $ticId; ?>" value="<?php echo $ticketCommissionPer; ?>">
+								<input type="hidden" name="totalTicketCnt_<?php echo $ticId; ?>" id="totalTicketCnt_<?php echo $ticId; ?>" value="0">
 				    			<input type="hidden" name="totalTicketPrice_<?php echo $ticId; ?>" id="totalTicketPrice_<?php echo $ticId; ?>" value="0">
-
 					    		<div class="col col-9 col-sm-6 type-box"> 
 					    			<div class="info"><?php echo $ticType; ?>(<?php echo $ticName; ?>)</div>
 					    			<div class="rate-info">
@@ -398,7 +405,9 @@ $eventPriceFormatted = (!empty($event->price)) ? asRupees($event->price) : 0;
 				    	<div class="ticket-footer">			    	
 					    	<div class="row">  
 						        <div class="steps-form-footer">
-						        	<button class="btn nextBtn-2 float-right" type="button">Checkout</button>
+									<?php
+										echo $this->Form->button('Checkout', ['type' => 'submit', 'class' => 'btn nextBtn-2 float-right']);
+									?>
 						        	<a href="javascript:;" class="tic-close-btn" data-dismiss="modal">Cancel</a>
 						    	</div>
 					    	</div>
@@ -450,7 +459,9 @@ $eventPriceFormatted = (!empty($event->price)) ? asRupees($event->price) : 0;
 					    	<div class="row">  
 						        <div class="steps-form-footer">
 						        	<button class="btn btn-sm btn-back prevBtn-2 float-left" type="button">Back</button>
-						        	<button class="btn nextBtn-2 float-right" type="button">Checkout</button>
+									<?php
+										echo $this->Form->button('Checkout', ['type' => 'submit', 'class' => 'btn nextBtn-2 float-right']);
+									?>
 						        	<a href="javascript:;" class="tic-close-btn" data-dismiss="modal">Cancel</a>
 						    	</div>
 					    	</div>
@@ -508,7 +519,9 @@ $eventPriceFormatted = (!empty($event->price)) ? asRupees($event->price) : 0;
 					    	<div class="row">  
 						        <div class="steps-form-footer">
 						        	<button class="btn btn-sm btn-back prevBtn-2 float-left" type="button">Back</button>
-						        	<button class="btn nextBtn-2 float-right" type="button">Checkout</button>
+									<?php
+										echo $this->Form->button('Checkout', ['type' => 'submit', 'class' => 'btn nextBtn-2 float-right']);
+									?>
 						        	<a href="javascript:;" class="tic-close-btn" data-dismiss="modal">Cancel</a>
 						    	</div>
 					    	</div>
@@ -545,7 +558,10 @@ $eventPriceFormatted = (!empty($event->price)) ? asRupees($event->price) : 0;
 	 <!-- <p>Ticket Price: Rs. <?= h($event->price) ?>/-
 	Commission Amount: Rs. <?= h($event->commamount) ?>/- 
 	 Settlement Amount: Rs.<?= h($event->settamount) ?>/-</p>
-	 --><?= $this->Form->create('',array('url' => ['controller' => 'Events', 'action' => 'activate',$event->id]));?>
+	 -->
+	 
+	 
+	 <?= $this->Form->create('',array('url' => ['controller' => 'Events', 'action' => 'activate',$event->id]));?>
 	<?= $this->Form->radio('active', ['DeActivate','Activate']);?>
 	<?= $this->Form->button(__('Submit')); ?>
 	<?= $this->Form->end() ?>

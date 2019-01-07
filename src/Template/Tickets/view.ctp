@@ -1,120 +1,23 @@
-<nav class="large-3 medium-4 columns" id="actions-sidebar" style="display: none;">
+<nav class="large-3 medium-4 columns" id="actions-sidebar">
     <ul class="side-nav">
         <li class="heading"><?= __('Actions') ?></li>
+        <li><?= $this->Html->link(__('Edit Ticket'), ['action' => 'edit', $ticket->id]) ?> </li>
         <li><?= $this->Form->postLink(__('Delete Ticket'), ['action' => 'delete', $ticket->id], ['confirm' => __('Are you sure you want to delete # {0}?', $ticket->id)]) ?> </li>
         <li><?= $this->Html->link(__('List Tickets'), ['action' => 'index']) ?> </li>
-        
+        <li><?= $this->Html->link(__('New Ticket'), ['action' => 'add']) ?> </li>
+        <li><?= $this->Html->link(__('List Orders'), ['controller' => 'Orders', 'action' => 'index']) ?> </li>
+        <li><?= $this->Html->link(__('New Order'), ['controller' => 'Orders', 'action' => 'add']) ?> </li>
+        <li><?= $this->Html->link(__('List Events'), ['controller' => 'Events', 'action' => 'index']) ?> </li>
+        <li><?= $this->Html->link(__('New Event'), ['controller' => 'Events', 'action' => 'add']) ?> </li>
     </ul>
 </nav>
-
-<div class="block-header">
-    <h2><?= __('SubCategories') ?></h2>
-</div>
-<!-- Basic Table -->
-<div class="row clearfix">
-    <div class="col-lg-12 col-md-12 col-sm-12 col-xs-12">
-        <div class="card">
-            <div class="header">
-                <h2>
-                    Ticket Details
-                </h2>
-            </div>
-            <div class="body table-responsive">
-                <table class="table table-bordered table-striped table-hover vertical-table">
-                    <thead>
-                        <tr>
-                            <th scope="row"><?= __('Event') ?></th>
-                            <th scope="row"><?= __('Firstname') ?></th>
-                            <th scope="row"><?= __('Lastname') ?></th>
-                            <th scope="row"><?= __('Name') ?></th>
-                            <th scope="row"><?= __('Email') ?></th>
-                            <th scope="row"><?= __('Service Provider') ?></th>
-                            <th scope="row"><?= __('Productinfo') ?></th>
-                            <th scope="row"><?= __('Phone') ?></th>
-                            <th scope="row"><?= __('Tickets') ?></th>
-                            <th scope="row"><?= __('Txnid') ?></th>
-                            <th scope="row"><?= __('Hash') ?></th>
-                            <th scope="row"><?= __('Amount') ?></th>
-                            <th scope="row"><?= __('Status') ?></th>
-                            <th scope="row"><?= __('Unmappedstatus') ?></th>
-                            <th scope="row"><?= __('Field9') ?></th>
-                            <th scope="row"><?= __('Bank Ref Num') ?></th>
-                        </tr>
-                    </thead>
-                    <tbody>
-                            <tr>
-                                <td><?= $ticket->has('event') ? $this->Html->link($ticket->event->title, ['controller' => 'Events', 'action' => 'view', $ticket->event->id]) : '' ?></td>
-                                <td><?= h($ticket->firstname) ?></td>
-                                <td><?= h($ticket->lastname) ?></td>
-                                <td><?= h($ticket->name) ?></td>
-                                <td><?= h($ticket->email) ?></td>
-                                <td><?= h($ticket->service_provider) ?></td>
-                                <td><?= h($ticket->productinfo) ?></td>
-                                <td><?= h($ticket->phone) ?></td>
-                                <td><?= h($ticket->tickets) ?></td>
-                                <td><?= h($ticket->txnid) ?></td>
-                                <td><?= h($ticket->hash) ?></td>
-                                <td><?= h($ticket->amount) ?></td>
-                                <td><?= h($ticket->status) ?></td>
-                                <td><?= h($ticket->unmappedstatus) ?></td>
-                                <td><?= h($ticket->field9) ?></td>
-                                <td><?= h($ticket->bank_ref_num) ?></td>
-                            </tr>
-                    </tbody>
-                </table>
-                <!-- <div class="paginator">
-                    <ul class="pagination">
-                    <?= $this->Paginator->prev('< ' . __('previous')) ?>
-                    <?= $this->Paginator->numbers() ?>
-                    <?= $this->Paginator->next(__('next') . ' >') ?>
-                    </ul>
-                    <p><?= $this->Paginator->counter() ?></p>
-                </div>  -->
-            </div>
-            <div class="body table-responsive">
-                <table class="table table-bordered table-striped table-hover js-basic-example dataTable vertical-table">
-                    <thead>
-                        <tr>
-                             <th scope="col"><?= __('FirstName') ?></th>
-                            <th scope="col"><?= __('LastName') ?></th>
-                            <th scope="col"><?= __('Email') ?></th>
-                            <th scope="col"><?= __('Phone') ?></th>
-                            <th scope="col"><?= __('TSHIRT') ?></th>
-                            <th scope="col"><?= __('KM') ?></th>
-                            <th scope="col" class="actions"><?= __('Actions') ?></th>
-                        </tr>
-                    </thead>
-                    <tbody>
-                            <?php foreach ($marathons as $marathon): ?>
-                    <tr>
-                        <td><?= h($marathon->firstname) ?></td>
-                        <td><?= h($marathon->lastname) ?></td>
-                        <td><?= h($marathon->email) ?></td>
-                        <td><?= h($marathon->phone) ?></td>
-                        <td><?= h($marathon->TSHIRT) ?></td>
-                        <td><?= h($marathon->KM) ?></td>
-                        <td class="actions">
-                            <?= $this->Html->link(__('View'), ['controller' => 'Marathonbooking','action' => 'view', $marathon->id]) ?>
-                        </td>
-                    </tr>
-                    <?php endforeach; ?>
-                    </tbody>
-                </table>
-                <!-- <div class="paginator">
-                    <ul class="pagination">
-                    <?= $this->Paginator->prev('< ' . __('previous')) ?>
-                    <?= $this->Paginator->numbers() ?>
-                    <?= $this->Paginator->next(__('next') . ' >') ?>
-                    </ul>
-                    <p><?= $this->Paginator->counter() ?></p>
-                </div>  -->
-            </div>
-        </div>
-    </div>
-</div>
-<!-- <div class="tickets view large-9 medium-8 columns content">
+<div class="tickets view large-9 medium-8 columns content">
     <h3><?= h($ticket->name) ?></h3>
     <table class="vertical-table">
+        <tr>
+            <th scope="row"><?= __('Order') ?></th>
+            <td><?= $ticket->has('order') ? $this->Html->link($ticket->order->ID, ['controller' => 'Orders', 'action' => 'view', $ticket->order->ID]) : '' ?></td>
+        </tr>
         <tr>
             <th scope="row"><?= __('Event') ?></th>
             <td><?= $ticket->has('event') ? $this->Html->link($ticket->event->title, ['controller' => 'Events', 'action' => 'view', $ticket->event->id]) : '' ?></td>
@@ -148,8 +51,32 @@
             <td><?= h($ticket->phone) ?></td>
         </tr>
         <tr>
+            <th scope="row"><?= __('TicketName') ?></th>
+            <td><?= h($ticket->ticketName) ?></td>
+        </tr>
+        <tr>
+            <th scope="row"><?= __('TicketType') ?></th>
+            <td><?= h($ticket->ticketType) ?></td>
+        </tr>
+        <tr>
+            <th scope="row"><?= __('CommissionPer') ?></th>
+            <td><?= h($ticket->commissionPer) ?></td>
+        </tr>
+        <tr>
+            <th scope="row"><?= __('CommissionAmt') ?></th>
+            <td><?= h($ticket->commissionAmt) ?></td>
+        </tr>
+        <tr>
             <th scope="row"><?= __('Tickets') ?></th>
             <td><?= h($ticket->tickets) ?></td>
+        </tr>
+        <tr>
+            <th scope="row"><?= __('EachPrice') ?></th>
+            <td><?= h($ticket->eachPrice) ?></td>
+        </tr>
+        <tr>
+            <th scope="row"><?= __('CommissionTotal') ?></th>
+            <td><?= h($ticket->commissionTotal) ?></td>
         </tr>
         <tr>
             <th scope="row"><?= __('Txnid') ?></th>
@@ -180,35 +107,8 @@
             <td><?= h($ticket->bank_ref_num) ?></td>
         </tr>
         <tr>
-            <table cellpadding="0" cellspacing="0">
-                <thead>
-                    <tr>
-                        <th scope="col"><?= __('FirstName') ?></th>
-                        <th scope="col"><?= __('LastName') ?></th>
-                        <th scope="col"><?= __('Email') ?></th>
-                        <th scope="col"><?= __('Phone') ?></th>
-                        <th scope="col"><?= __('TSHIRT') ?></th>
-                        <th scope="col"><?= __('KM') ?></th>
-                        <th scope="col" class="actions"><?= __('Actions') ?></th>
-                    </tr>
-                </thead>
-                <tbody>
-                     <?php foreach ($marathons as $marathon): ?>
-                    <tr>
-                        <td><?= h($marathon->firstname) ?></td>
-                        <td><?= h($marathon->lastname) ?></td>
-                        <td><?= h($marathon->email) ?></td>
-                        <td><?= h($marathon->phone) ?></td>
-                        <td><?= h($marathon->TSHIRT) ?></td>
-                        <td><?= h($marathon->KM) ?></td>
-                        <td class="actions">
-                            <?= $this->Html->link(__('View'), ['controller' => 'Marathonbooking','action' => 'view', $marathon->id]) ?>
-                        </td>
-                    </tr>
-                    <?php endforeach; ?>
-                </tbody>
-            </table>
-                 
+            <th scope="row"><?= __('Id') ?></th>
+            <td><?= $this->Number->format($ticket->id) ?></td>
         </tr>
         <tr>
             <th scope="row"><?= __('Created') ?></th>
@@ -216,4 +116,3 @@
         </tr>
     </table>
 </div>
- -->

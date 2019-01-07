@@ -42,9 +42,9 @@ class EventsController extends AppController
 
         parent::beforeFilter($event);
 
-        $this->Auth->allow(['Invitation','about','terms','privacy','partnerwith','contact','thebigbeachmarathon', 'index', 'eventlist','View','viewresult','searchbyeventtitle','search','chennai','findslug', 'demolist','category']);
+        $this->Auth->allow(['Invitation', 'about', 'terms', 'privacy', 'partnerwith', 'contact', 'thebigbeachmarathon', 'index', 'eventlist', 'View', 'viewresult', 'searchbyeventtitle', 'search', 'chennai', 'findslug', 'demolist', 'category']);
 
-        $this->set('Photo',$this->Auth->user('Photo'));
+        $this->set('Photo', $this->Auth->user('Photo'));
 
     }
 
@@ -62,7 +62,8 @@ class EventsController extends AppController
 
      */
 
-    public function about(){
+    public function about()
+    {
 
         $this->viewBuilder()->layout('event_new_home');
 
@@ -72,7 +73,8 @@ class EventsController extends AppController
 
 
 
-    public function terms(){
+    public function terms()
+    {
 
         $this->viewBuilder()->layout('event_new_home');
 
@@ -80,7 +82,8 @@ class EventsController extends AppController
 
 
 
-    public function privacy(){
+    public function privacy()
+    {
 
         $this->viewBuilder()->layout('event_new_home');
 
@@ -88,7 +91,8 @@ class EventsController extends AppController
 
 
 
-    public function partnerwith(){
+    public function partnerwith()
+    {
 
         $this->viewBuilder()->layout('event_new_home');
 
@@ -96,7 +100,8 @@ class EventsController extends AppController
 
 
 
-    public function contact(){
+    public function contact()
+    {
 
         $this->viewBuilder()->layout('event_new_home');
 
@@ -106,19 +111,19 @@ class EventsController extends AppController
 
 
 
-    public function index($query=null)
+    public function index($query = null)
 
     {
 
         $this->loadModel('Groups');
 
-        $groups = $this->Groups->find('list', ['limit' => 200,'conditions' => array('role' => 'Users')]);
+        $groups = $this->Groups->find('list', ['limit' => 200, 'conditions' => array('role' => 'Users')]);
 
         $this->set(compact('user', 'groups'));
 
         $logged = false;
 
-        if($this->Auth->user())
+        if ($this->Auth->user())
 
             $logged = true;
 
@@ -130,8 +135,6 @@ class EventsController extends AppController
 
         $this->viewBuilder()->layout('event_new_home');
 
-
-
         $this->loadModel('Categories');
 
         $categories_new = $this->Categories->find()->select(['Categories.name', 'Categories.id', 'Categories.card'])
@@ -142,11 +145,12 @@ class EventsController extends AppController
 
         $this->loadModel('SubCategories');
 
-        $subCategories_new = $this->SubCategories->find('all', ['fields' => 'name',
+        $subCategories_new = $this->SubCategories->find('all', [
+            'fields' => 'name',
 
-                'conditions' => ['active' => 1]
+            'conditions' => ['active' => 1]
 
-            ]);
+        ]);
 
 
 
@@ -166,7 +170,7 @@ class EventsController extends AppController
 
         $this->loadModel('UserProfile');
 
-        $userProfile = $this->UserProfile->find()->select(['UserProfile.userid', 'UserProfile.Photo','UserProfile.id']);
+        $userProfile = $this->UserProfile->find()->select(['UserProfile.userid', 'UserProfile.Photo', 'UserProfile.id']);
 
 
 
@@ -230,7 +234,8 @@ class EventsController extends AppController
 
      */
 
-    public function category($id = null) {
+    public function category($id = null)
+    {
 
         $this->viewBuilder()->layout('event_new_home');
 
@@ -240,7 +245,7 @@ class EventsController extends AppController
 
         $this->loadModel('UserProfile');
 
-        $userProfile = $this->UserProfile->find()->select(['UserProfile.userid', 'UserProfile.Photo','UserProfile.id']);
+        $userProfile = $this->UserProfile->find()->select(['UserProfile.userid', 'UserProfile.Photo', 'UserProfile.id']);
 
 
 
@@ -254,7 +259,7 @@ class EventsController extends AppController
 
         $this->loadModel('SubCategories');
 
-        $subCategories_new = $this->SubCategories->find('all', ['fields' => 'name', 'conditions' => ['active' => 1] ]);
+        $subCategories_new = $this->SubCategories->find('all', ['fields' => 'name', 'conditions' => ['active' => 1]]);
 
 
 
@@ -268,7 +273,7 @@ class EventsController extends AppController
 
 
 
-        $categoryDetailQry = "SELECT c.* FROM categories c WHERE c.id = ".$id;
+        $categoryDetailQry = "SELECT c.* FROM categories c WHERE c.id = " . $id;
 
         $categoryDetailStmt = $tcConn->execute($categoryDetailQry);
 
@@ -276,7 +281,7 @@ class EventsController extends AppController
 
 
 
-        $subCategoriesQry = "SELECT sc.* FROM sub_categories sc WHERE sc.categories_id = ".$id;
+        $subCategoriesQry = "SELECT sc.* FROM sub_categories sc WHERE sc.categories_id = " . $id;
 
         $subCategoriesStmt = $tcConn->execute($subCategoriesQry);
 
@@ -314,9 +319,7 @@ class EventsController extends AppController
 
         ];
 
-        if(!empty($this->Auth->user('id')))
-
-        {
+        if (!empty($this->Auth->user('id'))) {
 
             $users_id = $this->Auth->user('id');
 
@@ -378,11 +381,12 @@ class EventsController extends AppController
 
         $this->loadModel('SubCategories');
 
-        $subCategories_new = $this->SubCategories->find('all', ['fields' => 'name',
+        $subCategories_new = $this->SubCategories->find('all', [
+            'fields' => 'name',
 
-                'conditions' => ['active' => 1]
+            'conditions' => ['active' => 1]
 
-            ]);
+        ]);
 
 
 
@@ -410,11 +414,11 @@ class EventsController extends AppController
 
         $this->paginate = [
 
-            'contain' => ['Users', 'Categories',]
+            'contain' => ['Users', 'Categories', ]
 
         ];
 
-         $events = $this->paginate($this->Events->find('all',['limit' => 200, 'conditions' => array('register_online'=> 1 )]));
+        $events = $this->paginate($this->Events->find('all', ['limit' => 200, 'conditions' => array('register_online' => 1)]));
 
         // $events = $this->Events->find('all',array('conditions'=>array('register_online'=> 1)));
 
@@ -430,11 +434,12 @@ class EventsController extends AppController
 
         $this->loadModel('SubCategories');
 
-        $subCategories_new = $this->SubCategories->find('all', ['fields' => 'name',
+        $subCategories_new = $this->SubCategories->find('all', [
+            'fields' => 'name',
 
-                'conditions' => ['active' => 1]
+            'conditions' => ['active' => 1]
 
-            ]);
+        ]);
 
         $this->loadModel('Address');
 
@@ -444,13 +449,13 @@ class EventsController extends AppController
 
         foreach ($events as $event) {
 
-             $address= $this->Address->find('all', array('conditions' => array('events_id'=> $event['id'])));
+            $address = $this->Address->find('all', array('conditions' => array('events_id' => $event['id'])));
 
-             $event['Address'] = $address->first();
+            $event['Address'] = $address->first();
 
-             $eventss[$i] =$event;
+            $eventss[$i] = $event;
 
-             $i++;
+            $i++;
 
         }
 
@@ -480,7 +485,7 @@ class EventsController extends AppController
 
     {
 
-       
+
 
         $this->request->allowMethod(['post', 'addticketing']);
 
@@ -516,9 +521,7 @@ class EventsController extends AppController
 
         ];
 
-        if(!empty($this->Auth->user('id')))
-
-        {
+        if (!empty($this->Auth->user('id'))) {
 
             $users_id = $this->Auth->user('id');
 
@@ -580,11 +583,12 @@ class EventsController extends AppController
 
         $this->loadModel('SubCategories');
 
-        $subCategories_new = $this->SubCategories->find('all', ['fields' => 'name',
+        $subCategories_new = $this->SubCategories->find('all', [
+            'fields' => 'name',
 
-                'conditions' => ['active' => 1]
+            'conditions' => ['active' => 1]
 
-            ]);
+        ]);
 
 
 
@@ -614,9 +618,7 @@ class EventsController extends AppController
 
         $this->viewBuilder()->layout('admin');
 
-        if(!empty($this->Auth->user('id')))
-
-        {
+        if (!empty($this->Auth->user('id'))) {
 
             $users_id = $this->Auth->user('id');
 
@@ -632,7 +634,7 @@ class EventsController extends AppController
 
         $filter = false;
 
-          $events = $this->paginate($this->Events->find('all',['limit' => 200, 'conditions' => array('register_online'=> 1 )]));
+        $events = $this->paginate($this->Events->find('all', ['limit' => 200, 'conditions' => array('register_online' => 1)]));
 
         $this->loadModel('Categories');
 
@@ -644,11 +646,12 @@ class EventsController extends AppController
 
         $this->loadModel('SubCategories');
 
-        $subCategories_new = $this->SubCategories->find('all', ['fields' => 'name',
+        $subCategories_new = $this->SubCategories->find('all', [
+            'fields' => 'name',
 
-                'conditions' => ['active' => 1]
+            'conditions' => ['active' => 1]
 
-            ]);
+        ]);
 
         $this->loadModel('Address');
 
@@ -658,13 +661,13 @@ class EventsController extends AppController
 
         foreach ($events as $event) {
 
-             $address= $this->Address->find('all', array('conditions' => array('events_id'=> $event['id'])));
+            $address = $this->Address->find('all', array('conditions' => array('events_id' => $event['id'])));
 
-             $event['Address'] = $address->first();
+            $event['Address'] = $address->first();
 
-             $eventss[$i] =$event;
+            $eventss[$i] = $event;
 
-             $i++;
+            $i++;
 
         }
 
@@ -688,9 +691,9 @@ class EventsController extends AppController
 
     }
 
-   
 
-public function organizerevents()
+
+    public function organizerevents()
 
     {
 
@@ -700,9 +703,7 @@ public function organizerevents()
 
         ];
 
-        if(!empty($this->Auth->user('id')))
-
-        {
+        if (!empty($this->Auth->user('id'))) {
 
             $users_id = $this->Auth->user('id');
 
@@ -718,17 +719,18 @@ public function organizerevents()
 
         $filter = false;
 
-         $keyword = $this->request->query('keyword');
+        $keyword = $this->request->query('keyword');
 
-        if(!empty($keyword)){
+        if (!empty($keyword)) {
 
 
 
-            $this->paginate = ['conditions'=> array("OR" => array(
+            $this->paginate = ['conditions' => array("OR" => array(
 
-    'title LiKE' => '%'.$keyword.'%',
+                'title LiKE' => '%' . $keyword . '%',
 
-    'date LiKE' => '%'.$keyword.'%','time LiKE' => '%'.$keyword.'%', 'todate LiKE' => '%'.$keyword.'%','totime LiKE' => '%'.$keyword.'%','OrganizersName LiKE' => '%'.$keyword.'%' ))];
+                'date LiKE' => '%' . $keyword . '%', 'time LiKE' => '%' . $keyword . '%', 'todate LiKE' => '%' . $keyword . '%', 'totime LiKE' => '%' . $keyword . '%', 'OrganizersName LiKE' => '%' . $keyword . '%'
+            ))];
 
         //$this->paginate = ['conditions'=>['date LiKE' => '%'.$keyword.'%']];
 
@@ -780,17 +782,18 @@ public function organizerevents()
 
         $this->loadModel('SubCategories');
 
-        $subCategories_new = $this->SubCategories->find('all', ['fields' => 'name',
+        $subCategories_new = $this->SubCategories->find('all', [
+            'fields' => 'name',
 
-                'conditions' => ['active' => 1]
+            'conditions' => ['active' => 1]
 
-            ]);
+        ]);
 
- $page = (isset($this->request->query['page'])) ? $this->request->query['page'] : 0;
+        $page = (isset($this->request->query['page'])) ? $this->request->query['page'] : 0;
 
         $this->set(compact('page'));
 
-       
+
 
         $this->set('categories', $categories_new);
 
@@ -820,9 +823,7 @@ public function organizerevents()
 
 
 
-        if(!empty($this->Auth->user('id')))
-
-        {
+        if (!empty($this->Auth->user('id'))) {
 
             $users_id = $this->Auth->user('id');
 
@@ -834,9 +835,7 @@ public function organizerevents()
 
         }
 
-        if(!empty($likes))
-
-        {
+        if (!empty($likes)) {
 
             foreach ($likes as $key => $value) {
 
@@ -894,11 +893,12 @@ public function organizerevents()
 
         $this->loadModel('SubCategories');
 
-        $subCategories_new = $this->SubCategories->find('all', ['fields' => 'name',
+        $subCategories_new = $this->SubCategories->find('all', [
+            'fields' => 'name',
 
-                'conditions' => ['active' => 1]
+            'conditions' => ['active' => 1]
 
-            ]);
+        ]);
 
 
 
@@ -938,9 +938,7 @@ public function organizerevents()
 
 
 
-        if($id == null)
-
-        {
+        if ($id == null) {
 
             $event_val = $this->Events->findBySlug($slug, [
 
@@ -962,9 +960,7 @@ public function organizerevents()
 
         $u_id = "";
 
-        if(!empty($this->Auth->user('id')))
-
-        {
+        if (!empty($this->Auth->user('id'))) {
 
             $u_id = $this->Auth->user('id');
 
@@ -1000,9 +996,11 @@ public function organizerevents()
 
         $likes = $this->Likes->find('all', ['conditions' => ['events_id' => $id]]);
 
-        $query = $this->Likes->find('all', ['select' => 'id',
+        $query = $this->Likes->find('all', [
+            'select' => 'id',
 
-                'conditions' => ['events_id' => $id]]);
+            'conditions' => ['events_id' => $id]
+        ]);
 
         $number = $query->count();
 
@@ -1024,11 +1022,12 @@ public function organizerevents()
 
         $this->loadModel('SubCategories');
 
-        $subCategories_new = $this->SubCategories->find('all', ['fields' => 'name',
+        $subCategories_new = $this->SubCategories->find('all', [
+            'fields' => 'name',
 
-                'conditions' => ['active' => 1]
+            'conditions' => ['active' => 1]
 
-                    ]);
+        ]);
 
 
 
@@ -1042,7 +1041,7 @@ public function organizerevents()
 
 
 
-/**
+    /**
 
      * View method
 
@@ -1064,9 +1063,7 @@ public function organizerevents()
 
 
 
-        if($id == null)
-
-        {
+        if ($id == null) {
 
             $event_val = $this->Events->findBySlug($slug, [
 
@@ -1088,9 +1085,7 @@ public function organizerevents()
 
         $u_id = "";
 
-        if(!empty($this->Auth->user('id')))
-
-        {
+        if (!empty($this->Auth->user('id'))) {
 
             $u_id = $this->Auth->user('id');
 
@@ -1126,9 +1121,11 @@ public function organizerevents()
 
         $likes = $this->Likes->find('all', ['conditions' => ['events_id' => $id]]);
 
-        $query = $this->Likes->find('all', ['select' => 'id',
+        $query = $this->Likes->find('all', [
+            'select' => 'id',
 
-                'conditions' => ['events_id' => $id]]);
+            'conditions' => ['events_id' => $id]
+        ]);
 
         $number = $query->count();
 
@@ -1150,11 +1147,12 @@ public function organizerevents()
 
         $this->loadModel('SubCategories');
 
-        $subCategories_new = $this->SubCategories->find('all', ['fields' => 'name',
+        $subCategories_new = $this->SubCategories->find('all', [
+            'fields' => 'name',
 
-                'conditions' => ['active' => 1]
+            'conditions' => ['active' => 1]
 
-                    ]);
+        ]);
 
 
 
@@ -1196,9 +1194,7 @@ public function organizerevents()
 
         $this->viewBuilder()->layout('event_new_home');
 
-        if(!ctype_digit($id))
-
-        {
+        if (!ctype_digit($id)) {
 
             $slug = $id;
 
@@ -1206,11 +1202,9 @@ public function organizerevents()
 
         }
 
-        if($id == null)
+        if ($id == null) {
 
-        {
-
-            $event_val = $this->Events->find('all', ['conditions' => array('slug'=>$slug,'active' => '1')],[
+            $event_val = $this->Events->find('all', ['conditions' => array('slug' => $slug, 'active' => '1')], [
 
                 'contain' => ['Users', 'Categories'],
 
@@ -1221,7 +1215,6 @@ public function organizerevents()
             $id = $event_val['id'];
 
         }
-
         $event = $this->Events->get($id, [
 
             'contain' => ['Users', 'Categories']
@@ -1232,9 +1225,7 @@ public function organizerevents()
 
         $u_id = "";
 
-        if(!empty($this->Auth->user('id')))
-
-        {
+        if (!empty($this->Auth->user('id'))) {
 
             $u_id = $this->Auth->user('id');
 
@@ -1244,7 +1235,7 @@ public function organizerevents()
 
         }
 
-        
+
 
         $this->loadModel('Address');
 
@@ -1260,31 +1251,32 @@ public function organizerevents()
         // $this->set(compact('medialists','medialist'));
         // $this->set('_serialize', ['medialists']);
         // $this->set('_serialize', ['medialist']);
-         $this->loadModel('Mediapartners');
-        $medialist= $this->paginate['conditions'] = array('Mediapartners.events_id' => $id);
+        $this->loadModel('Mediapartners');
+        $medialist = $this->paginate['conditions'] = array('Mediapartners.events_id' => $id);
         $medialists = $this->paginate($this->Mediapartners);
-        $this->set(compact('medialists','medialist'));
+        $this->set(compact('medialists', 'medialist'));
         $this->set('_serialize', ['medialists']);
         $this->set('_serialize', ['medialist']);
         $this->loadModel('Sponsors');
-        $sponsorlist= $this->paginate['conditions'] = array('Sponsors.events_id' => $id);
+        $sponsorlist = $this->paginate['conditions'] = array('Sponsors.events_id' => $id);
         $sponsorlists = $this->paginate($this->Sponsors);
-        $this->set(compact('sponsorlists','sponsorlist'));
+        $this->set(compact('sponsorlists', 'sponsorlist'));
         $this->set('_serialize', ['sponsorlists']);
         $this->set('_serialize', ['sponsorlist']);
 
         $this->loadModel('Bookingonline');
-        $booklist= $this->paginate['conditions'] = array('Bookingonline.events_id' => $id,'Bookingonline.status' => 1,'Bookingonline.enddate >'=>date("Y-m-d"));
+        $booklist = $this->paginate['conditions'] = array('Bookingonline.events_id' => $id, 'Bookingonline.status' => 1, 'Bookingonline.enddate >=' => date("Y-m-d"));
         $booklists = $this->paginate($this->Bookingonline);
-        $this->set(compact('booklists','booklist'));
+
+        $this->set(compact('booklists', 'booklist'));
         $this->set('_serialize', ['booklists']);
         $this->set('_serialize', ['booklist']);
         $Bookingonline = $this->loadModel('Bookingonline');
-$query = $Bookingonline->query();
-            $result = $query->update()
-                    ->set(['status' => '2'])
-                    ->where(['enddate <' => date("Y-m-d")])
-                    ->execute();
+        $query = $Bookingonline->query();
+        $result = $query->update()
+            ->set(['status' => '2'])
+            ->where(['enddate <' => date("Y-m-d")])
+            ->execute();
         $this->loadModel('Galaries');
 
         $galaries = $this->Galaries->find('all', ['conditions' => ['events_id' => $id]]);
@@ -1293,9 +1285,11 @@ $query = $Bookingonline->query();
 
         $likes = $this->Likes->find('all', ['conditions' => ['events_id' => $id]]);
 
-        $query = $this->Likes->find('all', ['select' => 'id',
+        $query = $this->Likes->find('all', [
+            'select' => 'id',
 
-                'conditions' => ['events_id' => $id]]);
+            'conditions' => ['events_id' => $id]
+        ]);
 
         $number = $query->count();
 
@@ -1304,8 +1298,7 @@ $query = $Bookingonline->query();
         $this->set('event', $event);
 
         $this->set('_serialize', ['event']);
-
-
+        $this->set('events_id', $id);
 
         $this->loadModel('Categories');
 
@@ -1317,11 +1310,12 @@ $query = $Bookingonline->query();
 
         $this->loadModel('SubCategories');
 
-        $subCategories_new = $this->SubCategories->find('all', ['fields' => 'name',
+        $subCategories_new = $this->SubCategories->find('all', [
+            'fields' => 'name',
 
-                'conditions' => ['active' => 1]
+            'conditions' => ['active' => 1]
 
-                    ]);
+        ]);
 
 
 
@@ -1364,25 +1358,21 @@ $query = $Bookingonline->query();
     {
 
 
-          if($this->Auth->user('group_id') == 1)
+        if ($this->Auth->user('group_id') == 1) {
 
-        {
+            $this->loadModel('Users');
 
-           $this->loadModel('Users');
+            $users_id = $this->Auth->user('id');
 
-         $users_id = $this->Auth->user('id');
-
-           $this->Users->updateAll(['group_id' => '2'], ['id' => $users_id]);
+            $this->Users->updateAll(['group_id' => '2'], ['id' => $users_id]);
 
             $this->Flash->success(__('Now, You are a Event Organizer.'));
 
         }
 
-         
 
-        if(!empty($this->Auth->user('id')))
 
-        {
+        if (!empty($this->Auth->user('id'))) {
 
             $users_id = $this->Auth->user('id');
 
@@ -1428,31 +1418,25 @@ $query = $Bookingonline->query();
 
             /////////////////////////////////////////////////////////////////////////
 
-            if(!empty($this->request->data['Mediapartners']))
+            if (!empty($this->request->data['Mediapartners'])) {
 
-            {
+                $error = array();
 
-                $error=array();
+                $extension = array("jpeg", "jpg", "png", "gif");
 
-                $extension=array("jpeg","jpg","png","gif");
+                foreach ($this->request->data['Mediapartners'] as $key => $tmp_name) {
 
-                foreach($this->request->data['Mediapartners'] as $key=>$tmp_name)
+                    $file_name = $this->request->data['Mediapartners'][$key]["name"];
 
-                {
+                    $file_tmp = $this->request->data['Mediapartners'][$key]["tmp_name"];
 
-                    $file_name=$this->request->data['Mediapartners'][$key]["name"];
+                    $ext = pathinfo($file_name, PATHINFO_EXTENSION);
 
-                    $file_tmp=$this->request->data['Mediapartners'][$key]["tmp_name"];
-
-                    $ext=pathinfo($file_name,PATHINFO_EXTENSION);
-
-                    if(in_array($ext,$extension))
-
-                    {
+                    if (in_array($ext, $extension)) {
 
                         $uploadFolder = WWW_ROOT . 'img/Mediapartners';
 
-                        if( !file_exists($uploadFolder) ){
+                        if (!file_exists($uploadFolder)) {
 
                             mkdir($uploadFolder);
 
@@ -1466,37 +1450,27 @@ $query = $Bookingonline->query();
 
                         //move_uploaded_file($file_tmp=$this->request->data['Mediapartners'][$key]["tmp_name"], WWW_ROOT . 'img/Mediapartners' . DS . $filename);
 
-                        if(!file_exists(WWW_ROOT . 'img/Mediapartners' . DS . $filename))
+                        if (!file_exists(WWW_ROOT . 'img/Mediapartners' . DS . $filename)) {
 
-                        {
-
-                            move_uploaded_file($file_tmp=$this->request->data['Mediapartners'][$key]["tmp_name"], WWW_ROOT . 'img/Mediapartners' . DS . $filename);
+                            move_uploaded_file($file_tmp = $this->request->data['Mediapartners'][$key]["tmp_name"], WWW_ROOT . 'img/Mediapartners' . DS . $filename);
 
                             $this->request->data['Mediapartners'][$key]["name"] = $filename;
 
-                        }
+                        } else {
 
-                        else
+                            $filename = basename($file_name, $ext);
 
-                        {
+                            $newFileName = $filename . time() . "." . $ext;
 
-                            $filename=basename($file_name,$ext);
-
-                            $newFileName=$filename.time().".".$ext;
-
-                            move_uploaded_file($file_tmp=$this->request->data['Mediapartners'][$key]["tmp_name"], WWW_ROOT . 'img/Mediapartners' . DS . $newFileName);
+                            move_uploaded_file($file_tmp = $this->request->data['Mediapartners'][$key]["tmp_name"], WWW_ROOT . 'img/Mediapartners' . DS . $newFileName);
 
                             $this->request->data['Mediapartners'][$key]["name"] = $newFileName;
 
                         }
 
-                    }
+                    } else {
 
-                    else
-
-                    {
-
-                        array_push($error,"$file_name, ");
+                        array_push($error, "$file_name, ");
 
                     }
 
@@ -1508,69 +1482,53 @@ $query = $Bookingonline->query();
 
             //////////////////////////////////////////////////////////////////////////////////////////////////
 
-            if(!empty($this->request->data['Sponsors']))
+            if (!empty($this->request->data['Sponsors'])) {
 
-            {
+                $error = array();
 
-                $error=array();
+                $extension = array("jpeg", "jpg", "png", "gif");
 
-                $extension=array("jpeg","jpg","png","gif");
+                foreach ($this->request->data['Sponsors'] as $key => $tmp_name) {
 
-                foreach($this->request->data['Sponsors'] as $key=>$tmp_name)
+                    $file_name = $this->request->data['Sponsors'][$key]["name"];
 
-                {
+                    $file_tmp = $this->request->data['Sponsors'][$key]["tmp_name"];
 
-                    $file_name=$this->request->data['Sponsors'][$key]["name"];
+                    $ext = pathinfo($file_name, PATHINFO_EXTENSION);
 
-                    $file_tmp=$this->request->data['Sponsors'][$key]["tmp_name"];
-
-                    $ext=pathinfo($file_name,PATHINFO_EXTENSION);
-
-                    if(in_array($ext,$extension))
-
-                    {
+                    if (in_array($ext, $extension)) {
 
                         $uploadFolder = WWW_ROOT . 'img/Sponsors';
 
-                        if( !file_exists($uploadFolder) ){
+                        if (!file_exists($uploadFolder)) {
 
                             mkdir($uploadFolder);
 
                         }
-                         $filename = str_replace(" ", "-", rand(1, 3000) . $file_name);
+                        $filename = str_replace(" ", "-", rand(1, 3000) . $file_name);
                         //move_uploaded_file($file_tmp=$this->request->data['Mediapartners'][$key]["tmp_name"], WWW_ROOT . 'img/Mediapartners' . DS . $filename);
 
-                        if(!file_exists(WWW_ROOT . 'img/Sponsors' . DS . $filename))
+                        if (!file_exists(WWW_ROOT . 'img/Sponsors' . DS . $filename)) {
 
-                        {
-
-                            move_uploaded_file($file_tmp=$this->request->data['Sponsors'][$key]["tmp_name"], WWW_ROOT . 'img/Sponsors' . DS . $filename);
+                            move_uploaded_file($file_tmp = $this->request->data['Sponsors'][$key]["tmp_name"], WWW_ROOT . 'img/Sponsors' . DS . $filename);
 
                             $this->request->data['Sponsors'][$key]["name"] = $filename;
 
-                        }
+                        } else {
 
-                        else
+                            $filename = basename($file_name, $ext);
 
-                        {
+                            $newFileName = $filename . time() . "." . $ext;
 
-                            $filename=basename($file_name,$ext);
-
-                            $newFileName=$filename.time().".".$ext;
-
-                            move_uploaded_file($file_tmp=$this->request->data['Sponsors'][$key]["tmp_name"], WWW_ROOT . 'img/Sponsors' . DS . $newFileName);
+                            move_uploaded_file($file_tmp = $this->request->data['Sponsors'][$key]["tmp_name"], WWW_ROOT . 'img/Sponsors' . DS . $newFileName);
 
                             $this->request->data['Sponsors'][$key]["name"] = $newFileName;
 
                         }
 
-                    }
+                    } else {
 
-                    else
-
-                    {
-
-                        array_push($error,"$file_name, ");
+                        array_push($error, "$file_name, ");
 
                     }
 
@@ -1588,9 +1546,7 @@ $query = $Bookingonline->query();
 
             //banner Image
 
-            if(!empty($this->request->data['banner']))
-
-            {
+            if (!empty($this->request->data['banner'])) {
 
                 $banner = $this->request->data['banner'];
 
@@ -1600,19 +1556,13 @@ $query = $Bookingonline->query();
 
 
 
-                if($banner['size']/1024 > '2048')
-
-                {
+                if ($banner['size'] / 1024 > '2048') {
 
                     $this->Flash->error(__('"imageLogs", __METHOD__." The uploaded file exceeds the MAX_FILE_SIZE(2MB) '));
 
                     $errCheck = true;
 
-                }
-
-                else if(in_array($ext, $arr_ext))
-
-                {
+                } else if (in_array($ext, $arr_ext)) {
 
                     //do the actual uploading of the file. First arg is the tmp name, second arg is
 
@@ -1620,7 +1570,7 @@ $query = $Bookingonline->query();
 
                     $uploadFolder = WWW_ROOT . 'img/banner';
 
-                    if( !file_exists($uploadFolder) ){
+                    if (!file_exists($uploadFolder)) {
 
                         mkdir($uploadFolder);
 
@@ -1644,9 +1594,7 @@ $query = $Bookingonline->query();
 
 
 
-            if(!empty($this->request->data['display']))
-
-            {
+            if (!empty($this->request->data['display'])) {
 
                 $display = $this->request->data['display'];
 
@@ -1656,19 +1604,13 @@ $query = $Bookingonline->query();
 
 
 
-                if($display['size']/1024 > '2048')
-
-                {
+                if ($display['size'] / 1024 > '2048') {
 
                     $this->Flash->error(__('"imageLogs", __METHOD__." The uploaded file exceeds the MAX_FILE_SIZE(2MB) '));
 
                     $errCheck = true;
 
-                }
-
-                else if(in_array($ext, $arr_ext))
-
-                {
+                } else if (in_array($ext, $arr_ext)) {
 
                     //do the actual uploading of the file. First arg is the tmp name, second arg is
 
@@ -1676,7 +1618,7 @@ $query = $Bookingonline->query();
 
                     $uploadFolder = WWW_ROOT . 'img/display';
 
-                    if( !file_exists($uploadFolder) ){
+                    if (!file_exists($uploadFolder)) {
 
                         mkdir($uploadFolder);
 
@@ -1698,9 +1640,7 @@ $query = $Bookingonline->query();
 
 
 
-            if(!empty($this->request->data['OrganizersLogo']))
-
-            {
+            if (!empty($this->request->data['OrganizersLogo'])) {
 
                 $OrganizersLogo = $this->request->data['OrganizersLogo'];
 
@@ -1710,19 +1650,13 @@ $query = $Bookingonline->query();
 
 
 
-                if($OrganizersLogo['size']/1024 > '2048')
-
-                {
+                if ($OrganizersLogo['size'] / 1024 > '2048') {
 
                     $this->Flash->error(__('"imageLogs", __METHOD__." The uploaded file exceeds the MAX_FILE_SIZE(2MB) '));
 
                     $errCheck = true;
 
-                }
-
-                else if(in_array($ext, $arr_ext))
-
-                {
+                } else if (in_array($ext, $arr_ext)) {
 
                     //do the actual uploading of the file. First arg is the tmp name, second arg is
 
@@ -1730,7 +1664,7 @@ $query = $Bookingonline->query();
 
                     $uploadFolder = WWW_ROOT . 'img/OrganizersLogo';
 
-                    if( !file_exists($uploadFolder) ){
+                    if (!file_exists($uploadFolder)) {
 
                         mkdir($uploadFolder);
 
@@ -1752,45 +1686,34 @@ $query = $Bookingonline->query();
 
 
 
-            if(!is_null($banner))
-
-            {
+            if (!is_null($banner)) {
 
                 $this->request->data['banner'] = $banner;
 
             }
 
-            if(!is_null($display))
-
-            {
+            if (!is_null($display)) {
 
                 $this->request->data['display'] = $display;
 
             }
 
-            if(!is_null($display))
-
-            {
+            if (!is_null($display)) {
 
                 $this->request->data['OrganizersLogo'] = $OrganizersLogo;
 
             }
 
-
-
-
-        if(!empty($this->request->data['date']))
-
-            {
-                $str = $this->request->data['date']; 
-           $date =  str_replace(' ','',$str);
-           $date = explode("-",$date);
-           $date1 = $date[0];
-           $todate = $date[1];
-           $date1 = new Time($date1);
-           $todate = new Time($todate);
-           $this->request->data['date'] =  $date1;
-           $this->request->data['todate'] = $todate;
+            if (!empty($this->request->data['date'])) {
+                $str = $this->request->data['date'];
+                $date = str_replace(' ', '', $str);
+                $date = explode("-", $date);
+                $date1 = $date[0];
+                $todate = $date[1];
+                $date1 = new Time($date1);
+                $todate = new Time($todate);
+                $this->request->data['date'] = $date1;
+                $this->request->data['todate'] = $todate;
             }
             // if(!empty($this->request->data['todate']))
 
@@ -1801,9 +1724,7 @@ $query = $Bookingonline->query();
             // }
 
 
-            if(empty($this->request->data['slug']))
-
-            {
+            if (empty($this->request->data['slug'])) {
 
                 $name_to_slug = Inflector::slug($this->request->data['title'], $replacement = '-');
 
@@ -1817,21 +1738,19 @@ $query = $Bookingonline->query();
 
 
 
-            if($cnt > 0)
+            if ($cnt > 0) {
 
-            {
+                $this->request->data['slug_status'] = ($cnt + 1);
 
-                $this->request->data['slug_status'] = ($cnt+1);
-
-            } else
-
-            {
+            } else {
 
                 $this->request->data['slug_status'] = 0;
 
             }
 
-
+            if (!empty($this->request->data['name'])) {
+                $this->request->data['register_online'] = 1;
+            }
 
             $event = $this->Events->patchEntity($event, $this->request->data);
 
@@ -1843,9 +1762,7 @@ $query = $Bookingonline->query();
 
                 $new_id = $event->id;
 
-                foreach ($this->request->data['Eventsubcategories']['sub_categories'] as $key => $value)
-
-                {
+                foreach ($this->request->data['Eventsubcategories']['sub_categories'] as $key => $value) {
 
                     $subcategories = $this->Events->Eventsubcategories->newEntity();
 
@@ -1862,12 +1779,8 @@ $query = $Bookingonline->query();
                 //$mediapartner = $this->Mediapartners->newEntity();
 
                 //$sponsor = $this->Sponsors->newEntity();
- if(!empty($this->request->data['Mediapartners']))
-
-            {
-                foreach($this->request->data['Mediapartners'] as $key=>$tmp_name)
-
-                {
+                if (!empty($this->request->data['Mediapartners'])) {
+                    foreach ($this->request->data['Mediapartners'] as $key => $tmp_name) {
 
                     // $mediapartner = $this->Mediapartners->patchEntity($mediapartner, $this->request->data);
 
@@ -1875,24 +1788,20 @@ $query = $Bookingonline->query();
 
                     // $mediapartner->MediaPartners = $this->request->data['Mediapartners'][$key]["name"];
 
-                    $mediapartner = $this->Mediapartners->newEntity();
+                        $mediapartner = $this->Mediapartners->newEntity();
 
-                    $mediapartner['events_id'] = $new_id;
+                        $mediapartner['events_id'] = $new_id;
 
-                    $mediapartner['MediaPartners'] = $this->request->data['Mediapartners'][$key]["name"];
+                        $mediapartner['MediaPartners'] = $this->request->data['Mediapartners'][$key]["name"];
 
-                    $this->Mediapartners->save($mediapartner);
+                        $this->Mediapartners->save($mediapartner);
+
+                    }
 
                 }
+                if (!empty($this->request->data['Sponsors'])) {
 
-}
- if(!empty($this->request->data['Sponsors']))
-
-            {
-
-                foreach($this->request->data['Sponsors'] as $key=>$tmp_name)
-
-                {
+                    foreach ($this->request->data['Sponsors'] as $key => $tmp_name) {
 
                     // $sponsor = $this->Sponsors->patchEntity($sponsor, $this->request->data);
 
@@ -1900,60 +1809,93 @@ $query = $Bookingonline->query();
 
                     // $sponsor->Sponsors = $this->request->data['Sponsors'][$key]["name"];
 
-                    $sponsor = $this->Sponsors->newEntity();
+                        $sponsor = $this->Sponsors->newEntity();
 
-                    $sponsor['events_id'] = $new_id;
+                        $sponsor['events_id'] = $new_id;
 
-                    $sponsor['Sponsors'] = $this->request->data['Sponsors'][$key]["name"];
-                    $this->Sponsors->save($sponsor);
+                        $sponsor['Sponsors'] = $this->request->data['Sponsors'][$key]["name"];
+                        $this->Sponsors->save($sponsor);
 
-}
-                } 
-         $data = array();
-        // pr($this->request->data['name']);
-                 for($i=1;$i<count($this->request->data['name']);$i++){
-                   // pr($i);
-                $data['events_id'] = $new_id;
-                $data['name'] = $this->request->data['name'][$i];
-                 $data['tickettype'] = $this->request->data['tickettype'][$i];
-                $data['price'] = $this->request->data['price'][$i];
-                $data['noofseats'] = $this->request->data['noofseats'][$i];
-                $data['commission_per'] = $this->request->data['commission_per'][$i];
-                $data['commission_amt'] = $this->request->data['commission_amt'][$i];
-                 $data['status'] = 0;
-               // $data['startdate'] = $this->request->data['startdate'][$i];
-                 $start = $this->request->data['startdate']; 
-           $newdate =  str_replace(' ','',$start);
-           $newdate = explode("-",$newdate);
-           $startdate = $newdate[0];
-           $enddate = $newdate[1];
-           $startdate = new Time($startdate);
-           $enddate = new Time($enddate);
-          $this->request->data['startdate'][$i] =  $startdate;
-          $this->request->data['enddate'][$i] = $enddate;
-                // $data['enddate'] = $this->request->data['enddate'][$i];
-                 $bookingonline = $this->Bookingonline->newEntity();
-
-                $bookingonline = $this->Bookingonline->patchEntity($bookingonline,$data );
-                //$bookingonline->events_id = $new_id;
-
-                if($this->Bookingonline->save($bookingonline)){
-                     $this->Events->updateAll(['register_online' => '1'], ['id' => $new_id]);
-                 //   echo "success";
-                     //  pr($data); if i print this it will returns all the datas
-                    //exit;
-                }else{
-                   // pr($bookingonline->errors());
-                     
-                    //exit;
+                    }
                 }
 
-}
+                //Organizers add the ticketing services info
+                if (!empty($this->request->data['name'])) {
+                    $data = array();
+
+                    for ($i = 1; $i < count($this->request->data['name']); $i++) {
+                        $data['events_id'] = $new_id;
+                        $data['name'] = $this->request->data['name'][$i];
+                        $data['tickettype'] = $this->request->data['tickettype'][$i];
+                        $data['price'] = $this->request->data['price'][$i];
+                        $data['noofseats'] = $this->request->data['noofseats'][$i];
+                        $data['commission_per'] = $this->request->data['commission_per'][$i];
+                        $data['commission_amt'] = $this->request->data['commission_amt'][$i];
+
+                        $start = $this->request->data['startdate'][$i];
+                        $date = str_replace(' ', '', $start);
+                        $newdate = explode("-", $start);
+                        $startdate = trim($newdate[0]);
+                        $enddate = trim($newdate[1]);
+                        $startdate = new Time($startdate);
+                        $enddate = new Time($enddate);
+                        $data['startdate'] = $startdate;
+                        $data['enddate'] = $enddate;
+
+                        if (empty($data['startdate'])) {
+                            $str = $this->request->data['date'];
+                            $date = str_replace(' ', '', $str);
+                            $date = explode("-", $date);
+                            $date1 = $date[0];
+                            $date1 = new Time($date1);
+                            $data['startdate'][$i] = $date1;
+                        }
+
+                        if (empty($data['enddate'])) {
+                            $str = $this->request->data['date'];
+                            $date = str_replace(' ', '', $str);
+                            $date = explode("-", $date);
+                            $todate = $date[1];
+                            $todate = new Time($todate);
+                            $data['enddate'] = $todate;
+                        }
+
+                        $bookingonline = $this->Bookingonline->newEntity();
+                        $bookingonline = $this->Bookingonline->patchEntity($bookingonline, $data);
+                        if ($this->Bookingonline->save($bookingonline)) {
+                            $this->Events->updateAll(['register_online' => '1'], ['id' => $new_id]);
+                        }
+                    }
+                }
                 $addres = $this->Address->patchEntity($addres, $this->request->data);
 
                 $addres->events_id = $new_id;
 
                 $this->Address->save($addres);
+
+                if (!empty($this->request->data['name'])) {
+                    $query = $this->Bookingonline->find(
+                        'all',
+                        array(
+                            'fields' => 'price',
+                            'conditions' => array('events_id' => $new_id)
+                        )
+                    );
+
+                    $maxVal = $query->max('price')['price'];
+                    $minVal = $query->min('price')['price'];
+                    $price = 0;
+
+                    if (!empty($minVal) || !empty($maxVal)) {
+                        $price = $minVal . " - " . $maxVal;
+                        if ($maxVal == $minVal) {
+                            $price = 0;
+                            $price = $maxVal;
+                        }
+                    }
+
+                    $this->Events->updateAll(['price' => $price], ['id' => $new_id]);
+                }
 
                 ////////////////////////////////////////////////////////////////////
 
@@ -1961,11 +1903,12 @@ $query = $Bookingonline->query();
 
                 //Send email to admin to active
 
+                /*
                 $email = new Email();
 
                 $email->transport('gmail');
 
-                $email->template('eventactivationadmin','cs-email');
+                $email->template('eventactivationadmin', 'cs-email');
 
                 $subject = "New event has arrived!";
 
@@ -1977,7 +1920,7 @@ $query = $Bookingonline->query();
 
                 $email->subject($subject);
 
-                $activationUrl = Router::url(['controller' => 'events', 'action' => 'activate/' . $new_id, '_full' => true ]);
+                $activationUrl = Router::url(['controller' => 'events', 'action' => 'activate/' . $new_id, '_full' => true]);
 
                 $email->viewVars(['URL' => $activationUrl]);
 
@@ -1993,7 +1936,7 @@ $query = $Bookingonline->query();
 
                 // Always try to write clean code, so that you can read it :) :
 
-                $email->template('awaitingapproval','cs-email');
+                $email->template('awaitingapproval', 'cs-email');
 
                 $email->emailFormat('html');
 
@@ -2039,7 +1982,7 @@ $query = $Bookingonline->query();
 
              //    $email->send($message);
 
-
+                 */
 
                 ////////////////////////////////////////////////////////////////////
 
@@ -2049,9 +1992,7 @@ $query = $Bookingonline->query();
 
                 return $this->redirect(['action' => 'index']);
 
-            } else
-
-            {
+            } else {
 
                 $this->Flash->error(__('The event could not be saved. Please, try again.'));
 
@@ -2072,11 +2013,12 @@ $query = $Bookingonline->query();
 
         $this->loadModel('SubCategories');
 
-        $subCategories_new = $this->SubCategories->find('all', ['fields' => 'name',
+        $subCategories_new = $this->SubCategories->find('all', [
+            'fields' => 'name',
 
-                'conditions' => ['active' => 1]
+            'conditions' => ['active' => 1]
 
-            ]);
+        ]);
 
 
 
@@ -2110,7 +2052,7 @@ $query = $Bookingonline->query();
 
 
 
-   /**
+    /**
 
      * Edit method
 
@@ -2128,49 +2070,48 @@ $query = $Bookingonline->query();
 
     {
 
-      $event = $this->Events->get($id, [
+        $event = $this->Events->get($id, [
             'contain' => ['Eventsubcategories']
         ]);
         $this->viewBuilder()->layout('event_new_home');
-$this->paginate = [
-             'contain' => ['Events']
-         ];
-        
-       $this->loadModel('Address');
+        $this->paginate = [
+            'contain' => ['Events']
+        ];
+
+        $this->loadModel('Address');
 
         $this->loadModel('Mediapartners');
-        $medialist= $this->paginate['conditions'] = array('Mediapartners.events_id' => $id);
+        $medialist = $this->paginate['conditions'] = array('Mediapartners.events_id' => $id);
         $medialists = $this->paginate($this->Mediapartners);
-        $this->set(compact('medialists','medialist'));
+        $this->set(compact('medialists', 'medialist'));
         $this->set('_serialize', ['medialists']);
         $this->set('_serialize', ['medialist']);
 
         $this->loadModel('Sponsors');
-        $sponserlist= $this->paginate['conditions'] = array('Sponsors.events_id' => $id);
+        $sponserlist = $this->paginate['conditions'] = array('Sponsors.events_id' => $id);
         $sponserlists = $this->paginate($this->Sponsors);
-        $this->set(compact('sponserlists','sponserlist'));
+        $this->set(compact('sponserlists', 'sponserlist'));
         $this->set('_serialize', ['sponserlists']);
         $this->set('_serialize', ['sponserlist']);
 
-		$this->loadModel('Bookingonline');
+        $this->loadModel('Bookingonline');
         $bookinglist = $this->paginate['conditions'] = array('Bookingonline.events_id' => $id);
         $bookinglists = $this->paginate($this->Bookingonline);
-        $this->set(compact('bookinglists','bookinglist'));
+        $this->set(compact('bookinglists', 'bookinglist'));
         $this->set('_serialize', ['bookinglists']);
         $this->set('_serialize', ['bookinglist']);
 
         $address = $this->Address->find('all', ['conditions' => ['events_id' => $id]]);
         $address = $address->first();
-           $mediapartner = $this->Mediapartners->find('all', ['conditions' => ['events_id' => $id]]);
+        $mediapartner = $this->Mediapartners->find('all', ['conditions' => ['events_id' => $id]]);
 
         $mediapartner = $mediapartner->first();
 
-         $sponsor = $this->Sponsors->find('all', ['conditions' => ['events_id' => $id]]);
+        $sponsor = $this->Sponsors->find('all', ['conditions' => ['events_id' => $id]]);
 
         $sponsor = $sponsor->first();
 
-        if(!empty($this->Auth->user('id')))
-        {
+        if (!empty($this->Auth->user('id'))) {
             $users_id = $this->Auth->user('id');
             $fullname = $this->Auth->user('fullname');
             $email = $this->Auth->user('email');
@@ -2179,68 +2120,52 @@ $this->paginate = [
 
         if ($this->request->is(['patch', 'post', 'put'])) {
             //Media Partners
-            if(!empty($this->request->data['Mediapartners']))
+            if (!empty($this->request->data['Mediapartners'])) {
 
-            {
+                $error = array();
 
-                $error=array();
+                $extension = array("jpeg", "jpg", "png", "gif");
 
-                $extension=array("jpeg","jpg","png","gif");
+                foreach ($this->request->data['Mediapartners'] as $key => $tmp_name) {
 
-                foreach($this->request->data['Mediapartners'] as $key=>$tmp_name)
+                    $file_name = $this->request->data['Mediapartners'][$key]["name"];
 
-                {
+                    $file_tmp = $this->request->data['Mediapartners'][$key]["tmp_name"];
 
-                    $file_name=$this->request->data['Mediapartners'][$key]["name"];
+                    $ext = pathinfo($file_name, PATHINFO_EXTENSION);
 
-                    $file_tmp=$this->request->data['Mediapartners'][$key]["tmp_name"];
-
-                    $ext=pathinfo($file_name,PATHINFO_EXTENSION);
-
-                    if(in_array($ext,$extension))
-
-                    {
+                    if (in_array($ext, $extension)) {
 
                         $uploadFolder = WWW_ROOT . 'img/Mediapartners';
 
-                        if( !file_exists($uploadFolder) ){
+                        if (!file_exists($uploadFolder)) {
 
                             mkdir($uploadFolder);
 
                         }
 
                         $filename = str_replace(" ", "-", rand(1, 3000) . $file_name);
-                      if(!file_exists(WWW_ROOT . 'img/Mediapartners' . DS . $filename))
+                        if (!file_exists(WWW_ROOT . 'img/Mediapartners' . DS . $filename)) {
 
-                        {
-
-                            move_uploaded_file($file_tmp=$this->request->data['Mediapartners'][$key]["tmp_name"], WWW_ROOT . 'img/Mediapartners' . DS . $filename);
+                            move_uploaded_file($file_tmp = $this->request->data['Mediapartners'][$key]["tmp_name"], WWW_ROOT . 'img/Mediapartners' . DS . $filename);
 
                             $this->request->data['Mediapartners'][$key]["name"] = $filename;
 
-                        }
+                        } else {
 
-                        else
+                            $filename = basename($file_name, $ext);
 
-                        {
+                            $newFileName = $filename . time() . "." . $ext;
 
-                            $filename=basename($file_name,$ext);
-
-                            $newFileName=$filename.time().".".$ext;
-
-                            move_uploaded_file($file_tmp=$this->request->data['Mediapartners'][$key]["tmp_name"], WWW_ROOT . 'img/Mediapartners' . DS . $newFileName);
+                            move_uploaded_file($file_tmp = $this->request->data['Mediapartners'][$key]["tmp_name"], WWW_ROOT . 'img/Mediapartners' . DS . $newFileName);
 
                             $this->request->data['Mediapartners'][$key]["name"] = $newFileName;
 
                         }
 
-                    }
+                    } else {
 
-                    else
-
-                    {
-
-                        array_push($error,"$file_name, ");
+                        array_push($error, "$file_name, ");
 
                     }
 
@@ -2252,68 +2177,52 @@ $this->paginate = [
 
             //Sponsors
 
-            if(!empty($this->request->data['Sponsors']))
+            if (!empty($this->request->data['Sponsors'])) {
 
-            {
+                $error = array();
 
-                $error=array();
+                $extension = array("jpeg", "jpg", "png", "gif");
 
-                $extension=array("jpeg","jpg","png","gif");
+                foreach ($this->request->data['Sponsors'] as $key => $tmp_name) {
 
-                foreach($this->request->data['Sponsors'] as $key=>$tmp_name)
+                    $file_name = $this->request->data['Sponsors'][$key]["name"];
 
-                {
+                    $file_tmp = $this->request->data['Sponsors'][$key]["tmp_name"];
 
-                    $file_name=$this->request->data['Sponsors'][$key]["name"];
+                    $ext = pathinfo($file_name, PATHINFO_EXTENSION);
 
-                    $file_tmp=$this->request->data['Sponsors'][$key]["tmp_name"];
-
-                    $ext=pathinfo($file_name,PATHINFO_EXTENSION);
-
-                    if(in_array($ext,$extension))
-
-                    {
+                    if (in_array($ext, $extension)) {
 
                         $uploadFolder = WWW_ROOT . 'img/Sponsors';
 
-                        if( !file_exists($uploadFolder) ){
+                        if (!file_exists($uploadFolder)) {
 
                             mkdir($uploadFolder);
 
                         }
-                         $filename = str_replace(" ", "-", rand(1, 3000) . $file_name);
+                        $filename = str_replace(" ", "-", rand(1, 3000) . $file_name);
 
-                        if(!file_exists(WWW_ROOT . 'img/Sponsors' . DS . $filename))
+                        if (!file_exists(WWW_ROOT . 'img/Sponsors' . DS . $filename)) {
 
-                        {
-
-                            move_uploaded_file($file_tmp=$this->request->data['Sponsors'][$key]["tmp_name"], WWW_ROOT . 'img/Sponsors' . DS . $filename);
+                            move_uploaded_file($file_tmp = $this->request->data['Sponsors'][$key]["tmp_name"], WWW_ROOT . 'img/Sponsors' . DS . $filename);
 
                             $this->request->data['Sponsors'][$key]["name"] = $filename;
 
-                        }
+                        } else {
 
-                        else
+                            $filename = basename($file_name, $ext);
 
-                        {
+                            $newFileName = $filename . time() . "." . $ext;
 
-                            $filename=basename($file_name,$ext);
-
-                            $newFileName=$filename.time().".".$ext;
-
-                            move_uploaded_file($file_tmp=$this->request->data['Sponsors'][$key]["tmp_name"], WWW_ROOT . 'img/Sponsors' . DS . $newFileName);
+                            move_uploaded_file($file_tmp = $this->request->data['Sponsors'][$key]["tmp_name"], WWW_ROOT . 'img/Sponsors' . DS . $newFileName);
 
                             $this->request->data['Sponsors'][$key]["name"] = $newFileName;
 
                         }
 
-                    }
+                    } else {
 
-                    else
-
-                    {
-
-                        array_push($error,"$file_name, ");
+                        array_push($error, "$file_name, ");
 
                     }
 
@@ -2330,9 +2239,7 @@ $this->paginate = [
 
 //banner Image
 
-            if(!empty($this->request->data['banner']))
-
-            {
+            if (!empty($this->request->data['banner'])) {
 
                 $banner = $this->request->data['banner'];
 
@@ -2342,19 +2249,13 @@ $this->paginate = [
 
 
 
-                if($banner['size']/1024 > '2048')
-
-                {
+                if ($banner['size'] / 1024 > '2048') {
 
                     $this->Flash->error(__('"imageLogs", __METHOD__." The uploaded file exceeds the MAX_FILE_SIZE(2MB) '));
 
                     $errCheck = true;
 
-                }
-
-                else if(in_array($ext, $arr_ext))
-
-                {
+                } else if (in_array($ext, $arr_ext)) {
 
                     //do the actual uploading of the file. First arg is the tmp name, second arg is
 
@@ -2362,7 +2263,7 @@ $this->paginate = [
 
                     $uploadFolder = WWW_ROOT . 'img/banner';
 
-                    if( !file_exists($uploadFolder) ){
+                    if (!file_exists($uploadFolder)) {
 
                         mkdir($uploadFolder);
 
@@ -2386,9 +2287,7 @@ $this->paginate = [
 
 
 
-            if(!empty($this->request->data['display']))
-
-            {
+            if (!empty($this->request->data['display'])) {
 
                 $display = $this->request->data['display'];
 
@@ -2398,19 +2297,13 @@ $this->paginate = [
 
 
 
-                if($display['size']/1024 > '2048')
-
-                {
+                if ($display['size'] / 1024 > '2048') {
 
                     $this->Flash->error(__('"imageLogs", __METHOD__." The uploaded file exceeds the MAX_FILE_SIZE(2MB) '));
 
                     $errCheck = true;
 
-                }
-
-                else if(in_array($ext, $arr_ext))
-
-                {
+                } else if (in_array($ext, $arr_ext)) {
 
                     //do the actual uploading of the file. First arg is the tmp name, second arg is
 
@@ -2418,7 +2311,7 @@ $this->paginate = [
 
                     $uploadFolder = WWW_ROOT . 'img/display';
 
-                    if( !file_exists($uploadFolder) ){
+                    if (!file_exists($uploadFolder)) {
 
                         mkdir($uploadFolder);
 
@@ -2440,9 +2333,7 @@ $this->paginate = [
 
 
 
-            if(!empty($this->request->data['OrganizersLogo']))
-
-            {
+            if (!empty($this->request->data['OrganizersLogo'])) {
 
                 $OrganizersLogo = $this->request->data['OrganizersLogo'];
 
@@ -2452,19 +2343,13 @@ $this->paginate = [
 
 
 
-                if($OrganizersLogo['size']/1024 > '2048')
-
-                {
+                if ($OrganizersLogo['size'] / 1024 > '2048') {
 
                     $this->Flash->error(__('"imageLogs", __METHOD__." The uploaded file exceeds the MAX_FILE_SIZE(2MB) '));
 
                     $errCheck = true;
 
-                }
-
-                else if(in_array($ext, $arr_ext))
-
-                {
+                } else if (in_array($ext, $arr_ext)) {
 
                     //do the actual uploading of the file. First arg is the tmp name, second arg is
 
@@ -2472,7 +2357,7 @@ $this->paginate = [
 
                     $uploadFolder = WWW_ROOT . 'img/OrganizersLogo';
 
-                    if( !file_exists($uploadFolder) ){
+                    if (!file_exists($uploadFolder)) {
 
                         mkdir($uploadFolder);
 
@@ -2492,9 +2377,7 @@ $this->paginate = [
 
             }
 
-                foreach($this->request->data['Mediapartners'] as $key=>$tmp_name)
-
-                {
+            foreach ($this->request->data['Mediapartners'] as $key => $tmp_name) {
 
                     // $mediapartner = $this->Mediapartners->patchEntity($mediapartner, $this->request->data);
 
@@ -2502,21 +2385,19 @@ $this->paginate = [
 
                     // $mediapartner->MediaPartners = $this->request->data['Mediapartners'][$key]["name"];
 
-                   $mediapartner = $this->Mediapartners->patchEntity($mediapartner,$this->request->data);
+                $mediapartner = $this->Mediapartners->patchEntity($mediapartner, $this->request->data);
 
-                    $mediapartner['events_id'] = $id;
+                $mediapartner['events_id'] = $id;
 
-                    $mediapartner['MediaPartners'] = $this->request->data['Mediapartners'][$key]["name"];
+                $mediapartner['MediaPartners'] = $this->request->data['Mediapartners'][$key]["name"];
 
-                    $this->Mediapartners->save($mediapartner);
+                $this->Mediapartners->save($mediapartner);
 
-                }
+            }
 
 
 
-                foreach($this->request->data['Sponsors'] as $key=>$tmp_name)
-
-                {
+            foreach ($this->request->data['Sponsors'] as $key => $tmp_name) {
 
                     // $sponsor = $this->Sponsors->patchEntity($sponsor, $this->request->data);
 
@@ -2524,34 +2405,28 @@ $this->paginate = [
 
                     // $sponsor->Sponsors = $this->request->data['Sponsors'][$key]["name"];
 
-                   $sponsor = $this->Sponsors->patchEntity($sponsor, $this->request->data);
-                    $sponsor['events_id'] = $id;
+                $sponsor = $this->Sponsors->patchEntity($sponsor, $this->request->data);
+                $sponsor['events_id'] = $id;
 
-                    $sponsor['Sponsors'] = $this->request->data['Sponsors'][$key]["name"];
+                $sponsor['Sponsors'] = $this->request->data['Sponsors'][$key]["name"];
 
-                    $this->Sponsors->save($sponsor);
+                $this->Sponsors->save($sponsor);
 
-                }
+            }
 
-            if(!is_null($banner))
-
-            {
+            if (!is_null($banner)) {
 
                 $this->request->data['banner'] = $banner;
 
             }
 
-            if(!is_null($display))
-
-            {
+            if (!is_null($display)) {
 
                 $this->request->data['display'] = $display;
 
             }
 
-            if(!is_null($OrganizersLogo))
-
-            {
+            if (!is_null($OrganizersLogo)) {
 
                 $this->request->data['OrganizersLogo'] = $OrganizersLogo;
 
@@ -2560,58 +2435,56 @@ $this->paginate = [
             // $address = $this->Address->patchEntity($address, $this->request->data['Address']);
             // $address->events_id = $id;
             // $this->Address->save($address);
-             if(!empty($this->request->data['date']))
-
-            {
-                $str = $this->request->data['date']; 
-           $date =  str_replace(' ','',$str);
-           $date = explode("-",$date);
-           $date1 = $date[0];
-           $todate = $date[1];
-           $date1 = new Time($date1);
-           $todate = new Time($todate);
-           $this->request->data['date'] =  $date1;
-           $this->request->data['todate'] = $todate;
+            if (!empty($this->request->data['date'])) {
+                $str = $this->request->data['date'];
+                $date = str_replace(' ', '', $str);
+                $date = explode("-", $date);
+                $date1 = $date[0];
+                $todate = $date[1];
+                $date1 = new Time($date1);
+                $todate = new Time($todate);
+                $this->request->data['date'] = $date1;
+                $this->request->data['todate'] = $todate;
             }
-             $data = array();
+            $data = array();
         		// pr($this->request->data['name']);
-                 for($i=1;$i<count($this->request->data['name']);$i++){
+            for ($i = 1; $i < count($this->request->data['name']); $i++) {
                    // pr($i);
                 $data['events_id'] = $new_id;
                 $data['name'] = $this->request->data['name'][$i];
-                 $data['tickettype'] = $this->request->data['tickettype'][$i];
+                $data['tickettype'] = $this->request->data['tickettype'][$i];
                 $data['price'] = $this->request->data['price'][$i];
                 $data['noofseats'] = $this->request->data['noofseats'][$i];
                 $data['commission_per'] = $this->request->data['commission_per'][$i];
                 $data['commission_amt'] = $this->request->data['commission_amt'][$i];
-                 $data['status'] = 0;
-                   $start = $this->request->data['startdate']; 
-           $newdate =  str_replace(' ','',$start);
-           $newdate = explode("-",$newdate);
-           $startdate = $newdate[0];
-           $enddate = $newdate[1];
-           $startdate = new Time($startdate);
-           $enddate = new Time($enddate);
-          $this->request->data['startdate'][$i] =  $startdate;
-          $this->request->data['enddate'][$i] = $enddate;
+                $data['status'] = 0;
+                $start = $this->request->data['startdate'];
+                $newdate = str_replace(' ', '', $start);
+                $newdate = explode("-", $newdate);
+                $startdate = $newdate[0];
+                $enddate = $newdate[1];
+                $startdate = new Time($startdate);
+                $enddate = new Time($enddate);
+                $this->request->data['startdate'][$i] = $startdate;
+                $this->request->data['enddate'][$i] = $enddate;
                 // $data['startdate'] = $this->request->data['startdate'][$i];
                 // $data['enddate'] = $this->request->data['enddate'][$i];
-                 $bookingonline = $this->Bookingonline->newEntity();
+                $bookingonline = $this->Bookingonline->newEntity();
 
-                $bookingonline = $this->Bookingonline->patchEntity($bookingonline,$data );
+                $bookingonline = $this->Bookingonline->patchEntity($bookingonline, $data);
                 //$bookingonline->events_id = $new_id;
 
-                if($this->Bookingonline->save($bookingonline)){
-                     $this->Events->updateAll(['register_online' => '1'], ['id' => $new_id]);
-                  echo "success";
+                if ($this->Bookingonline->save($bookingonline)) {
+                    $this->Events->updateAll(['register_online' => '1'], ['id' => $new_id]);
+                    echo "success";
                      //  pr($data); if i print this it will returns all the datas
                     //exit;
-                }else{
+                } else {
                   //  pr($bookingonline->errors());
                     //exit;
                 }
 
-}
+            }
             $this->request->data['date'] = new Time($this->request->data['date']);
             /////////////////////////////////////////////////////////////////
             $name_to_slug = Inflector::slug($this->request->data['title'], $replacement = '-');
@@ -2620,11 +2493,9 @@ $this->paginate = [
             $results = $this->Events->find('all', array('conditions' => array('slug' => $this->request->data['title'], 'id !=' => $id)));
             $cnt = $results->count();
 
-            if($cnt > 0)
-            {
-                $this->request->data['slug_status'] = ($cnt+1);
-            } else
-            {
+            if ($cnt > 0) {
+                $this->request->data['slug_status'] = ($cnt + 1);
+            } else {
                 $this->request->data['slug_status'] = 0;
             }
 
@@ -2640,7 +2511,7 @@ $this->paginate = [
 
                 $email->transport('gmail');
 
-                $email->template('eventactivationadmin','cs-email');
+                $email->template('eventactivationadmin', 'cs-email');
 
                 $subject = "Event has Edited!";
 
@@ -2652,7 +2523,7 @@ $this->paginate = [
 
                 $email->subject($subject);
 
-                $activationUrl = Router::url(['controller' => 'events', 'action' => 'chennai/' . $id, '_full' => true ]);
+                $activationUrl = Router::url(['controller' => 'events', 'action' => 'chennai/' . $id, '_full' => true]);
 
                 $email->viewVars(['URL' => $activationUrl]);
 
@@ -2668,7 +2539,7 @@ $this->paginate = [
 
                 // Always try to write clean code, so that you can read it :) :
 
-                $email->template('awaitingapproval','cs-email');
+                $email->template('awaitingapproval', 'cs-email');
 
                 $email->emailFormat('html');
 
@@ -2689,7 +2560,7 @@ $this->paginate = [
                 $this->Flash->error(__('The event could not be saved. Please, try again.'));
             }
         }
-        $event['Address'] =$address;
+        $event['Address'] = $address;
 
         $this->loadModel('SubCategories');
         $this->set(compact('selected', 'selected'));
@@ -2798,23 +2669,17 @@ $this->paginate = [
 
 
 
-        if($this->Auth->user('group_id') == 4)
-
-        {
+        if ($this->Auth->user('group_id') == 4) {
 
             $users_email = $event['user']['email'];
 
             //$users_email['email']
 
-            if ($this->request->is(['patch', 'post', 'put']))
-
-            {
+            if ($this->request->is(['patch', 'post', 'put'])) {
 
                 //$event = $this->Events->patchEntity($event, $this->request->data['active']);
 
-                if ($this->Events->updateAll(['active' => $this->request->data['active']], ['id' => $id]))
-
-                {
+                if ($this->Events->updateAll(['active' => $this->request->data['active']], ['id' => $id])) {
 
                     //Send eamil to user
 
@@ -2826,11 +2691,9 @@ $this->paginate = [
 
                     // Always try to write clean code, so that you can read it :) :
 
-                    if($this->request->data['active'] == '1')
+                    if ($this->request->data['active'] == '1') {
 
-                    {
-
-                        $email->template('eventactivated','cs-email');
+                        $email->template('eventactivated', 'cs-email');
 
                         $name = $event['user']['fullname'];
 
@@ -2842,7 +2705,7 @@ $this->paginate = [
 
                         $email->cc('admin@chennaismile.com');
 
-                        $activationUrl = Router::url(['controller' => 'events', 'action' => 'view/' . $id, '_full' => true ]);
+                        $activationUrl = Router::url(['controller' => 'events', 'action' => 'view/' . $id, '_full' => true]);
 
                         $email->viewVars(['name' => $name, 'URL' => $activationUrl]);
 
@@ -2852,11 +2715,7 @@ $this->paginate = [
 
                         $email->send();
 
-                    }
-
-                    else
-
-                    {
+                    } else {
 
                         $email->template('default');
 
@@ -2870,13 +2729,13 @@ $this->paginate = [
 
                         $email->cc('admin@chennaismile.com');
 
-                        $activationUrl = Router::url(['controller' => 'events', 'action' => 'view/' . $id, '_full' => true ]);
+                        $activationUrl = Router::url(['controller' => 'events', 'action' => 'view/' . $id, '_full' => true]);
 
                         //$email->viewVars(['name' => $name, 'URL' => $activationUrl]);
 
                         $subject = "Event De-Activated";
 
-                        $message = "Dear <span style='color:#666666'>".$name."</span>,<br/><br/>";
+                        $message = "Dear <span style='color:#666666'>" . $name . "</span>,<br/><br/>";
 
                         $message .= "Event has been de-activated by Admin.<br/>";
 
@@ -2906,9 +2765,7 @@ $this->paginate = [
 
             $u_id = "";
 
-            if(!empty($this->Auth->user('id')))
-
-            {
+            if (!empty($this->Auth->user('id'))) {
 
                 $u_id = $this->Auth->user('id');
 
@@ -2927,13 +2784,13 @@ $this->paginate = [
             $this->loadModel('Mediapartners');
 
             $mediapartners = $this->Mediapartners->find('all', ['conditions' => ['events_id' => $id]]);
-            
+
             $this->loadModel('Mediapartners');
-        $medialist= $this->paginate['conditions'] = array('Mediapartners.events_id' => $id);
-        $medialists = $this->paginate($this->Mediapartners);
-        $this->set(compact('medialists','medialist'));
-        $this->set('_serialize', ['medialists']);
-        $this->set('_serialize', ['medialist']);
+            $medialist = $this->paginate['conditions'] = array('Mediapartners.events_id' => $id);
+            $medialists = $this->paginate($this->Mediapartners);
+            $this->set(compact('medialists', 'medialist'));
+            $this->set('_serialize', ['medialists']);
+            $this->set('_serialize', ['medialist']);
 
             $this->loadModel('Galaries');
 
@@ -2947,9 +2804,11 @@ $this->paginate = [
 
             $likes = $this->Likes->find('all', ['conditions' => ['events_id' => $id]]);
 
-            $query = $this->Likes->find('all', ['select' => 'id',
+            $query = $this->Likes->find('all', [
+                'select' => 'id',
 
-                    'conditions' => ['events_id' => $id]]);
+                'conditions' => ['events_id' => $id]
+            ]);
 
             $number = $query->count();
 
@@ -2963,11 +2822,12 @@ $this->paginate = [
 
             $this->loadModel('SubCategories');
 
-            $subCategories_new = $this->SubCategories->find('all', ['fields' => 'name',
+            $subCategories_new = $this->SubCategories->find('all', [
+                'fields' => 'name',
 
-                    'conditions' => ['active' => 1]
+                'conditions' => ['active' => 1]
 
-                        ]);
+            ]);
 
             $this->set('event', $event);
 
@@ -2979,11 +2839,7 @@ $this->paginate = [
 
             $this->set(compact('address', 'mediapartners', 'sponsors', 'number', 'likes', 'u_id', 'galaries'));
 
-        }
-
-        else
-
-        {
+        } else {
 
             return $this->redirect(['controller' => 'Users', 'action' => 'adminlogin']);
 
@@ -3011,19 +2867,19 @@ $this->paginate = [
 
             $results = $this->Area->find('all', array(
 
-                                           'conditions' => array('area_name LIKE ' =>  $name . '%')
+                'conditions' => array('area_name LIKE ' => $name . '%')
 
 
 
-                                           ));
+            ));
 
 
 
             $resultArr = array();
 
-            foreach($results as $result) {
+            foreach ($results as $result) {
 
-               $resultArr[] = array('label' =>$result['area_name'] , 'value' => $result['area_name'] );
+                $resultArr[] = array('label' => $result['area_name'], 'value' => $result['area_name']);
 
             }
 
@@ -3045,15 +2901,15 @@ $this->paginate = [
 
             $title = $this->request->query('term');
 
-            $results = $this->Events->find('all', array('conditions' => array('title LIKE ' => '%'.$title.'%')));
+            $results = $this->Events->find('all', array('conditions' => array('title LIKE ' => '%' . $title . '%')));
 
 
 
             $resultArr = array();
 
-            foreach($results as $result) {
+            foreach ($results as $result) {
 
-               $resultArr[] = array('label' =>$result['title'] , 'value' => $result['title'] );
+                $resultArr[] = array('label' => $result['title'], 'value' => $result['title']);
 
             }
 
@@ -3087,11 +2943,11 @@ $this->paginate = [
 
 
 
-            if (!empty($this->request->data)){
+            if (!empty($this->request->data)) {
 
                 //echo "<pre>";print_r($this->request->query);echo "</pre>";
 
-                if(isset($this->request->data['category']) && $this->request->data['category'] !='') {
+                if (isset($this->request->data['category']) && $this->request->data['category'] != '') {
 
                     $category = implode(',', $this->request->data['category']);
 
@@ -3103,13 +2959,13 @@ $this->paginate = [
 
 
 
-                if(isset($this->request->data['area']) && $this->request->data['area'] !='') {
+                if (isset($this->request->data['area']) && $this->request->data['area'] != '') {
 
                     $area = $this->request->data['area'];
 
                     $joins .= " LEFT JOIN address ad ON ad.events_id = e.id";
 
-                    $cond .= " AND ad.areaname = '".$area."' AND e.date >= CURDATE()";
+                    $cond .= " AND ad.areaname = '" . $area . "' AND e.date >= CURDATE()";
 
                     $filter = true;
 
@@ -3117,11 +2973,11 @@ $this->paginate = [
 
 
 
-                if(isset($this->request->data['eTitle']) && $this->request->data['eTitle'] !='') {
+                if (isset($this->request->data['eTitle']) && $this->request->data['eTitle'] != '') {
 
                     $eTitle = $this->request->data['eTitle'];
 
-                    $cond .= " AND e.title like '%".$eTitle."%' AND e.date >= CURDATE()";
+                    $cond .= " AND e.title like '%" . $eTitle . "%' AND e.date >= CURDATE()";
 
                     $filter = true;
 
@@ -3129,9 +2985,9 @@ $this->paginate = [
 
 
 
-                if((isset($this->request->data['page']) && $this->request->data['page'] !='') &&
+                if ((isset($this->request->data['page']) && $this->request->data['page'] != '') &&
 
-                    isset($this->request->data['limit']) && $this->request->data['limit'] !='') {
+                    isset($this->request->data['limit']) && $this->request->data['limit'] != '') {
 
                     $page = $this->request->data['page'];
 
@@ -3145,11 +3001,11 @@ $this->paginate = [
 
 
 
-                if(isset($this->request->data['action']) && $this->request->data['action'] !='') {
+                if (isset($this->request->data['action']) && $this->request->data['action'] != '') {
 
                     $action = $this->request->data['action'];
 
-                    if($action == "pastevents"){
+                    if ($action == "pastevents") {
 
                         $filter = true;
 
@@ -3157,19 +3013,19 @@ $this->paginate = [
 
                     }
 
-                    if($action == "likedevents"){
+                    if ($action == "likedevents") {
 
                         $joins .= " LEFT JOIN likes l ON l.events_id = e.id";
 
-                        $cond .= " AND l.user_id = ".$userId;
+                        $cond .= " AND l.user_id = " . $userId;
 
                         $filter = true;
 
                     }
 
-                    if($action == "myevents"){
+                    if ($action == "myevents") {
 
-                        $cond .= " AND e.user_id = ".$userId;
+                        $cond .= " AND e.user_id = " . $userId;
 
                         $filter = true;
 
@@ -3179,9 +3035,9 @@ $this->paginate = [
 
 
 
-                if(isset($this->request->data['type']) && !empty($this->request->data['type'])){
+                if (isset($this->request->data['type']) && !empty($this->request->data['type'])) {
 
-                    if($this->request->data['type'] == "register") {
+                    if ($this->request->data['type'] == "register") {
 
                         $filter = true;
 
@@ -3191,7 +3047,7 @@ $this->paginate = [
 
 
 
-                    if($this->request->data['type'] == "freeEvents") {
+                    if ($this->request->data['type'] == "freeEvents") {
 
                         $filter = true;
 
@@ -3203,35 +3059,29 @@ $this->paginate = [
 
 
 
-                if(isset($this->request->data['date']) && !empty($this->request->data['date'])){                    
+                if (isset($this->request->data['date']) && !empty($this->request->data['date'])) {
 
 
 
-                    if($this->request->data['date'] == "today") {
+                    if ($this->request->data['date'] == "today") {
 
                         $filter = true;
 
                         $cond .= " AND e.date = CURDATE()";
 
-                    }
-
-                    elseif($this->request->data['date'] == "tomorrow") {
+                    } elseif ($this->request->data['date'] == "tomorrow") {
 
                         $filter = true;
 
                         $cond .= " AND e.date = DATE_ADD(CURDATE(),INTERVAL 1 DAY)";
 
-                    }
-
-                    elseif ($this->request->data['date'] == "weekend") {
+                    } elseif ($this->request->data['date'] == "weekend") {
 
                         $filter = true;
 
                         $cond .= " AND e.date between DATE_ADD(CURDATE(), interval(7 - DAYOFWEEK(CURDATE()) ) DAY) AND DATE_ADD(CURDATE(), interval(7-DAYOFWEEK(CURDATE())+1) DAY)";
 
-                    }
-
-                    elseif ($this->request->data['date'] == "month") {
+                    } elseif ($this->request->data['date'] == "month") {
 
                         $filter = true;
 
@@ -3243,7 +3093,7 @@ $this->paginate = [
 
 
 
-                if(isset($this->request->data['customDate']) && !empty($this->request->data['customDate'])){
+                if (isset($this->request->data['customDate']) && !empty($this->request->data['customDate'])) {
 
                     $customDate = $this->request->data['customDate'];
 
@@ -3251,13 +3101,13 @@ $this->paginate = [
 
                     $filter = true;
 
-                    $cond .= " AND e.date between '".$exp[0]."' AND '".$exp[1]."'";
+                    $cond .= " AND e.date between '" . $exp[0] . "' AND '" . $exp[1] . "'";
 
                 }
 
             }
 
-            if(!$filter) {
+            if (!$filter) {
 
                 $cond .= " AND e.date > DATE_ADD(CURDATE(),INTERVAL -1 DAY)";
 
@@ -3297,9 +3147,7 @@ $this->paginate = [
 
     {
 
-        if ($this->request->is('ajax'))
-
-        {
+        if ($this->request->is('ajax')) {
 
             $this->loadModel('Likes');
 
@@ -3319,37 +3167,33 @@ $this->paginate = [
 
 
 
-            $query = $this->Likes->find('all', ['select' => 'id',
+            $query = $this->Likes->find('all', [
+                'select' => 'id',
 
-                'conditions' => ['events_id' => $events_id, 'user_id' => $user_id]]);
+                'conditions' => ['events_id' => $events_id, 'user_id' => $user_id]
+            ]);
 
             $number = $query->count();
 
 
 
-            if($number < 1)
-
-            {
+            if ($number < 1) {
 
                 $likes->likes = '1';
 
-            }
-
-            else if($number > 0)
-
-            {
+            } else if ($number > 0) {
 
                 $likes->likes = '0';
 
-                $query_1 = $this->Likes->find('all', ['select' => 'id',
+                $query_1 = $this->Likes->find('all', [
+                    'select' => 'id',
 
-                'conditions' => ['events_id' => $events_id, 'user_id' => $user_id, 'likes' => '1']]);
+                    'conditions' => ['events_id' => $events_id, 'user_id' => $user_id, 'likes' => '1']
+                ]);
 
                 $number_1 = $query_1->count();
 
-                if($number_1>0)
-
-                {
+                if ($number_1 > 0) {
 
                     $this->Likes->delete($query_1->first());
 
@@ -3359,17 +3203,17 @@ $this->paginate = [
 
 
 
-                $query_2 = $this->Likes->find('all', ['select' => 'id',
+                $query_2 = $this->Likes->find('all', [
+                    'select' => 'id',
 
-                'conditions' => ['events_id' => $events_id, 'user_id' => $user_id, 'likes' => '0']]);
+                    'conditions' => ['events_id' => $events_id, 'user_id' => $user_id, 'likes' => '0']
+                ]);
 
                 $number_2 = $query_2->count();
 
 
 
-                if($number_2 > 0)
-
-                {
+                if ($number_2 > 0) {
 
                     $this->Likes->delete($query_2->first());
 
@@ -3413,9 +3257,7 @@ $this->paginate = [
 
     {
 
-        if ($this->request->is('ajax'))
-
-        {
+        if ($this->request->is('ajax')) {
 
             $this->autoRender = false;
 
@@ -3435,15 +3277,13 @@ $this->paginate = [
 
             $this->loadModel('Invitefriends');
 
-            $invitefriends = $this->Invitefriends->find('all',array('conditions'=>array('email'=>$email_req, 'events_id' => $events_id)));
+            $invitefriends = $this->Invitefriends->find('all', array('conditions' => array('email' => $email_req, 'events_id' => $events_id)));
 
             $invitefriends = $invitefriends->first();
 
 
 
-            if(isset($invitefriends))
-
-            {
+            if (isset($invitefriends)) {
 
                 $invitefriend = $this->Invitefriends->get($invitefriends['ID']);
 
@@ -3481,7 +3321,7 @@ $this->paginate = [
 
             $address = $address->first();
 
-            $activationUrl = Router::url(['controller' => 'events', 'action' => 'invitation/' . $activation_key, '_full' => true ]);
+            $activationUrl = Router::url(['controller' => 'events', 'action' => 'invitation/' . $activation_key, '_full' => true]);
 
 
 
@@ -3489,7 +3329,7 @@ $this->paginate = [
 
             $email->transport('gmail');
 
-            $email->template('inviteemail','csinvite');
+            $email->template('inviteemail', 'csinvite');
 
             $subject = "Invitation from chennaismile";
 
@@ -3503,9 +3343,11 @@ $this->paginate = [
 
             $email->subject($subject);
 
-            $email->viewVars(['title' => $event['title'], 'descriptioin' => $event['descriptioin'], 'URL' => $activationUrl, 'date' => $event['date'], 'time' => $event['time'], 'contact' => $event['contact_number'], 'mobile' => $event['mobile_number'],  'address_1' => $address['address_1'],  'address_2' => $address['address_2'],  'landmark' => $address['landmark'],
+            $email->viewVars([
+                'title' => $event['title'], 'descriptioin' => $event['descriptioin'], 'URL' => $activationUrl, 'date' => $event['date'], 'time' => $event['time'], 'contact' => $event['contact_number'], 'mobile' => $event['mobile_number'], 'address_1' => $address['address_1'], 'address_2' => $address['address_2'], 'landmark' => $address['landmark'],
 
-                'city' => $address['city'], 'state' => $address['state'], 'country' => $address['country'], 'google_map' => $event['google_map']]);
+                'city' => $address['city'], 'state' => $address['state'], 'country' => $address['country'], 'google_map' => $event['google_map']
+            ]);
 
             $email->send();
 
@@ -3543,21 +3385,17 @@ $this->paginate = [
 
         $this->loadModel('Invitefriends');
 
-        $invitefriends = $this->Invitefriends->find('all',array('conditions'=>array('activation_key'=>$activation_key)));
+        $invitefriends = $this->Invitefriends->find('all', array('conditions' => array('activation_key' => $activation_key)));
 
         $invitefriends = $invitefriends->first();
 
 
 
-        if(isset($invitefriends['events_id']))
-
-        {
+        if (isset($invitefriends['events_id'])) {
 
             $id = $invitefriends['events_id'];
 
-        } else
-
-        {
+        } else {
 
             return $this->redirect(['controller' => 'Users', 'action' => 'login']);
 
@@ -3599,9 +3437,11 @@ $this->paginate = [
 
         $likes = $this->Likes->find('all', ['conditions' => ['events_id' => $id]]);
 
-        $query = $this->Likes->find('all', ['select' => 'id',
+        $query = $this->Likes->find('all', [
+            'select' => 'id',
 
-                'conditions' => ['events_id' => $id]]);
+            'conditions' => ['events_id' => $id]
+        ]);
 
         $number = $query->count();
 
@@ -3623,11 +3463,12 @@ $this->paginate = [
 
         $this->loadModel('SubCategories');
 
-        $subCategories_new = $this->SubCategories->find('all', ['fields' => 'name',
+        $subCategories_new = $this->SubCategories->find('all', [
+            'fields' => 'name',
 
-                'conditions' => ['active' => 1]
+            'conditions' => ['active' => 1]
 
-                    ]);
+        ]);
 
 
 
@@ -3651,21 +3492,22 @@ $this->paginate = [
 
         $this->paginate = [
 
-            'contain' => ['Users', 'Categories',]
+            'contain' => ['Users', 'Categories', ]
 
         ];
 
-         $keyword = $this->request->query('keyword');
+        $keyword = $this->request->query('keyword');
 
-        if(!empty($keyword)){
+        if (!empty($keyword)) {
 
 
 
-            $this->paginate = ['conditions'=> array("OR" => array(
+            $this->paginate = ['conditions' => array("OR" => array(
 
-    'title LiKE' => '%'.$keyword.'%',
+                'title LiKE' => '%' . $keyword . '%',
 
-    'date LiKE' => '%'.$keyword.'%','time LiKE' => '%'.$keyword.'%','OrganizersName LiKE' => '%'.$keyword.'%' ))];
+                'date LiKE' => '%' . $keyword . '%', 'time LiKE' => '%' . $keyword . '%', 'OrganizersName LiKE' => '%' . $keyword . '%'
+            ))];
 
         //$this->paginate = ['conditions'=>['date LiKE' => '%'.$keyword.'%']];
 
@@ -3685,11 +3527,12 @@ $this->paginate = [
 
         $this->loadModel('SubCategories');
 
-        $subCategories_new = $this->SubCategories->find('all', ['fields' => 'name',
+        $subCategories_new = $this->SubCategories->find('all', [
+            'fields' => 'name',
 
-                'conditions' => ['active' => 1]
+            'conditions' => ['active' => 1]
 
-            ]);
+        ]);
 
         $this->loadModel('Address');
 
@@ -3699,13 +3542,13 @@ $this->paginate = [
 
         foreach ($events as $event) {
 
-             $address= $this->Address->find('all', array('conditions' => array('events_id'=> $event['id'])));
+            $address = $this->Address->find('all', array('conditions' => array('events_id' => $event['id'])));
 
-             $event['Address'] = $address->first();
+            $event['Address'] = $address->first();
 
-             $eventss[$i] =$event;
+            $eventss[$i] = $event;
 
-             $i++;
+            $i++;
 
         }
 
@@ -3729,7 +3572,7 @@ $this->paginate = [
 
     }
 
-     public function waitingevent()
+    public function waitingevent()
 
     {
 
@@ -3739,11 +3582,11 @@ $this->paginate = [
 
         $this->paginate = [
 
-            'contain' => ['Users', 'Categories',]
+            'contain' => ['Users', 'Categories', ]
 
         ];
 
-         $events = $this->paginate($this->Events->find('all',['limit' => 200, 'conditions' => array('Events.active' => 0 )]));
+        $events = $this->paginate($this->Events->find('all', ['limit' => 200, 'conditions' => array('Events.active' => 0)]));
 
        // $events = $this->paginate($this->Events);
 
@@ -3757,11 +3600,12 @@ $this->paginate = [
 
         $this->loadModel('SubCategories');
 
-        $subCategories_new = $this->SubCategories->find('all', ['fields' => 'name',
+        $subCategories_new = $this->SubCategories->find('all', [
+            'fields' => 'name',
 
-                'conditions' => ['active' => 1]
+            'conditions' => ['active' => 1]
 
-            ]);
+        ]);
 
         $this->loadModel('Address');
 
@@ -3771,13 +3615,13 @@ $this->paginate = [
 
         foreach ($events as $event) {
 
-             $address= $this->Address->find('all', array('conditions' => array('events_id'=> $event['id'])));
+            $address = $this->Address->find('all', array('conditions' => array('events_id' => $event['id'])));
 
-             $event['Address'] = $address->first();
+            $event['Address'] = $address->first();
 
-             $eventss[$i] =$event;
+            $eventss[$i] = $event;
 
-             $i++;
+            $i++;
 
         }
 
@@ -3803,17 +3647,17 @@ $this->paginate = [
 
 
 
-public function eventindex()
+    public function eventindex()
 
     {
 
-      $this->viewBuilder()->layout('admin');
+        $this->viewBuilder()->layout('admin');
 
-        
 
-         $this->loadModel('Events');
 
-         $tcConn = ConnectionManager::get('default');
+        $this->loadModel('Events');
+
+        $tcConn = ConnectionManager::get('default');
 
         $topq = "SELECT DISTINCT e.user_id, u.fullname, COUNT(e.user_id) as CreatedEvents 
 
@@ -3835,85 +3679,83 @@ order by CreatedEvents desc limit 5";
 
         $numevent = $this->Events->find()->where(['active' => 1])->count();
 
-         $delevent = $this->Events->find()->where(['active' => 2])->count();
+        $delevent = $this->Events->find()->where(['active' => 2])->count();
 
-         $ticevent = $this->Events->find()->where(['register_online' => 1,[ 'date >'=>date("Y-m-d") ]])->count();
+        $ticevent = $this->Events->find()->where(['register_online' => 1, ['date >' => date("Y-m-d")]])->count();
 
-    $freeevent = $this->Events->find()->where(['register_online' => 0,[ 'date >'=>date("Y-m-d") ]])->count();
+        $freeevent = $this->Events->find()->where(['register_online' => 0, ['date >' => date("Y-m-d")]])->count();
 
         $numbevent = $this->Events->find()->where(['active' => 0])->count();
 
-        $pastevent = $this->Events->find()->where([ 'date <' =>date("Y-m-d") ,'active' => 1])->count();
+        $pastevent = $this->Events->find()->where(['date <' => date("Y-m-d"), 'active' => 1])->count();
 
-         $toevent = $this->Events->find()->where(['created >' => date("Y-m-d") ])->count();
+        $toevent = $this->Events->find()->where(['created >' => date("Y-m-d")])->count();
 
-    $toactiveevent = $this->Events->find()->where(['created >' =>date("Y-m-d") , 'active' => 1 ])->count();
+        $toactiveevent = $this->Events->find()->where(['created >' => date("Y-m-d"), 'active' => 1])->count();
 
-          $yesterday = date("Y-m-d", mktime(0, 0, 0, date("m") , date("d")-1,date("Y")));
+        $yesterday = date("Y-m-d", mktime(0, 0, 0, date("m"), date("d") - 1, date("Y")));
 
-          $yesevent = $this->Events->find()->where([ 'created' => $yesterday ])->count();
+        $yesevent = $this->Events->find()->where(['created' => $yesterday])->count();
 
-           $week = date("Y-m-d", mktime(0, 0, 0, date("m") , date("d")-7,date("Y")));
+        $week = date("Y-m-d", mktime(0, 0, 0, date("m"), date("d") - 7, date("Y")));
 
-           $weekevent = $this->Events->find()->where([ 'created >=' => $week ])->count();
+        $weekevent = $this->Events->find()->where(['created >=' => $week])->count();
 
-           $month = date("Y-m-d", mktime(0, 0, 0, date("m")-1 , date("d"),date("Y")));
+        $month = date("Y-m-d", mktime(0, 0, 0, date("m") - 1, date("d"), date("Y")));
 
-            $monthevent = $this->Events->find()->where([ 'created >=' => $month])->count();
+        $monthevent = $this->Events->find()->where(['created >=' => $month])->count();
 
-        $upevent = $this->Events->find()->where([ 'date >'=>date("Y-m-d") ])->count();
+        $upevent = $this->Events->find()->where(['date >' => date("Y-m-d")])->count();
 
-         if(!empty($this->Auth->user('id')))
-
-        {
+        if (!empty($this->Auth->user('id'))) {
 
             $users_id = $this->Auth->user('id');
 
            // $this->paginate['conditions'] = array("Events.user_id" => $users_id);
 
-             $orgevent = $this->Events->find()->where(["Events.user_id" => $users_id])->count();
+            $orgevent = $this->Events->find()->where(["Events.user_id" => $users_id])->count();
 
-            $orgactiveevent = $this->Events->find()->where(["Events.user_id" => $users_id,'active' => 1])->count();
+            $orgactiveevent = $this->Events->find()->where(["Events.user_id" => $users_id, 'active' => 1])->count();
 
-            $orgwaitevent = $this->Events->find()->where(["Events.user_id" => $users_id,'active' => 0])->count();
+            $orgwaitevent = $this->Events->find()->where(["Events.user_id" => $users_id, 'active' => 0])->count();
 
-             $orgpaidevent = $this->Events->find()->where(["Events.user_id" => $users_id,'register_online' => 1])->count();
+            $orgpaidevent = $this->Events->find()->where(["Events.user_id" => $users_id, 'register_online' => 1])->count();
 
-              $orgfreeevent = $this->Events->find()->where(["Events.user_id" => $users_id,'register_online' => 0])->count();
+            $orgfreeevent = $this->Events->find()->where(["Events.user_id" => $users_id, 'register_online' => 0])->count();
 
-        $uporgevent = $this->Events->find()->where(["Events.user_id" => $users_id,'date >' => date("Y-m-d") ])->count();       
+            $uporgevent = $this->Events->find()->where(["Events.user_id" => $users_id, 'date >' => date("Y-m-d")])->count();
 
         }
 
         $this->loadModel('Users');
 
-         $neworg = $this->Users->find()->where(['created >'=> date("Y-m-d"),'group_id' => 2])->count();
+        $neworg = $this->Users->find()->where(['created >' => date("Y-m-d"), 'group_id' => 2])->count();
 
-        $newuser = $this->Users->find()->where(['created >'=> date("Y-m-d")])->count();
+        $newuser = $this->Users->find()->where(['created >' => date("Y-m-d")])->count();
 
-        $yesterday = date("Y-m-d", mktime(0, 0, 0, date("m") , date("d")-1,date("Y")));
+        $yesterday = date("Y-m-d", mktime(0, 0, 0, date("m"), date("d") - 1, date("Y")));
 
-        $yesuser = $this->Users->find()->where(['created'=> $yesterday])->count();
+        $yesuser = $this->Users->find()->where(['created' => $yesterday])->count();
 
-        $yesorg = $this->Users->find()->where(['created'=> $yesterday,'group_id' => 2])->count();
+        $yesorg = $this->Users->find()->where(['created' => $yesterday, 'group_id' => 2])->count();
 
-        $week = date("Y-m-d", mktime(0, 0, 0, date("m") , date("d")-7,date("Y")));
+        $week = date("Y-m-d", mktime(0, 0, 0, date("m"), date("d") - 7, date("Y")));
 
-        $weekuser = $this->Users->find()->where(['created'=> $week ])->count();
+        $weekuser = $this->Users->find()->where(['created' => $week])->count();
 
-         $weekorg = $this->Users->find()->where(['created'=> $week ,'group_id' => 2])->count();
+        $weekorg = $this->Users->find()->where(['created' => $week, 'group_id' => 2])->count();
 
         $number = $this->Users->find()->where(['group_id' => 1])->count();
 
-         $numorg = $this->Users->find()->where(['group_id' => 2])->count();
+        $numorg = $this->Users->find()->where(['group_id' => 2])->count();
 
 //$organizer = $this->Users->find()->where(['group_id' => 2])->count();
 
- $this->loadModel('Events');
+        $this->loadModel('Events');
 
-    $users = $this->paginate($this->Users->find('all',['limit' => 200, 'conditions' => array('group_id' => 2 )])); 
+        $users = $this->paginate($this->Users->find('all', ['limit' => 200, 'conditions' => array('group_id' => 2)]));
 
-       $eve = $this->Events->find()->where(["Events.user_id" => "Users.id"])->count(); 
+        $eve = $this->Events->find()->where(["Events.user_id" => "Users.id"])->count(); 
 
     //$users = $this->paginate($this->Users->find('all',['limit' => 200, 'conditions' => array('group_id' => 2 )]));
 
@@ -3923,55 +3765,53 @@ order by CreatedEvents desc limit 5";
 
             //$users_id = $this->users('id');
 
-             $eventss = $this->Events->find()->where(["Events.user_id" => "Users.id"])->count();
+            $eventss = $this->Events->find()->where(["Events.user_id" => "Users.id"])->count();
 
         }
 
-         
 
-          $managers = $this->paginate($this->Users->find('all',['limit' => 200, 'conditions' => array('group_id' => 6 )]));
 
-   $this->loadModel('Contact');
+        $managers = $this->paginate($this->Users->find('all', ['limit' => 200, 'conditions' => array('group_id' => 6)]));
+
+        $this->loadModel('Contact');
 
         $numcontact = $this->Contact->find()->where(['id' != 0])->count();
 
-        $newcontact = $this->Contact->find()->where(['created >'=> date("Y-m-d")])->count();
+        $newcontact = $this->Contact->find()->where(['created >' => date("Y-m-d")])->count();
 
-        $yescontact = $this->Contact->find()->where(['created'=> $yesterday])->count();
+        $yescontact = $this->Contact->find()->where(['created' => $yesterday])->count();
 
-        $weekcontact = $this->Contact->find()->where(['created'=> $week ])->count();
+        $weekcontact = $this->Contact->find()->where(['created' => $week])->count();
 
-  
 
- $this->loadModel('Tickets');
+
+        $this->loadModel('Tickets');
 
         $numtic = $this->Tickets->find()->where(['status' => 'success'])->count();
 
-        $tictoday = $this->Tickets->find()->where(['status' => 'success','created >'=> date("Y-m-d")])->count();
+        $tictoday = $this->Tickets->find()->where(['status' => 'success', 'created >' => date("Y-m-d")])->count();
 
-        $ticyes = $this->Tickets->find()->where(['status' => 'success','created'=> $yesterday])->count();
+        $ticyes = $this->Tickets->find()->where(['status' => 'success', 'created' => $yesterday])->count();
 
-        $ticweek = $this->Tickets->find()->where(['status' => 'success','created'=> $week ])->count();
+        $ticweek = $this->Tickets->find()->where(['status' => 'success', 'created' => $week])->count();
 
-        $month = date("Y-m-d", mktime(0, 0, 0, date("m")-1 , date("d"),date("Y")));
+        $month = date("Y-m-d", mktime(0, 0, 0, date("m") - 1, date("d"), date("Y")));
 
-        $year = date("Y-m-d", mktime(0, 0, 0, date("m") , date("d"),date("Y")-1));
+        $year = date("Y-m-d", mktime(0, 0, 0, date("m"), date("d"), date("Y") - 1));
 
-        $ticmonth = $this->Tickets->find()->where(['status' => 'success','created'=> $week])->count();
+        $ticmonth = $this->Tickets->find()->where(['status' => 'success', 'created' => $week])->count();
 
-        $ticyr = $this->Tickets->find()->where(['status' => 'success','created'=> $week])->count();
+        $ticyr = $this->Tickets->find()->where(['status' => 'success', 'created' => $week])->count();
 
-       
 
- $this->paginate = [
+
+        $this->paginate = [
 
             'contain' => ['Events']
 
         ];
 
-        if(!empty($this->Auth->user('id')))
-
-        {
+        if (!empty($this->Auth->user('id'))) {
 
             $users_id = $this->Auth->user('id');
 
@@ -3991,15 +3831,15 @@ order by CreatedEvents desc limit 5";
 
 
 
-       $page = (isset($this->request->query['page'])) ? $this->request->query['page'] : 0;
+        $page = (isset($this->request->query['page'])) ? $this->request->query['page'] : 0;
 
-          $this->set(compact('users'));
+        $this->set(compact('users'));
 
         $this->set('_serialize', ['users']);
 
- $this->set('top',$top);
+        $this->set('top', $top);
 
-        $this->set(compact('number','numevent','numcontact','numtic','numbevent','upevent','newuser','yesuser','weekuser','tictoday','ticyes','ticweek','ticmonth','ticyr','numorg','managers','orgevent','orgwaitevent','uporgevent','orgactiveevent','neworg','yesorg','weekorg','newcontact','weekcontact','yescontact','ticevent','orgpaidevent','orgfreeevent','orgeventtic','toevent','delevent','pastevent','monthevent','weekevent','yesevent','eventss','eventsss','freeevent','toactiveevent','newcontact','weekcontact','yescontact','numcontact'));
+        $this->set(compact('number', 'numevent', 'numcontact', 'numtic', 'numbevent', 'upevent', 'newuser', 'yesuser', 'weekuser', 'tictoday', 'ticyes', 'ticweek', 'ticmonth', 'ticyr', 'numorg', 'managers', 'orgevent', 'orgwaitevent', 'uporgevent', 'orgactiveevent', 'neworg', 'yesorg', 'weekorg', 'newcontact', 'weekcontact', 'yescontact', 'ticevent', 'orgpaidevent', 'orgfreeevent', 'orgeventtic', 'toevent', 'delevent', 'pastevent', 'monthevent', 'weekevent', 'yesevent', 'eventss', 'eventsss', 'freeevent', 'toactiveevent', 'newcontact', 'weekcontact', 'yescontact', 'numcontact'));
 
         
 
@@ -4035,21 +3875,17 @@ order by CreatedEvents desc limit 5";
 
         $this->loadModel('Invitefriends');
 
-        $invitefriends = $this->Invitefriends->find('all',array('conditions'=>array('activation_key'=>$activation_key)));
+        $invitefriends = $this->Invitefriends->find('all', array('conditions' => array('activation_key' => $activation_key)));
 
         $invitefriends = $invitefriends->first();
 
 
 
-        if(isset($invitefriends['events_id']))
-
-        {
+        if (isset($invitefriends['events_id'])) {
 
             $id = $invitefriends['events_id'];
 
-        } else
-
-        {
+        } else {
 
             return $this->redirect(['controller' => 'Users', 'action' => 'login']);
 
@@ -4091,9 +3927,11 @@ order by CreatedEvents desc limit 5";
 
         $likes = $this->Likes->find('all', ['conditions' => ['events_id' => $id]]);
 
-        $query = $this->Likes->find('all', ['select' => 'id',
+        $query = $this->Likes->find('all', [
+            'select' => 'id',
 
-                'conditions' => ['events_id' => $id]]);
+            'conditions' => ['events_id' => $id]
+        ]);
 
         $number = $query->count();
 
@@ -4115,11 +3953,12 @@ order by CreatedEvents desc limit 5";
 
         $this->loadModel('SubCategories');
 
-        $subCategories_new = $this->SubCategories->find('all', ['fields' => 'name',
+        $subCategories_new = $this->SubCategories->find('all', [
+            'fields' => 'name',
 
-                'conditions' => ['active' => 1]
+            'conditions' => ['active' => 1]
 
-                    ]);
+        ]);
 
 
 
@@ -4173,7 +4012,7 @@ order by CreatedEvents desc limit 5";
 
         ]);
 
-         $this->viewBuilder()->layout('admin');
+        $this->viewBuilder()->layout('admin');
 
         //$this->viewBuilder()->layout('event_home');
 
@@ -4183,9 +4022,7 @@ order by CreatedEvents desc limit 5";
 
         $address = $address->first();
 
-        if(!empty($this->Auth->user('id')))
-
-        {
+        if (!empty($this->Auth->user('id'))) {
 
             $users_id = $this->Auth->user('id');
 
@@ -4213,7 +4050,7 @@ order by CreatedEvents desc limit 5";
 
         }
 
-        $event['Address'] =$address;
+        $event['Address'] = $address;
 
 
 
@@ -4237,7 +4074,7 @@ order by CreatedEvents desc limit 5";
 
     }
 
-/**
+    /**
 
      * Edit method
 
@@ -4261,7 +4098,7 @@ order by CreatedEvents desc limit 5";
 
         ]);
 
-         $this->viewBuilder()->layout('admin');
+        $this->viewBuilder()->layout('admin');
 
         //$this->viewBuilder()->layout('event_home');
 
@@ -4271,9 +4108,7 @@ order by CreatedEvents desc limit 5";
 
         $address = $address->first();
 
-        if(!empty($this->Auth->user('id')))
-
-        {
+        if (!empty($this->Auth->user('id'))) {
 
             $users_id = $this->Auth->user('id');
 
@@ -4301,7 +4136,7 @@ order by CreatedEvents desc limit 5";
 
         }
 
-        $event['Address'] =$address;
+        $event['Address'] = $address;
 
 
 
@@ -4333,15 +4168,15 @@ order by CreatedEvents desc limit 5";
 
     {
 
-       $this->loadModel('Groups');
+        $this->loadModel('Groups');
 
-        $groups = $this->Groups->find('list', ['limit' => 200,'conditions' => array('role' => 'Users')]);
+        $groups = $this->Groups->find('list', ['limit' => 200, 'conditions' => array('role' => 'Users')]);
 
         $this->set(compact('user', 'groups'));
 
         $logged = false;
 
-        if($this->Auth->user())
+        if ($this->Auth->user())
 
             $logged = true;
 
@@ -4363,11 +4198,12 @@ order by CreatedEvents desc limit 5";
 
         $this->loadModel('SubCategories');
 
-        $subCategories_new = $this->SubCategories->find('all', ['fields' => 'name',
+        $subCategories_new = $this->SubCategories->find('all', [
+            'fields' => 'name',
 
-                'conditions' => ['active' => 1]
+            'conditions' => ['active' => 1]
 
-            ]);
+        ]);
 
 
 
@@ -4412,4 +4248,3 @@ order by CreatedEvents desc limit 5";
     }
 
 }
-
