@@ -19,7 +19,7 @@ class TicketsController extends AppController
     public function index()
     {
         $this->paginate = [
-            'contain' => ['Events']
+            'contain' => ['Orders', 'Events']
         ];
         $tickets = $this->paginate($this->Tickets);
 
@@ -37,7 +37,7 @@ class TicketsController extends AppController
     public function view($id = null)
     {
         $ticket = $this->Tickets->get($id, [
-            'contain' => ['Events']
+            'contain' => ['Orders', 'Events']
         ]);
 
         $this->set('ticket', $ticket);
@@ -62,8 +62,9 @@ class TicketsController extends AppController
                 $this->Flash->error(__('The ticket could not be saved. Please, try again.'));
             }
         }
+        $orders = $this->Tickets->Orders->find('list', ['limit' => 200]);
         $events = $this->Tickets->Events->find('list', ['limit' => 200]);
-        $this->set(compact('ticket', 'events'));
+        $this->set(compact('ticket', 'orders', 'events'));
         $this->set('_serialize', ['ticket']);
     }
 
@@ -89,8 +90,9 @@ class TicketsController extends AppController
                 $this->Flash->error(__('The ticket could not be saved. Please, try again.'));
             }
         }
+        $orders = $this->Tickets->Orders->find('list', ['limit' => 200]);
         $events = $this->Tickets->Events->find('list', ['limit' => 200]);
-        $this->set(compact('ticket', 'events'));
+        $this->set(compact('ticket', 'orders', 'events'));
         $this->set('_serialize', ['ticket']);
     }
 

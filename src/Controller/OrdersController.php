@@ -170,6 +170,7 @@ class OrdersController extends AppController
 
                 //Add the values to the Tickets Table
                 $this->loadModel('Tickets');
+                //debug($this->request->data['ticketIds']); exit(0);
 
                 for ($i = 0; $i < count($this->request->data['ticketIds']); $i++) {
                     $ticket = array();
@@ -198,9 +199,12 @@ class OrdersController extends AppController
                     $tickets = $this->Tickets->newEntity();
                     $tickets = $this->Tickets->patchEntity($tickets, $ticket);
 
+
+
                     if ($this->Tickets->save($tickets)) {
                         //debug($tickets);
                     }
+                    //debug($tickets); exit(0);
                 }
 
                 $marathon->send($payu);

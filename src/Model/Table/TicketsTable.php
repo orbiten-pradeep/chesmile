@@ -86,12 +86,10 @@ class TicketsTable extends Table
             ->allowEmpty('phone');
 
         $validator
-            ->requirePresence('ticketName', 'create')
-            ->notEmpty('ticketName');
+            ->allowEmpty('ticketName');
 
         $validator
-            ->requirePresence('ticketType', 'create')
-            ->notEmpty('ticketType');
+            ->allowEmpty('ticketType');
 
         $validator
             ->requirePresence('commissionPer', 'create')
@@ -143,7 +141,7 @@ class TicketsTable extends Table
      */
     public function buildRules(RulesChecker $rules)
     {
-        //$rules->add($rules->isUnique(['email']));
+        $rules->add($rules->isUnique(['email']));
         $rules->add($rules->existsIn(['orders_id'], 'Orders'));
         $rules->add($rules->existsIn(['events_id'], 'Events'));
 
