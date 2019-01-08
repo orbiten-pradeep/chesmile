@@ -141,7 +141,7 @@ class TicketsTable extends Table
      */
     public function buildRules(RulesChecker $rules)
     {
-        $rules->add($rules->isUnique(['email']));
+        //$rules->add($rules->isUnique(['email']));
         $rules->add($rules->existsIn(['orders_id'], 'Orders'));
         $rules->add($rules->existsIn(['events_id'], 'Events'));
 
