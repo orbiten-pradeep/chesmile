@@ -83,6 +83,7 @@ class BannersController extends AppController
          $this->viewBuilder()->layout('admin');
          $banner = $this->Banners->newEntity();
         if ($this->request->is('post')) {
+           
             if(!empty($this->request->data['image']))
             {
                 $banners = $this->request->data['image'];
@@ -108,12 +109,19 @@ class BannersController extends AppController
                     $banners = $filename;
                 }
             }
+             
              if(!is_null($banners))
             {
                 $this->request->data['image'] = $banners;
             }
+
             $banner = $this->Banners->patchEntity($banner, $this->request->data);
             if ($this->Banners->save($banner)) {
+                 if( $banner->bannerstype == 'home'){
+                $new_id = $banner->id;
+               
+                $this->Banners->updateAll(['categories_id' => '0'], ['id' => $new_id]);
+            }
                 $this->Flash->success(__('The banner has been saved.'));
                 return $this->redirect(['action' => 'index']);
             } else {
@@ -123,7 +131,7 @@ class BannersController extends AppController
 //$events = $this->Banners->Events->find()->select(['Events.title'])->where(['active' => 1,'date >'=>date("Y-m-d")]);
         
         $events = $this->Banners->Events->find('list')->where(['active' => 1,'date >'=>date("Y-m-d")]);
-         $categories = $this->Banners->Categories->find('list')->where(['active' => 1]);
+         $categories = $this->Banners->Categories->find('list', ['limit' => 200]);
         $this->set(compact('banner', 'categories'));
         $this->set(compact('banner', 'events'));
         $this->set('_serialize', ['banner']);
@@ -139,13 +147,56 @@ class BannersController extends AppController
      */
     public function edit($id = null)
     {
-         $this->viewBuilder()->layout('admin');
+      $this->viewBuilder()->layout('admin');
         $banner = $this->Banners->get($id, [
             'contain' => []
         ]);
         if ($this->request->is(['patch', 'post', 'put'])) {
+            
+            if(!empty($this->request->data['image']))
+            {
+
+                $banners = $this->request->data['image'];
+                $ext = substr(strtolower(strrchr($banners['name'], '.')), 1); //get the extension
+                $arr_ext = array('jpg', 'jpeg', 'png'); //set allowed extensions
+                if($banners['size']/1024 > '2048')
+                {
+                    $this->Flash->error(__('"imageLogs", __METHOD__." The uploaded file exceeds the MAX_FILE_SIZE(2MB) '));
+                    $errCheck = true;
+                }
+                else if(in_array($ext, $arr_ext))
+                {
+                    $uploadFolder = WWW_ROOT . 'img/banners_hme';
+                    if( !file_exists($uploadFolder) ){
+                        mkdir($uploadFolder);
+                    }
+                    $filename = str_replace(" ", "-", rand(1, 3000) . $banners['name']);
+                    move_uploaded_file($banners['tmp_name'], WWW_ROOT . 'img/banners_hme' . DS . $filename);
+                    $this->request->data['image']['name'] = $filename;
+                    $banners = $filename;
+                }
+            }
+            if(!is_null($banners))
+            {
+                $this->request->data['image'] = $banners;
+            }
+                 // pr( $banners['size']);
+                 //            exit;
+            if( $banners['size'] == 0){
+             $image = $banner['image'];
+                            $this->request->data['image'] = $image;
+                            // pr($image);
+                            // exit;
+            }
             $banner = $this->Banners->patchEntity($banner, $this->request->data);
+             
             if ($this->Banners->save($banner)) {
+                    if( $banner->bannerstype == 'home'){
+               // $new_id = $banner->id;
+               
+                $this->Banners->updateAll(['categories_id' => '0'], ['id' => $id]);
+            }
+
                 $this->Flash->success(__('The banner has been saved.'));
 
                 return $this->redirect(['action' => 'index']);
@@ -153,8 +204,11 @@ class BannersController extends AppController
                 $this->Flash->error(__('The banner could not be saved. Please, try again.'));
             }
         }
-        $events = $this->Banners->Events->find('list', ['limit' => 200]);
+        //$events = $this->Banners->Events->find('list', ['limit' => 200]);
+         $events = $this->Banners->Events->find('list')->where(['active' => 1,'date >'=>date("Y-m-d")]);
+         $categories = $this->Banners->Categories->find('list', ['limit' => 200]);
         $this->set(compact('banner', 'events'));
+         $this->set(compact('banner', 'categories'));
         $this->set('_serialize', ['banner']);
     }
 /**

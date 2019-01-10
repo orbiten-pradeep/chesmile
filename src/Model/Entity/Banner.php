@@ -8,14 +8,16 @@ use Cake\ORM\Entity;
  *
  * @property int $id
  * @property int $events_id
- * @property string $image
+ * @property string $bannerstype
  * @property string $categories_id
+ * @property string $image
  * @property string $url
  * @property string $caption
  * @property int $active
  * @property \Cake\I18n\Time $created
  *
  * @property \App\Model\Entity\Event $event
+ * @property \App\Model\Entity\Category $category
  */
 class Banner extends Entity
 {

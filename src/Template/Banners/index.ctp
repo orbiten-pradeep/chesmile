@@ -86,6 +86,8 @@
              <th scope="col"><?= __('Select') ?><!-- <?= $this->Paginator->sort('Select') ?> --></th>
              <th scope="col"><?= __('Serial No') ?><!-- <?= $this->Paginator->sort('Serial No') ?> --></th>
                 <th scope="col"><?= $this->Paginator->sort('events_id') ?></th>
+                <th scope="col"><?= $this->Paginator->sort('bannerstype') ?></th>
+                <th scope="col"><?= $this->Paginator->sort('categories_id') ?></th>
                 <th scope="col"><?= $this->Paginator->sort('image') ?></th>
                 <th scope="col"><?= $this->Paginator->sort('url') ?></th>
                 <th scope="col"><?= $this->Paginator->sort('caption') ?></th>
@@ -114,8 +116,10 @@ foreach ($banners as $banner): $n++;?>
                 <?= $this->Number->format($n) ?>
               </td> 
                 <td><?= $banner->has('event') ? $this->Html->link($banner->event->title, ['controller' => 'Events', 'action' => 'view', $banner->event->id]) : '' ?></td>
+                <td><?= h($banner->bannerstype) ?></td>
+               <td><?= h($banner->categories_id) ?></td>
                  <td>
-                <?php echo $this->Html->image('banners_hme/'.$banner->image, array('width' => '20px', 'height' => '20px','alt'=>'Card')); ?>
+                <?php echo $this->Html->image('banners_hme/'.$banner->image, array('width' => '20px', 'height' => '20px','alt'=>'Banner Image')); ?>
               </td>
               
                <!--  <td><?= h($banner->image) ?></td> -->

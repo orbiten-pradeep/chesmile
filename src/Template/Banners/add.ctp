@@ -63,9 +63,9 @@ use Cake\Routing\Router;
             ];
 
             echo $this->Form->input('bannerstype',  ['options' => $options]);?> -->
-            <select onchange="Check(this);" id ="bannerstype">
-    <option id ="home" value="home">Home Banner</option>
-    <option id = "category" value="category">Category</option>
+            <select onchange="Check(this);" id ="bannerstype" name="bannerstype">
+    <option id ="home" value="home" name="bannerstype">Home Banner</option>
+    <option id = "category" value="category" name="bannerstype">Category</option>
     
     </select>
 
@@ -74,7 +74,7 @@ use Cake\Routing\Router;
             //echo $this->Form->input('categories_id', ['options' => $categories]);
         ?>   
          <div id="cat" style="display: none;">
-           <?php  echo $this->Form->input('categories_id', ['options' => $categories]);
+           <?php  echo $this->Form->input('categories_id', ['options' => $categories,'default'=> 0]);
         ?>   
          </div>
                                     </div>

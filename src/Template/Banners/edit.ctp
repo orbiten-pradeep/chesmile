@@ -43,30 +43,38 @@
         <li><?= $this->Html->link(__('New Event'), ['controller' => 'Events', 'action' => 'add']) ?></li>
         </ul>
 </nav>
-
 <section class="content">
         <div class="container-fluid">
             <div class="block-header">
                 <h2>Edit Banner</h2>
             </div>
-
             <!-- Vertical Layout -->
             <div class="row clearfix">
                 <div class="col-lg-6 col-md-6 col-sm-6 col-xs-12">
                     <div class="card">
                         <div class="body">
-                           <?= $this->Form->create($banner) ?>
+                          <?= $this->Form->create($banner, array('type' => 'file')) ?>
                             <fieldset>
         <legend><?= __('Edit Banner') ?></legend>
-   
+   <div class="form-group">  <select onchange="Check(this);" id ="bannerstype" name="bannerstype">
+   <option name="bannerstype" value="<?=($banner->bannerstype) ?>">
+    <?= h($banner->bannerstype) ?> banner</option>
+    <option id ="home" value="home" name="bannerstype">Home Banner</option>
+    <option id = "category" value="category" name="bannerstype">Category</option>
+    
+    </select></div>
+   <div id="cat" style="display: none;">
+           <?php  echo $this->Form->input('categories_id', ['options' => $categories]);
+        ?>   
+         </div>
                                 <div class="form-group">
                                          <?php  echo $this->Form->input('events_id', ['options' => $events]);
            ?> 
                                    </div>
-
+<label for="">Banner Image</label>
                                 <div class="form-group">
-                                    <div class="form-line">
-                                    <?php  echo $this->Form->input('image',['type' => 'file', 'accept' => 'banners_hme/*','class' => 'form-control']);?>
+                                    <div class="form-line"><?php $this->Form->input('image');?><?php echo $this->Html->image('banners_hme/'.$banner->image, array('width' => '80px', 'height' => '80px','alt'=>'Banner Image')); ?>
+                                    <?php  echo $this->Form->input('image',['type' => 'file', 'accept' => 'image/*','class' => 'form-control','label'=>false,'value'=> $banner->image]);?>
                                          </div>
                                 </div>
 
@@ -100,3 +108,13 @@
             </div>
         </div>
 </section>
+<script>
+    function Check(that) {
+        if (that.value == "category") {
+         // alert("check");
+            document.getElementById("cat").style.display = "block";
+        } else {
+            document.getElementById("cat").style.display = "none";
+        }
+    }
+</script>

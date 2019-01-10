@@ -46,7 +46,8 @@ class BannersTable extends Table
             'joinType' => 'INNER'
         ]);
         $this->belongsTo('Categories', [
-            'foreignKey' => 'categories_id'
+            'foreignKey' => 'categories_id',
+            'joinType' => 'INNER'
         ]);
     }
 
@@ -61,6 +62,10 @@ class BannersTable extends Table
         $validator
             ->integer('id')
             ->allowEmpty('id', 'create');
+
+        $validator
+            ->requirePresence('bannerstype', 'create')
+            ->notEmpty('bannerstype');
 
         $validator
             ->allowEmpty('image');

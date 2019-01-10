@@ -27,8 +27,8 @@ use Cake\I18n\Time;
    
         <div class="container">
             <div class="cs-tag-title-add">
-                    <div class="md-form">
- <?php echo $this->Form->input('title',array('label' => 'Event Title *','div' => false,'id' => 'title', 'class' => 'title-form', 'style'=>'color: #FFF;','placeholder' => 'Please enter your event title')); ?><p id="p1" style="color: #FF0000; font-size: 11px;"></p>
+                    <div class="">
+ <?php echo $this->Form->input('title',array('label'=>false,'div' => false,'id' => 'title', 'class' => 'title-form', 'style'=>'color: #000;','placeholder' => 'Event Title *')); ?><p id="p1" style="color: #FF0000; font-size: 11px;"></p>
             </div>
             </div>
         </div>
@@ -215,7 +215,7 @@ use Cake\I18n\Time;
                     </div>
 
                     <div class="md-form">
-                        <?= $this->Form->input('landmark',array('div' => false,'label' => 'Landmark *','class' => 'form-control', 'placeholder' => 'Any Specific Landmark?'));?>  <p id="p11" style="color: #FF0000; font-size: 11px;"></p>
+                        <?= $this->Form->input('landmark',array('div' => false,'label' => 'Landmark','class' => 'form-control', 'placeholder' => 'Any Specific Landmark?'));?>  <p id="p11" style="color: #FF0000; font-size: 11px;"></p>
                     </div>
 
                     <div class="md-form">
@@ -606,13 +606,13 @@ function showImage(src, target) {
              x1.className = "show";
      setTimeout(function(){ x1.className = x1.className.replace("show", ""); }, 3000);
         }
-         if ($('#landmark').val() == '') {
-            status = false;
-             $("#landmark").focus();
-             $('#p11').text("* please type landmark *"); 
-             x1.className = "show";
-     setTimeout(function(){ x1.className = x1.className.replace("show", ""); }, 3000);
-        }
+     //     if ($('#landmark').val() == '') {
+     //        status = false;
+     //         $("#landmark").focus();
+     //         $('#p11').text("* please type landmark *"); 
+     //         x1.className = "show";
+     // setTimeout(function(){ x1.className = x1.className.replace("show", ""); }, 3000);
+     //    }
         return status;
     });
     </script>

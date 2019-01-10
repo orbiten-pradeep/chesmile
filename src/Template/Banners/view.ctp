@@ -76,8 +76,16 @@
             <td><?= $banner->has('event') ? $this->Html->link($banner->event->title, ['controller' => 'Events', 'action' => 'view', $banner->event->id]) : '' ?></td>
         </tr>
         <tr>
+            <th scope="row"><?= __('Banner Type') ?></th>
+            <td><?= h($banner->bannerstype) ?></td>
+        </tr>
+        <tr>
+            <th scope="row"><?= __('Category') ?></th>
+            <td><?= h($banner->categories_id) ?></td>
+        </tr>
+        <tr>
             <th scope="row"><?= __('Image') ?></th>
-            <td><?= h($banner->image) ?></td>
+            <td><?= h($banner->image) ?> <?php echo $this->Html->image('banners_hme/'.$banner->image, array('width' => '20px', 'height' => '20px','alt'=>'Banner Image')); ?></td>
         </tr>
         <tr>
             <th scope="row"><?= __('Url') ?></th>
