@@ -8,22 +8,32 @@ $(document).ready(function() {
     });*/
 
     $('.date-input-class').daterangepicker({
-        opens: 'left'
+        opens: 'left',
+        autoUpdateInput: false
     }, function(start, end, label) {
         console.log("A new date selection was made: " + start.format('YYYY-MM-DD') + ' to ' + end.format('YYYY-MM-DD'));
+        $('.date-input-class').focus();
+    });
+
+    $('.date-input-class').on('apply.daterangepicker', function(ev, picker) {
+        $(this).val(picker.startDate.format('MM/DD/YYYY') + ' - ' + picker.endDate.format('MM/DD/YYYY'));
+        //$(this).focus();
     });
 
     $('.time-input').timepicker({
         timeFormat: 'h:mm p',
-        interval: 60,
+        interval: 30,
         minTime: '10',
-        maxTime: '6:00pm',
-        defaultTime: '11',
-        startTime: '10:00',
+        maxTime: '11:00pm',
+        defaultTime: '',
+        startTime: '12:00',
         dynamic: false,
         dropdown: true,
-        scrollbar: true
-    });
+        scrollbar: false,
+        change: function(time) {
+            $(this).focus();
+        }
+    }); 
 
     var e = document.getElementById("categories-id");
     if (e) {
@@ -276,6 +286,7 @@ $(document).ready(function() {
             return (isMobile.Android() || isMobile.BlackBerry() || isMobile.iOS() || isMobile.Opera() || isMobile.Windows());
         }
     };
+
     $(document).on("click", '.whatsapp', function() {
         if (isMobile.any()) {
 
@@ -351,6 +362,5 @@ $(document).ready(function() {
         return false;
 
     });
-
 
 });

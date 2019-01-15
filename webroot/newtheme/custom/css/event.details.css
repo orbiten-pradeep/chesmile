@@ -26,8 +26,7 @@
     letter-spacing: .5px;
 }
 .tag-border{
-    border:1px solid #4e4548!important;
-    ;
+    border:1px solid #4e4548!important; 
 }
 .tagline{
     margin-top: 9px;
@@ -36,10 +35,8 @@
     border-radius: 7px!important;
     background-color: #f4f4f4;
 }
-.cs-descr-box{
-    height: 250px;
-    overflow-y: scroll;
-    border: 1px solid #d4d4d4;
+.cs-descr-box {
+    height: 250px; 
 }
 .cs-title{
     /* color: black;

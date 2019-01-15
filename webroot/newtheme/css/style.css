@@ -763,3 +763,7 @@ div#noEventsMsg {
     margin-left: -20px;
     font-size: large !important;
 }
+.error-txt {
+    color: #FF0000; 
+    font-size: 11px;
+}
