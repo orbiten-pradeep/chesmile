@@ -22,7 +22,7 @@
 
     <!-- <link href="<?php echo $this->Url->build('/newtheme/css/thumbs2.css'); ?>" rel="stylesheet"> -->
 
-    <link href="<?php echo $this->Url->build('/newtheme/css/select2.min.css'); ?>" rel="stylesheet">
+    <link href="https://cdnjs.cloudflare.com/ajax/libs/select2/4.0.5/css/select2.css" rel="stylesheet" />
     
     <!-- Your custom styles (optional) -->
     <link href="<?php echo $this->Url->build('/newtheme/css/style.css'); ?>" rel="stylesheet">
@@ -33,15 +33,17 @@
 
     <link href="<?php echo $this->Url->build('/newtheme/custom/css/event.details.css'); ?>" rel="stylesheet">    
  
- <link href="<?php echo $this->Url->build('/newtheme/custom/css/event.add.css'); ?>" rel="stylesheet">    
+    <link href="<?php echo $this->Url->build('/newtheme/custom/css/event.add.css'); ?>" rel="stylesheet">    
 
-    <link rel="stylesheet" href="//code.jquery.com/ui/1.12.1/themes/base/jquery-ui.css">
+    <!-- <link rel="stylesheet" href="//code.jquery.com/ui/1.12.1/themes/base/jquery-ui.css"> -->
+    <link rel="stylesheet" href="https://ajax.googleapis.com/ajax/libs/jqueryui/1.12.1/themes/smoothness/jquery-ui.css">
 
     <link rel="stylesheet" href="//cdnjs.cloudflare.com/ajax/libs/timepicker/1.3.5/jquery.timepicker.min.css">
 
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/4.7.0/css/font-awesome.min.css">
 
-    <?php echo $this->Html->css(['daterangepicker']); ?>
+    <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/daterangepicker/daterangepicker.css">
+
     <link href="https://fonts.googleapis.com/css?family=PT+Sans:400,400i,700,700i|Roboto:100,100i,300,300i,400,400i,500,500i,700,700i,900,900i" rel="stylesheet">
 </head>
 
@@ -667,13 +669,14 @@
 
     <script type="text/javascript" src="<?php echo $this->Url->build('/newtheme/js/thumbnail-slider.js'); ?>"></script>
 
-    <script type="text/javascript" src="<?php echo $this->Url->build('/newtheme/js/select2.min.js'); ?>"></script>
+    <script type="text/javascript" src="https://cdnjs.cloudflare.com/ajax/libs/select2/4.0.5/js/select2.min.js"></script>
 
     <script src="//cdnjs.cloudflare.com/ajax/libs/timepicker/1.3.5/jquery.timepicker.min.js"></script>
 
-    <script src="http://code.jquery.com/ui/1.11.0/jquery-ui.js"></script>
+    <!--<script src="http://code.jquery.com/ui/1.11.0/jquery-ui.js"></script>-->
+    <script src="https://ajax.googleapis.com/ajax/libs/jqueryui/1.12.1/jquery-ui.min.js"></script>
 
-    <?php  echo $this->Html->script(['daterangepicker']);?>
+    <script type="text/javascript" src="https://cdn.jsdelivr.net/npm/daterangepicker/daterangepicker.min.js"></script>
 
     <script src="http://maps.googleapis.com/maps/api/js?libraries=places&key=AIzaSyCx2hb4R1uhaMbmlUAu1_lFasvl3gVHtnw"></script>
 
