@@ -17,8 +17,21 @@ $(document).ready(function() {
 
     $('.date-input-class').on('apply.daterangepicker', function(ev, picker) {
         $(this).val(picker.startDate.format('MM/DD/YYYY') + ' - ' + picker.endDate.format('MM/DD/YYYY'));
-        //$(this).focus();
     });
+
+    /** ticketing service calender **/
+    $('#ticketBookingDate').daterangepicker({
+        opens: 'left',
+        autoUpdateInput: false
+    }, function(start, end, label) {
+        console.log("A new date selection was made: " + start.format('YYYY-MM-DD') + ' to ' + end.format('YYYY-MM-DD'));
+        $('#ticketBookingDate').focus();
+    });
+
+    $('#ticketBookingDate').on('apply.daterangepicker', function(ev, picker) {
+        $(this).val(picker.startDate.format('MM/DD/YYYY') + ' - ' + picker.endDate.format('MM/DD/YYYY'));
+    });
+    /** ticketing service calender ends **/
 
     $('.time-input').timepicker({
         timeFormat: 'h:mm p',

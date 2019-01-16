@@ -315,6 +315,62 @@ width: 300px;
 .add-event-container .md-form label {
     top: 5px !important;
 }
+.ticket-add-container .nav-tabs {
+
+}
+.ticket-add-container .nav-tabs .nav-item {
+
+}
+.ticket-add-container .nav-tabs .nav-link {
+    color: #007bff;
+    font-weight: bolder;
+}
+.ticket-add-container .nav-tabs > li {
+    position:relative;
+}
+.ticket-add-container .nav-tabs > li > a {
+    display:inline-block;
+}
+.ticket-add-container .nav-tabs > li > span {
+    display:none;
+    cursor:pointer;
+    position:absolute;
+    right: 6px;
+    top: 8px;
+    color: red;
+}
+.ticket-add-container .nav-tabs > li:hover > span {
+    display: inline-block;
+}
+.ticket-add-container .nav-tabs .nav-link.show,
+.ticket-add-container .nav-tabs .nav-link.active {
+  border: 1px solid;
+  border-color: #dee2e6 #dee2e6 #fff;
+}
+.ticket-modal-content div#ticketTabs {
+    margin-top: 25px;
+}
+.ticket-modal-content .ask-head {
+    font-size: 16px;
+    padding-bottom: 10px;
+}
+.ticket-add-container .help-text {
+    font-size: 12px;
+}
+.ticket-add-container .md-form label {
+    left: inherit !important;
+}
+.ticket-add-container .nav-tabs > li:hover > span {
+    display: inline-block; 
+    font-size: 16px;
+    font-weight: 500;
+}
+.ticket-add-container .nav-tabs > li:hover > a { 
+    padding-right: 20px;
+}
+.ticket-add-container .nav-tabs > li:hover > a.add-ticket-type {
+    padding-right: inherit !important;
+}
 @media (max-width: 1200px){
   .add-event-container .right-side i.fa {
       font-size: 20px !important;

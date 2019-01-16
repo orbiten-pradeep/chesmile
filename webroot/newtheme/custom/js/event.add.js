@@ -137,6 +137,36 @@ function checkForOther(id) {
 $(document).ready(function() {
 	$("#categories_id").select2();
 
+	$(".start-ticket").click(function(){
+		if($(this).val() == "yes") {
+			$("#ticketTabs").show();
+		} else {
+			$("#ticketTabs").hide();
+		}
+	}); 
+
+	$(".nav-ticketing-tabs").on("click", "a", function (e) {
+		e.preventDefault();
+		if (!$(this).hasClass('add-ticket-type')) {
+			$(this).tab('show');
+		}
+	}).on("click", "span", function () {
+		var anchor = $(this).siblings('a');
+		$(anchor.attr('href')).remove();
+		$(this).parent().remove();
+		$(".nav-tabs li").children('a').first().click();
+	});
+
+	$('.add-ticket-type').click(function (e) {
+		e.preventDefault();
+		var id = $(".nav-ticketing-tabs").children().length; //think about it ;)
+		var tabId = 'type_' + id; 
+		$(this).closest('li').before('<li class="nav-item"><a href="#type_' + id + '" class="nav-link">Type ' + id + '</a> <span> x </span></li>');
+		$('.tab-content').append('<div class="tab-pane" id="' + tabId + '"></div>');
+		$('#type_1 > .dynamic-element').first().clone().appendTo('#'+tabId);
+		$('.nav-ticketing-tabs li:nth-child(' + id + ') a').click();
+	});
+
     var isMobile = {
         Android: function() {
             return navigator.userAgent.match(/Android/i);

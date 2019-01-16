@@ -280,95 +280,95 @@ use Cake\I18n\Time;
 
 <div class="modal fade" id="modalSubscriptionForm" tabindex="-1" role="dialog" aria-labelledby="myModalLabel" aria-hidden="true">
     <div class="modal-dialog" role="document">
-        <div class="modal-content">
+        <div class="modal-content ticket-modal-content">
             <div class="modal-header text-center">
-                <h4 class="modal-title w-100 font-weight-bold">Ticketing Service</h4>
+                <h5 class="modal-title w-100">Ticketing Service</h5>
                 <button type="button" class="close" data-dismiss="modal" aria-label="Close">
                     <span aria-hidden="true">&times;</span>
                 </button>
             </div>
             <div class="modal-body mx-3">
-                <h6>Do You Want to start Online Booking?</h6>
-                <div class="custom-control custom-radio custom-control-inline" style="margin-left: 40px;">
-                    <input type="radio" class="custom-control-input" onclick="javascript:yesnoCheck();" id="defaultInline1" name="inlineDefaultRadiosExample">
-                    <label class="custom-control-label" for="defaultInline1">Yes</label>
+                <h5 class="ask-head">Do you want to start Online Booking?</h5>
+                <div class="custom-control custom-radio custom-control-inline">
+                    <input type="radio" class="custom-control-input start-ticket" value="yes" id="startTicketYes" name="startTicket">
+                    <label class="custom-control-label" for="startTicketYes">Yes</label>
                 </div>
                 <!-- Default inline 2-->
                 <div class="custom-control custom-radio custom-control-inline">
-                    <input type="radio" class="custom-control-input" onclick="javascript:yesnoCheck();" id="defaultInline2" name="inlineDefaultRadiosExample">
-                    <label class="custom-control-label" for="defaultInline2">No</label>
-                </div> <br> 
-                <div id="ifYes" style="visibility:hidden">
-                    <div class="form-group dynamic-element" style="display:none">
-                        <div class="row">
-                            <!-- Replace these fields -->
-                            <div class="md-form col-md-10">
-                                <input type="text" id="tickettype"  name="tickettype[]" class="form-control">
-                                <label for="tickettype" >Ticket Type *</label>
-                                <span>Eg: Adult,children,above 60</span>
+                    <input type="radio" class="custom-control-input start-ticket" value="no" id="startTicketNo" name="startTicket">
+                    <label class="custom-control-label" for="startTicketNo">No</label>
+                </div>
+
+                <div id="ticketTabs" style="display:none">
+                    <div class="ticket-add-container">
+                        <ul class="nav nav-ticketing-tabs nav-tabs" role="tablist">
+                            <li class="nav-item">
+                                <a href="#type_1" class="nav-link active" data-toggle="tab">Type 1</a><span>x</span>
+                            </li> 
+                            <li class="nav-item">
+                                <a href="#" class="add-ticket-type nav-link"> + Add new</a>
+                            </li>
+                        </ul>
+                        <div class="tab-content">
+                            <div class="tab-pane active" id="type_1">
+                                <div class="form-group dynamic-element">
+                                    <div class="row">
+                                        <!-- Replace these fields -->
+                                        <div class="md-form col-md-6">
+                                            <input type="text" id="tickettype"  name="tickettype[]" class="form-control">
+                                            <label for="tickettype" >Ticket Type *</label>
+                                            <span class="help-text">Eg: Adult,children,above 60</span>
+                                        </div>
+                                        <div class="md-form col-md-6">
+                                            <input type="text" id="name" name="name[]" class="form-control">
+                                            <label for="name" >Ticket Name *</label>
+                                            <span class="help-text">Eg: earlybird,vip,couple entry</span>
+                                        </div>
+                                        <div class="md-form col-md-6">
+                                            <input type="text" id="price" name="price[]" class="form-control">
+                                            <label for="price" >Ticket Price *</label>
+                                        </div>
+                                        <div class="md-form col-md-6">
+                                            <select id="commission_per" name="commission_per[]" class="form-control my-price">
+                                                <option>Select percentage</option>
+                                                <option value="5">5</option>
+                                                <option value="10">10</option>
+                                                <option value="15">15</option>
+                                                <option value="20">20</option>
+                                                <option value="25">25</option>
+                                                <option value="30">30</option>
+                                                <option value="35">35</option>
+                                                <option value="40">40</option>
+                                                <option value="45">45</option>
+                                                <option value="50">50</option>
+                                                <option value="55">55</option>
+                                                <option value="60">60</option>
+                                                <option value="65">65</option>
+                                                <option value="70">70</option>
+                                                <option value="75">75</option>
+                                            </select>
+                                        </div>
+                                        <div class="md-form col-md-6">
+                                            <input type="text" id="commission_amt" name="commission_amt[]" class="form-control" readonly>
+                                            <label for="commission_amt" >Commission Amount</label>
+                                        </div>
+                                        <div class="md-form col-md-6">
+                                            <input type="text" id="noofseats" name="noofseats[]" class="form-control">
+                                            <label for="noofseats" >No.Of.Seats *</label>
+                                        </div>
+                                        <div class="md-form col-md-6">
+                                            <input type="text" id="ticketBookingDate" name="startdate[]" class="form-control">
+                                            <label for="ticketBookingDate">Booking Start & End Date *</label>
+                                        </div> 
+                                    </div>
+                                </div>
                             </div>
-                            <div class="md-form col-md-10">
-                                <input type="text" id="name"  name="name[]" class="form-control">
-                                <label for="name" >Ticket Name *</label>
-                                <span>Eg: earlybird,vip,couple entry</span>
-                            </div>
-                            <div class="md-form col-md-10">
-                                <input type="text" id="price" name="price[]" class="form-control">
-                                <label for="price" >Ticket Price *</label>
-                            </div>
-                            <div class="col-md-6">
-                                <select id="commission_per" name="commission_per[]" class="form-control my-price">
-                                    <option>Select percentage</option>
-                                    <option value="5">5</option>
-                                    <option value="10">10</option>
-                                    <option value="15">15</option>
-                                    <option value="20">20</option>
-                                    <option value="25">25</option>
-                                    <option value="30">30</option>
-                                    <option value="35">35</option>
-                                    <option value="40">40</option>
-                                    <option value="45">45</option>
-                                    <option value="50">50</option>
-                                    <option value="55">55</option>
-                                    <option value="60">60</option>
-                                    <option value="65">65</option>
-                                    <option value="70">70</option>
-                                    <option value="75">75</option>
-                                </select>
-                            </div>
-                            <div class="md-form col-md-10">
-                                <input type="text" id="commission_amt" name="commission_amt[]" class="form-control" readonly>
-                                <label for="commission_amt" >Commission Amount</label>
-                            </div>
-                            <div class="md-form col-md-10">
-                                <input type="text" id="noofseats" name="noofseats[]" class="form-control">
-                                <label for="noofseats" >No.Of.Seats *</label>
-                            </div>
-                            <div class="md-form col-md-6">
-                                <input type="text" id="startdate" name="startdate[]" class="form-control date-input-class">
-                                <label for="startdate" >Booking Start&End Date *</label>
-                            </div>
-                            <!-- <div class="md-form col-md-6"><input type="text" id="enddate" name="enddate[]" class="form-control"><label for="'enddate" >End Date</label></div> -->
-                            <!-- End of fields-->
-                            <a href="#" class="btn btn-red pull-right delete" >Remove Ticket</a>
                         </div>
-                    </div>
-                    <!-- END OF HIDDEN ELEMENT -->
-                    <div class="form-horizontal">
-                        <!-- Form Name -->
-                        <div class="dynamic-stuff">
-                            <!-- Dynamic element will be cloned here -->
-                            <!-- You can call clone function once if you want it to show it a first element-->
-                        </div>
-                        <!-- Button -->
-                        <a href="#" class="btn btn-green pull-right add-one" >Add Ticket</a>
                     </div>
                 </div>
             </div>
-            <div class="modal-footer d-flex justify-content-center modal-foot">
-                <button type="button" class=" btn btn-deep-orange" data-dismiss="modal"> Start
-                    <i class="fa fa-paper-plane-o ml-1"></i>
-                </button>
+            <div class="modal-footer d-flex  pb-2 pt-2 justify-content-center modal-foot">
+                <button type="button" class=" btn btn-sm btn-deep-orange" data-dismiss="modal"> Close & Submit</button>
             </div>
         </div>
     </div>
@@ -382,29 +382,9 @@ use Cake\I18n\Time;
 <?= $this->Form->end() ?>
 <div id="snackbar" >Please fill all the Required field....</div>
 
-<script type="text/javascript">
-    function yesnoCheck() {
-        if (document.getElementById('defaultInline1').checked) {
-            document.getElementById('ifYes').style.visibility = 'visible';
-        } else document.getElementById('ifYes').style.visibility = 'hidden';
-    }
-</script>
 
 <script src="https://ajax.googleapis.com/ajax/libs/jquery/2.1.1/jquery.min.js"></script>
-<script type="text/javascript">
-    //Clone the hidden element and shows it
-    $('.add-one').click(function() {
-        $('.dynamic-element').first().clone().appendTo('.dynamic-stuff').show();
-        attach_delete();
-    });
-    //Attach functionality to delete buttons
-    function attach_delete() {
-        $('.delete').off();
-        $('.delete').click(function() {
-            console.log("click");
-            $(this).closest('.form-group').remove();
-        });
-    }
+<script type="text/javascript"> 
     //mediapartners
     $(document).ready(function() {
         $("#modalSubscriptionForm").on("change", ".my-price", function(e) {
