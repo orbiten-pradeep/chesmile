@@ -17,16 +17,18 @@ use Cake\I18n\Time;
             <p class="head">Banner Image *</p>
             <label class="btn btn-outline-info-2 waves-effect btn-lg ">Upload Banner Image
                 <i class="fa fa-upload ml-3" aria-hidden="true"></i>
-                <?=$this->Form->input('banner',['type' => 'file','style'=>'display:none;','label' => false,'accept' => 'image/*','onchange' => 'putImage()', 'required']);?>
+                <?=$this->Form->input('banner',['type' => 'file','style'=>'display:none;','label' => false,'accept' => 'image/*','onchange' => 'putBannerImage()', 'required']);?>
             </label>
             <p id="p3" style="color: #FF0000; font-size: 11px;"></p>
         </div>
     </div>
     <div class="container">
-        <div class="md-form form-lg event-add-title">
-            <input type="text" id="titleId" class="form-control form-control-lg" name="title">
-            <label for="form1">Event Title*</label>
-        </div>
+        <div class="event-title-container">
+            <div class="md-form form-lg event-add-title">
+                <input type="text" id="titleId" class="form-control form-control-lg" name="title">
+                <label for="form1">Event Title*</label>
+            </div>
+        </div>        
     </div> 
 </div>
 
@@ -199,10 +201,10 @@ use Cake\I18n\Time;
                     <!--Body-->
                     <div class="md-form">
                         <div class="logo-upload-div">
-                            <div class="btn btn-outline-info waves-effect btn-sm">Organizer Logo
+                            <label class="btn btn-outline-info waves-effect btn-sm organizer-upload">Organizer Logo
                                 <i class="fa fa-upload ml-3" aria-hidden="true"></i>
                                 <?=$this->Form->input('OrganizersLogo',['type' => 'file','style'=>'display:none;','label' => false,'onchange' => 'putorgImage()','id' => 'org','accept' => 'image/*']);?>
-                            </div>
+                            </label>
                         </div>
                     </div> 
                     <div class="md-form">
@@ -455,8 +457,8 @@ use Cake\I18n\Time;
         } else {
             alert("Your browser doesn't support to File API")
         }
-    });
-    //banner image
+    }); 
+
     function showImage(src, target) {
         var fr = new FileReader();
 
@@ -466,10 +468,11 @@ use Cake\I18n\Time;
         fr.readAsDataURL(src.files[0]);
     }
 
-    function putImage() {
-        var src = document.getElementById("banner");
-        var target = document.getElementById("target");
-        showImage(src, target);
+    function putBannerImage() {
+        var src = document.getElementById("banner");       
+        var path = (window.URL || window.webkitURL).createObjectURL(src.files[0]);
+        var cssValue = "url('"+path+"')";
+        $('.top-contain-add').css('background-image', cssValue);
     }
     //display image
     function showDispImage(src1, target1) {

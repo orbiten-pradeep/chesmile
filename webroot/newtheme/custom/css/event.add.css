@@ -216,8 +216,8 @@ width: 300px;
 }
 
 .top-contain-add .event-add-title {
-    margin-top: 65px;
-    width: 50%;
+    margin-top: 0;
+    width: 100%;
 }
 .top-contain-add .event-add-title label {
     color: #fff0f0 !important;
@@ -371,6 +371,15 @@ width: 300px;
 .ticket-add-container .nav-tabs > li:hover > a.add-ticket-type {
     padding-right: inherit !important;
 }
+.top-contain-add .event-title-container {
+    background-color: rgba(0, 0, 0, 0.85);
+    padding: 25px 15px 5px;
+    width: 50%;
+    margin-top: 40px;
+}
+.logo-upload-div .organizer-upload {
+  position: relative !important;
+}
 @media (max-width: 1200px){
   .add-event-container .right-side i.fa {
       font-size: 20px !important;
@@ -408,7 +417,7 @@ width: 300px;
       top: 70px !important;
       left: 15px !important;
   }
-  .top-contain-add .event-add-title {
+  .top-contain-add .event-title-container {
       width: 100% !important;
   }
 }
