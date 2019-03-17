@@ -24,7 +24,7 @@ use Cake\I18n\Time;
     </div>
     <div class="container">
         <div class="event-title-container">
-            <div class="md-form form-lg event-add-title">
+            <div class="md-form form-lg event-add-title ">
                 <input type="text" id="titleId" class="form-control form-control-lg" name="title">
                 <label for="form1">Event Title*</label>
             </div>
@@ -263,8 +263,11 @@ use Cake\I18n\Time;
             </div>
             <div class="modal-body">
                 <div id="mapPanel">
-                    <input class="form-control text plac" id="city_country" type="textbox" value="Mylapore, Chennai" placeholder="Search your area..." style="color: black !important;">
-                    <input class="btn btn-md btn-primary botton" type="button" value="search" onclick="codeAddress()">
+                    <!--<input class="btn btn-md btn-primary botton" type="button" value="search" onclick="codeAddress()">-->
+                    <form class="form-inline">
+                      <i class="fa fa-search search-icon" aria-hidden="true"  onclick="codeAddress()"></i>
+                      <input class="form-control form-control-sm ml-3 w-75 text plac" id="city_country" type="textbox" value="Mylapore, Chennai" placeholder="Search your area..." style="color: black !important;">
+                    </form>       
                 </div>
                 <div id="mapCanvas" style="width: 100%; height: 350px;"></div>
                 <div id="infoPanel">

@@ -1,267 +1,272 @@
 <?php 
 use Cake\Routing\Router;
 use Cake\I18n\Time;
+//echo "<pre>"; print_r($medialists);echo "</pre>";
 ?>
 
- <?= $this->Form->create($event,array('enctype' => 'multipart/form-data', 'method' =>'post','novalidate' => true))?>
+<?= $this->Form->create($event,array('enctype' => 'multipart/form-data', 'method' =>'post','novalidate' => true))?>
 <?= $this->Form->hidden('user_id', ['options' => $users,'default'=> $users_id]);?>
 <?= $this->Form->hidden('active');?>
 
-<div class="col-md-12 col-xs-12 mb-4 pr-0 pl-0 contain">
-    <?php if($event->banner) {
-                echo $this->Html->image('banner/'.$event->banner, array('alt' => 'Cs-Static','class' => 'imgeff img-fluid static-banner' ,'id' => 'target'));
-            }  else {
-                echo $this->Html->image('cs-static-banner.jpg',array('alt' => 'Cs-Static','class' => 'imgeff img-fluid static-banner' ,'id' => 'target'));
-            }
-            ?>
-    <div class="text-block">
-   
-    <div class="middle">
-    <p>Banner Image *</p>
-    <!-- <style>
-        input[type="file"]{
-            display:none;
+<div class="col-md-12 col-xs-12 mb-4 pr-0 pl-0 top-contain-add contain">
+    <div class="background-img-container">
+        <?php 
+        if($event->banner) {
+            echo $this->Html->image('banner/'.$event->banner, array('alt' => 'Cs-Static','class' => 'imgeff img-fluid static-banner' ,'id' => 'target'));
+        }  else {
+            echo $this->Html->image('cs-static-banner.jpg',array('alt' => 'Cs-Static','class' => 'imgeff img-fluid static-banner' ,'id' => 'target'));
         }
-    </style> -->
-    <label class="btn btn-outline-info waves-effect btn-lg ">Upload Banner Image<i class="fa fa-upload ml-3" aria-hidden="true"></i>
-      
- <?=$this->Form->input('banner',['type' => 'file','style'=>'display:none;','label' => false,'accept' => 'image/*','onchange' => 'putImage()', 'class' => 'img-fluid static-banner','default'=> $event->banner]);?> </label>
- <?php $this->Form->input('banner');?><p id="p3" style="color: #FF0000; font-size: 11px;"></p>
-  </div>
-  </div>
-   
-        <div class="container">
-            <div class="cs-tag-title-add">
-                    <div class="md-form">
- <?php echo $this->Form->input('title',array('label' => 'Event Title *','div' => false,'id' => 'title', 'class' => 'form-control title-form', 'placeholder' => 'Please enter your event title')); ?><p id="p1" style="color: #FF0000; font-size: 11px;"></p>
-            </div>
-            </div>
+        ?>
+    </div>
+    <div class="text-block">
+        <div class="middle-image">
+            <p class="head">Banner Image *</p>
+            <label class="btn btn-outline-info-2 waves-effect btn-lg ">Update Banner Image
+                <i class="fa fa-upload ml-3" aria-hidden="true"></i>
+                <?=$this->Form->input('banner',['type' => 'file','style'=>'display:none;','label' => false,'accept' => 'image/*','onchange' => 'putBannerImage()', 'required']);?>
+            </label>
+            <p id="p3" style="color: #FF0000; font-size: 11px;"></p>
         </div>
-   
-  <!--   <div class="mob-container">
-        <div class="container">
-            <div class="cs-tag-titlemob-add">
-                <div class="md-form">
-                     <input type="text" id="title1" name="title" class="form-control" placeholder="Please enter your event title" style=" margin-bottom:-64px!important; margin-left: 0px;">
-                        <label for="title" class="">Title</label> <p id="p2" style="color: #FF0000; font-size: 11px;"></p>
+    </div>
+    <div class="container">
+        <div class="event-title-container">
+            <div class="md-form form-lg event-edit-title">
+                <input type="text" id="titleId" class="form-control form-control-lg" name="title" value="<?=$event->title?>" placeholder="Please enter event title">
+                <label for="form1">Event Title*</label>
             </div>
-            </div>
-        </div>
-    </div>  -->
+        </div>        
+    </div>   
 </div>
 
-<div class="container">
+<div class="container add-event-container">
     <div class="row">
         <div class="col-md-8 mb-4">
-        <div class="col-md-14 cs_banner_container mb-5 contain">
-         <?php if($event->display) {
-                echo $this->Html->image('display/'.$event->display, array('alt' => 'Cs-Static','class' => 'img-fluid z-depth-1 rounded cs_banner_bg' ,'id' => 'disptarget'));
-            }  else {
-                echo $this->Html->image('cover_pic.jpg',array('alt' => 'Cs-Static','class' => 'img-fluid z-depth-1 rounded cs_banner_bg' ,'id' => 'disptarget'));
-            }
-            ?>
-        <div class="dispmiddle"> <p>Display Image *</p>
-            <label class="btn btn-outline-info waves-effect btn-lg ">Upload Display Image<i class="fa fa-upload ml-3" aria-hidden="true"></i>
-         <?=$this->Form->input('display',['type' => 'file','style'=>'display:none;','label' => false,'accept' => 'image/*','id' =>'display','onchange' => 'putDispImage()', 'class' => '', 'required']);?></label><?php $this->Form->input('display');?> 
-     </label><?php $this->Form->input('display');?> <p id="p4" style="color: #FF0000; font-size: 11px;"></p>
-</div>
+            <div class="col-md-14 cs_banner_container mb-5 contain">
+                <?php 
+                if($event->display) {
+                    echo $this->Html->image('display/'.$event->display, array('alt' => 'Cs-Static','class' => 'img-fluid z-depth-1 rounded cs_banner_bg' ,'id' => 'disptarget'));
+                }  else {
+                    echo $this->Html->image('cover_pic.jpg',array('alt' => 'Cs-Static','class' => 'img-fluid z-depth-1 rounded cs_banner_bg' ,'id' => 'disptarget'));
+                }
+                ?>
+                <div class="dispmiddle">
+                    <p>Display Image *</p>
+                    <label class="btn btn-outline-info btn-outline-info-3 waves-effect btn-lg ">Update Display Image
+                        <i class="fa fa-upload ml-3" aria-hidden="true"></i>
+                        <?=$this->Form->input('display',['type' => 'file','style'=>'display:none;','label' => false,'accept' => 'image/*','id' =>'display','onchange' => 'putDispImage()', 'class' => '', 'required']);?>
+                    </label>
+                    <p id="p4" style="color: #FF0000; font-size: 11px;"></p>
+                </div>
             </div>
-        <div class="col-md-12 pr-0 pl-0">
+
+
+            <div class="col-md-12 pr-0 pl-0">
                 <div class="d-flex flex-column cs_right_details_mob">
                     <div class="p-4 mb-4 flex-cont rounded ">
                         <div class="text-center">
-                            <!-- <h5>₹ 700</h5> -->
-                            <a href="javascript:;" class="btn buy-btn" data-toggle="modal" data-target="#modalSubscriptionForm">Get Tickets</a>
-                        </div>
-
-<!--Grid row-->
-                <div class="row">
-                    <div class="col-md-12 ui-widget">
-                        <div class="md-form rs-details-bold"> <i class="fa fa-map-marker prefix" style="font-size:23px;margin-left: -17px;top:15px;"></i>
-                            <?php echo $this->Form->input('areaname', array('id' => 'Autocomplete', 'required','class' => 'form-control area-name-class','placeholder' => 'Areaname *','style'=>'margin-left:0;'));?><p id="p9" style="color: #FF0000; font-size: 11px;"></p>
-                        </div>
-                    </div>
-
-                    <!--Grid column-->
-                    <div class="col-md-6">
-                        <div class="md-form mb-0 rs-details-bold"><span><i class="fa fa-calendar prefix" style="font-size:20px; margin-left: -20px; top:15px;"></i></span>
-                          <?php   echo $this->Form->input('date');   echo $this->Form->input('todate'); ?>
-                        <!-- <?= $this->Form->input('date', array('type' => 'text','id' => 'date','class' => 'form-control datepicker date-input date-input-class', 'label' => 'From Date - To Date *'));?> -->
-                        </div>
-                    </div>
-                    <!--Grid column-->
-                     <!--Grid column-->
-                    <div class="col-md-6">
-                        <div class="md-form mb-0 rs-details-bold">
-                        <i class="fa fa-clock-o prefix" style="font-size:20px; margin-left: -20px; top:15px;"></i>
-                    <input type="text" id="time1" name="time" class="form-control datepicker date-input time-input" placeholder="From Time" style="margin-left:0px;">
-                            <label for="fromtime" class="">From Time*</label>
-                        </div>
-                    </div>
-                    <!--Grid column-->
-
-                    <!--Grid column-->
-                    <div class="col-md-6">
-                        <div class="md-form mb-0 rs-details-bold ">
-                            <input type="text" id="totime1" name="totime" class="form-control datepicker date-input time-input" placeholder="To Time">
-                            <label for="totime" class="">To Time *</label>
-                        </div>
-                    </div>
-</div></div>
-                    </div>
-                <div class="md-form">
-                                <?=  $this->Form->input('categories_id',array('div' => false,'class' => 'form-control','options' => $categories_list, 'onChange' => 'checkForOther(this);', 'empty' => '(Select Categories)','label' => false, 'required'));?><p id="p5" style="color: #FF0000; font-size: 11px;"></p>
-                            </div>
-                            <div class="md-form">
-                                <div id="subdiv" class="form-group" style="display: none;">
-                                    <?=$this->Form->input('Eventsubcategories.sub_categories',array( 'subcategory_id'=>'', 'class' => 'form-control','options' => $subCategories, 'multiple' => 'true', 'empty' => '(choose one)','label' => false,'empty' => false));?>
+                            <a href="javascript:;" class="btn buy-btn" data-toggle="modal" data-target="#modalSubscriptionForm">Update Tickets</a>
+                        </div> 
+                        <!--Grid row-->
+                        <div class="row">
+                            <div class="col-md-12">
+                                <div class="md-form rs-details-bold">
+                                    <i class="fa fa-map-marker prefix"></i>
+                                    <input type="text" id="Autocomplete" class="form-control area-name-class" name="areaname" value="<?=$event->Address->areaname;?>">
+                                    <label for="Autocomplete">Locality*</label>
+                                    <p id="p10" class="error-txt"></p>
                                 </div>
                             </div>
+
+                            <!--Grid column-->
+                            <div class="col-md-12">
+                                <div class="md-form rs-details-bold">
+                                    <i class="fa fa-calendar prefix"></i>
+                                    <input type="text" id="date" class="form-control datepicker date-input-class" name="date" value="<?php echo $event->date.' - '.$event->todate;?>">
+                                    <label for="date">From Date - To Date*</label>
+                                    <p id="p101" class="error-txt"></p>
+                                </div>
+                            </div>
+
+                            <div class="col-md-6">
+                                <div class="md-form rs-details-bold">
+                                    <i class="fa fa-clock-o prefix"></i>
+                                    <input type="text" id="fromTime2" class="form-control datepicker time-input" name="time" value="<?=$event->time;?>">
+                                    <label for="fromTime2">Start Time*</label>
+                                    <p id="p102" class="error-txt"></p>
+                                </div>
+                            </div>
+
+                            <div class="col-md-6">
+                                <div class="md-form rs-details-bold">
+                                    <i class="fa fa-clock-o prefix"></i>
+                                    <input type="text" id="toTime2" class="form-control datepicker time-input" name="totime" value="<?=$event->totime;?>">
+                                    <label for="toTime2">End Time*</label>
+                                    <p id="p103" class="error-txt"></p>
+                                </div>
+                            </div>
+                        </div>
+
+                    </div>
+                </div>
+                <div class="md-form">
+                    <?= $this->Form->input('categories_id',array('div' => false,'class' => 'form-control','options' => $categories_list, 'onChange' => 'checkForOther(this);', 'empty' => '(Select Categories)','label' => false, 'required'));?><p id="p5" style="color: #FF0000; font-size: 11px;"></p>
+                </div>
+
+                <div class="md-form">
+                    <div id="subdiv" class="form-group" style="display: none;">
+                        <?=$this->Form->input('Eventsubcategories.sub_categories',array( 'subcategory_id'=>'', 'class' => 'form-control','options' => $subCategories, 'multiple' => 'true', 'empty' => '(choose one)','label' => false,'empty' => false));?>
+                    </div>
+                </div>
+
                 <div class="d-flex flex-column">
-                <div class="p-4 mb-4 flex-cont cs-descr-box rounded ">
-                            <h5 class="cs-title">Event Details *</h5>
-                            <?= $this->Form->input('descriptioin',array('div' => false, 'label' => false,'class' => 'form-control md-textarea','placeholder' => 'Description about your event','rows' => '4', 'cols' => '50', 'resize'=> 'none','required' => true));?><p id="p8" style="color: #FF0000; font-size: 11px;"></p>
-                        </div>
-                        <div class="p-4 mb-4 flex-cont rounded ">
-                            <h5 class="cs-title">Terms & Conditions</h5>
-                            <?= $this->Form->input('descriptioin_more',array('div' => false, 'label' => false,'class' => 'form-control md-textarea','placeholder' => 'Terms and conditions if any','rows' => '4', 'cols' => '50', 'resize'=> 'none' ));?>
-                        </div>
+                    <div class="p-4 mb-4 flex-cont cs-descr-box rounded ">
+                        <h5 class="cs-title">Event Details *</h5>
+                        <?= $this->Form->input('descriptioin',array('div' => false, 'label' => false,'class' => 'form-control md-textarea','placeholder' => 'Description about your event','rows' => '4', 'cols' => '50', 'resize'=> 'none','required' => true));?><p id="p8" style="color: #FF0000; font-size: 11px;"></p>
+                    </div>
+                    <div class="p-4 mb-4 flex-cont rounded ">
+                        <h5 class="cs-title">Terms & Conditions</h5>
+                    <?= $this->Form->input('descriptioin_more',array('div' => false, 'label' => false,'class' => 'form-control md-textarea','placeholder' => 'Terms and conditions if any','rows' => '4', 'cols' => '50', 'resize'=> 'none' ));?>
+                    </div>
 
-                         <div class="p-4 mb-4 flex-cont rounded ">
-                <h5 class="cs-title">Mediapartner Logo</h5>  
-<?= $this->Form->input('Mediapartners[]',['type' => 'file','label' => false,'multiple' => 'false','id'=>'filesmedia','accept' => 'image/*']);?>
-<?php foreach ($medialists as $medialist): 
-  $id = $medialist['id'];
-  //echo"$medid";?> 
-      <?php echo $this->Html->image('Mediapartners/'. $medialist->MediaPartners ,array('alt' => 'Mediapartners','class' => 'thumb'));  ?><a id ="delete"  class="remove_img_preview"  delete-href-url="<?=$this->Url->build(array('controller' => 'Mediapartners', 'action' => 'delete', $id)); ?>" confirm="Are you sure you want to delete # {0}?,$id"></a>
-     
-               <?php endforeach; ?>
-            </div>
+                    <div class="p-4 mb-4 flex-cont rounded ">
+                        <h5 class="cs-title">Mediapartner Logo</h5>  
+                        <?= $this->Form->input('Mediapartners[]',['type' => 'file','label' => false,'multiple' => 'false','id'=>'filesmedia','accept' => 'image/*']);?>
+                        <?php foreach ($medialists as $medialist): $id = $medialist['id']; ?> 
+                            <?php echo $this->Html->image('Mediapartners/'. $medialist->MediaPartners ,array('alt' => 'Mediapartners','class' => 'thumb'));  ?>
+                            <a id ="delete"  class="remove_img_preview"  delete-href-url="<?=$this->Url->build(array('controller' => 'Mediapartners', 'action' => 'delete', $id)); ?>" confirm="Are you sure you want to delete # {0}?,$id"></a>
 
-                      <div class="p-4 mb-4 flex-cont rounded">
-                <h5 class="cs-title">Sponsors Logo</h5>
-                <?=$this->Form->input('Sponsors[]',['type' => 'file','label' => false, 'multiple' => 'false','id'=>'filessponser','accept' => 'image/*']);?>
-                <?php foreach ($sponserlists as $sponserlist): 
-  $id = $sponserlist['id'];
-  //echo"$medid";?>
-      <?php echo $this->Html->image('Sponsors/'. $sponserlist->Sponsors ,array('alt' => 'Sponsors','class' => 'thumb'));  ?> <a id ="delete"  class="remove_img_preview"  delete-href-url="<?=$this->Url->build(array('controller' => 'Sponsors', 'action' => 'delete', $id)); ?>" confirm="Are you sure you want to delete # {0}?,$id"></a>
-     
-               <?php endforeach; ?>
-            </div>
+                        <?php endforeach; ?>
+                    </div>
+
+                    <div class="p-4 mb-4 flex-cont rounded">
+                        <h5 class="cs-title">Sponsors Logo</h5>
+                        <?=$this->Form->input('Sponsors[]',['type' => 'file','label' => false, 'multiple' => 'false','id'=>'filessponser','accept' => 'image/*']);?>
+                        <?php foreach ($sponserlists as $sponserlist): $id = $sponserlist['id']; ?>
+                            <?php echo $this->Html->image('Sponsors/'. $sponserlist->Sponsors ,array('alt' => 'Sponsors','class' => 'thumb'));  ?> <a id ="delete"  class="remove_img_preview"  delete-href-url="<?=$this->Url->build(array('controller' => 'Sponsors', 'action' => 'delete', $id)); ?>" confirm="Are you sure you want to delete # {0}?,$id"></a>
+                        <?php endforeach; ?>
+                    </div>
                 </div>
             </div>
         </div>
-            <div class="col-md-4 mb-4">
+        <div class="col-md-4 mb-4">
             <div class="d-flex flex-column cs_right_details_desk">
                 <div class="p-4 mb-4 flex-cont rounded cs_details_rightblock-add">
-                <div class="text-center">
-                        <!-- <h5>₹ 699</h5> -->
-                        <a href="" class="btn buy-btn btn-rounded mb-4" data-toggle="modal" data-target="#modalSubscriptionForm">Start Ticketing</a>    </div>
-                    
-<!--Grid row-->
-                <div class="row">
-                    <div class="col-md-12  ui-widget">
-                        <div class="md-form rs-details-bold"> <i class="fa fa-map-marker prefix" style="font-size:23px;margin-left: -17px;top:15px;"></i><?php echo $this->Form->input('areaname', array('id' => 'Autocomplete2', 'required','class' => 'form-control area-name-class','placeholder' => 'Areaname *','style'=>'margin-left:0;'));?><p id="p10" style="color: #FF0000; font-size: 11px;"></p></div>
+                    <div class="text-center">
+                        <a href="" class="btn buy-btn btn-rounded mb-4" data-toggle="modal" data-target="#modalSubscriptionForm">Update Ticketing</a>
                     </div>
+                        
+                    <!--Grid row-->
+                    <div class="row">
+                        <div class="col-md-12">
+                            <div class="md-form rs-details-bold">
+                                <i class="fa fa-map-marker prefix"></i>
+                                <input type="text" id="Autocomplete" class="form-control area-name-class" name="areaname" value="<?=$event->Address->areaname;?>">
+                                <label for="Autocomplete">Locality*</label>
+                                <p id="p10" class="error-txt"></p>
+                            </div>
+                        </div>
 
-                    <!--Grid column-->
-                    <div class="col-md-12">
-                        <div class="md-form mb-0 rs-details-bold"><span><i class="fa fa-calendar prefix" style="font-size:20px; margin-left: -20px; top:15px;"></i></span>
-                        <?= $this->Form->input('date', array('type' => 'text','id' => 'date2','name' => 'date','class' => 'form-control datepicker date-input date-input-class  ', 'label' => 'From Date - To Date *'));?>
+                        <!--Grid column-->
+                        <div class="col-md-12">
+                            <div class="md-form rs-details-bold">
+                                <i class="fa fa-calendar prefix"></i>
+                                <input type="text" id="date" class="form-control datepicker date-input-class" name="date" value="<?php echo $event->date.' - '.$event->todate;?>">
+                                <label for="date">From Date - To Date*</label>
+                                <p id="p101" class="error-txt"></p>
+                            </div>
                         </div>
-                    </div>
-                    <!--Grid column-->
-    <!--Grid column-->
-                     <div class="col-md-6">
-                        <div class="md-form mb-0 rs-details-bold">
-                        <i class="fa fa-clock-o prefix" style="font-size:20px; margin-left: -20px; top:15px;"></i>
-                        <!-- <?= $this->Form->input('time', array('type' => 'text','class' => 'form-control datepicker date-input time-input','placeholder' => '0:00 AM', 'label' => 'From Time'));?> -->
-                         <input type="text" id="time" name="time" class="form-control datepicker date-input time-input" style="margin-left:0px;">
-                            <label for="fromtime" class="">From Time*</label>
-                           </div>
-                    </div>
-                    <!--Grid column-->
 
-                    <!--Grid column-->
-                    <div class="col-md-6">
-                        <div class="md-form mb-0 rs-details-bold ">
-                        <!--  <?= $this->Form->input('totime', array('type' => 'text','class' => 'form-control datepicker date-input time-input','placeholder' => '0:00 AM', 'label' => 'To Time'));?>  -->
-                           <input type="text" id="totime" name="totime" class="form-control datepicker date-input time-input">
-                            <label for="totime" class="">To Time *</label>
+                        <div class="col-md-6">
+                            <div class="md-form rs-details-bold">
+                                <i class="fa fa-clock-o prefix"></i>
+                                <input type="text" id="fromTime2" class="form-control datepicker time-input" name="time" value="<?=$event->time;?>">
+                                <label for="fromTime2">Start Time*</label>
+                                <p id="p102" class="error-txt"></p>
+                            </div>
+                        </div>
+
+                        <div class="col-md-6">
+                            <div class="md-form rs-details-bold">
+                                <i class="fa fa-clock-o prefix"></i>
+                                <input type="text" id="toTime2" class="form-control datepicker time-input" name="totime" value="<?=$event->totime;?>">
+                                <label for="toTime2">End Time*</label>
+                                <p id="p103" class="error-txt"></p>
+                            </div>
                         </div>
                     </div>
-</div>
-                        </div>
+                </div>
             </div>
 
             <div class="d-flex flex-column">
                 <div class=" mb-4 flex-cont rounded cs_details_orgblock">
                     <p style=" margin-left: 100px;  font-weight: bold;">Organizer Details</p>
-            <!--Modal: Login with Avatar Form-->
-  <div class="modal-dialog cascading-modal modal-avatar modal-sm" role="document">
-        <!--Content-->
-       
-            <!--Header-->
-            <div class="modal-header">
-               <!--  <?php echo $this->Html->image('org-logo.png',array('alt' => 'avatar','class' => 'rounded-circle img-responsive','id' => 'orgtarget', 'style'=>'height:130px;' )); ?> -->
-               <?php if($event->OrganizersLogo) {
-                echo $this->Html->image('OrganizersLogo/'.$event->OrganizersLogo, array('alt' => 'avatar','class' => 'rounded-circle img-responsive org-img','id' => 'orgtarget'));
-            }  else {
-                echo $this->Html->image('org-logo.png',array('alt' => 'avatar','class' => 'rounded-circle img-responsive org-img','id' => 'orgtarget'));
-            }
-            ?><?php $this->Form->input('OrganizersLogo');?> 
-            </div>
-            
-        </div>
-            <!--Body-->
+                    <div class="modal-dialog cascading-modal modal-avatar modal-sm" role="document"> 
+                        <div class="modal-header"> 
+                            <?php 
+                            if($event->OrganizersLogo) {
+                                echo $this->Html->image('OrganizersLogo/'.$event->OrganizersLogo, array('alt' => 'avatar','class' => 'rounded-circle img-responsive org-img','id' => 'orgtarget'));
+                            }
+                            else {
+                                echo $this->Html->image('org-logo.png',array('alt' => 'avatar','class' => 'rounded-circle img-responsive org-img','id' => 'orgtarget'));
+                            }
+                            ?>
+                            <?php $this->Form->input('OrganizersLogo');?> 
+                        </div>
+                    </div>
           
-                <div class="md-form">
-                    <label class="btn btn-outline-info waves-effect btn-sm pull-right ">Organizer Logo<i class="fa fa-upload ml-3" aria-hidden="true"></i>
-                     <?=$this->Form->input('OrganizersLogo',['type' => 'file','label' => false,'onchange' => 'putorgImage()','id' => 'org','accept' => 'image/*']);?>
-                </label> 
-                </div>
-                <br><br><div class="md-form">
-                     <?=  $this->Form->input('OrganizersName',array('label' => 'Organizers name','id'=>'OrganizersName','div' => false,'class' => 'form-control','placeholder' => 'Organizer Name *', 'required'));?><p id="p7" style="color: #FF0000; font-size: 11px;"></p></div>
+                    <div class="md-form">
+                        <div class="logo-upload-div">
+                            <label class="btn btn-outline-info waves-effect btn-sm organizer-upload">Organizer Logo
+                                <i class="fa fa-upload ml-3" aria-hidden="true"></i>
+                                <?=$this->Form->input('OrganizersLogo',['type' => 'file','style'=>'display:none;','label' => false,'onchange' => 'putorgImage()','id' => 'org','accept' => 'image/*']);?>
+                            </label>
+                        </div>
+                    </div> <br>
+                    <div class="md-form">
+                     <?= $this->Form->input('OrganizersName',array('label' => 'Organizers name','id'=>'OrganizersName','div' => false,'class' => 'form-control','placeholder' => 'Organizer Name *', 'required'));?>
+                     <p id="p7" style="color: #FF0000; font-size: 11px;"></p>
+                    </div>
+
                 
-  </div>
-        <!--/.Content-->
-    </div>
+                </div> 
+            </div>
 
             <div class="d-flex flex-column">
                 <div class="p-4 mb-4 flex-cont rounded ">
-               
                     <div class="md-form">
-                        <?= $this->Form->input('address_1',array('div' => false,'id'=>'address_1','label' => 'Address 1 *','class' => 'form-control', 'placeholder' => 'Enter address 1', 'required'));?>
+                        <?= $this->Form->input('address_1',array('div' => false,'id'=>'address_1','label' => 'Address 1 *','class' => 'form-control', 'placeholder' => 'Enter address 1', 'required', 'value'=> $event->Address->address_1));?>
                          <p id="p6" style="color: #FF0000; font-size: 11px;"></p>
                     </div>
 
                     <div class="md-form">
-                        <?= $this->Form->input('address_2',array('div' => false,'label' => 'Address 2','class' => 'form-control', 'placeholder' => 'Enter address 2', 'required'));?>
+                        <?= $this->Form->input('address_2',array('div' => false,'label' => 'Address 2','class' => 'form-control', 'placeholder' => 'Enter address 2', 'required', 'value'=>$event->Address->address_2));?>
                     </div>
 
                     <div class="md-form">
-                        <?= $this->Form->input('landmark',array('div' => false,'label' => 'Landmark *','class' => 'form-control', 'placeholder' => 'Any Specific Landmark?'));?>  <p id="p11" style="color: #FF0000; font-size: 11px;"></p>
+                        <?= $this->Form->input('landmark',array('div' => false,'label' => 'Landmark *','class' => 'form-control', 'placeholder' => 'Any Specific Landmark?', 'value'=>$event->Address->landmark));?>
+                        <p id="p11" style="color: #FF0000; font-size: 11px;"></p>
                     </div>
 
                     <div class="md-form">
-                                <?= $this->Form->input('contact_number',array('div' => false, 'id'=>'contact_number','label' => 'Contact Number *','class' => 'form-control','placeholder' => 'Enter Contact Number'));?> <p id="p12" style="color: #FF0000; font-size: 11px;"></p>
-                            </div>
-                            <div class="md-form">
-                                <?= $this->Form->input('mobile_number',array('id' => 'mobile_number', 'div' => false,'label' => 'Mobile Number','class' => 'form-control','placeholder' => 'Enter Mobile Number'));?>
-                            </div>
+                        <?= $this->Form->input('contact_number',array('div' => false, 'id'=>'contact_number','label' => 'Contact Number *','class' => 'form-control','placeholder' => 'Enter Contact Number'));?>
+                        <p id="p12" style="color: #FF0000; font-size: 11px;"></p>
+                    </div>
+                    <div class="md-form">
+                        <?= $this->Form->input('mobile_number',array('id' => 'mobile_number', 'div' => false,'label' => 'Mobile Number','class' => 'form-control','placeholder' => 'Enter Mobile Number'));?>
+                    </div>
 
                     <input type="text" class="form-control map" id="googleMapID" name="google_map" placeholder="" readonly="" style="color: black !important; display: none;">
                     <input type="button" data-toggle="modal" data-target="#myModal" class="btn launch-map" value="Launch Map" style="background-color: #337AB7;"/>
                 </div>
             </div>
+
             <div class="d-flex flex-column">
                 <div class="p-4 mb-4 flex-cont rounded cs_details_advertblock">
                     <div style='overflow:hidden;height:330px;width:100%;'>
-                        <div  style='height:330px;width:700px;'> <h4>
-                        Advertisement
-                    </h4></div>
-                    </div>
-                    
+                        <div style='height:330px;width:700px;'>
+                            <h4> Advertisement </h4>
+                        </div>
+                    </div>                    
                 </div>
             </div>
         </div>

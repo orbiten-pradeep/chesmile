@@ -232,6 +232,29 @@ width: 300px;
 .top-contain-add .md-form.event-add-title input.form-control:focus {
     color: #fff0f0;
 }
+
+.top-contain-add .event-edit-title {
+    margin-top: 0;
+    width: 100%;
+}
+.top-contain-add .event-edit-title label {
+    color: #fff0f0 !important;
+}
+.top-contain-add .event-edit-title label.active {
+    color: #a1a8b0 !important;
+}
+.top-contain-add .md-form.event-edit-title input[type=text]:focus:not([readonly]) {
+    box-shadow:0 1px 0 0 #ffc107 !important;
+    border-bottom: 1px solid #fff0f0 !important;
+}
+.top-contain-add .md-form.event-add-title input.form-control:focus {
+    color: #fff0f0;
+}
+
+.top-contain-add .md-form.event-edit-title input {
+    color: #fff !important;
+}
+
 .add-event-container .rs-details-bold {
     margin-left: 0 !important;
     font-weight: normal !important;
@@ -377,6 +400,17 @@ width: 300px;
     width: 50%;
     margin-top: 40px;
 }
+.top-contain-add .background-img-container {
+    position: absolute;
+    z-index: 0;
+    opacity: 0.8;
+}
+#mapPanel input#city_country { 
+  
+}
+#mapPanel .search-icon {
+
+}
 .logo-upload-div .organizer-upload {
   position: relative !important;
 }
@@ -421,6 +455,7 @@ width: 300px;
       width: 100% !important;
   }
 }
+
 @-webkit-keyframes fadein {
     from {bottom: 0; opacity: 0;} 
     to {bottom: 30px; opacity: 1;}
